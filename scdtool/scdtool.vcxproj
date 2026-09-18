@@ -209,12 +209,18 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="scdtool.cpp" />
+    <ClCompile Include="match.cpp" />
+    <ClCompile Include="audio_match.cpp" />
+    <ClCompile Include="win32_process.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="match.h" />
+    <ClInclude Include="audio_match.h" />
+    <ClInclude Include="win32_process.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\xivres\xivres\xivres.vcxproj">
+    <ProjectReference Include="..\xivres\xivres\xivres.vcxproj">
       <Project>{58daddf6-5733-40e0-855c-cc3b4bf235eb}</Project>
     </ProjectReference>
     <ProjectReference Include="..\xivres\xivres.vorbis\xivres.vorbis.vcxproj">

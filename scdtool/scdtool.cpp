@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "match.h"
 
 struct audio_time_point_t {
 	enum class Mode {
@@ -27,19 +28,26 @@ int wmain(int argc, wchar_t** argv) {
 int main(int argc, char** argv) {
 #endif
 
+	std::vector<std::string> args;
+	args.reserve(argc);
+	for (int i = 0; i < argc; i++)
+		args.emplace_back(xivres::util::unicode::convert<std::string>(argv[i]));
+
+	// `scdtool match ...`: a separate subcommand with its own argument parser
+	// (see match.cpp), dispatched before the single-entry-replace parser below
+	// so its required arguments never collide with -t/-o.
+	if (args.size() >= 2 && args[1] == "match")
+		return cmd_match(std::vector<std::string>(args.begin() + 1, args.end()));
+
 	argparse::ArgumentParser parser;
 	try {
-		std::vector<std::string> args;
-		args.reserve(argc);
-		for (int i = 0; i < argc; i++)
-			args.emplace_back(xivres::util::unicode::convert<std::string>(argv[i]));
-
 		parser
 			.add_description("Create a single-entry SCD file.")
 			.add_epilog(std::format("\n"
 				R"(Usage examples:)" "\n"
 				R"(* {0} -t "C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn\game::music/ex2/BGM_EX2_System_Title.scd")" "\n"
-				R"(  -i replacement.ogg -c ogg -oq 1.0 --loop-begin 1234 --loop-end 5.00 -o result.scd)" "\n",
+				R"(  -i replacement.ogg -c ogg -oq 1.0 --loop-begin 1234 --loop-end 5.00 -o result.scd)" "\n"
+				R"(* {0} match --game :global --ost "C:\OST\Dawntrail" --preset dawntrail.json --output dawntrail.json)" "\n",
 				xivres::util::unicode::convert<std::string>(std::filesystem::path(argv[0]).filename().u8string())));
 
 		parser
@@ -166,7 +174,7 @@ int main(int argc, char** argv) {
 		std::cerr << "Warning: loop-begin ignored as codec is set to copy." << std::endl;
 	if (makeMono && loopEnd.Mode != audio_time_point_t::Mode::Empty)
 		std::cerr << "Warning: loop-end ignored as codec is set to copy." << std::endl;
-	
+
 	try {
 		const auto templateScd = xivres::sound::reader(templateStream);
 		if (templateScd.sound_item_count() <= entryIndex)
@@ -174,7 +182,7 @@ int main(int argc, char** argv) {
 
 		xivres::sound::writer::sound_item newEntry;
 		bool newEntryFilled = false;
-		
+
 		xivres::sound::reader::sound_item::audio_info sourceInfo;
 		if (std::string_view(inputStream->read_vector<char>(0, 4)) == "RIFF") {
 			auto soundItem = xivres::sound::writer::sound_item::make_from_wave(inputStream->as_linear_reader<uint8_t>());
