@@ -23,7 +23,7 @@ mpls_playlist parse_mpls(const std::filesystem::path& path) {
 	if (!f)
 		throw std::runtime_error(std::format("mpls: could not open {}", xivres::util::unicode::convert<std::string>(path.wstring())));
 
-	std::vector<uint8_t> data((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());
+	const std::vector<uint8_t> data((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());
 	if (data.size() < 40 || std::memcmp(data.data(), "MPLS", 4) != 0)
 		throw std::runtime_error("mpls: not an MPLS file");
 
@@ -71,13 +71,14 @@ std::vector<mpls_playlist> parse_all_playlists(const std::filesystem::path& bdmv
 		if (entry.is_regular_file() && xivres::util::unicode::convert<std::string>(entry.path().extension().wstring(), &xivres::util::unicode::lower) == ".mpls")
 			files.push_back(entry.path());
 	}
-	std::sort(files.begin(), files.end());
+	std::ranges::sort(files);
 
 	for (const auto& file : files) {
 		try {
 			result.push_back(parse_mpls(file));
-		} catch (const std::exception&) {
+		} catch (const std::exception& e) {
 			// best-effort: skip files that don't parse as expected
+			(void)e;
 		}
 	}
 	return result;

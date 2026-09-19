@@ -74,25 +74,25 @@
     <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\$(Configuration)\Temp_$(Platform)_$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName)$(PlatformArchitecture)</TargetName>
-    <IncludePath>$(ProjectDir)..\xivres\xivres\include\;$(ProjectDir)..\xivres\xivres.vorbis\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)..\xivres\xivres\include\;$(ProjectDir)..\xivres\xivres.vorbis\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\$(Configuration)\Temp_$(Platform)_$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName)$(PlatformArchitecture)</TargetName>
-    <IncludePath>$(ProjectDir)..\xivres\xivres\include\;$(ProjectDir)..\xivres\xivres.vorbis\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)..\xivres\xivres\include\;$(ProjectDir)..\xivres\xivres.vorbis\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\$(Configuration)\Temp_$(Platform)_$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName)$(PlatformArchitecture)</TargetName>
-    <IncludePath>$(ProjectDir)..\xivres\xivres\include\;$(ProjectDir)..\xivres\xivres.vorbis\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)..\xivres\xivres\include\;$(ProjectDir)..\xivres\xivres.vorbis\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\$(Configuration)\Temp_$(Platform)_$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName)$(PlatformArchitecture)</TargetName>
-    <IncludePath>$(ProjectDir)..\xivres\xivres\include\;$(ProjectDir)..\xivres\xivres.vorbis\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)..\xivres\xivres\include\;$(ProjectDir)..\xivres\xivres.vorbis\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <VcpkgInstalledDir>$(SolutionDir)build\vcpkg_$(Platform)_$(ProjectName)\</VcpkgInstalledDir>
@@ -202,6 +202,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="commands\apply.cpp" />
+    <ClCompile Include="commands\extract.cpp" />
+    <ClCompile Include="commands\match.cpp" />
+    <ClCompile Include="commands\match_disc.cpp" />
+    <ClCompile Include="commands\toscd.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -209,21 +214,25 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="scdtool.cpp" />
-    <ClCompile Include="match.cpp" />
-    <ClCompile Include="apply.cpp" />
-    <ClCompile Include="extract.cpp" />
-    <ClCompile Include="toscd.cpp" />
-    <ClCompile Include="audio_match.cpp" />
-    <ClCompile Include="win32_process.cpp" />
+    <ClCompile Include="utils\argactions.cpp" />
+    <ClCompile Include="utils\audio_match.cpp" />
+    <ClCompile Include="utils\describe_path.cpp" />
+    <ClCompile Include="utils\mpls.cpp" />
+    <ClCompile Include="utils\win32_process.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="commands\apply.h" />
+    <ClInclude Include="commands\match_disc.h" />
+    <ClInclude Include="commands\extract.h" />
+    <ClInclude Include="commands\match.h" />
+    <ClInclude Include="commands\toscd.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="match.h" />
-    <ClInclude Include="apply.h" />
-    <ClInclude Include="extract.h" />
-    <ClInclude Include="toscd.h" />
-    <ClInclude Include="audio_match.h" />
-    <ClInclude Include="win32_process.h" />
+    <ClInclude Include="utils\argactions.h" />
+    <ClInclude Include="utils\audio_match.h" />
+    <ClInclude Include="utils\describe_path.h" />
+    <ClInclude Include="utils\misc.h" />
+    <ClInclude Include="utils\mpls.h" />
+    <ClInclude Include="utils\win32_process.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xivres\xivres\xivres.vcxproj">

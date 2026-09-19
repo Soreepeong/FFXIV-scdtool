@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "toscd.h"
 
+#include "utils/argactions.h"
+
 namespace {
 	struct audio_time_point_t {
 		enum class Mode {
@@ -15,10 +17,14 @@ namespace {
 
 		static audio_time_point_t from_string(const std::string& str) {
 			char* ep;
-			if (const auto val = strtoull(&str[0], &ep, 0); ep == str.data() + str.size())
-				return audio_time_point_t{Mode::Samples, val};
-			if (const auto val = strtod(&str[0], &ep); ep == str.data() + str.size())
-				return audio_time_point_t{Mode::TimePoint, 0, std::chrono::microseconds(static_cast<uint64_t>(val * 1000000.))};
+			if (const auto val = strtoull(str.data(), &ep, 0); ep == str.data() + str.size())
+				return audio_time_point_t{.Mode = Mode::Samples, .Samples = val};
+			if (const auto val = strtod(str.data(), &ep); ep == str.data() + str.size())
+				return audio_time_point_t{
+					.Mode = Mode::TimePoint,
+					.Samples = 0,
+					.TimePoint = std::chrono::microseconds(static_cast<uint64_t>(val * 1000000.)),
+				};
 			throw std::runtime_error("Invalid time point value");
 		}
 	};
@@ -44,49 +50,21 @@ int cmd_toscd(const std::vector<std::string>& args) {
 					throw std::runtime_error("Path not specified.");
 
 				if (components.size() == 1)
-					return std::make_shared<xivres::file_stream>(xivres::util::unicode::convert<std::wstring>(u8path));
+					return std::make_shared<xivres::file_stream>(argactions::path(u8path));
 
-				std::filesystem::path path;
-				if (components[0] == ":global") {
-					path = xivres::installation::find_installation_global();
-					if (path.empty())
-						throw std::runtime_error("Could not autodetect global client installation path.");
-
-				} else if (components[0] == ":china") {
-					path = xivres::installation::find_installation_china();
-					if (path.empty())
-						throw std::runtime_error("Could not autodetect Chinese client installation path.");
-
-				} else if (components[0] == ":korea") {
-					path = xivres::installation::find_installation_korea();
-					if (path.empty())
-						throw std::runtime_error("Could not autodetect Korean client installation path.");
-
-				} else
-					path = xivres::util::unicode::convert<std::wstring>(components[0]);
-				return xivres::installation(path).get_file(components[1]);
+				return xivres::installation(argactions::installation_root(components[0])).get_file(components[1]);
 			});
 		parser
 			.add_argument("-i", "--input")
 			.help("specify input ogg or wav file")
 			.action([](const std::string& u8path) -> std::shared_ptr<xivres::stream> {
-				std::filesystem::path path = xivres::util::unicode::convert<std::wstring>(u8path);
-				if (!path.is_absolute())
-					path = absolute(path);
-				if (!exists(path))
-					throw std::runtime_error(std::format("Path does not exist: {}", xivres::util::unicode::convert<std::string>(path.u8string())));
-				return std::make_shared<xivres::file_stream>(path);
+				return std::make_shared<xivres::file_stream>(argactions::existing_file(u8path));
 			});
 		parser
 			.add_argument("-o", "--output")
 			.required()
-			.help("specify output scd file path, including .scd extension")
-			.action([](const std::string& u8path) -> std::filesystem::path {
-				std::filesystem::path path = xivres::util::unicode::convert<std::wstring>(u8path);
-				if (!path.is_absolute())
-					path = absolute(path);
-				return path;
-			});
+			.help("specify output scd file path, including .scd extension, or - for stdout")
+			.action(argactions::absolute_path_or_stdout);
 		parser
 			.add_argument("-c", "--codec")
 			.default_value(xivres::sound::sound_entry_format::Empty)
@@ -107,7 +85,7 @@ int cmd_toscd(const std::vector<std::string>& args) {
 			.default_value(1.f)
 			.required()
 			.help("specify ogg quality, if using ogg codec")
-			.action([](const std::string& str) { return strtof(&str[0], nullptr); });
+			.action([](const std::string& str) { return strtof(str.data(), nullptr); });
 		parser
 			.add_argument("-m", "--mono")
 			.default_value(false)
@@ -133,14 +111,14 @@ int cmd_toscd(const std::vector<std::string>& args) {
 			.default_value(0u)
 			.required()
 			.help("specify track index (default: 0)")
-			.action([](const std::string& str) { return static_cast<uint32_t>(std::strtoul(&str[0], nullptr, 0)); });
+			.action([](const std::string& str) { return static_cast<uint32_t>(std::strtoul(str.data(), nullptr, 0)); });
 
 		parser.parse_args(args);
 
 	} catch (const std::exception& e) {
 		std::cerr
-			<< "Error parsing arguments. Use `toscd -h` to show help." << std::endl
-			<< e.what() << std::endl;
+			<< "Error parsing arguments. Use `toscd -h` to show help.\n"
+			<< e.what() << '\n';
 		return -1;
 	}
 
@@ -155,11 +133,11 @@ int cmd_toscd(const std::vector<std::string>& args) {
 	auto loopEnd = parser.get<audio_time_point_t>("--loop-end");
 
 	if (makeMono && codec == xivres::sound::sound_entry_format::Empty)
-		std::cerr << "Warning: mono ignored as codec is set to copy." << std::endl;
+		std::cerr << "Warning: mono ignored as codec is set to copy.\n";
 	if (makeMono && loopBegin.Mode != audio_time_point_t::Mode::Empty)
-		std::cerr << "Warning: loop-begin ignored as codec is set to copy." << std::endl;
+		std::cerr << "Warning: loop-begin ignored as codec is set to copy.\n";
 	if (makeMono && loopEnd.Mode != audio_time_point_t::Mode::Empty)
-		std::cerr << "Warning: loop-end ignored as codec is set to copy." << std::endl;
+		std::cerr << "Warning: loop-end ignored as codec is set to copy.\n";
 
 	try {
 		const auto templateScd = xivres::sound::reader(templateStream);
@@ -234,7 +212,7 @@ int cmd_toscd(const std::vector<std::string>& args) {
 					{},
 					oggQuality
 				);
-				std::cerr << std::endl;
+				std::cerr << '\n';
 
 			} else if (codec == xivres::sound::sound_entry_format::WaveFormatPcm) {
 				newEntry.Data.resize(sourceInfo.Data.size() * sizeof(int16_t) / sizeof(float));
@@ -268,17 +246,17 @@ int cmd_toscd(const std::vector<std::string>& args) {
 		if (hFile == INVALID_HANDLE_VALUE)
 			throw std::system_error(std::error_code(static_cast<int>(GetLastError()), std::system_category()));
 
-		if (DWORD w{}; !WriteFile(hFile, &result[0], static_cast<DWORD>(result.size()), &w, nullptr) || w != result.size())
+		if (DWORD w{}; !WriteFile(hFile, result.data(), static_cast<DWORD>(result.size()), &w, nullptr) || w != result.size())
 			throw std::system_error(std::error_code(static_cast<int>(GetLastError()), std::system_category()));
 
 		CloseHandle(hFile);
 
-		std::cerr << "Done!" << std::endl;
+		std::cerr << "Done!\n";
 
 	} catch (const std::exception& e) {
 		std::cerr
-			<< "Error processing data." << std::endl
-			<< e.what() << std::endl;
+			<< "Error processing data.\n"
+			<< e.what() << '\n';
 		return -1;
 	}
 	return 0;

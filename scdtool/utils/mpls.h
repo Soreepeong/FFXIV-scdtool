@@ -14,7 +14,7 @@ struct mpls_play_item {
 	uint32_t OutTime = 0;
 
 	[[nodiscard]] double duration_seconds() const {
-		return (OutTime >= InTime) ? (OutTime - InTime) / 45000.0 : 0.;
+		return OutTime >= InTime ? (OutTime - InTime) / 45000.0 : 0.;
 	}
 };
 

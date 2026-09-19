@@ -71,7 +71,7 @@ std::vector<uint8_t> run_process_capture_stderr(const std::filesystem::path& exe
 
 namespace {
 	std::vector<uint8_t> run_process_capture_one_stream(const std::filesystem::path& exe, const std::vector<std::wstring>& args, bool captureStderr) {
-	SECURITY_ATTRIBUTES sa{sizeof(sa), nullptr, TRUE};
+	SECURITY_ATTRIBUTES sa{.nLength = sizeof(sa), .lpSecurityDescriptor = nullptr, .bInheritHandle = TRUE};
 
 	auto_handle stdoutRead, stdoutWrite;
 	if (!CreatePipe(&stdoutRead.Value, &stdoutWrite.Value, &sa, 0))
@@ -117,7 +117,7 @@ namespace {
 	if (!created)
 		throw std::system_error(std::error_code(static_cast<int>(GetLastError()), std::system_category()), std::format("CreateProcessW({})", xivres::util::unicode::convert<std::string>(exe.wstring())));
 
-	auto_handle hProcess{pi.hProcess}, hThread{pi.hThread};
+	const auto_handle hProcess{pi.hProcess}, hThread{pi.hThread};
 	stdoutWrite.reset();
 	nulInput.reset();
 	nulOut.reset();

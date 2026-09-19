@@ -1,62 +1,22 @@
 #include "pch.h"
 #include "apply.h"
 
-#include "audio_match.h"
-#include "win32_process.h"
+#include "utils/argactions.h"
+#include "utils/audio_match.h"
+#include "utils/misc.h"
+#include "utils/win32_process.h"
 
 #include <algorithm>
 #include <atomic>
-#include <cmath>
+#include <charconv>
 #include <limits>
-#include <map>
 #include <mutex>
 #include <nlohmann/json.hpp>
-#include <set>
 #include <sstream>
-#include <thread>
 
 namespace {
 	std::string u8(const std::filesystem::path& p) {
 		return xivres::util::unicode::convert<std::string>(p.wstring());
-	}
-
-	std::filesystem::path fromU8(const std::string& s) {
-		return xivres::util::unicode::convert<std::wstring>(s);
-	}
-
-	// Each task holds a whole decoded track as float32 in memory (hundreds of MB for a
-	// long one), so this is capped well below the core count to avoid exhausting RAM.
-	template<typename Fn>
-	void parallel_for(size_t count, Fn&& fn) {
-		if (!count)
-			return;
-		constexpr size_t MaxThreads = 4;
-		const auto threadCount = (std::min)({count, MaxThreads, static_cast<size_t>((std::max)(1u, std::thread::hardware_concurrency()))});
-		std::atomic<size_t> next{0};
-		std::mutex errorMutex;
-		std::exception_ptr firstError;
-		std::vector<std::thread> threads;
-		threads.reserve(threadCount);
-		for (size_t t = 0; t < threadCount; ++t) {
-			threads.emplace_back([&fn, &next, count, &errorMutex, &firstError]() {
-				while (true) {
-					const auto i = next.fetch_add(1);
-					if (i >= count)
-						break;
-					try {
-						fn(i);
-					} catch (...) {
-						std::lock_guard lock(errorMutex);
-						if (!firstError)
-							firstError = std::current_exception();
-					}
-				}
-			});
-		}
-		for (auto& th : threads)
-			th.join();
-		if (firstError)
-			std::rethrow_exception(firstError);
 	}
 
 	struct apply_job {
@@ -131,11 +91,12 @@ namespace {
 			const auto valueStart = line.find_first_of("-0123456789", label + 2);
 			if (valueStart == std::string::npos)
 				continue;
-			try {
-				value = std::stod(line.substr(valueStart));
-			} catch (const std::exception&) {
-				continue;
-			}
+			// from_chars rather than stod: a line whose remainder is not a number is skipped
+			// by checking the error code, so there is no exception to swallow here.
+			const auto valueText = std::string_view(line).substr(valueStart);
+			double parsed = 0.;
+			if (std::from_chars(valueText.data(), valueText.data() + valueText.size(), parsed).ec == std::errc{})
+				value = parsed;
 		}
 		if (std::isnan(value) || value <= -70.)
 			throw std::runtime_error(std::format("ffmpeg reported no usable integrated loudness for {}", u8(file)));
@@ -211,14 +172,14 @@ namespace {
 		});
 
 		std::ifstream f(rawPath, std::ios::binary | std::ios::ate);
-		if (!f)
-			return {};
-		const auto size = static_cast<size_t>(f.tellg());
-		f.seekg(0);
-
-		std::vector<float> floats(size / sizeof(float));
-		if (!floats.empty() && !f.read(reinterpret_cast<char*>(floats.data()), static_cast<std::streamsize>(floats.size() * sizeof(float))))
-			return {};
+		std::vector<float> floats;
+		if (f) {
+			const auto size = static_cast<size_t>(f.tellg());
+			f.seekg(0);
+			floats.resize(size / sizeof(float));
+			if (!floats.empty() && !f.read(reinterpret_cast<char*>(floats.data()), static_cast<std::streamsize>(floats.size() * sizeof(float))))
+				floats.clear();
+		}
 		return floats;
 	}
 
@@ -266,7 +227,7 @@ namespace {
 
 		constexpr double CorrectionThreshold = 0.5;  // ~6 dB quieter or more counts as "an onset treatment is here"
 		constexpr double MinSourceRms = 1e-5;         // floor to avoid a huge ratio off a near-zero denominator
-		std::vector<double> ratios(totalBlocks, 1.);
+		std::vector ratios(totalBlocks, 1.);
 		size_t lastCorrected = 0;
 		bool anyCorrection = false;
 		for (size_t b = 0; b < totalBlocks; ++b) {
@@ -296,7 +257,7 @@ namespace {
 			const auto blockStart = b * blockFrames;
 			const auto blockEnd = (std::min)(blockStart + blockFrames, floats.size());
 			const auto ratioHere = ratios[b];
-			const auto ratioNext = (b + 1 < windowBlocks) ? ratios[b + 1] : ratios[b];
+			const auto ratioNext = b + 1 < windowBlocks ? ratios[b + 1] : ratios[b];
 			minRatio = (std::min)(minRatio, ratioHere);
 			for (size_t i = blockStart; i < blockEnd; i += channels) {
 				const auto t = static_cast<double>(i - blockStart) / static_cast<double>(blockEnd - blockStart);
@@ -341,8 +302,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 		parser.parse_args(args);
 	} catch (const std::exception& e) {
 		std::cerr
-			<< "Error parsing arguments. Use `apply -h` to show help." << std::endl
-			<< e.what() << std::endl;
+			<< "Error parsing arguments. Use `apply -h` to show help.\n"
+			<< e.what() << '\n';
 		return -1;
 	}
 
@@ -356,11 +317,11 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 	try {
 		const auto gameSpec = parser.get<std::string>("--game");
-		const auto ostDir = fromU8(parser.get<std::string>("--ost"));
-		const auto presetPath = fromU8(parser.get<std::string>("--preset"));
-		const auto outputDir = fromU8(parser.get<std::string>("--output-dir"));
-		const auto ffmpegPath = fromU8(parser.get<std::string>("--ffmpeg"));
-		const auto ffprobePath = fromU8(parser.get<std::string>("--ffprobe"));
+		const auto ostDir = argactions::path(parser.get<std::string>("--ost"));
+		const auto presetPath = argactions::path(parser.get<std::string>("--preset"));
+		const auto outputDir = argactions::path(parser.get<std::string>("--output-dir"));
+		const auto ffmpegPath = argactions::path(parser.get<std::string>("--ffmpeg"));
+		const auto ffprobePath = argactions::path(parser.get<std::string>("--ffprobe"));
 		const auto samplingRateSpec = parser.get<std::string>("--sampling-rate");
 		const auto entryIndex = parser.get<uint32_t>("--entry-index");
 		const auto oggQuality = std::clamp(parser.get<float>("--ogg-quality"), 0.f, 1.f);
@@ -371,15 +332,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 		const auto onsetMatch = parser.get<bool>("--onset-match") && !parser.get<bool>("--no-onset-match");
 		const auto maxGainDb = parser.get<double>("--max-gain");
 
-		const auto gameRoot = [&] {
-			if (gameSpec == ":global") return xivres::installation::find_installation_global();
-			if (gameSpec == ":china") return xivres::installation::find_installation_china();
-			if (gameSpec == ":korea") return xivres::installation::find_installation_korea();
-			return fromU8(gameSpec);
-		}();
-		if (gameRoot.empty())
-			throw std::runtime_error("Could not resolve game installation path.");
-		const xivres::installation installation(gameRoot);
+		const xivres::installation installation(argactions::installation_root(gameSpec));
 
 		nlohmann::json preset;
 		{
@@ -418,23 +371,23 @@ int cmd_apply(const std::vector<std::string>& args) {
 				continue;
 
 			jobs.push_back({
-				path->get<std::string>(),
-				ostDir / fromU8(file->get<std::string>()),
-				score,
-				info->value("offset", 0.),
+				.TargetPath = path->get<std::string>(),
+				.SourcePath = ostDir / argactions::path(file->get<std::string>()),
+				.Score = score,
+				.Offset = info->value("offset", 0.),
 			});
 		}
 
 		std::cerr << std::format("{} entr(ies) to rewrite, {} skipped (unmatched or below --min-score).",
-			jobs.size(), skippedUnmatched) << std::endl;
+			jobs.size(), skippedUnmatched) << '\n';
 		if (jobs.empty()) {
-			std::cerr << "Nothing to do." << std::endl;
+			std::cerr << "Nothing to do.\n";
 			return 0;
 		}
 
 		if (dryRun) {
 			for (const auto& job : jobs)
-				std::cerr << std::format("  would write {} <- {} (score {:.3f})", job.TargetPath, u8(job.SourcePath), job.Score) << std::endl;
+				std::cerr << std::format("  would write {} <- {} (score {:.3f})", job.TargetPath, u8(job.SourcePath), job.Score) << '\n';
 			return 0;
 		}
 
@@ -443,6 +396,10 @@ int cmd_apply(const std::vector<std::string>& args) {
 		std::atomic<size_t> writtenCount{0};
 		std::mutex logMutex;
 
+		// Each job decodes and holds a whole track as float32 in memory (hundreds of MB for
+		// a long one), so the worker count is kept well below the core count to avoid
+		// exhausting RAM -- hence an explicit cap instead of parallel_for's default.
+		constexpr size_t MaxDecodeThreads = 4;
 		parallel_for(jobs.size(), [&](size_t index) {
 			const auto& job = jobs[index];
 
@@ -463,12 +420,6 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 			const auto [templateLoopStart, templateLoopEnd] = template_loop_points(templateItem);
 
-			// The entry header also carries LoopStart/LoopEnd, but as byte offsets into the
-			// entry's stream, on a different scale from the sample indices the encoder takes.
-			// Reported only so a mismatch is visible when reviewing what was written.
-			const auto headerLoopStart = static_cast<uint32_t>(templateItem.Header->LoopStartOffset);
-			const auto headerLoopEnd = static_cast<uint32_t>(templateItem.Header->LoopEndOffset);
-
 			const auto channels = static_cast<size_t>(templateItem.Header->ChannelCount);
 			const auto templateRate = static_cast<size_t>(templateItem.Header->SamplingRate);
 			if (!channels || !templateRate)
@@ -479,9 +430,9 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// the calm/battle switching into one state, so refuse rather than silently
 			// produce a file that behaves differently in game.
 			if (channels > 2) {
-				const auto lock = std::lock_guard(logMutex);
+				const auto lock = std::scoped_lock(logMutex);
 				std::cerr << std::format("  SKIPPED {}: template has {} channels (engine-switched stems); a single stereo source cannot reproduce them",
-					job.TargetPath, channels) << std::endl;
+					job.TargetPath, channels) << '\n';
 				return;
 			}
 
@@ -509,7 +460,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 			const auto rawPath = tempDir / std::format(L"scdtool_apply_{}.f32", tempFileCounter.fetch_add(1));
 			{
-				const auto lock = std::lock_guard(logMutex);
+				const auto lock = std::scoped_lock(logMutex);
 				tempFiles.push_back(rawPath);
 			}
 			auto floats = decode_source_to_floats(ffmpegPath, job.SourcePath, channels, samplingRate, rawPath);
@@ -524,7 +475,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// boundary and produce an audible seam.
 			size_t paddingAdded = 0;
 			size_t trimmedAway = 0;
-			if (const auto offsetSamples = static_cast<int64_t>(std::llround(job.Offset * static_cast<double>(samplingRate)))) {
+			if (const auto offsetSamples = std::llround(job.Offset * static_cast<double>(samplingRate))) {
 				if (offsetSamples > 0) {
 					// The game file starts before the OST track does; the missing lead-in is
 					// unrecoverable, so pad with silence rather than shifting the music.
@@ -543,9 +494,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// Clamp rather than emit a loop past the end of the new audio.
 			const auto totalSamples = floats.size() / channels;
 			auto newLoopStart = loopStart;
-			auto newLoopEnd = loopEnd;
-			if (newLoopEnd > totalSamples)
-				newLoopEnd = totalSamples;
+			auto newLoopEnd = (std::min)(loopEnd, totalSamples);
 			if (newLoopStart >= totalSamples) {
 				newLoopStart = 0;
 				newLoopEnd = 0;
@@ -557,7 +506,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// loudness matching is on.
 			const auto templateAudio = tempDir / std::format(L"scdtool_apply_src_{}.ogg", tempFileCounter.fetch_add(1));
 			{
-				const auto lock = std::lock_guard(logMutex);
+				const auto lock = std::scoped_lock(logMutex);
 				tempFiles.push_back(templateAudio);
 			}
 			{
@@ -575,7 +524,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 			double gainDb = 0.;
 			double requestedGainDb = 0.;
 			bool gainLimited = false;
-			if (loudnessMatch && (newLoopEnd > newLoopStart)) {
+			if (loudnessMatch && newLoopEnd > newLoopStart) {
 				const auto spanSeconds = static_cast<double>(newLoopEnd - newLoopStart) / static_cast<double>(samplingRate);
 				const auto templateStartSeconds = static_cast<double>(templateLoopStart) / static_cast<double>(templateRate);
 
@@ -595,11 +544,11 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 					// Applying the gain must not clip; if it would, back off uniformly rather
 					// than letting the encoder fold peaks over.
-					if (const auto peak = floats.empty() ? 0.f : *std::max_element(floats.begin(), floats.end(), [](float a, float b) { return std::abs(a) < std::abs(b); });
+					if (const auto peak = floats.empty() ? 0.f : *std::ranges::max_element(floats, [](float a, float b) { return std::abs(a) < std::abs(b); });
 						std::abs(peak) > 1.f) {
 						const auto scale = 1.f / std::abs(peak);
 						for (auto& v : floats)
-							v = static_cast<float>(v * scale);
+							v = v * scale;
 						gainDb += 20. * std::log10(static_cast<double>(scale));
 						gainLimited = true;
 						requestedGainDb = requestedDb;
@@ -620,7 +569,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 				constexpr double OnsetWindowSeconds = 3.0;  // longest observed real case was ~1.3s; ample margin
 				const auto onsetRawPath = tempDir / std::format(L"scdtool_apply_onset_{}.f32", tempFileCounter.fetch_add(1));
 				{
-					const auto lock = std::lock_guard(logMutex);
+					const auto lock = std::scoped_lock(logMutex);
 					tempFiles.push_back(onsetRawPath);
 				}
 				try {
@@ -658,7 +607,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 			}
 
 			const auto result = newScd.export_to_bytes();
-			const auto outputPath = outputDir / fromU8(job.TargetPath);
+			const auto outputPath = outputDir / argactions::path(job.TargetPath);
 			std::filesystem::create_directories(outputPath.parent_path());
 			{
 				std::ofstream f(outputPath, std::ios::binary);
@@ -692,7 +641,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 				// A looping entry is encoded only up to its loop end: everything past that
 				// point is unreachable, because the game jumps back to the loop start. So
 				// the expected length is the loop end, not the whole source track.
-				const auto expectedSamples = (newLoopEnd > 0 && newLoopEnd < totalSamples) ? newLoopEnd : totalSamples;
+				const auto expectedSamples = newLoopEnd > 0 && newLoopEnd < totalSamples ? newLoopEnd : totalSamples;
 				const auto samplesDelta = checkSamples > expectedSamples ? checkSamples - expectedSamples : expectedSamples - checkSamples;
 				if (samplesDelta > LoopToleranceSamples)
 					throw std::runtime_error(std::format("verification failed for {}: {} samples read back, expected about {}",
@@ -700,25 +649,25 @@ int cmd_apply(const std::vector<std::string>& args) {
 			}
 
 			{
-				const auto lock = std::lock_guard(logMutex);
-				writtenCount++;
+				const auto lock = std::scoped_lock(logMutex);
+				++writtenCount;
 				std::cerr << std::format("  {} <- {} (score {:.3f}, offset {:+.3f}s, trim {} pad {} samples, loop {}-{}, gain {:+.1f} dB{}{})",
 					job.TargetPath, u8(job.SourcePath), job.Score, job.Offset, trimmedAway, paddingAdded,
 					newLoopStart, newLoopEnd, gainDb,
 					gainLimited ? std::format(", peak-limited from {:+.1f} dB", requestedGainDb) : "",
-					onsetSeconds > 0. ? std::format(", onset corrected {:.1f} dB over {:.2f}s", onsetDb, onsetSeconds) : "") << std::endl;
+					onsetSeconds > 0. ? std::format(", onset corrected {:.1f} dB over {:.2f}s", onsetDb, onsetSeconds) : "") << '\n';
 			}
-		});
+		}, MaxDecodeThreads);
 
 		cleanupTempFiles();
-		std::cerr << std::format("Done. Wrote {} file(s) under {}.", writtenCount.load(), u8(outputDir)) << std::endl;
+		std::cerr << std::format("Done. Wrote {} file(s) under {}.", writtenCount.load(), u8(outputDir)) << '\n';
 		return 0;
 
 	} catch (const std::exception& e) {
 		cleanupTempFiles();
 		std::cerr
-			<< "Error processing data." << std::endl
-			<< e.what() << std::endl;
+			<< "Error processing data.\n"
+			<< e.what() << '\n';
 		return -1;
 	}
 }

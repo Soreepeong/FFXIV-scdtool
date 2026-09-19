@@ -1,15 +1,13 @@
 #include "pch.h"
 #include "extract.h"
 
+#include "utils/argactions.h"
+
 #include <nlohmann/json.hpp>
 
 namespace {
 	std::string u8(const std::filesystem::path& p) {
 		return xivres::util::unicode::convert<std::string>(p.wstring());
-	}
-
-	std::filesystem::path fromU8(const std::string& s) {
-		return xivres::util::unicode::convert<std::wstring>(s);
 	}
 }
 
@@ -31,8 +29,8 @@ int cmd_extract(const std::vector<std::string>& args) {
 		parser.parse_args(args);
 	} catch (const std::exception& e) {
 		std::cerr
-			<< "Error parsing arguments. Use `extract -h` to show help." << std::endl
-			<< e.what() << std::endl;
+			<< "Error parsing arguments. Use `extract -h` to show help.\n"
+			<< e.what() << '\n';
 		return -1;
 	}
 
@@ -46,20 +44,12 @@ int cmd_extract(const std::vector<std::string>& args) {
 		// is a .scd sitting on disk, which is how a generated replacement is inspected.
 		std::shared_ptr<xivres::stream> stream;
 		if (gameSpec.empty()) {
-			auto path = fromU8(inputPath);
+			auto path = argactions::path(inputPath);
 			if (!std::filesystem::exists(path))
 				throw std::runtime_error(std::format("File not found: {}", u8(path)));
 			stream = std::make_shared<xivres::file_stream>(path);
 		} else {
-			const auto gameRoot = [&] {
-				if (gameSpec == ":global") return xivres::installation::find_installation_global();
-				if (gameSpec == ":china") return xivres::installation::find_installation_china();
-				if (gameSpec == ":korea") return xivres::installation::find_installation_korea();
-				return fromU8(gameSpec);
-			}();
-			if (gameRoot.empty())
-				throw std::runtime_error("Could not resolve game installation path.");
-			const xivres::installation installation(gameRoot);
+			const xivres::installation installation(argactions::installation_root(gameSpec));
 			stream = installation.get_file(inputPath);
 		}
 
@@ -67,7 +57,7 @@ int cmd_extract(const std::vector<std::string>& args) {
 			const auto outputPath = parser.present<std::string>("--output");
 			if (!outputPath)
 				throw std::runtime_error("--output is required with --raw.");
-			auto out = fromU8(*outputPath);
+			auto out = argactions::path(*outputPath);
 			if (out.extension().empty())
 				out.replace_extension(L".scd");
 			std::filesystem::create_directories(out.parent_path());
@@ -77,7 +67,7 @@ int cmd_extract(const std::vector<std::string>& args) {
 			if (!f)
 				throw std::runtime_error(std::format("Could not create {}", u8(out)));
 			f.write(reinterpret_cast<const char*>(bytes.data()), static_cast<std::streamsize>(bytes.size()));
-			std::cerr << std::format("Wrote {} ({} bytes, raw container).", u8(out), bytes.size()) << std::endl;
+			std::cerr << std::format("Wrote {} ({} bytes, raw container).", u8(out), bytes.size()) << '\n';
 			return 0;
 		}
 
@@ -107,7 +97,7 @@ int cmd_extract(const std::vector<std::string>& args) {
 				res["totalSamples"] = info.Data.size() / sizeof(float) / channels;
 				res["durationSeconds"] = static_cast<double>(res["totalSamples"].get<size_t>()) / static_cast<double>(info.SamplingRate ? info.SamplingRate : 1);
 			}
-			std::cout << res.dump(2) << std::endl;
+			std::cout << res.dump(2) << '\n';
 			return 0;
 		}
 
@@ -127,7 +117,7 @@ int cmd_extract(const std::vector<std::string>& args) {
 			throw std::runtime_error("Entry is neither Ogg nor PCM wave.");
 		}
 
-		auto out = fromU8(*outputPath);
+		auto out = argactions::path(*outputPath);
 		if (out.extension().empty())
 			out.replace_extension(ext);
 		std::filesystem::create_directories(out.parent_path());
@@ -135,13 +125,13 @@ int cmd_extract(const std::vector<std::string>& args) {
 		if (!f)
 			throw std::runtime_error(std::format("Could not create {}", u8(out)));
 		f.write(reinterpret_cast<const char*>(bytes.data()), static_cast<std::streamsize>(bytes.size()));
-		std::cerr << std::format("Wrote {} ({} bytes).", u8(out), bytes.size()) << std::endl;
+		std::cerr << std::format("Wrote {} ({} bytes).", u8(out), bytes.size()) << '\n';
 		return 0;
 
 	} catch (const std::exception& e) {
 		std::cerr
-			<< "Error processing data." << std::endl
-			<< e.what() << std::endl;
+			<< "Error processing data.\n"
+			<< e.what() << '\n';
 		return -1;
 	}
 }

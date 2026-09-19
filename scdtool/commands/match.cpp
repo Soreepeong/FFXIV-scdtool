@@ -1,19 +1,23 @@
 #include "pch.h"
 #include "match.h"
 
-#include "audio_match.h"
-#include "win32_process.h"
+#include "utils/argactions.h"
+#include "utils/audio_match.h"
+#include "utils/describe_path.h"
+#include "utils/misc.h"
+#include "utils/win32_process.h"
 
 #include <algorithm>
+#include <array>
 #include <atomic>
-#include <cmath>
 #include <functional>
 #include <map>
 #include <mutex>
 #include <nlohmann/json.hpp>
 #include <numeric>
+#include <ranges>
 #include <set>
-#include <thread>
+#include <string_view>
 #include <unordered_map>
 
 #include <xivres/excel.h>
@@ -25,64 +29,7 @@ namespace {
 	std::string u8(const std::filesystem::path& p) {
 		return xivres::util::unicode::convert<std::string>(p.wstring());
 	}
-
-	std::filesystem::path resolve_game_root(const std::string& spec) {
-		if (spec == ":global") {
-			auto path = xivres::installation::find_installation_global();
-			if (path.empty())
-				throw std::runtime_error("Could not autodetect global client installation path.");
-			return path;
-		}
-		if (spec == ":china") {
-			auto path = xivres::installation::find_installation_china();
-			if (path.empty())
-				throw std::runtime_error("Could not autodetect Chinese client installation path.");
-			return path;
-		}
-		if (spec == ":korea") {
-			auto path = xivres::installation::find_installation_korea();
-			if (path.empty())
-				throw std::runtime_error("Could not autodetect Korean client installation path.");
-			return path;
-		}
-		return xivres::util::unicode::convert<std::wstring>(spec);
-	}
-
-	// Runs fn(i) for i in [0, count) across a pool of hardware_concurrency() threads.
-	// If any invocation throws, all workers finish their current item and the first
-	// exception is rethrown on the calling thread. (Mirrors match_disc.cpp's helper;
-	// kept as a separate copy so match.cpp has no dependency on that unwired file.)
-	template<typename Fn>
-	void parallel_for(size_t count, Fn&& fn) {
-		if (!count)
-			return;
-		const auto threadCount = (std::min)(count, static_cast<size_t>((std::max)(1u, std::thread::hardware_concurrency())));
-		std::atomic<size_t> next{0};
-		std::mutex errorMutex;
-		std::exception_ptr firstError;
-		std::vector<std::thread> threads;
-		threads.reserve(threadCount);
-		for (size_t t = 0; t < threadCount; ++t) {
-			threads.emplace_back([&fn, &next, count, &errorMutex, &firstError]() {
-				while (true) {
-					const auto i = next.fetch_add(1);
-					if (i >= count)
-						break;
-					try {
-						fn(i);
-					} catch (...) {
-						std::lock_guard lock(errorMutex);
-						if (!firstError)
-							firstError = std::current_exception();
-					}
-				}
-			});
-		}
-		for (auto& th : threads)
-			th.join();
-		if (firstError)
-			std::rethrow_exception(firstError);
-	}
+	// Game installation specs are resolved by argactions::installation_root.
 
 	// Extracts a game .scd's first sound entry to a temp file so it can go through
 	// the same ffmpeg decode_envelope() path as OST candidate files, rather than
@@ -188,7 +135,7 @@ namespace {
 		for (size_t ch = 0; ch < channelCount; ++ch) {
 			const auto chPath = extract_single_channel_to_temp(ffmpegPath, targetAudio, ch, tempDir, tempFileCounter.fetch_add(1));
 			{
-				const auto lock = std::lock_guard(tempFilesMutex);
+				const auto lock = std::scoped_lock(tempFilesMutex);
 				tempFiles.push_back(chPath);
 			}
 			channelEnvelopes[ch] = decode_envelope(ffmpegPath, chPath);
@@ -196,7 +143,7 @@ namespace {
 
 		// Zero-lag-ish correlation: these are channels of the same stream, so any real
 		// pair is already sample-aligned; a small offset budget just absorbs decode jitter.
-		std::vector<std::vector<double>> pairScore(channelCount, std::vector<double>(channelCount, -1.));
+		std::vector pairScore(channelCount, std::vector(channelCount, -1.));
 		for (size_t a = 0; a < channelCount; ++a)
 			for (size_t b = a + 1; b < channelCount; ++b)
 				pairScore[a][b] = pairScore[b][a] = best_envelope_correlation(channelEnvelopes[a], channelEnvelopes[b], EnvelopeRateHz, 0.25, 1., 0.99);
@@ -205,11 +152,11 @@ namespace {
 		// pairs -- at most 15 of them (6 channels), so there is no need for anything
 		// cleverer than recursion.
 		std::vector<size_t> remaining(channelCount);
-		std::iota(remaining.begin(), remaining.end(), size_t{0});
+		std::ranges::iota(remaining, size_t{0});
 		std::vector<std::pair<size_t, size_t>> best;
 		double bestScore = -1e9;
 		const std::function<void(std::vector<size_t>, std::vector<std::pair<size_t, size_t>>, double)> recurse =
-			[&](std::vector<size_t> left, std::vector<std::pair<size_t, size_t>> chosen, double scoreSoFar) {
+			[&](const std::vector<size_t>& left, const std::vector<std::pair<size_t, size_t>>& chosen, double scoreSoFar) {
 				if (left.empty()) {
 					if (scoreSoFar > bestScore) {
 						bestScore = scoreSoFar;
@@ -232,7 +179,7 @@ namespace {
 		for (auto& [a, b] : best)
 			if (a > b)
 				std::swap(a, b);
-		std::sort(best.begin(), best.end());
+		std::ranges::sort(best);
 		return best;
 	}
 
@@ -284,7 +231,7 @@ namespace {
 			std::string title;
 			for (const auto& [key, value] : json["format"]["tags"].items()) {
 				auto lowerKey = key;
-				std::transform(lowerKey.begin(), lowerKey.end(), lowerKey.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+				std::ranges::transform(lowerKey, lowerKey.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
 				if (lowerKey == "title" && value.is_string()) {
 					title = value.get<std::string>();
 					break;
@@ -303,8 +250,8 @@ namespace {
 				if (i == title.size() || title[i] == '/') {
 					auto part = title.substr(start, i - start);
 					const auto notSpace = [](unsigned char ch) { return !std::isspace(ch); };
-					part.erase(part.begin(), std::find_if(part.begin(), part.end(), notSpace));
-					part.erase(std::find_if(part.rbegin(), part.rend(), notSpace).base(), part.end());
+					part.erase(part.begin(), std::ranges::find_if(part, notSpace));
+					part.erase(std::ranges::find_if(part.rbegin(), part.rend(), notSpace).base(), part.end());
 					if (!part.empty())
 						rawParts.push_back(std::move(part));
 					start = i + 1;
@@ -312,7 +259,7 @@ namespace {
 			}
 
 			for (const auto& part : rawParts) {
-				const bool isAscii = std::all_of(part.begin(), part.end(), [](unsigned char c) { return c < 0x80; });
+				const bool isAscii = std::ranges::all_of(part, [](unsigned char c) { return c < 0x80; });
 				if (isAscii) {
 					if (info.English.empty())
 						info.English = part;
@@ -330,9 +277,9 @@ namespace {
 			// purely because one release's tag is more redundant than the other's.
 			std::vector<std::string> normParts = rawParts;
 			for (auto& part : normParts)
-				std::transform(part.begin(), part.end(), part.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
-			std::sort(normParts.begin(), normParts.end());
-			normParts.erase(std::unique(normParts.begin(), normParts.end()), normParts.end());
+				std::ranges::transform(part, part.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+			std::ranges::sort(normParts);
+			normParts.erase(std::ranges::unique(normParts).begin(), normParts.end());
 			for (const auto& part : normParts) {
 				if (!info.Normalized.empty())
 					info.Normalized += '\x1f';
@@ -342,39 +289,6 @@ namespace {
 		} catch (const std::exception&) {
 			return {};
 		}
-	}
-
-	// Every BGM path the installed game knows about, read from the `bgm` excel sheet.
-	//
-	// xivres can only look files up by hash, so there is no way to enumerate the music
-	// folder directly; this sheet is the only way to discover target .scd paths, which
-	// is what makes presets for content that has none yet possible at all.
-	//
-	// Column names are not stored in the sheet header (exh::column carries only a type
-	// and an offset), so rather than hard-code a column index that a game update could
-	// shift, take any string cell that looks like a music path.
-	std::vector<std::string> enumerate_bgm_paths(const xivres::installation& installation) {
-		// Deliberately the default reader, not new_with_language(): a client need not ship
-		// every localized page file (this one only has exd/bgm_0.exd, not bgm_0_en.exd),
-		// and the columns read here are paths, which are not localized anyway.
-		const auto sheet = installation.get_excel("bgm");
-		const auto& exh = sheet.get_exh_reader();
-
-		std::set<std::string> paths;
-		for (size_t pageIndex = 0; pageIndex < exh.get_pages().size(); ++pageIndex) {
-			for (const auto& row : sheet.get_exd_reader(pageIndex)) {
-				for (const auto& subrow : row) {
-					for (const auto& cell : subrow) {
-						if (cell.Type != xivres::excel::cell_type::String)
-							continue;
-						auto path = cell.String.repr();
-						if (path.starts_with("music/") && path.ends_with(".scd"))
-							paths.insert(std::move(path));
-					}
-				}
-			}
-		}
-		return {paths.begin(), paths.end()};
 	}
 
 	// Collects the "path" of one target object, which the schema allows to be either a
@@ -420,13 +334,34 @@ namespace {
 		};
 		if (!target->is_array())
 			return enabled(*target);
-		if (target->empty())
-			return false;
-		for (const auto& t : *target)
-			if (enabled(t))
-				return true;
-		return false;
+		return std::ranges::any_of(*target, enabled);
 	}
+
+	// Adds what the game's sheets say about a target to the target itself, so a preset can be
+	// read (and filtered) by place and duty name rather than by path alone. A target is one
+	// object or, as the preset schema allows, a list of them.
+	void augment_target_names(nlohmann::json& target, const xivres::installation& installation, xivres::game_language language) {
+		if (target.is_array()) {
+			for (auto& t : target)
+				augment_target_names(t, installation, language);
+			return;
+		}
+		if (!target.is_object())
+			return;
+
+		std::vector<std::string> paths;
+		append_target_paths(paths, target);
+		std::set<std::string> placeNames, dutyNames;
+		for (const auto& path : paths) {
+			std::set<std::string> pathPlaceNames, pathDutyNames;
+			describe_path(installation, path, language, pathPlaceNames, pathDutyNames);
+			placeNames.insert(pathPlaceNames.begin(), pathPlaceNames.end());
+			dutyNames.insert(pathDutyNames.begin(), pathDutyNames.end());
+		}
+		target["placeNames"] = std::vector(placeNames.begin(), placeNames.end());
+		target["dutyNames"] = std::vector(dutyNames.begin(), dutyNames.end());
+	}
+
 }
 
 int cmd_match(const std::vector<std::string>& args) {
@@ -440,6 +375,9 @@ int cmd_match(const std::vector<std::string>& args) {
 				"have a non-empty \"source\" are left untouched. Items this tool cannot confidently resolve are left\n"
 				"without a \"source\", get \"enable\": false, and get a \"matchInfo\" field explaining why, for manual\n"
 				"review.\n"
+				"Its \"target\" also carries \"placeNames\"/\"dutyNames\": the places and duties the game's own\n"
+				"sheets (bgm/territorytype/contentfindercondition/placename) say that file is the music of.\n"
+				"are empty for music no territory uses.\n"
 				"\n"
 				"With --discover, the targets are instead read from the installed game's own bgm sheet, so a\n"
 				"preset can be built for content that has none yet. Combine with --exclude-preset to consider\n"
@@ -456,6 +394,26 @@ int cmd_match(const std::vector<std::string>& args) {
 		parser.add_argument("--matched-only").default_value(false).implicit_value(true).help("write only the items that were matched, so the output is directly usable as a preset");
 		parser.add_argument("--ffmpeg").default_value(std::string("ffmpeg")).help("path to ffmpeg executable");
 		parser.add_argument("--ffprobe").default_value(std::string("ffprobe")).help("path to ffprobe executable, used to read title tags for duplicate-release detection");
+		parser.add_argument("--language").default_value(xivres::game_language::Unspecified)
+			.help("language the place and duty names are written in: the client's own (default), or ja, en, de, fr, chs, cht, tc or ko")
+			.action([](const std::string& spec) -> xivres::game_language {
+				const auto lower = xivres::util::unicode::convert<std::string>(spec, &xivres::util::unicode::lower);
+				for (const auto language : {
+					xivres::game_language::Japanese,
+					xivres::game_language::English,
+					xivres::game_language::German,
+					xivres::game_language::French,
+					xivres::game_language::ChineseSimplified,
+					xivres::game_language::ChineseTraditional,
+					xivres::game_language::ChineseTraditionalTc,
+					xivres::game_language::Korean,
+				})
+					if (lower == xivres::game_language_code(language))
+						return language;
+				if (lower == "auto" || lower == "default" || lower == "unspecified")
+					return xivres::game_language::Unspecified;
+				throw std::runtime_error(std::format("Unknown language: {} (try ja, en, de, fr, chs, cht, tc or ko)", spec));
+			});
 		// Re-measured against the 690 hand-verified target->source mappings in the
 		// existing presets (a far larger and more honest sample than one ground-truth
 		// album, and one that actually contains wrong answers to catch): sweeping this
@@ -486,8 +444,8 @@ int cmd_match(const std::vector<std::string>& args) {
 		parser.parse_args(args);
 	} catch (const std::exception& e) {
 		std::cerr
-			<< "Error parsing arguments. Use `match -h` to show help." << std::endl
-			<< e.what() << std::endl;
+			<< "Error parsing arguments. Use `match -h` to show help.\n"
+			<< e.what() << '\n';
 		return -1;
 	}
 
@@ -501,14 +459,14 @@ int cmd_match(const std::vector<std::string>& args) {
 
 	try {
 		const auto gameSpec = parser.get<std::string>("--game");
-		const auto ostDir = std::filesystem::path(xivres::util::unicode::convert<std::wstring>(parser.get<std::string>("--ost")));
+		const auto ostDir = argactions::path(parser.get<std::string>("--ost"));
 		const auto presetSpec = parser.present<std::string>("--preset").value_or(std::string());
 		const auto excludeSpec = parser.get<std::string>("--exclude-preset");
 		const auto targetPrefix = parser.get<std::string>("--target-prefix");
 		const auto discover = parser.get<bool>("--discover");
-		const auto outputPath = std::filesystem::path(xivres::util::unicode::convert<std::wstring>(parser.get<std::string>("--output")));
-		const auto ffmpegPath = std::filesystem::path(xivres::util::unicode::convert<std::wstring>(parser.get<std::string>("--ffmpeg")));
-		const auto ffprobePath = std::filesystem::path(xivres::util::unicode::convert<std::wstring>(parser.get<std::string>("--ffprobe")));
+		const auto outputPath = argactions::path(parser.get<std::string>("--output"));
+		const auto ffmpegPath = argactions::path(parser.get<std::string>("--ffmpeg"));
+		const auto ffprobePath = argactions::path(parser.get<std::string>("--ffprobe"));
 		const auto minScore = parser.get<double>("--min-score");
 		const auto minMargin = parser.get<double>("--min-margin");
 		const auto maxDurationDiff = parser.get<double>("--max-duration-diff");
@@ -519,8 +477,9 @@ int cmd_match(const std::vector<std::string>& args) {
 		const auto duplicateThreshold = parser.get<double>("--duplicate-threshold");
 		const auto segmentMinScore = parser.get<double>("--segment-min-score");
 		const auto magnetThreshold = parser.get<uint32_t>("--magnet-threshold");
+		const auto language = parser.get<xivres::game_language>("--language");
 
-		const auto gameRoot = resolve_game_root(gameSpec);
+		const auto gameRoot = argactions::installation_root(gameSpec);
 		const xivres::installation installation(gameRoot);
 
 		const auto loadPreset = [](const std::filesystem::path& path) {
@@ -536,7 +495,7 @@ int cmd_match(const std::vector<std::string>& args) {
 
 		nlohmann::json preset = presetSpec.empty()
 			? nlohmann::json{{"name", ""}, {"items", nlohmann::json::array()}}
-			: loadPreset(std::filesystem::path(xivres::util::unicode::convert<std::wstring>(presetSpec)));
+			: loadPreset(argactions::path(presetSpec));
 
 		// Targets already described by other presets, so that --discover only reports
 		// BGM that nothing covers yet.
@@ -548,7 +507,7 @@ int cmd_match(const std::vector<std::string>& args) {
 			const auto part = excludeSpec.substr(begin, end - begin);
 			if (part.empty())
 				continue;
-			for (const auto& item : loadPreset(std::filesystem::path(xivres::util::unicode::convert<std::wstring>(part))).at("items"))
+			for (const auto& item : loadPreset(argactions::path(part)).at("items"))
 				for (auto& p : preset_target_paths(item))
 					coveredPaths.insert(std::move(p));
 		}
@@ -566,7 +525,7 @@ int cmd_match(const std::vector<std::string>& args) {
 				return res;
 			};
 			const auto matchesAny = [](const std::vector<std::string>& prefixes, const std::string& path) {
-				return std::any_of(prefixes.begin(), prefixes.end(), [&](const std::string& p) { return path.starts_with(p); });
+				return std::ranges::any_of(prefixes, [&](const std::string& p) { return path.starts_with(p); });
 			};
 
 			const auto includePrefixes = split(targetPrefix);
@@ -589,14 +548,16 @@ int cmd_match(const std::vector<std::string>& args) {
 				preset["items"].push_back({{"target", {{"path", path}}}});
 			}
 			std::cerr << std::format("Discovered {} BGM target(s) from the game ({} excluded as already covered, {} filtered out by prefix).",
-				preset["items"].size(), skippedAsCovered, skippedByPrefix) << std::endl;
+				preset["items"].size(), skippedAsCovered, skippedByPrefix) << '\n';
 		}
 
 		if (preset["items"].empty())
 			throw std::runtime_error("No target items to match.");
 
 		std::vector<candidate> candidates;
-		static const std::set<std::wstring> exts = {L".flac", L".ogg", L".wav", L".mp3", L".m4a"};
+		// constexpr data rather than a std::set: the list is fixed, so it must not need an
+		// exit-time destructor.
+		static constexpr std::array<std::wstring_view, 5> exts = {L".flac", L".ogg", L".wav", L".mp3", L".m4a"};
 		// follow_directory_symlink so an OST directory assembled out of links to the real
 		// album folders works; by default reparse points are skipped and the scan finds
 		// nothing at all, which looks exactly like "no matches".
@@ -604,7 +565,7 @@ int cmd_match(const std::vector<std::string>& args) {
 			if (!entry.is_regular_file())
 				continue;
 			const auto ext = xivres::util::unicode::convert<std::wstring>(entry.path().extension().wstring(), &xivres::util::unicode::lower);
-			if (!exts.contains(ext))
+			if (!std::ranges::contains(exts, ext))
 				continue;
 
 			candidate c;
@@ -623,7 +584,7 @@ int cmd_match(const std::vector<std::string>& args) {
 		// Keep only the best-encoded copy of each track name.
 		{
 			const auto rank = [](const std::filesystem::path& p) {
-				auto ext = xivres::util::unicode::convert<std::wstring>(p.extension().wstring(), &xivres::util::unicode::lower);
+				const auto ext = xivres::util::unicode::convert<std::wstring>(p.extension().wstring(), &xivres::util::unicode::lower);
 				if (ext == L".flac" || ext == L".wav")
 					return 0;  // lossless
 				if (ext == L".ogg" || ext == L".m4a")
@@ -644,27 +605,26 @@ int cmd_match(const std::vector<std::string>& args) {
 
 			std::vector<size_t> keep;
 			keep.reserve(candidates.size());
-			for (const auto& entry : byStem) {
-				const auto& group = entry.second;
-				const bool hasLossless = std::any_of(group.begin(), group.end(),
+			for (const auto& group : byStem | std::views::values) {
+				const bool hasLossless = std::ranges::any_of(group,
 					[&](size_t i) { return rank(candidates[i].Path) == 0; });
 				for (const auto index : group)
 					if (!hasLossless || rank(candidates[index].Path) == 0)
 						keep.push_back(index);
 			}
-			std::sort(keep.begin(), keep.end());
+			std::ranges::sort(keep);
 
 			if (keep.size() != candidates.size()) {
 				std::vector<candidate> deduped;
 				deduped.reserve(keep.size());
 				for (const auto index : keep)
 					deduped.push_back(std::move(candidates[index]));
-				std::cerr << std::format("Ignoring {} duplicate-encoding candidate(s) of the same track.", candidates.size() - deduped.size()) << std::endl;
+				std::cerr << std::format("Ignoring {} duplicate-encoding candidate(s) of the same track.", candidates.size() - deduped.size()) << '\n';
 				candidates = std::move(deduped);
 			}
 		}
 
-		std::cerr << std::format("Found {} candidate OST file(s). Decoding...", candidates.size()) << std::endl;
+		std::cerr << std::format("Found {} candidate OST file(s). Decoding...", candidates.size()) << '\n';
 
 		parallel_for(candidates.size(), [&](size_t i) {
 			auto& c = candidates[i];
@@ -679,7 +639,7 @@ int cmd_match(const std::vector<std::string>& args) {
 			}
 		});
 		std::erase_if(candidates, [](const candidate& c) { return c.Envelope.empty(); });
-		std::cerr << std::format("{} candidate(s) ready for matching.", candidates.size()) << std::endl;
+		std::cerr << std::format("{} candidate(s) ready for matching.", candidates.size()) << '\n';
 
 		// Coarse copies of every envelope, used to shortlist candidates cheaply before the
 		// full-resolution pass. Correlating 200 Hz envelopes of whole tracks costs a
@@ -687,7 +647,7 @@ int cmd_match(const std::vector<std::string>& args) {
 		// the game is matched against every track of every album; at 10 Hz the same pass
 		// is thousands of times cheaper and still ranks the right track near the top.
 		constexpr size_t CoarseFactor = 20;
-		const auto coarseRateHz = EnvelopeRateHz / static_cast<double>(CoarseFactor);
+		constexpr auto coarseRateHz = EnvelopeRateHz / static_cast<double>(CoarseFactor);
 		std::vector<std::vector<float>> coarseEnvelopes;
 		if (shortlistSize) {
 			const auto decimate = [](const std::vector<float>& env) {
@@ -736,7 +696,7 @@ int cmd_match(const std::vector<std::string>& args) {
 		}
 
 		if (!workItems.empty())
-			std::cerr << std::format("Matching {} target(s) against {} candidate(s)...", workItems.size(), candidates.size()) << std::endl;
+			std::cerr << std::format("Matching {} target(s) against {} candidate(s)...", workItems.size(), candidates.size()) << '\n';
 
 		// Scores one envelope against the candidate pool. Shared by the ordinary path and
 		// the per-stem path used for the game's multi-channel stem containers.
@@ -758,7 +718,7 @@ int cmd_match(const std::vector<std::string>& args) {
 		// out so the magnet-filtering pass can re-run it against a winner other than
 		// scores[0] once magnet candidates have been dropped from the list.
 		const auto computeDuplicatesAndRunnerUp = [&](const std::vector<scored>& scores, double minOverlap) {
-			std::vector<bool> duplicateOfWinner(scores.size(), false);
+			std::vector duplicateOfWinner(scores.size(), false);
 			size_t distinctRunnerUp = scores.size();
 			if (!scores.empty()) {
 				for (size_t i = 1; i < scores.size(); ++i) {
@@ -838,7 +798,7 @@ int cmd_match(const std::vector<std::string>& args) {
 						[](const auto& a, const auto& b) { return a.first > b.first; });
 					ranked.resize(shortlistSize);
 				}
-				for (const auto& [score, index] : ranked)
+				for (const auto& index : ranked | std::views::values)
 					shortlist.push_back(index);
 			}
 
@@ -847,10 +807,16 @@ int cmd_match(const std::vector<std::string>& args) {
 				const auto& c = candidates[index];
 				const auto r = best_envelope_correlation_ex(envelope, c.Envelope, EnvelopeRateHz, maxOffset, minOverlap, minOverlapFraction);
 				if (r.Score > -1.5)
-					res.Scores.push_back({c.RelName, r.Score, r.OffsetSeconds, r.OverlapSeconds, index});
+					res.Scores.push_back({
+						.Name = c.RelName,
+						.Score = r.Score,
+						.OffsetSeconds = r.OffsetSeconds,
+						.OverlapSeconds = r.OverlapSeconds,
+						.CandidateIndex = index,
+					});
 			}
 			auto& scores = res.Scores;
-			std::sort(scores.begin(), scores.end(), [](const auto& a, const auto& b) { return a.Score > b.Score; });
+			std::ranges::sort(scores, [](const auto& a, const auto& b) { return a.Score > b.Score; });
 
 			// The same recording is usually released on several albums, so the runner-up is
 			// often not a competing hypothesis but the identical audio under another name.
@@ -871,7 +837,7 @@ int cmd_match(const std::vector<std::string>& args) {
 		std::vector<double> pendingMinOverlap(workItems.size());
 		std::vector<nlohmann::json> pendingCandidatesJson(workItems.size());
 		std::vector<nlohmann::json> pendingSegmentsJson(workItems.size());
-		std::vector<bool> needsPhase3(workItems.size(), false);
+		std::vector needsPhase3(workItems.size(), false);
 
 		// Filled in for every plain (mono/stereo) target that decoded successfully, so a
 		// later pass can find targets that are verbatim reuses of another target's audio
@@ -881,8 +847,8 @@ int cmd_match(const std::vector<std::string>& args) {
 		// clear the score/margin bar. Multi-channel stem targets are excluded: they decide
 		// per-stem, not against this single envelope, so linking them would not make sense.
 		std::vector<std::vector<float>> dupTargetEnvelope(workItems.size());
-		std::vector<double> dupTargetDuration(workItems.size(), 0.0);
-		std::vector<bool> dupTargetEligible(workItems.size(), false);
+		std::vector dupTargetDuration(workItems.size(), 0.0);
+		std::vector dupTargetEligible(workItems.size(), false);
 
 		parallel_for(workItems.size(), [&](size_t workIndex) {
 			auto& item = preset.at("items")[workItems[workIndex]];
@@ -895,7 +861,7 @@ int cmd_match(const std::vector<std::string>& args) {
 			try {
 				targetAudio = extract_scd_audio_to_temp(installation, targetPaths.front(), tempDir, tempFileCounter.fetch_add(1), &targetChannels);
 				{
-					const auto lock = std::lock_guard(progressMutex);
+					const auto lock = std::scoped_lock(progressMutex);
 					tempFiles.push_back(targetAudio);
 				}
 				targetEnvelope = decode_envelope(ffmpegPath, targetAudio);
@@ -906,8 +872,8 @@ int cmd_match(const std::vector<std::string>& args) {
 					dupTargetEligible[workIndex] = true;
 				}
 			} catch (const std::exception& e) {
-				const auto lock = std::lock_guard(progressMutex);
-				std::cerr << std::format("Warning: could not decode target {}: {}", targetPaths.front(), e.what()) << std::endl;
+				const auto lock = std::scoped_lock(progressMutex);
+				std::cerr << std::format("Warning: could not decode target {}: {}", targetPaths.front(), e.what()) << '\n';
 				item["matchInfo"] = {{"status", "error"}, {"error", e.what()}};
 				item["enable"] = false;
 				unmatchedCount++;
@@ -917,7 +883,6 @@ int cmd_match(const std::vector<std::string>& args) {
 			const auto resolved = resolveEnvelope(targetEnvelope, targetDuration);
 			const auto& scores = resolved.Scores;
 			const auto& isDuplicateOfWinner = resolved.DuplicateOfWinner;
-			const auto distinctRunnerUp = resolved.DistinctRunnerUp;
 
 			nlohmann::json candidatesJson = nlohmann::json::array();
 			for (size_t i = 0; i < std::min<size_t>(5, scores.size()); i++) {
@@ -949,7 +914,7 @@ int cmd_match(const std::vector<std::string>& args) {
 						break;
 					const auto begin = (std::max)(0., s.OffsetSeconds);
 					const auto end = begin + s.OverlapSeconds;
-					const bool overlapsKept = std::any_of(keptRegions.begin(), keptRegions.end(), [&](const auto& kept) {
+					const bool overlapsKept = std::ranges::any_of(keptRegions, [&](const auto& kept) {
 						const auto overlap = (std::min)(end, kept.second) - (std::max)(begin, kept.first);
 						return overlap > 0.5 * (std::min)(end - begin, kept.second - kept.first);
 					});
@@ -980,7 +945,7 @@ int cmd_match(const std::vector<std::string>& args) {
 					try {
 						const auto stemPath = extract_stem_to_temp(ffmpegPath, targetAudio, channelA, channelB, tempDir, tempFileCounter.fetch_add(1));
 						{
-							const auto lock = std::lock_guard(progressMutex);
+							const auto lock = std::scoped_lock(progressMutex);
 							tempFiles.push_back(stemPath);
 						}
 						const auto stemEnvelope = decode_envelope(ffmpegPath, stemPath);
@@ -1022,7 +987,7 @@ int cmd_match(const std::vector<std::string>& args) {
 					for (const auto candidateIndex : stemSources) {
 						const auto& c = candidates[candidateIndex];
 						auto key = xivres::util::unicode::convert<std::string>(
-							std::filesystem::path(xivres::util::unicode::convert<std::wstring>(c.RelName)).stem().wstring());
+							argactions::path(c.RelName).stem().wstring());
 						keys.push_back(std::move(key));
 						if (!c.EnglishTitle.empty())
 							keys.push_back(c.EnglishTitle);
@@ -1034,7 +999,7 @@ int cmd_match(const std::vector<std::string>& args) {
 				}
 			}
 
-			const auto lock = std::lock_guard(progressMutex);
+			const auto lock = std::scoped_lock(progressMutex);
 			if (targetChannels > 2 && targetChannels % 2 == 0 && segmentMinScore > 0.) {
 				item["matchInfo"] = {
 					{"status", stemsAllConfident ? "matched" : "ambiguous"},
@@ -1080,13 +1045,13 @@ int cmd_match(const std::vector<std::string>& args) {
 						appearanceCount[s.CandidateIndex]++;
 			}
 		}
-		std::vector<bool> isMagnet(candidates.size(), false);
+		std::vector isMagnet(candidates.size(), false);
 		if (magnetThreshold) {
 			for (size_t i = 0; i < candidates.size(); ++i) {
 				if (appearanceCount[i] > magnetThreshold) {
 					isMagnet[i] = true;
 					std::cerr << std::format("Magnet source, dropped from candidate lists (scored >= {} against {} distinct targets): {}",
-						minScore, appearanceCount[i], candidates[i].RelName) << std::endl;
+						minScore, appearanceCount[i], candidates[i].RelName) << '\n';
 				}
 			}
 		}
@@ -1111,7 +1076,7 @@ int cmd_match(const std::vector<std::string>& args) {
 				scores = std::move(filtered);
 			}
 
-			const auto lock = std::lock_guard(progressMutex);
+			const auto lock = std::scoped_lock(progressMutex);
 			if (scores.empty()) {
 				item["matchInfo"] = {{"status", "unmatched"}};
 				item["enable"] = false;
@@ -1133,7 +1098,7 @@ int cmd_match(const std::vector<std::string>& args) {
 				// Japanese title and old track number as alternate keys).
 				const auto& winnerCandidate = candidates[scores[0].CandidateIndex];
 				const auto key = xivres::util::unicode::convert<std::string>(
-					std::filesystem::path(xivres::util::unicode::convert<std::wstring>(scores[0].Name)).stem().wstring());
+					argactions::path(scores[0].Name).stem().wstring());
 				item["source"] = nlohmann::json::array({key});
 				if (!winnerCandidate.EnglishTitle.empty())
 					item["source"].push_back(winnerCandidate.EnglishTitle);
@@ -1184,7 +1149,7 @@ int cmd_match(const std::vector<std::string>& args) {
 				if (dupTargetEligible[wi])
 					byDuration[std::llround(dupTargetDuration[wi] * 20.0)].push_back(wi);
 
-			for (const auto& [bucket, members] : byDuration) {
+			for (const auto& members : byDuration | std::views::values) {
 				for (size_t a = 0; a < members.size(); ++a) {
 					for (size_t b = a + 1; b < members.size(); ++b) {
 						const auto wa = members[a], wb = members[b];
@@ -1201,16 +1166,16 @@ int cmd_match(const std::vector<std::string>& args) {
 				if (dupTargetEligible[wi])
 					groups[find(wi)].push_back(wi);
 
-			for (const auto& [root, members] : groups) {
+			for (const auto& members : groups | std::views::values) {
 				if (members.size() < 2)
 					continue;
 
 				{
-					const auto lock = std::lock_guard(progressMutex);
+					const auto lock = std::scoped_lock(progressMutex);
 					std::cerr << "Duplicate-target group:";
 					for (const auto wi : members)
 						std::cerr << " " << preset_target_paths(preset.at("items")[workItems[wi]]).front();
-					std::cerr << std::endl;
+					std::cerr << '\n';
 				}
 
 				size_t bestMember = SIZE_MAX;
@@ -1261,6 +1226,12 @@ int cmd_match(const std::vector<std::string>& args) {
 			preset["items"] = std::move(kept);
 		}
 
+		// The targets carry the game's own names for what each file is the music of, from the
+		// bgm, territorytype, contentfindercondition and placename sheets.
+		for (auto& item : preset.at("items"))
+			if (const auto target = item.find("target"); target != item.end())
+				augment_target_names(*target, installation, language);
+
 		{
 			std::ofstream f(outputPath, std::ios::binary);
 			if (!f)
@@ -1270,14 +1241,14 @@ int cmd_match(const std::vector<std::string>& args) {
 
 		cleanupTempFiles();
 		std::cerr << std::format("Done. matched={} ambiguous={} unmatched={} skipped(already had source)={}",
-			matchedCount, ambiguousCount, unmatchedCount, skippedCount) << std::endl;
+			matchedCount, ambiguousCount, unmatchedCount, skippedCount) << '\n';
 		return 0;
 
 	} catch (const std::exception& e) {
 		cleanupTempFiles();
 		std::cerr
-			<< "Error processing data." << std::endl
-			<< e.what() << std::endl;
+			<< "Error processing data.\n"
+			<< e.what() << '\n';
 		return -1;
 	}
 }
