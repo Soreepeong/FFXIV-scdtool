@@ -82,12 +82,23 @@ double best_envelope_correlation(
 	const std::vector<float>& envB,
 	double envRateHz,
 	double maxOffsetSeconds,
-	double minOverlapSeconds) {
+	double minOverlapSeconds,
+	double minOverlapFraction) {
+	return best_envelope_correlation_ex(envA, envB, envRateHz, maxOffsetSeconds, minOverlapSeconds, minOverlapFraction).Score;
+}
+
+envelope_correlation_result best_envelope_correlation_ex(
+	const std::vector<float>& envA,
+	const std::vector<float>& envB,
+	double envRateHz,
+	double maxOffsetSeconds,
+	double minOverlapSeconds,
+	double minOverlapFraction) {
 
 	const auto la = envA.size();
 	const auto lb = envB.size();
 	if (!la || !lb)
-		return -2.;
+		return {};
 
 	double meanA = 0, meanB = 0;
 	for (const auto v : envA) meanA += v;
@@ -117,9 +128,12 @@ double best_envelope_correlation(
 	fft(fa, true);
 
 	const auto maxOff = static_cast<int64_t>(maxOffsetSeconds * envRateHz);
-	const auto minOverlap = static_cast<int64_t>(minOverlapSeconds * envRateHz);
+	auto minOverlap = static_cast<int64_t>(minOverlapSeconds * envRateHz);
+	if (const auto byFraction = static_cast<int64_t>(minOverlapFraction * static_cast<double>(std::min(la, lb)));
+		byFraction > minOverlap)
+		minOverlap = byFraction;
 
-	double best = -2.;
+	envelope_correlation_result best;
 	for (int64_t o = -maxOff; o <= maxOff; ++o) {
 		const int64_t iA = std::max<int64_t>(0, o);
 		const int64_t iB = std::max<int64_t>(0, -o);
@@ -135,8 +149,11 @@ double best_envelope_correlation(
 
 		const auto idx = o >= 0 ? static_cast<size_t>(o) : nfft + static_cast<size_t>(o);
 		const auto cos = fa[idx].real() / denom;
-		if (cos > best)
-			best = cos;
+		if (cos > best.Score) {
+			best.Score = cos;
+			best.OffsetSeconds = static_cast<double>(o) / envRateHz;
+			best.OverlapSeconds = static_cast<double>(len) / envRateHz;
+		}
 	}
 	return best;
 }

@@ -57,7 +57,20 @@ namespace {
 	}
 }
 
+namespace {
+	std::vector<uint8_t> run_process_capture_one_stream(const std::filesystem::path& exe, const std::vector<std::wstring>& args, bool captureStderr);
+}
+
 std::vector<uint8_t> run_process_capture_stdout(const std::filesystem::path& exe, const std::vector<std::wstring>& args) {
+	return run_process_capture_one_stream(exe, args, false);
+}
+
+std::vector<uint8_t> run_process_capture_stderr(const std::filesystem::path& exe, const std::vector<std::wstring>& args) {
+	return run_process_capture_one_stream(exe, args, true);
+}
+
+namespace {
+	std::vector<uint8_t> run_process_capture_one_stream(const std::filesystem::path& exe, const std::vector<std::wstring>& args, bool captureStderr) {
 	SECURITY_ATTRIBUTES sa{sizeof(sa), nullptr, TRUE};
 
 	auto_handle stdoutRead, stdoutWrite;
@@ -66,13 +79,15 @@ std::vector<uint8_t> run_process_capture_stdout(const std::filesystem::path& exe
 	if (!SetHandleInformation(stdoutRead.Value, HANDLE_FLAG_INHERIT, 0))
 		throw std::system_error(std::error_code(static_cast<int>(GetLastError()), std::system_category()), "SetHandleInformation");
 
-	auto_handle nulInput, nulError;
+	auto_handle nulInput, nulOut, nulErr;
 	nulInput.Value = CreateFileW(L"NUL", GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, &sa, OPEN_EXISTING, 0, nullptr);
 	if (nulInput.Value == INVALID_HANDLE_VALUE)
 		throw std::system_error(std::error_code(static_cast<int>(GetLastError()), std::system_category()), "CreateFileW(NUL, read)");
-	nulError.Value = CreateFileW(L"NUL", GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, &sa, OPEN_EXISTING, 0, nullptr);
-	if (nulError.Value == INVALID_HANDLE_VALUE)
-		throw std::system_error(std::error_code(static_cast<int>(GetLastError()), std::system_category()), "CreateFileW(NUL, write)");
+	for (auto* h : {&nulOut, &nulErr}) {
+		h->Value = CreateFileW(L"NUL", GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, &sa, OPEN_EXISTING, 0, nullptr);
+		if (h->Value == INVALID_HANDLE_VALUE)
+			throw std::system_error(std::error_code(static_cast<int>(GetLastError()), std::system_category()), "CreateFileW(NUL, write)");
+	}
 
 	std::wstring cmdLine = quote_argument(exe.wstring());
 	for (const auto& arg : args) {
@@ -84,8 +99,8 @@ std::vector<uint8_t> run_process_capture_stdout(const std::filesystem::path& exe
 	si.cb = sizeof(si);
 	si.dwFlags = STARTF_USESTDHANDLES;
 	si.hStdInput = nulInput.Value;
-	si.hStdOutput = stdoutWrite.Value;
-	si.hStdError = nulError.Value;
+	si.hStdOutput = captureStderr ? nulOut.Value : stdoutWrite.Value;
+	si.hStdError = captureStderr ? stdoutWrite.Value : nulErr.Value;
 
 	PROCESS_INFORMATION pi{};
 	const auto created = CreateProcessW(
@@ -105,7 +120,8 @@ std::vector<uint8_t> run_process_capture_stdout(const std::filesystem::path& exe
 	auto_handle hProcess{pi.hProcess}, hThread{pi.hThread};
 	stdoutWrite.reset();
 	nulInput.reset();
-	nulError.reset();
+	nulOut.reset();
+	nulErr.reset();
 
 	std::vector<uint8_t> result;
 	uint8_t buf[65536];
@@ -121,4 +137,5 @@ std::vector<uint8_t> run_process_capture_stdout(const std::filesystem::path& exe
 		throw std::runtime_error(std::format("{} exited with code {}", xivres::util::unicode::convert<std::string>(exe.wstring()), exitCode));
 
 	return result;
+	}
 }

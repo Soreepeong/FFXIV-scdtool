@@ -210,12 +210,18 @@
     </ClCompile>
     <ClCompile Include="scdtool.cpp" />
     <ClCompile Include="match.cpp" />
+    <ClCompile Include="apply.cpp" />
+    <ClCompile Include="extract.cpp" />
+    <ClCompile Include="toscd.cpp" />
     <ClCompile Include="audio_match.cpp" />
     <ClCompile Include="win32_process.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="match.h" />
+    <ClInclude Include="apply.h" />
+    <ClInclude Include="extract.h" />
+    <ClInclude Include="toscd.h" />
     <ClInclude Include="audio_match.h" />
     <ClInclude Include="win32_process.h" />
   </ItemGroup>

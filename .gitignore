@@ -1,6 +1,9 @@
 enc_temp_folder
 *.ttmp2
 
+# scdtool matching scratch output (regeneratable, not deliverables)
+/scratch/
+
 # Ignore all IDEA related files for now
 .idea
 
