@@ -9,10 +9,12 @@
 #include <algorithm>
 #include <atomic>
 #include <charconv>
+#include <chrono>
 #include <limits>
 #include <mutex>
 #include <nlohmann/json.hpp>
 #include <sstream>
+#include <thread>
 
 namespace {
 	std::string u8(const std::filesystem::path& p) {
@@ -183,6 +185,106 @@ namespace {
 		return floats;
 	}
 
+	struct deduced_offset {
+		double Seconds = 0.;
+		double Score = -2.;
+		size_t Candidates = 0;
+		bool Deduced = false;
+	};
+
+	// Works out where in the source this target's content actually begins, rather than
+	// trusting the offset the match recorded.
+	//
+	// Two reasons it is worth re-deriving. The recorded offset is measured against whatever
+	// copy of the album the matcher saw, so a user's trimmed or differently-encoded file
+	// invalidates it -- a re-encode alone shifts by a constant (FLAC vs the MP3 release
+	// measured 27ms on every track tested), and hand-trimming shifts by arbitrary seconds.
+	// And the matcher chooses on an RMS envelope, which is near-periodic over a loop, so on
+	// a release structured intro + loop + loop it frequently locks onto a later pass: 65 of
+	// 583 entries audited in presets-new were wrong this way.
+	//
+	// The envelope still proposes, because it is cheap and its peaks do include the right
+	// answer -- every loop pass is a peak. The spectrum disposes, judged on the game file's
+	// pre-loop intro. That region is the one that plays exactly once, so it is both the part
+	// a late alignment destroys and the only part where the candidates genuinely differ;
+	// judging on a whole-file mean dilutes the decision away almost entirely (measured:
+	// 0.9959 vs 0.9944 across 240s, 0.9957 vs 0.8457 across the 2s that matter).
+	deduced_offset deduce_offset(
+		const std::filesystem::path& ffmpeg,
+		const std::filesystem::path& templateAudio,
+		const std::filesystem::path& source,
+		double introSeconds,
+		double recordedOffset) {
+
+		constexpr double EnvelopeRateHz = 200.;   // decode_envelope's default 80-sample hop at 16 kHz
+		constexpr double MaxOffsetSeconds = 900.;
+		constexpr double MinOverlapSeconds = 15.; // absolute, never a fraction of the target: a
+		                                          // silence-padded 600s file holding 30s of audio
+		                                          // can never meet a fractional floor and would
+		                                          // otherwise score nothing at all
+		constexpr double MinIntroSeconds = 1.5;   // shorter than this is a lead-in, not an opening
+		constexpr double FallbackJudgeSeconds = 120.;
+		constexpr double TieMargin = 0.03;
+		constexpr double AcceptScore = 0.5;
+
+		deduced_offset result{recordedOffset, -2., 0, false};
+
+		const auto envTemplate = decode_envelope(ffmpeg, templateAudio);
+		const auto envSource = decode_envelope(ffmpeg, source);
+		auto candidates = envelope_offset_candidates(
+			envTemplate, envSource, EnvelopeRateHz, MaxOffsetSeconds, MinOverlapSeconds);
+		if (candidates.empty())
+			return result;
+
+		// The recorded offset is a candidate like any other, even when it is not a local
+		// maximum of this particular envelope -- it was derived from a real measurement and
+		// should have to lose on merit rather than by not being on the ballot.
+		if (std::ranges::none_of(candidates, [&](const offset_candidate& c) {
+			return std::abs(c.OffsetSeconds - recordedOffset) < 0.5;
+		}))
+			candidates.push_back({recordedOffset, -2., 0.});
+
+		const auto specTemplate = decode_logmel(ffmpeg, templateAudio, 240.);
+		const auto specSource = decode_logmel(ffmpeg, source, MaxOffsetSeconds + 240.);
+		if (specTemplate.empty() || specSource.empty())
+			return result;
+
+		const auto judgeTo = introSeconds >= MinIntroSeconds ? introSeconds : FallbackJudgeSeconds;
+
+		double bestScore = -2.;
+		for (const auto& c : candidates)
+			bestScore = (std::max)(bestScore, spectral_similarity_at(specTemplate, specSource, c.OffsetSeconds, 0., judgeTo));
+		if (bestScore < AcceptScore)
+			return result;
+
+		// Among alignments the intro cannot separate -- a piece whose opening really is its
+		// loop body -- take the one that reads the source earliest, which is the largest
+		// offset in this sign convention (target frame t holds source content at t - offset,
+		// so reading further into the source means a more negative offset). Later alignments
+		// risk running out of source before the target ends.
+		double chosen = 0.;
+		double chosenScore = -2.;
+		bool first = true;
+		for (const auto& c : candidates) {
+			const auto score = spectral_similarity_at(specTemplate, specSource, c.OffsetSeconds, 0., judgeTo);
+			if (score < bestScore - TieMargin)
+				continue;
+			if (first || c.OffsetSeconds > chosen) {
+				chosen = c.OffsetSeconds;
+				chosenScore = score;
+				first = false;
+			}
+		}
+		if (first)
+			return result;
+
+		result.Seconds = chosen;
+		result.Score = chosenScore;
+		result.Candidates = candidates.size();
+		result.Deduced = true;
+		return result;
+	}
+
 	// Reproduces the target's own onset treatment (a fade-in, a held silence, whatever it
 	// actually is) on the replacement, rather than guessing a generic fade -- a plain
 	// trim+gain has no way to know such a thing exists, since it is something the game's
@@ -299,6 +401,9 @@ int cmd_apply(const std::vector<std::string>& args) {
 		parser.add_argument("--max-gain").default_value(12.0).scan<'g', double>().help("clamp on loudness matching gain, in dB");
 		parser.add_argument("--onset-match").default_value(true).implicit_value(true).help("reproduce a fade-in or held silence the game's own file has at its start but the OST source does not; --no-onset-match disables");
 		parser.add_argument("--no-onset-match").default_value(false).implicit_value(true).help("disable --onset-match");
+		parser.add_argument("--auto-offset").default_value(true).implicit_value(true).help("re-derive each match's source offset against the game's own file instead of trusting the recorded one, judged on the pre-loop intro; --no-auto-offset uses the recorded offset verbatim");
+		parser.add_argument("--no-auto-offset").default_value(false).implicit_value(true).help("disable --auto-offset");
+		parser.add_argument("--emit-original").default_value(false).implicit_value(true).help("also write the game's own file next to each replacement as <name>.orig.scd, for A/B comparison");
 		parser.parse_args(args);
 	} catch (const std::exception& e) {
 		std::cerr
@@ -330,6 +435,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 		const auto verify = parser.get<bool>("--verify");
 		const auto loudnessMatch = parser.get<bool>("--loudness-match") && !parser.get<bool>("--no-loudness-match");
 		const auto onsetMatch = parser.get<bool>("--onset-match") && !parser.get<bool>("--no-onset-match");
+		const auto autoOffset = parser.get<bool>("--auto-offset") && !parser.get<bool>("--no-auto-offset");
+		const auto emitOriginal = parser.get<bool>("--emit-original");
 		const auto maxGainDb = parser.get<double>("--max-gain");
 
 		const xivres::installation installation(argactions::installation_root(gameSpec));
@@ -436,6 +543,22 @@ int cmd_apply(const std::vector<std::string>& args) {
 				return;
 			}
 
+			// Staged once, unconditionally: the offset deduction below aligns against it,
+			// the loudness measurement compares to it, and the onset check samples it, so
+			// it is wanted whatever the flags say.
+			const auto templateAudio = tempDir / std::format(L"scdtool_apply_src_{}.ogg", tempFileCounter.fetch_add(1));
+			{
+				const auto lock = std::scoped_lock(logMutex);
+				tempFiles.push_back(templateAudio);
+			}
+			{
+				std::ofstream f(templateAudio, std::ios::binary);
+				if (!f)
+					throw std::runtime_error(std::format("could not stage template audio for {}", job.TargetPath));
+				const auto ogg = templateItem.get_ogg_file();
+				f.write(reinterpret_cast<const char*>(ogg.data()), static_cast<std::streamsize>(ogg.size()));
+			}
+
 			// The SCD must be Ogg Vorbis, so a source that is lossless and high-rate can
 			// only lose by being forced down to the game file's rate. Take the highest rate
 			// available across the two, as MusicImporter's
@@ -458,6 +581,25 @@ int cmd_apply(const std::vector<std::string>& args) {
 			const auto loopStart = scaleLoop(templateLoopStart);
 			const auto loopEnd = scaleLoop(templateLoopEnd);
 
+			// Re-derive the offset against the game's own file. See deduce_offset: the
+			// recorded value was measured against a different copy of the album than the one
+			// in front of us, and the envelope that produced it cannot tell one loop pass
+			// from another. A failure here is never fatal -- the recorded offset still
+			// works for an untrimmed library, which is the common case.
+			auto effectiveOffset = job.Offset;
+			deduced_offset deduced;
+			if (autoOffset) {
+				try {
+					deduced = deduce_offset(ffmpegPath, templateAudio, job.SourcePath,
+						static_cast<double>(templateLoopStart) / static_cast<double>(templateRate),
+						job.Offset);
+					if (deduced.Deduced)
+						effectiveOffset = deduced.Seconds;
+				} catch (const std::exception&) {
+					deduced = {};
+				}
+			}
+
 			const auto rawPath = tempDir / std::format(L"scdtool_apply_{}.f32", tempFileCounter.fetch_add(1));
 			{
 				const auto lock = std::scoped_lock(logMutex);
@@ -475,7 +617,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// boundary and produce an audible seam.
 			size_t paddingAdded = 0;
 			size_t trimmedAway = 0;
-			if (const auto offsetSamples = std::llround(job.Offset * static_cast<double>(samplingRate))) {
+			if (const auto offsetSamples = std::llround(effectiveOffset * static_cast<double>(samplingRate))) {
 				if (offsetSamples > 0) {
 					// The game file starts before the OST track does; the missing lead-in is
 					// unrecoverable, so pad with silence rather than shifting the music.
@@ -500,23 +642,6 @@ int cmd_apply(const std::vector<std::string>& args) {
 				newLoopEnd = 0;
 			}
 
-			// Staged once, unconditionally: used for loudness measurement below when that
-			// is enabled, and always for the onset-correction check afterward, since a
-			// track's own onset treatment is worth reproducing whether or not overall
-			// loudness matching is on.
-			const auto templateAudio = tempDir / std::format(L"scdtool_apply_src_{}.ogg", tempFileCounter.fetch_add(1));
-			{
-				const auto lock = std::scoped_lock(logMutex);
-				tempFiles.push_back(templateAudio);
-			}
-			{
-				std::ofstream f(templateAudio, std::ios::binary);
-				if (!f)
-					throw std::runtime_error(std::format("could not stage template audio for {}", job.TargetPath));
-				const auto ogg = templateItem.get_ogg_file();
-				f.write(reinterpret_cast<const char*>(ogg.data()), static_cast<std::streamsize>(ogg.size()));
-			}
-
 			// Match the replacement's level to the file it replaces, measured over the same
 			// musical span on both sides. Without this the swapped track sits at the OST
 			// master's level, which is usually hotter than the game's own mix and would
@@ -530,7 +655,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 				// The source still has to be measured at the position the rebased output
 				// took its samples from, which is offset by the match offset.
-				const auto sourceStartSeconds = static_cast<double>(newLoopStart) / static_cast<double>(samplingRate) - job.Offset;
+				const auto sourceStartSeconds = static_cast<double>(newLoopStart) / static_cast<double>(samplingRate) - effectiveOffset;
 
 				try {
 					const auto templateLufs = measure_loudness(ffmpegPath, templateAudio, templateStartSeconds, spanSeconds);
@@ -618,11 +743,41 @@ int cmd_apply(const std::vector<std::string>& args) {
 					throw std::runtime_error(std::format("Could not write {}", u8(outputPath)));
 			}
 
+			// The game's own file, byte for byte, beside the replacement -- so any later
+			// comparison reads the two from one directory instead of having to reach back
+			// into the installation for the other half of every pair.
+			if (emitOriginal) {
+				auto origPath = outputPath;
+				origPath.replace_extension(L".orig.scd");
+				std::vector<uint8_t> bytes(static_cast<size_t>(templateStream->size()));
+				[[maybe_unused]] const auto read = templateStream->read(0, bytes.data(), static_cast<std::streamsize>(bytes.size()));
+				std::ofstream f(origPath, std::ios::binary);
+				if (!f)
+					throw std::runtime_error(std::format("Could not create {}", u8(origPath)));
+				f.write(reinterpret_cast<const char*>(bytes.data()), static_cast<std::streamsize>(bytes.size()));
+				if (!f)
+					throw std::runtime_error(std::format("Could not write {}", u8(origPath)));
+			}
+
 			// Read the file back and confirm the audio is there and the loop survived.
 			// Encoding is the one step that can silently produce a file the game will not
 			// loop correctly, and it is far cheaper to catch here than in-game.
 			if (verify) {
-				const auto checkStream = std::make_shared<xivres::file_stream>(outputPath);
+				// Reopening a file this thread has just closed can still lose a race with
+				// whatever scans new files on Windows, which surfaces as a sharing violation
+				// on a file that is perfectly good. Retry briefly rather than failing the run
+				// over it: measured 8 of 747 on one pass, every one of them fine on reread.
+				std::shared_ptr<xivres::file_stream> checkStream;
+				for (int attempt = 0; ; ++attempt) {
+					try {
+						checkStream = std::make_shared<xivres::file_stream>(outputPath);
+						break;
+					} catch (const std::exception&) {
+						if (attempt >= 5)
+							throw;
+						std::this_thread::sleep_for(std::chrono::milliseconds(50 << attempt));
+					}
+				}
 				const xivres::sound::reader checkScd(checkStream);
 				if (checkScd.sound_item_count() <= entryIndex)
 					throw std::runtime_error(std::format("verification failed for {}: wrote {} sound entries", u8(outputPath), checkScd.sound_item_count()));
@@ -651,8 +806,13 @@ int cmd_apply(const std::vector<std::string>& args) {
 			{
 				const auto lock = std::scoped_lock(logMutex);
 				++writtenCount;
-				std::cerr << std::format("  {} <- {} (score {:.3f}, offset {:+.3f}s, trim {} pad {} samples, loop {}-{}, gain {:+.1f} dB{}{})",
-					job.TargetPath, u8(job.SourcePath), job.Score, job.Offset, trimmedAway, paddingAdded,
+				std::cerr << std::format("  {} <- {} (score {:.3f}, offset {:+.3f}s{}, trim {} pad {} samples, loop {}-{}, gain {:+.1f} dB{}{})",
+					job.TargetPath, u8(job.SourcePath), job.Score, effectiveOffset,
+					deduced.Deduced && std::abs(effectiveOffset - job.Offset) > 0.05
+						? std::format(" [deduced, was {:+.3f}s, intro {:.3f} over {} candidates]",
+							job.Offset, deduced.Score, deduced.Candidates)
+						: "",
+					trimmedAway, paddingAdded,
 					newLoopStart, newLoopEnd, gainDb,
 					gainLimited ? std::format(", peak-limited from {:+.1f} dB", requestedGainDb) : "",
 					onsetSeconds > 0. ? std::format(", onset corrected {:.1f} dB over {:.2f}s", onsetDb, onsetSeconds) : "") << '\n';

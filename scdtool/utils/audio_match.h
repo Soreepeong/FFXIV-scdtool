@@ -44,3 +44,52 @@ envelope_correlation_result best_envelope_correlation_ex(
 	double maxOffsetSeconds,
 	double minOverlapSeconds,
 	double minOverlapFraction = 0.8);
+
+// Every locally-best alignment, not just the winner, best score first.
+//
+// A release structured intro + loop + loop correlates almost equally well at each loop
+// pass, because an envelope is near-periodic over a loop. Returning only the maximum
+// therefore picks between them by noise: measured over presets-new, 65 of 583 entries had
+// an offset one or more loop bodies late, which plays loop content where the game's
+// play-once intro belongs. The peaks are all plausible and the envelope cannot rank them,
+// so hand them to a caller that can.
+struct offset_candidate {
+	double OffsetSeconds = 0.;
+	double Score = -2.;
+	double OverlapSeconds = 0.;
+};
+
+std::vector<offset_candidate> envelope_offset_candidates(
+	const std::vector<float>& envA,
+	const std::vector<float>& envB,
+	double envRateHz,
+	double maxOffsetSeconds,
+	double minOverlapSeconds,
+	size_t maxCandidates = 12,
+	double minSeparationSeconds = 2.0);
+
+// Log-mel spectrogram, row-major [frame][band], each frame mean-centred across bands and
+// then scaled to unit length, so comparing an alignment is a plain dot product.
+//
+// This is the signal that tells loop passes apart, which an envelope cannot: it carries
+// timbre, so the same loudness shape played on different instruments no longer matches.
+constexpr size_t LogMelBands = 64;
+constexpr double LogMelFrameRateHz = 100.;   // 160-sample hop at 16 kHz
+
+std::vector<float> decode_logmel(
+	const std::filesystem::path& ffmpeg,
+	const std::filesystem::path& mediaFile,
+	double maxSeconds = 0.);
+
+// Mean per-frame cosine similarity between a span of `target` and `source` read from
+// `offsetSeconds`, i.e. target frame t is compared against source frame t - offset.
+// Returns -2 if the span does not lie inside both. Pass the game file's pre-loop region
+// as the span: that is where alignments genuinely differ, and averaging over the whole
+// file dilutes it away -- BGM_MJI_01 scores 0.9959 vs 0.9944 over 240s and 0.9957 vs
+// 0.8457 over its 2s intro, the same decision hidden 100x over.
+double spectral_similarity_at(
+	const std::vector<float>& target,
+	const std::vector<float>& source,
+	double offsetSeconds,
+	double fromSeconds,
+	double toSeconds);

@@ -351,15 +351,11 @@ namespace {
 
 		std::vector<std::string> paths;
 		append_target_paths(paths, target);
-		std::set<std::string> placeNames, dutyNames;
-		for (const auto& path : paths) {
-			std::set<std::string> pathPlaceNames, pathDutyNames;
-			describe_path(installation, path, language, pathPlaceNames, pathDutyNames);
-			placeNames.insert(pathPlaceNames.begin(), pathPlaceNames.end());
-			dutyNames.insert(pathDutyNames.begin(), pathDutyNames.end());
-		}
-		target["placeNames"] = std::vector(placeNames.begin(), placeNames.end());
-		target["dutyNames"] = std::vector(dutyNames.begin(), dutyNames.end());
+		std::set<std::string> names;
+		for (const auto& path : paths)
+			for (auto& name : describe_path(installation, path, language))
+				names.insert(std::move(name));
+		target["names"] = std::vector(names.begin(), names.end());
 	}
 
 }
@@ -375,9 +371,10 @@ int cmd_match(const std::vector<std::string>& args) {
 				"have a non-empty \"source\" are left untouched. Items this tool cannot confidently resolve are left\n"
 				"without a \"source\", get \"enable\": false, and get a \"matchInfo\" field explaining why, for manual\n"
 				"review.\n"
-				"Its \"target\" also carries \"placeNames\"/\"dutyNames\": the places and duties the game's own\n"
-				"sheets (bgm/territorytype/contentfindercondition/placename) say that file is the music of.\n"
-				"are empty for music no territory uses.\n"
+				"Its \"target\" also carries \"names\": every \"<SheetName>:<name>\" the game's own sheets\n"
+				"attach to that file, e.g. \"TerritoryType:The Tempest\" or \"Orchestrion:A New Hope\" -- from\n"
+				"territorytype/contentfindercondition/instancecontent/fate/mount/leve/weddingbgm (via bgm/\n"
+				"bgmsituation/placename) and orchestrionpath/orchestrion. Empty for music no sheet references.\n"
 				"\n"
 				"With --discover, the targets are instead read from the installed game's own bgm sheet, so a\n"
 				"preset can be built for content that has none yet. Combine with --exclude-preset to consider\n"
@@ -1084,7 +1081,8 @@ int cmd_match(const std::vector<std::string>& args) {
 				return;
 			}
 
-			const auto distinctRunnerUp = computeDuplicatesAndRunnerUp(scores, pendingMinOverlap[workIndex]).second;
+			const auto [isDuplicateOfWinner, distinctRunnerUp] =
+				computeDuplicatesAndRunnerUp(scores, pendingMinOverlap[workIndex]);
 			const bool confident = scores[0].Score >= minScore
 				&& (distinctRunnerUp == scores.size() || scores[0].Score - scores[distinctRunnerUp].Score >= minMargin);
 			if (confident) {
@@ -1100,6 +1098,23 @@ int cmd_match(const std::vector<std::string>& args) {
 				const auto key = xivres::util::unicode::convert<std::string>(
 					argactions::path(scores[0].Name).stem().wstring());
 				item["source"] = nlohmann::json::array({key});
+
+				// Every other release of the same recording contributes its file stem too. A
+				// piece re-released across discs is one recording under several names, and only
+				// one of them can win this target -- but this key list is what a consumer searches
+				// its own album folder with, so listing them all means owning any one of those
+				// discs resolves the entry. It is the convention the hand-written presets already
+				// follow: "Primogenitor" is listed against the same targets in both
+				// Before The Fall.json and The Far Edge Of Fate.json.
+				for (size_t i = 1; i < scores.size(); i++) {
+					if (!isDuplicateOfWinner[i])
+						continue;
+					auto alt = xivres::util::unicode::convert<std::string>(
+						argactions::path(scores[i].Name).stem().wstring());
+					if (!std::ranges::contains(item["source"], nlohmann::json(alt)))
+						item["source"].push_back(std::move(alt));
+				}
+
 				if (!winnerCandidate.EnglishTitle.empty())
 					item["source"].push_back(winnerCandidate.EnglishTitle);
 				if (!winnerCandidate.JapaneseTitle.empty())

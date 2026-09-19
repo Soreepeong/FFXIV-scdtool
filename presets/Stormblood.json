@@ -16,1092 +16,16 @@
   "items": [
     {
       "source": [
-        "00000",
-        "SB_FFXIV_001",
-        "血の嵐",
-        "Storm of Blood"
+        "SB_FFXIV_074",
+        "Keepers of the Lock",
+        "我ら国境警備隊"
       ],
       "target": {
-        "path": "music/ex2/movie/stormblood_loop.scd",
-        "enable": false
-      }
-    },
-    {
-      "source": [
-        "00001",
-        "SB_FFXIV_002",
-        "紅蓮のプレリュード",
-        "Prelude [-–] Long March Home"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_System_Title.scd",
-          "music/ffxiv/BGM_Ride_Kyubi.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_221.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00002",
-        "SB_FFXIV_003",
-        "衝撃 ～ラールガーズリーチ：昼～",
-        "Impact"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Town_R_Day.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_183.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00003",
-        "SB_FFXIV_004",
-        "壁の向こう側 ～ギラバニア辺境地帯：昼～",
-        "Beyond the Wall"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_G_Day.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_170.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00004",
-        "SB_FFXIV_005",
-        "辺境の乱戦",
-        "Looping in the Deepest Fringes"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_A_Battle.scd",
-          "music/ex2/BGM_EX2_Field_G_Battle.scd",
-          "music/ex2/BGM_EX2_Field_G_Lake_Battle.scd",
-          "music/ex2/BGM_EX2_Field_G_mountain_Battle.scd",
-          "music/ex2/BGM_EX2_Field_Kohgyoku_Battle.scd",
-          "music/ex2/BGM_EX2_Field_Yansa_Battle.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00005",
-        "SB_FFXIV_006",
-        "余光 ～ラールガーズリーチ：夜～",
-        "Afterglow"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Town_R_Night.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_291.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00006",
-        "SB_FFXIV_007",
-        "燃えよクァール ～壊神修行 星導山寺院～",
-        "Their Deadly Mission"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Dan_D07.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_214.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00007",
-        "SB_FFXIV_008",
-        "高みより ～ギラバニア山岳地帯：昼～",
-        "On High"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_G_mountain_Day.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_185.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00008",
-        "SB_FFXIV_009",
-        "巨峰の眼下にて",
-        "With Giants Watching"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Field_Safe_02.scd"
-      }
-    },
-    {
-      "source": [
-        "00009",
-        "SB_FFXIV_010",
-        "我らが支配圏",
-        "The Garlean Territorial Anthem for Gyr Abania and Surrounding States",
-        "The Measure of Our Reach"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Event_04.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_182.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00010",
-        "SB_FFXIV_011",
-        "平和への道のり",
-        "Procedamus in Pace"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Town_R_Sad.scd",
-        "loopOffsetDelta": 32,
-        "segments": [
-          {
-            "sourceThresholds": {
-              "target": 0.05,
-              "source": 0.05
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "source": [
-        "00011",
-        "SB_FFXIV_012",
-        "夜明けに向かって ～漂流海域 セイレーン海～",
-        "Dawnbound"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Dan_D01.scd"
-      }
-    },
-    {
-      "source": [
-        "00012",
-        "SB_FFXIV_013",
-        "鬨の声",
-        "Triumph"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Boss_Battle_01.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_226.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00013",
-        "SB_FFXIV_014",
-        "紅の夜明け ～クガネ：昼～",
-        "Crimson Sunrise"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Town_K_Day.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_184.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00014",
-        "SB_FFXIV_015",
-        "焔の海 ～紅玉海：昼～",
-        "Liquid Flame"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_Kohgyoku_Day.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_171.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00015",
-        "SB_FFXIV_016",
-        "祈りの翼",
-        "Wing and a Prayer"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Event_10.scd",
-          "music/ex2/BGM_EX2_Mount01.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00016",
-        "SB_FFXIV_017",
-        "揺り籠",
-        "Cradle"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_Safe_03.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_255.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00017",
-        "SB_FFXIV_018",
-        "開けられた玉手箱 ～海底宮殿 紫水宮～",
-        "The Open Box"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Dan_D02.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_189.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00018",
-        "SB_FFXIV_019",
-        "宵の海 ～紅玉海：夜～",
-        "Westward Tide"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_Kohgyoku_Night.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_208.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00019",
-        "SB_FFXIV_020",
-        "東方の地",
-        "Far East of Eorzea"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Event_08.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_233.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00020",
-        "SB_FFXIV_021",
-        "戦場の甲羅",
-        "Shell-shocked"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_BanFort_Koujin_Bad.scd"
-      }
-    },
-    {
-      "source": [
-        "00021",
-        "SB_FFXIV_022",
-        "啓示 ～蛮神スサノオ討滅戦～",
-        "Revelation"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Ban_01.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_166.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00022",
-        "SB_FFXIV_023",
-        "祭りである ～蛮神スサノオ討滅戦～",
-        "Riot"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Ban_01_2.scd"
-      }
-    },
-    {
-      "source": [
-        "00023",
-        "SB_FFXIV_024",
-        "終始 ～蛮神スサノオ討滅戦～",
-        "At Both Ends"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Ban_01_3.scd"
-      }
-    },
-    {
-      "source": {
-        "source": {
-          "inputFiles": [
-            [
-              "00022",
-              "SB_FFXIV_023",
-              "祭りである ～蛮神スサノオ討滅戦～",
-              "Riot"
-            ],
-            [
-              "00023",
-              "SB_FFXIV_024",
-              "終始 ～蛮神スサノオ討滅戦～",
-              "At Both Ends"
-            ]
-          ],
-          "filterComplex": "[0:a]atrim=0:21.807,afade=t=out:st=21.757:d=0.05[p1];[1:a]adelay=18s:all=1,atrim=0.567,asetpts=PTS-STARTPTS,volume='max(0,min(4.238,t-16.433))/4.238':eval=frame[p2];[p1][p2]amix=inputs=2:duration=longest:normalize=0,volume=+3.5dB[res]",
-          "filterComplexOutName": "[res]"
-        }
-      },
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_Susano.scd"
-      }
-    },
-    {
-      "source": [
-        "00024",
-        "SB_FFXIV_025",
-        "調和",
-        "Harmony"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_Safe_01.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_295.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00025",
-        "SB_FFXIV_026",
-        "父の誇り ～ヤンサ：昼～",
-        "A Father's Pride"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_Yansa_Day.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_187.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00026",
-        "SB_FFXIV_027",
-        "地平線に沈め ～アジムステップ：昼～",
-        "Drowning in the Horizon"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_A_Day.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_172.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00027",
-        "SB_FFXIV_028",
-        "カイエンのテーマ ～紅蓮～",
-        "Cyan's Theme"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Event_07.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_218.scd"
-        ],
-        "enable": false,
-        "# comment": "Soundtrack is shorter than the game resource."
-      }
-    },
-    {
-      "source": [
-        "00028",
-        "SB_FFXIV_029",
-        "地平線より昇れ ～アジムステップ：夜～",
-        "He Rises Above"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_A_Night.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_210.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00029",
-        "SB_FFXIV_030",
-        "英雄ならざる者 ～伝統試練 バルダム覇道～",
-        "Most Unworthy"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Dan_D03.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_190.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00030",
-        "SB_FFXIV_031",
-        "血嵐の勇士",
-        "Heroes of Stormblood"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Event_03.scd"
-      }
-    },
-    {
-      "source": [
-        "00031",
-        "SB_FFXIV_032",
-        "母の誇り ～ヤンサ：夜～",
-        "A Mother's Pride"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_Yansa_Night.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_209.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00032",
-        "SB_FFXIV_033",
-        "月亮門 ～解放決戦 ドマ城～",
-        "Gates of the Moon"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Dan_D04.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_237.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00033",
-        "SB_FFXIV_034",
-        "別れ",
-        "Parting Ways"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Event_12.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_234.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00034",
-        "SB_FFXIV_035",
-        "紅の夜更け ～クガネ：夜～",
-        "Crimson Sunset"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Town_K_Night.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_207.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00035",
-        "SB_FFXIV_036",
-        "策謀 ～悪党成敗 クガネ城～",
-        "Deception"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Dan_D08.scd",
-          "music/ffxiv/BGM_Ride_Abare.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_191.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00036",
-        "SB_FFXIV_037",
-        "忘れられた希望 ～ギラバニア辺境地帯：夜～",
-        "Hope Forgotten"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_G_Night.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_292.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00037",
-        "SB_FFXIV_038",
-        "美の謀略 ～蛮神ラクシュミ討滅戦～",
-        "Beauty's Wicked Wiles"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Ban_02.scd",
-          "music/ffxiv/BGM_Ride_Lakshmi.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_167.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00038",
-        "SB_FFXIV_039",
-        "石の記憶 ～ギラバニア山岳地帯：夜～",
-        "The Stone Remembers"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_G_mountain_Night.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_293.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00039",
-        "SB_FFXIV_040",
-        "アリエヌス ～巨砲要塞 カストルム・アバニア～",
-        "Alienus"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Dan_D05.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_337.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00040",
-        "SB_FFXIV_041",
-        "古傷 ～ギラバニア湖畔地帯：夜～",
-        "Old Wounds"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_G_Lake_Night.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_294.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00041",
-        "SB_FFXIV_042",
-        "塩と苦難の歌 ～ギラバニア湖畔地帯：昼～",
-        "Songs of Salt and Suffering"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_G_Lake_Day.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_186.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00042",
-        "SB_FFXIV_043",
-        "自由か死か ～紅蓮決戦 アラミゴ～",
-        "Liberty or Death"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Dan_D06.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_215.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00043",
-        "SB_FFXIV_044",
-        "龍の尾 ～神龍討滅戦～",
-        "The Worm's Tail"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Ban_03_2.scd",
-          "music/ffxiv/BGM_Ride_Shinryu.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_194.scd"
-        ],
-        "segments": [
-          {
-            "sourceFilters": {
-              "source": "volume=+3.5dB"
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "source": [
-        "00044",
-        "SB_FFXIV_045",
-        "壊神の拳が届く場所",
-        "The Measure of His Reach"
-      ],
-      "target": [
-        {
-          "path": "music/ffxiv/Orchestrion/BGM_ORCH_181.scd",
-          "enable": false
-        },
-        {
-          "path": "music/ex2/BGM_EX2_Event_END.scd",
-          "enable": false,
-          "# comment": "event_end has two segments which both segments are short versions"
-        }
-      ]
-    },
-    {
-      "source": [
-        "00045",
-        "SB_FFXIV_046",
-        "Revolutions"
-      ],
-      "target": [
-        {
-          "path": "music/ex2/BGM_EX2_endcredits01.scd",
-          "enable": false,
-          "# comment": "Plays full length Revolutions, Yanxia day theme, The Measure of Our Reach, and then loop Heroes of Stormblood."
-        },
-        {
-          "path": "music/ex2/BGM_EX2_endcredits02.scd",
-          "enable": false,
-          "# comment": "Plays full length Revolutions, The Measure of Our Reach, and then loop Heroes of Stormblood."
-        }
-      ]
-    },
-    {
-      "source": [
-        "00046",
-        "SB_FFXIV_047",
-        "デルタスケープ ～次元の狭間オメガ：デルタ編～",
-        "Deltascape"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Omega_01.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_274.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00047",
-        "SB_FFXIV_048",
-        "バトル2 ～次元の狭間オメガ：デルタ編～",
-        "Omega2"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Omega_02.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_262.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00048",
-        "SB_FFXIV_049",
-        "決戦 ～次元の狭間オメガ：デルタ編～",
-        "Decisions"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Omega_03.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_263.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00049",
-        "SB_FFXIV_050",
-        "最後の闘い ～次元の狭間オメガ：デルタ編～",
-        "Final, Not Final"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Omega_04.scd",
-          "music/ffxiv/BGM_Ride_Omega.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_264.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00050",
-        "SB_FFXIV_051",
-        "うぃざーどりー",
-        "Wizardly"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Season_Anniversary.scd"
-      }
-    },
-    {
-      "source": [
-        "00051",
-        "SB_FFXIV_052",
-        "星芒の扉",
-        "Starlit Gateway"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Season_Xmas2017.scd"
-      }
-    },
-    {
-      "source": [
-        "00052",
-        "SB_FFXIV_053",
-        "美の謀略 \\(Oasis Mix\\) ～蛮神ラクシュミ討滅戦～",
-        "Beauty's Wicked Wiles \\(Oasis Mix\\)"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Ban_02.scd",
-        "enable": false,
-        "# comment": "Alternative version"
-      }
-    },
-    {
-      "source": [
-        "00053",
-        "SB_FFXIV_054",
-        "故郷より離れて ～水没遺構 スカラ～",
-        "Far From Home"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Dan_D09.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_192.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00055",
-        "SB_FFXIV_055",
-        "硬き者たち",
-        "Indomitable"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_BanFort_Kojin_Good.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_188.scd"
-        ]
-      }
-    },
-    {
-      "source": {
-        "Rival Wings": [
-          "00056",
-          "SB_FFXIV_056",
-          "ライバルウィングズ ～アストラガロス機工戦～",
-          "Rival Wings"
-        ],
-        "Birds of Prey": [
-          "00057",
-          "SB_FFXIV_057",
-          "鳥たちの饗宴 ～ライバルウィングズ～",
-          "Birds of Prey"
-        ]
-      },
-      "target": [
-        {
-          "path": "music/ffxiv/BGM_PvP_Mogi_01.scd",
-          "sequentialToFfmpegChannelIndexMap": [
-            0,
-            2,
-            1,
-            4,
-            5,
-            3
-          ],
-          "segments": [
-            {
-              "channels": [
-                {
-                  "source": "Rival Wings",
-                  "channel": 0
-                },
-                {
-                  "source": "Rival Wings",
-                  "channel": 1
-                },
-                {
-                  "source": "Birds of Prey",
-                  "channel": 0
-                },
-                {
-                  "source": "Birds of Prey",
-                  "channel": 1
-                },
-                {
-                  "source": "target",
-                  "channel": 4
-                },
-                {
-                  "source": "target",
-                  "channel": 5
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "path": "music/ffxiv/Orchestrion/BGM_ORCH_180.scd",
-          "segments": [
-            {
-              "channels": [
-                {
-                  "source": "Birds of Prey",
-                  "channel": 0
-                },
-                {
-                  "source": "Birds of Prey",
-                  "channel": 1
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "path": "music/ffxiv/Orchestrion/BGM_ORCH_222.scd",
-          "segments": [
-            {
-              "channels": [
-                {
-                  "source": "Rival Wings",
-                  "channel": 0
-                },
-                {
-                  "source": "Rival Wings",
-                  "channel": 1
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "source": [
-        "00058",
-        "SB_FFXIV_058",
-        "転生の炎 ～絶バハムート討滅戦～",
-        "Forever in Flames"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Ban_04pre.scd"
-      }
-    },
-    {
-      "source": [
-        "00059",
-        "SB_FFXIV_059",
-        "贖いの果て ～絶バハムート討滅戦～",
-        "Beyond Redemption"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Ban_04.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_299.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00060",
-        "SB_FFXIV_060",
-        "プレイヤーメイク",
-        "Character Creation"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Rti_06.scd"
-      }
-    },
-    {
-      "source": [
-        "00061",
-        "SB_FFXIV_061",
-        "データ画面",
-        "Save",
-        "Load Screen"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Rti_05.scd"
-      }
-    },
-    {
-      "source": [
-        "00062",
-        "SB_FFXIV_062",
-        "主人公のテーマ",
-        "Protagonist's Theme"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Rti_07.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_198.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00063",
-        "SB_FFXIV_063",
-        "Backborn Story",
-        "Background Story"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Rti_09.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_199.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00064",
-        "SB_FFXIV_064",
-        "Trisection"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Rti_01.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_195.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00065",
-        "SB_FFXIV_065",
-        "橋上の戦い",
-        "Precipitous Combat"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Rti_02.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_196.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00066",
-        "SB_FFXIV_066",
-        "敵兵襲撃",
-        "The Enemy Approaches"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Rti_10.scd"
-      }
-    },
-    {
-      "source": [
-        "00067",
-        "SB_FFXIV_067",
-        "Ultema the Nice Body",
-        "Ultima's Transformation"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Rti_03.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_197.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00068",
-        "SB_FFXIV_068",
-        "戦闘終了",
-        "Victory"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Rti_04.scd"
-      }
-    },
-    {
-      "source": [
-        "00069",
-        "SB_FFXIV_069",
-        "鬼の棲む島 ～紅玉火山 獄之蓋～",
-        "Down Where Daemons Dwell"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Dan_D10.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_212.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00070",
-        "SB_FFXIV_070",
-        "Iroha"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Field_Iroha.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_225.scd"
-        ],
+        "path": "music/ex2/BGM_EX2_BanFort_Ananta_Good.scd",
         "segments": [
           {
             "sourceOffsets": {
-              "source": 0
-            },
-            "sourceThresholds": {
-              "target": 0.03,
-              "source": 0.03
+              "source": 2.525
             },
             "channels": [
               {
@@ -1114,416 +38,2720 @@
               }
             ]
           }
-        ]
-      }
-    },
-    {
-      "source": [
-        "00071",
-        "SB_FFXIV_071",
-        "天つ雷 ～白虎前哨戦～",
-        "Answer on High"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Ban_11.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_216.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00072",
-        "SB_FFXIV_072",
-        "轟 ～白虎征魂戦～",
-        "Todoroki"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Ban_12.scd"
-      }
-    },
-    {
-      "source": [
-        "00073",
-        "SB_FFXIV_073",
-        "天つ風 ～白虎征魂戦～",
-        "Amatsu Kaze"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Ban_13.scd",
-          "music/ffxiv/BGM_Ride_Byakko.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_217.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00074",
-        "SB_FFXIV_074",
-        "我ら国境警備隊",
-        "Keepers of the Lock"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_BanFort_Ananta_Good.scd"
-      }
-    },
-    {
-      "source": [
-        "00075",
-        "SB_FFXIV_075",
-        "アンブレーカブル \\(Duality\\) ～博物戦艦 フラクタル・コンティニアム～",
-        "Unbreakable \\(Duality\\)"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Dan_D11.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_213.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00076",
-        "SB_FFXIV_076",
-        "魔列車 ～次元の狭間オメガ：シグマ編～",
-        "The Phantom Train to Sigmascape"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Sigma_01.scd"
-      }
-    },
-    {
-      "source": [
-        "00077",
-        "SB_FFXIV_077",
-        "決戦 ～次元の狭間オメガ：シグマ編～",
-        "A Battle Decisively"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Sigma_02.scd"
-      }
-    },
-    {
-      "source": [
-        "00078",
-        "SB_FFXIV_078",
-        "妖星乱舞 第1楽章 ～次元の狭間オメガ：シグマ編～",
-        "Dancing Mad [-–] Movement I"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Sigma_03.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_266.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00079",
-        "SB_FFXIV_079",
-        "妖星乱舞 第2楽章 ～次元の狭間オメガ：シグマ編～",
-        "Dancing Mad [-–] Movement II"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Sigma_04.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_267.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00080",
-        "SB_FFXIV_080",
-        "妖星乱舞 第3楽章 ～次元の狭間オメガ：シグマ編～",
-        "Dancing Mad [-–] Movement III"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Sigma_05.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_268.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00081",
-        "SB_FFXIV_081",
-        "妖星乱舞 第4楽章 ～次元の狭間オメガ：シグマ編～",
-        "Dancing Mad [-–] Movement IV"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Sigma_06.scd",
-          "music/ffxiv/BGM_Ride_Sigma.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_269.scd"
-        ]
-      }
-    },
-    {
-      "source": {
-        "Wicked Winds Whisper": [
-          "00082",
-          "SB_FFXIV_082",
-          "乱風の囁き ～禁断の地 エウレカ：アネモス編～",
-          "Wicked Winds Whisper"
         ],
-        "Magicked Skulls": [
-          "00083",
-          "SB_FFXIV_083",
-          "呪われたサレコウベ",
-          "Magicked Skulls"
-        ]
-      },
-      "target": [
-        {
-          "path": "music/ex2/BGM_EX2_EU_Field.scd",
-          "sequentialToFfmpegChannelIndexMap": [
-            0,
-            2,
-            1,
-            4,
-            5,
-            3
-          ],
-          "segments": [
-            {
-              "channels": [
-                {
-                  "source": "Wicked Winds Whisper",
-                  "channel": 0
-                },
-                {
-                  "source": "Wicked Winds Whisper",
-                  "channel": 1
-                },
-                {
-                  "source": "Magicked Skulls",
-                  "channel": 0
-                },
-                {
-                  "source": "Magicked Skulls",
-                  "channel": 1
-                },
-                {
-                  "source": "target",
-                  "channel": 4
-                },
-                {
-                  "source": "target",
-                  "channel": 5
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "path": "music/ffxiv/Orchestrion/BGM_ORCH_223.scd",
-          "segments": [
-            {
-              "channels": [
-                {
-                  "source": "Wicked Winds Whisper",
-                  "channel": 0
-                },
-                {
-                  "source": "Wicked Winds Whisper",
-                  "channel": 1
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "source": [
-        "00084",
-        "SB_FFXIV_084",
-        "ノー・クォーター",
-        "No Quarter"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_EU_NM.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_224.scd"
-        ]
+        "# comment": "spectral similarity to the game's own file: 0.974"
       }
     },
     {
       "source": [
-        "00085",
-        "SB_FFXIV_085",
-        "セイレーンの呼び声",
-        "Siren Song"
+        "SB_FFXIV_055",
+        "Indomitable",
+        "硬き者たち"
       ],
       "target": {
-        "path": [
-          "music/ffxiv/BGM_Season_Princess.scd",
-          "music/ex3/BGM_EX3_Town_Y_Bar.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_220.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00086",
-        "SB_FFXIV_086",
-        "Pa-Paya Demastered"
-      ],
-      "target": {
-        "path": [
-          "music/ffxiv/BGM_Minigame_Egghunt.scd",
-          "music/ffxiv/BGM_Minigame_Egghunt2.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00087",
-        "SB_FFXIV_087",
-        "天晴大鯰音頭",
-        "Seven Hundred Seventy-Seven Whiskers"
-      ],
-      "target": {
-        "path": [
-          "music/ex2/BGM_EX2_BanFort_Namazuo_Good.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_240.scd"
-        ]
-      }
-    },
-    {
-      "source": [
-        "00088",
-        "SB_FFXIV_088",
-        "わっしょいわっしょい",
-        "Wasshoi, Wasshoi!"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_Mikoshi.scd"
-      }
-    },
-    {
-      "source": [
-        "00089",
-        "SB_FFXIV_089",
-        "危険なる妙技",
-        "Dangertek"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Uzune2.scd"
-      }
-    },
-    {
-      "source": {
-        "Starved": {
-          "inputFiles": [
-            [
-              {
-                "directory": "The Far Edge Of Fate",
-                "pattern": "00007"
-              },
-              {
-                "directory": "The Far Edge Of Fate",
-                "pattern": "TFEOF_FFXIV_08"
-              },
-              {
-                "directory": "The Far Edge Of Fate",
-                "pattern": "餓えた狼　～ザ・フィースト～"
-              },
-              {
-                "directory": "The Far Edge Of Fate",
-                "pattern": "Starved"
-              }
-            ]
-          ]
-        },
-        "Dangertek": {
-          "inputFiles": [
-            [
-              {
-                "directory": "Stormblood",
-                "pattern": "00089"
-              },
-              {
-                "directory": "Stormblood",
-                "pattern": "SB_FFXIV_089"
-              },
-              {
-                "directory": "Stormblood",
-                "pattern": "危険なる妙技"
-              },
-              {
-                "directory": "Stormblood",
-                "pattern": "Dangertek"
-              }
-            ]
-          ]
-        }
-      },
-      "target": {
-        "path": "music/ffxiv/BGM_EX1_PvP01.scd",
+        "path": "music/ex2/BGM_EX2_BanFort_Kojin_Good.scd",
         "segments": [
           {
+            "sourceOffsets": {
+              "source": 2.49
+            },
             "channels": [
               {
-                "source": "Starved",
+                "source": "source",
                 "channel": 0
               },
               {
-                "source": "Starved",
-                "channel": 1
-              },
-              {
-                "source": "Dangertek",
-                "channel": 0
-              },
-              {
-                "source": "Dangertek",
+                "source": "source",
                 "channel": 1
               }
             ]
           }
-        ]
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.996"
       }
     },
     {
       "source": [
-        "00090",
-        "SB_FFXIV_090",
-        "地風水 ～風水霊殿 ガンエン廟～",
-        "Earth, Wind, and Water"
+        "SB_FFXIV_021",
+        "Shell-shocked",
+        "戦場の甲羅"
       ],
       "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Dan_D12.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_238.scd"
-        ]
+        "path": "music/ex2/BGM_EX2_BanFort_Koujin_Bad.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.6
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.999"
       }
     },
     {
       "source": [
-        "00091",
+        "SB_FFXIV_087",
+        "Seven Hundred Seventy-Seven Whiskers",
+        "天晴大鯰音頭"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_BanFort_Namazuo_Good.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.495
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.998"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_022",
+        "Revelation",
+        "啓示 ～蛮神スサノオ討滅戦～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_01.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.91
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.996"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_023",
+        "Riot",
+        "祭りである ～蛮神スサノオ討滅戦～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_01_2.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.225
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.996"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_024",
+        "At Both Ends",
+        "終始 ～蛮神スサノオ討滅戦～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_01_3.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 139.84
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.982"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_038",
+        "Beauty's Wicked Wiles",
+        "美の謀略 ～蛮神ラクシュミ討滅戦～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_02.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 156.47
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.985"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_044",
+        "The Worm's Tail",
+        "龍の尾 ～神龍討滅戦～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_03_2.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.65
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.991"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_059",
+        "Beyond Redemption",
+        "贖いの果て ～絶バハムート討滅戦～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_04.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.62
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.963"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_058",
+        "Forever in Flames",
+        "転生の炎 ～絶バハムート討滅戦～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_04pre.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.79
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.992"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_071",
+        "Answer on High",
+        "天つ雷 ～白虎前哨戦～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_11.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.95
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.994"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_072",
+        "Todoroki",
+        "轟 ～白虎征魂戦～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_12.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.025
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.996"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_073",
+        "Amatsu Kaze",
+        "天つ風 ～白虎征魂戦～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_13.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 145.285
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.980"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_103",
+        "Nightbloom",
+        "月下美人 ～蛮神ツクヨミ前哨戦～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_16.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 111.885
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.993"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_104",
+        "Lunacy",
+        "狂える月夜 ～蛮神ツクヨミ討滅戦～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_17.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.685
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.995"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_105",
+        "Wayward Daughter",
+        "月下彼岸花 ～蛮神ツクヨミ討滅戦～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_18.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.04
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.993"
+      }
+    },
+    {
+      "source": [
         "SB_FFXIV_091",
-        "堕天せし者 \\(From Astral to Umbral\\) ～蛮神ガルーダ討伐戦～",
-        "Fallen Angel \\(From Astral to Umbral\\)"
+        "Fallen Angel (From Astral to Umbral)",
+        "堕天せし者 (From Astral to Umbral) ～蛮神ガルーダ討伐戦～"
       ],
       "target": {
-        "path": "music/ex2/BGM_EX2_Ban_19.scd"
+        "path": "music/ex2/BGM_EX2_Ban_19.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.25
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.965"
       }
     },
     {
       "source": [
-        "00092",
         "SB_FFXIV_092",
-        "原始の審判 \\(From Astral to Umbral\\) ～蛮神イフリート討伐戦～",
-        "Primal Judgment \\(From Astral to Umbral\\)"
+        "Primal Judgment (From Astral to Umbral)",
+        "原始の審判 (From Astral to Umbral) ～蛮神イフリート討伐戦～"
       ],
       "target": {
         "path": "music/ex2/BGM_EX2_Ban_20.scd",
         "segments": [
           {
+            "sourceOffsets": {
+              "source": 1.595
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.978"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_093",
+        "Under the Weight (From Astral to Umbral)",
+        "過重圧殺！ (From Astral to Umbral) ～蛮神タイタン討滅戦～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_21.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.595
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.995"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_094",
+        "Ultima (Orchestral Version)",
+        "究極幻想 (Orchestral Version)"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Ban_23.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 31.535
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.994"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_013",
+        "GL_00071",
+        "Triumph",
+        "鬨の声"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Boss_Battle_01.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.185
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.992"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_012",
+        "Dawnbound",
+        "夜明けに向かって ～漂流海域 セイレーン海～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Dan_D01.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.93
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.997"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_018",
+        "The Open Box",
+        "開けられた玉手箱 ～海底宮殿 紫水宮～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Dan_D02.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 109.05
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.993"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_030",
+        "Most Unworthy",
+        "英雄ならざる者 ～伝統試練 バルダム覇道～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Dan_D03.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.685
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.997"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_033",
+        "Gates of the Moon",
+        "月亮門 ～解放決戦 ドマ城～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Dan_D04.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.77
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.988"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_040",
+        "Alienus",
+        "アリエヌス ～巨砲要塞 カストルム・アバニア～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Dan_D05.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.585
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.992"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_043",
+        "Liberty or Death",
+        "自由か死か ～紅蓮決戦 アラミゴ～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Dan_D06.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.025
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.992"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_007",
+        "Their Deadly Mission",
+        "燃えよクァール ～壊神修行 星導山寺院～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Dan_D07.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.59
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.995"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_036",
+        "Deception",
+        "策謀 ～悪党成敗 クガネ城～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Dan_D08.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.2
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.993"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_054",
+        "Far From Home",
+        "故郷より離れて ～水没遺構 スカラ～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Dan_D09.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 124.64
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.901"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_069",
+        "Down Where Daemons Dwell",
+        "鬼の棲む島 ～紅玉火山 獄之蓋～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Dan_D10.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.815
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.982"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_075",
+        "Unbreakable (Duality)",
+        "アンブレーカブル (Duality) ～博物戦艦 フラクタル・コンティニアム～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Dan_D11.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.815
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.994"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_090",
+        "Earth, Wind, and Water",
+        "地風水 ～風水霊殿 ガンエン廟～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Dan_D12.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.365
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.969"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_084",
+        "ノー・クォーター",
+        "No Quarter"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_EU_NM.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.28
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "same recording as Before_Meteor_FFXIV_028.flac, which the matcher picked for this target (0.918 vs 0.987); listed here too so owning this album is enough to replace it"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_046",
+        "Revolutions"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_EndCredit01.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.375
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "enable": false,
+        "# comment": "source is correct (spectral 0.994 at offset -2.4s) but covers only 50% of this target: 426s of 859s. The rest needs a multi-segment or filterComplex source; left disabled until then."
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_046",
+        "Revolutions"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_EndCredit02.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.375
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "enable": false,
+        "# comment": "source is correct (spectral 0.994 at offset -2.4s) but covers only 61% of this target: 426s of 703s. The rest needs a multi-segment or filterComplex source; left disabled until then."
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_031",
+        "Heroes of Stormblood",
+        "血嵐の勇士"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Event_03.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.07
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.995"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_010",
+        "The Garlean Territorial Anthem for Gyr Abania and Surrounding States - The Measure of Our Reach",
+        "我らが支配圏"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Event_04.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.055
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.995"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_028",
+        "Cyan's Theme",
+        "カイエンのテーマ ～紅蓮～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Event_07.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.885
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.973"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_020",
+        "Far East of Eorzea",
+        "東方の地"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Event_08.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.015
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.969"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_016",
+        "Wing and a Prayer",
+        "祈りの翼"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Event_10.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.94
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.878"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_034",
+        "Parting Ways",
+        "別れ"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Event_12.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.03
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.985"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_002",
+        "Prelude - Long March Home",
+        "紅蓮のプレリュード"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Event_PRELUDE.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 20.715
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.954"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_005",
+        "GL_00069",
+        "Looping in the Deepest Fringes",
+        "辺境の乱戦"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_A_Battle.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.99
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.991"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_027",
+        "Drowning in the Horizon",
+        "地平線に沈め ～アジムステップ：昼～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_A_Day.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.255
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.989"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_029",
+        "He Rises Above",
+        "地平線より昇れ ～アジムステップ：夜～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_A_Night.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.925
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.998"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_005",
+        "GL_00069",
+        "Looping in the Deepest Fringes",
+        "辺境の乱戦"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_G_Battle.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.99
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.991"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_005",
+        "GL_00069",
+        "Looping in the Deepest Fringes",
+        "辺境の乱戦"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_G_Lake_Battle.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.99
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.991"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_042",
+        "Songs of Salt and Suffering",
+        "塩と苦難の歌 ～ギラバニア湖畔地帯：昼～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_G_Lake_Day.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.245
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.904"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_041",
+        "Old Wounds",
+        "古傷 ～ギラバニア湖畔地帯：夜～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_G_Lake_Night.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 205.835
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "enable": false,
+        "# comment": "source is correct (spectral 0.989 at offset -205.8s) but covers only 90% of this target: 222s of 247s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_037",
+        "Hope Forgotten",
+        "忘れられた希望 ～ギラバニア辺境地帯：夜～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_G_Night.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.29
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.996"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_005",
+        "GL_00069",
+        "Looping in the Deepest Fringes",
+        "辺境の乱戦"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_G_mountain_Battle.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.99
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.991"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_008",
+        "On High",
+        "高みより ～ギラバニア山岳地帯：昼～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_G_mountain_Day.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.875
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.994"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_039",
+        "The Stone Remembers",
+        "石の記憶 ～ギラバニア山岳地帯：夜～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_G_mountain_Night.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.605
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.996"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_070",
+        "Iroha"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_Iroha.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.08
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.990"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_005",
+        "GL_00069",
+        "Looping in the Deepest Fringes",
+        "辺境の乱戦"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_Kohgyoku_Battle.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.99
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.991"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_015",
+        "Liquid Flame",
+        "焔の海 ～紅玉海：昼～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_Kohgyoku_Day.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.815
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.982"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_019",
+        "Westward Tide",
+        "宵の海 ～紅玉海：夜～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_Kohgyoku_Night.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.12
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.979"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_025",
+        "Harmony",
+        "調和"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_Safe_01.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.785
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.956"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_009",
+        "With Giants Watching",
+        "巨峰の眼下にて"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_Safe_02.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.805
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "enable": false,
+        "# comment": "source is correct (spectral 0.920 at offset -1.8s) but covers only 94% of this target: 67s of 71s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_005",
+        "GL_00069",
+        "Looping in the Deepest Fringes",
+        "辺境の乱戦"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_Yansa_Battle.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.99
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.991"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_026",
+        "A Father's Pride",
+        "父の誇り ～ヤンサ：昼～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_Yansa_Day.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.525
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.992"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_032",
+        "A Mother's Pride",
+        "母の誇り ～ヤンサ：夜～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Field_Yansa_Night.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.94
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.997"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_016",
+        "Wing and a Prayer",
+        "祈りの翼"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Mount01.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.94
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.878"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_047",
+        "GL_00048",
+        "Deltascape",
+        "デルタスケープ ～次元の狭間オメガ：デルタ編～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Omega_01.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.79
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.995"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_048",
+        "TH_106",
+        "Omega2",
+        "バトル2 ～次元の狭間オメガ：デルタ編～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Omega_02.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 136.225
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.959"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_049",
+        "Decisions",
+        "決戦 ～次元の狭間オメガ：デルタ編～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Omega_03.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.64
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.894"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_050",
+        "Final, Not Final",
+        "最後の闘い ～次元の狭間オメガ：デルタ編～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Omega_04.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.25
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.968"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_064",
+        "Trisection"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_01.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 71.48
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.982"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_065",
+        "Precipitous Combat",
+        "橋上の戦い"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_02.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.46
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.987"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_067",
+        "Ultema the Nice Body"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_03.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 125.545
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.985"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_061",
+        "Save",
+        "データ画面"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_05.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.075
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.986"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_060",
+        "Character Creation",
+        "プレイヤーメイク"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_06.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.795
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.994"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_062",
+        "Protagonist's Theme",
+        "主人公のテーマ"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_07.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.39
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.987"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_063",
+        "Backborn Story"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_09.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.79
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.991"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_066",
+        "The Enemy Approaches",
+        "敵兵襲撃"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_10.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 0.42
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.988"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_095",
+        "World Map",
+        "ワールドマップ"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_11.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.46
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.996"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_096",
+        "A Chapel"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_12.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.545
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.989"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_097",
+        "Ascent",
+        "頂上へ"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_13.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.945
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.995"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_099",
+        "The Mystery of Giruvegan",
+        "ギルヴェガンの謎"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_14.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.515
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.996"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_098",
+        "Boss Battle",
+        "ボス戦"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_15.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.53
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.991"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_100",
+        "Apoplexy"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_16.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.085
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.991"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_101",
+        "Flash of Steel",
+        "剣の一閃"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_17.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.335
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.993"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_102",
+        "Victory Fanfare (FFXII Version)",
+        "勝利のファンファーレ ～FFXIIバージョン～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Rti_18.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.71
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.994"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_076",
+        "The Phantom Train to Sigmascape",
+        "魔列車 ～次元の狭間オメガ：シグマ編～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Sigma_01.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.94
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.987"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_077",
+        "TH_144",
+        "A Battle Decisively",
+        "決戦 ～次元の狭間オメガ：シグマ編～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Sigma_02.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.9
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.992"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_078",
+        "TH_140",
+        "Dancing Mad - Movement I",
+        "妖星乱舞 第1楽章 ～次元の狭間オメガ：シグマ編～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Sigma_03.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.155
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.990"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_079",
+        "TH_141",
+        "Dancing Mad - Movement II",
+        "妖星乱舞 第2楽章 ～次元の狭間オメガ：シグマ編～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Sigma_04.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.125
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.996"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_080",
+        "妖星乱舞 第3楽章 ～次元の狭間オメガ：シグマ編～",
+        "Dancing Mad - Movement III"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Sigma_05.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.595
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "same recording as TH_142.mp3, which the matcher picked for this target (0.890 vs 0.970); listed here too so owning this album is enough to replace it"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_081",
+        "妖星乱舞 第4楽章 ～次元の狭間オメガ：シグマ編～",
+        "Dancing Mad - Movement IV"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Sigma_06.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.09
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "same recording as TH_143.mp3, which the matcher picked for this target (0.881 vs 0.954); listed here too so owning this album is enough to replace it"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_014",
+        "Crimson Sunrise",
+        "紅の夜明け ～クガネ：昼～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Town_K_Day.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.355
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.996"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_035",
+        "Crimson Sunset",
+        "紅の夜更け ～クガネ：夜～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Town_K_Night.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.205
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.972"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_003",
+        "Impact",
+        "衝撃 ～ラールガーズリーチ：昼～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Town_R_Day.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 130.66
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.973"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_006",
+        "Afterglow",
+        "余光 ～ラールガーズリーチ：夜～"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Town_R_Night.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 134.415
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.955"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_011",
+        "Procedamus in Pace",
+        "平和への道のり"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Town_R_Sad.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.73
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "enable": false,
+        "# comment": "source is correct (spectral 0.972 at offset -1.7s) but covers only 91% of this target: 137s of 151s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_089",
+        "Dangertek",
+        "危険なる妙技"
+      ],
+      "target": {
+        "path": "music/ex2/BGM_EX2_Uzune2.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.99
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.986"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_103",
+        "Nightbloom",
+        "月下美人 ～蛮神ツクヨミ前哨戦～"
+      ],
+      "target": {
+        "path": "music/ex3/BGM_EX3_Event_28.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 111.885
+            },
             "channels": [
               {
                 "source": "source",
@@ -1534,195 +2762,2802 @@
                 "channel": 1
               }
             ],
-            "length": 165
-          },
+            "sourceFilters": {
+              "source": "volume=+1.4dB"
+            }
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.993"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_047",
+        "GL_00048",
+        "Deltascape",
+        "デルタスケープ ～次元の狭間オメガ：デルタ編～"
+      ],
+      "target": {
+        "path": "music/ex4/BGM_EX4_Ban_11.scd",
+        "segments": [
           {
             "sourceOffsets": {
-              "target": 165
+              "source": 1.79
             },
             "channels": [
               {
-                "source": "target",
+                "source": "source",
                 "channel": 0
               },
               {
-                "source": "target",
+                "source": "source",
+                "channel": 1
+              }
+            ],
+            "sourceFilters": {
+              "source": "volume=+3dB"
+            }
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.995"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_078",
+        "TH_140",
+        "Dancing Mad - Movement I",
+        "妖星乱舞 第1楽章 ～次元の狭間オメガ：シグマ編～"
+      ],
+      "target": {
+        "path": "music/ex5/BGM_EX5_Ban_22.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.155
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ],
+            "sourceFilters": {
+              "source": "volume=+1.5dB"
+            }
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.990"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_079",
+        "TH_141",
+        "Dancing Mad - Movement II",
+        "妖星乱舞 第2楽章 ～次元の狭間オメガ：シグマ編～"
+      ],
+      "target": {
+        "path": "music/ex5/BGM_EX5_Ban_23.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.125
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ],
+            "sourceFilters": {
+              "source": "volume=+1.8dB"
+            }
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.996"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_080",
+        "妖星乱舞 第3楽章 ～次元の狭間オメガ：シグマ編～",
+        "Dancing Mad - Movement III"
+      ],
+      "target": {
+        "path": "music/ex5/BGM_EX5_Ban_24.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.595
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
                 "channel": 1
               }
             ]
           }
-        ]
+        ],
+        "# comment": "same recording as TH_142.mp3, which the matcher picked for this target (0.890 vs 0.970); listed here too so owning this album is enough to replace it"
       }
     },
     {
       "source": [
-        "00093",
-        "SB_FFXIV_093",
-        "過重圧殺！ \\(From Astral to Umbral\\) ～蛮神タイタン討滅戦～",
-        "Under the Weight \\(From Astral to Umbral\\)"
+        "SB_FFXIV_081",
+        "妖星乱舞 第4楽章 ～次元の狭間オメガ：シグマ編～",
+        "Dancing Mad - Movement IV"
       ],
       "target": {
-        "path": "music/ex2/BGM_EX2_Ban_21.scd"
+        "path": "music/ex5/BGM_EX5_Ban_25.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.09
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "same recording as TH_143.mp3, which the matcher picked for this target (0.881 vs 0.954); listed here too so owning this album is enough to replace it"
       }
     },
     {
       "source": [
-        "00094",
+        "SB_FFXIV_077",
+        "TH_144",
+        "A Battle Decisively",
+        "決戦 ～次元の狭間オメガ：シグマ編～"
+      ],
+      "target": {
+        "path": "music/ex5/BGM_EX5_Ban_26.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.9
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ],
+            "sourceFilters": {
+              "source": "volume=+3.2dB"
+            }
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.992"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_005",
+        "GL_00069",
+        "Looping in the Deepest Fringes",
+        "辺境の乱戦"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Field_G_Battle.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.99
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ],
+            "sourceFilters": {
+              "source": "volume=+3.8dB"
+            }
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.991"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_086",
+        "Pa-Paya Demastered"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Minigame_Egghunt.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.89
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.995"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_086",
+        "Pa-Paya Demastered"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Minigame_Egghunt2.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.89
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.995"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_036",
+        "Deception",
+        "策謀 ～悪党成敗 クガネ城～"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Ride_Abare.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.2
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.993"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_073",
+        "Amatsu Kaze",
+        "天つ風 ～白虎征魂戦～"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Ride_Byakko.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.115
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.933"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_002",
+        "Prelude - Long March Home",
+        "紅蓮のプレリュード"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Ride_Kyubi.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.65
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.970"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_038",
+        "Beauty's Wicked Wiles",
+        "美の謀略 ～蛮神ラクシュミ討滅戦～"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Ride_Lakshmi.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 156.47
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.985"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_088",
+        "Wasshoi, Wasshoi!",
+        "わっしょいわっしょい"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Ride_Mikoshi.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.64
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.993"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_050",
+        "Final, Not Final",
+        "最後の闘い ～次元の狭間オメガ：デルタ編～"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Ride_Omega.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.25
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.968"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_044",
+        "The Worm's Tail",
+        "龍の尾 ～神龍討滅戦～"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Ride_Shinryu.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.65
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.991"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_081",
+        "妖星乱舞 第4楽章 ～次元の狭間オメガ：シグマ編～",
+        "Dancing Mad - Movement IV"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Ride_Sigma.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.09
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "same recording as TH_143.mp3, which the matcher picked for this target (0.881 vs 0.954); listed here too so owning this album is enough to replace it"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_105",
+        "Wayward Daughter",
+        "月下彼岸花 ～蛮神ツクヨミ討滅戦～"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Ride_TK.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.04
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.993"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_051",
+        "Wizardly",
+        "うぃざーどりー"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Season_Anniversary.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.155
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.900"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_014",
+        "Crimson Sunrise",
+        "紅の夜明け ～クガネ：昼～"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Town_K_Day.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.355
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ],
+            "sourceFilters": {
+              "source": "volume=+1dB"
+            }
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.996"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_035",
+        "Crimson Sunset",
+        "紅の夜更け ～クガネ：夜～"
+      ],
+      "target": {
+        "path": "music/ffxiv/BGM_Town_K_Night.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.205
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.972"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_001",
+        "GL_00070",
+        "Storm of Blood",
+        "血の嵐"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_159.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 110.58
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ],
+            "sourceFilters": {
+              "source": "volume=-5dB"
+            }
+          }
+        ],
+        "# comment": "offset corrected by +0.990s from the envelope match, by spectral alignment search; spectral similarity to the game's own file: 0.806"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_022",
+        "Revelation",
+        "啓示 ～蛮神スサノオ討滅戦～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_166.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.91
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.986"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_038",
+        "Beauty's Wicked Wiles",
+        "美の謀略 ～蛮神ラクシュミ討滅戦～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_167.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 156.47
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.970"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_015",
+        "Liquid Flame",
+        "焔の海 ～紅玉海：昼～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_171.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.9
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.956"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_027",
+        "Drowning in the Horizon",
+        "地平線に沈め ～アジムステップ：昼～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_172.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.255
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.941"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_057",
+        "Birds of Prey",
+        "鳥たちの饗宴 ～ライバルウィングズ～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_180.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 72.14
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.908"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_045",
+        "The Measure of His Reach",
+        "壊神の拳が届く場所"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_181.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.025
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.966"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_010",
+        "The Garlean Territorial Anthem for Gyr Abania and Surrounding States - The Measure of Our Reach",
+        "我らが支配圏"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_182.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.06
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.967"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_003",
+        "Impact",
+        "衝撃 ～ラールガーズリーチ：昼～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_183.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 130.66
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.955"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_014",
+        "Crimson Sunrise",
+        "紅の夜明け ～クガネ：昼～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_184.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.355
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.974"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_008",
+        "On High",
+        "高みより ～ギラバニア山岳地帯：昼～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_185.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.875
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.951"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_042",
+        "Songs of Salt and Suffering",
+        "塩と苦難の歌 ～ギラバニア湖畔地帯：昼～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_186.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.245
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.890"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_026",
+        "A Father's Pride",
+        "父の誇り ～ヤンサ：昼～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_187.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.525
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "enable": false,
+        "# comment": "source is correct (spectral 0.952 at offset -1.5s) but covers only 93% of this target: 174s of 186s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_055",
+        "Indomitable",
+        "硬き者たち"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_188.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.49
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.978"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_018",
+        "The Open Box",
+        "開けられた玉手箱 ～海底宮殿 紫水宮～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_189.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 109.05
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.971"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_030",
+        "Most Unworthy",
+        "英雄ならざる者 ～伝統試練 バルダム覇道～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_190.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.685
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.984"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_036",
+        "Deception",
+        "策謀 ～悪党成敗 クガネ城～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_191.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.2
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.979"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_054",
+        "Far From Home",
+        "故郷より離れて ～水没遺構 スカラ～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_192.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.23
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.919"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_044",
+        "The Worm's Tail",
+        "龍の尾 ～神龍討滅戦～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_194.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.65
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.979"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_064",
+        "Trisection"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_195.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 71.48
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.966"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_065",
+        "Precipitous Combat",
+        "橋上の戦い"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_196.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.46
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.967"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_067",
+        "Ultema the Nice Body"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_197.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 125.545
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.965"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_062",
+        "Protagonist's Theme",
+        "主人公のテーマ"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_198.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.39
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.976"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_063",
+        "Backborn Story"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_199.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.79
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.970"
+      }
+    },
+    {
+      "source": [
         "SB_FFXIV_094",
-        "究極幻想 \\(Orchestral Version\\)",
-        "Ultima \\(Orchestral Version\\)"
-      ],
-      "target": [
-        {
-          "path": "music/ffxiv/Orchestrion/BGM_ORCH_200.scd",
-          "enable": false
-        },
-        {
-          "path": "music/ex2/BGM_EX2_Ban_23.scd",
-          "enable": false,
-          "# comment": "Incomplete."
-        }
-      ]
-    },
-    {
-      "source": [
-        "00095",
-        "SB_FFXIV_095",
-        "ワールドマップ",
-        "World Map"
+        "Ultima (Orchestral Version)",
+        "究極幻想 (Orchestral Version)"
       ],
       "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Rti_11.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_241.scd"
-        ]
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_200.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.855
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.967"
       }
     },
     {
       "source": [
-        "00096",
+        "SB_FFXIV_035",
+        "Crimson Sunset",
+        "紅の夜更け ～クガネ：夜～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_207.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.205
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.955"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_019",
+        "Westward Tide",
+        "宵の海 ～紅玉海：夜～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_208.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.12
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.962"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_032",
+        "A Mother's Pride",
+        "母の誇り ～ヤンサ：夜～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_209.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.94
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.958"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_029",
+        "He Rises Above",
+        "地平線より昇れ ～アジムステップ：夜～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_210.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.925
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.955"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_074",
+        "Keepers of the Lock",
+        "我ら国境警備隊"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_211.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.525
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ],
+            "sourceFilters": {
+              "source": "volume=-2.5dB"
+            }
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.954"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_069",
+        "Down Where Daemons Dwell",
+        "鬼の棲む島 ～紅玉火山 獄之蓋～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_212.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.835
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.942"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_075",
+        "Unbreakable (Duality)",
+        "アンブレーカブル (Duality) ～博物戦艦 フラクタル・コンティニアム～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_213.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.815
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.981"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_007",
+        "Their Deadly Mission",
+        "燃えよクァール ～壊神修行 星導山寺院～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_214.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.59
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.980"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_043",
+        "Liberty or Death",
+        "自由か死か ～紅蓮決戦 アラミゴ～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_215.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.025
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.978"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_071",
+        "Answer on High",
+        "天つ雷 ～白虎前哨戦～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_216.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.95
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.979"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_073",
+        "Amatsu Kaze",
+        "天つ風 ～白虎征魂戦～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_217.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.115
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.924"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_028",
+        "Cyan's Theme",
+        "カイエンのテーマ ～紅蓮～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_218.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.885
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.959"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_056",
+        "Rival Wings",
+        "ライバルウィングズ ～アストラガロス機工戦～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_222.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.67
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.984"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_082",
+        "Wicked Winds Whisper",
+        "乱風の囁き ～禁断の地 エウレカ：アネモス編～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_223.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.7
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.981"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_084",
+        "ノー・クォーター",
+        "No Quarter"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_224.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.28
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "same recording as Before_Meteor_FFXIV_028.flac, which the matcher picked for this target (0.915 vs 0.984); listed here too so owning this album is enough to replace it"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_070",
+        "Iroha"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_225.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.08
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.965"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_013",
+        "GL_00071",
+        "Triumph",
+        "鬨の声"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_226.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.185
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.976"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_020",
+        "Far East of Eorzea",
+        "東方の地"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_233.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.015
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.954"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_034",
+        "Parting Ways",
+        "別れ"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_234.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.03
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.968"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_046",
+        "Revolutions"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_235.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.375
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ],
+            "sourceFilters": {
+              "source": "volume=-4.3dB"
+            }
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.974"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_033",
+        "Gates of the Moon",
+        "月亮門 ～解放決戦 ドマ城～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_237.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.77
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.974"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_090",
+        "Earth, Wind, and Water",
+        "地風水 ～風水霊殿 ガンエン廟～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_238.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.365
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.955"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_087",
+        "Seven Hundred Seventy-Seven Whiskers",
+        "天晴大鯰音頭"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_240.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.495
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.981"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_095",
+        "World Map",
+        "ワールドマップ"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_241.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.46
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.964"
+      }
+    },
+    {
+      "source": [
         "SB_FFXIV_096",
         "A Chapel"
       ],
       "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Rti_12.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_242.scd"
-        ]
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_242.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.545
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.971"
       }
     },
     {
       "source": [
-        "00097",
-        "SB_FFXIV_097",
-        "頂上へ",
-        "Ascent"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Rti_13.scd"
-      }
-    },
-    {
-      "source": [
-        "00098",
-        "SB_FFXIV_098",
-        "ボス戦",
-        "Boss Battle"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Rti_15.scd"
-      }
-    },
-    {
-      "source": [
-        "00099",
         "SB_FFXIV_099",
-        "ギルヴェガンの謎",
-        "The Mystery of Giruvegan"
+        "The Mystery of Giruvegan",
+        "ギルヴェガンの謎"
       ],
       "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Rti_14.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_243.scd"
-        ]
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_243.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.515
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.976"
       }
     },
     {
       "source": [
-        "00100",
         "SB_FFXIV_100",
         "Apoplexy"
       ],
       "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Rti_16.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_244.scd"
-        ]
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_244.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.085
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.973"
       }
     },
     {
       "source": [
-        "00101",
         "SB_FFXIV_101",
-        "剣の一閃",
-        "Flash of Steel"
+        "Flash of Steel",
+        "剣の一閃"
       ],
       "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Rti_17.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_245.scd"
-        ]
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_245.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.335
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.979"
       }
     },
     {
       "source": [
-        "00102",
-        "SB_FFXIV_102",
-        "勝利のファンファーレ ～FFXIIバージョン～",
-        "Victory Fanfare \\(FFXII Version\\)"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Rti_18.scd"
-      }
-    },
-    {
-      "source": [
-        "00103",
         "SB_FFXIV_103",
-        "月下美人 ～蛮神ツクヨミ前哨戦～",
-        "Nightbloom"
+        "Nightbloom",
+        "月下美人 ～蛮神ツクヨミ前哨戦～"
       ],
       "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Ban_16.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_249.scd"
-        ]
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_249.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 111.885
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.980"
       }
     },
     {
       "source": [
-        "00104",
-        "SB_FFXIV_104",
-        "狂える月夜 ～蛮神ツクヨミ討滅戦～",
-        "Lunacy"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_Ban_17.scd"
-      }
-    },
-    {
-      "source": [
-        "00105",
         "SB_FFXIV_105",
-        "月下彼岸花 ～蛮神ツクヨミ討滅戦～",
-        "Wayward Daughter"
+        "Wayward Daughter",
+        "月下彼岸花 ～蛮神ツクヨミ討滅戦～"
       ],
       "target": {
-        "path": [
-          "music/ex2/BGM_EX2_Ban_18.scd",
-          "music/ffxiv/BGM_Ride_TK.scd",
-          "music/ffxiv/Orchestrion/BGM_ORCH_250.scd"
-        ]
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_250.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.04
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.986"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_048",
+        "TH_106",
+        "Omega2",
+        "バトル2 ～次元の狭間オメガ：デルタ編～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_262.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 136.225
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.943"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_049",
+        "Decisions",
+        "決戦 ～次元の狭間オメガ：デルタ編～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_263.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.64
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.877"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_050",
+        "Final, Not Final",
+        "最後の闘い ～次元の狭間オメガ：デルタ編～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_264.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.25
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.962"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_077",
+        "TH_144",
+        "A Battle Decisively",
+        "決戦 ～次元の狭間オメガ：シグマ編～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_265.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.9
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.979"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_078",
+        "TH_140",
+        "Dancing Mad - Movement I",
+        "妖星乱舞 第1楽章 ～次元の狭間オメガ：シグマ編～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_266.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.155
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.978"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_079",
+        "TH_141",
+        "Dancing Mad - Movement II",
+        "妖星乱舞 第2楽章 ～次元の狭間オメガ：シグマ編～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_267.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.125
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.977"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_080",
+        "妖星乱舞 第3楽章 ～次元の狭間オメガ：シグマ編～",
+        "Dancing Mad - Movement III"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_268.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.595
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "same recording as TH_142.mp3, which the matcher picked for this target (0.888 vs 0.966); listed here too so owning this album is enough to replace it"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_081",
+        "妖星乱舞 第4楽章 ～次元の狭間オメガ：シグマ編～",
+        "Dancing Mad - Movement IV"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_269.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.09
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "same recording as TH_143.mp3, which the matcher picked for this target (0.878 vs 0.950); listed here too so owning this album is enough to replace it"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_047",
+        "GL_00048",
+        "Deltascape",
+        "デルタスケープ ～次元の狭間オメガ：デルタ編～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_274.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.79
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.978"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_006",
+        "Afterglow",
+        "余光 ～ラールガーズリーチ：夜～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_291.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 134.415
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.934"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_037",
+        "Hope Forgotten",
+        "忘れられた希望 ～ギラバニア辺境地帯：夜～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_292.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.29
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.959"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_039",
+        "The Stone Remembers",
+        "石の記憶 ～ギラバニア山岳地帯：夜～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_293.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.605
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.951"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_041",
+        "Old Wounds",
+        "古傷 ～ギラバニア湖畔地帯：夜～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_294.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 205.835
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "enable": false,
+        "# comment": "source is correct (spectral 0.977 at offset -205.8s) but covers only 90% of this target: 222s of 247s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_025",
+        "Harmony",
+        "調和"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_295.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.785
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.955"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_059",
+        "Beyond Redemption",
+        "贖いの果て ～絶バハムート討滅戦～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_299.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.62
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.951"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_040",
+        "Alienus",
+        "アリエヌス ～巨砲要塞 カストルム・アバニア～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_337.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.585
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.980"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_012",
+        "Dawnbound",
+        "夜明けに向かって ～漂流海域 セイレーン海～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_516.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.905
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ],
+            "sourceFilters": {
+              "source": "volume=-2.9dB"
+            }
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.985"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_089",
+        "Dangertek",
+        "危険なる妙技"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_586.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.995
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ],
+            "sourceFilters": {
+              "source": "volume=-2.9dB"
+            }
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.982"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_086",
+        "Pa-Paya Demastered"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_594.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.93
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ],
+            "sourceFilters": {
+              "source": "volume=-1.8dB"
+            }
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.972"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_005",
+        "辺境の乱戦",
+        "Looping in the Deepest Fringes"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_613.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.005
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ]
+          }
+        ],
+        "# comment": "same recording as GL_00069.flac, which the matcher picked for this target (0.813 vs 0.829); listed here too so owning this album is enough to replace it"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_072",
+        "Todoroki",
+        "轟 ～白虎征魂戦～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_787.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 2.025
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ],
+            "sourceFilters": {
+              "source": "volume=-3.3dB"
+            }
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.974"
+      }
+    },
+    {
+      "source": [
+        "SB_FFXIV_093",
+        "Under the Weight (From Astral to Umbral)",
+        "過重圧殺！ (From Astral to Umbral) ～蛮神タイタン討滅戦～"
+      ],
+      "target": {
+        "path": "music/ffxiv/Orchestrion/BGM_ORCH_856.scd",
+        "segments": [
+          {
+            "sourceOffsets": {
+              "source": 1.54
+            },
+            "channels": [
+              {
+                "source": "source",
+                "channel": 0
+              },
+              {
+                "source": "source",
+                "channel": 1
+              }
+            ],
+            "sourceFilters": {
+              "source": "volume=-2dB"
+            }
+          }
+        ],
+        "# comment": "spectral similarity to the game's own file: 0.981"
       }
     }
   ]
