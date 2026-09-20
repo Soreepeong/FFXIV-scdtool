@@ -12,7 +12,6 @@
   {
    "source": [
     "ENDWALKER_008",
-    "TFEOF_FFXIV_02",
     "Down the Up Staircase",
     "上り階段をくだれ ～星海観測 逆さの塔～"
    ],
@@ -38,7 +37,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.993"
+    "# comment": "spectral similarity to the game's own file: 0.993; also released as TFEOF_FFXIV_02; that album's own preset carries its own entry"
    }
   },
   {
@@ -569,7 +568,6 @@
   {
    "source": [
     "ENDWALKER_033",
-    "GL_00014",
     "Heroes Forge Ahead",
     "英雄に続け"
    ],
@@ -592,7 +590,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
+    "# comment": "spectral similarity to the game's own file: 0.995; also released as GL_00014; that album's own preset carries its own entry"
    }
   },
   {
@@ -880,7 +878,6 @@
   {
    "source": [
     "ENDWALKER_040",
-    "Before_Meteor_FFXIV_104",
     "Answers"
    ],
    "target": {
@@ -902,7 +899,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.982"
+    "# comment": "spectral similarity to the game's own file: 0.982; also released as Before_Meteor_FFXIV_104; that album's own preset carries its own entry"
    }
   },
   {
@@ -1655,7 +1652,6 @@
   {
    "source": [
     "ENDWALKER_030",
-    "TH_014",
     "Battle 1 from FINAL FANTASY IV",
     "バトル1 from FINAL FANTASY IV"
    ],
@@ -1681,13 +1677,12 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.966"
+    "# comment": "spectral similarity to the game's own file: 0.966; also released as TH_014; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "ENDWALKER_040",
-    "Before_Meteor_FFXIV_104",
     "Answers"
    ],
    "target": {
@@ -1709,7 +1704,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.947"
+    "# comment": "spectral similarity to the game's own file: 0.947; also released as Before_Meteor_FFXIV_104; that album's own preset carries its own entry"
    }
   },
   {
@@ -1771,19 +1766,17 @@
   {
    "source": [
     "ENDWALKER_039",
-    "BTF_FFXIV_45",
     "From the Ashes",
     "灰より生まれし者"
    ],
    "target": {
     "path": "music/ffxiv/Orchestrion/BGM_ORCH_044.scd",
-    "# comment": "spectral similarity to the game's own file: 0.979"
+    "# comment": "spectral similarity to the game's own file: 0.979; also released as BTF_FFXIV_45; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "ENDWALKER_040",
-    "Before_Meteor_FFXIV_104",
     "Answers"
    ],
    "target": {
@@ -1808,7 +1801,7 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.971"
+    "# comment": "spectral similarity to the game's own file: 0.971; also released as Before_Meteor_FFXIV_104; that album's own preset carries its own entry"
    }
   },
   {
@@ -2517,7 +2510,6 @@
   {
    "source": [
     "ENDWALKER_015",
-    "GL_00012",
     "On Blade's Edge",
     "震える刃"
    ],
@@ -2543,7 +2535,7 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.970; offset corrected +126.365s -> +1.840s by re-deriving the alignment and judging it on the intro (0.9216 -> 0.9705)"
+    "# comment": "spectral similarity to the game's own file: 0.970; offset corrected +126.365s -> +1.840s by re-deriving the alignment and judging it on the intro (0.9216 -> 0.9705); also released as GL_00012; that album's own preset carries its own entry"
    }
   },
   {
@@ -2966,6 +2958,65 @@
      }
     ],
     "# comment": "spectral similarity to the game's own file: 0.989"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_040",
+    "Answers",
+    "Answers"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_14.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.5
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as ENDWALKER_040.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.926)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_039",
+    "灰より生まれし者",
+    "From the Ashes"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Con_Bahamut_Bigboss1.scd",
+     "music/ffxiv/BGM_Ride_Bennu.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.6
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as ENDWALKER_039.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.985)"
    }
   }
  ]

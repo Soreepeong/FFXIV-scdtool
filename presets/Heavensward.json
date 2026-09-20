@@ -195,7 +195,6 @@
   {
    "source": [
     "HEAVENSWARD_FFXIV_55",
-    "GL_00033",
     "Dragonsong"
    ],
    "target": {
@@ -221,7 +220,7 @@
      }
     ],
     "enable": false,
-    "# comment": "source is correct (spectral 0.997 at offset -1.7s) but covers only 95% of this target: 341s of 360s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then.; source is correct (spectral 0.997 at offset -1.7s) but covers only 95% of this target: 341s of 360s. The rest needs a multi-segment or filterComplex source"
+    "# comment": "source is correct (spectral 0.997 at offset -1.7s) but covers only 95% of this target: 341s of 360s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then.; source is correct (spectral 0.997 at offset -1.7s) but covers only 95% of this target: 341s of 360s. The rest needs a multi-segment or filterComplex source; also released as GL_00033; that album's own preset carries its own entry"
    }
   },
   {

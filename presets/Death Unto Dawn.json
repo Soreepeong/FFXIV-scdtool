@@ -2201,7 +2201,6 @@
   {
    "source": [
     "DUD_029",
-    "BTF_FFXIV_42",
     "TH_101",
     "Footsteps in the Snow",
     "雪上の足跡 ～蛮神シヴァ前哨戦～"
@@ -2225,7 +2224,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.988"
+    "# comment": "spectral similarity to the game's own file: 0.988; also released as BTF_FFXIV_42; that album's own preset carries its own entry"
    }
   },
   {
@@ -3351,6 +3350,37 @@
      }
     ],
     "# comment": "spectral similarity to the game's own file: 0.978"
+   }
+  },
+  {
+   "source": [
+    "DUD_058",
+    "The Legendary Beast ～漆黒～",
+    "The Legendary Beast (Shadowbringers)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Raid_10.scd",
+     "music/ex5/BGM_EX5_Ban_13.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.3
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as DUD_058.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.919)"
    }
   }
  ]

@@ -838,7 +838,6 @@
   {
    "source": [
     "SHADOWBRINGERS_06",
-    "GL_00049",
     "Heartless",
     "心を持たぬ者 ～次元の狭間オメガ：アルファ編～"
    ],
@@ -864,7 +863,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.875"
+    "# comment": "spectral similarity to the game's own file: 0.875; also released as GL_00049; that album's own preset carries its own entry"
    }
   },
   {
@@ -2530,7 +2529,6 @@
   {
    "source": [
     "SHADOWBRINGERS_06",
-    "GL_00049",
     "Heartless",
     "心を持たぬ者 ～次元の狭間オメガ：アルファ編～"
    ],
@@ -2556,7 +2554,7 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.875"
+    "# comment": "spectral similarity to the game's own file: 0.875; also released as GL_00049; that album's own preset carries its own entry"
    }
   },
   {
@@ -3139,6 +3137,69 @@
      }
     ],
     "# comment": "spectral similarity to the game's own file: 0.982"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_04",
+    "エスケープ ～次元の狭間オメガ：アルファ編～",
+    "eScape"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_alpha_02.scd",
+     "music/ex4/BGM_EX4_Ban_13.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_272.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.77
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as SHADOWBRINGERS_04.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.974)"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_18",
+    "Turmoil"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_EU_LB.scd",
+     "music/ex5/BGM_EX5_EoV_31.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_298.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 2.1
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as SHADOWBRINGERS_18.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.992)"
    }
   }
  ]

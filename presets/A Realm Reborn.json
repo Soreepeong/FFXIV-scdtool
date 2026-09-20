@@ -415,7 +415,6 @@
   {
    "source": [
     "ARR_FFXIV_034",
-    "Before_Meteor_FFXIV_087",
     "The Promise of Plunder",
     "隠し財宝を求めて"
    ],
@@ -438,7 +437,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
+    "# comment": "spectral similarity to the game's own file: 0.997; also released as Before_Meteor_FFXIV_087; that album's own preset carries its own entry"
    }
   },
   {
@@ -732,7 +731,6 @@
   {
    "source": [
     "ARR_FFXIV_038",
-    "Before_Meteor_FFXIV_070",
     "Nemesis",
     "ネメシス"
    ],
@@ -758,7 +756,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.991"
+    "# comment": "spectral similarity to the game's own file: 0.991; also released as Before_Meteor_FFXIV_070; that album's own preset carries its own entry"
    }
   },
   {
@@ -3237,7 +3235,6 @@
   {
    "source": [
     "ARR_FFXIV_030",
-    "Before_Meteor_FFXIV_091",
     "The Rider's Boon",
     "その背に揺られて"
    ],
@@ -3263,7 +3260,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
+    "# comment": "spectral similarity to the game's own file: 0.994; also released as Before_Meteor_FFXIV_091; that album's own preset carries its own entry"
    }
   },
   {
@@ -3999,13 +3996,12 @@
   {
    "source": [
     "ARR_FFXIV_038",
-    "Before_Meteor_FFXIV_070",
     "Nemesis",
     "ネメシス"
    ],
    "target": {
     "path": "music/ffxiv/Orchestrion/BGM_ORCH_443.scd",
-    "# comment": "spectral similarity to the game's own file: 0.970"
+    "# comment": "spectral similarity to the game's own file: 0.970; also released as Before_Meteor_FFXIV_070; that album's own preset carries its own entry"
    }
   },
   {
@@ -4331,7 +4327,6 @@
   {
    "source": [
     "ARR_FFXIV_034",
-    "Before_Meteor_FFXIV_087",
     "The Promise of Plunder",
     "隠し財宝を求めて"
    ],
@@ -4357,7 +4352,7 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.987"
+    "# comment": "spectral similarity to the game's own file: 0.987; also released as Before_Meteor_FFXIV_087; that album's own preset carries its own entry"
    }
   },
   {
@@ -4707,6 +4702,65 @@
      }
     ],
     "# comment": "spectral similarity to the game's own file: 0.985"
+   }
+  },
+  {
+   "source": [
+    "ARR_FFXIV_044",
+    "Primal Judgment",
+    "原始の審判"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Ban_Ifrit.scd",
+     "music/ffxiv/BGM_Ride_Ifrit.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.38
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as ARR_FFXIV_044.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.991)"
+   }
+  },
+  {
+   "source": [
+    "ARR_FFXIV_090",
+    "Good King Moggle Mog XII",
+    "善王モグル・モグXII世"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Ban_Moogle_Nomal.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 125.73
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as ARR_FFXIV_090.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.854)"
    }
   }
  ]

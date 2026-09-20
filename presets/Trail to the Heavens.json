@@ -307,7 +307,6 @@
   {
    "source": [
     "TH_014",
-    "ENDWALKER_030",
     "Battle 1 from FINAL FANTASY IV",
     "バトル1 from FINAL FANTASY IV"
    ],
@@ -330,7 +329,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.988; offset corrected +50.135s -> +1.370s by re-deriving the alignment and judging it on the intro (0.8197 -> 0.9915)"
+    "# comment": "spectral similarity to the game's own file: 0.988; offset corrected +50.135s -> +1.370s by re-deriving the alignment and judging it on the intro (0.8197 -> 0.9915); also released as ENDWALKER_030; that album's own preset carries its own entry"
    }
   },
   {
@@ -4441,7 +4440,6 @@
   {
    "source": [
     "TH_068",
-    "ARR_FFXIV_079",
     "Fleeting Rays",
     "儚き光彩"
    ],
@@ -4467,7 +4465,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
+    "# comment": "spectral similarity to the game's own file: 0.994; also released as ARR_FFXIV_079; that album's own preset carries its own entry"
    }
   },
   {
@@ -5101,7 +5099,6 @@
   {
    "source": [
     "TH_014",
-    "ENDWALKER_030",
     "Battle 1 from FINAL FANTASY IV",
     "バトル1 from FINAL FANTASY IV"
    ],
@@ -5127,7 +5124,7 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.961"
+    "# comment": "spectral similarity to the game's own file: 0.961; also released as ENDWALKER_030; that album's own preset carries its own entry"
    }
   },
   {

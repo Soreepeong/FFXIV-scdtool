@@ -884,7 +884,6 @@
   {
    "source": [
     "TFEOF_FFXIV_13",
-    "BTF_FFXIV_58",
     "Faith in Her Fury",
     "戦神の教義 ～皇都イシュガルド防衛戦～"
    ],
@@ -907,7 +906,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
+    "# comment": "spectral similarity to the game's own file: 0.992; also released as BTF_FFXIV_58; that album's own preset carries its own entry"
    }
   },
   {
@@ -1224,7 +1223,6 @@
   {
    "source": [
     "TFEOF_FFXIV_13",
-    "BTF_FFXIV_58",
     "Faith in Her Fury",
     "戦神の教義 ～皇都イシュガルド防衛戦～"
    ],
@@ -1247,13 +1245,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.991"
+    "# comment": "spectral similarity to the game's own file: 0.991; also released as BTF_FFXIV_58; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "TFEOF_FFXIV_24",
-    "Before_Meteor_FFXIV_011",
     "Emerald Labyrinth",
     "黒衣の迷宮"
    ],
@@ -1276,13 +1273,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.990"
+    "# comment": "spectral similarity to the game's own file: 0.990; also released as Before_Meteor_FFXIV_011; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "TFEOF_FFXIV_25",
-    "Before_Meteor_FFXIV_057",
     "Enraptured",
     "淡き光の夢に"
    ],
@@ -1305,13 +1301,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
+    "# comment": "spectral similarity to the game's own file: 0.996; also released as Before_Meteor_FFXIV_057; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "TFEOF_FFXIV_26",
-    "Before_Meteor_FFXIV_023",
     "Tears for Mor Dhona",
     "モードゥナの涙雨"
    ],
@@ -1334,7 +1329,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
+    "# comment": "spectral similarity to the game's own file: 0.997; also released as Before_Meteor_FFXIV_023; that album's own preset carries its own entry"
    }
   },
   {
@@ -1622,7 +1617,6 @@
   {
    "source": [
     "TFEOF_FFXIV_02",
-    "ENDWALKER_008",
     "Down the Up Staircase",
     "上り階段をくだれ　～星海観測 逆さの塔～"
    ],
@@ -1645,7 +1639,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.845; offset corrected +3.415s -> +1.360s by re-deriving the alignment and judging it on the intro (0.5417 -> 0.7678)"
+    "# comment": "spectral similarity to the game's own file: 0.845; offset corrected +3.415s -> +1.360s by re-deriving the alignment and judging it on the intro (0.5417 -> 0.7678); also released as ENDWALKER_008; that album's own preset carries its own entry"
    }
   },
   {
@@ -1735,7 +1729,6 @@
   {
    "source": [
     "TFEOF_FFXIV_15",
-    "GL_00029",
     "Freefall",
     "邪竜の急襲　～ニーズヘッグ征竜戦～"
    ],
@@ -1758,13 +1751,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.984"
+    "# comment": "spectral similarity to the game's own file: 0.984; also released as GL_00029; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "TFEOF_FFXIV_13",
-    "BTF_FFXIV_58",
     "Faith in Her Fury",
     "戦神の教義 ～皇都イシュガルド防衛戦～"
    ],
@@ -1787,7 +1779,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.985"
+    "# comment": "spectral similarity to the game's own file: 0.985; also released as BTF_FFXIV_58; that album's own preset carries its own entry"
    }
   },
   {
@@ -1821,7 +1813,6 @@
   {
    "source": [
     "TFEOF_FFXIV_18",
-    "Before_Meteor_FFXIV_004",
     "Freedom",
     "自由なる風に吹かれて"
    ],
@@ -1844,7 +1835,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.979"
+    "# comment": "spectral similarity to the game's own file: 0.979; also released as Before_Meteor_FFXIV_004; that album's own preset carries its own entry"
    }
   },
   {

@@ -635,7 +635,6 @@
   {
    "source": [
     "SB_FFXIV_013",
-    "GL_00071",
     "Triumph",
     "鬨の声"
    ],
@@ -661,7 +660,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
+    "# comment": "spectral similarity to the game's own file: 0.992; also released as GL_00071; that album's own preset carries its own entry"
    }
   },
   {
@@ -1301,7 +1300,6 @@
   {
    "source": [
     "SB_FFXIV_005",
-    "GL_00069",
     "Looping in the Deepest Fringes",
     "辺境の乱戦"
    ],
@@ -1331,7 +1329,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.991"
+    "# comment": "spectral similarity to the game's own file: 0.991; also released as GL_00069; that album's own preset carries its own entry"
    }
   },
   {
@@ -1762,7 +1760,6 @@
   {
    "source": [
     "SB_FFXIV_047",
-    "GL_00048",
     "Deltascape",
     "デルタスケープ ～次元の狭間オメガ：デルタ編～"
    ],
@@ -1788,7 +1785,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
+    "# comment": "spectral similarity to the game's own file: 0.995; also released as GL_00048; that album's own preset carries its own entry"
    }
   },
   {
@@ -2764,7 +2761,6 @@
   {
    "source": [
     "SB_FFXIV_047",
-    "GL_00048",
     "Deltascape",
     "デルタスケープ ～次元の狭間オメガ：デルタ編～"
    ],
@@ -2790,7 +2786,7 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
+    "# comment": "spectral similarity to the game's own file: 0.995; also released as GL_00048; that album's own preset carries its own entry"
    }
   },
   {
@@ -2892,7 +2888,6 @@
   {
    "source": [
     "SB_FFXIV_005",
-    "GL_00069",
     "Looping in the Deepest Fringes",
     "辺境の乱戦"
    ],
@@ -2918,7 +2913,7 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.991"
+    "# comment": "spectral similarity to the game's own file: 0.991; also released as GL_00069; that album's own preset carries its own entry"
    }
   },
   {
@@ -3100,7 +3095,6 @@
   {
    "source": [
     "SB_FFXIV_001",
-    "GL_00070",
     "Storm of Blood",
     "血の嵐"
    ],
@@ -3126,7 +3120,7 @@
       }
      }
     ],
-    "# comment": "offset corrected by +0.990s from the envelope match, by spectral alignment search; spectral similarity to the game's own file: 0.806"
+    "# comment": "offset corrected by +0.990s from the envelope match, by spectral alignment search; spectral similarity to the game's own file: 0.806; also released as GL_00070; that album's own preset carries its own entry"
    }
   },
   {
@@ -3651,6 +3645,38 @@
      }
     ],
     "# comment": "spectral similarity to the game's own file: 0.981"
+   }
+  },
+  {
+   "source": [
+    "SB_FFXIV_085",
+    "セイレーンの呼び声",
+    "Siren Song"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Town_Y_Bar.scd",
+     "music/ffxiv/BGM_Season_Princess.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_220.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 2.01
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as SB_FFXIV_085.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.990)"
    }
   }
  ]

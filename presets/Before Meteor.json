@@ -12,7 +12,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_018",
-    "TFEOF_FFXIV_46",
     "Quicksand",
     "砂塵"
    ],
@@ -21,13 +20,12 @@
      "music/ex1/BGM_EX1_Dungeon_DravaniaH_02.scd",
      "music/ffxiv/Orchestrion/BGM_ORCH_140.scd"
     ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
+    "# comment": "spectral similarity to the game's own file: 0.992; also released as TFEOF_FFXIV_46; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_037",
-    "TFEOF_FFXIV_11",
     "Holy Consult",
     "聖なる助言者"
    ],
@@ -50,13 +48,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
+    "# comment": "spectral similarity to the game's own file: 0.995; also released as TFEOF_FFXIV_11; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_004",
-    "TFEOF_FFXIV_18",
     "Freedom",
     "自由なる風に吹かれて"
    ],
@@ -65,13 +62,12 @@
      "music/ex1/BGM_EX1_Field_SkyPirates.scd",
      "music/ffxiv/BGM_Season_VTID.scd"
     ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
+    "# comment": "spectral similarity to the game's own file: 0.996; also released as TFEOF_FFXIV_18; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_088",
-    "BTF_FFXIV_15",
     "Meteor",
     "メテオ"
    ],
@@ -97,13 +93,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
+    "# comment": "spectral similarity to the game's own file: 0.997; also released as BTF_FFXIV_15; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_028",
-    "SB_FFXIV_084",
     "No Quarter",
     "ノー・クォーター"
    ],
@@ -129,7 +124,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
+    "# comment": "spectral similarity to the game's own file: 0.996; also released as SB_FFXIV_084; that album's own preset carries its own entry"
    }
   },
   {
@@ -218,7 +213,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_069",
-    "ARR_FFXIV_097",
     "The Dark's Kiss",
     "闇の口付"
    ],
@@ -241,13 +235,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.988; offset corrected +96.345s -> +0.350s by re-deriving the alignment and judging it on the intro (0.9139 -> 0.9872)"
+    "# comment": "spectral similarity to the game's own file: 0.988; offset corrected +96.345s -> +0.350s by re-deriving the alignment and judging it on the intro (0.9139 -> 0.9872); also released as ARR_FFXIV_097; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_008",
-    "SB_FFXIV_085",
     "Siren Song",
     "セイレーンの呼び声"
    ],
@@ -274,18 +267,17 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.947"
+    "# comment": "spectral similarity to the game's own file: 0.947; also released as SB_FFXIV_085; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_104",
-    "ENDWALKER_040",
     "Answers"
    ],
    "target": {
     "path": "music/ex4/BGM_EX4_Event_14.scd",
-    "# comment": "spectral similarity to the game's own file: 0.926"
+    "# comment": "spectral similarity to the game's own file: 0.926; also released as ENDWALKER_040; that album's own preset carries its own entry"
    }
   },
   {
@@ -381,7 +373,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_101",
-    "ARR_FFXIV_082",
     "Fallen Angel",
     "堕天せし者"
    ],
@@ -407,13 +398,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.968"
+    "# comment": "spectral similarity to the game's own file: 0.968; also released as ARR_FFXIV_082; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_066",
-    "ARR_FFXIV_044",
     "Primal Judgment",
     "原始の審判"
    ],
@@ -439,13 +429,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.990"
+    "# comment": "spectral similarity to the game's own file: 0.990; also released as ARR_FFXIV_044; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_090",
-    "ARR_FFXIV_090",
     "Good King Moggle Mog XII",
     "善王モグル・モグXII世"
    ],
@@ -472,13 +461,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.992; offset corrected +157.720s -> +0.390s by re-deriving the alignment and judging it on the intro (0.7199 -> 0.9924)"
+    "# comment": "spectral similarity to the game's own file: 0.992; offset corrected +157.720s -> +0.390s by re-deriving the alignment and judging it on the intro (0.7199 -> 0.9924); also released as ARR_FFXIV_090; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_090",
-    "ARR_FFXIV_090",
     "Good King Moggle Mog XII",
     "善王モグル・モグXII世"
    ],
@@ -501,7 +489,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.831; offset corrected -31.595s -> +125.730s by re-deriving the alignment and judging it on the intro (-1.0000 -> 0.8539)"
+    "# comment": "spectral similarity to the game's own file: 0.831; offset corrected -31.595s -> +125.730s by re-deriving the alignment and judging it on the intro (-1.0000 -> 0.8539); also released as ARR_FFXIV_090; that album's own preset carries its own entry"
    }
   },
   {
@@ -566,7 +554,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_021",
-    "BTF_FFXIV_40",
     "Pennons Aloft",
     "槍旗"
    ],
@@ -592,7 +579,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.990"
+    "# comment": "spectral similarity to the game's own file: 0.990; also released as BTF_FFXIV_40; that album's own preset carries its own entry"
    }
   },
   {
@@ -772,7 +759,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_102",
-    "BTF_FFXIV_17",
     "Tempest",
     "戦乱"
    ],
@@ -798,7 +784,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.993"
+    "# comment": "spectral similarity to the game's own file: 0.993; also released as BTF_FFXIV_17; that album's own preset carries its own entry"
    }
   },
   {
@@ -1238,7 +1224,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_095",
-    "ARR_FFXIV_050",
     "Agent of Inquiry",
     "事件屋のアレ"
    ],
@@ -1261,7 +1246,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
+    "# comment": "spectral similarity to the game's own file: 0.994; also released as ARR_FFXIV_050; that album's own preset carries its own entry"
    }
   },
   {
@@ -1295,7 +1280,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_092",
-    "ARR_FFXIV_095",
     "Breaking Boundaries",
     "極限を超えて"
    ],
@@ -1321,7 +1305,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
+    "# comment": "spectral similarity to the game's own file: 0.995; also released as ARR_FFXIV_095; that album's own preset carries its own entry"
    }
   },
   {
@@ -1467,7 +1451,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_047",
-    "TFEOF_FFXIV_40",
     "Fragments of Forever",
     "永遠の欠片"
    ],
@@ -1476,7 +1459,7 @@
      "music/ffxiv/BGM_Event_Odayaka.scd",
      "music/ffxiv/Orchestrion/BGM_ORCH_219.scd"
     ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
+    "# comment": "spectral similarity to the game's own file: 0.995; also released as TFEOF_FFXIV_40; that album's own preset carries its own entry"
    }
   },
   {
@@ -1747,7 +1730,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_086",
-    "ARR_FFXIV_042",
     "Pitfire",
     "炎獄の火種"
    ],
@@ -1770,13 +1752,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
+    "# comment": "spectral similarity to the game's own file: 0.992; also released as ARR_FFXIV_042; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_085",
-    "ARR_FFXIV_078",
     "Flightless Wings",
     "猛き嵐の剣に"
    ],
@@ -1799,13 +1780,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.989"
+    "# comment": "spectral similarity to the game's own file: 0.989; also released as ARR_FFXIV_078; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_084",
-    "ARR_FFXIV_062",
     "Quick as Silver, Hard as Stone",
     "疾きこと銀の如く、硬きこと石の如く"
    ],
@@ -1828,7 +1808,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.993"
+    "# comment": "spectral similarity to the game's own file: 0.993; also released as ARR_FFXIV_062; that album's own preset carries its own entry"
    }
   },
   {
@@ -1893,7 +1873,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_069",
-    "ARR_FFXIV_097",
     "The Dark's Kiss",
     "闇の口付"
    ],
@@ -1919,7 +1898,7 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.988; offset corrected +96.350s -> +0.350s by re-deriving the alignment and judging it on the intro (0.9326 -> 0.9942)"
+    "# comment": "spectral similarity to the game's own file: 0.988; offset corrected +96.350s -> +0.350s by re-deriving the alignment and judging it on the intro (0.9326 -> 0.9942); also released as ARR_FFXIV_097; that album's own preset carries its own entry"
    }
   },
   {
@@ -1957,7 +1936,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_076",
-    "ARR_FFXIV_022",
     "Eorzea de Chocobo",
     "エオルゼア de チョコボ"
    ],
@@ -1980,7 +1958,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.993"
+    "# comment": "spectral similarity to the game's own file: 0.993; also released as ARR_FFXIV_022; that album's own preset carries its own entry"
    }
   },
   {
@@ -2051,7 +2029,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_059",
-    "ARR_FFXIV_010",
     "Bo-down",
     "レンタル de チョコボ"
    ],
@@ -2074,7 +2051,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
+    "# comment": "spectral similarity to the game's own file: 0.992; also released as ARR_FFXIV_010; that album's own preset carries its own entry"
    }
   },
   {
@@ -2142,7 +2119,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_052",
-    "BTF_FFXIV_24",
     "Moonfire Faire",
     "紅蓮祭"
    ],
@@ -2165,7 +2141,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
+    "# comment": "spectral similarity to the game's own file: 0.995; also released as BTF_FFXIV_24; that album's own preset carries its own entry"
    }
   },
   {
@@ -2258,7 +2234,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_095",
-    "ARR_FFXIV_050",
     "Agent of Inquiry",
     "事件屋のアレ"
    ],
@@ -2281,13 +2256,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.970"
+    "# comment": "spectral similarity to the game's own file: 0.970; also released as ARR_FFXIV_050; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_068",
-    "ARR_FFXIV_096",
     "The Dark's Embrace",
     "闇の抱擁"
    ],
@@ -2310,13 +2284,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
+    "# comment": "spectral similarity to the game's own file: 0.992; also released as ARR_FFXIV_096; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_066",
-    "ARR_FFXIV_044",
     "Primal Judgment",
     "原始の審判"
    ],
@@ -2339,19 +2312,18 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.974"
+    "# comment": "spectral similarity to the game's own file: 0.974; also released as ARR_FFXIV_044; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_101",
-    "ARR_FFXIV_082",
     "Fallen Angel",
     "堕天せし者"
    ],
    "target": {
     "path": "music/ffxiv/Orchestrion/BGM_ORCH_031.scd",
-    "# comment": "spectral similarity to the game's own file: 0.974"
+    "# comment": "spectral similarity to the game's own file: 0.974; also released as ARR_FFXIV_082; that album's own preset carries its own entry"
    }
   },
   {
@@ -2443,13 +2415,12 @@
   {
    "source": [
     "Before_Meteor_FFXIV_090",
-    "ARR_FFXIV_090",
     "Good King Moggle Mog XII",
     "善王モグル・モグXII世"
    ],
    "target": {
     "path": "music/ffxiv/Orchestrion/BGM_ORCH_070.scd",
-    "# comment": "spectral similarity to the game's own file: 0.983"
+    "# comment": "spectral similarity to the game's own file: 0.983; also released as ARR_FFXIV_090; that album's own preset carries its own entry"
    }
   },
   {
@@ -2624,7 +2595,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_076",
-    "ARR_FFXIV_022",
     "Eorzea de Chocobo",
     "エオルゼア de チョコボ"
    ],
@@ -2650,7 +2620,7 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.969; offset corrected +122.225s -> +0.380s by re-deriving the alignment and judging it on the intro (0.8435 -> 0.9674)"
+    "# comment": "spectral similarity to the game's own file: 0.969; offset corrected +122.225s -> +0.380s by re-deriving the alignment and judging it on the intro (0.8435 -> 0.9674); also released as ARR_FFXIV_022; that album's own preset carries its own entry"
    }
   },
   {
@@ -2842,7 +2812,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_037",
-    "TFEOF_FFXIV_11",
     "Holy Consult",
     "聖なる助言者"
    ],
@@ -2868,7 +2837,7 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.972"
+    "# comment": "spectral similarity to the game's own file: 0.972; also released as TFEOF_FFXIV_11; that album's own preset carries its own entry"
    }
   },
   {
@@ -3023,7 +2992,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_088",
-    "BTF_FFXIV_15",
     "Meteor",
     "メテオ"
    ],
@@ -3049,13 +3017,12 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.988"
+    "# comment": "spectral similarity to the game's own file: 0.988; also released as BTF_FFXIV_15; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "Before_Meteor_FFXIV_021",
-    "BTF_FFXIV_40",
     "Pennons Aloft",
     "槍旗"
    ],
@@ -3081,7 +3048,7 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.967"
+    "# comment": "spectral similarity to the game's own file: 0.967; also released as BTF_FFXIV_40; that album's own preset carries its own entry"
    }
   },
   {
@@ -3118,7 +3085,6 @@
   {
    "source": [
     "Before_Meteor_FFXIV_065",
-    "BTF_FFXIV_05",
     "Wrath of the Eikons",
     "怒れる神々"
    ],
@@ -3144,7 +3110,90 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.981"
+    "# comment": "spectral similarity to the game's own file: 0.981; also released as BTF_FFXIV_05; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_103",
+    "Rise of the White Raven",
+    "白銀の凶鳥、飛翔せり"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Con_CarteneauBattle.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.41
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as Before_Meteor_FFXIV_103.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.977)"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_103",
+    "Rise of the White Raven",
+    "白銀の凶鳥、飛翔せり"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_043.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.16
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as Before_Meteor_FFXIV_103.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.858)"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_104",
+    "Answers"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Con_Bahamut_Bigboss3.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 155.64
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as Before_Meteor_FFXIV_104.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.989)"
    }
   }
  ]

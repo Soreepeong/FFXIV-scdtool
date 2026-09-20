@@ -162,8 +162,6 @@
   {
    "source": [
     "BTF_FFXIV_61",
-    "TFEOF_FFXIV_14",
-    "GL_00034",
     "Primogenitor",
     "始祖たる幻龍"
    ],
@@ -189,7 +187,7 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
+    "# comment": "spectral similarity to the game's own file: 0.997; also released as TFEOF_FFXIV_14, GL_00034; that album's own preset carries its own entry"
    }
   },
   {
@@ -381,7 +379,6 @@
   {
    "source": [
     "BTF_FFXIV_45",
-    "ENDWALKER_039",
     "From the Ashes",
     "灰より生まれし者"
    ],
@@ -407,13 +404,12 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.983"
+    "# comment": "spectral similarity to the game's own file: 0.983; also released as ENDWALKER_039; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
     "BTF_FFXIV_18",
-    "Before_Meteor_FFXIV_103",
     "Rise of the White Raven",
     "白銀の凶鳥、飛翔せり"
    ],
@@ -436,7 +432,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
+    "# comment": "spectral similarity to the game's own file: 0.996; also released as Before_Meteor_FFXIV_103; that album's own preset carries its own entry"
    }
   },
   {
@@ -557,7 +553,6 @@
   {
    "source": [
     "BTF_FFXIV_05",
-    "Before_Meteor_FFXIV_065",
     "Wrath of the Eikons",
     "怒れる神々"
    ],
@@ -580,7 +575,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
+    "# comment": "spectral similarity to the game's own file: 0.996; also released as Before_Meteor_FFXIV_065; that album's own preset carries its own entry"
    }
   },
   {
@@ -788,8 +783,6 @@
   {
    "source": [
     "BTF_FFXIV_61",
-    "TFEOF_FFXIV_14",
-    "GL_00034",
     "Primogenitor",
     "始祖たる幻龍"
    ],
@@ -815,7 +808,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
+    "# comment": "spectral similarity to the game's own file: 0.997; also released as TFEOF_FFXIV_14, GL_00034; that album's own preset carries its own entry"
    }
   },
   {
@@ -1512,7 +1505,6 @@
   {
    "source": [
     "BTF_FFXIV_44",
-    "Before_Meteor_FFXIV_050",
     "Everbinding Oath",
     "永遠の誓い"
    ],
@@ -1535,7 +1527,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
+    "# comment": "spectral similarity to the game's own file: 0.992; also released as Before_Meteor_FFXIV_050; that album's own preset carries its own entry"
    }
   },
   {
@@ -1887,7 +1879,6 @@
   {
    "source": [
     "BTF_FFXIV_18",
-    "Before_Meteor_FFXIV_103",
     "Rise of the White Raven",
     "白銀の凶鳥、飛翔せり"
    ],
@@ -1910,7 +1901,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.984"
+    "# comment": "spectral similarity to the game's own file: 0.984; also released as Before_Meteor_FFXIV_103; that album's own preset carries its own entry"
    }
   },
   {
@@ -1927,13 +1918,12 @@
   {
    "source": [
     "BTF_FFXIV_24",
-    "Before_Meteor_FFXIV_052",
     "Moonfire Faire",
     "紅蓮祭"
    ],
    "target": {
     "path": "music/ffxiv/Orchestrion/BGM_ORCH_060.scd",
-    "# comment": "spectral similarity to the game's own file: 0.962"
+    "# comment": "spectral similarity to the game's own file: 0.962; also released as Before_Meteor_FFXIV_052; that album's own preset carries its own entry"
    }
   },
   {
@@ -2079,7 +2069,6 @@
   {
    "source": [
     "BTF_FFXIV_42",
-    "DUD_029",
     "TH_101",
     "Footsteps in the Snow",
     "雪上の足跡 ～蛮神シヴァ前哨戦～"
@@ -2103,7 +2092,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.983"
+    "# comment": "spectral similarity to the game's own file: 0.983; also released as DUD_029; that album's own preset carries its own entry"
    }
   },
   {
@@ -2371,6 +2360,34 @@
      }
     ],
     "# comment": "same recording as Before_Meteor_FFXIV_065.flac, which the matcher picked for this target (0.923 vs 0.971); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "BTF_FFXIV_40",
+    "槍旗",
+    "Pennons Aloft"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_654.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.51
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as BTF_FFXIV_40.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.961)"
    }
   }
  ]
