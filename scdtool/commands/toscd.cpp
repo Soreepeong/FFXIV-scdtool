@@ -224,7 +224,7 @@ int cmd_toscd(const std::vector<std::string>& args) {
 				newEntry.Header.StreamSize = static_cast<uint32_t>(newEntry.Data.size());
 				newEntry.Header.ChannelCount = static_cast<uint32_t>(sourceInfo.Channels);
 				newEntry.Header.SamplingRate = static_cast<uint32_t>(sourceInfo.SamplingRate);
-				newEntry.Header.Unknown_0x02E = templateScd.read_sound_item(entryIndex).Header->Unknown_0x02E;
+				newEntry.Header.Flags = templateScd.read_sound_item(entryIndex).Header->Flags;
 			}
 		}
 
