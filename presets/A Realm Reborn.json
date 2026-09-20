@@ -415,8 +415,45 @@
    ],
    "target": {
     "path": "music/ffxiv/Orchestrion/BGM_ORCH_057.scd",
-    "enable": false,
-    "# comment": "source is correct (spectral 0.983 at offset +0.0s) but covers only 93% of this target: 394s of 422s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than predicted: it comes out 394.5s against the target's 422.2s and loops 27.8s early, scoring 0.985 against the game's own file over the part it does cover. Not silence -- the audio is there, the loop is short. Still off because a loop that ends 93% of the way through the target is worse than the game's own file."
+    "# comment": "the recording covers 394.5s of this target and the uncovered tail repeats material from earlier in it (matching at 0.989), so a second segment re-enters there, with the seam pulled 2s back so the first segment plays its ending under the second. Full length with the loop intact: 0.9846 against the game's own file, where the short build this replaces scored 0.9845 while losing the rest of the loop.",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.0
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "length": 392.01
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.5
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 2.49
+     }
+    ]
    }
   },
   {
@@ -4476,11 +4513,29 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 64.1
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 32.46
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 4.0
      }
     ],
-    "# comment": "same recording as ARR_FFXIV_090.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.854). Disabled: this recording reaches 68.1s of the 168.0s this target actually carries (41%), so the replacement would cut to silence.",
-    "enable": false
+    "# comment": "the recording covers 68.1s of this target and the uncovered tail repeats material from earlier in it (matching at 0.842), so a second segment re-enters there, with the seam pulled 4s back so the first segment plays its ending under the second. Full length with the loop intact: 0.8386 against the game's own file (a second listing; the album that serves this target today is earlier in release order and still wins)."
    }
   },
   {

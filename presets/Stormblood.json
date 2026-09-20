@@ -75,11 +75,29 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 12.8
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 33.48
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 4.0
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.954; offset corrected +20.715s -> +58.740s by re-deriving the alignment and judging it on the intro (0.6246 -> 0.9421). Disabled: this recording reaches 16.8s of the 41.0s this target actually carries (41%), so the replacement would cut to silence. Built and measured 2026-09-21 rather than predicted: it comes out 16.8s against the target's 41.3s and loops 24.5s early, scoring 0.880 against the game's own file over the part it does cover. Not silence -- the audio is there, the loop is short. Still off because a loop that ends 41% of the way through the target is worse than the game's own file.",
-    "enable": false
+    "# comment": "the recording covers 16.8s of this target and the uncovered tail repeats material from earlier in it (matching at 0.983), so a second segment re-enters there, with the seam pulled 4s back so the first segment plays its ending under the second. Full length with the loop intact: 0.9283 against the game's own file, where the short build this replaces scored 0.8797 while losing the rest of the loop."
    }
   },
   {
@@ -1927,35 +1945,104 @@
    }
   },
   {
-   "source": [
-    "^00045\\.",
-    "SB_FFXIV_046",
-    "Revolutions"
-   ],
+   "source": {
+    "SB_FFXIV_046": [
+     "^00045\\.",
+     "SB_FFXIV_046",
+     "Revolutions"
+    ],
+    "SB_FFXIV_010": [
+     "^00009\\.",
+     "SB_FFXIV_010",
+     "The Garlean Territorial Anthem for Gyr Abania and Surrounding States - The Measure of Our Reach",
+     "我らが支配圏"
+    ],
+    "SB_FFXIV_031": [
+     "^00030\\.",
+     "SB_FFXIV_031",
+     "Heroes of Stormblood",
+     "血嵐の勇士"
+    ]
+   },
    "target": {
     "path": "music/ex2/BGM_EX2_EndCredit02.scd",
     "segments": [
      {
       "sourceOffsets": {
-       "source": {
-        "offset": 2.375,
-        "pcmHash": "72bf459d"
+       "SB_FFXIV_046": {
+        "offset": 2.375
        }
       },
       "channels": [
        {
-        "source": "source",
+        "source": "SB_FFXIV_046",
         "channel": 0
        },
        {
-        "source": "source",
+        "source": "SB_FFXIV_046",
         "channel": 1
        }
-      ]
+      ],
+      "length": 422.0
+     },
+     {
+      "sourceOffsets": {
+       "SB_FFXIV_010": {
+        "offset": 2.32
+       }
+      },
+      "channels": [
+       {
+        "source": "SB_FFXIV_010",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_010",
+        "channel": 1
+       }
+      ],
+      "length": 127.1,
+      "crossfadeSeconds": 2.0
+     },
+     {
+      "sourceOffsets": {
+       "SB_FFXIV_031": {
+        "offset": 153.5
+       }
+      },
+      "channels": [
+       {
+        "source": "SB_FFXIV_031",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_031",
+        "channel": 1
+       }
+      ],
+      "length": 120.2,
+      "crossfadeSeconds": 2.0
+     },
+     {
+      "sourceOffsets": {
+       "SB_FFXIV_031": {
+        "offset": 122.12
+       }
+      },
+      "channels": [
+       {
+        "source": "SB_FFXIV_031",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_031",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 2.0
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.994 at offset -2.4s) but covers only 50% of this target: 426s of 859s. The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than predicted: it comes out 425.7s against the target's 703.4s and loses its loop entirely, scoring 0.984 against the game's own file over the part it does cover. Not silence -- the audio is there, the loop is short. Still off because a looping track that plays once and stops is worse than the game's own file."
+    "# comment": "a medley of three pieces, not a short track: SB_FFXIV_046 to 422s, SB_FFXIV_010 to 552s, SB_FFXIV_031 to 669s, then SB_FFXIV_031 re-entered at 122.120s for the last 34s, which the recording does not reach the first time. Spans located by scan_credits_medley.py over the whole pool (0.982, 0.986, 0.996) and the re-entry by the same tail check the loop-out entries use (0.993). Full length with the loop intact: 0.9877 against the game's own file, from 0.9841 for a build that stopped 278s short."
    }
   },
   {

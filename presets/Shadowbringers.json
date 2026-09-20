@@ -3307,35 +3307,79 @@
    }
   },
   {
-   "source": [
-    "^00076\\.",
-    "SHADOWBRINGERS_76",
-    "Tomorrow and Tomorrow"
-   ],
+   "source": {
+    "SHADOWBRINGERS_76": [
+     "^00076\\.",
+     "SHADOWBRINGERS_76",
+     "Tomorrow and Tomorrow"
+    ],
+    "SHADOWBRINGERS_62": [
+     "^00062\\.",
+     "SHADOWBRINGERS_62",
+     "Tomorrow and Tomorrow - Reprise",
+     "反復する明日"
+    ]
+   },
    "target": {
     "path": "music/ex3/BGM_EX3_Event_24.scd",
     "segments": [
      {
       "sourceOffsets": {
-       "source": {
-        "offset": 2.82,
-        "pcmHash": "92270fe3"
+       "SHADOWBRINGERS_76": {
+        "offset": 2.82
        }
       },
       "channels": [
        {
-        "source": "source",
+        "source": "SHADOWBRINGERS_76",
         "channel": 0
        },
        {
-        "source": "source",
+        "source": "SHADOWBRINGERS_76",
         "channel": 1
        }
-      ]
+      ],
+      "length": 258.8
+     },
+     {
+      "sourceOffsets": {
+       "SHADOWBRINGERS_62": {
+        "offset": 93.16
+       }
+      },
+      "channels": [
+       {
+        "source": "SHADOWBRINGERS_62",
+        "channel": 0
+       },
+       {
+        "source": "SHADOWBRINGERS_62",
+        "channel": 1
+       }
+      ],
+      "length": 113.7,
+      "crossfadeSeconds": 2.0
+     },
+     {
+      "sourceOffsets": {
+       "SHADOWBRINGERS_62": {
+        "offset": 24.09
+       }
+      },
+      "channels": [
+       {
+        "source": "SHADOWBRINGERS_62",
+        "channel": 0
+       },
+       {
+        "source": "SHADOWBRINGERS_62",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 2.0
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.992 at offset -2.8s) but covers only 69% of this target: 269s of 387s. The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than predicted: it comes out 268.6s against the target's 387.6s and loses its loop entirely, scoring 0.981 against the game's own file over the part it does cover. Not silence -- the audio is there, the loop is short. Still off because a looping track that plays once and stops is worse than the game's own file."
+    "# comment": "two pieces, not a short track: SHADOWBRINGERS_76 to 259s then SHADOWBRINGERS_62, which itself runs out 15s before the target and is re-entered at 24.090s. Spans located by scan_credits_medley.py over the whole pool (0.976, 0.995) and the re-entry by the tail check (0.998). Full length with the loop intact: 0.9914 against the game's own file, from 0.9805 for a build that stopped 119s short."
    }
   },
   {

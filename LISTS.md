@@ -9,16 +9,16 @@ Weighted, because a cosine between two digital silences is noise and many of the
 | | count |
 |---|---:|
 | targets in the game's bgm sheet | 2175 |
-| enabled | 1830 |
-| disabled entries | 13 |
-| targets with no enabled entry at all | 10 |
+| enabled | 1839 |
+| disabled entries | 1 |
+| targets with no enabled entry at all | 1 |
 | never referenced by any preset | 267 |
 
 - confidence below 0.80: **2**
-- confidence 0.80-0.90: **83**
-- confidence 0.90-0.95: **153**
-- confidence 0.95-0.98: **437**
-- confidence 0.98 and up: **1155**
+- confidence 0.80-0.90: **84**
+- confidence 0.90-0.95: **155**
+- confidence 0.95-0.98: **439**
+- confidence 0.98 and up: **1159**
 
 Anything under about 0.90 is worth listening to before trusting it; the band from 0.95 up is where a correct match normally sits. A low score with the target's full length reproduced usually means the album's master genuinely differs from the game's, not that the wrong recording was picked.
 
@@ -43,7 +43,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.8616 | `music/ffxiv/Orchestrion/BGM_ORCH_642.scd` | GL_00087.flac | Growing Light.json |
 | 0.8632 | `music/ex4/BGM_EX4_Ban_14.scd` | GL_00075.flac | Growing Light.json |
 | 0.8645 | `music/ex4/BGM_EX4_Dan_D10.scd` | GL_00007.flac | Growing Light.json |
-| 0.8665 | `music/ffxiv/BGM_Ban_Moogle_Nomal.scd` | Before_Meteor_FFXIV_090.flac | Before Meteor.json |
+| 0.8665 | `music/ffxiv/BGM_Ban_Moogle_Nomal.scd` | Before_Meteor_FFXIV_090.flac | A Realm Reborn.json |
 | 0.8671 | `music/ffxiv/Orchestrion/BGM_ORCH_609.scd` | GL_00061.flac | Growing Light.json |
 | 0.8682 | `music/ffxiv/BGM_MKS01.scd` | GL_00024.flac | Growing Light.json |
 | 0.8694 | `music/ffxiv/Orchestrion/BGM_ORCH_814.scd` | DT_022.flac | Dawntrail.json |
@@ -57,6 +57,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.8738 | `music/ffxiv/Orchestrion/BGM_ORCH_525.scd` | GL_00002.flac | Growing Light.json |
 | 0.8743 | `music/ffxiv/Orchestrion/BGM_ORCH_374.scd` | DUD_031.flac | Death Unto Dawn.json |
 | 0.8752 | `music/ffxiv/Orchestrion/BGM_ORCH_524.scd` | GL_00001.flac | Growing Light.json |
+| 0.8761 | `music/ex3/BGM_EX3_Ban_14.scd` | source | Death Unto Dawn.json |
 | 0.8779 | `music/ffxiv/Orchestrion/BGM_ORCH_834.scd` | TH_046.flac | Trail to the Heavens.json |
 | 0.8795 | `music/ffxiv/Orchestrion/BGM_ORCH_548.scd` | GL_00010.flac | Growing Light.json |
 | 0.8802 | `music/ex1/BGM_EX1_Dungeon_Xelphatol.scd` | TFEOF_FFXIV_33.flac | The Far Edge Of Fate.json |
@@ -185,6 +186,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9269 | `music/ex5/BGM_EX5_Ban_21.scd` | TH_064.flac | Trail to the Heavens.json |
 | 0.9269 | `music/ffxiv/BGM_Ride_NO.scd` | TH_064.flac | Trail to the Heavens.json |
 | 0.9280 | `music/ffxiv/Orchestrion/BGM_ORCH_408.scd` | DUD_040.flac | Death Unto Dawn.json |
+| 0.9283 | `music/ex2/BGM_EX2_Event_PRELUDE.scd` | source | Stormblood.json |
 | 0.9286 | `music/ex5/BGM_EX5_Raid_28.scd` | TH_057.flac | Trail to the Heavens.json |
 | 0.9290 | `music/ffxiv/Orchestrion/BGM_ORCH_090.scd` | TFEOF_FFXIV_32.flac | The Far Edge Of Fate.json |
 | 0.9295 | `music/ex1/BGM_EX1_Hukko_concert.scd` | DUD_052, DUD_053 | Death Unto Dawn.json |
@@ -251,6 +253,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9462 | `music/ex5/BGM_EX5_Field_Koz_Day.scd` | DT_011.flac | Dawntrail.json |
 | 0.9463 | `music/ex4/BGM_EX4_Raid_11.scd` | GL_00067.flac | Growing Light.json |
 | 0.9465 | `music/ex5/BGM_EX5_MKD_01.scd` | TH_020, TH_022 | Trail to the Heavens.json |
+| 0.9472 | `music/ex3/BGM_EX3_Ban_06.scd` | source | The Far Edge Of Fate.json |
 | 0.9472 | `music/ffxiv/Orchestrion/BGM_ORCH_210.scd` | SB_FFXIV_029.flac | Stormblood.json |
 | 0.9478 | `music/ex3/BGM_EX3_Town_Y_Bar.scd` | Before_Meteor_FFXIV_008.flac | Before Meteor.json |
 | 0.9478 | `music/ffxiv/BGM_Con_Bahamut_Bigboss3.scd` | Before_Meteor_FFXIV_104.flac | Before Meteor.json |
@@ -461,6 +464,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9708 | `music/ffxiv/Orchestrion/BGM_ORCH_314.scd` | DUD_004.flac | Death Unto Dawn.json |
 | 0.9708 | `music/ffxiv/Orchestrion/BGM_ORCH_594.scd` | SB_FFXIV_086.flac | Stormblood.json |
 | 0.9709 | `music/ex4/BGM_EX4_WKS_04.scd` | ENDWALKER_030.flac | Endwalker.json |
+| 0.9709 | `music/ffxiv/BGM_KTG_04.scd` | source | Trail to the Heavens.json |
 | 0.9709 | `music/ffxiv/Orchestrion/BGM_ORCH_443.scd` | Before_Meteor_FFXIV_070.flac | A Realm Reborn.json |
 | 0.9709 | `music/ffxiv/Orchestrion/BGM_ORCH_556.scd` | GL_00016.flac | Growing Light.json |
 | 0.9709 | `music/ffxiv/Orchestrion/BGM_ORCH_580.scd` | GL_00043.flac | Growing Light.json |
@@ -523,6 +527,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9740 | `music/ffxiv/Orchestrion/BGM_ORCH_721.scd` | DT_028.flac | Dawntrail.json |
 | 0.9740 | `music/ffxiv/Orchestrion/BGM_ORCH_746.scd` | TH_105.mp3 | Trail to the Heavens.json |
 | 0.9741 | `music/ffxiv/Orchestrion/BGM_ORCH_316.scd` | ENDWALKER_058.flac | Endwalker.json |
+| 0.9741 | `music/ffxiv/Orchestrion/BGM_ORCH_489.scd` | source | Death Unto Dawn.json |
 | 0.9741 | `music/ffxiv/Orchestrion/BGM_ORCH_753.scd` | TH_083.mp3 | Trail to the Heavens.json |
 | 0.9741 | `music/ffxiv/Orchestrion/BGM_ORCH_789.scd` | DT_044.flac | Dawntrail.json |
 | 0.9742 | `music/ffxiv/Orchestrion/BGM_ORCH_076.scd` | Before_Meteor_FFXIV_005.flac | Before Meteor.json |
@@ -884,6 +889,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9844 | `music/ffxiv/Orchestrion/BGM_ORCH_748.scd` | ENDWALKER_060.flac | Endwalker.json |
 | 0.9845 | `music/ffxiv/Orchestrion/BGM_ORCH_110.scd` | HEAVENSWARD_FFXIV_23.flac | Heavensward.json |
 | 0.9845 | `music/ffxiv/Orchestrion/BGM_ORCH_415.scd` | DUD_037.flac | Death Unto Dawn.json |
+| 0.9846 | `music/ffxiv/Orchestrion/BGM_ORCH_057.scd` | source | A Realm Reborn.json |
 | 0.9846 | `music/ffxiv/Orchestrion/BGM_ORCH_103.scd` | HEAVENSWARD_FFXIV_41.flac | Heavensward.json |
 | 0.9846 | `music/ffxiv/Orchestrion/BGM_ORCH_190.scd` | SB_FFXIV_030.flac | Stormblood.json |
 | 0.9847 | `music/ffxiv/Orchestrion/BGM_ORCH_012.scd` | ARR_FFXIV_003.flac | A Realm Reborn.json |
@@ -993,10 +999,12 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9876 | `music/ffxiv/BGM_Ride_Glasya.scd` | TH_051.flac | Trail to the Heavens.json |
 | 0.9876 | `music/ffxiv/Orchestrion/BGM_ORCH_416.scd` | DUD_038.flac | Death Unto Dawn.json |
 | 0.9876 | `music/ffxiv/Orchestrion/BGM_ORCH_844.scd` | DT_061.flac | Dawntrail.json |
+| 0.9877 | `music/ex2/BGM_EX2_EndCredit02.scd` | SB_FFXIV_046, SB_FFXIV_010, SB_FFXIV_031 | Stormblood.json |
 | 0.9877 | `music/ex5/BGM_EX5_Ban_20.scd` | TH_051.flac | Trail to the Heavens.json |
 | 0.9877 | `music/ex5/BGM_EX5_Raid_06.scd` | source | Dawntrail.json |
 | 0.9877 | `music/ffxiv/BGM_Ride_Arcadia.scd` | source | Dawntrail.json |
 | 0.9878 | `music/ffxiv/Orchestrion/BGM_ORCH_747.scd` | DUD_030.flac | Death Unto Dawn.json |
+| 0.9879 | `music/ex3/BGM_EX3_Ytc_27.scd` | source | Death Unto Dawn.json |
 | 0.9880 | `music/ffxiv/BGM_Field_Ish_01.scd` | ARR_FFXIV_069.flac | A Realm Reborn.json |
 | 0.9880 | `music/ffxiv/BGM_Season_Wedding.scd` | Before_Meteor_FFXIV_050.flac | Before Meteor.json |
 | 0.9880 | `music/ffxiv/Orchestrion/BGM_ORCH_456.scd` | TH_110.mp3 | Trail to the Heavens.json |
@@ -1115,6 +1123,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9913 | `music/ex3/BGM_EX3_Ytc_22.scd` | DUD_075.flac | Death Unto Dawn.json |
 | 0.9913 | `music/ex5/BGM_EX5_EoV_04.scd` | TH_085.mp3 | Trail to the Heavens.json |
 | 0.9913 | `music/ffxiv/Orchestrion/BGM_ORCH_811.scd` | TH_095.mp3 | Trail to the Heavens.json |
+| 0.9914 | `music/ex3/BGM_EX3_Event_24.scd` | SHADOWBRINGERS_76, SHADOWBRINGERS_62 | Shadowbringers.json |
 | 0.9914 | `music/ffxiv/Orchestrion/BGM_ORCH_022.scd` | Before_Meteor_FFXIV_068.flac | A Realm Reborn.json |
 | 0.9915 | `music/ex3/BGM_EX3_Field_Welrit.scd` | DUD_081.flac | Death Unto Dawn.json |
 | 0.9915 | `music/ffxiv/BGM_Boss_03.scd` | Before_Meteor_FFXIV_070.flac | A Realm Reborn.json |
@@ -1865,19 +1874,7 @@ These reasons are now measured rather than predicted. Six entries that carried t
 
 | target | recording | preset | also enabled elsewhere | why |
 |---|---|---|:-:|---|
-| `music/ex2/BGM_EX2_EndCredit02.scd` | source | Stormblood.json | **no** | source is correct (spectral 0.994 at offset -2.4s) but covers only 50% of this target: 426s of 859s. The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than predicted: it comes out 425.7s against the target's 703.4s and loses its lo |
-| `music/ex2/BGM_EX2_Event_PRELUDE.scd` | source | Stormblood.json | **no** | this recording reaches 16.8s of the 41.0s this target actually carries (41%), so the replacement would cut to silence. Built and measured 2026-09-21 rather than predicted: it comes out 16.8s against the target's 41.3s and loops 24.5s early, scoring 0.880 against the game's own file over the part it  |
-| `music/ex3/BGM_EX3_Ban_06.scd` | source | The Far Edge Of Fate.json | **no** | this recording reaches 87.0s of the 122.0s this target actually carries (71%), so the replacement would cut to silence. Built and measured 2026-09-21 rather than predicted: it comes out 87.0s against the target's 122.1s and loops 35.1s early, scoring 0.946 against the game's own file over the part i |
-| `music/ex3/BGM_EX3_Ban_14.scd` | source | Death Unto Dawn.json | **no** | offset corrected +2.960s -> +31.760s: the previous value scored better on the intro (0.670 vs 0.581) but far worse over the whole file (built and measured at 0.414 against 0.842), so judging on the intro alone had locked onto the wrong pass. The recording still covers only 427.6s of this 467.5s targ |
-| `music/ex3/BGM_EX3_Event_24.scd` | source | Shadowbringers.json | **no** | source is correct (spectral 0.992 at offset -2.8s) but covers only 69% of this target: 269s of 387s. The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than predicted: it comes out 268.6s against the target's 387.6s and loses its lo |
-| `music/ex3/BGM_EX3_Ytc_27.scd` | source | Death Unto Dawn.json | **no** | source is correct (spectral 0.972 at offset -1.4s) but covers only 94% of this target: 109s of 116s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than pr |
 | `music/ex4/BGM_EX4_Event_15.scd` | source | Endwalker.json | **no** | source "source" is built by a filterComplex, which segments cannot express |
-| `music/ffxiv/BGM_Ban_Moogle_Nomal.scd` | source | A Realm Reborn.json | yes | this recording reaches 68.1s of the 168.0s this target actually carries (41%), so the replacement would cut to silence. |
-| `music/ffxiv/BGM_KTG_04.scd` | source | Trail to the Heavens.json | **no** | source is correct (spectral 0.915 at offset -0.4s) but covers only 89% of this target: 38s of 43s. The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than predicted: it comes out 38.1s against the target's 43.5s and loops 5.3s early |
-| `music/ffxiv/Orchestrion/BGM_ORCH_057.scd` | source | A Realm Reborn.json | **no** | source is correct (spectral 0.983 at offset +0.0s) but covers only 93% of this target: 394s of 422s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than pr |
-| `music/ffxiv/Orchestrion/BGM_ORCH_148.scd` | source | Before The Fall.json | yes | this recording reaches 374.7s of the 451.0s this target actually carries (83%), so the replacement would cut to silence. |
-| `music/ffxiv/Orchestrion/BGM_ORCH_258.scd` | source | Before The Fall.json | yes | this recording reaches 170.3s of the 265.0s this target actually carries (64%), so the replacement would cut to silence. |
-| `music/ffxiv/Orchestrion/BGM_ORCH_489.scd` | source | Death Unto Dawn.json | **no** | source is correct (spectral 0.972 at offset -1.4s) but covers only 94% of this target: 109s of 116s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than pr |
 
 ## 3. Never referenced
 

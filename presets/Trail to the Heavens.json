@@ -9553,11 +9553,29 @@
       ],
       "sourceFilters": {
        "source": "volume=+2.9dB"
-      }
+      },
+      "length": 34.1
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 22.13
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 4.0
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.915 at offset -0.4s) but covers only 89% of this target: 38s of 43s. The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than predicted: it comes out 38.1s against the target's 43.5s and loops 5.3s early, scoring 0.920 against the game's own file over the part it does cover. Not silence -- the audio is there, the loop is short. Still off because a loop that ends 88% of the way through the target is worse than the game's own file."
+    "# comment": "the recording covers 38.1s of this target and the uncovered tail repeats material from earlier in it (matching at 0.966), so a second segment re-enters there, with the seam pulled 4s back so the first segment plays its ending under the second. Full length with the loop intact: 0.9709 against the game's own file, where the short build this replaces scored 0.9202 while losing the rest of the loop."
    }
   },
   {

@@ -556,11 +556,29 @@
          "source": "source",
          "channel": 1
         }
-       ]
+       ],
+       "length": 166.3
+      },
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 8.71
+        }
+       },
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ],
+       "crossfadeSeconds": 4.0
       }
      ],
-     "# comment": "same recording as Before_Meteor_FFXIV_029.flac, which the matcher picked for this target (0.802 vs 0.968); listed here too so owning this album is enough to replace it. Disabled: this recording reaches 170.3s of the 265.0s this target actually carries (64%), so the replacement would cut to silence.",
-     "enable": false
+     "# comment": "the recording covers 170.3s of this target and the uncovered tail repeats material from earlier in it (matching at 0.966), so a second segment re-enters there, with the seam pulled 4s back so the first segment plays its ending under the second. Full length with the loop intact: 0.9431 against the game's own file (a second listing; the album that serves this target today is earlier in release order and still wins)."
     }
    ]
   },
@@ -800,11 +818,29 @@
          "source": "source",
          "channel": 1
         }
-       ]
+       ],
+       "length": 370.7
+      },
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 18.87
+        }
+       },
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ],
+       "crossfadeSeconds": 4.0
       }
      ],
-     "# comment": "same recording as Before_Meteor_FFXIV_102.flac, which the matcher picked for this target (0.848 vs 0.980); listed here too so owning this album is enough to replace it. Disabled: this recording reaches 374.7s of the 451.0s this target actually carries (83%), so the replacement would cut to silence.",
-     "enable": false
+     "# comment": "the recording covers 374.7s of this target and the uncovered tail repeats material from earlier in it (matching at 0.780), so a second segment re-enters there, with the seam pulled 4s back so the first segment plays its ending under the second. Full length with the loop intact: 0.9308 against the game's own file (a second listing; the album that serves this target today is earlier in release order and still wins)."
     }
    ]
   },
