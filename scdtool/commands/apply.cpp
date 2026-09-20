@@ -1265,6 +1265,113 @@ namespace {
 		}
 	}
 
+namespace {
+	// Builds the sound entry as *lossless* Vorbis, by handing the finished buffer to the
+	// llogg encoder and wrapping the Ogg stream it produces rather than encoding here.
+	//
+	// libvorbis cannot do this at any quality setting: what makes it lossy is encoder
+	// policy -- a fitted floor curve and a rate-controlled residue -- not the format, and
+	// the lossless construction replaces both (flat floor, trained cascade quantiser,
+	// the real decoder in a correction loop). That encoder is a separate program, so this
+	// shells out to it instead of duplicating it.
+	//
+	// Three things have to line up, or the output is wrong rather than merely larger:
+	//
+	// * The guarantee is about *16-bit* PCM, so the float buffer is quantised here. That
+	//   is not a compromise for this pipeline: Miles hands the engine 16-bit samples and
+	//   nothing in the SCD Ogg path records a depth, so this is the step the decoder was
+	//   going to perform anyway -- doing it up front is what makes the rest exact.
+	// * The scale is 32767, not 32768, and most of the game's float-to-int conversion
+	//   truncates toward zero rather than rounding -- the whole three-or-more-channel
+	//   path does. `--mss` is the encoder's shorthand for both, and it aims a quarter LSB
+	//   away from zero so either conversion lands on the same integer.
+	// * The buffer reaching here is already in Vorbis channel order, and llogg writes PCM
+	//   channel i to Vorbis channel i with no remapping of its own, so the permutation
+	//   the caller already applied is exactly right and nothing further is wanted.
+	xivres::sound::writer::sound_item make_lossless_ogg_entry(
+		const std::filesystem::path& python,
+		const std::filesystem::path& llogg,
+		std::span<const float> floats,
+		size_t channels,
+		size_t samplingRate,
+		size_t loopStartBlockIndex,
+		size_t loopEndBlockIndex,
+		std::span<const uint32_t> markIndices,
+		const std::filesystem::path& wavPath,
+		const std::filesystem::path& oggPath) {
+
+		// A looping entry is only ever heard up to its loop end -- the game cuts back from
+		// there -- so encode that much and no more, which is what the libvorbis path's block
+		// loop does and what --verify measures the written length against.
+		auto frames = channels ? floats.size() / channels : 0;
+		if (loopEndBlockIndex && loopEndBlockIndex < frames)
+			frames = loopEndBlockIndex;
+
+		constexpr double FullScale = 32767.;
+		const auto dataBytes = frames * channels * sizeof(int16_t);
+		if (dataBytes + 0x2c > 0xFFFFFFFFull)
+			throw std::runtime_error(std::format(
+				"lossless: {} frames x {} ch does not fit a 32-bit WAV size field", frames, channels));
+
+		std::vector<int16_t> pcm(frames * channels);
+		for (size_t i = 0; i < pcm.size(); i++) {
+			const auto v = std::lround(static_cast<double>(floats[i]) * FullScale);
+			pcm[i] = static_cast<int16_t>(std::clamp<long>(v, -32768, 32767));
+		}
+
+		{
+			std::error_code ec;
+			std::filesystem::remove(oggPath, ec);
+			std::ofstream f(wavPath, std::ios::binary);
+			if (!f)
+				throw std::runtime_error(std::format("Could not create {}", u8(wavPath)));
+			const auto put32 = [&f](uint32_t v) { f.write(reinterpret_cast<const char*>(&v), 4); };
+			const auto put16 = [&f](uint16_t v) { f.write(reinterpret_cast<const char*>(&v), 2); };
+			const auto blockAlign = static_cast<uint16_t>(channels * sizeof(int16_t));
+			// Plain WAVE_FORMAT_PCM rather than the extensible form: the reader on the other
+			// side is ffmpeg, which takes either, and a channel mask would only invite a
+			// speaker-layout reinterpretation of what are actually engine-switched stems.
+			f.write("RIFF", 4);
+			put32(static_cast<uint32_t>(0x24 + dataBytes));
+			f.write("WAVEfmt ", 8);
+			put32(16);
+			put16(1);
+			put16(static_cast<uint16_t>(channels));
+			put32(static_cast<uint32_t>(samplingRate));
+			put32(static_cast<uint32_t>(samplingRate * blockAlign));
+			put16(blockAlign);
+			put16(16);
+			f.write("data", 4);
+			put32(static_cast<uint32_t>(dataBytes));
+			if (!pcm.empty())
+				f.write(reinterpret_cast<const char*>(pcm.data()), static_cast<std::streamsize>(dataBytes));
+			if (!f)
+				throw std::runtime_error(std::format("Could not write {}", u8(wavPath)));
+		}
+
+		// -X utf8 because this machine's Python follows a cp949 codepage otherwise, and the
+		// encoder's report goes through print().
+		std::vector<std::wstring> args{
+			L"-X", L"utf8", llogg.wstring(), L"encode",
+			wavPath.wstring(), oggPath.wstring(), L"--mss",
+		};
+		if (loopStartBlockIndex || loopEndBlockIndex) {
+			args.insert(args.end(), {L"--loop-start", std::to_wstring(loopStartBlockIndex)});
+			args.insert(args.end(), {L"--loop-end", std::to_wstring(loopEndBlockIndex)});
+		}
+		// A nonzero exit means the encode did not come out bit-exact, which is a failure and
+		// not a quality setting to shrug at; run_process_capture_stdout carries the
+		// encoder's own diagnosis out in the exception.
+		run_process_capture_stdout(python, args);
+
+		const xivres::file_stream oggStream(oggPath);
+		auto entry = xivres::sound::writer::sound_item::make_from_ogg(oggStream.as_linear_reader<uint8_t>());
+		if (!markIndices.empty())
+			entry.set_mark_chunks(static_cast<uint32_t>(loopStartBlockIndex), static_cast<uint32_t>(loopEndBlockIndex), markIndices);
+		return entry;
+	}
+}
+
 int cmd_apply(const std::vector<std::string>& args) {
 	argparse::ArgumentParser parser("scdtool apply");
 	try {
@@ -1284,7 +1391,10 @@ int cmd_apply(const std::vector<std::string>& args) {
 		parser.add_argument("--ffprobe").default_value(std::string("ffprobe")).help("path to ffprobe executable");
 		parser.add_argument("--sampling-rate").default_value(std::string("auto")).help(R"(output sample rate: "auto" (highest of the game file and the source), "keep" (the game file's), or an integer)");
 		parser.add_argument("--entry-index").default_value(0u).scan<'u', uint32_t>().help("sound entry index to replace (default: 0)");
-		parser.add_argument("--ogg-quality").default_value(1.0f).scan<'g', float>().help("Ogg Vorbis encode quality, 0..1");
+		parser.add_argument("--ogg-quality").default_value(1.0f).scan<'g', float>().help("Ogg Vorbis encode quality, 0..1 (ignored with --lossless)");
+		parser.add_argument("--lossless").default_value(false).implicit_value(true).help("encode bit-exact 16-bit Vorbis with the llogg encoder instead of libvorbis; needs --llogg, and produces entries roughly 7x the size");
+		parser.add_argument("--llogg").default_value(std::string()).help("path to llogg.py, the lossless Vorbis encoder --lossless drives");
+		parser.add_argument("--python").default_value(std::string("python")).help("python executable used to run --llogg");
 		parser.add_argument("--min-score").default_value(0.95).scan<'g', double>().help("only rewrite entries matched at or above this correlation score");
 		parser.add_argument("--dry-run").default_value(false).implicit_value(true).help("list what would be written without writing anything");
 		parser.add_argument("--verify").default_value(false).implicit_value(true).help("re-read each written file and check its loop points and length survived the round trip (slower)");
@@ -1322,6 +1432,15 @@ int cmd_apply(const std::vector<std::string>& args) {
 		const auto samplingRateSpec = parser.get<std::string>("--sampling-rate");
 		const auto entryIndex = parser.get<uint32_t>("--entry-index");
 		const auto oggQuality = std::clamp(parser.get<float>("--ogg-quality"), 0.f, 1.f);
+		const auto lossless = parser.get<bool>("--lossless");
+		const auto lloggPath = argactions::path(parser.get<std::string>("--llogg"));
+		const auto pythonPath = argactions::path(parser.get<std::string>("--python"));
+		if (lossless) {
+			if (lloggPath.empty())
+				throw std::runtime_error("--lossless needs --llogg pointing at llogg.py.");
+			if (!std::filesystem::is_regular_file(lloggPath))
+				throw std::runtime_error(std::format("--llogg: not an existing file: {}", u8(lloggPath)));
+		}
 		const auto minScore = parser.get<double>("--min-score");
 		const auto dryRun = parser.get<bool>("--dry-run");
 		const auto verify = parser.get<bool>("--verify");
@@ -1924,15 +2043,21 @@ int cmd_apply(const std::vector<std::string>& args) {
 				}
 			}
 
-			auto newEntry = xivres::sound::writer::sound_item::make_from_ogg_encode(
-				channels,
-				samplingRate,
-				newLoopStart,
-				newLoopEnd,
-				xivres::memory_stream(xivres::util::span_cast<const uint8_t>(floats)).as_linear_reader<uint8_t>(),
-				{},
-				markIndices,
-				oggQuality);
+			auto newEntry = lossless
+				? make_lossless_ogg_entry(
+					pythonPath, lloggPath, floats, channels, samplingRate,
+					newLoopStart, newLoopEnd, markIndices,
+					keepTemp(tempDir / std::format(L"scdtool_apply_ll_{}.wav", tempFileCounter.fetch_add(1))),
+					keepTemp(tempDir / std::format(L"scdtool_apply_ll_{}.ogg", tempFileCounter.fetch_add(1))))
+				: xivres::sound::writer::sound_item::make_from_ogg_encode(
+					channels,
+					samplingRate,
+					newLoopStart,
+					newLoopEnd,
+					xivres::memory_stream(xivres::util::span_cast<const uint8_t>(floats)).as_linear_reader<uint8_t>(),
+					{},
+					markIndices,
+					oggQuality);
 
 			auto newScd = xivres::sound::writer();
 			newScd.set_table_1(templateScd.read_table_1());

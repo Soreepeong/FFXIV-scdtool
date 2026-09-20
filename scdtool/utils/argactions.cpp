@@ -22,10 +22,10 @@ std::filesystem::path argactions::absolute_path_or_stdout(const std::string& u8p
 	if (u8path.empty() || u8path == "-")
 		return {};
 
-	const auto path = absolute_path(u8path);
-	if (!std::filesystem::is_regular_file(path))
-		throw std::runtime_error(std::format("Not an existing file: {}", u8(path)));
-	return path;
+	// An output path, so it must NOT be required to exist: this used to run the same
+	// is_regular_file check `existing_file` does, which made `toscd --output` refuse
+	// every path that was not already a file -- that is, every first run.
+	return absolute_path(u8path);
 }
 
 std::filesystem::path argactions::existing_file(const std::string& u8path) {

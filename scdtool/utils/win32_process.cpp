@@ -133,8 +133,24 @@ namespace {
 	WaitForSingleObject(hProcess.Value, INFINITE);
 	DWORD exitCode = 0;
 	GetExitCodeProcess(hProcess.Value, &exitCode);
-	if (exitCode != 0)
-		throw std::runtime_error(std::format("{} exited with code {}", xivres::util::unicode::convert<std::string>(exe.wstring()), exitCode));
+	if (exitCode != 0) {
+		// Whatever the child said about why is in the stream we captured; a bare exit code
+		// leaves the caller guessing, and for a tool that reports its own diagnosis (llogg
+		// prints how far off the encode was) that is the whole message. Keep the tail,
+		// stripped to printable ASCII so a binary stdout cannot wreck the console.
+		std::string tail;
+		const auto keep = (std::min<size_t>)(result.size(), 2048);
+		for (auto c : std::span(result).last(keep)) {
+			if (c == '\r')
+				continue;
+			tail.push_back(c == '\n' || (c >= 0x20 && c < 0x7f) ? static_cast<char>(c) : '?');
+		}
+		while (!tail.empty() && (tail.back() == '\n' || tail.back() == ' '))
+			tail.pop_back();
+		throw std::runtime_error(std::format("{} exited with code {}{}",
+			xivres::util::unicode::convert<std::string>(exe.wstring()), exitCode,
+			tail.empty() ? std::string() : std::format(":\n{}", tail)));
+	}
 
 	return result;
 	}
