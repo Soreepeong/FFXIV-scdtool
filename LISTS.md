@@ -292,7 +292,6 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9547 | `music/ex3/BGM_EX3_Dan_D11.scd` | DUD_042.flac | Death Unto Dawn.json |
 | 0.9552 | `music/ffxiv/BGM_Minigame_10th01.scd` | GL_00055.flac | Growing Light.json |
 | 0.9553 | `music/ffxiv/Orchestrion/BGM_ORCH_465.scd` | DUD_022.flac | Death Unto Dawn.json |
-| 0.9557 | `music/ffxiv/Orchestrion/BGM_ORCH_327.scd` | SHADOWBRINGERS_37.flac | Shadowbringers.json |
 | 0.9558 | `music/ex2/BGM_EX2_Town_R_Night.scd` | SB_FFXIV_006.flac | Stormblood.json |
 | 0.9558 | `music/ffxiv/Orchestrion/BGM_ORCH_208.scd` | SB_FFXIV_019.flac | Stormblood.json |
 | 0.9565 | `music/ffxiv/Orchestrion/BGM_ORCH_238.scd` | SB_FFXIV_090.flac | Stormblood.json |
@@ -643,6 +642,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9784 | `music/ffxiv/Orchestrion/BGM_ORCH_836.scd` | TH_060.flac | Trail to the Heavens.json |
 | 0.9785 | `music/ex5/BGM_EX5_EoV_36.scd` | TH_128.mp3 | Trail to the Heavens.json |
 | 0.9785 | `music/ffxiv/Orchestrion/BGM_ORCH_300.scd` | SHADOWBRINGERS_33.flac | Shadowbringers.json |
+| 0.9785 | `music/ffxiv/Orchestrion/BGM_ORCH_327.scd` | SHADOWBRINGERS_37.flac | Shadowbringers.json |
 | 0.9785 | `music/ffxiv/Orchestrion/BGM_ORCH_791.scd` | DT_012.flac | Dawntrail.json |
 | 0.9786 | `music/ffxiv/Orchestrion/BGM_ORCH_468.scd` | GL_00047.flac | Growing Light.json |
 | 0.9786 | `music/ffxiv/Orchestrion/BGM_ORCH_854.scd` | TH_042.flac | Trail to the Heavens.json |

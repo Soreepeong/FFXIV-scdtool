@@ -1547,7 +1547,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 5.455,
+        "offset": 3.76,
         "pcmHash": "c899b5e6"
        }
       },
@@ -1560,10 +1560,29 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 62.0
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 67.46
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.5
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.882"
+    "# comment": "the game's roll edits this recording rather than trimming it: up to ~61s the recording runs 3.760s ahead of the target, from ~63s it runs 5.460s ahead, and every window is confident either side (0.97-0.98), so a single offset is wrong for one half whichever value it takes. The entry carried the body's alignment, so only the first 62s of 372s were off -- which is why it still measured 0.9557. Two segments joined at 62.0s with a half-second crossfade, the cut not being hidden in silence the way BGM_ORCH_025's is: 0.9785 against the game's own file. Seam and crossfade are both immaterial -- 61.5/62.0/62.5 and 0/0.5/1.5s all measure within 0.0002."
    }
   },
   {
