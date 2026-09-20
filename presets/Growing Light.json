@@ -3,7 +3,8 @@
  "searchDirectories": {
   "Growing Light": {
    "default": true
-  }
+  },
+  "Heavensward": {}
  },
  "items": [
   {
@@ -106,37 +107,6 @@
      }
     ],
     "# comment": "spectral similarity to the game's own file: 0.995; also released as HEAVENSWARD_FFXIV_53; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "GL_00033",
-    "Dragonsong"
-   ],
-   "target": {
-    "path": "music/ex1/BGM_EX1_EndCredit01.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.075,
-        "pcmHash": "3d5621fd"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.995 at offset -1.1s) but covers only 34% of this target: 341s of 1014s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then.; also released as HEAVENSWARD_FFXIV_55; that album's own preset carries its own entry"
    }
   },
   {
@@ -5667,6 +5637,138 @@
      }
     ],
     "# comment": "same recording as GL_00070.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.913)"
+   }
+  },
+  {
+   "source": {
+    "GL_00033": [
+     "GL_00033",
+     "Dragonsong"
+    ],
+    "HEAVENSWARD_FFXIV_03": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Heavensward",
+        "pattern": "HEAVENSWARD_FFXIV_03"
+       },
+       {
+        "directory": "Heavensward",
+        "pattern": "堅牢 ～イシュガルド下層：昼～"
+       },
+       {
+        "directory": "Heavensward",
+        "pattern": "Solid"
+       }
+      ]
+     ]
+    },
+    "GL_00032": [
+     "GL_00032",
+     "Heavensward"
+    ],
+    "HEAVENSWARD_FFXIV_48": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Heavensward",
+        "pattern": "HEAVENSWARD_FFXIV_48"
+       },
+       {
+        "directory": "Heavensward",
+        "pattern": "石と鋼"
+       },
+       {
+        "directory": "Heavensward",
+        "pattern": "Stone and Steel"
+       }
+      ]
+     ]
+    }
+   },
+   "target": {
+    "path": "music/ex1/BGM_EX1_EndCredit01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "GL_00033": {
+        "offset": 1.07,
+        "pcmHash": "3d5621fd"
+       }
+      },
+      "length": 331.44,
+      "channels": [
+       {
+        "source": "GL_00033",
+        "channel": 0
+       },
+       {
+        "source": "GL_00033",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "HEAVENSWARD_FFXIV_03": {
+        "offset": 301.64,
+        "pcmHash": "11f678c7"
+       }
+      },
+      "length": 297.36,
+      "crossfadeSeconds": 2.0,
+      "channels": [
+       {
+        "source": "HEAVENSWARD_FFXIV_03",
+        "channel": 0
+       },
+       {
+        "source": "HEAVENSWARD_FFXIV_03",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "GL_00032": {
+        "offset": 0.55,
+        "pcmHash": "5ae1f468"
+       }
+      },
+      "length": 251.87,
+      "crossfadeSeconds": 3.0,
+      "channels": [
+       {
+        "source": "GL_00032",
+        "channel": 0
+       },
+       {
+        "source": "GL_00032",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "HEAVENSWARD_FFXIV_48": {
+        "offset": 1.47,
+        "pcmHash": "f88249b5"
+       }
+      },
+      "crossfadeSeconds": 1.0,
+      "channels": [
+       {
+        "source": "HEAVENSWARD_FFXIV_48",
+        "channel": 0
+       },
+       {
+        "source": "HEAVENSWARD_FFXIV_48",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "credits roll: a medley of 4 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). GL_00033 from 0s, HEAVENSWARD_FFXIV_03 from 331s, GL_00032 from 629s, HEAVENSWARD_FFXIV_48 from 881s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.982, worst segment 0.955, worst join 0.893."
    }
   }
  ],

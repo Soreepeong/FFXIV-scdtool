@@ -754,36 +754,6 @@
   },
   {
    "source": [
-    "HEAVENSWARD_FFXIV_55",
-    "Dragonsong"
-   ],
-   "target": {
-    "path": "music/ex1/BGM_EX1_EndCredit01.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.075,
-        "pcmHash": "624d198e"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as GL_00033.flac, which the matcher picked for this target (0.882 vs 0.884); listed here too so owning this album is enough to replace it"
-   }
-  },
-  {
-   "source": [
     "HEAVENSWARD_FFXIV_36",
     "Misconception",
     "誤想"

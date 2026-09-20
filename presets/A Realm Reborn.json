@@ -6,7 +6,8 @@
    "purchaseLinks": {
     "amazon.co.jp": "https://www.amazon.co.jp/dp/B00I3LHM2M/"
    }
-  }
+  },
+  "Endwalker": {}
  },
  "items": [
   {
@@ -3635,34 +3636,6 @@
   },
   {
    "source": [
-    "ARR_FFXIV_115",
-    "And You! – A Realm Reborn Medley"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_System_EndCredit01.scd",
-    "segments": [
-     {
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "adelay=426380:all=1"
-      }
-     }
-    ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.967 at offset +426.4s) but covers only 68% of this target: 587s of 868s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. the game's file starts before this recording does, so the source is delayed rather than offset: source by 426.380s"
-   }
-  },
-  {
-   "source": [
     "ARR_FFXIV_001",
     "Prelude – Rebirth"
    ],
@@ -5372,6 +5345,101 @@
      }
     ],
     "# comment": "recovered from its numbered siblings: ARR_FFXIV_005 is the recording the rest of this group resolved to, and it matches this target's intro at 0.976"
+   }
+  },
+  {
+   "source": {
+    "ENDWALKER_040": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Endwalker",
+        "pattern": "ENDWALKER_040"
+       },
+       {
+        "directory": "Endwalker",
+        "pattern": "Answers"
+       }
+      ]
+     ]
+    },
+    "ARR_FFXIV_115": [
+     "ARR_FFXIV_115",
+     "And You! – A Realm Reborn Medley",
+     "And You!　～新生エオルゼアメドレー～"
+    ],
+    "ARR_FFXIV_003": [
+     "ARR_FFXIV_003",
+     "Prelude – Discoveries",
+     "プレリュード　～冒険の序章～"
+    ]
+   },
+   "target": {
+    "path": "music/ffxiv/BGM_System_EndCredit01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "ENDWALKER_040": {
+        "offset": 0.0,
+        "pcmHash": "dee9f3f6"
+       }
+      },
+      "sourceFilters": {
+       "ENDWALKER_040": "adelay=280:all=1"
+      },
+      "length": 426.59,
+      "channels": [
+       {
+        "source": "ENDWALKER_040",
+        "channel": 0
+       },
+       {
+        "source": "ENDWALKER_040",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ARR_FFXIV_115": {
+        "offset": 0.19,
+        "pcmHash": "05a88142"
+       }
+      },
+      "length": 153.29,
+      "crossfadeSeconds": 0.25,
+      "channels": [
+       {
+        "source": "ARR_FFXIV_115",
+        "channel": 0
+       },
+       {
+        "source": "ARR_FFXIV_115",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ARR_FFXIV_003": {
+        "offset": 0.6,
+        "pcmHash": "c9bff6d8"
+       }
+      },
+      "crossfadeSeconds": 2.0,
+      "channels": [
+       {
+        "source": "ARR_FFXIV_003",
+        "channel": 0
+       },
+       {
+        "source": "ARR_FFXIV_003",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "credits roll: a medley of 3 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). ENDWALKER_040 from 0s, ARR_FFXIV_115 from 427s, ARR_FFXIV_003 from 580s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.994, worst segment 0.992, worst join 0.973."
    }
   }
  ],

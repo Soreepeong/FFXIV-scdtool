@@ -1169,10 +1169,7 @@
     "Revolutions"
    ],
    "target": {
-    "path": [
-     "music/ex2/BGM_EX2_EndCredit01.scd",
-     "music/ex2/BGM_EX2_EndCredit02.scd"
-    ],
+    "path": "music/ex2/BGM_EX2_EndCredit02.scd",
     "segments": [
      {
       "sourceOffsets": {
@@ -4098,6 +4095,113 @@
      }
     ],
     "# comment": "same recording as SB_FFXIV_085.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.990)"
+   }
+  },
+  {
+   "source": {
+    "SB_FFXIV_046": [
+     "SB_FFXIV_046",
+     "Revolutions"
+    ],
+    "SB_FFXIV_026": [
+     "SB_FFXIV_026",
+     "父の誇り ～ヤンサ：昼～",
+     "A Father's Pride"
+    ],
+    "SB_FFXIV_010": [
+     "SB_FFXIV_010",
+     "我らが支配圏",
+     "The Garlean Territorial Anthem for Gyr Abania and Surrounding States - The Measure of Our Reach"
+    ],
+    "SB_FFXIV_031": [
+     "SB_FFXIV_031",
+     "血嵐の勇士",
+     "Heroes of Stormblood"
+    ]
+   },
+   "target": {
+    "path": "music/ex2/BGM_EX2_EndCredit01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "SB_FFXIV_046": {
+        "offset": 2.37,
+        "pcmHash": "72bf459d"
+       }
+      },
+      "length": 420.68,
+      "channels": [
+       {
+        "source": "SB_FFXIV_046",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_046",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "SB_FFXIV_026": {
+        "offset": 2.22,
+        "pcmHash": "ecece5d3"
+       }
+      },
+      "length": 158.66,
+      "crossfadeSeconds": 1.0,
+      "channels": [
+       {
+        "source": "SB_FFXIV_026",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_026",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "SB_FFXIV_010": {
+        "offset": 2.1,
+        "pcmHash": "24ded18d"
+       }
+      },
+      "length": 125.52,
+      "crossfadeSeconds": 0.25,
+      "channels": [
+       {
+        "source": "SB_FFXIV_010",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_010",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "SB_FFXIV_031": {
+        "offset": 0.1,
+        "pcmHash": "6556b5ea"
+       }
+      },
+      "crossfadeSeconds": 2.0,
+      "channels": [
+       {
+        "source": "SB_FFXIV_031",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_031",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "credits roll: a medley of 4 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). SB_FFXIV_046 from 0s, SB_FFXIV_026 from 421s, SB_FFXIV_010 from 579s, SB_FFXIV_031 from 705s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.992, worst segment 0.989, worst join 0.961."
    }
   }
  ],

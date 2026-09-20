@@ -3,7 +3,8 @@
  "searchDirectories": {
   "Trail to the Heavens": {
    "default": true
-  }
+  },
+  "Dawntrail": {}
  },
  "items": [
   {
@@ -9498,6 +9499,221 @@
      }
     ],
     "# comment": "spectral similarity to the game's own file: 0.879"
+   }
+  },
+  {
+   "source": {
+    "DT_001": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Dawntrail",
+        "pattern": "DT_001"
+       },
+       {
+        "directory": "Dawntrail",
+        "pattern": "Dawntrail"
+       }
+      ]
+     ]
+    },
+    "TH_002": [
+     "TH_002",
+     "獰猛なる器 ～廃地討究 ユウェヤーワータ～",
+     "Unbroken Vessels"
+    ],
+    "TH_007": [
+     "TH_007",
+     "ローズ・オブ・メイ ～黄金～",
+     "Roses of May (Dawntrail)"
+    ],
+    "TH_036": [
+     "TH_036",
+     "最後の闘い (FINAL FANTASY IX) ～黄金～",
+     "FINAL FANTASY IX: The Final Battle (Dawntrail)"
+    ],
+    "TH_048": [
+     "TH_048",
+     "眠らない街 トレノ ～黄金～",
+     "Dark City Treno (Dawntrail)"
+    ],
+    "TH_063": [
+     "TH_063",
+     "空知らぬ艦 ～妖異侵攻 クルティウス魔導工廠～",
+     "Untested Voyager"
+    ],
+    "TH_079": [
+     "TH_079",
+     "寒空に肩寄せて",
+     "Neath Wintry Skies"
+    ],
+    "TH_037": [
+     "TH_037",
+     "明日への道標",
+     "The Promise of Tomorrow"
+    ]
+   },
+   "target": {
+    "path": "music/ex5/BGM_EX5_EndCredit02.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "DT_001": {
+        "offset": 1.55,
+        "pcmHash": "2b968e14"
+       }
+      },
+      "length": 313.58,
+      "channels": [
+       {
+        "source": "DT_001",
+        "channel": 0
+       },
+       {
+        "source": "DT_001",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "TH_002": {
+        "offset": 3.13,
+        "pcmHash": "ac568f4b"
+       }
+      },
+      "length": 151.95,
+      "crossfadeSeconds": 3.0,
+      "channels": [
+       {
+        "source": "TH_002",
+        "channel": 0
+       },
+       {
+        "source": "TH_002",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "TH_007": {
+        "offset": 134.7,
+        "pcmHash": "eb5d1c4b"
+       }
+      },
+      "length": 148.92,
+      "crossfadeSeconds": 16.0,
+      "channels": [
+       {
+        "source": "TH_007",
+        "channel": 0
+       },
+       {
+        "source": "TH_007",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "TH_036": {
+        "offset": 34.21,
+        "pcmHash": "b17ef8aa"
+       }
+      },
+      "length": 257.01,
+      "crossfadeSeconds": 12.0,
+      "channels": [
+       {
+        "source": "TH_036",
+        "channel": 0
+       },
+       {
+        "source": "TH_036",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "TH_048": {
+        "offset": 16.6,
+        "pcmHash": "715580dc"
+       }
+      },
+      "length": 253.49,
+      "channels": [
+       {
+        "source": "TH_048",
+        "channel": 0
+       },
+       {
+        "source": "TH_048",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "TH_063": {
+        "offset": 125.64,
+        "pcmHash": "7e37da54"
+       }
+      },
+      "length": 153.45,
+      "crossfadeSeconds": 16.0,
+      "channels": [
+       {
+        "source": "TH_063",
+        "channel": 0
+       },
+       {
+        "source": "TH_063",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "TH_079": {
+        "offset": 0.82,
+        "pcmHash": "fc8484a4"
+       }
+      },
+      "length": 151.25,
+      "crossfadeSeconds": 6.0,
+      "channels": [
+       {
+        "source": "TH_079",
+        "channel": 0
+       },
+       {
+        "source": "TH_079",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "TH_037": {
+        "offset": 0.82,
+        "pcmHash": "bf3e57a3"
+       }
+      },
+      "channels": [
+       {
+        "source": "TH_037",
+        "channel": 0
+       },
+       {
+        "source": "TH_037",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "credits roll: a medley of 8 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). DT_001 from 0s, TH_002 from 314s, TH_007 from 466s, TH_036 from 614s, TH_048 from 871s, TH_063 from 1125s, TH_079 from 1278s, TH_037 from 1430s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.969, worst segment 0.928, worst join 0.878."
    }
   }
  ],

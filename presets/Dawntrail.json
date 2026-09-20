@@ -463,66 +463,6 @@
   },
   {
    "source": [
-    "DT_006",
-    "Windswept Echoes",
-    "山峡の涼風 ～オルコ・パチャ：昼～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_EndCredit01.scd",
-    "segments": [
-     {
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "adelay=326460:all=1"
-      }
-     }
-    ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.971 at offset +326.5s) but covers only 24% of this target: 492s of 2070s. The rest needs a multi-segment or filterComplex source; left disabled until then. the game's file starts before this recording does, so the source is delayed rather than offset: source by 326.460s"
-   }
-  },
-  {
-   "source": [
-    "DT_001",
-    "Dawntrail"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_EndCredit02.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.55,
-        "pcmHash": "2b968e14"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.991 at offset -1.6s) but covers only 21% of this target: 333s of 1623s. The rest needs a multi-segment or filterComplex source; left disabled until then."
-   }
-  },
-  {
-   "source": [
     "DT_035",
     "Tantalus's Theme (Dawntrail)",
     "タンタラスのテーマ ～黄金～"
@@ -3849,6 +3789,261 @@
      }
     ],
     "# comment": "spectral similarity to the game's own file: 0.979"
+   }
+  },
+  {
+   "source": {
+    "DT_001": [
+     "DT_001",
+     "Dawntrail"
+    ],
+    "DT_006": [
+     "DT_006",
+     "山峡の涼風 ～オルコ・パチャ：昼～",
+     "Windswept Echoes"
+    ],
+    "DT_023": [
+     "DT_023",
+     "森と地底の境界 ～ヤクテル樹海：夜～",
+     "Skybound Emerald"
+    ],
+    "DT_032": [
+     "DT_032",
+     "火花と閃光 ～外征前哨 ヴァンガード～",
+     "In Fulgur and Fire"
+    ],
+    "DT_036": [
+     "DT_036",
+     "暗き雷雲 ～ヘリテージファウンド：夜～",
+     "Crash in the Dark"
+    ],
+    "DT_042": [
+     "DT_042",
+     "遠き日の思い出 ～リビング・メモリー：開園～",
+     "Bygone Serenity"
+    ],
+    "DT_050": [
+     "DT_050",
+     "終わりなき軌跡 ～記憶幻想 アレクサンドリア～",
+     "A Trail Unending"
+    ],
+    "DT_053": [
+     "DT_053",
+     "それぞれの旅路へ",
+     "Fond Farewells"
+    ],
+    "DT_054": [
+     "DT_054",
+     "Smile"
+    ],
+    "DT_037": [
+     "DT_037",
+     "星なき摩天楼 ～ソリューション・ナイン～",
+     "Starless Skyline"
+    ]
+   },
+   "target": {
+    "path": "music/ex5/BGM_EX5_EndCredit01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "DT_001": {
+        "offset": 1.55,
+        "pcmHash": "2b968e14"
+       }
+      },
+      "length": 328.17,
+      "channels": [
+       {
+        "source": "DT_001",
+        "channel": 0
+       },
+       {
+        "source": "DT_001",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_006": {
+        "offset": 1.69,
+        "pcmHash": "458ffced"
+       }
+      },
+      "length": 154.77,
+      "crossfadeSeconds": 0.5,
+      "channels": [
+       {
+        "source": "DT_006",
+        "channel": 0
+       },
+       {
+        "source": "DT_006",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_023": {
+        "offset": 0.33,
+        "pcmHash": "b96ae678"
+       }
+      },
+      "length": 277.51,
+      "crossfadeSeconds": 2.0,
+      "channels": [
+       {
+        "source": "DT_023",
+        "channel": 0
+       },
+       {
+        "source": "DT_023",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_032": {
+        "offset": 1.6,
+        "pcmHash": "9f934297"
+       }
+      },
+      "length": 149.32,
+      "crossfadeSeconds": 0.5,
+      "channels": [
+       {
+        "source": "DT_032",
+        "channel": 0
+       },
+       {
+        "source": "DT_032",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_036": {
+        "offset": 2.01,
+        "pcmHash": "6e3282d5"
+       }
+      },
+      "length": 124.27,
+      "crossfadeSeconds": 0.5,
+      "channels": [
+       {
+        "source": "DT_036",
+        "channel": 0
+       },
+       {
+        "source": "DT_036",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_042": {
+        "offset": 160.13,
+        "pcmHash": "21dee3f9"
+       }
+      },
+      "length": 283.6,
+      "crossfadeSeconds": 16.0,
+      "channels": [
+       {
+        "source": "DT_042",
+        "channel": 0
+       },
+       {
+        "source": "DT_042",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_050": {
+        "offset": 2.18,
+        "pcmHash": "a42bbf1d"
+       }
+      },
+      "length": 198.74,
+      "crossfadeSeconds": 2.0,
+      "channels": [
+       {
+        "source": "DT_050",
+        "channel": 0
+       },
+       {
+        "source": "DT_050",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_053": {
+        "offset": 0.39,
+        "pcmHash": "c5dc7738"
+       }
+      },
+      "length": 137.51,
+      "crossfadeSeconds": 2.0,
+      "channels": [
+       {
+        "source": "DT_053",
+        "channel": 0
+       },
+       {
+        "source": "DT_053",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_054": {
+        "offset": 1.88,
+        "pcmHash": "1221d5cf"
+       }
+      },
+      "length": 265.76,
+      "channels": [
+       {
+        "source": "DT_054",
+        "channel": 0
+       },
+       {
+        "source": "DT_054",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_037": {
+        "offset": 1.39,
+        "pcmHash": "c35d497f"
+       }
+      },
+      "crossfadeSeconds": 0.5,
+      "channels": [
+       {
+        "source": "DT_037",
+        "channel": 0
+       },
+       {
+        "source": "DT_037",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "credits roll: a medley of 10 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). DT_001 from 0s, DT_006 from 328s, DT_023 from 483s, DT_032 from 760s, DT_036 from 910s, DT_042 from 1034s, DT_050 from 1318s, DT_053 from 1516s, DT_054 from 1654s, DT_037 from 1920s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.987, worst segment 0.959, worst join 0.843."
    }
   }
  ],
