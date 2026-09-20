@@ -325,12 +325,28 @@
      "餓えた狼　～ザ・フィースト～",
      "Starved"
     ],
-    "SB_FFXIV_089": [
-     "^00089\\.",
-     "SB_FFXIV_089",
-     "危険なる妙技",
-     "Dangertek"
-    ]
+    "SB_FFXIV_089": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Stormblood",
+        "pattern": "^00089\\."
+       },
+       {
+        "directory": "Stormblood",
+        "pattern": "SB_FFXIV_089"
+       },
+       {
+        "directory": "Stormblood",
+        "pattern": "危険なる妙技"
+       },
+       {
+        "directory": "Stormblood",
+        "pattern": "Dangertek"
+       }
+      ]
+     ]
+    }
    },
    "target": {
     "path": "music/ffxiv/BGM_EX1_PvP01.scd",
@@ -988,12 +1004,28 @@
      "豪雨に打たれて　～禁忌都市マハ～",
      "Torrent"
     ],
-    "SB_FFXIV_020": [
-     "^00019\\.",
-     "SB_FFXIV_020",
-     "東方の地",
-     "Far East of Eorzea"
-    ]
+    "SB_FFXIV_020": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Stormblood",
+        "pattern": "^00019\\."
+       },
+       {
+        "directory": "Stormblood",
+        "pattern": "SB_FFXIV_020"
+       },
+       {
+        "directory": "Stormblood",
+        "pattern": "東方の地"
+       },
+       {
+        "directory": "Stormblood",
+        "pattern": "Far East of Eorzea"
+       }
+      ]
+     ]
+    }
    },
    "target": {
     "path": "music/ex1/BGM_EX1_Makosen_Nomal02.scd",

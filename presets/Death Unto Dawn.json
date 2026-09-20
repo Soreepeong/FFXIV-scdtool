@@ -11,6 +11,11 @@
    "purchaseLinks": {
     "amazon.co.jp": "https://www.amazon.co.jp/dp/B06XRQCZX9/"
    }
+  },
+  "Before Meteor": {
+   "purchaseLinks": {
+    "amazon.co.jp": "https://www.amazon.co.jp/dp/B00D1B8WY6/"
+   }
   }
  },
  "items": [
@@ -156,12 +161,28 @@
      "ライズ (Journeys) ～機工城アレキサンダー：天動編～",
      "Rise (Journeys)"
     ],
-    "TFEOF_FFXIV_38": [
-     "^00037\\.",
-     "TFEOF_FFXIV_38",
-     "無限停止　～機工城アレキサンダー：天動編～",
-     "Stasis Loop"
-    ]
+    "TFEOF_FFXIV_38": {
+     "inputFiles": [
+      [
+       {
+        "directory": "The Far Edge Of Fate",
+        "pattern": "^00037\\."
+       },
+       {
+        "directory": "The Far Edge Of Fate",
+        "pattern": "TFEOF_FFXIV_38"
+       },
+       {
+        "directory": "The Far Edge Of Fate",
+        "pattern": "無限停止　～機工城アレキサンダー：天動編～"
+       },
+       {
+        "directory": "The Far Edge Of Fate",
+        "pattern": "Stasis Loop"
+       }
+      ]
+     ]
+    }
    },
    "target": {
     "path": "music/ex3/BGM_EX3_Ban_07.scd",
@@ -1356,12 +1377,28 @@
      "ボズヤの血風",
      "Blood on the Wind"
     ],
-    "Before_Meteor_FFXIV_084": [
-     "^00083\\.",
-     "Before_Meteor_FFXIV_084",
-     "Quick as Silver, Hard as Stone",
-     "疾きこと銀の如く、硬きこと石の如く"
-    ]
+    "Before_Meteor_FFXIV_084": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Before Meteor",
+        "pattern": "^00083\\."
+       },
+       {
+        "directory": "Before Meteor",
+        "pattern": "Before_Meteor_FFXIV_084"
+       },
+       {
+        "directory": "Before Meteor",
+        "pattern": "Quick as Silver, Hard as Stone"
+       },
+       {
+        "directory": "Before Meteor",
+        "pattern": "疾きこと銀の如く、硬きこと石の如く"
+       }
+      ]
+     ]
+    }
    },
    "target": {
     "path": "music/ex3/BGM_EX3_MYC_01.scd",
