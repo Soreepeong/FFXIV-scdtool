@@ -653,7 +653,7 @@
      }
     ],
     "enable": false,
-    "# comment": "source is correct (spectral 0.981 at offset -0.4s) but covers only 94% of this target: 104s of 110s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+    "# comment": "source is correct (spectral 0.981 at offset -0.4s) but covers only 94% of this target: 104s of 110s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than predicted: it comes out 103.9s against the target's 110.5s and loops 6.6s early, scoring 0.982 against the game's own file over the part it does cover. Not silence -- the audio is there, the loop is short. Still off because a loop that ends 94% of the way through the target is worse than the game's own file."
    }
   },
   {

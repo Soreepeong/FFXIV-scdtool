@@ -1415,7 +1415,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.881; offset corrected -26.955s -> +1.500s by re-deriving the alignment and judging it on the intro (-1.0000 -> 0.9436). Disabled: this recording reaches 99.4s of the 117.0s this target actually carries (85%), so the replacement would cut to silence.",
+    "# comment": "spectral similarity to the game's own file: 0.881; offset corrected -26.955s -> +1.500s by re-deriving the alignment and judging it on the intro (-1.0000 -> 0.9436). Disabled: this recording reaches 99.4s of the 117.0s this target actually carries (85%), so the replacement would cut to silence. Built and measured 2026-09-21 rather than predicted: it comes out 99.4s against the target's 117.1s and loops 17.8s early, scoring 0.942 against the game's own file over the part it does cover. Not silence -- the audio is there, the loop is short. Still off because a loop that ends 85% of the way through the target is worse than the game's own file.",
     "enable": false
    }
   },

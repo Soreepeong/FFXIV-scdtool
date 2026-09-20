@@ -2042,8 +2042,19 @@ int cmd_apply(const std::vector<std::string>& args) {
 					std::cerr << '\n';
 					return;
 				}
+				// A segmented job has no single source, so name what it was actually built from;
+				// it was logging an empty path, which left the shipped listing unable to say what
+				// 30-odd of its entries came from.
+				std::string built;
+				for (const auto& segment : job.Segments) {
+					for (const auto& [name, source] : segment.Sources) {
+						const auto file = u8(source.Path.filename());
+						if (built.find(file) == std::string::npos)
+							built += (built.empty() ? "" : "+") + file;
+					}
+				}
 				std::cerr << std::format("  {} <- {} (score {:.3f}, offset {:+.3f}s{}{}, trim {} pad {} samples, loop {}-{}, gain {:+.1f} dB{}{})",
-					job.TargetPath, u8(job.SourcePath), job.Score, effectiveOffset,
+					job.TargetPath, job.Segments.empty() ? u8(job.SourcePath) : built, job.Score, effectiveOffset,
 					deduced.Deduced && std::abs(effectiveOffset - job.Offset) > 0.05
 						? std::format(" [deduced, was {:+.3f}s, intro {:.3f} over {} candidates]",
 							job.Offset, deduced.Score, deduced.Candidates)
