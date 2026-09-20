@@ -609,8 +609,26 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 2.4,
+        "offset": 0.35,
         "pcmHash": "b9551e56"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "length": 18.5
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 20.9
        }
       },
       "channels": [
@@ -625,7 +643,7 @@
       ]
      }
     ],
-    "# comment": "same recording as TFEOF_FFXIV_02.flac, which the matcher picked for this target (0.915 vs 0.926); listed here too so owning this album is enough to replace it; offset corrected +2.400s -> +0.350s by re-deriving the alignment and judging it on the intro (0.5461 -> 0.7698) Offset restored 2026-09-21 from 0.350 to 2.400: the intro-judged correction above inverted a correct answer, leaving the build 2.06s out of step. Measured on the built file, 2.400 gives 0.894 against the game's own file where 0.350 gave 0.490."
+    "# comment": "the game's roll is an edit of this recording, not a trim of it: up to ~16.5s the recording runs 0.350s ahead of the target, and from ~19s it runs 2.400s ahead -- about two seconds are dropped at a point where the target fades to -62 dBFS and comes back at -22.8 dB. So it is two segments joined in that silence at 18.5s; the seam's exact value hardly matters, 17.5/18.5/19.4 all measure within 0.0002. Built and measured against the game's own file: 0.921, no 10s window below 0.85. A single offset cannot do it -- 0.350 alone gives 0.490 because it breaks the body, 20.900 alone gives 0.894 and sounds trimmed at the start."
    }
   },
   {

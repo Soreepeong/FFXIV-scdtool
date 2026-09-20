@@ -15,8 +15,8 @@ Weighted, because a cosine between two digital silences is noise and many of the
 | never referenced by any preset | 267 |
 
 - confidence below 0.80: **2**
-- confidence 0.80-0.90: **84**
-- confidence 0.90-0.95: **151**
+- confidence 0.80-0.90: **83**
+- confidence 0.90-0.95: **152**
 - confidence 0.95-0.98: **435**
 - confidence 0.98 and up: **1155**
 
@@ -97,7 +97,6 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.8929 | `music/ex4/BGM_EX4_Ban_07.scd` | GL_00010.flac | Growing Light.json |
 | 0.8929 | `music/ffxiv/BGM_Ride_Barb.scd` | GL_00010.flac | Growing Light.json |
 | 0.8934 | `music/ffxiv/Orchestrion/BGM_ORCH_411.scd` | DUD_044.flac | Death Unto Dawn.json |
-| 0.8937 | `music/ffxiv/Orchestrion/BGM_ORCH_025.scd` | ENDWALKER_008.flac | Endwalker.json |
 | 0.8954 | `music/ex5/timeline/BGM_EX5_Raid_10.scd` | TH_008.flac | Trail to the Heavens.json |
 | 0.8961 | `music/ex4/BGM_EX4_Dan_D11.scd` | GL_00041.flac | Growing Light.json |
 | 0.8962 | `music/ffxiv/Orchestrion/BGM_ORCH_270.scd` | SHADOWBRINGERS_03.flac | Shadowbringers.json |
@@ -164,6 +163,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9199 | `music/ffxiv/Orchestrion/BGM_ORCH_034.scd` | TFEOF_FFXIV_01.flac | The Far Edge Of Fate.json |
 | 0.9207 | `music/ex3/BGM_EX3_Ban_11.scd` | DUD_044.flac | Death Unto Dawn.json |
 | 0.9207 | `music/ffxiv/BGM_Ride_WOL.scd` | DUD_044.flac | Death Unto Dawn.json |
+| 0.9209 | `music/ffxiv/Orchestrion/BGM_ORCH_025.scd` | ENDWALKER_008.flac | Endwalker.json |
 | 0.9213 | `music/ex1/BGM_EX1_Alex08.scd` | TFEOF_FFXIV_39, TFEOF_FFXIV_38 | The Far Edge Of Fate.json |
 | 0.9218 | `music/ex4/BGM_EX4_MoE_09.scd` | GL_00096.flac | Growing Light.json |
 | 0.9222 | `music/ffxiv/Orchestrion/BGM_ORCH_584.scd` | GL_00009.flac | Growing Light.json |
