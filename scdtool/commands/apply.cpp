@@ -74,9 +74,12 @@ namespace {
 		std::vector<apply_segment> Segments;  // empty unless the entry needs more than one span
 		std::wstring Filter;      // the preset's filter chain for this source, if it gave one
 		// A preset is a record of decisions already taken: its offset was fitted against
-		// this very file, and where a gain or a lead-in silence was wanted it says so as a
-		// filter. Re-deriving either would apply it twice, so such a job is executed as
-		// written rather than re-judged.
+		// this very file, so it is not re-derived. A gain or a lead-in silence, though, is
+		// only written down when it was worth writing -- the generator dropped any gain
+		// under a decibel -- so the absence of one is not an instruction to leave the level
+		// alone. Measuring it where the preset is silent is what the matchset build did, and
+		// without it BGM_Town_Uru_Day came out 0.6 dB off a game file it used to match
+		// exactly. Only where the preset *does* say would measuring again apply it twice.
 		bool FromPreset = false;
 		std::string Note;         // the preset's own comment, echoed in the log line
 	};
@@ -1768,7 +1771,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 				// musical span on both sides. Without this the swapped track sits at the OST
 				// master's level, which is usually hotter than the game's own mix and would
 				// stand out against every other track in game.
-				if (loudnessMatch && !job.FromPreset && newLoopEnd > newLoopStart) {
+				const auto presetSetsGain = job.Filter.find(L"volume=") != std::wstring::npos;
+				if (loudnessMatch && !presetSetsGain && newLoopEnd > newLoopStart) {
 					const auto spanSeconds = static_cast<double>(newLoopEnd - newLoopStart) / static_cast<double>(samplingRate);
 					const auto templateStartSeconds = static_cast<double>(templateLoopStart) / static_cast<double>(templateRate);
 
@@ -1807,7 +1811,9 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 				// Reproduce whatever onset treatment the game's own file has (a fade-in, a
 				// held silence) that the OST recording does not, per apply_onset_correction.
-				if (onsetMatch && !job.FromPreset) {
+				const auto presetSetsOnset = job.Filter.find(L"adelay=") != std::wstring::npos
+					|| job.Filter.find(L"afade=t=in") != std::wstring::npos;
+				if (onsetMatch && !presetSetsOnset) {
 					constexpr double OnsetWindowSeconds = 3.0;  // longest observed real case was ~1.3s; ample margin
 					const auto onsetRawPath = tempDir / std::format(L"scdtool_apply_onset_{}.f32", tempFileCounter.fetch_add(1));
 					keepTemp(onsetRawPath);
