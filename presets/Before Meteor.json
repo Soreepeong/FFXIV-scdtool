@@ -3749,6 +3749,32 @@
     ],
     "# comment": "same recording as ENDWALKER_040.flac, which the matcher picked for this target (0.976 vs 0.987); listed here too so owning this album is enough to replace it. the game's file starts before this recording does, so the source is delayed rather than offset: source by 0.780s the recording runs out 2.8s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.08s (similarity 0.987 against 0.834 for the next-best placement, and the distance back is the game file's own loop period of 424.805s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 1.575s, seamed 0.50s early and crossfaded over that."
    }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_033"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_IKD03.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.39
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "found only with the coarse shortlist disabled, then ranked on log-mel rather than envelope correlation: 0.9841 here, 0.4606 clear of the next candidate."
+   }
   }
  ],
  "pcmHashAlgorithm": "crc32/s32le@native",

@@ -2872,6 +2872,32 @@
     ],
     "# comment": "spectral similarity to the game's own file: 0.982; offset corrected +154.180s -> +3.320s by re-deriving the alignment and judging it on the intro (0.9223 -> 0.9795)"
    }
+  },
+  {
+   "source": [
+    "HEAVENSWARD_FFXIV_19"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_313.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.685
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "found only with the coarse shortlist disabled, then ranked on log-mel rather than envelope correlation: 0.7832 here, 0.3902 clear of the next candidate."
+   }
   }
  ],
  "pcmHashAlgorithm": "crc32/s32le@native",

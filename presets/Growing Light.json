@@ -6095,6 +6095,58 @@
     ],
     "# comment": "spectral similarity to the game's own file: 0.977"
    }
+  },
+  {
+   "source": [
+    "GL_00031"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_568.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.865
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "found only with the coarse shortlist disabled, then ranked on log-mel rather than envelope correlation: 0.8679 here, 0.2565 clear of the next candidate."
+   }
+  },
+  {
+   "source": [
+    "GL_00036"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_581.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.37
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "found only with the coarse shortlist disabled, then ranked on log-mel rather than envelope correlation: 0.9040 here, 0.3982 clear of the next candidate."
+   }
   }
  ],
  "pcmHashAlgorithm": "crc32/s32le@native",

@@ -1,0 +1,443 @@
+{
+ "name": "Monster Hunter World",
+ "searchDirectories": {
+  "Monster Hunter World Original Soundtrack": {
+   "default": true,
+   "purchaseLinks": {
+    "amazon.co.jp": "https://www.amazon.co.jp/dp/B077RLLKW5/"
+   }
+  },
+  "Monster Hunter World Iceborne Original Soundtrack": {}
+ },
+ "items": [
+  {
+   "source": {
+    "source": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "^1-06\\."
+       },
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "1\\-06\\ \\-\\ 新大陸への礎\\ ～\\ 調査拠点アステラ"
+       }
+      ]
+     ]
+    }
+   },
+   "target": {
+    "path": "music/ex2/BGM_EX2_Event_15.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": -0.185
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "log-mel 0.9544 against the game's own file, 0.4077 clear of the next candidate."
+   }
+  },
+  {
+   "source": {
+    "source": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "^1-06\\."
+       },
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "1\\-06\\ \\-\\ 新大陸への礎\\ ～\\ 調査拠点アステラ"
+       }
+      ]
+     ]
+    }
+   },
+   "target": {
+    "path": "music/ex2/BGM_EX2_Event_16.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 141.64
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "log-mel 0.9899 against the game's own file, 0.5765 clear of the next candidate."
+   }
+  },
+  {
+   "source": {
+    "source": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "^1-06\\."
+       },
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "1\\-06\\ \\-\\ 新大陸への礎\\ ～\\ 調査拠点アステラ"
+       }
+      ]
+     ]
+    }
+   },
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_248.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": -0.185
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "log-mel 0.9385 against the game's own file, 0.4158 clear of the next candidate."
+   }
+  },
+  {
+   "source": {
+    "source": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "^1-15\\."
+       },
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "1\\-15\\ \\-\\ 森を牛耳る蛮顎の竜"
+       }
+      ]
+     ]
+    }
+   },
+   "target": {
+    "path": "music/ex2/BGM_EX2_Ban_14.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.375
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "log-mel 0.9403 against the game's own file, 0.4759 clear of the next candidate."
+   }
+  },
+  {
+   "source": {
+    "source": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "^1-15\\."
+       },
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "1\\-15\\ \\-\\ 森を牛耳る蛮顎の竜"
+       }
+      ]
+     ]
+    }
+   },
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_246.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.375
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "log-mel 0.9284 against the game's own file, 0.4798 clear of the next candidate."
+   }
+  },
+  {
+   "source": {
+    "source": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "^1-17\\."
+       },
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "1\\-17\\ \\-\\ クエストクリア\\ \\(英雄の証version\\)"
+       }
+      ]
+     ]
+    }
+   },
+   "target": {
+    "path": "music/ex2/BGM_EX2_Event_14.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.345
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "log-mel 0.9912 against the game's own file, 0.4648 clear of the next candidate."
+   }
+  },
+  {
+   "source": {
+    "source": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "^1-26\\."
+       },
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "1\\-26\\ \\-\\ QUEST\\ FAILED"
+       }
+      ]
+     ]
+    }
+   },
+   "target": {
+    "path": "music/ex2/BGM_EX2_Event_24.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.35
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "log-mel 0.9770 against the game's own file, 0.4601 clear of the next candidate."
+   }
+  },
+  {
+   "source": {
+    "source": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "^1-28\\."
+       },
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "1\\-28\\ \\-\\ 作戦会議2\\ ～\\ 緊迫"
+       }
+      ]
+     ]
+    }
+   },
+   "target": {
+    "path": "music/ex2/BGM_EX2_Event_18.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.41
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "log-mel 0.9919 against the game's own file, 0.5559 clear of the next candidate."
+   }
+  },
+  {
+   "source": {
+    "source": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "^3-19\\."
+       },
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "3\\-19\\ \\-\\ 英雄の証\\ ～\\ Monster\\ Hunter\\ World\\ version\\ \\(Extended\\ edition\\)"
+       }
+      ]
+     ]
+    }
+   },
+   "target": {
+    "path": "music/ex2/BGM_EX2_Ban_15.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.935
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "log-mel 0.9607 against the game's own file, 0.5836 clear of the next candidate."
+   }
+  },
+  {
+   "source": {
+    "source": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "^3-19\\."
+       },
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "3\\-19\\ \\-\\ 英雄の証\\ ～\\ Monster\\ Hunter\\ World\\ version\\ \\(Extended\\ edition\\)"
+       }
+      ]
+     ]
+    }
+   },
+   "target": {
+    "path": "music/ffxiv/BGM_Ride_NIKU.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.395
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "log-mel 0.9616 against the game's own file, 0.5850 clear of the next candidate."
+   }
+  },
+  {
+   "source": {
+    "source": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "^3-19\\."
+       },
+       {
+        "directory": "Monster Hunter World Original Soundtrack",
+        "pattern": "3\\-19\\ \\-\\ 英雄の証\\ ～\\ Monster\\ Hunter\\ World\\ version\\ \\(Extended\\ edition\\)"
+       }
+      ]
+     ]
+    }
+   },
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_247.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.395
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "log-mel 0.9456 against the game's own file, 0.5749 clear of the next candidate."
+   }
+  }
+ ]
+}

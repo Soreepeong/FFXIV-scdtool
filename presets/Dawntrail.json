@@ -4286,6 +4286,34 @@
     ],
     "# comment": "spectral similarity to the game's own file: 0.975"
    }
+  },
+  {
+   "source": [
+    "^00001\\.",
+    "DT_002",
+    "Dawntrail"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_System_Title.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.545
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "the matcher never proposed this one: the coarse shortlist of 60 drops DT_002 before it is scored, and with the shortlist off it wins on envelope correlation by only 0.0155, under the 0.05 margin. Against the log-mel metric it is not close -- 0.853 here against 0.559 for the best rival -- so the pairing is not in doubt."
+   }
   }
  ],
  "pcmHashAlgorithm": "crc32/s32le@native",
