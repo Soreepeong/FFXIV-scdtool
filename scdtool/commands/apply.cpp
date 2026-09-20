@@ -71,7 +71,13 @@ namespace {
 		double Score = 0.;
 		double Offset = 0.;       // seconds the source is shifted relative to the game's timeline
 		std::vector<apply_stem> Stems;  // empty unless the entry is engine-switched stems
-		std::vector<apply_segment> Segments;  // empty unless the entry came from a MusicImportConfig
+		std::vector<apply_segment> Segments;  // empty unless the entry needs more than one span
+		std::wstring Filter;      // the preset's filter chain for this source, if it gave one
+		// A preset is a record of decisions already taken: its offset was fitted against
+		// this very file, and where a gain or a lead-in silence was wanted it says so as a
+		// filter. Re-deriving either would apply it twice, so such a job is executed as
+		// written rather than re-judged.
+		bool FromPreset = false;
 		std::string Note;         // the preset's own comment, echoed in the log line
 	};
 
@@ -168,23 +174,31 @@ namespace {
 		const std::filesystem::path& source,
 		size_t channels,
 		size_t samplingRate,
-		const std::filesystem::path& rawPath) {
+		const std::filesystem::path& rawPath,
+		const std::wstring& filter = {}) {
 
 		std::error_code ec;
 		std::filesystem::remove(rawPath, ec);
 
 		// soxr, matching MusicImporter: the SCD is lossy Vorbis, so the resample is part
 		// of the audible chain and a cheap one would be the weak link.
-		run_process_capture_stdout(ffmpeg, {
+		std::vector<std::wstring> args{
 			L"-v", L"error",
 			L"-i", source.wstring(),
 			L"-map", L"0:a:0",
+		};
+		// The preset's own chain runs first, on the whole recording, which is what
+		// MusicImportConfig's sourceFilters have always meant -- the offset trims after it.
+		if (!filter.empty())
+			args.insert(args.end(), {L"-af", filter});
+		args.insert(args.end(), {
 			L"-ac", std::to_wstring(channels),
 			L"-ar", std::to_wstring(samplingRate),
 			L"-resampler", L"soxr",
 			L"-f", L"f32le",
 			L"-y", rawPath.wstring(),
 		});
+		run_process_capture_stdout(ffmpeg, args);
 
 		std::ifstream f(rawPath, std::ios::binary | std::ios::ate);
 		if (!f)
@@ -1138,11 +1152,42 @@ namespace {
 		if (segments.empty())
 			return;
 
+		// One span of one recording, its channels taken in order, is exactly what the
+		// single-source path already builds -- and that path carries the treatments a
+		// segment assembly has no way to reach: the sample-accurate alignment around the
+		// loop point, which a preset's millisecond-rounded offset has lost by the time it
+		// is written down. So the assembler is kept for what only it can do.
+		const auto plain = segments.size() == 1 && segments.front().Sources.size() == 1;
+		bool sequential = plain;
+		if (plain) {
+			for (size_t ch = 0; ch < segments.front().Channels.size(); ch++)
+				sequential = sequential && segments.front().Channels[ch].second == ch;
+		}
+
 		for (const auto& path : paths) {
+			if (sequential) {
+				const auto& only = segments.front().Sources.begin()->second;
+				jobs.push_back({
+					.TargetPath = path,
+					.SourcePath = only.Path,
+					.Score = 1.,
+					// Opposite signs. A MusicImportConfig offset says where in the recording
+					// this target begins, so it counts forward into the source; the matchset's
+					// says how far the recording sits from the game's timeline, so a positive
+					// one pads. Carried across unchanged, a field track keyed at +168.705s got
+					// 168s of silence in front of the whole recording instead of starting there.
+					.Offset = -only.Offset,
+					.Filter = only.Filter,
+					.FromPreset = true,
+					.Note = target.value("# comment", std::string{}),
+				});
+				continue;
+			}
 			jobs.push_back({
 				.TargetPath = path,
 				.Score = 1.,
 				.Segments = segments,
+				.FromPreset = true,
 				.Note = target.value("# comment", std::string{}),
 			});
 		}
@@ -1602,7 +1647,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 				// in front of us, and the envelope that produced it cannot tell one loop pass
 				// from another. A failure here is never fatal -- the recorded offset still
 				// works for an untrimmed library, which is the common case.
-				if (autoOffset) {
+				if (autoOffset && !job.FromPreset) {
 					try {
 						deduced = deduce_offset(ffmpegPath, templateAudio, job.SourcePath,
 							static_cast<double>(templateLoopStart) / static_cast<double>(templateRate),
@@ -1629,8 +1674,16 @@ int cmd_apply(const std::vector<std::string>& args) {
 					try {
 						aligned = refine_offset_to_samples(ffmpegPath, templateAudio, job.SourcePath,
 							samplingRate, around, effectiveOffset, tempFile);
-						if (aligned.Refined)
+						// A preset's offset was fitted against this file and only lost precision on
+						// its way into JSON, so refinement is allowed to recover the samples and
+						// nothing more; a larger move would be the search disagreeing with the fit,
+						// and the fit is the one that was checked.
+						constexpr double PresetRefinementSeconds = 0.005;
+						if (aligned.Refined && (!job.FromPreset
+							|| std::abs(aligned.Seconds - effectiveOffset) <= PresetRefinementSeconds))
 							effectiveOffset = aligned.Seconds;
+						else
+							aligned = {};
 					} catch (const std::exception&) {
 						aligned = {};
 					}
@@ -1638,7 +1691,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 				const auto rawPath = tempDir / std::format(L"scdtool_apply_{}.f32", tempFileCounter.fetch_add(1));
 				keepTemp(rawPath);
-				floats = decode_source_to_floats(ffmpegPath, job.SourcePath, channels, samplingRate, rawPath);
+				floats = decode_source_to_floats(ffmpegPath, job.SourcePath, channels, samplingRate, rawPath, job.Filter);
 
 				// Rebase the source onto the game's timeline before anything else.
 				//
@@ -1677,7 +1730,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 				// musical span on both sides. Without this the swapped track sits at the OST
 				// master's level, which is usually hotter than the game's own mix and would
 				// stand out against every other track in game.
-				if (loudnessMatch && newLoopEnd > newLoopStart) {
+				if (loudnessMatch && !job.FromPreset && newLoopEnd > newLoopStart) {
 					const auto spanSeconds = static_cast<double>(newLoopEnd - newLoopStart) / static_cast<double>(samplingRate);
 					const auto templateStartSeconds = static_cast<double>(templateLoopStart) / static_cast<double>(templateRate);
 
@@ -1716,7 +1769,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 				// Reproduce whatever onset treatment the game's own file has (a fade-in, a
 				// held silence) that the OST recording does not, per apply_onset_correction.
-				if (onsetMatch) {
+				if (onsetMatch && !job.FromPreset) {
 					constexpr double OnsetWindowSeconds = 3.0;  // longest observed real case was ~1.3s; ample margin
 					const auto onsetRawPath = tempDir / std::format(L"scdtool_apply_onset_{}.f32", tempFileCounter.fetch_add(1));
 					keepTemp(onsetRawPath);
@@ -1756,6 +1809,29 @@ int cmd_apply(const std::vector<std::string>& args) {
 				floats = std::move(reordered);
 			}
 
+			// Carry the entry's MARK chunk across. It holds musical cue points -- one
+			// Orchestrion roll has 41 of them, one every four seconds -- and since the
+			// replacement is laid on the game's own timeline the positions still mean what
+			// they meant; only the sample rate has to be followed. 17 of the game's music
+			// entries carry one and every replacement built before this dropped it, because
+			// a freshly encoded entry has no aux chunks and the writer clears the flag to
+			// match.
+			std::vector<uint32_t> markIndices;
+			for (const auto& aux : templateItem.AuxChunks) {
+				if (std::memcmp(aux->Name, xivres::sound::sound_entry_aux_chunk::Name_Mark, sizeof aux->Name) != 0)
+					continue;
+				const auto& mark = aux->Data.Mark;
+				for (size_t i = 0, count = *mark.Count; i < count; i++) {
+					const auto scaled = static_cast<uint64_t>(*mark.SampleBlockIndices[i])
+						* samplingRate / templateRate;
+					// A mark past the end of the new audio would point outside the stream; the
+					// recording being shorter than the game's own file is common enough that
+					// this has to drop rather than clamp, which would pile them on the last frame.
+					if (scaled < totalSamples)
+						markIndices.push_back(static_cast<uint32_t>(scaled));
+				}
+			}
+
 			auto newEntry = xivres::sound::writer::sound_item::make_from_ogg_encode(
 				channels,
 				samplingRate,
@@ -1763,7 +1839,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 				newLoopEnd,
 				xivres::memory_stream(xivres::util::span_cast<const uint8_t>(floats)).as_linear_reader<uint8_t>(),
 				{},
-				{},
+				markIndices,
 				oggQuality);
 
 			auto newScd = xivres::sound::writer();
