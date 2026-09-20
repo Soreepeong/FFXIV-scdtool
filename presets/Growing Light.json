@@ -180,10 +180,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "afade=t=out:st=237.237:d=2.000"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.975; also released as BTF_FFXIV_61, TFEOF_FFXIV_14; that album's own preset carries its own entry"
+    "# comment": "spectral similarity to the game's own file: 0.975; also released as BTF_FFXIV_61, TFEOF_FFXIV_14; that album's own preset carries its own entry. the recording is still playing at -8.9 dB where the game's own file has fallen to -81.4 dB, so it is faded to match that file's own decay: down from 2.80s before the end, silent for the last 0.80s"
    }
   },
   {

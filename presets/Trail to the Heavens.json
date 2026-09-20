@@ -2867,10 +2867,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "afade=t=out:st=114.193:d=1.100"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.869"
+    "# comment": "spectral similarity to the game's own file: 0.869. the recording is still playing at -3.8 dB where the game's own file has fallen to -78.8 dB, so it is faded to match that file's own decay: down from 2.30s before the end, silent for the last 1.20s"
    }
   },
   {

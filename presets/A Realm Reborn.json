@@ -2562,10 +2562,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "afade=t=out:st=25.922:d=1.100"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.958"
+    "# comment": "spectral similarity to the game's own file: 0.958. the recording is still playing at -16.2 dB where the game's own file has fallen to -92.9 dB, so it is faded to match that file's own decay: down from 2.10s before the end, silent for the last 1.00s"
    }
   },
   {
@@ -2590,10 +2593,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "afade=t=out:st=85.449:d=1.100"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.975"
+    "# comment": "spectral similarity to the game's own file: 0.975. the recording is still playing at -3.4 dB where the game's own file has fallen to -120.0 dB, so it is faded to match that file's own decay: down from 2.10s before the end, silent for the last 1.00s"
    }
   },
   {
@@ -2646,10 +2652,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "afade=t=out:st=261.593:d=1.100"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
+    "# comment": "spectral similarity to the game's own file: 0.992. the recording is still playing at -20.8 dB where the game's own file has fallen to -75.5 dB, so it is faded to match that file's own decay: down from 1.60s before the end, silent for the last 0.50s"
    }
   },
   {
@@ -2960,10 +2969,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "afade=t=out:st=165.377:d=5.300"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
+    "# comment": "spectral similarity to the game's own file: 0.995. the recording is still playing at -20.3 dB where the game's own file has fallen to -62.5 dB, so it is faded to match that file's own decay: down from 5.60s before the end, silent for the last 0.30s"
    }
   },
   {
@@ -3016,10 +3028,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "afade=t=out:st=354.242:d=2.700"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.989"
+    "# comment": "spectral similarity to the game's own file: 0.989. the recording is still playing at -18.4 dB where the game's own file has fallen to -75.1 dB, so it is faded to match that file's own decay: down from 3.40s before the end, silent for the last 0.70s"
    }
   },
   {
@@ -4869,10 +4884,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "afade=t=out:st=27.238:d=3.600"
+      }
      }
     ],
-    "# comment": "recovered from its numbered siblings: ARR_FFXIV_005 is the recording the rest of this group resolved to, and it matches this target's intro at 0.994"
+    "# comment": "recovered from its numbered siblings: ARR_FFXIV_005 is the recording the rest of this group resolved to, and it matches this target's intro at 0.994. the recording is still playing at -17.6 dB where the game's own file has fallen to -52.4 dB, so it is faded to match that file's own decay: down from 3.60s before the end, silent for the last 0.00s"
    }
   },
   {

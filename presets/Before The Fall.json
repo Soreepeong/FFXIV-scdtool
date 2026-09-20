@@ -94,10 +94,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "afade=t=out:st=440.662:d=2.000"
+      }
      }
     ],
-    "# comment": "same recording as GL_00034.flac, which the matcher picked for this target (0.855 vs 0.859); listed here too so owning this album is enough to replace it"
+    "# comment": "same recording as GL_00034.flac, which the matcher picked for this target (0.855 vs 0.859); listed here too so owning this album is enough to replace it. the recording is still playing at -14.2 dB where the game's own file has fallen to -81.4 dB, so it is faded to match that file's own decay: down from 2.80s before the end, silent for the last 0.80s"
    }
   },
   {
