@@ -67,6 +67,11 @@ namespace {
 		std::vector<std::pair<std::string, size_t>> Channels;  // output channel -> (source name, channel in it)
 		double Length = 0.;
 		double CrossfadeSeconds = 0.;
+		// Where this segment begins in the target, when it does not simply follow the one
+		// before it. That turns a sequence into a layering: several spans sounding at once
+		// rather than one after another, which is what a canon is -- BGM_EX4_Event_15 is its
+		// own recording entering three times over itself. Negative means "follow on".
+		double StartSeconds = -1.;
 	};
 
 	struct apply_job {
@@ -659,11 +664,16 @@ namespace {
 			return static_cast<size_t>((std::max)(0LL, std::llround(seconds * rate)));
 		};
 
-		// Where each segment starts, and how far past its stated length it has to keep
-		// playing so the next one can fade in over it.
+		// Where each segment starts. One that names its own start is placed there and the
+		// rest still follow on from it, so a layered entry and a sequenced one can be
+		// described in the same list.
 		std::vector<size_t> segmentStart(segments.size(), 0);
-		for (size_t i = 1; i < segments.size(); i++)
-			segmentStart[i] = segmentStart[i - 1] + toSamples(segments[i - 1].Length);
+		for (size_t i = 0, cursor = 0; i < segments.size(); i++) {
+			segmentStart[i] = segments[i].StartSeconds >= 0.
+				? toSamples(segments[i].StartSeconds)
+				: cursor;
+			cursor = segmentStart[i] + toSamples(segments[i].Length);
+		}
 
 		std::vector<float> out;
 		for (size_t i = 0; i < segments.size(); i++) {
@@ -1206,6 +1216,7 @@ namespace {
 			apply_segment segment{
 				.Length = segmentJson.value("length", 0.),
 				.CrossfadeSeconds = segmentJson.value("crossfadeSeconds", 0.),
+				.StartSeconds = segmentJson.value("startSeconds", -1.),
 			};
 			for (const auto& [name, path] : resolved)
 				segment.Sources.emplace(name, apply_segment_source{.Path = path});

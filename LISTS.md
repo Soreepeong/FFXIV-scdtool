@@ -9,16 +9,16 @@ Weighted, because a cosine between two digital silences is noise and many of the
 | | count |
 |---|---:|
 | targets in the game's bgm sheet | 2175 |
-| enabled | 1839 |
-| disabled entries | 1 |
-| targets with no enabled entry at all | 1 |
+| enabled | 1840 |
+| disabled entries | 0 |
+| targets with no enabled entry at all | 0 |
 | never referenced by any preset | 267 |
 
 - confidence below 0.80: **2**
 - confidence 0.80-0.90: **84**
 - confidence 0.90-0.95: **155**
 - confidence 0.95-0.98: **439**
-- confidence 0.98 and up: **1159**
+- confidence 0.98 and up: **1160**
 
 Anything under about 0.90 is worth listening to before trusting it; the band from 0.95 up is where a correct match normally sits. A low score with the target's full length reproduced usually means the album's master genuinely differs from the game's, not that the wrong recording was picked.
 
@@ -1729,6 +1729,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9971 | `music/ex2/BGM_EX2_Rti_32.scd` | SHADOWBRINGERS_25.flac | Shadowbringers.json |
 | 0.9971 | `music/ex3/BGM_EX3_Field_Safe_02.scd` | SHADOWBRINGERS_45.flac | Shadowbringers.json |
 | 0.9971 | `music/ex3/BGM_EX3_Field_Tem_Day.scd` | SHADOWBRINGERS_70.flac | Shadowbringers.json |
+| 0.9971 | `music/ex4/BGM_EX4_Event_15.scd` | Tremble | Endwalker.json |
 | 0.9971 | `music/ex4/BGM_EX4_MoE_01.scd` | GL_00000.flac | Growing Light.json |
 | 0.9971 | `music/ex4/BGM_EX4_Town_R_Day2.scd` | ENDWALKER_013.flac | Endwalker.json |
 | 0.9971 | `music/ex5/BGM_EX5_EoV_08.scd` | TH_089.mp3 | Trail to the Heavens.json |
@@ -1874,7 +1875,6 @@ These reasons are now measured rather than predicted. Six entries that carried t
 
 | target | recording | preset | also enabled elsewhere | why |
 |---|---|---|:-:|---|
-| `music/ex4/BGM_EX4_Event_15.scd` | source | Endwalker.json | **no** | source "source" is built by a filterComplex, which segments cannot express |
 
 ## 3. Never referenced
 

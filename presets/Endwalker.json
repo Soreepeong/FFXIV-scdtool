@@ -1355,22 +1355,75 @@
   },
   {
    "source": {
-    "source": {
-     "inputFiles": [
-      [
-       "00020",
-       "ENDWALKER_021",
-       "恐怖の波動",
-       "Tremble"
-      ]
-     ],
-     "filterComplex": "[0:a]afade=t=in:st=65.04525:d=2[tr1];[0:a]adelay=75195:all=1[tr2];[0:a]adelay=150390:all=1[tr3];[tr1][tr2][tr3]amix=inputs=3:duration=longest:normalize=0,atrim=start=65.04525,asetpts=PTS-STARTPTS[res]",
-     "filterComplexOutName": "[res]"
-    }
+    "Tremble": [
+     "^00020\\.",
+     "ENDWALKER_021",
+     "Tremble",
+     "恐怖の波動"
+    ]
    },
    "target": {
     "path": "music/ex4/BGM_EX4_Event_15.scd",
-    "# comment": "not short, layered: the target is this recording played over itself, three voices entering at 0s, 75.195s and 150.390s, trimmed to start at 65.045s. The graph is the hand-written one from presets-manual/Endwalker.json, copied rather than approximated, because segments sequence spans and this needs them to sound together. `scdtool apply` declines it for that reason and says so; the importer can build it. Previously disabled on the reading that the recording reaches only 24.2s of the 94.0s target, which measured 0.8612 and loops 69.9s early."
+    "segments": [
+     {
+      "sourceOffsets": {
+       "Tremble": {
+        "offset": 65.045
+       }
+      },
+      "channels": [
+       {
+        "source": "Tremble",
+        "channel": 0
+       },
+       {
+        "source": "Tremble",
+        "channel": 1
+       }
+      ],
+      "startSeconds": 0.0,
+      "sourceFilters": {
+       "Tremble": "afade=t=in:st=65.045:d=2"
+      }
+     },
+     {
+      "sourceOffsets": {
+       "Tremble": {
+        "offset": 0.0
+       }
+      },
+      "channels": [
+       {
+        "source": "Tremble",
+        "channel": 0
+       },
+       {
+        "source": "Tremble",
+        "channel": 1
+       }
+      ],
+      "startSeconds": 10.15
+     },
+     {
+      "sourceOffsets": {
+       "Tremble": {
+        "offset": 0.0
+       }
+      },
+      "channels": [
+       {
+        "source": "Tremble",
+        "channel": 0
+       },
+       {
+        "source": "Tremble",
+        "channel": 1
+       }
+      ],
+      "startSeconds": 85.345
+     }
+    ],
+    "# comment": "a canon: this recording entering three times over itself, at target 0s from its own 65.045s, and from its own start at 10.150s and 85.345s. That is the hand-written filterComplex in presets-manual/Endwalker.json read through its trim, expressed as layered segments so `scdtool apply` can build it -- segments sequence spans, and `startSeconds` lets one be placed instead of following on. The two-second fade on the first voice is the graph's and is load-bearing: without it the build opens at -17.7 dB where the game's file is at -37.1, and the whole-file score cannot tell, both reading 0.9971. Full length with the loop intact: 0.9971."
    }
   },
   {
