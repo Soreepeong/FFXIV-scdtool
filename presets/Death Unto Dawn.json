@@ -1,4525 +1,3357 @@
 {
-  "name": "Final Fantasy XIV - 5.5 - Death Unto Dawn",
-  "searchDirectories": {
-    "Death Unto Dawn": {
-      "default": true,
-      "purchaseLinks": {
-        "amazon.co.jp": "https://www.amazon.co.jp/dp/B097XB7DD6/"
-      }
-    }
+ "name": "Final Fantasy XIV - 5.5 - Death Unto Dawn",
+ "searchDirectories": {
+  "Death Unto Dawn": {
+   "default": true,
+   "purchaseLinks": {
+    "amazon.co.jp": "https://www.amazon.co.jp/dp/B097XB7DD6/"
+   }
+  }
+ },
+ "items": [
+  {
+   "source": [
+    "DUD_009",
+    "The Mendicant's Relish",
+    "名も無き者たちの情熱 ～蒼天街復興～"
+   ],
+   "target": {
+    "path": [
+     "music/ex1/BGM_EX1_FATE_Hukko.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_385.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.625
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.947"
+   }
   },
-  "items": [
-    {
-      "source": [
-        "DUD_009",
-        "The Mendicant's Relish",
-        "名も無き者たちの情熱 ～蒼天街復興～"
-      ],
-      "target": {
-        "path": "music/ex1/BGM_EX1_FATE_Hukko.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.625
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.947"
-      }
-    },
-    {
-      "source": [
-        "DUD_068",
-        "Skyrise",
-        "蒼天街復興祝祭"
-      ],
-      "target": {
-        "path": "music/ex1/BGM_EX1_Hukko_Fes.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.36
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.923"
-      }
-    },
-    {
-      "source": [
-        "DUD_026",
-        "Hearthward",
-        "蒼き日常 ～蒼天街復興～"
-      ],
-      "target": {
-        "path": "music/ex1/BGM_EX1_Hukko_Finish01.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.355
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.995"
-      }
-    },
-    {
-      "source": {
-        "DUD_052": [
-          "DUD_052",
-          "祝いの調べ ～蒼天街復興～",
-          "New Foundations"
-        ],
-        "DUD_053": [
-          "DUD_053",
-          "祝いの調べ：熱演 ～蒼天街復興～",
-          "New Foundations (Groundbreaking)"
-        ]
+  {
+   "source": [
+    "DUD_068",
+    "Skyrise",
+    "蒼天街復興祝祭"
+   ],
+   "target": {
+    "path": [
+     "music/ex1/BGM_EX1_Hukko_Fes.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_473.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.36
       },
-      "target": {
-        "path": "music/ex1/BGM_EX1_Hukko_concert.scd",
-        "segments": [
-          {
-            "channels": [
-              {
-                "source": "DUD_052",
-                "channel": 0
-              },
-              {
-                "source": "DUD_052",
-                "channel": 1
-              },
-              {
-                "source": "DUD_053",
-                "channel": 0
-              },
-              {
-                "source": "DUD_053",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "multichannel target: 2 engine-switched stems, matched individually (DUD_052 to game channels [0, 1] @0.935; DUD_053 to game channels [2, 3] @0.883). The stems tile the channels in order, so a plain sequential mapping is correct -- the same shape as the hand-written BGM_EX1_PvP01 entry. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio."
-      }
-    },
-    {
-      "source": [
-        "DUD_054",
-        "Gogo's Theme",
-        "ゴゴのテーマ"
-      ],
-      "target": {
-        "path": "music/ex2/BGM_EX2_AOZ_Battle03.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.065
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.990"
-      }
-    },
-    {
-      "source": [
-        "DUD_040",
-        "Watts's Anvil",
-        "ワッツハンマー・ガレージ"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_BanFort_Dwarf_Good.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.505
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.957"
-      }
-    },
-    {
-      "source": [
-        "DUD_007",
-        "The Garden's Gates",
-        "リェー・メグの門"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_BanFort_Fairy_Good.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.45
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.981"
-      }
-    },
-    {
-      "source": [
-        "DUD_023",
-        "Hopl's Dropple",
-        "ホパル古盤"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_BanFort_kkrn_Good.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 122.145
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "DUD_002",
-        "Metal - Brute Justice Mode (Journeys)",
-        "メタル：ブルートジャスティスモード (Journeys) ～機工城アレキサンダー：律動編～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ban_05.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.705
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.981"
-      }
-    },
-    {
-      "source": {
-        "DUD_003": [
-          "DUD_003",
-          "ライズ (Journeys) ～機工城アレキサンダー：天動編～",
-          "Rise (Journeys)"
-        ],
-        "TFEOF_FFXIV_38": [
-          "TFEOF_FFXIV_38",
-          "無限停止　～機工城アレキサンダー：天動編～",
-          "Stasis Loop"
-        ]
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.923"
+   }
+  },
+  {
+   "source": [
+    "DUD_026",
+    "Hearthward",
+    "蒼き日常 ～蒼天街復興～"
+   ],
+   "target": {
+    "path": [
+     "music/ex1/BGM_EX1_Hukko_Finish01.scd",
+     "music/ffxiv/BGM_Ride_Hukko01.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_450.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.355
       },
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ban_07.scd",
-        "segments": [
-          {
-            "channels": [
-              {
-                "source": "DUD_003",
-                "channel": 0
-              },
-              {
-                "source": "DUD_003",
-                "channel": 1
-              },
-              {
-                "source": "TFEOF_FFXIV_38",
-                "channel": 0
-              },
-              {
-                "source": "TFEOF_FFXIV_38",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "multichannel target: 2 engine-switched stems, matched individually (DUD_003 to game channels [0, 1] @0.622; TFEOF_FFXIV_38 to game channels [2, 3] @0.609). The stems tile the channels in order, so a plain sequential mapping is correct -- the same shape as the hand-written BGM_EX1_PvP01 entry. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio."
-      }
-    },
-    {
-      "source": [
-        "DUD_024",
-        "Ultima (Scions & Sinners)",
-        "究極幻想 (Scions & Sinners)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ban_09.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.355
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.963"
-      }
-    },
-    {
-      "source": [
-        "DUD_025",
-        "Rise of the White Raven (Orchestral Version)",
-        "白銀の凶鳥、飛翔せり (Orchestral Version)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ban_10.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 3.42
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.980"
-      }
-    },
-    {
-      "source": [
-        "DUD_044",
-        "To the Edge"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ban_11.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.62
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.910"
-      }
-    },
-    {
-      "source": [
-        "DUD_043",
-        "Echoes in the Dark",
-        "暗がりに響く音"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ban_12.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.46
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.998"
-      }
-    },
-    {
-      "source": [
-        "DUD_044",
-        "To the Edge"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ban_14.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 31.755
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-4dB"
-            }
-          }
-        ],
-        "enable": false,
-        "# comment": "source is correct (spectral 0.847 at offset -31.8s) but covers only 91% of this target: 428s of 467s. The rest needs a multi-segment or filterComplex source; left disabled until then."
-      }
-    },
-    {
-      "source": [
-        "DUD_082",
-        "In the Arms of War",
-        "孤児たちの戦い ～ダイヤウェポン捕獲作戦～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ban_15.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.105
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "DUD_001",
-        "Locus (Duality)",
-        "ローカス (Duality) ～機工城アレキサンダー：起動編～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Boss_Battle02.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.01
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.991"
-      }
-    },
-    {
-      "source": [
-        "DUD_022",
-        "Insatiable (Scions & Sinners)",
-        "貪欲 (Scions & Sinners)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Boss_Battle03.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.32
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.978"
-      }
-    },
-    {
-      "source": [
-        "DUD_056",
-        "The Black Wolf Stalks Again",
-        "漆黒の王狼、再び ～エメラルドウェポン破壊作戦～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Con_01.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.465
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "DUD_021",
-        "Floundering in the Depths",
-        "底に潜みし者 ～黒風海底 アニドラス・アナムネーシス～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Dan_D10.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.685
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "DUD_042",
-        "Where All Roads Lead",
-        "すべての道が至る場所 ～漆黒決戦 ノルヴラント～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Dan_D11.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.44
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.954"
-      }
-    },
-    {
-      "source": [
-        "DUD_055",
-        "Freshly Glazed Porxie",
-        "焼き立てポークシー ～魔術工房 マトーヤのアトリエ～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Dan_D12.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 115.84
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.953"
-      }
-    },
-    {
-      "source": [
-        "DUD_080",
-        "Seven Flames",
-        "炎の七部族 ～黄金平原 パガルザン～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Dan_D13.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.805
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.946"
-      }
-    },
-    {
-      "source": [
-        "DUD_062",
-        "Ami (Shadowbringers)",
-        "Ami ～漆黒～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Event_20.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.14
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.998"
-      }
-    },
-    {
-      "source": [
-        "DUD_032",
-        "Gangos",
-        "ガンゴッシュ"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Event_21.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.72
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "DUD_045",
-        "Eternal Wind (Shadowbringers)",
-        "悠久の風 ～漆黒～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Event_22.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.61
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.995"
-      }
-    },
-    {
-      "source": [
-        "DUD_083",
-        "Forever at Your Side",
-        "ひとりじゃない"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Event_26.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.66
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.978"
-      }
-    },
-    {
-      "source": [
-        "DUD_059",
-        "Treasured Memory",
-        "美しき思い出 ～希望の園エデン：再生編～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Event_29.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 52.07
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.999"
-      }
-    },
-    {
-      "source": [
-        "DUD_081",
-        "And Love You Shall Find",
-        "愛を求める者たち"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Field_Welrit.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.895
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.988"
-      }
-    },
-    {
-      "source": {
-        "DUD_033": [
-          "DUD_033",
-          "ボズヤの微風",
-          "Wind on the Plains"
-        ],
-        "DUD_034": [
-          "DUD_034",
-          "ボズヤの血風",
-          "Blood on the Wind"
-        ],
-        "Before_Meteor_FFXIV_084": [
-          "Before_Meteor_FFXIV_084",
-          "Quick as Silver, Hard as Stone",
-          "疾きこと銀の如く、硬きこと石の如く"
-        ]
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": {
+    "DUD_052": [
+     "DUD_052",
+     "祝いの調べ ～蒼天街復興～",
+     "New Foundations"
+    ],
+    "DUD_053": [
+     "DUD_053",
+     "祝いの調べ：熱演 ～蒼天街復興～",
+     "New Foundations (Groundbreaking)"
+    ]
+   },
+   "target": {
+    "path": "music/ex1/BGM_EX1_Hukko_concert.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "DUD_052",
+        "channel": 0
+       },
+       {
+        "source": "DUD_052",
+        "channel": 1
+       },
+       {
+        "source": "DUD_053",
+        "channel": 0
+       },
+       {
+        "source": "DUD_053",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "multichannel target: 2 engine-switched stems, matched individually (DUD_052 to game channels [0, 1] @0.935; DUD_053 to game channels [2, 3] @0.883). The stems tile the channels in order, so a plain sequential mapping is correct -- the same shape as the hand-written BGM_EX1_PvP01 entry. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio."
+   }
+  },
+  {
+   "source": [
+    "DUD_054",
+    "Gogo's Theme",
+    "ゴゴのテーマ"
+   ],
+   "target": {
+    "path": "music/ex2/BGM_EX2_AOZ_Battle03.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.065
       },
-      "target": {
-        "path": "music/ex3/BGM_EX3_MYC_01.scd",
-        "segments": [
-          {
-            "channels": [
-              {
-                "source": "DUD_033",
-                "channel": 0
-              },
-              {
-                "source": "DUD_033",
-                "channel": 1
-              },
-              {
-                "source": "DUD_034",
-                "channel": 0
-              },
-              {
-                "source": "DUD_034",
-                "channel": 1
-              },
-              {
-                "source": "Before_Meteor_FFXIV_084",
-                "channel": 0
-              },
-              {
-                "source": "Before_Meteor_FFXIV_084",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "enable": false,
-        "# comment": "multichannel target: 3 engine-switched stems, matched individually (DUD_033 to game channels [0, 2] @0.891; DUD_034 to game channels [1, 4] @0.780; Before_Meteor_FFXIV_084 to game channels [3, 5] @0.587). The stems do NOT tile the channels in order, so this needs a sequentialToFfmpegChannelIndexMap that has not been derived; disabled. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio."
-      }
-    },
-    {
-      "source": [
-        "DUD_036",
-        "Discord: Imperial (Zodiac Age Version)",
-        "動乱 帝国バージョン (Zodiac Age Version)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_MYC_02.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.76
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "DUD_037",
-        "Into the Fortress (Zodiac Age Version)",
-        "潜入 (Zodiac Age Version)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_MYC_03.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.325
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.995"
-      }
-    },
-    {
-      "source": [
-        "DUD_038",
-        "Battle with an Esper (Zodiac Age Version)",
-        "召喚獣戦 (Zodiac Age Version)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_MYC_04.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.41
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "enable": false,
-        "# comment": "source is correct (spectral 0.984 at offset -1.4s) but covers only 74% of this target: 145s of 194s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
-      }
-    },
-    {
-      "source": [
-        "DUD_039",
-        "Life and Death (Zodiac Age Version)",
-        "死闘 (Zodiac Age Version)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_MYC_05.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.245
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "enable": false,
-        "# comment": "source is correct (spectral 0.977 at offset -1.2s) but covers only 67% of this target: 110s of 164s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
-      }
-    },
-    {
-      "source": [
-        "DUD_035",
-        "Unrest (Zodiac Age Version)",
-        "騒乱 (Zodiac Age Version)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_MYC_06.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": -81.7
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.981"
-      }
-    },
-    {
-      "source": [
-        "DUD_064",
-        "The Sochen Cave Palace (Zodiac Age Version)",
-        "ソーヘン地下宮殿 (Zodiac Age Version)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_MYC_07.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": -0.87
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.992"
-      }
-    },
-    {
-      "source": [
-        "DUD_065",
-        "Giving Chase (Zodiac Age Version)",
-        "言葉無き戦い (Zodiac Age Version)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_MYC_08.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.855
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.986"
-      }
-    },
-    {
-      "source": [
-        "DUD_066",
-        "The Queen Awakens",
-        "復活の女王 ～グンヒルド・ディルーブラム～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_MYC_09.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 237.69
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "enable": false,
-        "# comment": "source is correct (spectral 0.982 at offset -237.7s) but covers only 93% of this target: 222s of 240s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
-      }
-    },
-    {
-      "source": [
-        "DUD_067",
-        "Wrath of the Harrier",
-        "怒れる悪魔 ～旗艦ダル・リアータ攻略戦～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_MYC_10.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.235
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.992"
-      }
-    },
-    {
-      "source": [
-        "DUD_027",
-        "Twice Stricken",
-        "雷轟電撃 ～希望の園エデン：共鳴編～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Raid_05.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 159.46
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.988"
-      }
-    },
-    {
-      "source": [
-        "DUD_028",
-        "Primal Angel",
-        "原始の堕天使 ～希望の園エデン：共鳴編～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Raid_06.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.55
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.986"
-      }
-    },
-    {
-      "source": [
-        "DUD_031",
-        "Return to Oblivion",
-        "忘却の此方 ～希望の園エデン：共鳴編～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Raid_07.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.87
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.879"
-      }
-    },
-    {
-      "source": [
-        "DUD_030",
-        "TH_102",
-        "A Sundering of Light",
-        "分割された光 ～希望の園エデン：共鳴編～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Raid_08.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.13
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "DUD_057",
-        "Don't Be Afraid (Shadowbringers)",
-        "Don’t be Afraid ～漆黒～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Raid_09.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.995
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.929"
-      }
-    },
-    {
-      "source": [
-        "DUD_060",
-        "消せない約束 ～希望の園エデン：再生編～",
-        "Promises to Keep"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Raid_11.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.33
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "same recording as TH_104.mp3, which the matcher picked for this target (0.846 vs 0.857); listed here too so owning this album is enough to replace it"
-      }
-    },
-    {
-      "source": [
-        "DUD_061",
-        "TH_103",
-        "The Extreme (Shadowbringers)",
-        "The Extreme ～漆黒～"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Raid_12.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.455
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.917"
-      }
-    },
-    {
-      "source": [
-        "DUD_012",
-        "Significance - Nothing (From NieR:Automata)",
-        "意味／無 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_01.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.075
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.990"
-      }
-    },
-    {
-      "source": [
-        "DUD_079",
-        "City Ruins - Rays of Light (From NieR:Automata)",
-        "遺サレタ場所／斜光 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_02.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.535
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "DUD_013",
-        "Vague Hope - Cold Rain (From NieR:Automata)",
-        "曖昧ナ希望／氷雨 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_03.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.825
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "DUD_020",
-        "Voice of no Return - Guitar (From NieR:Automata)",
-        "還ラナイ声／ギター (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_05.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.35
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "DUD_015",
-        "Alien Manifestation (From NieR:Automata)",
-        "顕現シタ異物 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_06.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.125
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.997"
-      }
-    },
-    {
-      "source": [
-        "DUD_016",
-        "Song of the Ancients - Atonement (From NieR:Automata)",
-        "イニシエノウタ／贖罪 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_07.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.96
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "DUD_017",
-        "Bipolar Nightmare (From NieR:Automata)",
-        "双極ノ悪夢 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_08.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 146.455
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.966"
-      }
-    },
-    {
-      "source": [
-        "DUD_018",
-        "Weight of the World - Prelude Version",
-        "Weight of the World／Prelude Version"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_09.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.705
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.995"
-      }
-    },
-    {
-      "source": [
-        "DUD_014",
-        "Crumbling Lies - Front (From NieR:Automata)",
-        "崩壊ノ虚妄 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_10.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.965
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.997"
-      }
-    },
-    {
-      "source": [
-        "DUD_051",
-        "Broken Heart (From NieR:Automata)",
-        "割レタ心 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_11.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.205
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.998"
-      }
-    },
-    {
-      "source": [
-        "DUD_046",
-        "Amusement Park (From NieR:Automata)",
-        "遊園施設 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_13.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.215
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.997"
-      }
-    },
-    {
-      "source": [
-        "DUD_047",
-        "Fortress of Lies (From NieR:Automata)",
-        "偽リノ城塞 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_14.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.89
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "DUD_048",
-        "Grandma - Destruction (From NieR:Automata)",
-        "オバアチャン／破壊 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_15.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.175
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "DUD_049",
-        "End of the Unknown (From NieR:Automata)",
-        "異形ノ末路 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_16.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.775
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "DUD_050",
-        "Torn from the Heavens",
-        "天より降りし力～全テヲ破壊スル黒キ巨人／Medley Version"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_17.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.51
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.991"
-      }
-    },
-    {
-      "source": [
-        "DUD_073",
-        "Mourning (From NieR:Automata)",
-        "追悼 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_18.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.26
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.995"
-      }
-    },
-    {
-      "source": [
-        "DUD_072",
-        "Emil - Despair (From NieR:Automata)",
-        "エミール／絶望 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_19.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.205
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.990"
-      }
-    },
-    {
-      "source": [
-        "DUD_074",
-        "The Sound of the End (From NieR:Automata)",
-        "終ワリノ音 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_21.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.385
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "DUD_075",
-        "The Sound of the End: 8bit (From NieR:Automata)",
-        "終ワリノ音：丁 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_22.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.41
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.990"
-      }
-    },
-    {
-      "source": [
-        "DUD_077",
-        "カイネ／Final Fantasy Main Theme Version"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_23.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.96
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.995"
-      }
-    },
-    {
-      "source": [
-        "DUD_078",
-        "Weight of the World - Instrumental Version (From NieR:Automata)",
-        "Weight of the World／Instrumental Version (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_24.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.355
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.997"
-      }
-    },
-    {
-      "source": [
-        "DUD_069",
-        "Voice of no Return - Normal (From NieR:Automata)",
-        "還ラナイ声／通常 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_25.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.525
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.997"
-      }
-    },
-    {
-      "source": [
-        "DUD_071",
-        "Widespread Illness (From NieR:Automata)",
-        "茫洋タル病 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_27.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.37
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "enable": false,
-        "# comment": "source is correct (spectral 0.972 at offset -1.4s) but covers only 94% of this target: 109s of 116s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
-      }
-    },
-    {
-      "source": [
-        "DUD_076",
-        "Possessed by Disease (From NieR:Automata)",
-        "取リ憑イタ業病 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_28.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.0
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "DUD_019",
-        "Faltering Prayer - Dawn Breeze (From NieR:Automata)",
-        "澱ンダ祈リ／暁風 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ex3/BGM_EX3_Ytc_29.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.88
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.997"
-      }
-    },
-    {
-      "source": [
-        "DUD_061",
-        "The Extreme ～漆黒～",
-        "The Extreme (Shadowbringers)"
-      ],
-      "target": {
-        "path": "music/ex5/BGM_EX5_Ban_12.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 33.475
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "same recording as TH_103.mp3, which the matcher picked for this target (0.883 vs 0.912); listed here too so owning this album is enough to replace it"
-      }
-    },
-    {
-      "source": [
-        "DUD_060",
-        "消せない約束 ～希望の園エデン：再生編～",
-        "Promises to Keep"
-      ],
-      "target": {
-        "path": "music/ex5/BGM_EX5_Ban_16.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.33
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "same recording as TH_104.mp3, which the matcher picked for this target (0.846 vs 0.857); listed here too so owning this album is enough to replace it"
-      }
-    },
-    {
-      "source": [
-        "DUD_029",
-        "BTF_FFXIV_42",
-        "TH_101",
-        "Footsteps in the Snow",
-        "雪上の足跡 ～蛮神シヴァ前哨戦～"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ban_Shiva1.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.66
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.988"
-      }
-    },
-    {
-      "source": [
-        "DUD_041",
-        "The Isle of Endless Summer",
-        "常夏の島"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Event_Hula.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 19.175
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.978"
-      }
-    },
-    {
-      "source": [
-        "DUD_063",
-        "Shuffle or Boogie (Shadowbringers)",
-        "Shuffle or Boogie ～漆黒～"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_GlodSaucer_TripleWaiting.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.335
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.972"
-      }
-    },
-    {
-      "source": [
-        "DUD_082",
-        "In the Arms of War",
-        "孤児たちの戦い ～ダイヤウェポン捕獲作戦～"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_Dia.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.105
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "DUD_027",
-        "Twice Stricken",
-        "雷轟電撃 ～希望の園エデン：共鳴編～"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_Eden02.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 159.46
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.988"
-      }
-    },
-    {
-      "source": [
-        "DUD_060",
-        "消せない約束 ～希望の園エデン：再生編～",
-        "Promises to Keep"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_Eden03.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.33
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "same recording as TH_104.mp3, which the matcher picked for this target (0.846 vs 0.857); listed here too so owning this album is enough to replace it"
-      }
-    },
-    {
-      "source": [
-        "DUD_056",
-        "The Black Wolf Stalks Again",
-        "漆黒の王狼、再び ～エメラルドウェポン破壊作戦～"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_Emerald.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.465
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "DUD_084",
-        "Lunar Whale (Shadowbringers)",
-        "魔導船 ～漆黒～"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_Fanfes2021.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.475
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.940"
-      }
-    },
-    {
-      "source": [
-        "DUD_006",
-        "A Fierce Air Forceth",
-        "戦士の攻勢 ～PvPフロントライン～"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_Frontline.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.725
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "DUD_026",
-        "Hearthward",
-        "蒼き日常 ～蒼天街復興～"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_Hukko01.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.355
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.995"
-      }
-    },
-    {
-      "source": [
-        "DUD_036",
-        "Discord: Imperial (Zodiac Age Version)",
-        "動乱 帝国バージョン (Zodiac Age Version)"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_MYC01.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.76
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "DUD_024",
-        "Ultima (Scions & Sinners)",
-        "究極幻想 (Scions & Sinners)"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_Ruby.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.355
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.963"
-      }
-    },
-    {
-      "source": [
-        "DUD_044",
-        "To the Edge"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_WOL.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.62
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.910"
-      }
-    },
-    {
-      "source": [
-        "DUD_018",
-        "Weight of the World - Prelude Version",
-        "Weight of the World／Prelude Version"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_YTC.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.705
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-1.8dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.995"
-      }
-    },
-    {
-      "source": {
-        "DUD_010": [
-          "DUD_010",
-          "スターライト de チョコボ",
-          "Starlight de Chocobo"
-        ],
-        "DUD_011": [
-          "DUD_011",
-          "スターライト de チョコボ？",
-          "Starlight de Chocobo (?)"
-        ]
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.990"
+   }
+  },
+  {
+   "source": [
+    "DUD_040",
+    "Watts's Anvil",
+    "ワッツハンマー・ガレージ"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_BanFort_Dwarf_Good.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_408.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.505
       },
-      "target": {
-        "path": "music/ffxiv/BGM_Season_XmasCho_02.scd",
-        "segments": [
-          {
-            "channels": [
-              {
-                "source": "DUD_010",
-                "channel": 0
-              },
-              {
-                "source": "DUD_010",
-                "channel": 1
-              },
-              {
-                "source": "DUD_011",
-                "channel": 0
-              },
-              {
-                "source": "DUD_011",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "multichannel target: 2 engine-switched stems, matched individually (DUD_010 to game channels [0, 1] @0.859; DUD_011 to game channels [2, 3] @0.976). The stems tile the channels in order, so a plain sequential mapping is correct -- the same shape as the hand-written BGM_EX1_PvP01 entry. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio."
-      }
-    },
-    {
-      "source": [
-        "DUD_029",
-        "雪上の足跡 ～蛮神シヴァ前哨戦～",
-        "Footsteps in the Snow"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_113.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.415
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "same recording as BTF_FFXIV_42.flac, which the matcher picked for this target (0.959 vs 0.959); listed here too so owning this album is enough to replace it"
-      }
-    },
-    {
-      "source": [
-        "DUD_025",
-        "Rise of the White Raven (Orchestral Version)",
-        "白銀の凶鳥、飛翔せり (Orchestral Version)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_251.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.475
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-4.2dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.972"
-      }
-    },
-    {
-      "source": [
-        "DUD_003",
-        "Rise (Journeys)",
-        "ライズ (Journeys) ～機工城アレキサンダー：天動編～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_285.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.265
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.976"
-      }
-    },
-    {
-      "source": [
-        "DUD_004",
-        "Moebius (Orchestral Version)",
-        "メビウス (Orchestral Version) ～機工城アレキサンダー：天動編～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_314.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.07
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.975"
-      }
-    },
-    {
-      "source": [
-        "DUD_007",
-        "The Garden's Gates",
-        "リェー・メグの門"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_355.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.45
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.960"
-      }
-    },
-    {
-      "source": [
-        "DUD_006",
-        "A Fierce Air Forceth",
-        "戦士の攻勢 ～PvPフロントライン～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_356.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.725
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.984"
-      }
-    },
-    {
-      "source": [
-        "DUD_010",
-        "Starlight de Chocobo",
-        "スターライト de チョコボ"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_358.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.585
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.894"
-      }
-    },
-    {
-      "source": [
-        "DUD_012",
-        "Significance - Nothing (From NieR:Automata)",
-        "意味／無 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_362.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.075
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.970"
-      }
-    },
-    {
-      "source": [
-        "DUD_079",
-        "City Ruins - Rays of Light (From NieR:Automata)",
-        "遺サレタ場所／斜光 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_363.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.535
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.981"
-      }
-    },
-    {
-      "source": [
-        "DUD_020",
-        "Voice of no Return - Guitar (From NieR:Automata)",
-        "還ラナイ声／ギター (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_364.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.35
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.974"
-      }
-    },
-    {
-      "source": [
-        "DUD_015",
-        "Alien Manifestation (From NieR:Automata)",
-        "顕現シタ異物 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_365.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.125
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.984"
-      }
-    },
-    {
-      "source": [
-        "DUD_016",
-        "Song of the Ancients - Atonement (From NieR:Automata)",
-        "イニシエノウタ／贖罪 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_366.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.96
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.980"
-      }
-    },
-    {
-      "source": [
-        "DUD_017",
-        "Bipolar Nightmare (From NieR:Automata)",
-        "双極ノ悪夢 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_367.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 146.455
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.955"
-      }
-    },
-    {
-      "source": [
-        "DUD_018",
-        "Weight of the World - Prelude Version",
-        "Weight of the World／Prelude Version"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_368.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.705
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.984"
-      }
-    },
-    {
-      "source": [
-        "DUD_027",
-        "Twice Stricken",
-        "雷轟電撃 ～希望の園エデン：共鳴編～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_372.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 159.46
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.975"
-      }
-    },
-    {
-      "source": [
-        "DUD_028",
-        "Primal Angel",
-        "原始の堕天使 ～希望の園エデン：共鳴編～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_373.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.55
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.974"
-      }
-    },
-    {
-      "source": [
-        "DUD_031",
-        "Return to Oblivion",
-        "忘却の此方 ～希望の園エデン：共鳴編～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_374.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.87
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.869"
-      }
-    },
-    {
-      "source": [
-        "DUD_024",
-        "Ultima (Scions & Sinners)",
-        "究極幻想 (Scions & Sinners)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_375.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.355
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.952"
-      }
-    },
-    {
-      "source": [
-        "DUD_021",
-        "Floundering in the Depths",
-        "底に潜みし者 ～黒風海底 アニドラス・アナムネーシス～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_379.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.685
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.982"
-      }
-    },
-    {
-      "source": [
-        "DUD_023",
-        "Hopl's Dropple",
-        "ホパル古盤"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_380.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 122.145
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.977"
-      }
-    },
-    {
-      "source": [
-        "DUD_014",
-        "Crumbling Lies - Front (From NieR:Automata)",
-        "崩壊ノ虚妄 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_381.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.965
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.985"
-      }
-    },
-    {
-      "source": [
-        "DUD_009",
-        "The Mendicant's Relish",
-        "名も無き者たちの情熱 ～蒼天街復興～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_385.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.625
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.920"
-      }
-    },
-    {
-      "source": [
-        "DUD_040",
-        "Watts's Anvil",
-        "ワッツハンマー・ガレージ"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_408.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.505
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.927"
-      }
-    },
-    {
-      "source": [
-        "DUD_045",
-        "Eternal Wind (Shadowbringers)",
-        "悠久の風 ～漆黒～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_410.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.615
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.978"
-      }
-    },
-    {
-      "source": [
-        "DUD_044",
-        "To the Edge"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_411.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 3.02
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.888"
-      }
-    },
-    {
-      "source": [
-        "DUD_033",
-        "Wind on the Plains",
-        "ボズヤの微風"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_412.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.175
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.918"
-      }
-    },
-    {
-      "source": [
-        "DUD_034",
-        "Blood on the Wind",
-        "ボズヤの血風"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_413.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.455
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.901"
-      }
-    },
-    {
-      "source": [
-        "DUD_036",
-        "Discord: Imperial (Zodiac Age Version)",
-        "動乱 帝国バージョン (Zodiac Age Version)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_414.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.76
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.980"
-      }
-    },
-    {
-      "source": [
-        "DUD_037",
-        "Into the Fortress (Zodiac Age Version)",
-        "潜入 (Zodiac Age Version)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_415.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.54
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.977"
-      }
-    },
-    {
-      "source": [
-        "DUD_038",
-        "Battle with an Esper (Zodiac Age Version)",
-        "召喚獣戦 (Zodiac Age Version)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_416.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.41
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.988"
-      }
-    },
-    {
-      "source": [
-        "DUD_039",
-        "Life and Death (Zodiac Age Version)",
-        "死闘 (Zodiac Age Version)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_417.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.245
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.976"
-      }
-    },
-    {
-      "source": [
-        "DUD_042",
-        "Where All Roads Lead",
-        "すべての道が至る場所 ～漆黒決戦 ノルヴラント～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_418.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.415
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.934"
-      }
-    },
-    {
-      "source": [
-        "DUD_051",
-        "Broken Heart (From NieR:Automata)",
-        "割レタ心 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_424.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.195
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.982"
-      }
-    },
-    {
-      "source": [
-        "DUD_046",
-        "Amusement Park (From NieR:Automata)",
-        "遊園施設 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_425.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.32
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.962"
-      }
-    },
-    {
-      "source": [
-        "DUD_047",
-        "Fortress of Lies (From NieR:Automata)",
-        "偽リノ城塞 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_426.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.355
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.984"
-      }
-    },
-    {
-      "source": [
-        "DUD_048",
-        "Grandma - Destruction (From NieR:Automata)",
-        "オバアチャン／破壊 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_427.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.07
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.973"
-      }
-    },
-    {
-      "source": [
-        "DUD_049",
-        "End of the Unknown (From NieR:Automata)",
-        "異形ノ末路 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_428.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.555
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.982"
-      }
-    },
-    {
-      "source": [
-        "DUD_050",
-        "Torn from the Heavens",
-        "天より降りし力～全テヲ破壊スル黒キ巨人／Medley Version"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_429.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 186.355
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.951"
-      }
-    },
-    {
-      "source": [
-        "DUD_052",
-        "New Foundations",
-        "祝いの調べ ～蒼天街復興～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_432.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 2.185
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.946"
-      }
-    },
-    {
-      "source": [
-        "DUD_056",
-        "The Black Wolf Stalks Again",
-        "漆黒の王狼、再び ～エメラルドウェポン破壊作戦～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_433.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.465
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.981"
-      }
-    },
-    {
-      "source": [
-        "DUD_054",
-        "Gogo's Theme",
-        "ゴゴのテーマ"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_434.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.51
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.977"
-      }
-    },
-    {
-      "source": [
-        "DUD_064",
-        "The Sochen Cave Palace (Zodiac Age Version)",
-        "ソーヘン地下宮殿 (Zodiac Age Version)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_435.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.515
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.980"
-      }
-    },
-    {
-      "source": [
-        "DUD_065",
-        "Giving Chase (Zodiac Age Version)",
-        "言葉無き戦い (Zodiac Age Version)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_436.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.265
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.980"
-      }
-    },
-    {
-      "source": [
-        "DUD_066",
-        "The Queen Awakens",
-        "復活の女王 ～グンヒルド・ディルーブラム～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_437.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 237.69
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "enable": false,
-        "# comment": "source is correct (spectral 0.975 at offset -237.7s) but covers only 93% of this target: 222s of 240s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
-      }
-    },
-    {
-      "source": [
-        "DUD_055",
-        "Freshly Glazed Porxie",
-        "焼き立てポークシー ～魔術工房 マトーヤのアトリエ～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_438.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.6
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.938"
-      }
-    },
-    {
-      "source": [
-        "DUD_057",
-        "Don't Be Afraid (Shadowbringers)",
-        "Don’t be Afraid ～漆黒～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_439.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.07
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.911"
-      }
-    },
-    {
-      "source": [
-        "DUD_058",
-        "TH_100",
-        "The Legendary Beast (Shadowbringers)",
-        "The Legendary Beast ～漆黒～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_440.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.33
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.916"
-      }
-    },
-    {
-      "source": [
-        "DUD_060",
-        "消せない約束 ～希望の園エデン：再生編～",
-        "Promises to Keep"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_441.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.33
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "same recording as TH_104.mp3, which the matcher picked for this target (0.845 vs 0.856); listed here too so owning this album is enough to replace it"
-      }
-    },
-    {
-      "source": [
-        "DUD_061",
-        "TH_103",
-        "The Extreme (Shadowbringers)",
-        "The Extreme ～漆黒～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_442.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.455
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.898"
-      }
-    },
-    {
-      "source": [
-        "DUD_026",
-        "Hearthward",
-        "蒼き日常 ～蒼天街復興～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_450.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.355
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.978"
-      }
-    },
-    {
-      "source": [
-        "DUD_063",
-        "Shuffle or Boogie (Shadowbringers)",
-        "Shuffle or Boogie ～漆黒～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_455.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.335
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.964"
-      }
-    },
-    {
-      "source": [
-        "DUD_022",
-        "Insatiable (Scions & Sinners)",
-        "貪欲 (Scions & Sinners)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_465.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": -0.57
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.973"
-      }
-    },
-    {
-      "source": [
-        "DUD_082",
-        "In the Arms of War",
-        "孤児たちの戦い ～ダイヤウェポン捕獲作戦～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_471.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.105
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.983"
-      }
-    },
-    {
-      "source": [
-        "DUD_067",
-        "Wrath of the Harrier",
-        "怒れる悪魔 ～旗艦ダル・リアータ攻略戦～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_472.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.235
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.981"
-      }
-    },
-    {
-      "source": [
-        "DUD_068",
-        "Skyrise",
-        "蒼天街復興祝祭"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_473.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.36
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.904"
-      }
-    },
-    {
-      "source": [
-        "DUD_080",
-        "Seven Flames",
-        "炎の七部族 ～黄金平原 パガルザン～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_474.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.805
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.933"
-      }
-    },
-    {
-      "source": [
-        "DUD_081",
-        "And Love You Shall Find",
-        "愛を求める者たち"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_475.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.895
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.974"
-      }
-    },
-    {
-      "source": [
-        "DUD_073",
-        "Mourning (From NieR:Automata)",
-        "追悼 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_480.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.26
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.976"
-      }
-    },
-    {
-      "source": [
-        "DUD_072",
-        "Emil - Despair (From NieR:Automata)",
-        "エミール／絶望 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_481.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.205
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.976"
-      }
-    },
-    {
-      "source": [
-        "DUD_074",
-        "The Sound of the End (From NieR:Automata)",
-        "終ワリノ音 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_483.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.61
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.984"
-      }
-    },
-    {
-      "source": [
-        "DUD_075",
-        "The Sound of the End: 8bit (From NieR:Automata)",
-        "終ワリノ音：丁 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_484.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.41
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.969"
-      }
-    },
-    {
-      "source": [
-        "DUD_077",
-        "カイネ／Final Fantasy Main Theme Version"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_485.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.105
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.970"
-      }
-    },
-    {
-      "source": [
-        "DUD_078",
-        "Weight of the World - Instrumental Version (From NieR:Automata)",
-        "Weight of the World／Instrumental Version (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_486.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.355
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.987"
-      }
-    },
-    {
-      "source": [
-        "DUD_069",
-        "Voice of no Return - Normal (From NieR:Automata)",
-        "還ラナイ声／通常 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_487.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.525
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.987"
-      }
-    },
-    {
-      "source": [
-        "DUD_071",
-        "Widespread Illness (From NieR:Automata)",
-        "茫洋タル病 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_489.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.37
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "enable": false,
-        "# comment": "source is correct (spectral 0.959 at offset -1.4s) but covers only 94% of this target: 109s of 116s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
-      }
-    },
-    {
-      "source": [
-        "DUD_076",
-        "Possessed by Disease (From NieR:Automata)",
-        "取リ憑イタ業病 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_490.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.27
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.988"
-      }
-    },
-    {
-      "source": [
-        "DUD_019",
-        "Faltering Prayer - Dawn Breeze (From NieR:Automata)",
-        "澱ンダ祈リ／暁風 (From NieR:Automata)"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_491.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.88
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.968"
-      }
-    },
-    {
-      "source": [
-        "DUD_030",
-        "TH_102",
-        "A Sundering of Light",
-        "分割された光 ～希望の園エデン：共鳴編～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_747.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.18
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-4.8dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.988"
-      }
-    },
-    {
-      "source": [
-        "DUD_001",
-        "Locus (Duality)",
-        "ローカス (Duality) ～機工城アレキサンダー：起動編～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_859.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.395
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-3.5dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.978"
-      }
-    },
-    {
-      "source": [
-        "DUD_002",
-        "Metal - Brute Justice Mode (Journeys)",
-        "メタル：ブルートジャスティスモード (Journeys) ～機工城アレキサンダー：律動編～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_860.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.67
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-3dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.978"
-      }
-    }
-  ]
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.957"
+   }
+  },
+  {
+   "source": [
+    "DUD_007",
+    "The Garden's Gates",
+    "リェー・メグの門"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_BanFort_Fairy_Good.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_355.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.45
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.981"
+   }
+  },
+  {
+   "source": [
+    "DUD_023",
+    "Hopl's Dropple",
+    "ホパル古盤"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_BanFort_kkrn_Good.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_380.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.88
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993; offset corrected +122.145s -> +0.880s by re-deriving the alignment and judging it on the intro (0.8983 -> 0.9770)"
+   }
+  },
+  {
+   "source": [
+    "DUD_002",
+    "Metal - Brute Justice Mode (Journeys)",
+    "メタル：ブルートジャスティスモード (Journeys) ～機工城アレキサンダー：律動編～"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ban_05.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.705
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.981"
+   }
+  },
+  {
+   "source": {
+    "DUD_003": [
+     "DUD_003",
+     "ライズ (Journeys) ～機工城アレキサンダー：天動編～",
+     "Rise (Journeys)"
+    ],
+    "TFEOF_FFXIV_38": [
+     "TFEOF_FFXIV_38",
+     "無限停止　～機工城アレキサンダー：天動編～",
+     "Stasis Loop"
+    ]
+   },
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ban_07.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "DUD_003",
+        "channel": 0
+       },
+       {
+        "source": "DUD_003",
+        "channel": 1
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "multichannel target: 2 engine-switched stems, matched individually (DUD_003 to game channels [0, 1] @0.622; TFEOF_FFXIV_38 to game channels [2, 3] @0.609). The stems tile the channels in order, so a plain sequential mapping is correct -- the same shape as the hand-written BGM_EX1_PvP01 entry. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio."
+   }
+  },
+  {
+   "source": [
+    "DUD_024",
+    "Ultima (Scions & Sinners)",
+    "究極幻想 (Scions & Sinners)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ban_09.scd",
+     "music/ffxiv/BGM_Ride_Ruby.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_375.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.355
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.963"
+   }
+  },
+  {
+   "source": [
+    "DUD_025",
+    "Rise of the White Raven (Orchestral Version)",
+    "白銀の凶鳥、飛翔せり (Orchestral Version)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ban_10.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 3.42
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.980"
+   }
+  },
+  {
+   "source": [
+    "DUD_044",
+    "To the Edge"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ban_11.scd",
+     "music/ffxiv/BGM_Ride_WOL.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.62
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.910"
+   }
+  },
+  {
+   "source": [
+    "DUD_043",
+    "Echoes in the Dark",
+    "暗がりに響く音"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ban_12.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.46
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.998"
+   }
+  },
+  {
+   "source": [
+    "DUD_044",
+    "To the Edge"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ban_14.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 2.96
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4dB"
+      }
+     }
+    ],
+    "enable": false,
+    "# comment": "source is correct (spectral 0.847 at offset -31.8s) but covers only 92% of this target: 428s of 467s. The rest needs a multi-segment or filterComplex source; left disabled until then.; offset corrected +31.755s -> +2.960s by re-deriving the alignment and judging it on the intro (0.5813 -> 0.6697)"
+   }
+  },
+  {
+   "source": [
+    "DUD_082",
+    "In the Arms of War",
+    "孤児たちの戦い ～ダイヤウェポン捕獲作戦～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ban_15.scd",
+     "music/ffxiv/BGM_Ride_Dia.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_471.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.105
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "DUD_001",
+    "Locus (Duality)",
+    "ローカス (Duality) ～機工城アレキサンダー：起動編～"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Boss_Battle02.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.01
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.991"
+   }
+  },
+  {
+   "source": [
+    "DUD_022",
+    "Insatiable (Scions & Sinners)",
+    "貪欲 (Scions & Sinners)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Boss_Battle03.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.32
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.978"
+   }
+  },
+  {
+   "source": [
+    "DUD_056",
+    "The Black Wolf Stalks Again",
+    "漆黒の王狼、再び ～エメラルドウェポン破壊作戦～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Con_01.scd",
+     "music/ffxiv/BGM_Ride_Emerald.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_433.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.465
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "DUD_021",
+    "Floundering in the Depths",
+    "底に潜みし者 ～黒風海底 アニドラス・アナムネーシス～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Dan_D10.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_379.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.685
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "DUD_042",
+    "Where All Roads Lead",
+    "すべての道が至る場所 ～漆黒決戦 ノルヴラント～"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Dan_D11.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.44
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.954"
+   }
+  },
+  {
+   "source": [
+    "DUD_055",
+    "Freshly Glazed Porxie",
+    "焼き立てポークシー ～魔術工房 マトーヤのアトリエ～"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Dan_D12.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 115.84
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.953"
+   }
+  },
+  {
+   "source": [
+    "DUD_080",
+    "Seven Flames",
+    "炎の七部族 ～黄金平原 パガルザン～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Dan_D13.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_474.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.805
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.946"
+   }
+  },
+  {
+   "source": [
+    "DUD_062",
+    "Ami (Shadowbringers)",
+    "Ami ～漆黒～"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_20.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.14
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.998"
+   }
+  },
+  {
+   "source": [
+    "DUD_032",
+    "Gangos",
+    "ガンゴッシュ"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_21.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.72
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "DUD_045",
+    "Eternal Wind (Shadowbringers)",
+    "悠久の風 ～漆黒～"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_22.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.61
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "DUD_083",
+    "Forever at Your Side",
+    "ひとりじゃない"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_26.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.66
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.978"
+   }
+  },
+  {
+   "source": [
+    "DUD_059",
+    "Treasured Memory",
+    "美しき思い出 ～希望の園エデン：再生編～"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_29.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 52.07
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.999"
+   }
+  },
+  {
+   "source": [
+    "DUD_081",
+    "And Love You Shall Find",
+    "愛を求める者たち"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Field_Welrit.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_475.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.895
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988"
+   }
+  },
+  {
+   "source": {
+    "DUD_033": [
+     "DUD_033",
+     "ボズヤの微風",
+     "Wind on the Plains"
+    ],
+    "DUD_034": [
+     "DUD_034",
+     "ボズヤの血風",
+     "Blood on the Wind"
+    ],
+    "Before_Meteor_FFXIV_084": [
+     "Before_Meteor_FFXIV_084",
+     "Quick as Silver, Hard as Stone",
+     "疾きこと銀の如く、硬きこと石の如く"
+    ]
+   },
+   "target": {
+    "path": "music/ex3/BGM_EX3_MYC_01.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "DUD_033",
+        "channel": 0
+       },
+       {
+        "source": "DUD_033",
+        "channel": 1
+       },
+       {
+        "source": "DUD_034",
+        "channel": 0
+       },
+       {
+        "source": "DUD_034",
+        "channel": 1
+       },
+       {
+        "source": "Before_Meteor_FFXIV_084",
+        "channel": 0
+       },
+       {
+        "source": "Before_Meteor_FFXIV_084",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "enable": false,
+    "# comment": "multichannel target: 3 engine-switched stems, matched individually (DUD_033 to game channels [0, 2] @0.891; DUD_034 to game channels [1, 4] @0.780; Before_Meteor_FFXIV_084 to game channels [3, 5] @0.587). The stems do NOT tile the channels in order, so this needs a sequentialToFfmpegChannelIndexMap that has not been derived; disabled. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio."
+   }
+  },
+  {
+   "source": [
+    "DUD_036",
+    "Discord: Imperial (Zodiac Age Version)",
+    "動乱 帝国バージョン (Zodiac Age Version)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_MYC_02.scd",
+     "music/ffxiv/BGM_Ride_MYC01.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_414.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.76
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "DUD_037",
+    "Into the Fortress (Zodiac Age Version)",
+    "潜入 (Zodiac Age Version)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_MYC_03.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.325
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "DUD_038",
+    "Battle with an Esper (Zodiac Age Version)",
+    "召喚獣戦 (Zodiac Age Version)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_MYC_04.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.41
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "enable": false,
+    "# comment": "source is correct (spectral 0.984 at offset -1.4s) but covers only 75% of this target: 145s of 194s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+   }
+  },
+  {
+   "source": [
+    "DUD_039",
+    "Life and Death (Zodiac Age Version)",
+    "死闘 (Zodiac Age Version)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_MYC_05.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.245
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "enable": false,
+    "# comment": "source is correct (spectral 0.977 at offset -1.2s) but covers only 67% of this target: 110s of 164s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+   }
+  },
+  {
+   "source": [
+    "DUD_035",
+    "Unrest (Zodiac Age Version)",
+    "騒乱 (Zodiac Age Version)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_MYC_06.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.22
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.981; offset corrected -81.700s -> +1.220s by re-deriving the alignment and judging it on the intro (-1.0000 -> 0.9934)"
+   }
+  },
+  {
+   "source": [
+    "DUD_064",
+    "The Sochen Cave Palace (Zodiac Age Version)",
+    "ソーヘン地下宮殿 (Zodiac Age Version)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_MYC_07.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": -0.87
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.992"
+   }
+  },
+  {
+   "source": [
+    "DUD_065",
+    "Giving Chase (Zodiac Age Version)",
+    "言葉無き戦い (Zodiac Age Version)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_MYC_08.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.855
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.986"
+   }
+  },
+  {
+   "source": [
+    "DUD_066",
+    "The Queen Awakens",
+    "復活の女王 ～グンヒルド・ディルーブラム～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_MYC_09.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_437.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.42
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "enable": false,
+    "# comment": "source is correct (spectral 0.982 at offset -237.7s) but covers only 93% of this target: 222s of 240s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then.; offset corrected +237.690s -> +1.420s by re-deriving the alignment and judging it on the intro (0.9584 -> 0.9935)"
+   }
+  },
+  {
+   "source": [
+    "DUD_067",
+    "Wrath of the Harrier",
+    "怒れる悪魔 ～旗艦ダル・リアータ攻略戦～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_MYC_10.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_472.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.235
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.992"
+   }
+  },
+  {
+   "source": [
+    "DUD_027",
+    "Twice Stricken",
+    "雷轟電撃 ～希望の園エデン：共鳴編～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Raid_05.scd",
+     "music/ffxiv/BGM_Ride_Eden02.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_372.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.65
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988; offset corrected +159.460s -> +1.650s by re-deriving the alignment and judging it on the intro (0.9357 -> 0.9905)"
+   }
+  },
+  {
+   "source": [
+    "DUD_028",
+    "Primal Angel",
+    "原始の堕天使 ～希望の園エデン：共鳴編～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Raid_06.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_373.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.55
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.986"
+   }
+  },
+  {
+   "source": [
+    "DUD_031",
+    "Return to Oblivion",
+    "忘却の此方 ～希望の園エデン：共鳴編～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Raid_07.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_374.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.87
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.879"
+   }
+  },
+  {
+   "source": [
+    "DUD_030",
+    "TH_102",
+    "A Sundering of Light",
+    "分割された光 ～希望の園エデン：共鳴編～"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Raid_08.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.13
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "DUD_057",
+    "Don't Be Afraid (Shadowbringers)",
+    "Don’t be Afraid ～漆黒～"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Raid_09.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.995
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.929"
+   }
+  },
+  {
+   "source": [
+    "DUD_060",
+    "消せない約束 ～希望の園エデン：再生編～",
+    "Promises to Keep"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Raid_11.scd",
+     "music/ex5/BGM_EX5_Ban_16.scd",
+     "music/ffxiv/BGM_Ride_Eden03.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_441.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.33
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as TH_104.mp3, which the matcher picked for this target (0.846 vs 0.857); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "DUD_061",
+    "TH_103",
+    "The Extreme (Shadowbringers)",
+    "The Extreme ～漆黒～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Raid_12.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_442.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.455
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.917"
+   }
+  },
+  {
+   "source": [
+    "DUD_012",
+    "Significance - Nothing (From NieR:Automata)",
+    "意味／無 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_01.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_362.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.075
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.990"
+   }
+  },
+  {
+   "source": [
+    "DUD_079",
+    "City Ruins - Rays of Light (From NieR:Automata)",
+    "遺サレタ場所／斜光 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_02.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_363.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.535
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "DUD_013",
+    "Vague Hope - Cold Rain (From NieR:Automata)",
+    "曖昧ナ希望／氷雨 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ytc_03.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.825
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "DUD_020",
+    "Voice of no Return - Guitar (From NieR:Automata)",
+    "還ラナイ声／ギター (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_05.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_364.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.35
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "DUD_015",
+    "Alien Manifestation (From NieR:Automata)",
+    "顕現シタ異物 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_06.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_365.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.125
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "DUD_016",
+    "Song of the Ancients - Atonement (From NieR:Automata)",
+    "イニシエノウタ／贖罪 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_07.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_366.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.96
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "DUD_017",
+    "Bipolar Nightmare (From NieR:Automata)",
+    "双極ノ悪夢 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_08.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_367.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.63
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.966; offset corrected +146.455s -> +0.630s by re-deriving the alignment and judging it on the intro (0.5075 -> 0.9741)"
+   }
+  },
+  {
+   "source": [
+    "DUD_018",
+    "Weight of the World - Prelude Version",
+    "Weight of the World／Prelude Version"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_09.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_368.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.705
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "DUD_014",
+    "Crumbling Lies - Front (From NieR:Automata)",
+    "崩壊ノ虚妄 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_10.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_381.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.965
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "DUD_051",
+    "Broken Heart (From NieR:Automata)",
+    "割レタ心 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ytc_11.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.205
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.998"
+   }
+  },
+  {
+   "source": [
+    "DUD_046",
+    "Amusement Park (From NieR:Automata)",
+    "遊園施設 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ytc_13.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.215
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "DUD_047",
+    "Fortress of Lies (From NieR:Automata)",
+    "偽リノ城塞 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ytc_14.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.89
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "DUD_048",
+    "Grandma - Destruction (From NieR:Automata)",
+    "オバアチャン／破壊 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ytc_15.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.175
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "DUD_049",
+    "End of the Unknown (From NieR:Automata)",
+    "異形ノ末路 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ytc_16.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.775
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "DUD_050",
+    "Torn from the Heavens",
+    "天より降りし力～全テヲ破壊スル黒キ巨人／Medley Version"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ytc_17.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.51
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.991"
+   }
+  },
+  {
+   "source": [
+    "DUD_073",
+    "Mourning (From NieR:Automata)",
+    "追悼 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_18.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_480.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.26
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "DUD_072",
+    "Emil - Despair (From NieR:Automata)",
+    "エミール／絶望 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_19.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_481.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.205
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.990"
+   }
+  },
+  {
+   "source": [
+    "DUD_074",
+    "The Sound of the End (From NieR:Automata)",
+    "終ワリノ音 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ytc_21.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.385
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "DUD_075",
+    "The Sound of the End: 8bit (From NieR:Automata)",
+    "終ワリノ音：丁 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_22.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_484.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.41
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.990"
+   }
+  },
+  {
+   "source": [
+    "DUD_077",
+    "カイネ／Final Fantasy Main Theme Version"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ytc_23.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.96
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "DUD_078",
+    "Weight of the World - Instrumental Version (From NieR:Automata)",
+    "Weight of the World／Instrumental Version (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_24.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_486.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.355
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "DUD_069",
+    "Voice of no Return - Normal (From NieR:Automata)",
+    "還ラナイ声／通常 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_25.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_487.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.525
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "DUD_071",
+    "Widespread Illness (From NieR:Automata)",
+    "茫洋タル病 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_27.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_489.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.37
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "enable": false,
+    "# comment": "source is correct (spectral 0.972 at offset -1.4s) but covers only 94% of this target: 109s of 116s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+   }
+  },
+  {
+   "source": [
+    "DUD_076",
+    "Possessed by Disease (From NieR:Automata)",
+    "取リ憑イタ業病 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ytc_28.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.0
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "DUD_019",
+    "Faltering Prayer - Dawn Breeze (From NieR:Automata)",
+    "澱ンダ祈リ／暁風 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_29.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_491.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.88
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "DUD_061",
+    "The Extreme ～漆黒～",
+    "The Extreme (Shadowbringers)"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Ban_12.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 33.475
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as TH_103.mp3, which the matcher picked for this target (0.883 vs 0.912); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "DUD_029",
+    "BTF_FFXIV_42",
+    "TH_101",
+    "Footsteps in the Snow",
+    "雪上の足跡 ～蛮神シヴァ前哨戦～"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Ban_Shiva1.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.66
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988"
+   }
+  },
+  {
+   "source": [
+    "DUD_041",
+    "The Isle of Endless Summer",
+    "常夏の島"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Hula.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 19.175
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.978"
+   }
+  },
+  {
+   "source": [
+    "DUD_063",
+    "Shuffle or Boogie (Shadowbringers)",
+    "Shuffle or Boogie ～漆黒～"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_GlodSaucer_TripleWaiting.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_455.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.335
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.972"
+   }
+  },
+  {
+   "source": [
+    "DUD_084",
+    "Lunar Whale (Shadowbringers)",
+    "魔導船 ～漆黒～"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Ride_Fanfes2021.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.475
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.940"
+   }
+  },
+  {
+   "source": [
+    "DUD_006",
+    "A Fierce Air Forceth",
+    "戦士の攻勢 ～PvPフロントライン～"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Ride_Frontline.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_356.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.725
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "DUD_018",
+    "Weight of the World - Prelude Version",
+    "Weight of the World／Prelude Version"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Ride_YTC.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.705
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.8dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": {
+    "DUD_010": [
+     "DUD_010",
+     "スターライト de チョコボ",
+     "Starlight de Chocobo"
+    ],
+    "DUD_011": [
+     "DUD_011",
+     "スターライト de チョコボ？",
+     "Starlight de Chocobo (?)"
+    ]
+   },
+   "target": {
+    "path": "music/ffxiv/BGM_Season_XmasCho_02.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "DUD_010",
+        "channel": 0
+       },
+       {
+        "source": "DUD_010",
+        "channel": 1
+       },
+       {
+        "source": "DUD_011",
+        "channel": 0
+       },
+       {
+        "source": "DUD_011",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "multichannel target: 2 engine-switched stems, matched individually (DUD_010 to game channels [0, 1] @0.859; DUD_011 to game channels [2, 3] @0.976). The stems tile the channels in order, so a plain sequential mapping is correct -- the same shape as the hand-written BGM_EX1_PvP01 entry. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio."
+   }
+  },
+  {
+   "source": [
+    "DUD_029",
+    "雪上の足跡 ～蛮神シヴァ前哨戦～",
+    "Footsteps in the Snow"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_113.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.415
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as BTF_FFXIV_42.flac, which the matcher picked for this target (0.959 vs 0.959); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "DUD_025",
+    "Rise of the White Raven (Orchestral Version)",
+    "白銀の凶鳥、飛翔せり (Orchestral Version)"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_251.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.475
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.2dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.972"
+   }
+  },
+  {
+   "source": [
+    "DUD_003",
+    "Rise (Journeys)",
+    "ライズ (Journeys) ～機工城アレキサンダー：天動編～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_285.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.265
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.976"
+   }
+  },
+  {
+   "source": [
+    "DUD_004",
+    "Moebius (Orchestral Version)",
+    "メビウス (Orchestral Version) ～機工城アレキサンダー：天動編～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_314.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.07
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.975"
+   }
+  },
+  {
+   "source": [
+    "DUD_010",
+    "Starlight de Chocobo",
+    "スターライト de チョコボ"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_358.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.585
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.894"
+   }
+  },
+  {
+   "source": [
+    "DUD_045",
+    "Eternal Wind (Shadowbringers)",
+    "悠久の風 ～漆黒～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_410.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.615
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.978"
+   }
+  },
+  {
+   "source": [
+    "DUD_044",
+    "To the Edge"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_411.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 3.02
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.888"
+   }
+  },
+  {
+   "source": [
+    "DUD_033",
+    "Wind on the Plains",
+    "ボズヤの微風"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_412.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.175
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.918"
+   }
+  },
+  {
+   "source": [
+    "DUD_034",
+    "Blood on the Wind",
+    "ボズヤの血風"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_413.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.455
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.901"
+   }
+  },
+  {
+   "source": [
+    "DUD_037",
+    "Into the Fortress (Zodiac Age Version)",
+    "潜入 (Zodiac Age Version)"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_415.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.54
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.977"
+   }
+  },
+  {
+   "source": [
+    "DUD_038",
+    "Battle with an Esper (Zodiac Age Version)",
+    "召喚獣戦 (Zodiac Age Version)"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_416.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.41
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988"
+   }
+  },
+  {
+   "source": [
+    "DUD_039",
+    "Life and Death (Zodiac Age Version)",
+    "死闘 (Zodiac Age Version)"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_417.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.245
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.976"
+   }
+  },
+  {
+   "source": [
+    "DUD_042",
+    "Where All Roads Lead",
+    "すべての道が至る場所 ～漆黒決戦 ノルヴラント～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_418.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.415
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.934"
+   }
+  },
+  {
+   "source": [
+    "DUD_051",
+    "Broken Heart (From NieR:Automata)",
+    "割レタ心 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_424.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.195
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.982"
+   }
+  },
+  {
+   "source": [
+    "DUD_046",
+    "Amusement Park (From NieR:Automata)",
+    "遊園施設 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_425.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.32
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.962"
+   }
+  },
+  {
+   "source": [
+    "DUD_047",
+    "Fortress of Lies (From NieR:Automata)",
+    "偽リノ城塞 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_426.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.355
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.984"
+   }
+  },
+  {
+   "source": [
+    "DUD_048",
+    "Grandma - Destruction (From NieR:Automata)",
+    "オバアチャン／破壊 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_427.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.07
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.973"
+   }
+  },
+  {
+   "source": [
+    "DUD_049",
+    "End of the Unknown (From NieR:Automata)",
+    "異形ノ末路 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_428.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.555
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.982"
+   }
+  },
+  {
+   "source": [
+    "DUD_050",
+    "Torn from the Heavens",
+    "天より降りし力～全テヲ破壊スル黒キ巨人／Medley Version"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_429.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.62
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.951; offset corrected +186.355s -> +1.620s by re-deriving the alignment and judging it on the intro (0.7783 -> 0.9620)"
+   }
+  },
+  {
+   "source": [
+    "DUD_052",
+    "New Foundations",
+    "祝いの調べ ～蒼天街復興～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_432.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 2.185
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.946"
+   }
+  },
+  {
+   "source": [
+    "DUD_054",
+    "Gogo's Theme",
+    "ゴゴのテーマ"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_434.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.51
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.977"
+   }
+  },
+  {
+   "source": [
+    "DUD_064",
+    "The Sochen Cave Palace (Zodiac Age Version)",
+    "ソーヘン地下宮殿 (Zodiac Age Version)"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_435.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.515
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.980"
+   }
+  },
+  {
+   "source": [
+    "DUD_065",
+    "Giving Chase (Zodiac Age Version)",
+    "言葉無き戦い (Zodiac Age Version)"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_436.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.265
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.980"
+   }
+  },
+  {
+   "source": [
+    "DUD_055",
+    "Freshly Glazed Porxie",
+    "焼き立てポークシー ～魔術工房 マトーヤのアトリエ～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_438.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.6
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.938"
+   }
+  },
+  {
+   "source": [
+    "DUD_057",
+    "Don't Be Afraid (Shadowbringers)",
+    "Don’t be Afraid ～漆黒～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_439.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.07
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.911"
+   }
+  },
+  {
+   "source": [
+    "DUD_058",
+    "TH_100",
+    "The Legendary Beast (Shadowbringers)",
+    "The Legendary Beast ～漆黒～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_440.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.33
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.916"
+   }
+  },
+  {
+   "source": [
+    "DUD_022",
+    "Insatiable (Scions & Sinners)",
+    "貪欲 (Scions & Sinners)"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_465.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": -0.57
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.973"
+   }
+  },
+  {
+   "source": [
+    "DUD_074",
+    "The Sound of the End (From NieR:Automata)",
+    "終ワリノ音 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_483.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.61
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.984"
+   }
+  },
+  {
+   "source": [
+    "DUD_077",
+    "カイネ／Final Fantasy Main Theme Version"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_485.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.105
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.970"
+   }
+  },
+  {
+   "source": [
+    "DUD_076",
+    "Possessed by Disease (From NieR:Automata)",
+    "取リ憑イタ業病 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_490.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.27
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988"
+   }
+  },
+  {
+   "source": [
+    "DUD_030",
+    "TH_102",
+    "A Sundering of Light",
+    "分割された光 ～希望の園エデン：共鳴編～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_747.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.18
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.8dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988"
+   }
+  },
+  {
+   "source": [
+    "DUD_001",
+    "Locus (Duality)",
+    "ローカス (Duality) ～機工城アレキサンダー：起動編～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_859.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.395
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.978"
+   }
+  },
+  {
+   "source": [
+    "DUD_002",
+    "Metal - Brute Justice Mode (Journeys)",
+    "メタル：ブルートジャスティスモード (Journeys) ～機工城アレキサンダー：律動編～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_860.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.67
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.978"
+   }
+  }
+ ]
 }

@@ -1,3352 +1,2972 @@
 {
-  "name": "Final Fantasy XIV - 6.0 - Endwalker",
-  "searchDirectories": {
-    "Endwalker": {
-      "default": true,
-      "purchaseLinks": {
-        "amazon.co.jp": "https://www.amazon.co.jp/dp/B09PW4VVHN/"
-      }
-    }
+ "name": "Final Fantasy XIV - 6.0 - Endwalker",
+ "searchDirectories": {
+  "Endwalker": {
+   "default": true,
+   "purchaseLinks": {
+    "amazon.co.jp": "https://www.amazon.co.jp/dp/B09PW4VVHN/"
+   }
+  }
+ },
+ "items": [
+  {
+   "source": [
+    "ENDWALKER_008",
+    "TFEOF_FFXIV_02",
+    "Down the Up Staircase",
+    "上り階段をくだれ ～星海観測 逆さの塔～"
+   ],
+   "target": {
+    "path": [
+     "music/ex1/BGM_EX1_Dungeon_DravaniaL_02.scd",
+     "music/ex4/BGM_EX4_Field_Lab_Sakasa.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.345
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
   },
-  "items": [
-    {
-      "source": [
-        "ENDWALKER_008",
-        "TFEOF_FFXIV_02",
-        "Down the Up Staircase",
-        "上り階段をくだれ ～星海観測 逆さの塔～"
-      ],
-      "target": {
-        "path": "music/ex1/BGM_EX1_Dungeon_DravaniaL_02.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.345
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_027",
-        "Endcaller",
-        "ENDCALLER ～ゾディアーク討滅戦～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Ban_01.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.715
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_042",
-        "Your Answer",
-        "Your Answer ～ハイデリン討滅戦～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Ban_02.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.22
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_050",
-        "The Final Day",
-        "終焉の戦い"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Ban_04.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.62
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_051",
-        "With Hearts Aligned",
-        "想いが動かす力"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Ban_05.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 131.2
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.917"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_015",
-        "震える刃",
-        "On Blade's Edge"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Boss_Battle01.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 126.365
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "same recording as GL_00012.flac, which the matcher picked for this target (0.873 vs 0.873); listed here too so owning this album is enough to replace it"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_024",
-        "終の戦",
-        "Finality"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Boss_Battle02.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.525
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "same recording as GL_00013.flac, which the matcher picked for this target (0.887 vs 0.887); listed here too so owning this album is enough to replace it"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_041",
-        "The Aetherial Sea",
-        "星の海 ～星海潜航 アイティオン星晶鏡～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Dan_D01.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.325
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.997"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_014",
-        "Tower of Zot (Endwalker)",
-        "ゾットの塔 ～暁月～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Dan_D02.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 2.03
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_032",
-        "As the Sky Burns",
-        "空が燃える日 ～終末樹海 ヴァナスパティ～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Dan_D03.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 125.415
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.988"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_023",
-        "Garlemald Express",
-        "ガレマルド急行 ～ 魔導神門 バブイルの塔～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Dan_D04.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 117.575
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.986"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_036",
-        "Miracle Works",
-        "創造の奇跡 ～創造環境 ヒュペルボレア造物院～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Dan_D05.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 147.07
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_049",
-        "Of Countless Stars",
-        "先ゆく星々 ～最終幻想 レムナント～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Dan_D06.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.54
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_057",
-        "Carrots of Happiness",
-        "ハピネスキャロット ～楽園都市 スマイルトン～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Dan_D07.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.855
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.995"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_058",
-        "eScape (Journeys)",
-        "エスケープ (Journeys) 〜次元の狭間オメガ：アルファ編〜"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Dan_D08.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.995
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.988"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_001",
-        "Endwalker - Footfalls"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_EndCredit02.scd",
-        "enable": false,
-        "# comment": "source is correct (spectral 0.995 at offset +0.0s) but covers only 22% of this target: 352s of 1589s. The rest needs a multi-segment or filterComplex source; left disabled until then."
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_052",
-        "Flow"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_01.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.7
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_022",
-        "Each Drop",
-        "小さな命"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_03.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.475
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.997"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_043",
-        "Answers - Piano"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_04.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 121.14
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.998"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_044",
-        "The Last Stand",
-        "ラストスタンド"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_05.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.675
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_033",
-        "GL_00014",
-        "Heroes Forge Ahead",
-        "英雄に続け"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_06.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.61
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.995"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_048",
-        "Dynamis",
-        "デュナミスの欠片"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_07.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 2.12
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.997"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_004",
-        "Spoken without End",
-        "語り継がれる言葉"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_08.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.66
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_031",
-        "What Comes of Despair",
-        "絶望の果て"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_09.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.87
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_019",
-        "Home Beyond the Horizon",
-        "帰らん、地平の彼方へ"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_10.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 112.555
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_054",
-        "The Tale of the Star",
-        "星と命を巡る物語"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_11.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.67
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_026",
-        "'Neath Dark Waters (Scions & Sinners)",
-        "冥き水底 (Scions & Sinners) 〜テンペスト：深部〜"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_12.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 2.555
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.999"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_021",
-        "Tremble",
-        "恐怖の波動"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_15.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": -10.14
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.961"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_019",
-        "Home Beyond the Horizon",
-        "帰らん、地平の彼方へ"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_16.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 107.675
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.844"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_059",
-        "Roads Less Traveled",
-        "旅を駆け抜けて"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_17.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.98
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.878"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_035",
-        "Flow Together"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_20.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.43
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.983"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_040",
-        "Before_Meteor_FFXIV_104",
-        "Answers"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Event_21.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 211.99
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.982"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_009",
-        "Unbowed",
-        "抗戦"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Elp_Battle.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.755
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_034",
-        "Sky Unsundered",
-        "古の空 ～エルピス：昼～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Elp_Day.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.74
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.997"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_037",
-        "Stars Long Dead",
-        "古の星空 ～エルピス：夜～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Elp_Night.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.895
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.989"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_009",
-        "Unbowed",
-        "抗戦"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Gar_Battle.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.755
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_017",
-        "White Snow, Black Steel",
-        "白雪と黒鉄 ～ガレマルド：昼～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Gar_Day.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.535
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.995"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_020",
-        "Black Steel, Cold Embers",
-        "黒闇と黒鉄 ～ガレマルド：夜～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Gar_Night.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.255
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.986"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_009",
-        "Unbowed",
-        "抗戦"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Lab_Battle.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.755
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_007",
-        "The Labyrinth",
-        "迷宮 ～ラヴィリンソス：昼～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Lab_Day.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.94
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_010",
-        "Dreams of Man",
-        "迷夢 ～ラヴィリンソス：夜～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Lab_Night.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.845
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.980"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_008",
-        "TFEOF_FFXIV_02",
-        "Down the Up Staircase",
-        "上り階段をくだれ ～星海観測 逆さの塔～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Lab_Sakasa.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.345
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_038",
-        "From Below",
-        "地より昇りし力"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Lab_Ten.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 51.25
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.975"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_025",
-        "One Small Step",
-        "小さな一歩 ～嘆きの海～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Mar_Day.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 193.755
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.983"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_030",
-        "バトル1 from FINAL FANTASY IV",
-        "Battle 1 from FINAL FANTASY IV"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Mar_Lep_battle.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 50.29
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "same recording as TH_014.flac, which the matcher picked for this target (0.822 vs 0.886); listed here too so owning this album is enough to replace it"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_018",
-        "Those We Can Yet Save",
-        "護るべき営み"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Safe01.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.485
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.983"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_029",
-        "Welcome to Our Town! (Endwalker)",
-        "街のテーマ ～暁月～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Safe02.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 116.665
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_009",
-        "Unbowed",
-        "抗戦"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Thav_Battle.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.755
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_012",
-        "Divine Words",
-        "神々の訓え ～サベネア島：昼～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Thav_Day.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.755
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.991"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_016",
-        "Prayers Repeated",
-        "人々の祈り ～サベネア島：夜～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Thav_Night.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.61
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_045",
-        "Echoes in the Distance"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Ult_Day01.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.845
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.998"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_046",
-        "Close in the Distance - Instrumental"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Ult_Day02.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.74
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.997"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_047",
-        "Close in the Distance"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Field_Ult_Day03.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.99
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.997"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_060",
-        "魔のすべて"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Raid_01.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 148.49
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.956"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_061",
-        "Ancient Shackles",
-        "縛めの鎖 ～万魔殿パンデモニウム：辺獄編～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Raid_02.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 3.01
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_062",
-        "Hic Svnt Leones",
-        "此処に獅子あり ～万魔殿パンデモニウム：辺獄編～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Raid_03.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.195
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.908"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_003",
-        "The Ewer Brimmeth",
-        "知恵の水瓶 ～オールド・シャーレアン：昼～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Town_O_Day.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 244.625
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.979"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_006",
-        "The Nautilus Knoweth",
-        "知恵の巻貝 ～オールド・シャーレアン：夜～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Town_O_Night.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.55
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_005",
-        "The Day Will Come (Endwalker)",
-        "いつの日かきっと ～暁月～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Town_O_Room.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.595
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_055",
-        "Vibrant Voices",
-        "多彩なる都 ～ラザハン：昼～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Town_R_Day.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 136.69
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.988"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_013",
-        "Twilit Terraces",
-        "落日の都 ～ラザハン～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Town_R_Day2.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.47
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.997"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_056",
-        "Perfumed Eves",
-        "薫香の都 ～ラザハン：夜～"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_Town_R_Night.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.77
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_030",
-        "TH_014",
-        "Battle 1 from FINAL FANTASY IV",
-        "バトル1 from FINAL FANTASY IV"
-      ],
-      "target": {
-        "path": "music/ex4/BGM_EX4_WKS_04.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": -6.265
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=+1.4dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.966"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_040",
-        "Before_Meteor_FFXIV_104",
-        "Answers"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Con_Bahamut_Bigboss3.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 156.14
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.947"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_011",
-        "Shade's Delight",
-        "微笑む幽霊"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Event_ShinAyashii.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.645
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.997"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_059",
-        "Roads Less Traveled",
-        "旅を駆け抜けて"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_EX4Common.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.98
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.878"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_050",
-        "The Final Day",
-        "終焉の戦い"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_GDZ.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.62
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_042",
-        "Your Answer",
-        "Your Answer ～ハイデリン討滅戦～"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_Hydaelyn.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.22
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.996"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_062",
-        "Hic Svnt Leones",
-        "此処に獅子あり ～万魔殿パンデモニウム：辺獄編～"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_Pandemonium01.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.195
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.908"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_027",
-        "Endcaller",
-        "ENDCALLER ～ゾディアーク討滅戦～"
-      ],
-      "target": {
-        "path": "music/ffxiv/BGM_Ride_Zodiark.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.715
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.994"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_008",
-        "上り階段をくだれ ～星海観測 逆さの塔～",
-        "Down the Up Staircase"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_025.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 2.4
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "same recording as TFEOF_FFXIV_02.flac, which the matcher picked for this target (0.915 vs 0.926); listed here too so owning this album is enough to replace it"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_039",
-        "BTF_FFXIV_45",
-        "From the Ashes",
-        "灰より生まれし者"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_044.scd",
-        "# comment": "spectral similarity to the game's own file: 0.979"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_040",
-        "Before_Meteor_FFXIV_104",
-        "Answers"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_045.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": -0.27
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-4.4dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.971"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_058",
-        "eScape (Journeys)",
-        "エスケープ (Journeys) 〜次元の狭間オメガ：アルファ編〜"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_316.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.95
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-2.7dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.979"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_028",
-        "Imagination (Duality)",
-        "イマジネーション (Duality) 〜蒼天聖戦 魔科学研究所〜"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_403.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.805
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.972"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_026",
-        "'Neath Dark Waters (Scions & Sinners)",
-        "冥き水底 (Scions & Sinners) 〜テンペスト：深部〜"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_406.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.395
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.992"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_014",
-        "Tower of Zot (Endwalker)",
-        "ゾットの塔 ～暁月～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_492.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 2.03
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-4.1dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.976"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_023",
-        "Garlemald Express",
-        "ガレマルド急行 ～ 魔導神門 バブイルの塔～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_493.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 117.575
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-2.3dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.930"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_032",
-        "As the Sky Burns",
-        "空が燃える日 ～終末樹海 ヴァナスパティ～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_494.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 125.415
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-1.2dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.967"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_036",
-        "Miracle Works",
-        "創造の奇跡 ～創造環境 ヒュペルボレア造物院～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_495.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 147.07
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-1.2dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.977"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_041",
-        "The Aetherial Sea",
-        "星の海 ～星海潜航 アイティオン星晶鏡～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_496.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.325
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-3.3dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.983"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_049",
-        "Of Countless Stars",
-        "先ゆく星々 ～最終幻想 レムナント～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_497.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.54
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-1dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.988"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_057",
-        "Carrots of Happiness",
-        "ハピネスキャロット ～楽園都市 スマイルトン～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_498.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.855
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-2.6dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.967"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_027",
-        "Endcaller",
-        "ENDCALLER ～ゾディアーク討滅戦～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_499.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.715
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-3.5dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.985"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_042",
-        "Your Answer",
-        "Your Answer ～ハイデリン討滅戦～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_500.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.22
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-5.2dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.983"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_061",
-        "Ancient Shackles",
-        "縛めの鎖 ～万魔殿パンデモニウム：辺獄編～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_501.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 3.35
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-5.3dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.893"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_062",
-        "Hic Svnt Leones",
-        "此処に獅子あり ～万魔殿パンデモニウム：辺獄編～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_502.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.195
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-7dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.882"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_003",
-        "The Ewer Brimmeth",
-        "知恵の水瓶 ～オールド・シャーレアン：昼～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_503.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.12
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.983"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_013",
-        "Twilit Terraces",
-        "落日の都 ～ラザハン～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_504.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.47
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-2.6dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.978"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_007",
-        "The Labyrinth",
-        "迷宮 ～ラヴィリンソス：昼～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_505.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.94
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-2.7dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.958"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_012",
-        "Divine Words",
-        "神々の訓え ～サベネア島：昼～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_506.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.755
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-3.1dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.961"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_017",
-        "White Snow, Black Steel",
-        "白雪と黒鉄 ～ガレマルド：昼～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_507.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.535
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-6.3dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.974"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_025",
-        "One Small Step",
-        "小さな一歩 ～嘆きの海～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_508.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.755
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-4.2dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.988"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_034",
-        "Sky Unsundered",
-        "古の空 ～エルピス：昼～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_509.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.74
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-3.1dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.984"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_047",
-        "Close in the Distance"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_510.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.99
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-6.5dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.965"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_009",
-        "Unbowed",
-        "抗戦"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_511.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.755
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-3.7dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.979"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_015",
-        "GL_00012",
-        "On Blade's Edge",
-        "震える刃"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_512.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 126.365
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-6.1dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.970"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_024",
-        "終の戦",
-        "Finality"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_513.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.525
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "same recording as GL_00013.flac, which the matcher picked for this target (0.869 vs 0.869); listed here too so owning this album is enough to replace it"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_001",
-        "Endwalker - Footfalls"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_514.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.955
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-8.8dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.941"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_052",
-        "Flow"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_515.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.945
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-3dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.976"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_050",
-        "The Final Day",
-        "終焉の戦い"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_520.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.62
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-4.2dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.977"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_051",
-        "With Hearts Aligned",
-        "想いが動かす力"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_521.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 131.2
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-4.5dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.908"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_035",
-        "Flow Together"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_522.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.43
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-5.6dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.968"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_006",
-        "The Nautilus Knoweth",
-        "知恵の巻貝 ～オールド・シャーレアン：夜～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_528.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.55
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=+1.5dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.969"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_005",
-        "The Day Will Come (Endwalker)",
-        "いつの日かきっと ～暁月～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_529.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.595
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.980"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_055",
-        "Vibrant Voices",
-        "多彩なる都 ～ラザハン：昼～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_530.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 136.69
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-2.9dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.972"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_056",
-        "Perfumed Eves",
-        "薫香の都 ～ラザハン：夜～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_531.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.77
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.973"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_010",
-        "Dreams of Man",
-        "迷夢 ～ラヴィリンソス：夜～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_532.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.845
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.962"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_016",
-        "Prayers Repeated",
-        "人々の祈り ～サベネア島：夜～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_533.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.61
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-3.9dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.982"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_020",
-        "Black Steel, Cold Embers",
-        "黒闇と黒鉄 ～ガレマルド：夜～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_534.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.255
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.964"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_019",
-        "Home Beyond the Horizon",
-        "帰らん、地平の彼方へ"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_535.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 107.85
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-4.4dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.863"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_037",
-        "Stars Long Dead",
-        "古の星空 ～エルピス：夜～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_536.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 0.895
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.969"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_029",
-        "Welcome to Our Town! (Endwalker)",
-        "街のテーマ ～暁月～"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_537.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.57
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.983"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_030",
-        "バトル1 from FINAL FANTASY IV",
-        "Battle 1 from FINAL FANTASY IV"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_595.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.325
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ]
-          }
-        ],
-        "# comment": "same recording as TH_014.flac, which the matcher picked for this target (0.879 vs 0.885); listed here too so owning this album is enough to replace it"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_060",
-        "魔のすべて"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_748.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.76
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-3.3dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.983"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_045",
-        "Echoes in the Distance"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_785.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.845
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-2.1dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.993"
-      }
-    },
-    {
-      "source": [
-        "ENDWALKER_046",
-        "Close in the Distance - Instrumental"
-      ],
-      "target": {
-        "path": "music/ffxiv/Orchestrion/BGM_ORCH_786.scd",
-        "segments": [
-          {
-            "sourceOffsets": {
-              "source": 1.74
-            },
-            "channels": [
-              {
-                "source": "source",
-                "channel": 0
-              },
-              {
-                "source": "source",
-                "channel": 1
-              }
-            ],
-            "sourceFilters": {
-              "source": "volume=-3.8dB"
-            }
-          }
-        ],
-        "# comment": "spectral similarity to the game's own file: 0.989"
-      }
-    }
-  ]
+  {
+   "source": [
+    "ENDWALKER_027",
+    "Endcaller",
+    "ENDCALLER ～ゾディアーク討滅戦～"
+   ],
+   "target": {
+    "path": [
+     "music/ex4/BGM_EX4_Ban_01.scd",
+     "music/ffxiv/BGM_Ride_Zodiark.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.715
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_042",
+    "Your Answer",
+    "Your Answer ～ハイデリン討滅戦～"
+   ],
+   "target": {
+    "path": [
+     "music/ex4/BGM_EX4_Ban_02.scd",
+     "music/ffxiv/BGM_Ride_Hydaelyn.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.22
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_050",
+    "The Final Day",
+    "終焉の戦い"
+   ],
+   "target": {
+    "path": [
+     "music/ex4/BGM_EX4_Ban_04.scd",
+     "music/ffxiv/BGM_Ride_GDZ.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.62
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_051",
+    "With Hearts Aligned",
+    "想いが動かす力"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Ban_05.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.81
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.917; offset corrected +131.200s -> +1.810s by re-deriving the alignment and judging it on the intro (0.8247 -> 0.9865)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_015",
+    "震える刃",
+    "On Blade's Edge"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Boss_Battle01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.84
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as GL_00012.flac, which the matcher picked for this target (0.873 vs 0.873); listed here too so owning this album is enough to replace it; offset corrected +126.365s -> +1.840s by re-deriving the alignment and judging it on the intro (0.9473 -> 0.9938)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_024",
+    "終の戦",
+    "Finality"
+   ],
+   "target": {
+    "path": [
+     "music/ex4/BGM_EX4_Boss_Battle02.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_513.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.525
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as GL_00013.flac, which the matcher picked for this target (0.887 vs 0.887); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_041",
+    "The Aetherial Sea",
+    "星の海 ～星海潜航 アイティオン星晶鏡～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Dan_D01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.325
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_014",
+    "Tower of Zot (Endwalker)",
+    "ゾットの塔 ～暁月～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Dan_D02.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 2.03
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_032",
+    "As the Sky Burns",
+    "空が燃える日 ～終末樹海 ヴァナスパティ～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Dan_D03.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.97
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988; offset corrected +125.415s -> +1.970s by re-deriving the alignment and judging it on the intro (0.9495 -> 0.9925)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_023",
+    "Garlemald Express",
+    "ガレマルド急行 ～ 魔導神門 バブイルの塔～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Dan_D04.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.71
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.986; offset corrected +117.575s -> +1.710s by re-deriving the alignment and judging it on the intro (0.8373 -> 0.9794)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_036",
+    "Miracle Works",
+    "創造の奇跡 ～創造環境 ヒュペルボレア造物院～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Dan_D05.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.57
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993; offset corrected +147.070s -> +1.570s by re-deriving the alignment and judging it on the intro (0.9575 -> 0.9923)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_049",
+    "Of Countless Stars",
+    "先ゆく星々 ～最終幻想 レムナント～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Dan_D06.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.54
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_057",
+    "Carrots of Happiness",
+    "ハピネスキャロット ～楽園都市 スマイルトン～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Dan_D07.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.855
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_058",
+    "eScape (Journeys)",
+    "エスケープ (Journeys) 〜次元の狭間オメガ：アルファ編〜"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Dan_D08.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.995
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_001",
+    "Endwalker - Footfalls"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_EndCredit02.scd",
+    "enable": false,
+    "# comment": "source is correct (spectral 0.995 at offset +0.0s) but covers only 22% of this target: 352s of 1589s. The rest needs a multi-segment or filterComplex source; left disabled until then."
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_052",
+    "Flow"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.7
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_022",
+    "Each Drop",
+    "小さな命"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_03.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.475
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_043",
+    "Answers - Piano"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_04.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 121.14
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.998"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_044",
+    "The Last Stand",
+    "ラストスタンド"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_05.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.675
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_033",
+    "GL_00014",
+    "Heroes Forge Ahead",
+    "英雄に続け"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_06.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.61
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_048",
+    "Dynamis",
+    "デュナミスの欠片"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_07.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 2.12
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_004",
+    "Spoken without End",
+    "語り継がれる言葉"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_08.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.66
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_031",
+    "What Comes of Despair",
+    "絶望の果て"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_09.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.87
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_019",
+    "Home Beyond the Horizon",
+    "帰らん、地平の彼方へ"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_10.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 119.51
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994; offset corrected +112.555s -> +119.510s by re-deriving the alignment and judging it on the intro (0.8910 -> 0.9550)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_054",
+    "The Tale of the Star",
+    "星と命を巡る物語"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_11.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.67
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_026",
+    "'Neath Dark Waters (Scions & Sinners)",
+    "冥き水底 (Scions & Sinners) 〜テンペスト：深部〜"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_12.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 2.555
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.999"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_021",
+    "Tremble",
+    "恐怖の波動"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_15.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 65.05
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.961; offset corrected -10.140s -> +65.050s by re-deriving the alignment and judging it on the intro (0.6596 -> 0.9884)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_019",
+    "Home Beyond the Horizon",
+    "帰らん、地平の彼方へ"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_16.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.58
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.844; offset corrected +107.675s -> +1.580s by re-deriving the alignment and judging it on the intro (0.8362 -> 0.8957)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_059",
+    "Roads Less Traveled",
+    "旅を駆け抜けて"
+   ],
+   "target": {
+    "path": [
+     "music/ex4/BGM_EX4_Event_17.scd",
+     "music/ffxiv/BGM_Ride_EX4Common.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.98
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.878"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_035",
+    "Flow Together"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_20.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.43
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.983"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_040",
+    "Before_Meteor_FFXIV_104",
+    "Answers"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_21.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 211.99
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.982"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_009",
+    "Unbowed",
+    "抗戦"
+   ],
+   "target": {
+    "path": [
+     "music/ex4/BGM_EX4_Field_Elp_Battle.scd",
+     "music/ex4/BGM_EX4_Field_Gar_Battle.scd",
+     "music/ex4/BGM_EX4_Field_Lab_Battle.scd",
+     "music/ex4/BGM_EX4_Field_Thav_Battle.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.755
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_034",
+    "Sky Unsundered",
+    "古の空 ～エルピス：昼～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Field_Elp_Day.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.74
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_037",
+    "Stars Long Dead",
+    "古の星空 ～エルピス：夜～"
+   ],
+   "target": {
+    "path": [
+     "music/ex4/BGM_EX4_Field_Elp_Night.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_536.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.895
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.989"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_017",
+    "White Snow, Black Steel",
+    "白雪と黒鉄 ～ガレマルド：昼～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Field_Gar_Day.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.535
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_020",
+    "Black Steel, Cold Embers",
+    "黒闇と黒鉄 ～ガレマルド：夜～"
+   ],
+   "target": {
+    "path": [
+     "music/ex4/BGM_EX4_Field_Gar_Night.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_534.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.255
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.986"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_007",
+    "The Labyrinth",
+    "迷宮 ～ラヴィリンソス：昼～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Field_Lab_Day.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.94
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_010",
+    "Dreams of Man",
+    "迷夢 ～ラヴィリンソス：夜～"
+   ],
+   "target": {
+    "path": [
+     "music/ex4/BGM_EX4_Field_Lab_Night.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_532.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.845
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.980"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_038",
+    "From Below",
+    "地より昇りし力"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Field_Lab_Ten.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 2.21
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.975; offset corrected +51.250s -> +2.210s by re-deriving the alignment and judging it on the intro (0.6507 -> 0.9870)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_025",
+    "One Small Step",
+    "小さな一歩 ～嘆きの海～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Field_Mar_Day.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.75
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.983; offset corrected +193.755s -> +1.750s by re-deriving the alignment and judging it on the intro (0.8773 -> 0.9945)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_030",
+    "バトル1 from FINAL FANTASY IV",
+    "Battle 1 from FINAL FANTASY IV"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Field_Mar_Lep_battle.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.53
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as TH_014.flac, which the matcher picked for this target (0.822 vs 0.886); listed here too so owning this album is enough to replace it; offset corrected +50.290s -> +1.530s by re-deriving the alignment and judging it on the intro (0.8182 -> 0.9925)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_018",
+    "Those We Can Yet Save",
+    "護るべき営み"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Field_Safe01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.485
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.983"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_029",
+    "Welcome to Our Town! (Endwalker)",
+    "街のテーマ ～暁月～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Field_Safe02.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.45
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994; offset corrected +116.665s -> +1.450s by re-deriving the alignment and judging it on the intro (0.9318 -> 0.9851)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_012",
+    "Divine Words",
+    "神々の訓え ～サベネア島：昼～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Field_Thav_Day.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.755
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.991"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_016",
+    "Prayers Repeated",
+    "人々の祈り ～サベネア島：夜～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Field_Thav_Night.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.61
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_045",
+    "Echoes in the Distance"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Field_Ult_Day01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.845
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.998"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_046",
+    "Close in the Distance - Instrumental"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Field_Ult_Day02.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.74
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_047",
+    "Close in the Distance"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Field_Ult_Day03.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.99
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_060",
+    "魔のすべて"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Raid_01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.67
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.956; offset corrected +148.490s -> +1.670s by re-deriving the alignment and judging it on the intro (0.9260 -> 0.9508)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_061",
+    "Ancient Shackles",
+    "縛めの鎖 ～万魔殿パンデモニウム：辺獄編～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Raid_02.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 3.01
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_062",
+    "Hic Svnt Leones",
+    "此処に獅子あり ～万魔殿パンデモニウム：辺獄編～"
+   ],
+   "target": {
+    "path": [
+     "music/ex4/BGM_EX4_Raid_03.scd",
+     "music/ffxiv/BGM_Ride_Pandemonium01.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.195
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.908"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_003",
+    "The Ewer Brimmeth",
+    "知恵の水瓶 ～オールド・シャーレアン：昼～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Town_O_Day.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.62
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.979; offset corrected +244.625s -> +1.620s by re-deriving the alignment and judging it on the intro (0.9702 -> 0.9936)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_006",
+    "The Nautilus Knoweth",
+    "知恵の巻貝 ～オールド・シャーレアン：夜～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Town_O_Night.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.55
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_005",
+    "The Day Will Come (Endwalker)",
+    "いつの日かきっと ～暁月～"
+   ],
+   "target": {
+    "path": [
+     "music/ex4/BGM_EX4_Town_O_Room.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_529.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.595
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_055",
+    "Vibrant Voices",
+    "多彩なる都 ～ラザハン：昼～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Town_R_Day.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.83
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988; offset corrected +136.690s -> +1.830s by re-deriving the alignment and judging it on the intro (0.8316 -> 0.9913)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_013",
+    "Twilit Terraces",
+    "落日の都 ～ラザハン～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Town_R_Day2.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.47
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_056",
+    "Perfumed Eves",
+    "薫香の都 ～ラザハン：夜～"
+   ],
+   "target": {
+    "path": [
+     "music/ex4/BGM_EX4_Town_R_Night.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_531.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.77
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_030",
+    "TH_014",
+    "Battle 1 from FINAL FANTASY IV",
+    "バトル1 from FINAL FANTASY IV"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_WKS_04.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": -6.265
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+1.4dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.966"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_040",
+    "Before_Meteor_FFXIV_104",
+    "Answers"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Con_Bahamut_Bigboss3.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 156.14
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.947"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_011",
+    "Shade's Delight",
+    "微笑む幽霊"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_ShinAyashii.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.645
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_008",
+    "上り階段をくだれ ～星海観測 逆さの塔～",
+    "Down the Up Staircase"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_025.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.35
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as TFEOF_FFXIV_02.flac, which the matcher picked for this target (0.915 vs 0.926); listed here too so owning this album is enough to replace it; offset corrected +2.400s -> +0.350s by re-deriving the alignment and judging it on the intro (0.5461 -> 0.7698)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_039",
+    "BTF_FFXIV_45",
+    "From the Ashes",
+    "灰より生まれし者"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_044.scd",
+    "# comment": "spectral similarity to the game's own file: 0.979"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_040",
+    "Before_Meteor_FFXIV_104",
+    "Answers"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_045.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": -0.27
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.4dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.971"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_058",
+    "eScape (Journeys)",
+    "エスケープ (Journeys) 〜次元の狭間オメガ：アルファ編〜"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_316.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.95
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.7dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.979"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_028",
+    "Imagination (Duality)",
+    "イマジネーション (Duality) 〜蒼天聖戦 魔科学研究所〜"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_403.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.805
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.972"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_026",
+    "'Neath Dark Waters (Scions & Sinners)",
+    "冥き水底 (Scions & Sinners) 〜テンペスト：深部〜"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_406.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.395
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.992"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_014",
+    "Tower of Zot (Endwalker)",
+    "ゾットの塔 ～暁月～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_492.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 2.03
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.976"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_023",
+    "Garlemald Express",
+    "ガレマルド急行 ～ 魔導神門 バブイルの塔～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_493.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.71
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.930; offset corrected +117.575s -> +1.710s by re-deriving the alignment and judging it on the intro (0.7791 -> 0.9115)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_032",
+    "As the Sky Burns",
+    "空が燃える日 ～終末樹海 ヴァナスパティ～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_494.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.97
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.2dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.967; offset corrected +125.415s -> +1.970s by re-deriving the alignment and judging it on the intro (0.9379 -> 0.9742)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_036",
+    "Miracle Works",
+    "創造の奇跡 ～創造環境 ヒュペルボレア造物院～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_495.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.57
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.2dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.977; offset corrected +147.070s -> +1.570s by re-deriving the alignment and judging it on the intro (0.9530 -> 0.9865)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_041",
+    "The Aetherial Sea",
+    "星の海 ～星海潜航 アイティオン星晶鏡～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_496.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.325
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.983"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_049",
+    "Of Countless Stars",
+    "先ゆく星々 ～最終幻想 レムナント～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_497.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.54
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_057",
+    "Carrots of Happiness",
+    "ハピネスキャロット ～楽園都市 スマイルトン～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_498.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.855
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.6dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.967"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_027",
+    "Endcaller",
+    "ENDCALLER ～ゾディアーク討滅戦～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_499.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.715
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.985"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_042",
+    "Your Answer",
+    "Your Answer ～ハイデリン討滅戦～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_500.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.22
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-5.2dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.983"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_061",
+    "Ancient Shackles",
+    "縛めの鎖 ～万魔殿パンデモニウム：辺獄編～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_501.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 3.35
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-5.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.893"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_062",
+    "Hic Svnt Leones",
+    "此処に獅子あり ～万魔殿パンデモニウム：辺獄編～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_502.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.195
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-7dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.882"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_003",
+    "The Ewer Brimmeth",
+    "知恵の水瓶 ～オールド・シャーレアン：昼～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_503.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.12
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.983"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_013",
+    "Twilit Terraces",
+    "落日の都 ～ラザハン～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_504.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.47
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.6dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.978"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_007",
+    "The Labyrinth",
+    "迷宮 ～ラヴィリンソス：昼～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_505.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.94
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.7dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.958"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_012",
+    "Divine Words",
+    "神々の訓え ～サベネア島：昼～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_506.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.755
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.961"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_017",
+    "White Snow, Black Steel",
+    "白雪と黒鉄 ～ガレマルド：昼～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_507.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.535
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-6.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.974"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_025",
+    "One Small Step",
+    "小さな一歩 ～嘆きの海～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_508.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.755
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.2dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_034",
+    "Sky Unsundered",
+    "古の空 ～エルピス：昼～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_509.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.74
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.984"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_047",
+    "Close in the Distance"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_510.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.99
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-6.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.965"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_009",
+    "Unbowed",
+    "抗戦"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_511.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.755
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.7dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.979"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_015",
+    "GL_00012",
+    "On Blade's Edge",
+    "震える刃"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_512.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.84
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-6.1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.970; offset corrected +126.365s -> +1.840s by re-deriving the alignment and judging it on the intro (0.9216 -> 0.9705)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_001",
+    "Endwalker - Footfalls"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_514.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.955
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-8.8dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.941"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_052",
+    "Flow"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_515.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.945
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.976"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_050",
+    "The Final Day",
+    "終焉の戦い"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_520.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.62
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.2dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.977"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_051",
+    "With Hearts Aligned",
+    "想いが動かす力"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_521.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.81
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.908; offset corrected +131.200s -> +1.810s by re-deriving the alignment and judging it on the intro (0.8254 -> 0.9808)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_035",
+    "Flow Together"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_522.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.43
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-5.6dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.968"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_006",
+    "The Nautilus Knoweth",
+    "知恵の巻貝 ～オールド・シャーレアン：夜～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_528.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.55
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+1.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.969"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_055",
+    "Vibrant Voices",
+    "多彩なる都 ～ラザハン：昼～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_530.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.83
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.9dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.972; offset corrected +136.690s -> +1.830s by re-deriving the alignment and judging it on the intro (0.8175 -> 0.9716)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_016",
+    "Prayers Repeated",
+    "人々の祈り ～サベネア島：夜～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_533.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.61
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.9dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.982"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_019",
+    "Home Beyond the Horizon",
+    "帰らん、地平の彼方へ"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_535.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.76
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.4dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.863; offset corrected +107.850s -> +1.760s by re-deriving the alignment and judging it on the intro (0.8877 -> 0.9627)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_029",
+    "Welcome to Our Town! (Endwalker)",
+    "街のテーマ ～暁月～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_537.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.57
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.983"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_030",
+    "バトル1 from FINAL FANTASY IV",
+    "Battle 1 from FINAL FANTASY IV"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_595.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.325
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as TH_014.flac, which the matcher picked for this target (0.879 vs 0.885); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_060",
+    "魔のすべて"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_748.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.76
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.983"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_045",
+    "Echoes in the Distance"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_785.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.845
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_046",
+    "Close in the Distance - Instrumental"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_786.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 1.74
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.8dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.989"
+   }
+  }
+ ]
 }
