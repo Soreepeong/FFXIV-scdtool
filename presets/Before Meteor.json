@@ -1234,10 +1234,27 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 103.56
+     },
+     {
+      "sourceOffsets": {
+       "source": 15.05102
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.5
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.980"
+    "# comment": "spectral similarity to the game's own file: 0.980 the recording runs out 1.8s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 15.17s (similarity 0.962 against 0.863 for the next-best placement, and the distance back is the game file's own loop period of 88.889s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 15.051s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
@@ -1482,10 +1499,27 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 154.4
+     },
+     {
+      "sourceOffsets": {
+       "source": 11.947029
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.5
      }
     ],
-    "# comment": "same recording as BTF_FFXIV_44.flac, which the matcher picked for this target (0.912 vs 0.995); listed here too so owning this album is enough to replace it"
+    "# comment": "same recording as BTF_FFXIV_44.flac, which the matcher picked for this target (0.912 vs 0.995); listed here too so owning this album is enough to replace it the recording runs out 1.3s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 12.07s (similarity 0.992 against 0.920 for the next-best placement, and the distance back is the game file's own loop period of 142.833s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 11.947s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
@@ -3690,10 +3724,30 @@
       ],
       "sourceFilters": {
        "source": "adelay=780:all=1"
+      },
+      "length": 426.38
+     },
+     {
+      "sourceOffsets": {
+       "source": 1.575374
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.5,
+      "sourceFilters": {
+       "source": "adelay=780:all=1"
       }
      }
     ],
-    "# comment": "same recording as ENDWALKER_040.flac, which the matcher picked for this target (0.976 vs 0.987); listed here too so owning this album is enough to replace it. the game's file starts before this recording does, so the source is delayed rather than offset: source by 0.780s"
+    "# comment": "same recording as ENDWALKER_040.flac, which the matcher picked for this target (0.976 vs 0.987); listed here too so owning this album is enough to replace it. the game's file starts before this recording does, so the source is delayed rather than offset: source by 0.780s the recording runs out 2.8s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.08s (similarity 0.987 against 0.834 for the next-best placement, and the distance back is the game file's own loop period of 424.805s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 1.575s, seamed 0.50s early and crossfaded over that."
    }
   }
  ],

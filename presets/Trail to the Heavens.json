@@ -2869,10 +2869,30 @@
       ],
       "sourceFilters": {
        "source": "volume=-2.4dB"
+      },
+      "length": 255.88
+     },
+     {
+      "sourceOffsets": {
+       "source": 6.081485
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.5,
+      "sourceFilters": {
+       "source": "volume=-2.4dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.980"
+    "# comment": "spectral similarity to the game's own file: 0.980 the recording runs out 3.8s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 5.42s (similarity 0.988 against 0.927 for the next-best placement, and the distance back is the game file's own loop period of 250.964s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 6.081s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
@@ -3679,10 +3699,27 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 186.3
+     },
+     {
+      "sourceOffsets": {
+       "source": 4.195227
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.5
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.908"
+    "# comment": "spectral similarity to the game's own file: 0.908 the recording runs out 1.3s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.97s (similarity 0.966 against 0.897 for the next-best placement, and the distance back is the game file's own loop period of 183.830s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 4.195s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
@@ -3714,10 +3751,30 @@
       ],
       "sourceFilters": {
        "source": "volume=-5.2dB"
+      },
+      "length": 185.8
+     },
+     {
+      "sourceOffsets": {
+       "source": 3.691803
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.5,
+      "sourceFilters": {
+       "source": "volume=-5.2dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.900"
+    "# comment": "spectral similarity to the game's own file: 0.900 the recording runs out 1.8s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.47s (similarity 0.948 against 0.843 for the next-best placement, and the distance back is the game file's own loop period of 183.833s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 3.692s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
@@ -6951,10 +7008,30 @@
       ],
       "sourceFilters": {
        "source": "volume=-5.1dB"
+      },
+      "length": 290.426644
+     },
+     {
+      "sourceOffsets": {
+       "source": 0.43
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.053356,
+      "sourceFilters": {
+       "source": "volume=-5.1dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.976"
+    "# comment": "spectral similarity to the game's own file: 0.976 the recording runs out 1.3s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 0.05s (similarity 0.986 against 0.776 for the next-best placement, and the distance back is the game file's own loop period of 290.427s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 0.430s, seamed 0.05s early and crossfaded over that."
    }
   },
   {
@@ -7016,10 +7093,27 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 269.72
+     },
+     {
+      "sourceOffsets": {
+       "source": 3.294218
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.5
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.999"
+    "# comment": "spectral similarity to the game's own file: 0.999 the recording runs out 3.5s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 3.27s (similarity 0.998 against 0.947 for the next-best placement, and the distance back is the game file's own loop period of 266.946s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 3.294s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
@@ -7289,10 +7383,30 @@
       ],
       "sourceFilters": {
        "source": "volume=-1dB"
+      },
+      "length": 259.02
+     },
+     {
+      "sourceOffsets": {
+       "source": 2.443367
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.5,
+      "sourceFilters": {
+       "source": "volume=-1dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.993"
+    "# comment": "spectral similarity to the game's own file: 0.993 the recording runs out 2.6s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.50s (similarity 0.997 against 0.915 for the next-best placement, and the distance back is the game file's own loop period of 257.022s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 2.443s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
@@ -7353,10 +7467,27 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 277.88
+     },
+     {
+      "sourceOffsets": {
+       "source": 4.814989
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.5
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
+    "# comment": "spectral similarity to the game's own file: 0.992 the recording runs out 4.4s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 4.32s (similarity 0.995 against 0.909 for the next-best placement, and the distance back is the game file's own loop period of 274.055s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 4.815s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
@@ -8034,10 +8165,30 @@
       ],
       "sourceFilters": {
        "source": "volume=+2.2dB"
+      },
+      "length": 247.69737
+     },
+     {
+      "sourceOffsets": {
+       "source": 0.76
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.00263,
+      "sourceFilters": {
+       "source": "volume=+2.2dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
+    "# comment": "spectral similarity to the game's own file: 0.996 the recording runs out 2.5s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 0.00s (similarity 0.996 against 0.846 for the next-best placement, and the distance back is the game file's own loop period of 247.697s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 0.760s, seamed 0.00s early and crossfaded over that."
    }
   },
   {
@@ -8067,10 +8218,30 @@
       ],
       "sourceFilters": {
        "source": "volume=-1.8dB"
+      },
+      "length": 247.69737
+     },
+     {
+      "sourceOffsets": {
+       "source": 0.76
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.00263,
+      "sourceFilters": {
+       "source": "volume=-1.8dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.966"
+    "# comment": "spectral similarity to the game's own file: 0.966 the recording runs out 2.5s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 0.00s (similarity 0.986 against 0.822 for the next-best placement, and the distance back is the game file's own loop period of 247.697s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 0.760s, seamed 0.00s early and crossfaded over that."
    }
   },
   {
@@ -8391,10 +8562,30 @@
       ],
       "sourceFilters": {
        "source": "volume=+3.4dB"
+      },
+      "length": 118.24
+     },
+     {
+      "sourceOffsets": {
+       "source": 6.077132
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.5,
+      "sourceFilters": {
+       "source": "volume=+3.4dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.974"
+    "# comment": "spectral similarity to the game's own file: 0.974 the recording runs out 1.0s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 5.84s (similarity 0.992 against 0.925 for the next-best placement, and the distance back is the game file's own loop period of 112.898s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 6.077s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
@@ -8421,10 +8612,27 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 118.1
+     },
+     {
+      "sourceOffsets": {
+       "source": 5.937109
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.5
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.954"
+    "# comment": "spectral similarity to the game's own file: 0.954 the recording runs out 1.1s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 5.70s (similarity 0.980 against 0.919 for the next-best placement, and the distance back is the game file's own loop period of 112.898s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 5.937s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
@@ -9315,10 +9523,30 @@
       ],
       "sourceFilters": {
        "source": "volume=-2.9dB"
+      },
+      "length": 644.6
+     },
+     {
+      "sourceOffsets": {
+       "source": 7.412494
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.5,
+      "sourceFilters": {
+       "source": "volume=-2.9dB"
       }
      }
     ],
-    "# comment": "source is correct (spectral 0.971 at offset -2.2s) but covers only 93% of this target: 600s of 648s. The rest needs a multi-segment or filterComplex source; left disabled until then. Enabled 2026-09-21: built and measured rather than predicted. Full 648.1s, loop points intact, 0.890 against the game's own file."
+    "# comment": "source is correct (spectral 0.971 at offset -2.2s) but covers only 93% of this target: 600s of 648s. The rest needs a multi-segment or filterComplex source; left disabled until then. Enabled 2026-09-21: built and measured rather than predicted. Full 648.1s, loop points intact, 0.890 against the game's own file. the recording runs out 3.0s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 5.75s (similarity 0.981 against 0.837 for the next-best placement, and the distance back is the game file's own loop period of 639.348s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 7.412s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
