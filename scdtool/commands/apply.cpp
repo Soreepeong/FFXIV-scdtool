@@ -12,6 +12,10 @@
 #include <chrono>
 #include <functional>
 #include <limits>
+#include <map>
+#include <optional>
+#include <regex>
+#include <set>
 #include <mutex>
 #include <nlohmann/json.hpp>
 #include <sstream>
@@ -40,12 +44,35 @@ namespace {
 		bool Deduced = false;
 	};
 
+	// One source feeding one segment: which file, where in it the segment starts, and the
+	// filter chain the preset attached to that source.
+	struct apply_segment_source {
+		std::filesystem::path Path;
+		double Offset = 0.;       // seconds into the source that this segment begins at
+		std::wstring Filter;
+	};
+
+	// A span of the output, in the *target's* timeline. Segments run back to back in the
+	// order given: `Length` is how long this one holds the output before the next one
+	// starts, and 0 means "until its source runs out", which is what the last segment of a
+	// preset always says. `CrossfadeSeconds` lets the previous segment carry on playing
+	// past its stated length, faded out underneath this one fading in -- which is how the
+	// game built the loop-outs these presets reproduce, so a hard cut is not a substitute.
+	struct apply_segment {
+		std::map<std::string, apply_segment_source> Sources;
+		std::vector<std::pair<std::string, size_t>> Channels;  // output channel -> (source name, channel in it)
+		double Length = 0.;
+		double CrossfadeSeconds = 0.;
+	};
+
 	struct apply_job {
 		std::string TargetPath;   // path inside the game
 		std::filesystem::path SourcePath;
 		double Score = 0.;
 		double Offset = 0.;       // seconds the source is shifted relative to the game's timeline
 		std::vector<apply_stem> Stems;  // empty unless the entry is engine-switched stems
+		std::vector<apply_segment> Segments;  // empty unless the entry came from a MusicImportConfig
+		std::string Note;         // the preset's own comment, echoed in the log line
 	};
 
 	// Loop points of the template entry, in samples.
@@ -177,12 +204,16 @@ namespace {
 	// happens in this path, which matters because the game's 6-channel entries are stems
 	// laid out in the asset's own order, not a 5.1 mix, and `-ac`/`-map_channel` would be
 	// free to reinterpret them against a speaker layout they do not follow.
+	// `filter` is a preset's own filter chain for this source, run *before* the channel is
+	// picked out -- which is the order MusicImportConfig's sourceFilters have always meant:
+	// they treat the whole recording, and the offset and channel selection come after.
 	std::vector<float> decode_channel_to_floats(
 		const std::filesystem::path& ffmpeg,
 		const std::filesystem::path& source,
 		size_t channelIndex,
 		size_t samplingRate,
-		const std::filesystem::path& rawPath) {
+		const std::filesystem::path& rawPath,
+		const std::wstring& filter = {}) {
 
 		std::error_code ec;
 		std::filesystem::remove(rawPath, ec);
@@ -191,7 +222,9 @@ namespace {
 			L"-v", L"error",
 			L"-i", source.wstring(),
 			L"-map", L"0:a:0",
-			L"-af", std::format(L"pan=mono|c0=c{}", channelIndex),
+			L"-af", filter.empty()
+				? std::format(L"pan=mono|c0=c{}", channelIndex)
+				: std::format(L"{},pan=mono|c0=c{}", filter, channelIndex),
 			L"-ar", std::to_wstring(samplingRate),
 			L"-resampler", L"soxr",
 			L"-f", L"f32le",
@@ -577,6 +610,132 @@ namespace {
 	// them by correlation, and 14 of the game's 21 multichannel entries pair up as
 	// (0,2)(1,4)(3,5) or similar rather than (0,1)(2,3)(4,5), so the channel indices are
 	// taken from the match and never assumed.
+	// Lay a preset's segments onto the target's timeline and sum them into one buffer.
+	//
+	// Every segment is placed at the cumulative sum of the lengths before it, and the
+	// overlaps are complementary linear ramps, so a crossfade region adds to unit gain
+	// rather than dipping through it. That "keep playing and fade under" shape is the point
+	// of the whole path: the 20 loop-out entries here are targets whose game file outlasts
+	// its recording and ends by re-entering the same piece earlier on, and a hard cut at
+	// the seam measures 0.939 against the game's own file where the crossfade measures
+	// 0.993. The 7 credits rolls are the same machinery with a different source per segment.
+	//
+	// Level matching is per source per segment rather than once for the whole file: a
+	// medley stitched from eight album tracks has eight different masters in it, and one
+	// gain for the lot leaves most of them wrong.
+	std::vector<float> build_segment_audio(
+		const std::filesystem::path& ffmpeg,
+		const std::filesystem::path& templateAudio,
+		const std::vector<apply_segment>& segments,
+		size_t channels,
+		size_t samplingRate,
+		bool loudnessMatch,
+		double maxGainDb,
+		const std::function<std::filesystem::path(const wchar_t*, const wchar_t*)>& tempFile) {
+
+		const auto rate = static_cast<double>(samplingRate);
+		const auto toSamples = [rate](double seconds) {
+			return static_cast<size_t>((std::max)(0LL, std::llround(seconds * rate)));
+		};
+
+		// Where each segment starts, and how far past its stated length it has to keep
+		// playing so the next one can fade in over it.
+		std::vector<size_t> segmentStart(segments.size(), 0);
+		for (size_t i = 1; i < segments.size(); i++)
+			segmentStart[i] = segmentStart[i - 1] + toSamples(segments[i - 1].Length);
+
+		std::vector<float> out;
+		for (size_t i = 0; i < segments.size(); i++) {
+			const auto& segment = segments[i];
+			if (segment.Channels.size() != channels)
+				throw std::runtime_error(std::format(
+					"Segment {} maps {} channel(s) but the target entry has {}.",
+					i, segment.Channels.size(), channels));
+
+			// One mono decode per (source, channel) the segment actually asks for, shared
+			// between output channels that name the same pair.
+			std::map<std::pair<std::string, size_t>, std::vector<float>> decoded;
+			for (const auto& [name, channelIndex] : segment.Channels) {
+				const auto key = std::make_pair(name, channelIndex);
+				if (decoded.contains(key))
+					continue;
+				const auto source = segment.Sources.find(name);
+				if (source == segment.Sources.end())
+					throw std::runtime_error(std::format(
+						"Segment {} maps a channel from source \"{}\", which it does not define.", i, name));
+				decoded.emplace(key, decode_channel_to_floats(ffmpeg, source->second.Path, channelIndex,
+					samplingRate, tempFile(L"scdtool_apply_seg", L".f32"), source->second.Filter));
+			}
+
+			// How much of this segment its sources can actually supply, from its own offset
+			// on. A recording that stops short simply ends the segment early rather than
+			// reading past its end.
+			size_t available = (std::numeric_limits<size_t>::max)();
+			for (const auto& [key, samples] : decoded) {
+				const auto offsetSamples = toSamples(segment.Sources.at(key.first).Offset);
+				available = (std::min)(available, samples.size() > offsetSamples ? samples.size() - offsetSamples : 0);
+			}
+			if (available == (std::numeric_limits<size_t>::max)())
+				available = 0;
+
+			// Its stated span, plus whatever tail the next segment needs to fade in over.
+			const auto stated = segment.Length > 0. ? toSamples(segment.Length) : available;
+			const auto tail = i + 1 < segments.size() ? toSamples(segments[i + 1].CrossfadeSeconds) : size_t{0};
+			const auto render = (std::min)(stated + tail, available);
+			if (!render)
+				continue;
+
+			const auto fadeIn = (std::min)(toSamples(segment.CrossfadeSeconds), render);
+			const auto fadeOut = (std::min)(tail, render - fadeIn);
+
+			// Per-source gain, measured over this segment's own span on both sides.
+			std::map<std::string, double> gain;
+			if (loudnessMatch) {
+				const auto spanSeconds = static_cast<double>(stated) / rate;
+				const auto startSeconds = static_cast<double>(segmentStart[i]) / rate;
+				for (const auto& [name, source] : segment.Sources) {
+					try {
+						const auto templateLufs = measure_loudness(ffmpeg, templateAudio, startSeconds, spanSeconds);
+						const auto sourceLufs = measure_loudness(ffmpeg, source.Path, source.Offset, spanSeconds);
+						gain[name] = std::pow(10., std::clamp(templateLufs - sourceLufs, -maxGainDb, maxGainDb) / 20.);
+					} catch (const std::exception&) {
+						// Same rule as the single-source path: an unreadable measurement
+						// costs the level match, never the file.
+						gain[name] = 1.;
+					}
+				}
+			}
+
+			const auto end = segmentStart[i] + render;
+			if (out.size() < end * channels)
+				out.resize(end * channels, 0.f);
+
+			for (size_t ch = 0; ch < channels; ch++) {
+				const auto& [name, channelIndex] = segment.Channels[ch];
+				const auto& samples = decoded.at({name, channelIndex});
+				const auto offsetSamples = toSamples(segment.Sources.at(name).Offset);
+				const auto scale = static_cast<float>(gain.empty() ? 1. : gain.at(name));
+				for (size_t n = 0; n < render; n++) {
+					auto value = samples[offsetSamples + n] * scale;
+					if (n < fadeIn)
+						value *= static_cast<float>(static_cast<double>(n + 1) / static_cast<double>(fadeIn + 1));
+					else if (fadeOut && n >= render - fadeOut)
+						value *= static_cast<float>(static_cast<double>(render - n) / static_cast<double>(fadeOut + 1));
+					out[(segmentStart[i] + n) * channels + ch] += value;
+				}
+			}
+		}
+
+		// Summed ramps cannot clip on their own, but two segments of the same loud master
+		// overlapping can, and the encoder would fold the peaks over rather than refuse.
+		if (const auto peak = out.empty() ? 0.f : std::abs(*std::ranges::max_element(out,
+			[](float a, float b) { return std::abs(a) < std::abs(b); })); peak > 1.f) {
+			for (auto& v : out)
+				v /= peak;
+		}
+		return out;
+	}
+
 	std::vector<float> build_stem_audio(
 		const std::filesystem::path& ffmpeg,
 		const std::filesystem::path& templateAudio,
@@ -752,6 +911,228 @@ namespace {
 		return out;
 	}
 
+	// The album directories a MusicImportConfig's `searchDirectories` name, as they exist
+	// under --ost. The config names an album ("Stormblood"); the directory carries the
+	// patch version too ("4.0 - Stormblood"), so the name is matched as a suffix.
+	std::vector<std::filesystem::path> resolve_search_directories(
+		const std::filesystem::path& ostDir, const nlohmann::json& config) {
+
+		std::vector<std::filesystem::path> dirs;
+		const auto search = config.find("searchDirectories");
+		if (search == config.end() || !search->is_object())
+			return {ostDir};
+
+		const auto lower = [](std::string text) {
+			std::ranges::transform(text, text.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+			return text;
+		};
+		std::vector<std::pair<std::string, std::filesystem::path>> candidates;
+		for (const auto& entry : std::filesystem::directory_iterator(ostDir)) {
+			if (entry.is_directory())
+				candidates.emplace_back(lower(u8(entry.path().filename())), entry.path());
+		}
+		for (const auto& [album, _unused] : search->items()) {
+			const auto wanted = lower(album);
+			for (const auto& [name, path] : candidates) {
+				if (name == wanted || (name.size() > wanted.size() && name.ends_with(wanted)))
+					dirs.push_back(path);
+			}
+		}
+		// A config whose albums are not unpacked here still resolves nothing rather than
+		// silently reaching into every other album's files.
+		return dirs;
+	}
+
+	// A MusicImportConfig source name is a list of alternatives -- a disc index, an OST
+	// stem, the track's title in either language -- and the first one that names exactly one
+	// file wins. Two files matching is an error rather than a coin flip, which is the rule
+	// the importer itself follows.
+	//
+	// An alternative may also be an object naming its own directory, which is how an entry
+	// reaches a track that lives on another album: a credits medley stitched from six
+	// releases names each of them explicitly rather than widening the search for all of them.
+	std::optional<std::filesystem::path> resolve_source_name(
+		const std::filesystem::path& ostDir,
+		const std::vector<std::filesystem::path>& dirs,
+		const nlohmann::json& patterns) {
+
+		// (pattern, the directories to look in -- empty meaning the album's own)
+		std::vector<std::pair<std::string, std::vector<std::filesystem::path>>> alternatives;
+		const auto add = [&](const nlohmann::json& one) {
+			if (one.is_string()) {
+				alternatives.emplace_back(one.get<std::string>(), dirs);
+			} else if (one.is_object() && one.contains("pattern")) {
+				auto scoped = dirs;
+				if (const auto directory = one.find("directory"); directory != one.end() && directory->is_string()) {
+					nlohmann::json named = nlohmann::json::object();
+					named[directory->get<std::string>()] = nlohmann::json::object();
+					nlohmann::json wrapper = nlohmann::json::object();
+					wrapper["searchDirectories"] = std::move(named);
+					scoped = resolve_search_directories(ostDir, wrapper);
+				}
+				alternatives.emplace_back(one.at("pattern").get<std::string>(), std::move(scoped));
+			}
+		};
+
+		if (patterns.is_object() && patterns.contains("inputFiles")) {
+			const auto& files = patterns.at("inputFiles");
+			if (files.is_array() && !files.empty()) {
+				// Only the first entry: this path replaces one stream, so a list of files to
+				// join is not something it can honour, and taking the first silently would be
+				// worse than the miss that not resolving produces.
+				if (files.size() > 1)
+					return std::nullopt;
+				for (const auto& one : files.front().is_array() ? files.front() : nlohmann::json::array({files.front()}))
+					add(one);
+			}
+		} else if (patterns.is_array()) {
+			for (const auto& one : patterns)
+				add(one);
+		} else {
+			add(patterns);
+		}
+
+		for (const auto& [pattern, where] : alternatives) {
+			std::regex re;
+			try {
+				re = std::regex(pattern, std::regex::icase);
+			} catch (const std::regex_error&) {
+				continue;
+			}
+			std::vector<std::filesystem::path> hits;
+			for (const auto& dir : where) {
+				std::error_code ec;
+				// Recursive: a release with more tracks than one disc holds keeps the rest in
+				// a subdirectory, and 131 targets resolved to nothing while this only looked
+				// at the album's top level.
+				for (const auto& entry : std::filesystem::recursive_directory_iterator(dir, ec)) {
+					if (!entry.is_regular_file())
+						continue;
+					if (std::regex_search(u8(entry.path().filename()), re))
+						hits.push_back(entry.path());
+				}
+			}
+			if (hits.size() == 1)
+				return hits.front();
+			// The same track in two encodings is one track, and the album's own lossless copy
+			// is the one to take -- an .mp3 beside a .flac is a convenience copy, not a rival.
+			if (hits.size() > 1) {
+				std::vector<std::filesystem::path> lossless;
+				for (const auto& hit : hits) {
+					const auto extension = hit.extension();
+					if (extension == L".flac" || extension == L".wav")
+						lossless.push_back(hit);
+				}
+				if (lossless.size() == 1)
+					return lossless.front();
+				throw std::runtime_error(std::format("\"{}\" names {} files; it has to name one.", pattern, hits.size()));
+			}
+		}
+		return std::nullopt;
+	}
+
+	// The first game path a target names, for a diagnostic that has nothing else to
+	// identify it by.
+	std::string collect_config_target_path(const nlohmann::json& target) {
+		if (const auto path = target.find("path"); path != target.end()) {
+			if (path->is_string())
+				return path->get<std::string>();
+			if (path->is_array() && !path->empty() && path->front().is_string())
+				return path->front().get<std::string>();
+		}
+		return "(unnamed target)";
+	}
+
+	// Turn one MusicImportConfig target into jobs -- one per game path it lists, since a
+	// target may name several .scd files that carry the same music.
+	void collect_config_target(
+		const std::filesystem::path& ostDir,
+		const nlohmann::json& config,
+		const nlohmann::json& sourceSpec,
+		const nlohmann::json& target,
+		std::vector<apply_job>& jobs,
+		std::vector<std::pair<std::string, std::string>>& unresolved) {
+
+		if (target.value("enable", true) == false)
+			return;
+		const auto segmentsJson = target.find("segments");
+		if (segmentsJson == target.end() || !segmentsJson->is_array() || segmentsJson->empty())
+			return;
+
+		std::vector<std::string> paths;
+		if (const auto path = target.find("path"); path != target.end()) {
+			if (path->is_string())
+				paths.push_back(path->get<std::string>());
+			else if (path->is_array())
+				for (const auto& one : *path)
+					if (one.is_string())
+						paths.push_back(one.get<std::string>());
+		}
+		if (paths.empty())
+			return;
+
+		// "source" is either one list of alternatives -- the implicit name "source" -- or
+		// an object of named ones, which is what a multi-source segment refers to.
+		std::map<std::string, nlohmann::json> named;
+		if (sourceSpec.is_object())
+			for (const auto& [name, patterns] : sourceSpec.items())
+				named.emplace(name, patterns);
+		else
+			named.emplace("source", sourceSpec);
+
+		const auto dirs = resolve_search_directories(ostDir, config);
+		std::map<std::string, std::filesystem::path> resolved;
+		for (const auto& [name, patterns] : named) {
+			const auto file = resolve_source_name(ostDir, dirs, patterns);
+			if (!file) {
+				unresolved.emplace_back(paths.front(), std::format("no file for \"{}\"", name));
+				return;
+			}
+			resolved.emplace(name, *file);
+		}
+
+		std::vector<apply_segment> segments;
+		for (const auto& segmentJson : *segmentsJson) {
+			apply_segment segment{
+				.Length = segmentJson.value("length", 0.),
+				.CrossfadeSeconds = segmentJson.value("crossfadeSeconds", 0.),
+			};
+			for (const auto& [name, path] : resolved)
+				segment.Sources.emplace(name, apply_segment_source{.Path = path});
+			if (const auto offsets = segmentJson.find("sourceOffsets"); offsets != segmentJson.end() && offsets->is_object()) {
+				for (const auto& [name, spec] : offsets->items()) {
+					if (const auto source = segment.Sources.find(name); source != segment.Sources.end())
+						source->second.Offset = spec.is_object() ? spec.value("offset", 0.) : spec.get<double>();
+				}
+			}
+			if (const auto filters = segmentJson.find("sourceFilters"); filters != segmentJson.end() && filters->is_object()) {
+				for (const auto& [name, filter] : filters->items()) {
+					if (const auto source = segment.Sources.find(name); source != segment.Sources.end() && filter.is_string())
+						source->second.Filter = xivres::util::unicode::convert<std::wstring>(filter.get<std::string>());
+				}
+			}
+			if (const auto channels = segmentJson.find("channels"); channels != segmentJson.end() && channels->is_array()) {
+				for (const auto& channel : *channels)
+					segment.Channels.emplace_back(channel.value("source", std::string("source")),
+						channel.value("channel", size_t{0}));
+			}
+			if (segment.Channels.empty())
+				return;
+			segments.push_back(std::move(segment));
+		}
+		if (segments.empty())
+			return;
+
+		for (const auto& path : paths) {
+			jobs.push_back({
+				.TargetPath = path,
+				.Score = 1.,
+				.Segments = segments,
+				.Note = target.value("# comment", std::string{}),
+			});
+		}
+	}
+
 int cmd_apply(const std::vector<std::string>& args) {
 	argparse::ArgumentParser parser("scdtool apply");
 	try {
@@ -765,7 +1146,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 				"under --output-dir using the target's game-relative path.");
 		parser.add_argument("--game").required().help(R"(game installation path, or :global/:china/:korea to autodetect)");
 		parser.add_argument("--ost").required().help("directory the preset's source paths are relative to");
-		parser.add_argument("--preset").required().help("matched preset JSON produced by `scdtool match`");
+		parser.add_argument("--preset").required().help("a matchset JSON produced by `scdtool match`, or a MusicImportConfig preset (or a directory of them)");
 		parser.add_argument("--output-dir").required().help("directory to write replacement .scd files into");
 		parser.add_argument("--ffmpeg").default_value(std::string("ffmpeg")).help("path to ffmpeg executable");
 		parser.add_argument("--ffprobe").default_value(std::string("ffprobe")).help("path to ffprobe executable");
@@ -820,18 +1201,68 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 		const xivres::installation installation(argactions::installation_root(gameSpec));
 
-		nlohmann::json preset;
-		{
-			std::ifstream f(presetPath, std::ios::binary);
-			if (!f)
-				throw std::runtime_error(std::format("Could not open preset file: {}", u8(presetPath)));
-			f >> preset;
+		// --preset takes either form. A MusicImportConfig is the format this tool emits and
+		// the one the importer reads, and it can say things a matchset cannot -- segments,
+		// crossfades, a different recording per span -- so pointing at the presets directory
+		// builds everything from the same files that ship, with no conversion step between.
+		std::vector<std::filesystem::path> presetPaths;
+		if (std::filesystem::is_directory(presetPath)) {
+			for (const auto& entry : std::filesystem::directory_iterator(presetPath))
+				if (entry.is_regular_file() && entry.path().extension() == L".json")
+					presetPaths.push_back(entry.path());
+			std::ranges::sort(presetPaths);
+			if (presetPaths.empty())
+				throw std::runtime_error(std::format("No .json presets in {}", u8(presetPath)));
+		} else {
+			presetPaths.push_back(presetPath);
 		}
-		if (!preset.contains("items") || !preset["items"].is_array())
-			throw std::runtime_error("Preset file has no \"items\" array.");
 
 		std::vector<apply_job> jobs;
 		size_t skippedUnmatched = 0;
+		std::vector<std::pair<std::string, std::string>> unresolvedSources;
+		std::set<std::string> seenTargets;
+
+		for (const auto& onePresetPath : presetPaths) {
+		nlohmann::json preset;
+		{
+			std::ifstream f(onePresetPath, std::ios::binary);
+			if (!f)
+				throw std::runtime_error(std::format("Could not open preset file: {}", u8(onePresetPath)));
+			f >> preset;
+		}
+		if (!preset.contains("items") || !preset["items"].is_array())
+			throw std::runtime_error(std::format("{} has no \"items\" array.", u8(onePresetPath)));
+
+		// A MusicImportConfig announces itself by naming the albums it needs.
+		if (preset.contains("searchDirectories")) {
+			const auto before = jobs.size();
+			for (const auto& item : preset.at("items")) {
+				const auto source = item.find("source");
+				const auto target = item.find("target");
+				if (source == item.end() || target == item.end())
+					continue;
+				for (const auto& one : target->is_array() ? *target : nlohmann::json::array({*target})) {
+					try {
+						collect_config_target(ostDir, preset, *source, one, jobs, unresolvedSources);
+					} catch (const std::exception& e) {
+						unresolvedSources.emplace_back(collect_config_target_path(one), e.what());
+					}
+				}
+			}
+			// Albums overlap: a track reissued on a later release is listed by both, so that
+			// owning either one is enough, and the first listing that resolves is the one
+			// used. Only this preset's own additions are weighed: a sweep over the whole list
+			// would meet every job kept by an earlier preset a second time and drop it as a
+			// duplicate of itself, which cost 1384 of 1546 entries before it was caught.
+			auto write = jobs.begin() + static_cast<ptrdiff_t>(before);
+			for (auto read = write; read != jobs.end(); ++read) {
+				if (seenTargets.insert(read->TargetPath).second)
+					*write++ = std::move(*read);
+			}
+			jobs.erase(write, jobs.end());
+			continue;
+		}
+
 		for (const auto& item : preset.at("items")) {
 			const auto info = item.find("matchInfo");
 			if (info == item.end()) {
@@ -905,9 +1336,23 @@ int cmd_apply(const std::vector<std::string>& args) {
 				.Offset = info->value("offset", 0.),
 			});
 		}
+		}
 
 		std::cerr << std::format("{} entr(ies) to rewrite, {} skipped (unmatched or below --min-score).",
 			jobs.size(), skippedUnmatched) << '\n';
+		// A target listed by several albums only has to resolve in one of them, so a miss
+		// is only worth reporting when nothing ended up covering that target at all.
+		{
+			std::set<std::string> covered;
+			for (const auto& job : jobs)
+				covered.insert(job.TargetPath);
+			std::erase_if(unresolvedSources, [&](const auto& entry) { return covered.contains(entry.first); });
+			if (!unresolvedSources.empty()) {
+				std::cerr << std::format("{} target(s) left uncovered for want of a source file:", unresolvedSources.size()) << '\n';
+				for (const auto& [target, reason] : unresolvedSources)
+					std::cerr << std::format("   {} <- {}", target, reason) << '\n';
+			}
+		}
 		if (jobs.empty()) {
 			std::cerr << "Nothing to do.\n";
 			return 0;
@@ -915,6 +1360,20 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 		if (dryRun) {
 			for (const auto& job : jobs) {
+				if (!job.Segments.empty()) {
+					std::cerr << std::format("  would write {} <- {} segment(s)", job.TargetPath, job.Segments.size());
+					for (const auto& segment : job.Segments) {
+						std::cerr << "\n     ";
+						for (const auto& [name, source] : segment.Sources)
+							std::cerr << std::format(" {} @{:+.3f}s", u8(source.Path.filename()), source.Offset);
+						if (segment.Length > 0.)
+							std::cerr << std::format(" for {:.3f}s", segment.Length);
+						if (segment.CrossfadeSeconds > 0.)
+							std::cerr << std::format(" fading in over {:.1f}s", segment.CrossfadeSeconds);
+					}
+					std::cerr << '\n';
+					continue;
+				}
 				if (job.Stems.empty()) {
 					std::cerr << std::format("  would write {} <- {} (score {:.3f})", job.TargetPath, u8(job.SourcePath), job.Score) << '\n';
 					continue;
@@ -1069,7 +1528,26 @@ int cmd_apply(const std::vector<std::string>& args) {
 			size_t newLoopStart = 0;
 			size_t newLoopEnd = 0;
 
-			if (!job.Stems.empty()) {
+			if (!job.Segments.empty()) {
+				const auto tempFile = [&](const wchar_t* prefix, const wchar_t* extension) {
+					return keepTemp(tempDir / std::format(L"{}_{}{}", prefix,
+						tempFileCounter.fetch_add(1), extension));
+				};
+				// A preset's offsets, lengths and crossfades were fitted against this very file
+				// and carry a checksum of the recording they were fitted to, so they are used as
+				// written -- re-deriving them here would throw away the one thing the preset knows
+				// that the matcher does not, which is where the seams go.
+				floats = build_segment_audio(ffmpegPath, templateAudio, job.Segments, channels,
+					samplingRate, loudnessMatch, maxGainDb, tempFile);
+
+				totalSamples = floats.size() / channels;
+				newLoopStart = loopStart;
+				newLoopEnd = (std::min)(loopEnd, totalSamples);
+				if (newLoopStart >= totalSamples) {
+					newLoopStart = 0;
+					newLoopEnd = 0;
+				}
+			} else if (!job.Stems.empty()) {
 				const auto tempFile = [&](const wchar_t* prefix, const wchar_t* extension) {
 					return keepTemp(tempDir / std::format(L"{}_{}{}", prefix,
 						tempFileCounter.fetch_add(1), extension));
