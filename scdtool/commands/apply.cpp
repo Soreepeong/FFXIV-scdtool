@@ -1406,12 +1406,14 @@ int cmd_apply(const std::vector<std::string>& args) {
 				"track's loop points are preserved, and only the audio is replaced. Output files are written\n"
 				"under --output-dir using the target's game-relative path.\n"
 				"\n"
-				"--lossless replaces the libvorbis encode with a bit-exact one, driven through llogg.py.\n"
-				"What it is exact about is 16-bit PCM, which is all the game's decoder emits, so nothing is\n"
-				"lost by it -- but the entries come out roughly 5x the size, take minutes rather than seconds\n"
-				"each, and need python with numpy plus ffmpeg on PATH. Pair it with --sampling-rate keep\n"
-				"unless you want the game file's own rate raised as well; at 96 kHz the cost roughly doubles\n"
-				"for content the decoder cannot carry any more precisely.");
+				"--ogg-quality takes oggenc's scale, -1 to 10, and libvorbis is handed a tenth of it.\n"
+				"\"lossless\" is the far end of that same axis: the libvorbis encode is replaced by a\n"
+				"bit-exact one driven through llogg.py, named by --llogg. What it is exact about is\n"
+				"16-bit PCM, which is all the game's decoder emits, so nothing audible is lost by it --\n"
+				"but entries come out roughly 5x the size, take minutes rather than seconds each, and\n"
+				"need python with numpy plus ffmpeg on PATH. Pair it with --sampling-rate keep unless\n"
+				"you want the game file's own rate raised too; at 96 kHz the cost roughly doubles for\n"
+				"precision the decoder cannot carry.");
 		parser.add_argument("--game").required().help(R"(game installation path, or :global/:china/:korea to autodetect)");
 		parser.add_argument("--ost").required().help("directory the preset's source paths are relative to");
 		parser.add_argument("--preset").required().help("a matchset JSON produced by `scdtool match`, or a MusicImportConfig preset (or a directory of them)");
@@ -1420,9 +1422,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 		parser.add_argument("--ffprobe").default_value(std::string("ffprobe")).help("path to ffprobe executable");
 		parser.add_argument("--sampling-rate").default_value(std::string("auto")).help(R"(output sample rate: "auto" (highest of the game file and the source), "keep" (the game file's), or an integer)");
 		parser.add_argument("--entry-index").default_value(0u).scan<'u', uint32_t>().help("sound entry index to replace (default: 0)");
-		parser.add_argument("--ogg-quality").default_value(1.0f).scan<'g', float>().help("Ogg Vorbis encode quality, 0..1 (ignored with --lossless)");
-		parser.add_argument("--lossless").default_value(false).implicit_value(true).help("encode bit-exact 16-bit Vorbis with the llogg encoder instead of libvorbis; needs --llogg, and lands at 0.66-1.05x raw PCM -- measured 5x the libvorbis output");
-		parser.add_argument("--llogg").default_value(std::string()).help("path to llogg.py, the lossless Vorbis encoder --lossless drives");
+		parser.add_argument("--ogg-quality").default_value(std::string("10")).help(R"(Ogg Vorbis encode quality: -1 to 10 on oggenc's scale, or "lossless")");
+		parser.add_argument("--llogg").default_value(std::string()).help(R"(path to llogg.py, the encoder that --ogg-quality lossless drives)");
 		parser.add_argument("--python").default_value(std::string("python")).help("python executable used to run --llogg");
 		parser.add_argument("--min-score").default_value(0.95).scan<'g', double>().help("only rewrite entries matched at or above this correlation score");
 		parser.add_argument("--dry-run").default_value(false).implicit_value(true).help("list what would be written without writing anything");
@@ -1460,13 +1461,35 @@ int cmd_apply(const std::vector<std::string>& args) {
 		const auto ffprobePath = argactions::path(parser.get<std::string>("--ffprobe"));
 		const auto samplingRateSpec = parser.get<std::string>("--sampling-rate");
 		const auto entryIndex = parser.get<uint32_t>("--entry-index");
-		const auto oggQuality = std::clamp(parser.get<float>("--ogg-quality"), 0.f, 1.f);
-		const auto lossless = parser.get<bool>("--lossless");
+		// Quality is oggenc's scale, -1 to 10, because that is the one people know; libvorbis
+		// itself takes -0.1 to 1.0 and the two differ only by a factor of ten. "lossless" sits
+		// at the end of the same axis rather than on a flag of its own: it is a choice about
+		// how the entry is encoded, which is what this option is for.
+		const auto qualitySpec = parser.get<std::string>("--ogg-quality");
+		const auto lossless = qualitySpec == "lossless";
+		float oggQuality = 1.f;
+		if (!lossless) {
+			size_t consumed = 0;
+			double value;
+			try {
+				value = std::stod(qualitySpec, &consumed);
+			} catch (const std::exception&) {
+				consumed = 0;
+				value = 0;
+			}
+			if (!consumed || consumed != qualitySpec.size())
+				throw std::runtime_error(std::format(
+					R"(--ogg-quality: expected a number from -1 to 10, or "lossless", not "{}")", qualitySpec));
+			if (value < -1. || value > 10.)
+				throw std::runtime_error(std::format(
+					"--ogg-quality: {} is outside the -1 to 10 the encoder accepts", qualitySpec));
+			oggQuality = static_cast<float>(value / 10.);
+		}
 		const auto lloggPath = argactions::path(parser.get<std::string>("--llogg"));
 		const auto pythonPath = argactions::path(parser.get<std::string>("--python"));
 		if (lossless) {
 			if (lloggPath.empty())
-				throw std::runtime_error("--lossless needs --llogg pointing at llogg.py.");
+				throw std::runtime_error(R"(--ogg-quality lossless needs --llogg pointing at llogg.py.)");
 			if (!std::filesystem::is_regular_file(lloggPath))
 				throw std::runtime_error(std::format("--llogg: not an existing file: {}", u8(lloggPath)));
 		}
