@@ -7,3791 +7,6 @@
  },
  "items": [
   {
-   "source": [
-    "DT_019",
-    "The Skyruin",
-    "The Skyruin ～ヴァリガルマンダ討滅戦～"
-   ],
-   "target": {
-    "path": [
-     "music/ex5/BGM_EX5_Ban_01.scd",
-     "music/ffxiv/BGM_Ride_Valigarmanda.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.47,
-        "pcmHash": "fa2642a9"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+1.6dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "DT_041",
-    "Seeking Purpose",
-    "レゾンデートル ～ゾラージャ討滅戦～"
-   ],
-   "target": {
-    "path": [
-     "music/ex5/BGM_EX5_Ban_02.scd",
-     "music/ffxiv/BGM_Ride_Zoraalja.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.71,
-        "pcmHash": "d67924b5"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.990"
-   }
-  },
-  {
-   "source": [
-    "DT_051",
-    "Paved in Solitude",
-    "ひとつの路 ～エターナルクイーン討滅戦～"
-   ],
-   "target": {
-    "path": [
-     "music/ex5/BGM_EX5_Ban_03.scd",
-     "music/ffxiv/BGM_Ride_Queen.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.945,
-        "pcmHash": "46389c95"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.949"
-   }
-  },
-  {
-   "source": [
-    "DT_052",
-    "Paved with Resolve",
-    "ふたりの路 ～エターナルクイーン討滅戦～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Ban_04.scd",
-    "segments": [
-     {
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "adelay=7905:all=1"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.972. the game's file starts before this recording does, so the source is delayed rather than offset: source by 7.905s"
-   }
-  },
-  {
-   "source": [
-    "DT_014",
-    "Roads Forsaken",
-    "路を遮るもの"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Boss_Battle01.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.53,
-        "pcmHash": "0bd243a5"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.954; offset corrected +113.420s -> +2.530s by re-deriving the alignment and judging it on the intro (0.7450 -> 0.8926)"
-   }
-  },
-  {
-   "source": [
-    "DT_025",
-    "Pathmaker",
-    "路を拓くもの"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Boss_Battle02.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.31,
-        "pcmHash": "0ded4aed"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "DT_013",
-    "Punutiy Crossing",
-    "プヌティーの川上り ～濁流遡上 イフイカ・トゥム～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Dan_D01.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.67,
-        "pcmHash": "327cf2d5"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.895; offset corrected +130.905s -> +1.670s by re-deriving the alignment and judging it on the intro (0.7422 -> 0.8908)"
-   }
-  },
-  {
-   "source": [
-    "DT_017",
-    "Empyrean Peak",
-    "雲衝く高峰 ～山嶺登頂 ウォーコー・ゾーモー～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Dan_D02.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.5,
-        "pcmHash": "8336c68e"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.965"
-   }
-  },
-  {
-   "source": [
-    "DT_024",
-    "樹海に沈む夢 ～遺産踏査 天深きセノーテ～",
-    "Lost in the Deep"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Dan_D03.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.34,
-        "pcmHash": "f3704594"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+1.9dB"
-      }
-     }
-    ],
-    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.929); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.929"
-   }
-  },
-  {
-   "source": [
-    "DT_032",
-    "In Fulgur and Fire",
-    "火花と閃光 ～外征前哨 ヴァンガード～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Dan_D04.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.465,
-        "pcmHash": "9f934297"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.993"
-   }
-  },
-  {
-   "source": [
-    "DT_040",
-    "Anatomy of Existence",
-    "生命の解体 ～魂魄工廠 オリジェニクス～"
-   ],
-   "target": {
-    "path": [
-     "music/ex5/BGM_EX5_Dan_D05.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_705.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.82,
-        "pcmHash": "e86601fd"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.991"
-   }
-  },
-  {
-   "source": [
-    "DT_050",
-    "A Trail Unending",
-    "終わりなき軌跡 ～記憶幻想 アレクサンドリア～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Dan_D06.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.145,
-        "pcmHash": "a42bbf1d"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+1.4dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "DT_059",
-    "Blessings on the Bluffs",
-    "赤き大地の恵み ～荒野秘境 サボテンダーバレー～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Dan_D07.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.505,
-        "pcmHash": "d5cef841"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+1.7dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.940"
-   }
-  },
-  {
-   "source": [
-    "DT_060",
-    "Court Jesters (Dawntrail)",
-    "月なきみそらの道化師たち ～黄金～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Dan_D08.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.72,
-        "pcmHash": "b7168ec7"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994; offset corrected +107.695s -> +1.720s by re-deriving the alignment and judging it on the intro (0.9498 -> 0.9968)"
-   }
-  },
-  {
-   "source": [
-    "DT_035",
-    "Tantalus's Theme (Dawntrail)",
-    "タンタラスのテーマ ～黄金～"
-   ],
-   "target": {
-    "path": [
-     "music/ex5/BGM_EX5_EventMap05.scd",
-     "music/ex5/BGM_EX5_EventMap06.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.635,
-        "pcmHash": "85332750"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.998"
-   }
-  },
-  {
-   "source": [
-    "DT_001",
-    "Dawntrail"
-   ],
-   "target": {
-    "path": [
-     "music/ex5/BGM_EX5_Event_01.scd",
-     "music/ex5/BGM_EX5_Event_28.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.55,
-        "pcmHash": "2b968e14"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3.6dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.991"
-   }
-  },
-  {
-   "source": [
-    "DT_020",
-    "Dawntrail (Instrumental)",
-    "Dawntrail (Instrumental)"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_02.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.35,
-        "pcmHash": "e7ff09b4"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.974); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.974"
-   }
-  },
-  {
-   "source": [
-    "DT_044",
-    "In Dawn's Embrace",
-    "明けの空を見上げて"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_05.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.94,
-        "pcmHash": "4e20f57d"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+5.3dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.986"
-   }
-  },
-  {
-   "source": [
-    "DT_022",
-    "Coffee Break",
-    "コーヒーブレイク"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_06.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.725,
-        "pcmHash": "57c8a9ce"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+5.4dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.960"
-   }
-  },
-  {
-   "source": [
-    "DT_005",
-    "For Hope and Happiness",
-    "笑顔を護るために"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_07.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.485,
-        "pcmHash": "c1e2a3b1"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.944"
-   }
-  },
-  {
-   "source": [
-    "DT_030",
-    "Cast Stones in Shadow",
-    "暗夜の礫"
-   ],
-   "target": {
-    "path": [
-     "music/ex5/BGM_EX5_Event_08.scd",
-     "music/ex5/BGM_EX5_Event_25.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.995,
-        "pcmHash": "248d079c"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+1.8dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
-    "DT_031",
-    "Hearts Tread and Trampled",
-    "踏みにじられた心"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_09.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.89,
-        "pcmHash": "95957fa6"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.954"
-   }
-  },
-  {
-   "source": [
-    "DT_053",
-    "Fond Farewells",
-    "それぞれの旅路へ"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_10.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.845,
-        "pcmHash": "c5dc7738"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.968"
-   }
-  },
-  {
-   "source": [
-    "DT_003",
-    "Taco Delight",
-    "タコスでパーティー！"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_11.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.765,
-        "pcmHash": "44287256"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+2.9dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
-   }
-  },
-  {
-   "source": [
-    "DT_018",
-    "Etched in Memory",
-    "刻まれた記憶"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_12.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.035,
-        "pcmHash": "f6e52400"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+1.1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "DT_012",
-    "Fun and Games",
-    "お茶目な戯れ"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_13.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.59,
-        "pcmHash": "55c8d9ac"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+3.5dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.991; offset corrected +91.590s -> +1.590s by re-deriving the alignment and judging it on the intro (0.9533 -> 0.9940)"
-   }
-  },
-  {
-   "source": [
-    "DT_045",
-    "Fleeting Life",
-    "限りある時間（とき）"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_14.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.815,
-        "pcmHash": "d823e7cd"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+3.2dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
-   }
-  },
-  {
-   "source": [
-    "DT_049",
-    "Unforgettable Sorrow",
-    "消えぬ悲しみ"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_15.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.815,
-        "pcmHash": "a7d9a09f"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.998"
-   }
-  },
-  {
-   "source": [
-    "DT_043",
-    "Broken Spell, Healed Hearts",
-    "とけた魔法と心"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_16.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.82,
-        "pcmHash": "2564049f"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+2dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "DT_034",
-    "Prima Vista Orchestra",
-    "プリマビスタ楽団"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_17.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.625,
-        "pcmHash": "baf06245"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "DT_046",
-    "The Fateful Hour",
-    "今宵"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_18.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.8,
-        "pcmHash": "92045123"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.976"
-   }
-  },
-  {
-   "source": [
-    "DT_047",
-    "Sword of Fury",
-    "この刃に懸けて"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_19.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.75,
-        "pcmHash": "589a6011"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "DT_038",
-    "Thy Warmth",
-    "あなたのぬくもり"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_20.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.655,
-        "pcmHash": "414bd3c5"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.958"
-   }
-  },
-  {
-   "source": [
-    "DT_048",
-    "Something to Protect",
-    "守るべきもの"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_21.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.995,
-        "pcmHash": "fa15eb4b"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
-    "DT_054",
-    "Smile"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Event_24.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 87.855,
-        "pcmHash": "1221d5cf"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.978"
-   }
-  },
-  {
-   "source": [
-    "DT_002",
-    "Prelude - A Westward Journey",
-    "黄金のプレリュード"
-   ],
-   "target": {
-    "path": [
-     "music/ex5/BGM_EX5_Event_43.scd",
-     "music/ffxiv/BGM_Ride_EX5Comp.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.545,
-        "pcmHash": "2b0e6411"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
-    "DT_007",
-    "Blade's Exaltation",
-    "心躍る駆け引き"
-   ],
-   "target": {
-    "path": [
-     "music/ex5/BGM_EX5_Field_Her_Battle.scd",
-     "music/ex5/BGM_EX5_Field_Koz_Battle.scd",
-     "music/ex5/BGM_EX5_Field_Sha_Battle.scd",
-     "music/ex5/BGM_EX5_Field_Urq_Battle.scd",
-     "music/ex5/BGM_EX5_Field_Yak_Battle.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.835,
-        "pcmHash": "4fb45730"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
-   }
-  },
-  {
-   "source": [
-    "DT_033",
-    "Flash in the Dark",
-    "迸る雷光 ～ヘリテージファウンド：昼～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Her_Day.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.77,
-        "pcmHash": "e26d271e"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.987"
-   }
-  },
-  {
-   "source": [
-    "DT_036",
-    "Crash in the Dark",
-    "暗き雷雲 ～ヘリテージファウンド：夜～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Her_Night.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.59,
-        "pcmHash": "6e3282d5"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "DT_011",
-    "Of Glittering Wings",
-    "極彩色の羽根 ～コザマル・カ：昼～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Koz_Day.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.765,
-        "pcmHash": "a4faa130"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.940"
-   }
-  },
-  {
-   "source": [
-    "DT_015",
-    "Of Glittering Baubles",
-    "極彩色の宝飾品 ～コザマル・カ：夜～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Koz_Night.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.695,
-        "pcmHash": "5a5644e4"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "afade=t=out:st=291.463:d=6.300"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997. the recording is still playing at -24.6 dB where the game's own file has fallen to -66.0 dB, so it is faded to match that file's own decay: down from 6.60s before the end, silent for the last 0.30s"
-   }
-  },
-  {
-   "source": [
-    "DT_042",
-    "Bygone Serenity",
-    "遠き日の思い出 ～リビング・メモリー：開園～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Liv_Day01.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.35,
-        "pcmHash": "21dee3f9"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+3.1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.993; offset corrected +221.580s -> +1.350s by re-deriving the alignment and judging it on the intro (0.9069 -> 0.9918)"
-   }
-  },
-  {
-   "source": [
-    "DT_056",
-    "Echoes of Memory",
-    "遠き日の残響 ～リビング・メモリー：閉園～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Liv_Day02.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.545,
-        "pcmHash": "9592dcab"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+3.2dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "DT_058",
-    "Faerie Battle",
-    "フェアリーバトル"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Liv_Fate.scd",
-    "segments": [
-     {
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "adelay=4285:all=1,volume=+4.5dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.974. the game's file starts before this recording does, so the source is delayed rather than offset: source by 4.285s"
-   }
-  },
-  {
-   "source": [
-    "DT_058",
-    "Faerie Battle",
-    "フェアリーバトル"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Liv_Fate2.scd",
-    "segments": [
-     {
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "adelay=2795:all=1,volume=+4.5dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.972. the game's file starts before this recording does, so the source is delayed rather than offset: source by 2.795s"
-   }
-  },
-  {
-   "source": [
-    "DT_008",
-    "Pastoral Pleasures",
-    "愉快な暮らし"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Safe01.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.885,
-        "pcmHash": "e8dfed89"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.993"
-   }
-  },
-  {
-   "source": [
-    "DT_016",
-    "Life Bound by Honor",
-    "積み重ねる日々"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Safe02.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.74,
-        "pcmHash": "3097e5e9"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.951"
-   }
-  },
-  {
-   "source": [
-    "DT_028",
-    "Desertwalkers",
-    "荒野に生きる人々"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Safe03.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.795,
-        "pcmHash": "bad5a1a2"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "DT_027",
-    "Ceruleum Smoke at High Noon",
-    "硝煙に青炎 ～シャーローニ荒野：昼～"
-   ],
-   "target": {
-    "path": [
-     "music/ex5/BGM_EX5_Field_Sha_Day.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_716.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.665,
-        "pcmHash": "25b51cda"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.960"
-   }
-  },
-  {
-   "source": [
-    "DT_029",
-    "Ceruleum Embers by Dusk",
-    "硝煙に緑陰 ～シャーローニ荒野：夜～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Sha_Night.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.41,
-        "pcmHash": "bafeaf83"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.998"
-   }
-  },
-  {
-   "source": [
-    "DT_006",
-    "Windswept Echoes",
-    "山峡の涼風 ～オルコ・パチャ：昼～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Urq_Day.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.49,
-        "pcmHash": "458ffced"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.989"
-   }
-  },
-  {
-   "source": [
-    "DT_010",
-    "Windswept Whispers",
-    "山峡の夜風 ～オルコ・パチャ：夜～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Urq_Night.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.995,
-        "pcmHash": "688e7220"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.998"
-   }
-  },
-  {
-   "source": [
-    "DT_021",
-    "Emerald under Sapphire",
-    "空と森の境界 ～ヤクテル樹海：昼～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Field_Yak_Day.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.445,
-        "pcmHash": "54ad2c4f"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
-   }
-  },
-  {
-   "source": [
-    "DT_023",
-    "Skybound Emerald",
-    "森と地底の境界 ～ヤクテル樹海：夜～"
-   ],
-   "target": {
-    "path": [
-     "music/ex5/BGM_EX5_Field_Yak_Night.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_738.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.62,
-        "pcmHash": "b96ae678"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.998"
-   }
-  },
-  {
-   "source": [
-    "DT_061",
-    "The Ring's Reprieve"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Raid_01.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.54,
-        "pcmHash": "748bf306"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.966; offset corrected +154.250s -> +1.540s by re-deriving the alignment and judging it on the intro (0.7047 -> 0.9962)"
-   }
-  },
-  {
-   "source": [
-    "DT_062",
-    "It's Showtime!",
-    "It's Showtime! ～至天の座アルカディア：ライトヘビー級～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Raid_03.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.375,
-        "pcmHash": "33757bcd"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+1.7dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "DT_063",
-    "Bee My Honey",
-    "Bee My Honey ～至天の座アルカディア：ライトヘビー級～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Raid_04.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.64,
-        "pcmHash": "54c61b25"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
-    "DT_064",
-    "Burning Souls",
-    "Burning Souls ～至天の座アルカディア：ライトヘビー級～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Raid_05.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.76,
-        "pcmHash": "5558f4b7"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.943; offset corrected +152.310s -> +1.760s by re-deriving the alignment and judging it on the intro (0.9547 -> 0.9838)"
-   }
-  },
-  {
-   "source": [
-    "DT_065",
-    "Give it All",
-    "Give it All ～至天の座アルカディア：ライトヘビー級～"
-   ],
-   "target": {
-    "path": [
-     "music/ex5/BGM_EX5_Raid_06.scd",
-     "music/ffxiv/BGM_Ride_Arcadia.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.78,
-        "pcmHash": "8116c3e6"
-       }
-      },
-      "length": 319.77,
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     },
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 143.8,
-        "pcmHash": "8116c3e6"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "the game's file is 35.4s longer than this recording and ends by repeating itself: from 319.8s it replays the file from 142.0s (similarity 0.986, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 143.800s. Built and measured: whole file 0.987, across the seam 0.981, against a ceiling of 0.989 for this pairing."
-   }
-  },
-  {
-   "source": [
-    "DT_066",
-    "A Risky Bet",
-    "A Risky Bet ～至天の座アルカディア：ライトヘビー級～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Raid_07.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.57,
-        "pcmHash": "e10deb7f"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.991"
-   }
-  },
-  {
-   "source": [
-    "DT_037",
-    "Starless Skyline",
-    "星なき摩天楼 ～ソリューション・ナイン～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Town_S_Day.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.385,
-        "pcmHash": "c35d497f"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+2.7dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "DT_004",
-    "Morrow's Might",
-    "金煌なる民 ～トライヨラ：昼～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Town_T_Day.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.63,
-        "pcmHash": "a216bce3"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.5dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.991; offset corrected +268.845s -> +1.630s by re-deriving the alignment and judging it on the intro (0.8499 -> 0.9969)"
-   }
-  },
-  {
-   "source": [
-    "DT_026",
-    "Morrow's Magic",
-    "金煌なる夜明け ～トライヨラ：夜～"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_Town_T_Night.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.475,
-        "pcmHash": "bf85affb"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.956"
-   }
-  },
-  {
-   "source": [
-    "DT_009",
-    "Bright Bustle",
-    "陽気な大騒動"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_Dotabata.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.755,
-        "pcmHash": "58c5a0a3"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+2.2dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "DT_057",
-    "Battle 1 from FINAL FANTASY IX",
-    "バトル1 from FINAL FANTASY IX"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Ride_Ark.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.9,
-        "pcmHash": "539d6bd5"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "DT_013",
-    "Punutiy Crossing",
-    "プヌティーの川上り ～濁流遡上 イフイカ・トゥム～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_701.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.67,
-        "pcmHash": "327cf2d5"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.888; offset corrected +130.905s -> +1.670s by re-deriving the alignment and judging it on the intro (0.7411 -> 0.8875)"
-   }
-  },
-  {
-   "source": [
-    "DT_017",
-    "Empyrean Peak",
-    "雲衝く高峰 ～山嶺登頂 ウォーコー・ゾーモー～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_702.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.5,
-        "pcmHash": "8336c68e"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3.3dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.951"
-   }
-  },
-  {
-   "source": [
-    "DT_024",
-    "樹海に沈む夢 ～遺産踏査 天深きセノーテ～",
-    "Lost in the Deep"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_703.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.34,
-        "pcmHash": "f3704594"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3dB"
-      }
-     }
-    ],
-    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.920); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.920"
-   }
-  },
-  {
-   "source": [
-    "DT_032",
-    "In Fulgur and Fire",
-    "火花と閃光 ～外征前哨 ヴァンガード～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_704.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.465,
-        "pcmHash": "9f934297"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.4dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.979"
-   }
-  },
-  {
-   "source": [
-    "DT_050",
-    "A Trail Unending",
-    "終わりなき軌跡 ～記憶幻想 アレクサンドリア～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_706.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.145,
-        "pcmHash": "a42bbf1d"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.2dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.982"
-   }
-  },
-  {
-   "source": [
-    "DT_059",
-    "Blessings on the Bluffs",
-    "赤き大地の恵み ～荒野秘境 サボテンダーバレー～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_707.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.505,
-        "pcmHash": "d5cef841"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.928"
-   }
-  },
-  {
-   "source": [
-    "DT_060",
-    "Court Jesters (Dawntrail)",
-    "月なきみそらの道化師たち ～黄金～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_708.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.72,
-        "pcmHash": "b7168ec7"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-4.4dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.978; offset corrected +107.695s -> +1.720s by re-deriving the alignment and judging it on the intro (0.9218 -> 0.9677)"
-   }
-  },
-  {
-   "source": [
-    "DT_019",
-    "The Skyruin",
-    "The Skyruin ～ヴァリガルマンダ討滅戦～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_709.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.47,
-        "pcmHash": "fa2642a9"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.5dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.989"
-   }
-  },
-  {
-   "source": [
-    "DT_041",
-    "Seeking Purpose",
-    "レゾンデートル ～ゾラージャ討滅戦～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_710.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.71,
-        "pcmHash": "d67924b5"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.4dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.980"
-   }
-  },
-  {
-   "source": [
-    "DT_004",
-    "Morrow's Might",
-    "金煌なる民 ～トライヨラ：昼～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_711.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.63,
-        "pcmHash": "a216bce3"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.974; offset corrected +268.845s -> +1.630s by re-deriving the alignment and judging it on the intro (0.8462 -> 0.9926)"
-   }
-  },
-  {
-   "source": [
-    "DT_037",
-    "Starless Skyline",
-    "星なき摩天楼 ～ソリューション・ナイン～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_712.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.385,
-        "pcmHash": "c35d497f"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.988"
-   }
-  },
-  {
-   "source": [
-    "DT_006",
-    "Windswept Echoes",
-    "山峡の涼風 ～オルコ・パチャ：昼～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_713.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.49,
-        "pcmHash": "458ffced"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-4.6dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.975"
-   }
-  },
-  {
-   "source": [
-    "DT_011",
-    "Of Glittering Wings",
-    "極彩色の羽根 ～コザマル・カ：昼～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_714.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.765,
-        "pcmHash": "a4faa130"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1.8dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.919"
-   }
-  },
-  {
-   "source": [
-    "DT_021",
-    "Emerald under Sapphire",
-    "空と森の境界 ～ヤクテル樹海：昼～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_715.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.445,
-        "pcmHash": "54ad2c4f"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.961"
-   }
-  },
-  {
-   "source": [
-    "DT_033",
-    "Flash in the Dark",
-    "迸る雷光 ～ヘリテージファウンド：昼～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_717.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.77,
-        "pcmHash": "e26d271e"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.5dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.973"
-   }
-  },
-  {
-   "source": [
-    "DT_042",
-    "Bygone Serenity",
-    "遠き日の思い出 ～リビング・メモリー：開園～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_718.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.35,
-        "pcmHash": "21dee3f9"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1.3dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.975; offset corrected +221.580s -> +1.350s by re-deriving the alignment and judging it on the intro (0.8731 -> 0.9682)"
-   }
-  },
-  {
-   "source": [
-    "DT_008",
-    "Pastoral Pleasures",
-    "愉快な暮らし"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_719.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.885,
-        "pcmHash": "e8dfed89"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1.9dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.966"
-   }
-  },
-  {
-   "source": [
-    "DT_016",
-    "Life Bound by Honor",
-    "積み重ねる日々"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_720.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.74,
-        "pcmHash": "3097e5e9"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.7dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.930"
-   }
-  },
-  {
-   "source": [
-    "DT_028",
-    "Desertwalkers",
-    "荒野に生きる人々"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_721.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.795,
-        "pcmHash": "bad5a1a2"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.968"
-   }
-  },
-  {
-   "source": [
-    "DT_007",
-    "Blade's Exaltation",
-    "心躍る駆け引き"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_722.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.835,
-        "pcmHash": "4fb45730"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3.7dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.978"
-   }
-  },
-  {
-   "source": [
-    "DT_014",
-    "Roads Forsaken",
-    "路を遮るもの"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_723.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.765,
-        "pcmHash": "0bd243a5"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3.8dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.933"
-   }
-  },
-  {
-   "source": [
-    "DT_025",
-    "Pathmaker",
-    "路を拓くもの"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_724.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.31,
-        "pcmHash": "0ded4aed"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3.9dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.985"
-   }
-  },
-  {
-   "source": [
-    "DT_001",
-    "Dawntrail"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_725.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.55,
-        "pcmHash": "2b968e14"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-7.4dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.980"
-   }
-  },
-  {
-   "source": [
-    "DT_054",
-    "Smile"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_726.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.72,
-        "pcmHash": "1221d5cf"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-5dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.978"
-   }
-  },
-  {
-   "source": [
-    "DT_062",
-    "It's Showtime!",
-    "It's Showtime! ～至天の座アルカディア：ライトヘビー級～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_727.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.375,
-        "pcmHash": "33757bcd"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.983"
-   }
-  },
-  {
-   "source": [
-    "DT_063",
-    "Bee My Honey",
-    "Bee My Honey ～至天の座アルカディア：ライトヘビー級～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_728.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.64,
-        "pcmHash": "54c61b25"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.5dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.980"
-   }
-  },
-  {
-   "source": [
-    "DT_064",
-    "Burning Souls",
-    "Burning Souls ～至天の座アルカディア：ライトヘビー級～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_729.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.76,
-        "pcmHash": "5558f4b7"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.8dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.929; offset corrected +152.310s -> +1.760s by re-deriving the alignment and judging it on the intro (0.9488 -> 0.9781)"
-   }
-  },
-  {
-   "source": [
-    "DT_065",
-    "Give it All",
-    "Give it All ～至天の座アルカディア：ライトヘビー級～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_730.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.78,
-        "pcmHash": "8116c3e6"
-       }
-      },
-      "length": 319.8,
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     },
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 143.83,
-        "pcmHash": "8116c3e6"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "the game's file is 35.4s longer than this recording and ends by repeating itself: from 319.8s it replays the file from 142.1s (similarity 0.967, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 143.830s. Built and measured: whole file 0.978, across the seam 0.977, against a ceiling of 0.979 for this pairing."
-   }
-  },
-  {
-   "source": [
-    "DT_066",
-    "A Risky Bet",
-    "A Risky Bet ～至天の座アルカディア：ライトヘビー級～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_731.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.57,
-        "pcmHash": "e10deb7f"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.5dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.975"
-   }
-  },
-  {
-   "source": [
-    "DT_026",
-    "Morrow's Magic",
-    "金煌なる夜明け ～トライヨラ：夜～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_735.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.475,
-        "pcmHash": "bf85affb"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1.7dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.939"
-   }
-  },
-  {
-   "source": [
-    "DT_010",
-    "Windswept Whispers",
-    "山峡の夜風 ～オルコ・パチャ：夜～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_736.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.1,
-        "pcmHash": "688e7220"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.982"
-   }
-  },
-  {
-   "source": [
-    "DT_015",
-    "Of Glittering Baubles",
-    "極彩色の宝飾品 ～コザマル・カ：夜～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_737.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.695,
-        "pcmHash": "5a5644e4"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.2dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.983"
-   }
-  },
-  {
-   "source": [
-    "DT_029",
-    "Ceruleum Embers by Dusk",
-    "硝煙に緑陰 ～シャーローニ荒野：夜～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_739.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.69,
-        "pcmHash": "bafeaf83"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3.1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "DT_036",
-    "Crash in the Dark",
-    "暗き雷雲 ～ヘリテージファウンド：夜～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_740.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.59,
-        "pcmHash": "6e3282d5"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3.5dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.979"
-   }
-  },
-  {
-   "source": [
-    "DT_056",
-    "Echoes of Memory",
-    "遠き日の残響 ～リビング・メモリー：閉園～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_741.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.325,
-        "pcmHash": "9592dcab"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.987"
-   }
-  },
-  {
-   "source": [
-    "DT_058",
-    "Faerie Battle",
-    "フェアリーバトル"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_742.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.81,
-        "pcmHash": "b50d3297"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+1.8dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.968"
-   }
-  },
-  {
-   "source": [
-    "DT_051",
-    "Paved in Solitude",
-    "ひとつの路 ～エターナルクイーン討滅戦～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_743.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.945,
-        "pcmHash": "46389c95"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3.7dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.936"
-   }
-  },
-  {
-   "source": [
-    "DT_052",
-    "Paved with Resolve",
-    "ふたりの路 ～エターナルクイーン討滅戦～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_744.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.53,
-        "pcmHash": "bbf4f30a"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.976"
-   }
-  },
-  {
-   "source": [
-    "DT_009",
-    "Bright Bustle",
-    "陽気な大騒動"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_745.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.755,
-        "pcmHash": "58c5a0a3"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1.3dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.975"
-   }
-  },
-  {
-   "source": [
-    "DT_030",
-    "Cast Stones in Shadow",
-    "暗夜の礫"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_765.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.995,
-        "pcmHash": "248d079c"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.9dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.984"
-   }
-  },
-  {
-   "source": [
-    "DT_044",
-    "In Dawn's Embrace",
-    "明けの空を見上げて"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_789.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.94,
-        "pcmHash": "4e20f57d"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.968"
-   }
-  },
-  {
-   "source": [
-    "DT_012",
-    "Fun and Games",
-    "お茶目な戯れ"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_791.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.59,
-        "pcmHash": "55c8d9ac"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1.5dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.976; offset corrected +91.590s -> +1.590s by re-deriving the alignment and judging it on the intro (0.9489 -> 0.9889)"
-   }
-  },
-  {
-   "source": [
-    "DT_022",
-    "Coffee Break",
-    "コーヒーブレイク"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_814.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.725,
-        "pcmHash": "57c8a9ce"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+1.4dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.946"
-   }
-  },
-  {
-   "source": [
-    "DT_018",
-    "Etched in Memory",
-    "刻まれた記憶"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_815.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.035,
-        "pcmHash": "f6e52400"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1.3dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.980"
-   }
-  },
-  {
-   "source": [
-    "DT_061",
-    "The Ring's Reprieve"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_844.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.515,
-        "pcmHash": "748bf306"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.8dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.987"
-   }
-  },
-  {
-   "source": [
-    "DT_031",
-    "Hearts Tread and Trampled",
-    "踏みにじられた心"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_873.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.975,
-        "pcmHash": "95957fa6"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.978"
-   }
-  },
-  {
-   "source": [
-    "DT_003",
-    "Taco Delight",
-    "タコスでパーティー！"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_874.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.785,
-        "pcmHash": "44287256"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.989"
-   }
-  },
-  {
-   "source": [
-    "DT_005",
-    "For Hope and Happiness",
-    "笑顔を護るために"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_911.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.635,
-        "pcmHash": "c1e2a3b1"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3.5dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.987"
-   }
-  },
-  {
-   "source": [
-    "DT_053",
-    "Fond Farewells",
-    "それぞれの旅路へ"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_912.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.815,
-        "pcmHash": "c5dc7738"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-4.1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.979"
-   }
-  },
-  {
    "source": {
     "DT_001": [
      "DT_001",
@@ -4044,6 +259,3791 @@
      }
     ],
     "# comment": "credits roll: a medley of 10 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). DT_001 from 0s, DT_006 from 328s, DT_023 from 483s, DT_032 from 760s, DT_036 from 910s, DT_042 from 1034s, DT_050 from 1318s, DT_053 from 1516s, DT_054 from 1654s, DT_037 from 1920s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.987, worst segment 0.959, worst join 0.843."
+   }
+  },
+  {
+   "source": [
+    "DT_001",
+    "Dawntrail"
+   ],
+   "target": {
+    "path": [
+     "music/ex5/BGM_EX5_Event_01.scd",
+     "music/ex5/BGM_EX5_Event_28.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.55,
+        "pcmHash": "2b968e14"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.6dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.991"
+   }
+  },
+  {
+   "source": [
+    "DT_001",
+    "Dawntrail"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_725.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.55,
+        "pcmHash": "2b968e14"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-7.4dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.980"
+   }
+  },
+  {
+   "source": [
+    "DT_002",
+    "Prelude - A Westward Journey",
+    "黄金のプレリュード"
+   ],
+   "target": {
+    "path": [
+     "music/ex5/BGM_EX5_Event_43.scd",
+     "music/ffxiv/BGM_Ride_EX5Comp.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.545,
+        "pcmHash": "2b0e6411"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "DT_003",
+    "Taco Delight",
+    "タコスでパーティー！"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_11.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.765,
+        "pcmHash": "44287256"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+2.9dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "DT_003",
+    "Taco Delight",
+    "タコスでパーティー！"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_874.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.785,
+        "pcmHash": "44287256"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.989"
+   }
+  },
+  {
+   "source": [
+    "DT_004",
+    "Morrow's Might",
+    "金煌なる民 ～トライヨラ：昼～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Town_T_Day.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.63,
+        "pcmHash": "a216bce3"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.991; offset corrected +268.845s -> +1.630s by re-deriving the alignment and judging it on the intro (0.8499 -> 0.9969)"
+   }
+  },
+  {
+   "source": [
+    "DT_004",
+    "Morrow's Might",
+    "金煌なる民 ～トライヨラ：昼～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_711.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.63,
+        "pcmHash": "a216bce3"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.974; offset corrected +268.845s -> +1.630s by re-deriving the alignment and judging it on the intro (0.8462 -> 0.9926)"
+   }
+  },
+  {
+   "source": [
+    "DT_005",
+    "For Hope and Happiness",
+    "笑顔を護るために"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_07.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.485,
+        "pcmHash": "c1e2a3b1"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.944"
+   }
+  },
+  {
+   "source": [
+    "DT_005",
+    "For Hope and Happiness",
+    "笑顔を護るために"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_911.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.635,
+        "pcmHash": "c1e2a3b1"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.987"
+   }
+  },
+  {
+   "source": [
+    "DT_006",
+    "Windswept Echoes",
+    "山峡の涼風 ～オルコ・パチャ：昼～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Urq_Day.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.49,
+        "pcmHash": "458ffced"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.989"
+   }
+  },
+  {
+   "source": [
+    "DT_006",
+    "Windswept Echoes",
+    "山峡の涼風 ～オルコ・パチャ：昼～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_713.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.49,
+        "pcmHash": "458ffced"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.6dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.975"
+   }
+  },
+  {
+   "source": [
+    "DT_007",
+    "Blade's Exaltation",
+    "心躍る駆け引き"
+   ],
+   "target": {
+    "path": [
+     "music/ex5/BGM_EX5_Field_Her_Battle.scd",
+     "music/ex5/BGM_EX5_Field_Koz_Battle.scd",
+     "music/ex5/BGM_EX5_Field_Sha_Battle.scd",
+     "music/ex5/BGM_EX5_Field_Urq_Battle.scd",
+     "music/ex5/BGM_EX5_Field_Yak_Battle.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.835,
+        "pcmHash": "4fb45730"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.992"
+   }
+  },
+  {
+   "source": [
+    "DT_007",
+    "Blade's Exaltation",
+    "心躍る駆け引き"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_722.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.835,
+        "pcmHash": "4fb45730"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.7dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.978"
+   }
+  },
+  {
+   "source": [
+    "DT_008",
+    "Pastoral Pleasures",
+    "愉快な暮らし"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Safe01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.885,
+        "pcmHash": "e8dfed89"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "DT_008",
+    "Pastoral Pleasures",
+    "愉快な暮らし"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_719.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.885,
+        "pcmHash": "e8dfed89"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.9dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.966"
+   }
+  },
+  {
+   "source": [
+    "DT_009",
+    "Bright Bustle",
+    "陽気な大騒動"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Dotabata.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.755,
+        "pcmHash": "58c5a0a3"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+2.2dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "DT_009",
+    "Bright Bustle",
+    "陽気な大騒動"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_745.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.755,
+        "pcmHash": "58c5a0a3"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.975"
+   }
+  },
+  {
+   "source": [
+    "DT_010",
+    "Windswept Whispers",
+    "山峡の夜風 ～オルコ・パチャ：夜～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Urq_Night.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.995,
+        "pcmHash": "688e7220"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.998"
+   }
+  },
+  {
+   "source": [
+    "DT_010",
+    "Windswept Whispers",
+    "山峡の夜風 ～オルコ・パチャ：夜～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_736.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.1,
+        "pcmHash": "688e7220"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.982"
+   }
+  },
+  {
+   "source": [
+    "DT_011",
+    "Of Glittering Wings",
+    "極彩色の羽根 ～コザマル・カ：昼～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Koz_Day.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.765,
+        "pcmHash": "a4faa130"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.940"
+   }
+  },
+  {
+   "source": [
+    "DT_011",
+    "Of Glittering Wings",
+    "極彩色の羽根 ～コザマル・カ：昼～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_714.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.765,
+        "pcmHash": "a4faa130"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.8dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.919"
+   }
+  },
+  {
+   "source": [
+    "DT_012",
+    "Fun and Games",
+    "お茶目な戯れ"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_13.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.59,
+        "pcmHash": "55c8d9ac"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+3.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.991; offset corrected +91.590s -> +1.590s by re-deriving the alignment and judging it on the intro (0.9533 -> 0.9940)"
+   }
+  },
+  {
+   "source": [
+    "DT_012",
+    "Fun and Games",
+    "お茶目な戯れ"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_791.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.59,
+        "pcmHash": "55c8d9ac"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.976; offset corrected +91.590s -> +1.590s by re-deriving the alignment and judging it on the intro (0.9489 -> 0.9889)"
+   }
+  },
+  {
+   "source": [
+    "DT_013",
+    "Punutiy Crossing",
+    "プヌティーの川上り ～濁流遡上 イフイカ・トゥム～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Dan_D01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.67,
+        "pcmHash": "327cf2d5"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.895; offset corrected +130.905s -> +1.670s by re-deriving the alignment and judging it on the intro (0.7422 -> 0.8908)"
+   }
+  },
+  {
+   "source": [
+    "DT_013",
+    "Punutiy Crossing",
+    "プヌティーの川上り ～濁流遡上 イフイカ・トゥム～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_701.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.67,
+        "pcmHash": "327cf2d5"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.888; offset corrected +130.905s -> +1.670s by re-deriving the alignment and judging it on the intro (0.7411 -> 0.8875)"
+   }
+  },
+  {
+   "source": [
+    "DT_014",
+    "Roads Forsaken",
+    "路を遮るもの"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Boss_Battle01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.53,
+        "pcmHash": "0bd243a5"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.954; offset corrected +113.420s -> +2.530s by re-deriving the alignment and judging it on the intro (0.7450 -> 0.8926)"
+   }
+  },
+  {
+   "source": [
+    "DT_014",
+    "Roads Forsaken",
+    "路を遮るもの"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_723.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.765,
+        "pcmHash": "0bd243a5"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.8dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.933"
+   }
+  },
+  {
+   "source": [
+    "DT_015",
+    "Of Glittering Baubles",
+    "極彩色の宝飾品 ～コザマル・カ：夜～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Koz_Night.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.695,
+        "pcmHash": "5a5644e4"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "afade=t=out:st=291.463:d=6.300"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997. the recording is still playing at -24.6 dB where the game's own file has fallen to -66.0 dB, so it is faded to match that file's own decay: down from 6.60s before the end, silent for the last 0.30s"
+   }
+  },
+  {
+   "source": [
+    "DT_015",
+    "Of Glittering Baubles",
+    "極彩色の宝飾品 ～コザマル・カ：夜～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_737.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.695,
+        "pcmHash": "5a5644e4"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.2dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.983"
+   }
+  },
+  {
+   "source": [
+    "DT_016",
+    "Life Bound by Honor",
+    "積み重ねる日々"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Safe02.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.74,
+        "pcmHash": "3097e5e9"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.951"
+   }
+  },
+  {
+   "source": [
+    "DT_016",
+    "Life Bound by Honor",
+    "積み重ねる日々"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_720.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.74,
+        "pcmHash": "3097e5e9"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.7dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.930"
+   }
+  },
+  {
+   "source": [
+    "DT_017",
+    "Empyrean Peak",
+    "雲衝く高峰 ～山嶺登頂 ウォーコー・ゾーモー～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Dan_D02.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.5,
+        "pcmHash": "8336c68e"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.965"
+   }
+  },
+  {
+   "source": [
+    "DT_017",
+    "Empyrean Peak",
+    "雲衝く高峰 ～山嶺登頂 ウォーコー・ゾーモー～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_702.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.5,
+        "pcmHash": "8336c68e"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.951"
+   }
+  },
+  {
+   "source": [
+    "DT_018",
+    "Etched in Memory",
+    "刻まれた記憶"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_12.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.035,
+        "pcmHash": "f6e52400"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+1.1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "DT_018",
+    "Etched in Memory",
+    "刻まれた記憶"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_815.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.035,
+        "pcmHash": "f6e52400"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.980"
+   }
+  },
+  {
+   "source": [
+    "DT_019",
+    "The Skyruin",
+    "The Skyruin ～ヴァリガルマンダ討滅戦～"
+   ],
+   "target": {
+    "path": [
+     "music/ex5/BGM_EX5_Ban_01.scd",
+     "music/ffxiv/BGM_Ride_Valigarmanda.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.47,
+        "pcmHash": "fa2642a9"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+1.6dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "DT_019",
+    "The Skyruin",
+    "The Skyruin ～ヴァリガルマンダ討滅戦～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_709.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.47,
+        "pcmHash": "fa2642a9"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.989"
+   }
+  },
+  {
+   "source": [
+    "DT_020",
+    "Dawntrail (Instrumental)",
+    "Dawntrail (Instrumental)"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_02.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.35,
+        "pcmHash": "e7ff09b4"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.974); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.974"
+   }
+  },
+  {
+   "source": [
+    "DT_021",
+    "Emerald under Sapphire",
+    "空と森の境界 ～ヤクテル樹海：昼～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Yak_Day.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.445,
+        "pcmHash": "54ad2c4f"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.992"
+   }
+  },
+  {
+   "source": [
+    "DT_021",
+    "Emerald under Sapphire",
+    "空と森の境界 ～ヤクテル樹海：昼～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_715.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.445,
+        "pcmHash": "54ad2c4f"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.961"
+   }
+  },
+  {
+   "source": [
+    "DT_022",
+    "Coffee Break",
+    "コーヒーブレイク"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_06.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.725,
+        "pcmHash": "57c8a9ce"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+5.4dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.960"
+   }
+  },
+  {
+   "source": [
+    "DT_022",
+    "Coffee Break",
+    "コーヒーブレイク"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_814.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.725,
+        "pcmHash": "57c8a9ce"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+1.4dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.946"
+   }
+  },
+  {
+   "source": [
+    "DT_023",
+    "Skybound Emerald",
+    "森と地底の境界 ～ヤクテル樹海：夜～"
+   ],
+   "target": {
+    "path": [
+     "music/ex5/BGM_EX5_Field_Yak_Night.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_738.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.62,
+        "pcmHash": "b96ae678"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.998"
+   }
+  },
+  {
+   "source": [
+    "DT_024",
+    "樹海に沈む夢 ～遺産踏査 天深きセノーテ～",
+    "Lost in the Deep"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Dan_D03.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.34,
+        "pcmHash": "f3704594"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+1.9dB"
+      }
+     }
+    ],
+    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.929); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.929"
+   }
+  },
+  {
+   "source": [
+    "DT_024",
+    "樹海に沈む夢 ～遺産踏査 天深きセノーテ～",
+    "Lost in the Deep"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_703.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.34,
+        "pcmHash": "f3704594"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3dB"
+      }
+     }
+    ],
+    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.920); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.920"
+   }
+  },
+  {
+   "source": [
+    "DT_025",
+    "Pathmaker",
+    "路を拓くもの"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Boss_Battle02.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.31,
+        "pcmHash": "0ded4aed"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "DT_025",
+    "Pathmaker",
+    "路を拓くもの"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_724.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.31,
+        "pcmHash": "0ded4aed"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.9dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.985"
+   }
+  },
+  {
+   "source": [
+    "DT_026",
+    "Morrow's Magic",
+    "金煌なる夜明け ～トライヨラ：夜～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Town_T_Night.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.475,
+        "pcmHash": "bf85affb"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.956"
+   }
+  },
+  {
+   "source": [
+    "DT_026",
+    "Morrow's Magic",
+    "金煌なる夜明け ～トライヨラ：夜～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_735.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.475,
+        "pcmHash": "bf85affb"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.7dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.939"
+   }
+  },
+  {
+   "source": [
+    "DT_027",
+    "Ceruleum Smoke at High Noon",
+    "硝煙に青炎 ～シャーローニ荒野：昼～"
+   ],
+   "target": {
+    "path": [
+     "music/ex5/BGM_EX5_Field_Sha_Day.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_716.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.665,
+        "pcmHash": "25b51cda"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.960"
+   }
+  },
+  {
+   "source": [
+    "DT_028",
+    "Desertwalkers",
+    "荒野に生きる人々"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Safe03.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.795,
+        "pcmHash": "bad5a1a2"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "DT_028",
+    "Desertwalkers",
+    "荒野に生きる人々"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_721.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.795,
+        "pcmHash": "bad5a1a2"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.968"
+   }
+  },
+  {
+   "source": [
+    "DT_029",
+    "Ceruleum Embers by Dusk",
+    "硝煙に緑陰 ～シャーローニ荒野：夜～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Sha_Night.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.41,
+        "pcmHash": "bafeaf83"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.998"
+   }
+  },
+  {
+   "source": [
+    "DT_029",
+    "Ceruleum Embers by Dusk",
+    "硝煙に緑陰 ～シャーローニ荒野：夜～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_739.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.69,
+        "pcmHash": "bafeaf83"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "DT_030",
+    "Cast Stones in Shadow",
+    "暗夜の礫"
+   ],
+   "target": {
+    "path": [
+     "music/ex5/BGM_EX5_Event_08.scd",
+     "music/ex5/BGM_EX5_Event_25.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.995,
+        "pcmHash": "248d079c"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+1.8dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "DT_030",
+    "Cast Stones in Shadow",
+    "暗夜の礫"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_765.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.995,
+        "pcmHash": "248d079c"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.9dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.984"
+   }
+  },
+  {
+   "source": [
+    "DT_031",
+    "Hearts Tread and Trampled",
+    "踏みにじられた心"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_09.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.89,
+        "pcmHash": "95957fa6"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.954"
+   }
+  },
+  {
+   "source": [
+    "DT_031",
+    "Hearts Tread and Trampled",
+    "踏みにじられた心"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_873.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.975,
+        "pcmHash": "95957fa6"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.978"
+   }
+  },
+  {
+   "source": [
+    "DT_032",
+    "In Fulgur and Fire",
+    "火花と閃光 ～外征前哨 ヴァンガード～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Dan_D04.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.465,
+        "pcmHash": "9f934297"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "DT_032",
+    "In Fulgur and Fire",
+    "火花と閃光 ～外征前哨 ヴァンガード～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_704.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.465,
+        "pcmHash": "9f934297"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.4dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.979"
+   }
+  },
+  {
+   "source": [
+    "DT_033",
+    "Flash in the Dark",
+    "迸る雷光 ～ヘリテージファウンド：昼～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Her_Day.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.77,
+        "pcmHash": "e26d271e"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.987"
+   }
+  },
+  {
+   "source": [
+    "DT_033",
+    "Flash in the Dark",
+    "迸る雷光 ～ヘリテージファウンド：昼～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_717.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.77,
+        "pcmHash": "e26d271e"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.973"
+   }
+  },
+  {
+   "source": [
+    "DT_034",
+    "Prima Vista Orchestra",
+    "プリマビスタ楽団"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_17.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.625,
+        "pcmHash": "baf06245"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "DT_035",
+    "Tantalus's Theme (Dawntrail)",
+    "タンタラスのテーマ ～黄金～"
+   ],
+   "target": {
+    "path": [
+     "music/ex5/BGM_EX5_EventMap05.scd",
+     "music/ex5/BGM_EX5_EventMap06.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.635,
+        "pcmHash": "85332750"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.998"
+   }
+  },
+  {
+   "source": [
+    "DT_036",
+    "Crash in the Dark",
+    "暗き雷雲 ～ヘリテージファウンド：夜～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Her_Night.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.59,
+        "pcmHash": "6e3282d5"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "DT_036",
+    "Crash in the Dark",
+    "暗き雷雲 ～ヘリテージファウンド：夜～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_740.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.59,
+        "pcmHash": "6e3282d5"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.979"
+   }
+  },
+  {
+   "source": [
+    "DT_037",
+    "Starless Skyline",
+    "星なき摩天楼 ～ソリューション・ナイン～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Town_S_Day.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.385,
+        "pcmHash": "c35d497f"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+2.7dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "DT_037",
+    "Starless Skyline",
+    "星なき摩天楼 ～ソリューション・ナイン～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_712.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.385,
+        "pcmHash": "c35d497f"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988"
+   }
+  },
+  {
+   "source": [
+    "DT_038",
+    "Thy Warmth",
+    "あなたのぬくもり"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_20.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.655,
+        "pcmHash": "414bd3c5"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.958"
+   }
+  },
+  {
+   "source": [
+    "DT_040",
+    "Anatomy of Existence",
+    "生命の解体 ～魂魄工廠 オリジェニクス～"
+   ],
+   "target": {
+    "path": [
+     "music/ex5/BGM_EX5_Dan_D05.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_705.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.82,
+        "pcmHash": "e86601fd"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.991"
+   }
+  },
+  {
+   "source": [
+    "DT_041",
+    "Seeking Purpose",
+    "レゾンデートル ～ゾラージャ討滅戦～"
+   ],
+   "target": {
+    "path": [
+     "music/ex5/BGM_EX5_Ban_02.scd",
+     "music/ffxiv/BGM_Ride_Zoraalja.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.71,
+        "pcmHash": "d67924b5"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.990"
+   }
+  },
+  {
+   "source": [
+    "DT_041",
+    "Seeking Purpose",
+    "レゾンデートル ～ゾラージャ討滅戦～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_710.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.71,
+        "pcmHash": "d67924b5"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.4dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.980"
+   }
+  },
+  {
+   "source": [
+    "DT_042",
+    "Bygone Serenity",
+    "遠き日の思い出 ～リビング・メモリー：開園～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Liv_Day01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.35,
+        "pcmHash": "21dee3f9"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+3.1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993; offset corrected +221.580s -> +1.350s by re-deriving the alignment and judging it on the intro (0.9069 -> 0.9918)"
+   }
+  },
+  {
+   "source": [
+    "DT_042",
+    "Bygone Serenity",
+    "遠き日の思い出 ～リビング・メモリー：開園～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_718.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.35,
+        "pcmHash": "21dee3f9"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.975; offset corrected +221.580s -> +1.350s by re-deriving the alignment and judging it on the intro (0.8731 -> 0.9682)"
+   }
+  },
+  {
+   "source": [
+    "DT_043",
+    "Broken Spell, Healed Hearts",
+    "とけた魔法と心"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_16.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.82,
+        "pcmHash": "2564049f"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+2dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "DT_044",
+    "In Dawn's Embrace",
+    "明けの空を見上げて"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_05.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.94,
+        "pcmHash": "4e20f57d"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+5.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.986"
+   }
+  },
+  {
+   "source": [
+    "DT_044",
+    "In Dawn's Embrace",
+    "明けの空を見上げて"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_789.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.94,
+        "pcmHash": "4e20f57d"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.968"
+   }
+  },
+  {
+   "source": [
+    "DT_045",
+    "Fleeting Life",
+    "限りある時間（とき）"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_14.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.815,
+        "pcmHash": "d823e7cd"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+3.2dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "DT_046",
+    "The Fateful Hour",
+    "今宵"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_18.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.8,
+        "pcmHash": "92045123"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.976"
+   }
+  },
+  {
+   "source": [
+    "DT_047",
+    "Sword of Fury",
+    "この刃に懸けて"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_19.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.75,
+        "pcmHash": "589a6011"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "DT_048",
+    "Something to Protect",
+    "守るべきもの"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_21.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.995,
+        "pcmHash": "fa15eb4b"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "DT_049",
+    "Unforgettable Sorrow",
+    "消えぬ悲しみ"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_15.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.815,
+        "pcmHash": "a7d9a09f"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.998"
+   }
+  },
+  {
+   "source": [
+    "DT_050",
+    "A Trail Unending",
+    "終わりなき軌跡 ～記憶幻想 アレクサンドリア～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Dan_D06.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.145,
+        "pcmHash": "a42bbf1d"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+1.4dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "DT_050",
+    "A Trail Unending",
+    "終わりなき軌跡 ～記憶幻想 アレクサンドリア～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_706.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.145,
+        "pcmHash": "a42bbf1d"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.2dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.982"
+   }
+  },
+  {
+   "source": [
+    "DT_051",
+    "Paved in Solitude",
+    "ひとつの路 ～エターナルクイーン討滅戦～"
+   ],
+   "target": {
+    "path": [
+     "music/ex5/BGM_EX5_Ban_03.scd",
+     "music/ffxiv/BGM_Ride_Queen.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.945,
+        "pcmHash": "46389c95"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.949"
+   }
+  },
+  {
+   "source": [
+    "DT_051",
+    "Paved in Solitude",
+    "ひとつの路 ～エターナルクイーン討滅戦～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_743.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.945,
+        "pcmHash": "46389c95"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.7dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.936"
+   }
+  },
+  {
+   "source": [
+    "DT_052",
+    "Paved with Resolve",
+    "ふたりの路 ～エターナルクイーン討滅戦～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Ban_04.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "adelay=7905:all=1"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.972. the game's file starts before this recording does, so the source is delayed rather than offset: source by 7.905s"
+   }
+  },
+  {
+   "source": [
+    "DT_052",
+    "Paved with Resolve",
+    "ふたりの路 ～エターナルクイーン討滅戦～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_744.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.53,
+        "pcmHash": "bbf4f30a"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.976"
+   }
+  },
+  {
+   "source": [
+    "DT_053",
+    "Fond Farewells",
+    "それぞれの旅路へ"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_10.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.845,
+        "pcmHash": "c5dc7738"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.968"
+   }
+  },
+  {
+   "source": [
+    "DT_053",
+    "Fond Farewells",
+    "それぞれの旅路へ"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_912.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.815,
+        "pcmHash": "c5dc7738"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.979"
+   }
+  },
+  {
+   "source": [
+    "DT_054",
+    "Smile"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Event_24.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 87.855,
+        "pcmHash": "1221d5cf"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.978"
+   }
+  },
+  {
+   "source": [
+    "DT_054",
+    "Smile"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_726.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.72,
+        "pcmHash": "1221d5cf"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.978"
+   }
+  },
+  {
+   "source": [
+    "DT_056",
+    "Echoes of Memory",
+    "遠き日の残響 ～リビング・メモリー：閉園～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Liv_Day02.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.545,
+        "pcmHash": "9592dcab"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+3.2dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "DT_056",
+    "Echoes of Memory",
+    "遠き日の残響 ～リビング・メモリー：閉園～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_741.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.325,
+        "pcmHash": "9592dcab"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.987"
+   }
+  },
+  {
+   "source": [
+    "DT_057",
+    "Battle 1 from FINAL FANTASY IX",
+    "バトル1 from FINAL FANTASY IX"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Ride_Ark.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.9,
+        "pcmHash": "539d6bd5"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "DT_058",
+    "Faerie Battle",
+    "フェアリーバトル"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Liv_Fate.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "adelay=4285:all=1,volume=+4.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.974. the game's file starts before this recording does, so the source is delayed rather than offset: source by 4.285s"
+   }
+  },
+  {
+   "source": [
+    "DT_058",
+    "Faerie Battle",
+    "フェアリーバトル"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Field_Liv_Fate2.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "adelay=2795:all=1,volume=+4.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.972. the game's file starts before this recording does, so the source is delayed rather than offset: source by 2.795s"
+   }
+  },
+  {
+   "source": [
+    "DT_058",
+    "Faerie Battle",
+    "フェアリーバトル"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_742.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.81,
+        "pcmHash": "b50d3297"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+1.8dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.968"
+   }
+  },
+  {
+   "source": [
+    "DT_059",
+    "Blessings on the Bluffs",
+    "赤き大地の恵み ～荒野秘境 サボテンダーバレー～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Dan_D07.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.505,
+        "pcmHash": "d5cef841"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+1.7dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.940"
+   }
+  },
+  {
+   "source": [
+    "DT_059",
+    "Blessings on the Bluffs",
+    "赤き大地の恵み ～荒野秘境 サボテンダーバレー～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_707.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.505,
+        "pcmHash": "d5cef841"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.928"
+   }
+  },
+  {
+   "source": [
+    "DT_060",
+    "Court Jesters (Dawntrail)",
+    "月なきみそらの道化師たち ～黄金～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Dan_D08.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.72,
+        "pcmHash": "b7168ec7"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994; offset corrected +107.695s -> +1.720s by re-deriving the alignment and judging it on the intro (0.9498 -> 0.9968)"
+   }
+  },
+  {
+   "source": [
+    "DT_060",
+    "Court Jesters (Dawntrail)",
+    "月なきみそらの道化師たち ～黄金～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_708.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.72,
+        "pcmHash": "b7168ec7"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.4dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.978; offset corrected +107.695s -> +1.720s by re-deriving the alignment and judging it on the intro (0.9218 -> 0.9677)"
+   }
+  },
+  {
+   "source": [
+    "DT_061",
+    "The Ring's Reprieve"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Raid_01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.54,
+        "pcmHash": "748bf306"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.966; offset corrected +154.250s -> +1.540s by re-deriving the alignment and judging it on the intro (0.7047 -> 0.9962)"
+   }
+  },
+  {
+   "source": [
+    "DT_061",
+    "The Ring's Reprieve"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_844.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.515,
+        "pcmHash": "748bf306"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.8dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.987"
+   }
+  },
+  {
+   "source": [
+    "DT_062",
+    "It's Showtime!",
+    "It's Showtime! ～至天の座アルカディア：ライトヘビー級～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Raid_03.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.375,
+        "pcmHash": "33757bcd"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+1.7dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "DT_062",
+    "It's Showtime!",
+    "It's Showtime! ～至天の座アルカディア：ライトヘビー級～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_727.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.375,
+        "pcmHash": "33757bcd"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.983"
+   }
+  },
+  {
+   "source": [
+    "DT_063",
+    "Bee My Honey",
+    "Bee My Honey ～至天の座アルカディア：ライトヘビー級～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Raid_04.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.64,
+        "pcmHash": "54c61b25"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "DT_063",
+    "Bee My Honey",
+    "Bee My Honey ～至天の座アルカディア：ライトヘビー級～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_728.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.64,
+        "pcmHash": "54c61b25"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.980"
+   }
+  },
+  {
+   "source": [
+    "DT_064",
+    "Burning Souls",
+    "Burning Souls ～至天の座アルカディア：ライトヘビー級～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Raid_05.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.76,
+        "pcmHash": "5558f4b7"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.943; offset corrected +152.310s -> +1.760s by re-deriving the alignment and judging it on the intro (0.9547 -> 0.9838)"
+   }
+  },
+  {
+   "source": [
+    "DT_064",
+    "Burning Souls",
+    "Burning Souls ～至天の座アルカディア：ライトヘビー級～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_729.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.76,
+        "pcmHash": "5558f4b7"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.8dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.929; offset corrected +152.310s -> +1.760s by re-deriving the alignment and judging it on the intro (0.9488 -> 0.9781)"
+   }
+  },
+  {
+   "source": [
+    "DT_065",
+    "Give it All",
+    "Give it All ～至天の座アルカディア：ライトヘビー級～"
+   ],
+   "target": {
+    "path": [
+     "music/ex5/BGM_EX5_Raid_06.scd",
+     "music/ffxiv/BGM_Ride_Arcadia.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.78,
+        "pcmHash": "8116c3e6"
+       }
+      },
+      "length": 319.77,
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 143.8,
+        "pcmHash": "8116c3e6"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "the game's file is 35.4s longer than this recording and ends by repeating itself: from 319.8s it replays the file from 142.0s (similarity 0.986, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 143.800s. Built and measured: whole file 0.987, across the seam 0.981, against a ceiling of 0.989 for this pairing."
+   }
+  },
+  {
+   "source": [
+    "DT_065",
+    "Give it All",
+    "Give it All ～至天の座アルカディア：ライトヘビー級～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_730.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.78,
+        "pcmHash": "8116c3e6"
+       }
+      },
+      "length": 319.8,
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 143.83,
+        "pcmHash": "8116c3e6"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "the game's file is 35.4s longer than this recording and ends by repeating itself: from 319.8s it replays the file from 142.1s (similarity 0.967, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 143.830s. Built and measured: whole file 0.978, across the seam 0.977, against a ceiling of 0.979 for this pairing."
+   }
+  },
+  {
+   "source": [
+    "DT_066",
+    "A Risky Bet",
+    "A Risky Bet ～至天の座アルカディア：ライトヘビー級～"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_Raid_07.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.57,
+        "pcmHash": "e10deb7f"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.991"
+   }
+  },
+  {
+   "source": [
+    "DT_066",
+    "A Risky Bet",
+    "A Risky Bet ～至天の座アルカディア：ライトヘビー級～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_731.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.57,
+        "pcmHash": "e10deb7f"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.975"
    }
   }
  ],

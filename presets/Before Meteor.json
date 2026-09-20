@@ -10,48 +10,47 @@
  },
  "items": [
   {
-   "source": [
-    "Before_Meteor_FFXIV_018",
-    "Quicksand",
-    "砂塵"
-   ],
+   "source": {
+    "Before_Meteor_FFXIV_002": [
+     "Before_Meteor_FFXIV_002",
+     "Opening Theme",
+     "オープニングテーマ"
+    ]
+   },
    "target": {
-    "path": [
-     "music/ex1/BGM_EX1_Dungeon_DravaniaH_02.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_140.scd"
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.992; also released as TFEOF_FFXIV_46; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_037",
-    "Holy Consult",
-    "聖なる助言者"
-   ],
-   "target": {
-    "path": "music/ex1/BGM_EX1_Dungeon_Hullbreaker_Hard.scd",
+    "path": "music/ffxiv/BGM_System_EndCredit02.scd",
     "segments": [
      {
       "sourceOffsets": {
-       "source": {
+       "Before_Meteor_FFXIV_002": {
         "offset": 0.39,
-        "pcmHash": "8ab1016e"
+        "pcmHash": "7e96665a"
        }
       },
       "channels": [
        {
-        "source": "source",
+        "source": "Before_Meteor_FFXIV_002",
         "channel": 0
        },
        {
-        "source": "source",
+        "source": "Before_Meteor_FFXIV_002",
         "channel": 1
        }
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.995; also released as TFEOF_FFXIV_11; that album's own preset carries its own entry"
+    "# comment": "credits roll: a medley of 1 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). Before_Meteor_FFXIV_002 from 0s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.985, worst segment 0.985, worst join -."
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_003",
+    "Navigator's Glory - The Theme of Limsa Lominsa",
+    "潮風の集う街 ～リムサ・ロミンサのテーマ～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_174.scd",
+    "# comment": "spectral similarity to the game's own file: 0.970"
    }
   },
   {
@@ -70,21 +69,94 @@
   },
   {
    "source": [
-    "Before_Meteor_FFXIV_088",
-    "Meteor",
-    "メテオ"
+    "Before_Meteor_FFXIV_004",
+    "Freedom",
+    "自由なる風に吹かれて"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_478.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.37,
+        "pcmHash": "ab8e675a"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as TFEOF_FFXIV_18.flac, which the matcher picked for this target (0.803 vs 0.958); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_005",
+    "On Windy Meadows",
+    "ラノシアの疾風"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_StartLim.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.37,
+        "pcmHash": "2169293c"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_005",
+    "On Windy Meadows",
+    "ラノシアの疾風"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_076.scd",
+    "# comment": "spectral similarity to the game's own file: 0.972"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_006",
+    "Nail of the Heavens",
+    "天楔"
    ],
    "target": {
     "path": [
-     "music/ex2/BGM_EX2_Boss_Battle_02.scd",
-     "music/ffxiv/BGM_Event_Neal.scd"
+     "music/ffxiv/BGM_AOZ_Battle01.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_360.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.34,
-        "pcmHash": "d6268e99"
+        "offset": 0.275,
+        "pcmHash": "cef30fed"
        }
       },
       "channels": [
@@ -99,164 +171,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.997; also released as BTF_FFXIV_15; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_028",
-    "No Quarter",
-    "ノー・クォーター"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_EU_NM.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_224.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.265,
-        "pcmHash": "64de2cb1"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996; also released as SB_FFXIV_084; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_071",
-    "Victory Fanfare ＜Full＞"
-   ],
-   "target": {
-    "path": "music/ex2/BGM_EX2_Event_13.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.83,
-        "pcmHash": "29d0e55f"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.990"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_020",
-    "Unspoken",
-    "クルザスの静寂"
-   ],
-   "target": {
-    "path": "music/ex2/BGM_EX2_Event_35.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 88.505,
-        "pcmHash": "a697f407"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.993"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_044",
-    "Inner Recess",
-    "焦燥の旅路"
-   ],
-   "target": {
-    "path": "music/ex2/BGM_EX2_Event_36.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.07,
-        "pcmHash": "61c1589a"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.946"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_069",
-    "The Dark's Kiss",
-    "闇の口付"
-   ],
-   "target": {
-    "path": "music/ex3/BGM_EX3_Event_19.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.35,
-        "pcmHash": "2233d3a5"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.988; offset corrected +96.345s -> +0.350s by re-deriving the alignment and judging it on the intro (0.9139 -> 0.9872); also released as ARR_FFXIV_097; that album's own preset carries its own entry"
+    "# comment": "spectral similarity to the game's own file: 0.995"
    }
   },
   {
@@ -296,27 +211,29 @@
   },
   {
    "source": [
-    "Before_Meteor_FFXIV_104",
-    "Answers"
+    "Before_Meteor_FFXIV_009",
+    "Born of the Boughs - The Theme of Gridania",
+    "木々のさざめく街 ～グリダニアのテーマ～"
    ],
    "target": {
-    "path": "music/ex4/BGM_EX4_Event_14.scd",
-    "# comment": "spectral similarity to the game's own file: 0.926; also released as ENDWALKER_040; that album's own preset carries its own entry"
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_175.scd",
+    "# comment": "spectral similarity to the game's own file: 0.967"
    }
   },
   {
    "source": [
-    "Before_Meteor_FFXIV_104",
-    "Answers"
+    "Before_Meteor_FFXIV_010",
+    "Whisper of the Land",
+    "冥き地の底に"
    ],
    "target": {
-    "path": "music/ex4/BGM_EX4_Event_21.scd",
+    "path": "music/ffxiv/BGM_Event_StartGri.scd",
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 211.49,
-        "pcmHash": "5312680b"
+        "offset": 0.38,
+        "pcmHash": "002417ab"
        }
       },
       "channels": [
@@ -331,26 +248,64 @@
       ]
      }
     ],
-    "# comment": "same recording as ENDWALKER_040.flac, which the matcher picked for this target (0.811 vs 0.830); listed here too so owning this album is enough to replace it"
+    "# comment": "spectral similarity to the game's own file: 0.997"
    }
   },
   {
    "source": [
-    "Before_Meteor_FFXIV_006",
-    "Nail of the Heavens",
-    "天楔"
+    "Before_Meteor_FFXIV_010",
+    "Whisper of the Land",
+    "冥き地の底に"
    ],
    "target": {
-    "path": [
-     "music/ffxiv/BGM_AOZ_Battle01.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_360.scd"
-    ],
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_077.scd",
+    "# comment": "spectral similarity to the game's own file: 0.977"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_011",
+    "Emerald Labyrinth",
+    "黒衣の迷宮"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Dungeon_Deep01.scd",
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.275,
-        "pcmHash": "cef30fed"
+        "offset": 0.37,
+        "pcmHash": "9aaa7849"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as TFEOF_FFXIV_24.flac, which the matcher picked for this target (0.968 vs 0.980); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_013",
+    "Bathed in Woodsin　"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Dungeon_Treasure.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.365,
+        "pcmHash": "79e3f2fd"
        }
       },
       "channels": [
@@ -370,22 +325,29 @@
   },
   {
    "source": [
-    "Before_Meteor_FFXIV_100",
-    "Imperium",
-    "インペリウム"
+    "Before_Meteor_FFXIV_015",
+    "The Twin Faces of Fate - The Theme of Ul'dah",
+    "運命の交わる街 ～ウルダハのテーマ～"
    ],
    "target": {
-    "path": [
-     "music/ffxiv/BGM_AOZ_Battle02.scd",
-     "music/ffxiv/BGM_Ride_AOZ.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_361.scd"
-    ],
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_176.scd",
+    "# comment": "spectral similarity to the game's own file: 0.972"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_016",
+    "Twilight over Thanalan",
+    "ザナラーンの黄昏"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_StartLUru.scd",
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.27,
-        "pcmHash": "dd8fa051"
+        "offset": 0.375,
+        "pcmHash": "9d3868fd"
        }
       },
       "channels": [
@@ -400,26 +362,1175 @@
       ]
      }
     ],
-    "# comment": "same recording as GL_00059.flac, which the matcher picked for this target (0.966 vs 0.966); listed here too so owning this album is enough to replace it"
+    "# comment": "spectral similarity to the game's own file: 0.996"
    }
   },
   {
    "source": [
-    "Before_Meteor_FFXIV_101",
-    "Fallen Angel",
-    "堕天せし者"
+    "Before_Meteor_FFXIV_016",
+    "Twilight over Thanalan",
+    "ザナラーンの黄昏"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_078.scd",
+    "# comment": "spectral similarity to the game's own file: 0.973"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_018",
+    "Quicksand",
+    "砂塵"
    ],
    "target": {
     "path": [
-     "music/ffxiv/BGM_Ban_Garuda.scd",
-     "music/ffxiv/BGM_Ride_Gruda.scd"
+     "music/ex1/BGM_EX1_Dungeon_DravaniaH_02.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_140.scd"
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.992; also released as TFEOF_FFXIV_46; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_020",
+    "Unspoken",
+    "クルザスの静寂"
+   ],
+   "target": {
+    "path": "music/ex2/BGM_EX2_Event_35.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 88.505,
+        "pcmHash": "a697f407"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_020",
+    "Unspoken",
+    "クルザスの静寂"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_101.scd",
+    "# comment": "spectral similarity to the game's own file: 0.962"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_021",
+    "Pennons Aloft",
+    "槍旗"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Boss_04.scd",
+     "music/ffxiv/BGM_Event_BattleCommon_01.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.39,
+        "pcmHash": "4e92b780"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.990; also released as BTF_FFXIV_40; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_021",
+    "Pennons Aloft",
+    "槍旗"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_654.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.38,
+        "pcmHash": "4e92b780"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-6.4dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.967; also released as BTF_FFXIV_40; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_022",
+    "Starlight and Sellswords",
+    "桟道を上りて"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Barbar.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.375,
+        "pcmHash": "efd957e6"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.6dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_022",
+    "Starlight and Sellswords",
+    "桟道を上りて"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_545.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.345,
+        "pcmHash": "efd957e6"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.6dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.976"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_023",
+    "Tears for Mor Dhona",
+    "モードゥナの涙雨"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Dungeon_Deep03.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.39,
+        "pcmHash": "1ffb40c2"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as TFEOF_FFXIV_26.flac, which the matcher picked for this target (0.971 vs 0.981); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_025",
+    "Supply & Demand",
+    "街路の雑踏"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Bazaar.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.41,
+        "pcmHash": "7f8f72a6"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "enable": false,
+    "# comment": "source is correct (spectral 0.981 at offset -0.4s) but covers only 94% of this target: 104s of 110s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_026",
+    "Behind Closed Doors",
+    "安らぎの部屋"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Town_Rest_01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.385,
+        "pcmHash": "67cc4676"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_026",
+    "Behind Closed Doors",
+    "安らぎの部屋"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_098.scd",
+    "# comment": "spectral similarity to the game's own file: 0.961"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_028",
+    "No Quarter",
+    "ノー・クォーター"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_EU_NM.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_224.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.265,
+        "pcmHash": "64de2cb1"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996; also released as SB_FFXIV_084; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_029",
+    "Beneath Bloodied Banners",
+    "紅蓮の戦旗の下に"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Dungeon_Uru_06.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_258.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.335,
+        "pcmHash": "179aaca4"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_031",
+    "By Design",
+    "バイデザイン"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Event_Craft.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_477.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.38,
+        "pcmHash": "104e3b47"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_032",
+    "Nature's Bounty",
+    "自然の賜物"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Saisyu.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.365,
+        "pcmHash": "cfcb28af"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_032",
+    "Nature's Bounty",
+    "自然の賜物"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_764.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.35,
+        "pcmHash": "cfcb28af"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.4dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.981"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_033",
+    "When a Tree Falls",
+    "汗を流して"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Field_Workshop.scd",
+     "music/ffxiv/BGM_Leves_Easy.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.39,
+        "pcmHash": "f65fbe46"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_033",
+    "When a Tree Falls",
+    "汗を流して"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_047.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.39,
+        "pcmHash": "f65fbe46"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-7.1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.974"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_034",
+    "Decisions",
+    "駆け引き"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Nego.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.39,
+        "pcmHash": "6ba12020"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.986"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_034",
+    "Decisions",
+    "駆け引き"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_593.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.35,
+        "pcmHash": "6ba12020"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.982"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_036",
+    "Where the Heart Is",
+    "心の故郷"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Ansoku2.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.395,
+        "pcmHash": "6ac9b6b6"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.998"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_036",
+    "Where the Heart Is",
+    "心の故郷"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_102.scd",
+    "# comment": "spectral similarity to the game's own file: 0.981"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_037",
+    "Holy Consult",
+    "聖なる助言者"
+   ],
+   "target": {
+    "path": "music/ex1/BGM_EX1_Dungeon_Hullbreaker_Hard.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.39,
+        "pcmHash": "8ab1016e"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995; also released as TFEOF_FFXIV_11; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_037",
+    "Holy Consult",
+    "聖なる助言者"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_592.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.325,
+        "pcmHash": "8ab1016e"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-5.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.972; also released as TFEOF_FFXIV_11; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_039",
+    "The Echo",
+    "追憶の迷路"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Kako.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.39,
+        "pcmHash": "07d1ddca"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_040",
+    "Fever Dream",
+    "前触れ"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Fuan.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.38,
+        "pcmHash": "e61b2db5"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_041",
+    "Daring Dalliances",
+    "日溜り"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Event_Tanoshii1.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_229.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.38,
+        "pcmHash": "3d5db835"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.980"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_042",
+    "Sacred Bonds",
+    "哀愁"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_VerySad.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.375,
+        "pcmHash": "24fd6dfc"
+       }
+      },
+      "length": 162.24,
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.375,
+        "pcmHash": "24fd6dfc"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "the game's file is 19.8s longer than this recording and ends by repeating itself: from 162.2s it replays the file from 0.0s (similarity 0.993, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 0.375s. Built and measured: whole file 0.995, across the seam 0.997, against a ceiling of 0.995 for this pairing."
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_042",
+    "Sacred Bonds",
+    "哀愁"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_599.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.335,
+        "pcmHash": "24fd6dfc"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.9dB"
+      }
+     }
+    ],
+    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.977); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.977"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_044",
+    "Inner Recess",
+    "焦燥の旅路"
+   ],
+   "target": {
+    "path": "music/ex2/BGM_EX2_Event_36.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.07,
+        "pcmHash": "61c1589a"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.946"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_047",
+    "Fragments of Forever",
+    "永遠の欠片"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Event_Odayaka.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_219.scd"
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995; also released as TFEOF_FFXIV_40; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_048",
+    "Tranquility",
+    "静かなる一刻"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Ansoku1.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.34,
+        "pcmHash": "225aad11"
+       }
+      },
+      "length": 126.86,
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.34,
+        "pcmHash": "225aad11"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "the game's file is 29.2s longer than this recording and ends by repeating itself: from 126.9s it replays the file from 0.0s (similarity 0.997, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 0.340s. Built and measured: whole file 0.995, across the seam 0.997, against a ceiling of 0.995 for this pairing."
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_048",
+    "Tranquility",
+    "静かなる一刻"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_621.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.37,
+        "pcmHash": "225aad11"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.966"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_050",
+    "Everbinding Oath",
+    "永遠の誓い"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Season_Wedding.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.38,
+        "pcmHash": "100f83b0"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as BTF_FFXIV_44.flac, which the matcher picked for this target (0.912 vs 0.995); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_051",
+    "Heavensturn",
+    "降神祭"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Season_NewYear.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_092.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.365,
+        "pcmHash": "9704a33d"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_052",
+    "Moonfire Faire",
+    "紅蓮祭"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Season_SummerFes.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.37,
+        "pcmHash": "439256a3"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995; also released as BTF_FFXIV_24; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_052",
+    "Moonfire Faire",
+    "紅蓮祭"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_060.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "adelay=1120:all=1"
+      }
+     }
+    ],
+    "# comment": "same recording as BTF_FFXIV_24.flac, which the matcher picked for this target (0.966 vs 0.989); listed here too so owning this album is enough to replace it. the game's file starts before this recording does, so the source is delayed rather than offset: source by 1.120s"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_053",
+    "All Saint's Wake",
+    "守護天節"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Ride_Broom.scd",
+     "music/ffxiv/BGM_Season_Halloween.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_089.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
         "offset": 0.37,
-        "pcmHash": "a39d1e4b"
+        "pcmHash": "c05b4a0f"
        }
       },
       "channels": [
@@ -434,7 +1545,264 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.968; also released as ARR_FFXIV_082; that album's own preset carries its own entry"
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_054",
+    "Starlight Celebration",
+    "星芒祭"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Season_Christmas.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_091.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.405,
+        "pcmHash": "5002d41b"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_057",
+    "Enraptured",
+    "淡き光の夢に"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Dungeon_Deep02.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.38,
+        "pcmHash": "c2d856e1"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as TFEOF_FFXIV_25.flac, which the matcher picked for this target (0.948 vs 0.984); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_058",
+    "Battle Drums",
+    "蛮勇"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Field_BanFort_Sahagin.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.365,
+        "pcmHash": "5fa4a7fa"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_059",
+    "Bo-down",
+    "レンタル de チョコボ"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Ride_RChocobo.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.38,
+        "pcmHash": "edf9e81a"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.992; also released as ARR_FFXIV_010; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_063",
+    "Without Shadow",
+    "忍び寄る闇"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Ascian.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.38,
+        "pcmHash": "76a73a07"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.998"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_064",
+    "Canticle",
+    "祈りの歌"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Event_Truth.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_136.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.395,
+        "pcmHash": "53ca3e08"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_065",
+    "Wrath of the Eikons",
+    "怒れる神々"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Dungeon_Gri_06.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.36,
+        "pcmHash": "90fc1578"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as BTF_FFXIV_05.flac, which the matcher picked for this target (0.953 vs 0.976); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_065",
+    "Wrath of the Eikons",
+    "怒れる神々"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_847.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.395,
+        "pcmHash": "90fc1578"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-5.9dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.981; also released as BTF_FFXIV_05; that album's own preset carries its own entry"
    }
   },
   {
@@ -469,6 +1837,1049 @@
      }
     ],
     "# comment": "spectral similarity to the game's own file: 0.990; also released as ARR_FFXIV_044; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_066",
+    "Primal Judgment",
+    "原始の審判"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_030.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.28,
+        "pcmHash": "50ebe8c1"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.974; also released as ARR_FFXIV_044; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_068",
+    "The Dark's Embrace",
+    "闇の抱擁"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_022.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.405,
+        "pcmHash": "f046c629"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.992; also released as ARR_FFXIV_096; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_069",
+    "The Dark's Kiss",
+    "闇の口付"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_19.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.35,
+        "pcmHash": "2233d3a5"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988; offset corrected +96.345s -> +0.350s by re-deriving the alignment and judging it on the intro (0.9139 -> 0.9872); also released as ARR_FFXIV_097; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_069",
+    "The Dark's Kiss",
+    "闇の口付"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_LoV_Boss03.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.35,
+        "pcmHash": "2233d3a5"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988; offset corrected +96.350s -> +0.350s by re-deriving the alignment and judging it on the intro (0.9326 -> 0.9942); also released as ARR_FFXIV_097; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_070",
+    "Nemesis",
+    "ネメシス"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Boss_03.scd",
+     "music/ffxiv/BGM_LoV_Boss02.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.405,
+        "pcmHash": "c67495e2"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as ARR_FFXIV_038.flac, which the matcher picked for this target (0.951 vs 0.951); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_070",
+    "Nemesis",
+    "ネメシス"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_443.scd",
+    "# comment": "same recording as ARR_FFXIV_038.flac, which the matcher picked for this target (0.995 vs 0.995); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_071",
+    "Victory Fanfare ＜Full＞"
+   ],
+   "target": {
+    "path": "music/ex2/BGM_EX2_Event_13.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.83,
+        "pcmHash": "29d0e55f"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.990"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_071",
+    "Victory Fanfare ＜Full＞"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_ChocoboRace_Win1st.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.365,
+        "pcmHash": "29d0e55f"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.989"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_072",
+    "Maelstrom Command",
+    "黒渦団軍令部"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Company_Lim.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.28,
+        "pcmHash": "7f93e3f2"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_072",
+    "Maelstrom Command",
+    "黒渦団軍令部"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_561.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.355,
+        "pcmHash": "7f93e3f2"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.6dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.972"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_073",
+    "Into the Adder's Den",
+    "双蛇党統合司令部"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Company_Gri.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.41,
+        "pcmHash": "dc898fbe"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_073",
+    "Into the Adder's Den",
+    "双蛇党統合司令部"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_560.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.4,
+        "pcmHash": "dc898fbe"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.4dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.971"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_074",
+    "The Hall of Flames",
+    "不滅隊作戦本部"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Company_Uru.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.39,
+        "pcmHash": "2a414e5a"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_074",
+    "The Hall of Flames",
+    "不滅隊作戦本部"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_562.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.355,
+        "pcmHash": "2a414e5a"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-5.2dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.981"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_076",
+    "Eorzea de Chocobo",
+    "エオルゼア de チョコボ"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Ride_Chocobo.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.4,
+        "pcmHash": "88422f6a"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993; also released as ARR_FFXIV_022; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_076",
+    "Eorzea de Chocobo",
+    "エオルゼア de チョコボ"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_559.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.38,
+        "pcmHash": "88422f6a"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.8dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.969; offset corrected +122.225s -> +0.380s by re-deriving the alignment and judging it on the intro (0.8435 -> 0.9674); also released as ARR_FFXIV_022; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_077",
+    "Ripples in the Sea",
+    "洋上の小波"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Melvib.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.415,
+        "pcmHash": "f441f38b"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_077",
+    "Ripples in the Sea",
+    "洋上の小波"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_564.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.445,
+        "pcmHash": "f441f38b"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.7dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.982"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_078",
+    "The Sands' Secrets",
+    "砂の機密"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Rauburn.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.405,
+        "pcmHash": "69fa7d40"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_078",
+    "The Sands' Secrets",
+    "砂の機密"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_565.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.365,
+        "pcmHash": "69fa7d40"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.981"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_079",
+    "Dewdrops & Moonbeams",
+    "露の玉、月の光"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Kanue.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.335,
+        "pcmHash": "45872ca0"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_079",
+    "Dewdrops & Moonbeams",
+    "露の玉、月の光"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_563.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.395,
+        "pcmHash": "45872ca0"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.5dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.979"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_080",
+    "Dreams Aloft",
+    "夢見るは遙かなる空"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_MemoryOfCid.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.38,
+        "pcmHash": "1dc7c98d"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_080",
+    "Dreams Aloft",
+    "夢見るは遙かなる空"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_Ride_Fanfes2023.scd",
+     "music/ffxiv/BGM_System_Launcher.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.38,
+        "pcmHash": "1dc7c98d"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-2.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_080",
+    "Dreams Aloft",
+    "夢見るは遙かなる空"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_600.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.34,
+        "pcmHash": "1dc7c98d"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.966"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_082",
+    "Birds of a Feather",
+    "キャラバン護衛"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Dungeon_Uru_05.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.34,
+        "pcmHash": "608c9a70"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_084",
+    "Quick as Silver, Hard as Stone",
+    "疾きこと銀の如く、硬きこと石の如く"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Field_BanFort_Kobold.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.22,
+        "pcmHash": "6fed3f7e"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993; also released as ARR_FFXIV_062; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_085",
+    "Flightless Wings",
+    "猛き嵐の剣に"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Field_BanFort_Ixal.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.395,
+        "pcmHash": "cec79746"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.989; also released as ARR_FFXIV_078; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_086",
+    "Pitfire",
+    "炎獄の火種"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Field_BanFort_Amaruja.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.37,
+        "pcmHash": "6d36aea7"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.992; also released as ARR_FFXIV_042; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_087",
+    "The Promise of Plunder",
+    "隠し財宝を求めて"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Battle_Dungeon_01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 107.0,
+        "pcmHash": "2381345a"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as ARR_FFXIV_034.flac, which the matcher picked for this target (0.946 vs 0.947); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_087",
+    "The Promise of Plunder",
+    "隠し財宝を求めて"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_596.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.325,
+        "pcmHash": "2381345a"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as ARR_FFXIV_034.flac, which the matcher picked for this target (0.980 vs 0.981); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_088",
+    "Meteor",
+    "メテオ"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_Boss_Battle_02.scd",
+     "music/ffxiv/BGM_Event_Neal.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.34,
+        "pcmHash": "d6268e99"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997; also released as BTF_FFXIV_15; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_088",
+    "Meteor",
+    "メテオ"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_623.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.395,
+        "pcmHash": "d6268e99"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.8dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988; also released as BTF_FFXIV_15; that album's own preset carries its own entry"
    }
   },
   {
@@ -539,52 +2950,32 @@
   },
   {
    "source": [
-    "Before_Meteor_FFXIV_087",
-    "The Promise of Plunder",
-    "隠し財宝を求めて"
+    "Before_Meteor_FFXIV_090",
+    "Good King Moggle Mog XII",
+    "善王モグル・モグXII世"
    ],
    "target": {
-    "path": "music/ffxiv/BGM_Battle_Dungeon_01.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 107.0,
-        "pcmHash": "2381345a"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as ARR_FFXIV_034.flac, which the matcher picked for this target (0.946 vs 0.947); listed here too so owning this album is enough to replace it"
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_070.scd",
+    "# comment": "spectral similarity to the game's own file: 0.983; also released as ARR_FFXIV_090; that album's own preset carries its own entry"
    }
   },
   {
    "source": [
-    "Before_Meteor_FFXIV_070",
-    "Nemesis",
-    "ネメシス"
+    "Before_Meteor_FFXIV_091",
+    "The Rider's Boon",
+    "その背に揺られて"
    ],
    "target": {
     "path": [
-     "music/ffxiv/BGM_Boss_03.scd",
-     "music/ffxiv/BGM_LoV_Boss02.scd"
+     "music/ffxiv/BGM_Ride_CommonMonster.scd",
+     "music/ffxiv/BGM_Ride_CoolMount.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.405,
-        "pcmHash": "c67495e2"
+        "offset": 0.34,
+        "pcmHash": "3d9f5cab"
        }
       },
       "channels": [
@@ -599,26 +2990,26 @@
       ]
      }
     ],
-    "# comment": "same recording as ARR_FFXIV_038.flac, which the matcher picked for this target (0.951 vs 0.951); listed here too so owning this album is enough to replace it"
+    "# comment": "same recording as ARR_FFXIV_030.flac, which the matcher picked for this target (0.867 vs 0.868); listed here too so owning this album is enough to replace it"
    }
   },
   {
    "source": [
-    "Before_Meteor_FFXIV_021",
-    "Pennons Aloft",
-    "槍旗"
+    "Before_Meteor_FFXIV_092",
+    "Breaking Boundaries",
+    "極限を超えて"
    ],
    "target": {
     "path": [
-     "music/ffxiv/BGM_Boss_04.scd",
-     "music/ffxiv/BGM_Event_BattleCommon_01.scd"
+     "music/ffxiv/BGM_Event_JobShiren.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_138.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.39,
-        "pcmHash": "4e92b780"
+        "offset": 0.38,
+        "pcmHash": "b283db44"
        }
       },
       "channels": [
@@ -633,7 +3024,100 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.990; also released as BTF_FFXIV_40; that album's own preset carries its own entry"
+    "# comment": "spectral similarity to the game's own file: 0.995; also released as ARR_FFXIV_095; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_093",
+    "Relics",
+    "古のジョブ"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_JobEvent.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.32,
+        "pcmHash": "2bcca2e0"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_095",
+    "Agent of Inquiry",
+    "事件屋のアレ"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Event_Hildy.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.37,
+        "pcmHash": "d9429968"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994; also released as ARR_FFXIV_050; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_095",
+    "Agent of Inquiry",
+    "事件屋のアレ"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_013.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.26,
+        "pcmHash": "d9429968"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.970; also released as ARR_FFXIV_050; that album's own preset carries its own entry"
    }
   },
   {
@@ -707,144 +3191,21 @@
   },
   {
    "source": [
-    "Before_Meteor_FFXIV_071",
-    "Victory Fanfare ＜Full＞"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_ChocoboRace_Win1st.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.365,
-        "pcmHash": "29d0e55f"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.989"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_073",
-    "Into the Adder's Den",
-    "双蛇党統合司令部"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Company_Gri.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.41,
-        "pcmHash": "dc898fbe"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_072",
-    "Maelstrom Command",
-    "黒渦団軍令部"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Company_Lim.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.28,
-        "pcmHash": "7f93e3f2"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_074",
-    "The Hall of Flames",
-    "不滅隊作戦本部"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Company_Uru.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.39,
-        "pcmHash": "2a414e5a"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_102",
-    "Tempest",
-    "戦乱"
+    "Before_Meteor_FFXIV_098",
+    "Imperial Will",
+    "帝国の意志"
    ],
    "target": {
     "path": [
-     "music/ffxiv/BGM_Con_Neal.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_148.scd"
+     "music/ffxiv/BGM_Event_Teikoku.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_134.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.39,
-        "pcmHash": "651c4cf4"
+        "offset": 0.405,
+        "pcmHash": "4a83ca50"
        }
       },
       "channels": [
@@ -859,7 +3220,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.993; also released as BTF_FFXIV_17; that album's own preset carries its own entry"
+    "# comment": "spectral similarity to the game's own file: 0.994"
    }
   },
   {
@@ -899,206 +3260,22 @@
   },
   {
    "source": [
-    "Before_Meteor_FFXIV_011",
-    "Emerald Labyrinth",
-    "黒衣の迷宮"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Dungeon_Deep01.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.37,
-        "pcmHash": "9aaa7849"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as TFEOF_FFXIV_24.flac, which the matcher picked for this target (0.968 vs 0.980); listed here too so owning this album is enough to replace it"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_057",
-    "Enraptured",
-    "淡き光の夢に"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Dungeon_Deep02.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.38,
-        "pcmHash": "c2d856e1"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as TFEOF_FFXIV_25.flac, which the matcher picked for this target (0.948 vs 0.984); listed here too so owning this album is enough to replace it"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_023",
-    "Tears for Mor Dhona",
-    "モードゥナの涙雨"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Dungeon_Deep03.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.39,
-        "pcmHash": "1ffb40c2"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as TFEOF_FFXIV_26.flac, which the matcher picked for this target (0.971 vs 0.981); listed here too so owning this album is enough to replace it"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_065",
-    "Wrath of the Eikons",
-    "怒れる神々"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Dungeon_Gri_06.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.36,
-        "pcmHash": "90fc1578"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as BTF_FFXIV_05.flac, which the matcher picked for this target (0.953 vs 0.976); listed here too so owning this album is enough to replace it"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_013",
-    "Bathed in Woodsin　"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Dungeon_Treasure.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.365,
-        "pcmHash": "79e3f2fd"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_082",
-    "Birds of a Feather",
-    "キャラバン護衛"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Dungeon_Uru_05.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.34,
-        "pcmHash": "608c9a70"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_029",
-    "Beneath Bloodied Banners",
-    "紅蓮の戦旗の下に"
+    "Before_Meteor_FFXIV_100",
+    "Imperium",
+    "インペリウム"
    ],
    "target": {
     "path": [
-     "music/ffxiv/BGM_Dungeon_Uru_06.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_258.scd"
+     "music/ffxiv/BGM_AOZ_Battle02.scd",
+     "music/ffxiv/BGM_Ride_AOZ.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_361.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.335,
-        "pcmHash": "179aaca4"
+        "offset": 0.27,
+        "pcmHash": "dd8fa051"
        }
       },
       "channels": [
@@ -1113,1037 +3290,26 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
+    "# comment": "same recording as GL_00059.flac, which the matcher picked for this target (0.966 vs 0.966); listed here too so owning this album is enough to replace it"
    }
   },
   {
    "source": [
-    "Before_Meteor_FFXIV_048",
-    "Tranquility",
-    "静かなる一刻"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_Ansoku1.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.34,
-        "pcmHash": "225aad11"
-       }
-      },
-      "length": 126.86,
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     },
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.34,
-        "pcmHash": "225aad11"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "the game's file is 29.2s longer than this recording and ends by repeating itself: from 126.9s it replays the file from 0.0s (similarity 0.997, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 0.340s. Built and measured: whole file 0.995, across the seam 0.997, against a ceiling of 0.995 for this pairing."
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_036",
-    "Where the Heart Is",
-    "心の故郷"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_Ansoku2.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.395,
-        "pcmHash": "6ac9b6b6"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.998"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_063",
-    "Without Shadow",
-    "忍び寄る闇"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_Ascian.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.38,
-        "pcmHash": "76a73a07"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.998"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_022",
-    "Starlight and Sellswords",
-    "桟道を上りて"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_Barbar.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.375,
-        "pcmHash": "efd957e6"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1.6dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.993"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_025",
-    "Supply & Demand",
-    "街路の雑踏"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_Bazaar.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.41,
-        "pcmHash": "7f8f72a6"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.981 at offset -0.4s) but covers only 94% of this target: 104s of 110s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_031",
-    "By Design",
-    "バイデザイン"
+    "Before_Meteor_FFXIV_101",
+    "Fallen Angel",
+    "堕天せし者"
    ],
    "target": {
     "path": [
-     "music/ffxiv/BGM_Event_Craft.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_477.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.38,
-        "pcmHash": "104e3b47"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_040",
-    "Fever Dream",
-    "前触れ"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_Fuan.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.38,
-        "pcmHash": "e61b2db5"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_095",
-    "Agent of Inquiry",
-    "事件屋のアレ"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_Hildy.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.37,
-        "pcmHash": "d9429968"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994; also released as ARR_FFXIV_050; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_093",
-    "Relics",
-    "古のジョブ"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_JobEvent.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.32,
-        "pcmHash": "2bcca2e0"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_092",
-    "Breaking Boundaries",
-    "極限を超えて"
-   ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Event_JobShiren.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_138.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.38,
-        "pcmHash": "b283db44"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995; also released as ARR_FFXIV_095; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_039",
-    "The Echo",
-    "追憶の迷路"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_Kako.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.39,
-        "pcmHash": "07d1ddca"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.993"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_079",
-    "Dewdrops & Moonbeams",
-    "露の玉、月の光"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_Kanue.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.335,
-        "pcmHash": "45872ca0"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_077",
-    "Ripples in the Sea",
-    "洋上の小波"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_Melvib.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.415,
-        "pcmHash": "f441f38b"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_080",
-    "Dreams Aloft",
-    "夢見るは遙かなる空"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_MemoryOfCid.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.38,
-        "pcmHash": "1dc7c98d"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_034",
-    "Decisions",
-    "駆け引き"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_Nego.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.39,
-        "pcmHash": "6ba12020"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.986"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_047",
-    "Fragments of Forever",
-    "永遠の欠片"
-   ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Event_Odayaka.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_219.scd"
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995; also released as TFEOF_FFXIV_40; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_078",
-    "The Sands' Secrets",
-    "砂の機密"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_Rauburn.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.405,
-        "pcmHash": "69fa7d40"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_032",
-    "Nature's Bounty",
-    "自然の賜物"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_Saisyu.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.365,
-        "pcmHash": "cfcb28af"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_010",
-    "Whisper of the Land",
-    "冥き地の底に"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_StartGri.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.38,
-        "pcmHash": "002417ab"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_016",
-    "Twilight over Thanalan",
-    "ザナラーンの黄昏"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_StartLUru.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.375,
-        "pcmHash": "9d3868fd"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_005",
-    "On Windy Meadows",
-    "ラノシアの疾風"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_StartLim.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.37,
-        "pcmHash": "2169293c"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_041",
-    "Daring Dalliances",
-    "日溜り"
-   ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Event_Tanoshii1.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_229.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.38,
-        "pcmHash": "3d5db835"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.980"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_098",
-    "Imperial Will",
-    "帝国の意志"
-   ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Event_Teikoku.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_134.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.405,
-        "pcmHash": "4a83ca50"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_064",
-    "Canticle",
-    "祈りの歌"
-   ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Event_Truth.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_136.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.395,
-        "pcmHash": "53ca3e08"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_042",
-    "Sacred Bonds",
-    "哀愁"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Event_VerySad.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.375,
-        "pcmHash": "24fd6dfc"
-       }
-      },
-      "length": 162.24,
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     },
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.375,
-        "pcmHash": "24fd6dfc"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "the game's file is 19.8s longer than this recording and ends by repeating itself: from 162.2s it replays the file from 0.0s (similarity 0.993, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 0.375s. Built and measured: whole file 0.995, across the seam 0.997, against a ceiling of 0.995 for this pairing."
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_086",
-    "Pitfire",
-    "炎獄の火種"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Field_BanFort_Amaruja.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.37,
-        "pcmHash": "6d36aea7"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.992; also released as ARR_FFXIV_042; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_085",
-    "Flightless Wings",
-    "猛き嵐の剣に"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Field_BanFort_Ixal.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.395,
-        "pcmHash": "cec79746"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.989; also released as ARR_FFXIV_078; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_084",
-    "Quick as Silver, Hard as Stone",
-    "疾きこと銀の如く、硬きこと石の如く"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Field_BanFort_Kobold.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.22,
-        "pcmHash": "6fed3f7e"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.993; also released as ARR_FFXIV_062; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_058",
-    "Battle Drums",
-    "蛮勇"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Field_BanFort_Sahagin.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.365,
-        "pcmHash": "5fa4a7fa"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.993"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_033",
-    "When a Tree Falls",
-    "汗を流して"
-   ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Field_Workshop.scd",
-     "music/ffxiv/BGM_Leves_Easy.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.39,
-        "pcmHash": "f65fbe46"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_069",
-    "The Dark's Kiss",
-    "闇の口付"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_LoV_Boss03.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.35,
-        "pcmHash": "2233d3a5"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.988; offset corrected +96.350s -> +0.350s by re-deriving the alignment and judging it on the intro (0.9326 -> 0.9942); also released as ARR_FFXIV_097; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_053",
-    "All Saint's Wake",
-    "守護天節"
-   ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Ride_Broom.scd",
-     "music/ffxiv/BGM_Season_Halloween.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_089.scd"
+     "music/ffxiv/BGM_Ban_Garuda.scd",
+     "music/ffxiv/BGM_Ride_Gruda.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
         "offset": 0.37,
-        "pcmHash": "c05b4a0f"
+        "pcmHash": "a39d1e4b"
        }
       },
       "channels": [
@@ -2158,394 +3324,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.993"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_076",
-    "Eorzea de Chocobo",
-    "エオルゼア de チョコボ"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Ride_Chocobo.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.4,
-        "pcmHash": "88422f6a"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.993; also released as ARR_FFXIV_022; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_091",
-    "The Rider's Boon",
-    "その背に揺られて"
-   ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Ride_CommonMonster.scd",
-     "music/ffxiv/BGM_Ride_CoolMount.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.34,
-        "pcmHash": "3d9f5cab"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as ARR_FFXIV_030.flac, which the matcher picked for this target (0.867 vs 0.868); listed here too so owning this album is enough to replace it"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_080",
-    "Dreams Aloft",
-    "夢見るは遙かなる空"
-   ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Ride_Fanfes2023.scd",
-     "music/ffxiv/BGM_System_Launcher.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.38,
-        "pcmHash": "1dc7c98d"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.3dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_059",
-    "Bo-down",
-    "レンタル de チョコボ"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Ride_RChocobo.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.38,
-        "pcmHash": "edf9e81a"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.992; also released as ARR_FFXIV_010; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_054",
-    "Starlight Celebration",
-    "星芒祭"
-   ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Season_Christmas.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_091.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.405,
-        "pcmHash": "5002d41b"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_051",
-    "Heavensturn",
-    "降神祭"
-   ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Season_NewYear.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_092.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.365,
-        "pcmHash": "9704a33d"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_052",
-    "Moonfire Faire",
-    "紅蓮祭"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Season_SummerFes.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.37,
-        "pcmHash": "439256a3"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995; also released as BTF_FFXIV_24; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_050",
-    "Everbinding Oath",
-    "永遠の誓い"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Season_Wedding.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.38,
-        "pcmHash": "100f83b0"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as BTF_FFXIV_44.flac, which the matcher picked for this target (0.912 vs 0.995); listed here too so owning this album is enough to replace it"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_026",
-    "Behind Closed Doors",
-    "安らぎの部屋"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Town_Rest_01.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.385,
-        "pcmHash": "67cc4676"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_095",
-    "Agent of Inquiry",
-    "事件屋のアレ"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_013.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.26,
-        "pcmHash": "d9429968"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.970; also released as ARR_FFXIV_050; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_068",
-    "The Dark's Embrace",
-    "闇の抱擁"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_022.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.405,
-        "pcmHash": "f046c629"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.992; also released as ARR_FFXIV_096; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_066",
-    "Primal Judgment",
-    "原始の審判"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_030.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.28,
-        "pcmHash": "50ebe8c1"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.974; also released as ARR_FFXIV_044; that album's own preset carries its own entry"
+    "# comment": "spectral similarity to the game's own file: 0.968; also released as ARR_FFXIV_082; that album's own preset carries its own entry"
    }
   },
   {
@@ -2561,228 +3340,21 @@
   },
   {
    "source": [
-    "Before_Meteor_FFXIV_104",
-    "Answers"
+    "Before_Meteor_FFXIV_102",
+    "Tempest",
+    "戦乱"
    ],
    "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_045.scd",
-    "segments": [
-     {
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "adelay=780:all=1"
-      }
-     }
+    "path": [
+     "music/ffxiv/BGM_Con_Neal.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_148.scd"
     ],
-    "# comment": "same recording as ENDWALKER_040.flac, which the matcher picked for this target (0.976 vs 0.987); listed here too so owning this album is enough to replace it. the game's file starts before this recording does, so the source is delayed rather than offset: source by 0.780s"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_033",
-    "When a Tree Falls",
-    "汗を流して"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_047.scd",
     "segments": [
      {
       "sourceOffsets": {
        "source": {
         "offset": 0.39,
-        "pcmHash": "f65fbe46"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-7.1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.974"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_052",
-    "Moonfire Faire",
-    "紅蓮祭"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_060.scd",
-    "segments": [
-     {
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "adelay=1120:all=1"
-      }
-     }
-    ],
-    "# comment": "same recording as BTF_FFXIV_24.flac, which the matcher picked for this target (0.966 vs 0.989); listed here too so owning this album is enough to replace it. the game's file starts before this recording does, so the source is delayed rather than offset: source by 1.120s"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_090",
-    "Good King Moggle Mog XII",
-    "善王モグル・モグXII世"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_070.scd",
-    "# comment": "spectral similarity to the game's own file: 0.983; also released as ARR_FFXIV_090; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_005",
-    "On Windy Meadows",
-    "ラノシアの疾風"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_076.scd",
-    "# comment": "spectral similarity to the game's own file: 0.972"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_010",
-    "Whisper of the Land",
-    "冥き地の底に"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_077.scd",
-    "# comment": "spectral similarity to the game's own file: 0.977"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_016",
-    "Twilight over Thanalan",
-    "ザナラーンの黄昏"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_078.scd",
-    "# comment": "spectral similarity to the game's own file: 0.973"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_026",
-    "Behind Closed Doors",
-    "安らぎの部屋"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_098.scd",
-    "# comment": "spectral similarity to the game's own file: 0.961"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_020",
-    "Unspoken",
-    "クルザスの静寂"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_101.scd",
-    "# comment": "spectral similarity to the game's own file: 0.962"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_036",
-    "Where the Heart Is",
-    "心の故郷"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_102.scd",
-    "# comment": "spectral similarity to the game's own file: 0.981"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_003",
-    "Navigator's Glory - The Theme of Limsa Lominsa",
-    "潮風の集う街 ～リムサ・ロミンサのテーマ～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_174.scd",
-    "# comment": "spectral similarity to the game's own file: 0.970"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_009",
-    "Born of the Boughs - The Theme of Gridania",
-    "木々のさざめく街 ～グリダニアのテーマ～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_175.scd",
-    "# comment": "spectral similarity to the game's own file: 0.967"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_015",
-    "The Twin Faces of Fate - The Theme of Ul'dah",
-    "運命の交わる街 ～ウルダハのテーマ～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_176.scd",
-    "# comment": "spectral similarity to the game's own file: 0.972"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_070",
-    "Nemesis",
-    "ネメシス"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_443.scd",
-    "# comment": "same recording as ARR_FFXIV_038.flac, which the matcher picked for this target (0.995 vs 0.995); listed here too so owning this album is enough to replace it"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_004",
-    "Freedom",
-    "自由なる風に吹かれて"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_478.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.37,
-        "pcmHash": "ab8e675a"
+        "pcmHash": "651c4cf4"
        }
       },
       "channels": [
@@ -2797,613 +3369,7 @@
       ]
      }
     ],
-    "# comment": "same recording as TFEOF_FFXIV_18.flac, which the matcher picked for this target (0.803 vs 0.958); listed here too so owning this album is enough to replace it"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_022",
-    "Starlight and Sellswords",
-    "桟道を上りて"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_545.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.345,
-        "pcmHash": "efd957e6"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3.6dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.976"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_076",
-    "Eorzea de Chocobo",
-    "エオルゼア de チョコボ"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_559.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.38,
-        "pcmHash": "88422f6a"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.8dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.969; offset corrected +122.225s -> +0.380s by re-deriving the alignment and judging it on the intro (0.8435 -> 0.9674); also released as ARR_FFXIV_022; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_073",
-    "Into the Adder's Den",
-    "双蛇党統合司令部"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_560.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.4,
-        "pcmHash": "dc898fbe"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-4.4dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.971"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_072",
-    "Maelstrom Command",
-    "黒渦団軍令部"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_561.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.355,
-        "pcmHash": "7f93e3f2"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1.6dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.972"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_074",
-    "The Hall of Flames",
-    "不滅隊作戦本部"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_562.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.355,
-        "pcmHash": "2a414e5a"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-5.2dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.981"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_079",
-    "Dewdrops & Moonbeams",
-    "露の玉、月の光"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_563.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.395,
-        "pcmHash": "45872ca0"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1.5dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.979"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_077",
-    "Ripples in the Sea",
-    "洋上の小波"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_564.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.445,
-        "pcmHash": "f441f38b"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-4.7dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.982"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_078",
-    "The Sands' Secrets",
-    "砂の機密"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_565.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.365,
-        "pcmHash": "69fa7d40"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-4.1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.981"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_037",
-    "Holy Consult",
-    "聖なる助言者"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_592.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.325,
-        "pcmHash": "8ab1016e"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-5.3dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.972; also released as TFEOF_FFXIV_11; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_034",
-    "Decisions",
-    "駆け引き"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_593.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.35,
-        "pcmHash": "6ba12020"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-4.3dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.982"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_087",
-    "The Promise of Plunder",
-    "隠し財宝を求めて"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_596.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.325,
-        "pcmHash": "2381345a"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as ARR_FFXIV_034.flac, which the matcher picked for this target (0.980 vs 0.981); listed here too so owning this album is enough to replace it"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_042",
-    "Sacred Bonds",
-    "哀愁"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_599.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.335,
-        "pcmHash": "24fd6dfc"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-2.9dB"
-      }
-     }
-    ],
-    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.977); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.977"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_080",
-    "Dreams Aloft",
-    "夢見るは遙かなる空"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_600.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.34,
-        "pcmHash": "1dc7c98d"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3.3dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.966"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_048",
-    "Tranquility",
-    "静かなる一刻"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_621.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.37,
-        "pcmHash": "225aad11"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.966"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_088",
-    "Meteor",
-    "メテオ"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_623.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.395,
-        "pcmHash": "d6268e99"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3.8dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.988; also released as BTF_FFXIV_15; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_021",
-    "Pennons Aloft",
-    "槍旗"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_654.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.38,
-        "pcmHash": "4e92b780"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-6.4dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.967; also released as BTF_FFXIV_40; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_032",
-    "Nature's Bounty",
-    "自然の賜物"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_764.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.35,
-        "pcmHash": "cfcb28af"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1.4dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.981"
-   }
-  },
-  {
-   "source": [
-    "Before_Meteor_FFXIV_065",
-    "Wrath of the Eikons",
-    "怒れる神々"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_847.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.395,
-        "pcmHash": "90fc1578"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-5.9dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.981; also released as BTF_FFXIV_05; that album's own preset carries its own entry"
+    "# comment": "spectral similarity to the game's own file: 0.993; also released as BTF_FFXIV_17; that album's own preset carries its own entry"
    }
   },
   {
@@ -3474,12 +3440,22 @@
     "Answers"
    ],
    "target": {
-    "path": "music/ffxiv/BGM_Con_Bahamut_Bigboss3.scd",
+    "path": "music/ex4/BGM_EX4_Event_14.scd",
+    "# comment": "spectral similarity to the game's own file: 0.926; also released as ENDWALKER_040; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_104",
+    "Answers"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_21.scd",
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 155.64,
+        "offset": 211.49,
         "pcmHash": "5312680b"
        }
       },
@@ -3495,7 +3471,7 @@
       ]
      }
     ],
-    "# comment": "same recording as Before_Meteor_FFXIV_104.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.989)"
+    "# comment": "same recording as ENDWALKER_040.flac, which the matcher picked for this target (0.811 vs 0.830); listed here too so owning this album is enough to replace it"
    }
   },
   {
@@ -3529,36 +3505,60 @@
    }
   },
   {
-   "source": {
-    "Before_Meteor_FFXIV_002": [
-     "Before_Meteor_FFXIV_002",
-     "Opening Theme",
-     "オープニングテーマ"
-    ]
-   },
+   "source": [
+    "Before_Meteor_FFXIV_104",
+    "Answers"
+   ],
    "target": {
-    "path": "music/ffxiv/BGM_System_EndCredit02.scd",
+    "path": "music/ffxiv/BGM_Con_Bahamut_Bigboss3.scd",
     "segments": [
      {
       "sourceOffsets": {
-       "Before_Meteor_FFXIV_002": {
-        "offset": 0.39,
-        "pcmHash": "7e96665a"
+       "source": {
+        "offset": 155.64,
+        "pcmHash": "5312680b"
        }
       },
       "channels": [
        {
-        "source": "Before_Meteor_FFXIV_002",
+        "source": "source",
         "channel": 0
        },
        {
-        "source": "Before_Meteor_FFXIV_002",
+        "source": "source",
         "channel": 1
        }
       ]
      }
     ],
-    "# comment": "credits roll: a medley of 1 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). Before_Meteor_FFXIV_002 from 0s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.985, worst segment 0.985, worst join -."
+    "# comment": "same recording as Before_Meteor_FFXIV_104.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.989)"
+   }
+  },
+  {
+   "source": [
+    "Before_Meteor_FFXIV_104",
+    "Answers"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_045.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "adelay=780:all=1"
+      }
+     }
+    ],
+    "# comment": "same recording as ENDWALKER_040.flac, which the matcher picked for this target (0.976 vs 0.987); listed here too so owning this album is enough to replace it. the game's file starts before this recording does, so the source is delayed rather than offset: source by 0.780s"
    }
   }
  ],

@@ -11,106 +11,6 @@
  "items": [
   {
    "source": [
-    "SHADOWBRINGERS_11",
-    "Sunset",
-    "千年の誰そ彼 ～朱雀征魂戦～"
-   ],
-   "target": {
-    "path": "music/ex2/BGM_EX2_Ban_24.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.985,
-        "pcmHash": "2ebb5e4d"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_12",
-    "Sunrise",
-    "千年の暁 ～朱雀征魂戦～"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_Ban_25.scd",
-     "music/ffxiv/BGM_Ride_Suzaku.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_261.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 121.73,
-        "pcmHash": "11365bae"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.942"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_35",
-    "From the Dragon's Wake",
-    "雲蒸龍変 ～青龍征魂戦～"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_Ban_26.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_287.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.12,
-        "pcmHash": "6d9e41e3"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
-   }
-  },
-  {
-   "source": [
     "SHADOWBRINGERS_01",
     "A Land Long Dead",
     "死の大地 ～永久焦土 ザ・バーン～"
@@ -145,122 +45,21 @@
   },
   {
    "source": [
-    "SHADOWBRINGERS_10",
-    "From Mud",
-    "泥中の蓮 ～草木汚染 聖モシャーヌ植物園～"
+    "SHADOWBRINGERS_02",
+    "Bedlam's Brink",
+    "不穏の淵"
    ],
    "target": {
     "path": [
-     "music/ex2/BGM_EX2_Dan_D14.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_259.scd"
+     "music/ex2/BGM_EX2_Event_38.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_386.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 213.46,
-        "pcmHash": "d347a7ed"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.980"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_36",
-    "A Pall Most Murderous",
-    "黒煙の戦い ～境界戦線 ギムリトダーク～"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_Dan_D15.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_288.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.505,
-        "pcmHash": "3142ad01"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.937"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_17",
-    "Onslaught"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_EU_Boss.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_297.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.355,
-        "pcmHash": "2132ee0b"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_16",
-    "TH_131",
-    "Gates of Paradise - The Garden of Ru'Hmet"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_EU_Dungeon.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_296.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.44,
-        "pcmHash": "ec9a68ac"
+        "offset": 1.6,
+        "pcmHash": "2bb4a4e9"
        }
       },
       "channels": [
@@ -276,6 +75,75 @@
      }
     ],
     "# comment": "spectral similarity to the game's own file: 0.998"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_03",
+    "Battle",
+    "戦闘シーン ～次元の狭間オメガ：アルファ編～"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_alpha_01.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_270.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.025,
+        "pcmHash": "f15bd4a1"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.911"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_04",
+    "エスケープ ～次元の狭間オメガ：アルファ編～",
+    "eScape"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_alpha_02.scd",
+     "music/ex4/BGM_EX4_Ban_13.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_272.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.77,
+        "pcmHash": "51781a74"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as SHADOWBRINGERS_04.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.974)"
    }
   },
   {
@@ -307,6 +175,170 @@
      }
     ],
     "# comment": "spectral similarity to the game's own file: 0.986; offset corrected +33.240s -> +1.240s by re-deriving the alignment and judging it on the intro (0.9515 -> 0.9960)"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_05",
+    "Everywhere and Nowhere",
+    "何処でもない何処か"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_444.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.23,
+        "pcmHash": "8ce13e73"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.966"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_06",
+    "Heartless",
+    "心を持たぬ者 ～次元の狭間オメガ：アルファ編～"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_alpha_03.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_273.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.44,
+        "pcmHash": "75ab5089"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.875; also released as GL_00049; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_06",
+    "Heartless",
+    "心を持たぬ者 ～次元の狭間オメガ：アルファ編～"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Ban_12.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.44,
+        "pcmHash": "75ab5089"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+3.6dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.875; also released as GL_00049; that album's own preset carries its own entry"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_07",
+    "From the Heavens",
+    "空より現れし者 ～次元の狭間オメガ：アルファ編～"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_alpha_04.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_277.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.19,
+        "pcmHash": "548e3f7c"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.973; offset corrected +256.630s -> +2.190s by re-deriving the alignment and judging it on the intro (0.8625 -> 0.9750)"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_07",
+    "From the Heavens",
+    "空より現れし者 ～次元の狭間オメガ：アルファ編～"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Ride_Alpha.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.23,
+        "pcmHash": "548e3f7c"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993; offset corrected +256.670s -> +2.230s by re-deriving the alignment and judging it on the intro (0.9064 -> 0.9921)"
    }
   },
   {
@@ -373,6 +405,37 @@
   },
   {
    "source": [
+    "SHADOWBRINGERS_08",
+    "A Dream in Flight",
+    "翼に夢を"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_276.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.11,
+        "pcmHash": "936f2688"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.975"
+   }
+  },
+  {
+   "source": [
     "SHADOWBRINGERS_09",
     "Ending",
     "エンディング"
@@ -404,21 +467,304 @@
   },
   {
    "source": [
-    "SHADOWBRINGERS_02",
-    "Bedlam's Brink",
-    "不穏の淵"
+    "SHADOWBRINGERS_09",
+    "Ending",
+    "エンディング"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_275.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.445,
+        "pcmHash": "c293336d"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-3.3dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.978"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_10",
+    "From Mud",
+    "泥中の蓮 ～草木汚染 聖モシャーヌ植物園～"
    ],
    "target": {
     "path": [
-     "music/ex2/BGM_EX2_Event_38.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_386.scd"
+     "music/ex2/BGM_EX2_Dan_D14.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_259.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.6,
-        "pcmHash": "2bb4a4e9"
+        "offset": 213.46,
+        "pcmHash": "d347a7ed"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.980"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_11",
+    "Sunset",
+    "千年の誰そ彼 ～朱雀征魂戦～"
+   ],
+   "target": {
+    "path": "music/ex2/BGM_EX2_Ban_24.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.985,
+        "pcmHash": "2ebb5e4d"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_11",
+    "Sunset",
+    "千年の誰そ彼 ～朱雀征魂戦～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_788.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.985,
+        "pcmHash": "2ebb5e4d"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-1.7dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.986"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_12",
+    "Sunrise",
+    "千年の暁 ～朱雀征魂戦～"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_Ban_25.scd",
+     "music/ffxiv/BGM_Ride_Suzaku.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_261.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 121.73,
+        "pcmHash": "11365bae"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.942"
+   }
+  },
+  {
+   "source": {
+    "SHADOWBRINGERS_13": [
+     "SHADOWBRINGERS_13",
+     "星芒の歌",
+     "Starlight, Starbright"
+    ],
+    "SHADOWBRINGERS_14": [
+     "SHADOWBRINGERS_14",
+     "絶望の歌",
+     "Starlight, Not Right"
+    ]
+   },
+   "target": {
+    "path": "music/ffxiv/BGM_Season_XmasCho.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "SHADOWBRINGERS_13",
+        "channel": 0
+       },
+       {
+        "source": "SHADOWBRINGERS_13",
+        "channel": 1
+       },
+       {
+        "source": "SHADOWBRINGERS_14",
+        "channel": 0
+       },
+       {
+        "source": "SHADOWBRINGERS_14",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "SHADOWBRINGERS_13": {
+        "offset": 1.69,
+        "pcmHash": "8c11d7a0"
+       },
+       "SHADOWBRINGERS_14": {
+        "offset": 2.15,
+        "pcmHash": "42f10cfc"
+       }
+      }
+     }
+    ],
+    "# comment": "multichannel target: 2 engine-switched stems, matched individually (SHADOWBRINGERS_13 to game channels [0, 1] @0.953; SHADOWBRINGERS_14 to game channels [2, 3] @0.979). The stems tile the channels in order, so a plain sequential mapping is correct -- the same shape as the hand-written BGM_EX1_PvP01 entry. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio. per-stem offsets: SHADOWBRINGERS_13 at +1.690s, SHADOWBRINGERS_14 at +2.150s."
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_13",
+    "Starlight, Starbright",
+    "星芒の歌"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_254.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.69,
+        "pcmHash": "8c11d7a0"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.969"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_15",
+    "Doman Distractions",
+    "東方遊戯"
+   ],
+   "target": {
+    "path": [
+     "music/ffxiv/BGM_EMJ.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_290.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.74,
+        "pcmHash": "08f39815"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_16",
+    "TH_131",
+    "Gates of Paradise - The Garden of Ru'Hmet"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_EU_Dungeon.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_296.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.44,
+        "pcmHash": "ec9a68ac"
        }
       },
       "channels": [
@@ -438,6 +784,267 @@
   },
   {
    "source": [
+    "SHADOWBRINGERS_16",
+    "Gates of Paradise - The Garden of Ru'Hmet"
+   ],
+   "target": {
+    "path": "music/ex5/BGM_EX5_EoV_39.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.495,
+        "pcmHash": "ec9a68ac"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as TH_131.mp3, which the matcher picked for this target (0.854 vs 0.904); listed here too so owning this album is enough to replace it"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_17",
+    "Onslaught"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_EU_Boss.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_297.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.355,
+        "pcmHash": "2132ee0b"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_18",
+    "Turmoil"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_EU_LB.scd",
+     "music/ex5/BGM_EX5_EoV_31.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_298.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.1,
+        "pcmHash": "57331843"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "same recording as SHADOWBRINGERS_18.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.992)"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_19",
+    "Under The Stars"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_Rti_26.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_302.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.51,
+        "pcmHash": "0e002456"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_20",
+    "Pressure (No. 1)",
+    "緊迫1"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_Rti_28.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_303.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.565,
+        "pcmHash": "448671cd"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.992"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_21",
+    "Antipyretic"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_Rti_29.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_304.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.66,
+        "pcmHash": "fc85ad07"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_22",
+    "Bloody Excrement"
+   ],
+   "target": {
+    "path": "music/ex2/BGM_EX2_Rti_27.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.29,
+        "pcmHash": "0e36cccc"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_23",
+    "A Man Consumed",
+    "異形の者"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_Rti_30.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_305.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.52,
+        "pcmHash": "c630cb6f"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.992"
+   }
+  },
+  {
+   "source": [
     "SHADOWBRINGERS_24",
     "St. Ajora's Theme",
     "聖アジョラのテーマ"
@@ -450,6 +1057,169 @@
        "source": {
         "offset": 2.66,
         "pcmHash": "463dbca6"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_25",
+    "Descent",
+    "降臨"
+   ],
+   "target": {
+    "path": "music/ex2/BGM_EX2_Rti_32.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.64,
+        "pcmHash": "40cffb14"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_26",
+    "Ultema The Perfect Body!"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_Rti_33.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_306.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.51,
+        "pcmHash": "59a25a86"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_29",
+    "Brave Story",
+    "ブレイブストーリー"
+   ],
+   "target": {
+    "path": "music/ex2/BGM_EX2_Rti_23.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.145,
+        "pcmHash": "ae13f024"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_29",
+    "Brave Story",
+    "ブレイブストーリー"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_796.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.22,
+        "pcmHash": "ae13f024"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=-4.1dB"
+      }
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.982"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_30",
+    "Alma's Theme",
+    "アルマのテーマ"
+   ],
+   "target": {
+    "path": [
+     "music/ex2/BGM_EX2_Rti_24.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_301.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.17,
+        "pcmHash": "11d5c7a7"
        }
       },
       "channels": [
@@ -563,71 +1333,6 @@
   },
   {
    "source": [
-    "SHADOWBRINGERS_29",
-    "Brave Story",
-    "ブレイブストーリー"
-   ],
-   "target": {
-    "path": "music/ex2/BGM_EX2_Rti_23.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.145,
-        "pcmHash": "ae13f024"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_30",
-    "Alma's Theme",
-    "アルマのテーマ"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_Rti_24.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_301.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.17,
-        "pcmHash": "11d5c7a7"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
     "SHADOWBRINGERS_34",
     "Intrigue",
     "謀略"
@@ -659,84 +1364,21 @@
   },
   {
    "source": [
-    "SHADOWBRINGERS_19",
-    "Under The Stars"
+    "SHADOWBRINGERS_35",
+    "From the Dragon's Wake",
+    "雲蒸龍変 ～青龍征魂戦～"
    ],
    "target": {
     "path": [
-     "music/ex2/BGM_EX2_Rti_26.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_302.scd"
+     "music/ex2/BGM_EX2_Ban_26.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_287.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 2.51,
-        "pcmHash": "0e002456"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_22",
-    "Bloody Excrement"
-   ],
-   "target": {
-    "path": "music/ex2/BGM_EX2_Rti_27.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.29,
-        "pcmHash": "0e36cccc"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_20",
-    "Pressure (No. 1)",
-    "緊迫1"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_Rti_28.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_303.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.565,
-        "pcmHash": "448671cd"
+        "offset": 2.12,
+        "pcmHash": "6d9e41e3"
        }
       },
       "channels": [
@@ -756,20 +1398,52 @@
   },
   {
    "source": [
-    "SHADOWBRINGERS_21",
-    "Antipyretic"
+    "SHADOWBRINGERS_35",
+    "From the Dragon's Wake",
+    "雲蒸龍変 ～青龍征魂戦～"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Ride_Seiryu.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.17,
+        "pcmHash": "6d9e41e3"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.921; offset corrected +360.565s -> +2.170s by re-deriving the alignment and judging it on the intro (0.8654 -> 0.9112)"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_36",
+    "A Pall Most Murderous",
+    "黒煙の戦い ～境界戦線 ギムリトダーク～"
    ],
    "target": {
     "path": [
-     "music/ex2/BGM_EX2_Rti_29.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_304.scd"
+     "music/ex2/BGM_EX2_Dan_D15.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_288.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 2.66,
-        "pcmHash": "fc85ad07"
+        "offset": 1.505,
+        "pcmHash": "3142ad01"
        }
       },
       "channels": [
@@ -784,990 +1458,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_23",
-    "A Man Consumed",
-    "異形の者"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_Rti_30.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_305.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.52,
-        "pcmHash": "c630cb6f"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_25",
-    "Descent",
-    "降臨"
-   ],
-   "target": {
-    "path": "music/ex2/BGM_EX2_Rti_32.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.64,
-        "pcmHash": "40cffb14"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_26",
-    "Ultema The Perfect Body!"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_Rti_33.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_306.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.51,
-        "pcmHash": "59a25a86"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_03",
-    "Battle",
-    "戦闘シーン ～次元の狭間オメガ：アルファ編～"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_alpha_01.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_270.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.025,
-        "pcmHash": "f15bd4a1"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.911"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_06",
-    "Heartless",
-    "心を持たぬ者 ～次元の狭間オメガ：アルファ編～"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_alpha_03.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_273.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.44,
-        "pcmHash": "75ab5089"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.875; also released as GL_00049; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_07",
-    "From the Heavens",
-    "空より現れし者 ～次元の狭間オメガ：アルファ編～"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_alpha_04.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_277.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.19,
-        "pcmHash": "548e3f7c"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.973; offset corrected +256.630s -> +2.190s by re-deriving the alignment and judging it on the intro (0.8625 -> 0.9750)"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_57",
-    "What Angel Wakes Me",
-    "目覚めの御使い ～ティターニア討滅戦～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Ban_01.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_325.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.645,
-        "pcmHash": "087b3b86"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_68",
-    "Insanity",
-    "インサニティー ～イノセンス討滅戦～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Ban_02.scd",
-     "music/ffxiv/BGM_Ride_Innocence.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_326.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.895,
-        "pcmHash": "1a90cb6d"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_74",
-    "Who Brings Shadow",
-    "影をもたらす者 ～ハーデス前哨戦～"
-   ],
-   "target": {
-    "path": "music/ex3/BGM_EX3_Ban_03.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.935,
-        "pcmHash": "376271a7"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_75",
-    "Invincible",
-    "砕けぬ思い ～ハーデス討滅戦～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Ban_04.scd",
-     "music/ffxiv/BGM_Ride_Hades.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_353.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.135,
-        "pcmHash": "7a454760"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.990"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_49",
-    "Insatiable",
-    "貪欲"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Boss_Battle01.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_340.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.18,
-        "pcmHash": "fe974afe"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.993"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_48",
-    "To Fire and Sword",
-    "炎と剣によりて ～殺戮郷村 ホルミンスター～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Dan_D01.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_329.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.205,
-        "pcmHash": "a878da4b"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_56",
-    "Figments",
-    "虚構 ～水妖幻園 ドォーヌ・メグ～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Dan_D02.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_330.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.225,
-        "pcmHash": "5f7c0831"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_60",
-    "Unwound",
-    "紐解かれしもの ～古跡探索 キタンナ神影洞～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Dan_D03.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_331.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.91,
-        "pcmHash": "5223bab1"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_63",
-    "Deep Down",
-    "深き底 ～爽涼離宮 マリカの大井戸～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Dan_D04.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_332.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.825,
-        "pcmHash": "5c9ab1e2"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.976"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_67",
-    "In the Belly of the Beast",
-    "獣の腹 ～偽造天界 グルグ火山～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Dan_D05.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_333.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.06,
-        "pcmHash": "f72e8ba6"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.991"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_73",
-    "Mortal Instants",
-    "死の刻 ～終末幻想 アーモロート～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Dan_D06.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_334.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.515,
-        "pcmHash": "755fd7a5"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_82",
-    "Shadows Withal",
-    "影なき影 ～創造機関 アナイダアカデミア～"
-   ],
-   "target": {
-    "path": "music/ex3/BGM_EX3_Dan_D07.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.015,
-        "pcmHash": "1d333d82"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.982"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_83",
-    "A Long Fall",
-    "ロングフォール ～異界遺構 シルクス・ツイニング～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Dan_D08.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_336.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.27,
-        "pcmHash": "130a3194"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.944; offset corrected +134.560s -> +3.270s by re-deriving the alignment and judging it on the intro (0.8491 -> 0.9785)"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_76",
-    "Tomorrow and Tomorrow"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Event_01.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_328.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.82,
-        "pcmHash": "92270fe3"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_62",
-    "Tomorrow and Tomorrow - Reprise",
-    "反復する明日"
-   ],
-   "target": {
-    "path": "music/ex3/BGM_EX3_Event_02.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.605,
-        "pcmHash": "8809308b"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_65",
-    "A Better Tomorrow",
-    "より良き明日"
-   ],
-   "target": {
-    "path": "music/ex3/BGM_EX3_Event_03.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.43,
-        "pcmHash": "ad2461f1"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.972; offset corrected +100.020s -> +3.430s by re-deriving the alignment and judging it on the intro (0.9393 -> 0.9607)"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_69",
-    "Tears in the Rain",
-    "雨の中の涙"
-   ],
-   "target": {
-    "path": "music/ex3/BGM_EX3_Event_04.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.7,
-        "pcmHash": "196efff8"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_66",
-    "Dangerous Words",
-    "危険な言葉"
-   ],
-   "target": {
-    "path": "music/ex3/BGM_EX3_Event_05.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.825,
-        "pcmHash": "f9c325cc"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_53",
-    "High Treason",
-    "大逆"
-   ],
-   "target": {
-    "path": "music/ex3/BGM_EX3_Event_06.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.47,
-        "pcmHash": "69e760b3"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.987; offset corrected +133.305s -> +3.470s by re-deriving the alignment and judging it on the intro (0.7188 -> 0.9952)"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_72",
-    "More than Truth",
-    "驚嘆の真実"
-   ],
-   "target": {
-    "path": "music/ex3/BGM_EX3_Event_07.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.08,
-        "pcmHash": "54b43d85"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_46",
-    "Paradisaical Predicaments",
-    "天上の窮地"
-   ],
-   "target": {
-    "path": "music/ex3/BGM_EX3_Event_08.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.25,
-        "pcmHash": "4e0dfa4c"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.986; offset corrected +125.650s -> +3.250s by re-deriving the alignment and judging it on the intro (0.7410 -> 0.9828)"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_79",
-    "Vamo' alla Flamenco",
-    "Vamo' alla Flamenco ～漆黒～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Event_12.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_376.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.195,
-        "pcmHash": "7baeb2db"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_84",
-    "The Lute",
-    "ノアのリュート ～漆黒～"
-   ],
-   "target": {
-    "path": "music/ex3/BGM_EX3_Event_14.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.545,
-        "pcmHash": "ddfe778f"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.936"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_76",
-    "Tomorrow and Tomorrow"
-   ],
-   "target": {
-    "path": "music/ex3/BGM_EX3_Event_15.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.91,
-        "pcmHash": "92270fe3"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.941"
+    "# comment": "spectral similarity to the game's own file: 0.937"
    }
   },
   {
@@ -1802,17 +1493,17 @@
   },
   {
    "source": [
-    "SHADOWBRINGERS_76",
-    "Tomorrow and Tomorrow"
+    "SHADOWBRINGERS_37",
+    "Shadowbringers"
    ],
    "target": {
-    "path": "music/ex3/BGM_EX3_Event_24.scd",
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_327.scd",
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 2.82,
-        "pcmHash": "92270fe3"
+        "offset": 5.455,
+        "pcmHash": "c899b5e6"
        }
       },
       "channels": [
@@ -1827,198 +1518,57 @@
       ]
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.992 at offset -2.8s) but covers only 69% of this target: 269s of 387s. The rest needs a multi-segment or filterComplex source; left disabled until then."
+    "# comment": "spectral similarity to the game's own file: 0.882"
    }
   },
   {
    "source": [
-    "SHADOWBRINGERS_41",
-    "Rencounter",
-    "対峙"
+    "SHADOWBRINGERS_38",
+    "Four-fold Knowing",
+    "四重の見聞を経て"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Ride_EX3Comp.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.555,
+        "pcmHash": "4496c678"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.973"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_39",
+    "The Dark Which Illuminates the World",
+    "世界を照らす闇 ～クリスタリウム：昼～"
    ],
    "target": {
     "path": [
-     "music/ex3/BGM_EX3_Field_Ama_Battle.scd",
-     "music/ex3/BGM_EX3_Field_Ilm_Battle.scd",
-     "music/ex3/BGM_EX3_Field_Kor_Battle.scd",
-     "music/ex3/BGM_EX3_Field_Lak_Battle.scd",
-     "music/ex3/BGM_EX3_Field_Rak_Battle.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_339.scd"
+     "music/ex3/BGM_EX3_Town_C_Day.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_317.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 3.405,
-        "pcmHash": "fb49267b"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_44",
-    "Sands of Amber",
-    "琥珀の砂漠 ～アム・アレーン：昼～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Field_Ama_Day.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_321.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.425,
-        "pcmHash": "7e937651"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_64",
-    "Sands of Blood",
-    "鮮血の砂漠 ～アム・アレーン：夜～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Field_Ama_Night.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_348.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.725,
-        "pcmHash": "26732188"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_54",
-    "Fierce and Free",
-    "残忍と自由 ～イル・メグ：昼～"
-   ],
-   "target": {
-    "path": "music/ex3/BGM_EX3_Field_Ilm_Day.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.245,
-        "pcmHash": "f131a197"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.979"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_58",
-    "The Faerie Ring",
-    "妖精の輪 ～イル・メグ：夜～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Field_Ilm_Night.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_349.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.44,
-        "pcmHash": "dc9159f4"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_78",
-    "A World Divided",
-    "分かたれし世界 ～コルシア島：昼～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Field_Kor_Day.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_320.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.705,
-        "pcmHash": "bc191cf4"
+        "offset": 2.005,
+        "pcmHash": "c3864c32"
        }
       },
       "channels": [
@@ -2069,21 +1619,18 @@
   },
   {
    "source": [
-    "SHADOWBRINGERS_77",
-    "The Quick Way",
-    "クイックウェイ ～コルシア島：夜～"
+    "SHADOWBRINGERS_40",
+    "Unmatching Pieces",
+    "合わないピース"
    ],
    "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Field_Kor_Night.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_347.scd"
-    ],
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_447.scd",
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 2.05,
-        "pcmHash": "ba5919df"
+        "offset": 2.51,
+        "pcmHash": "1f3b1d3d"
        }
       },
       "channels": [
@@ -2098,26 +1645,30 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
+    "# comment": "spectral similarity to the game's own file: 0.987"
    }
   },
   {
    "source": [
-    "SHADOWBRINGERS_47",
-    "The Source",
-    "始まりの湖 ～レイクランド：昼～"
+    "SHADOWBRINGERS_41",
+    "Rencounter",
+    "対峙"
    ],
    "target": {
     "path": [
-     "music/ex3/BGM_EX3_Field_Lak_Day.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_319.scd"
+     "music/ex3/BGM_EX3_Field_Ama_Battle.scd",
+     "music/ex3/BGM_EX3_Field_Ilm_Battle.scd",
+     "music/ex3/BGM_EX3_Field_Kor_Battle.scd",
+     "music/ex3/BGM_EX3_Field_Lak_Battle.scd",
+     "music/ex3/BGM_EX3_Field_Rak_Battle.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_339.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 3.625,
-        "pcmHash": "d05a45ae"
+        "offset": 3.405,
+        "pcmHash": "fb49267b"
        }
       },
       "channels": [
@@ -2132,60 +1683,23 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.990"
+    "# comment": "spectral similarity to the game's own file: 0.994"
    }
   },
   {
    "source": [
-    "SHADOWBRINGERS_50",
-    "Unchanging, Everchanging",
-    "不変と変化 ～レイクランド：夜～"
+    "SHADOWBRINGERS_42",
+    "Such as it Is",
+    "それなりの暮らし"
    ],
    "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Field_Lak_Night.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_346.scd"
-    ],
+    "path": "music/ex3/BGM_EX3_Field_Safe_03.scd",
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 3.15,
-        "pcmHash": "e6dd751e"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_59",
-    "Civilizations",
-    "シヴィライゼーションズ ～ラケティカ大森林：昼～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Field_Rak_Day.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_323.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.81,
-        "pcmHash": "82b58168"
+        "offset": 2.455,
+        "pcmHash": "498a73f2"
        }
       },
       "channels": [
@@ -2205,21 +1719,21 @@
   },
   {
    "source": [
-    "SHADOWBRINGERS_61",
-    "A Hopeless Race",
-    "望みなき競争 ～ラケティカ大森林：夜～"
+    "SHADOWBRINGERS_43",
+    "Pain in Pleasure",
+    "享楽の痛み"
    ],
    "target": {
     "path": [
-     "music/ex3/BGM_EX3_Field_Rak_Night.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_350.scd"
+     "music/ex3/BGM_EX3_Town_Y_Day2.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_352.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 3.15,
-        "pcmHash": "d86c7248"
+        "offset": 3.37,
+        "pcmHash": "e27ee9a1"
        }
       },
       "channels": [
@@ -2234,26 +1748,26 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.997"
+    "# comment": "spectral similarity to the game's own file: 0.994; offset corrected +110.910s -> +3.370s by re-deriving the alignment and judging it on the intro (0.9346 -> 0.9951)"
    }
   },
   {
    "source": [
-    "SHADOWBRINGERS_55",
-    "A Reason to Live",
-    "生きる理由"
+    "SHADOWBRINGERS_44",
+    "Sands of Amber",
+    "琥珀の砂漠 ～アム・アレーン：昼～"
    ],
    "target": {
     "path": [
-     "music/ex3/BGM_EX3_Field_Safe_01.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_387.scd"
+     "music/ex3/BGM_EX3_Field_Ama_Day.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_321.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.78,
-        "pcmHash": "0965b357"
+        "offset": 2.425,
+        "pcmHash": "7e937651"
        }
       },
       "channels": [
@@ -2268,7 +1782,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.960"
+    "# comment": "spectral similarity to the game's own file: 0.994"
    }
   },
   {
@@ -2307,18 +1821,517 @@
   },
   {
    "source": [
-    "SHADOWBRINGERS_42",
-    "Such as it Is",
-    "それなりの暮らし"
+    "SHADOWBRINGERS_46",
+    "Paradisaical Predicaments",
+    "天上の窮地"
    ],
    "target": {
-    "path": "music/ex3/BGM_EX3_Field_Safe_03.scd",
+    "path": "music/ex3/BGM_EX3_Event_08.scd",
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 2.455,
-        "pcmHash": "498a73f2"
+        "offset": 3.25,
+        "pcmHash": "4e0dfa4c"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.986; offset corrected +125.650s -> +3.250s by re-deriving the alignment and judging it on the intro (0.7410 -> 0.9828)"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_47",
+    "The Source",
+    "始まりの湖 ～レイクランド：昼～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Field_Lak_Day.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_319.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.625,
+        "pcmHash": "d05a45ae"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.990"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_48",
+    "To Fire and Sword",
+    "炎と剣によりて ～殺戮郷村 ホルミンスター～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Dan_D01.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_329.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.205,
+        "pcmHash": "a878da4b"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_49",
+    "Insatiable",
+    "貪欲"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Boss_Battle01.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_340.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.18,
+        "pcmHash": "fe974afe"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.993"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_50",
+    "Unchanging, Everchanging",
+    "不変と変化 ～レイクランド：夜～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Field_Lak_Night.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_346.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.15,
+        "pcmHash": "e6dd751e"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_51",
+    "On Our Fates Alight",
+    "運命の旅"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Mount01.scd",
+     "music/ffxiv/BGM_Ride_Amaro.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_389.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.1,
+        "pcmHash": "02e5e437"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.974; offset corrected +119.660s -> +2.100s by re-deriving the alignment and judging it on the intro (0.9534 -> 0.9811)"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_52",
+    "Knowledge Never Sleeps",
+    "知恵は眠らず ～クリスタリウム：夜～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Town_C_Night.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_344.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.725,
+        "pcmHash": "47fc6913"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_53",
+    "High Treason",
+    "大逆"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_06.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.47,
+        "pcmHash": "69e760b3"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.987; offset corrected +133.305s -> +3.470s by re-deriving the alignment and judging it on the intro (0.7188 -> 0.9952)"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_54",
+    "Fierce and Free",
+    "残忍と自由 ～イル・メグ：昼～"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Field_Ilm_Day.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.245,
+        "pcmHash": "f131a197"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.979"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_54",
+    "Fierce and Free",
+    "残忍と自由 ～イル・メグ：昼～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_322.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.94,
+        "pcmHash": "f131a197"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.984"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_55",
+    "A Reason to Live",
+    "生きる理由"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Field_Safe_01.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_387.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.78,
+        "pcmHash": "0965b357"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.960"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_56",
+    "Figments",
+    "虚構 ～水妖幻園 ドォーヌ・メグ～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Dan_D02.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_330.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.225,
+        "pcmHash": "5f7c0831"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_57",
+    "What Angel Wakes Me",
+    "目覚めの御使い ～ティターニア討滅戦～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ban_01.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_325.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.645,
+        "pcmHash": "087b3b86"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_57",
+    "What Angel Wakes Me",
+    "目覚めの御使い ～ティターニア討滅戦～"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Ride_Titania.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.635,
+        "pcmHash": "087b3b86"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.919"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_58",
+    "The Faerie Ring",
+    "妖精の輪 ～イル・メグ：夜～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Field_Ilm_Night.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_349.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.44,
+        "pcmHash": "dc9159f4"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_59",
+    "Civilizations",
+    "シヴィライゼーションズ ～ラケティカ大森林：昼～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Field_Rak_Day.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_323.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.81,
+        "pcmHash": "82b58168"
        }
       },
       "channels": [
@@ -2334,6 +2347,428 @@
      }
     ],
     "# comment": "spectral similarity to the game's own file: 0.989"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_60",
+    "Unwound",
+    "紐解かれしもの ～古跡探索 キタンナ神影洞～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Dan_D03.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_331.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.91,
+        "pcmHash": "5223bab1"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.992"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_61",
+    "A Hopeless Race",
+    "望みなき競争 ～ラケティカ大森林：夜～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Field_Rak_Night.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_350.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.15,
+        "pcmHash": "d86c7248"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_62",
+    "Tomorrow and Tomorrow - Reprise",
+    "反復する明日"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_02.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.605,
+        "pcmHash": "8809308b"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_62",
+    "Tomorrow and Tomorrow - Reprise",
+    "反復する明日"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_445.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.7,
+        "pcmHash": "8809308b"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.982"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_63",
+    "Deep Down",
+    "深き底 ～爽涼離宮 マリカの大井戸～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Dan_D04.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_332.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.825,
+        "pcmHash": "5c9ab1e2"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.976"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_64",
+    "Sands of Blood",
+    "鮮血の砂漠 ～アム・アレーン：夜～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Field_Ama_Night.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_348.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.725,
+        "pcmHash": "26732188"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_65",
+    "A Better Tomorrow",
+    "より良き明日"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_03.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.43,
+        "pcmHash": "ad2461f1"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.972; offset corrected +100.020s -> +3.430s by re-deriving the alignment and judging it on the intro (0.9393 -> 0.9607)"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_65",
+    "A Better Tomorrow",
+    "より良き明日"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_479.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.625,
+        "pcmHash": "ad2461f1"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.974"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_66",
+    "Dangerous Words",
+    "危険な言葉"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_05.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.825,
+        "pcmHash": "f9c325cc"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_66",
+    "Dangerous Words",
+    "危険な言葉"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_446.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.915,
+        "pcmHash": "f9c325cc"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.980"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_67",
+    "In the Belly of the Beast",
+    "獣の腹 ～偽造天界 グルグ火山～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Dan_D05.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_333.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.06,
+        "pcmHash": "f72e8ba6"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.991"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_68",
+    "Insanity",
+    "インサニティー ～イノセンス討滅戦～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ban_02.scd",
+     "music/ffxiv/BGM_Ride_Innocence.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_326.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.895,
+        "pcmHash": "1a90cb6d"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.994"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_69",
+    "Tears in the Rain",
+    "雨の中の涙"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_04.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.7,
+        "pcmHash": "196efff8"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
    }
   },
   {
@@ -2406,22 +2841,52 @@
   },
   {
    "source": [
-    "SHADOWBRINGERS_51",
-    "On Our Fates Alight",
-    "運命の旅"
+    "SHADOWBRINGERS_72",
+    "More than Truth",
+    "驚嘆の真実"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_07.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.08,
+        "pcmHash": "54b43d85"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_73",
+    "Mortal Instants",
+    "死の刻 ～終末幻想 アーモロート～"
    ],
    "target": {
     "path": [
-     "music/ex3/BGM_EX3_Mount01.scd",
-     "music/ffxiv/BGM_Ride_Amaro.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_389.scd"
+     "music/ex3/BGM_EX3_Dan_D06.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_334.scd"
     ],
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 2.1,
-        "pcmHash": "02e5e437"
+        "offset": 2.515,
+        "pcmHash": "755fd7a5"
        }
       },
       "channels": [
@@ -2436,26 +2901,23 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.974; offset corrected +119.660s -> +2.100s by re-deriving the alignment and judging it on the intro (0.9534 -> 0.9811)"
+    "# comment": "spectral similarity to the game's own file: 0.994"
    }
   },
   {
    "source": [
-    "SHADOWBRINGERS_85",
-    "Blue Fields",
-    "Blue Fields ～漆黒～"
+    "SHADOWBRINGERS_74",
+    "Who Brings Shadow",
+    "影をもたらす者 ～ハーデス前哨戦～"
    ],
    "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Raid_01.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_371.scd"
-    ],
+    "path": "music/ex3/BGM_EX3_Ban_03.scd",
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 2.66,
-        "pcmHash": "83f777c9"
+        "offset": 1.935,
+        "pcmHash": "376271a7"
        }
       },
       "channels": [
@@ -2470,1032 +2932,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.998"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_86",
-    "Force Your Way",
-    "Force Your Way ～漆黒～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Raid_02.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_341.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.035,
-        "pcmHash": "c9ec6850"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.976"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_88",
-    "Landslide",
-    "ランドスライド ～希望の園エデン：覚醒編～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Raid_03.scd",
-     "music/ffxiv/BGM_Ride_Eden.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_343.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.485,
-        "pcmHash": "dafe5af2"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.987"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_87",
-    "Blinding Indigo",
-    "輝ける蒼 ～希望の園エデン：覚醒編～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Raid_04.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_342.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.16,
-        "pcmHash": "108f77a4"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.988"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_39",
-    "The Dark Which Illuminates the World",
-    "世界を照らす闇 ～クリスタリウム：昼～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Town_C_Day.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_317.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.005,
-        "pcmHash": "c3864c32"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_52",
-    "Knowledge Never Sleeps",
-    "知恵は眠らず ～クリスタリウム：夜～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Town_C_Night.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_344.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.725,
-        "pcmHash": "47fc6913"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_81",
-    "Indulgence",
-    "耽溺 ～ユールモア：昼～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Town_Y_Day.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_318.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.66,
-        "pcmHash": "d7670573"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.938"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_43",
-    "Pain in Pleasure",
-    "享楽の痛み"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Town_Y_Day2.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_352.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.37,
-        "pcmHash": "e27ee9a1"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.994; offset corrected +110.910s -> +3.370s by re-deriving the alignment and judging it on the intro (0.9346 -> 0.9951)"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_80",
-    "Masquerade",
-    "仮面舞踏会 ～ユールモア：夜～"
-   ],
-   "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Town_Y_Night.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_345.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.32,
-        "pcmHash": "e970af73"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.996"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_06",
-    "Heartless",
-    "心を持たぬ者 ～次元の狭間オメガ：アルファ編～"
-   ],
-   "target": {
-    "path": "music/ex4/BGM_EX4_Ban_12.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.44,
-        "pcmHash": "75ab5089"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=+3.6dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.875; also released as GL_00049; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_16",
-    "Gates of Paradise - The Garden of Ru'Hmet"
-   ],
-   "target": {
-    "path": "music/ex5/BGM_EX5_EoV_39.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.495,
-        "pcmHash": "ec9a68ac"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as TH_131.mp3, which the matcher picked for this target (0.854 vs 0.904); listed here too so owning this album is enough to replace it"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_15",
-    "Doman Distractions",
-    "東方遊戯"
-   ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_EMJ.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_290.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.74,
-        "pcmHash": "08f39815"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.993"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_07",
-    "From the Heavens",
-    "空より現れし者 ～次元の狭間オメガ：アルファ編～"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Ride_Alpha.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.23,
-        "pcmHash": "548e3f7c"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.993; offset corrected +256.670s -> +2.230s by re-deriving the alignment and judging it on the intro (0.9064 -> 0.9921)"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_38",
-    "Four-fold Knowing",
-    "四重の見聞を経て"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Ride_EX3Comp.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.555,
-        "pcmHash": "4496c678"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.973"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_35",
-    "From the Dragon's Wake",
-    "雲蒸龍変 ～青龍征魂戦～"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Ride_Seiryu.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.17,
-        "pcmHash": "6d9e41e3"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.921; offset corrected +360.565s -> +2.170s by re-deriving the alignment and judging it on the intro (0.8654 -> 0.9112)"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_57",
-    "What Angel Wakes Me",
-    "目覚めの御使い ～ティターニア討滅戦～"
-   ],
-   "target": {
-    "path": "music/ffxiv/BGM_Ride_Titania.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.635,
-        "pcmHash": "087b3b86"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.919"
-   }
-  },
-  {
-   "source": {
-    "SHADOWBRINGERS_13": [
-     "SHADOWBRINGERS_13",
-     "星芒の歌",
-     "Starlight, Starbright"
-    ],
-    "SHADOWBRINGERS_14": [
-     "SHADOWBRINGERS_14",
-     "絶望の歌",
-     "Starlight, Not Right"
-    ]
-   },
-   "target": {
-    "path": "music/ffxiv/BGM_Season_XmasCho.scd",
-    "segments": [
-     {
-      "channels": [
-       {
-        "source": "SHADOWBRINGERS_13",
-        "channel": 0
-       },
-       {
-        "source": "SHADOWBRINGERS_13",
-        "channel": 1
-       },
-       {
-        "source": "SHADOWBRINGERS_14",
-        "channel": 0
-       },
-       {
-        "source": "SHADOWBRINGERS_14",
-        "channel": 1
-       }
-      ],
-      "sourceOffsets": {
-       "SHADOWBRINGERS_13": {
-        "offset": 1.69,
-        "pcmHash": "8c11d7a0"
-       },
-       "SHADOWBRINGERS_14": {
-        "offset": 2.15,
-        "pcmHash": "42f10cfc"
-       }
-      }
-     }
-    ],
-    "# comment": "multichannel target: 2 engine-switched stems, matched individually (SHADOWBRINGERS_13 to game channels [0, 1] @0.953; SHADOWBRINGERS_14 to game channels [2, 3] @0.979). The stems tile the channels in order, so a plain sequential mapping is correct -- the same shape as the hand-written BGM_EX1_PvP01 entry. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio. per-stem offsets: SHADOWBRINGERS_13 at +1.690s, SHADOWBRINGERS_14 at +2.150s."
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_13",
-    "Starlight, Starbright",
-    "星芒の歌"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_254.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.69,
-        "pcmHash": "8c11d7a0"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.969"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_09",
-    "Ending",
-    "エンディング"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_275.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.445,
-        "pcmHash": "c293336d"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-3.3dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.978"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_08",
-    "A Dream in Flight",
-    "翼に夢を"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_276.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.11,
-        "pcmHash": "936f2688"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.975"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_54",
-    "Fierce and Free",
-    "残忍と自由 ～イル・メグ：昼～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_322.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.94,
-        "pcmHash": "f131a197"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.984"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_37",
-    "Shadowbringers"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_327.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 5.455,
-        "pcmHash": "c899b5e6"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.882"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_82",
-    "Shadows Withal",
-    "影なき影 ～創造機関 アナイダアカデミア～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_335.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 112.885,
-        "pcmHash": "1d333d82"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.971"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_05",
-    "Everywhere and Nowhere",
-    "何処でもない何処か"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_444.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.23,
-        "pcmHash": "8ce13e73"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.966"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_62",
-    "Tomorrow and Tomorrow - Reprise",
-    "反復する明日"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_445.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.7,
-        "pcmHash": "8809308b"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.982"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_66",
-    "Dangerous Words",
-    "危険な言葉"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_446.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.915,
-        "pcmHash": "f9c325cc"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.980"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_40",
-    "Unmatching Pieces",
-    "合わないピース"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_447.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.51,
-        "pcmHash": "1f3b1d3d"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.987"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_65",
-    "A Better Tomorrow",
-    "より良き明日"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_479.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 3.625,
-        "pcmHash": "ad2461f1"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.974"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_11",
-    "Sunset",
-    "千年の誰そ彼 ～朱雀征魂戦～"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_788.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.985,
-        "pcmHash": "2ebb5e4d"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1.7dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.986"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_29",
-    "Brave Story",
-    "ブレイブストーリー"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_796.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.22,
-        "pcmHash": "ae13f024"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "volume=-4.1dB"
-      }
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.982"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_04",
-    "エスケープ ～次元の狭間オメガ：アルファ編～",
-    "eScape"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_alpha_02.scd",
-     "music/ex4/BGM_EX4_Ban_13.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_272.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.77,
-        "pcmHash": "51781a74"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as SHADOWBRINGERS_04.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.974)"
-   }
-  },
-  {
-   "source": [
-    "SHADOWBRINGERS_18",
-    "Turmoil"
-   ],
-   "target": {
-    "path": [
-     "music/ex2/BGM_EX2_EU_LB.scd",
-     "music/ex5/BGM_EX5_EoV_31.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_298.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.1,
-        "pcmHash": "57331843"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as SHADOWBRINGERS_18.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.992)"
+    "# comment": "spectral similarity to the game's own file: 0.995"
    }
   },
   {
@@ -3653,6 +3090,569 @@
      }
     ],
     "# comment": "credits roll: a medley of 6 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). SHADOWBRINGERS_74 from 0s, SHADOWBRINGERS_76 from 232s, SHADOWBRINGERS_81 from 428s, SHADOWBRINGERS_53 from 524s, SHADOWBRINGERS_52 from 782s, SHADOWBRINGERS_39 from 1037s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.982, worst segment 0.939, worst join 0.840."
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_75",
+    "Invincible",
+    "砕けぬ思い ～ハーデス討滅戦～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ban_04.scd",
+     "music/ffxiv/BGM_Ride_Hades.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_353.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.135,
+        "pcmHash": "7a454760"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.990"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_76",
+    "Tomorrow and Tomorrow"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Event_01.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_328.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.82,
+        "pcmHash": "92270fe3"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.992"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_76",
+    "Tomorrow and Tomorrow"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_15.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.91,
+        "pcmHash": "92270fe3"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.941"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_76",
+    "Tomorrow and Tomorrow"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_24.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.82,
+        "pcmHash": "92270fe3"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "enable": false,
+    "# comment": "source is correct (spectral 0.992 at offset -2.8s) but covers only 69% of this target: 269s of 387s. The rest needs a multi-segment or filterComplex source; left disabled until then."
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_77",
+    "The Quick Way",
+    "クイックウェイ ～コルシア島：夜～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Field_Kor_Night.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_347.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.05,
+        "pcmHash": "ba5919df"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_78",
+    "A World Divided",
+    "分かたれし世界 ～コルシア島：昼～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Field_Kor_Day.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_320.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.705,
+        "pcmHash": "bc191cf4"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_79",
+    "Vamo' alla Flamenco",
+    "Vamo' alla Flamenco ～漆黒～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Event_12.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_376.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.195,
+        "pcmHash": "7baeb2db"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.995"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_80",
+    "Masquerade",
+    "仮面舞踏会 ～ユールモア：夜～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Town_Y_Night.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_345.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.32,
+        "pcmHash": "e970af73"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.996"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_81",
+    "Indulgence",
+    "耽溺 ～ユールモア：昼～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Town_Y_Day.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_318.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.66,
+        "pcmHash": "d7670573"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.938"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_82",
+    "Shadows Withal",
+    "影なき影 ～創造機関 アナイダアカデミア～"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Dan_D07.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.015,
+        "pcmHash": "1d333d82"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.982"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_82",
+    "Shadows Withal",
+    "影なき影 ～創造機関 アナイダアカデミア～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_335.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 112.885,
+        "pcmHash": "1d333d82"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.971"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_83",
+    "A Long Fall",
+    "ロングフォール ～異界遺構 シルクス・ツイニング～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Dan_D08.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_336.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.27,
+        "pcmHash": "130a3194"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.944; offset corrected +134.560s -> +3.270s by re-deriving the alignment and judging it on the intro (0.8491 -> 0.9785)"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_84",
+    "The Lute",
+    "ノアのリュート ～漆黒～"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Event_14.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.545,
+        "pcmHash": "ddfe778f"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.936"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_85",
+    "Blue Fields",
+    "Blue Fields ～漆黒～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Raid_01.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_371.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.66,
+        "pcmHash": "83f777c9"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.998"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_86",
+    "Force Your Way",
+    "Force Your Way ～漆黒～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Raid_02.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_341.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.035,
+        "pcmHash": "c9ec6850"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.976"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_87",
+    "Blinding Indigo",
+    "輝ける蒼 ～希望の園エデン：覚醒編～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Raid_04.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_342.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.16,
+        "pcmHash": "108f77a4"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.988"
+   }
+  },
+  {
+   "source": [
+    "SHADOWBRINGERS_88",
+    "Landslide",
+    "ランドスライド ～希望の園エデン：覚醒編～"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Raid_03.scd",
+     "music/ffxiv/BGM_Ride_Eden.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_343.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.485,
+        "pcmHash": "dafe5af2"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.987"
    }
   }
  ],
