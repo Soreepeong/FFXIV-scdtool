@@ -3238,7 +3238,8 @@
       ]
      }
     ],
-    "# comment": "same recording as Before_Meteor_FFXIV_084.flac, which the matcher picked for this target (0.870 vs 0.954); listed here too so owning this album is enough to replace it"
+    "# comment": "same recording as Before_Meteor_FFXIV_084.flac, which the matcher picked for this target (0.870 vs 0.954); listed here too so owning this album is enough to replace it. Disabled: this recording reaches 150.7s of the 200.0s this target actually carries (75%), so the replacement would cut to silence.",
+    "enable": false
    }
   },
   {
@@ -4455,7 +4456,8 @@
       ]
      }
     ],
-    "# comment": "same recording as ARR_FFXIV_090.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.854)"
+    "# comment": "same recording as ARR_FFXIV_090.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.854). Disabled: this recording reaches 68.1s of the 168.0s this target actually carries (41%), so the replacement would cut to silence.",
+    "enable": false
    }
   },
   {

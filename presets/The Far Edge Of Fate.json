@@ -1662,7 +1662,8 @@
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.927; offset corrected -46.825s -> +1.180s by re-deriving the alignment and judging it on the intro (-1.0000 -> 0.9430)"
+    "# comment": "spectral similarity to the game's own file: 0.927; offset corrected -46.825s -> +1.180s by re-deriving the alignment and judging it on the intro (-1.0000 -> 0.9430). Disabled: this recording reaches 87.0s of the 122.0s this target actually carries (71%), so the replacement would cut to silence.",
+    "enable": false
    }
   },
   {

@@ -493,33 +493,58 @@
     "紅蓮の戦旗の下に ～剣闘領域 ハラタリ修練所～",
     "Beneath Bloodied Banners"
    ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Dungeon_Uru_06.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_258.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.46,
-        "pcmHash": "29def670"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
+   "target": [
+    {
+     "path": "music/ffxiv/BGM_Dungeon_Uru_06.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 1.46,
+         "pcmHash": "29def670"
+        }
        },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as Before_Meteor_FFXIV_029.flac, which the matcher picked for this target (0.802 vs 0.968); listed here too so owning this album is enough to replace it"
-   }
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ]
+      }
+     ],
+     "# comment": "same recording as Before_Meteor_FFXIV_029.flac, which the matcher picked for this target (0.802 vs 0.968); listed here too so owning this album is enough to replace it. Disabled: this recording reaches 170.3s of the 265.0s this target actually carries (64%), so the replacement would cut to silence.",
+     "enable": false
+    },
+    {
+     "path": "music/ffxiv/Orchestrion/BGM_ORCH_258.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 1.46,
+         "pcmHash": "29def670"
+        }
+       },
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ]
+      }
+     ],
+     "# comment": "same recording as Before_Meteor_FFXIV_029.flac, which the matcher picked for this target (0.802 vs 0.968); listed here too so owning this album is enough to replace it. Disabled: this recording reaches 170.3s of the 265.0s this target actually carries (64%), so the replacement would cut to silence.",
+     "enable": false
+    }
+   ]
   },
   {
    "source": [
@@ -694,33 +719,58 @@
     "戦乱",
     "Tempest"
    ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Con_Neal.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_148.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.52,
-        "pcmHash": "b086c993"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
+   "target": [
+    {
+     "path": "music/ffxiv/BGM_Con_Neal.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 1.52,
+         "pcmHash": "b086c993"
+        }
        },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as Before_Meteor_FFXIV_102.flac, which the matcher picked for this target (0.848 vs 0.980); listed here too so owning this album is enough to replace it"
-   }
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ]
+      }
+     ],
+     "# comment": "same recording as Before_Meteor_FFXIV_102.flac, which the matcher picked for this target (0.848 vs 0.980); listed here too so owning this album is enough to replace it. Disabled: this recording reaches 374.7s of the 451.0s this target actually carries (83%), so the replacement would cut to silence.",
+     "enable": false
+    },
+    {
+     "path": "music/ffxiv/Orchestrion/BGM_ORCH_148.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 1.52,
+         "pcmHash": "b086c993"
+        }
+       },
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ]
+      }
+     ],
+     "# comment": "same recording as Before_Meteor_FFXIV_102.flac, which the matcher picked for this target (0.848 vs 0.980); listed here too so owning this album is enough to replace it. Disabled: this recording reaches 374.7s of the 451.0s this target actually carries (83%), so the replacement would cut to silence.",
+     "enable": false
+    }
+   ]
   },
   {
    "source": [
@@ -1365,7 +1415,8 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.881; offset corrected -26.955s -> +1.500s by re-deriving the alignment and judging it on the intro (-1.0000 -> 0.9436)"
+    "# comment": "spectral similarity to the game's own file: 0.881; offset corrected -26.955s -> +1.500s by re-deriving the alignment and judging it on the intro (-1.0000 -> 0.9436). Disabled: this recording reaches 99.4s of the 117.0s this target actually carries (85%), so the replacement would cut to silence.",
+    "enable": false
    }
   },
   {
@@ -1694,7 +1745,8 @@
       ]
      }
     ],
-    "# comment": "same recording as BTF_FFXIV_40.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.961)"
+    "# comment": "same recording as BTF_FFXIV_40.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.961). Disabled: this recording reaches 236.4s of the 282.0s this target actually carries (84%), so the replacement would cut to silence.",
+    "enable": false
    }
   },
   {

@@ -2226,33 +2226,58 @@
     "Dragonsong",
     "Dragonsong"
    ],
-   "target": {
-    "path": [
-     "music/ex1/BGM_EX1_Ban_Nidhogg_01.scd",
-     "music/ex4/BGM_EX4_Ban_Nidhogg_01.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.69,
-        "pcmHash": "3d5621fd"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
+   "target": [
+    {
+     "path": "music/ex1/BGM_EX1_Ban_Nidhogg_01.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 1.69,
+         "pcmHash": "3d5621fd"
+        }
        },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as HEAVENSWARD_FFXIV_55.flac, which the matcher picked for this target (0.973 vs 0.973); listed here too so owning this album is enough to replace it"
-   }
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ]
+      }
+     ],
+     "# comment": "same recording as HEAVENSWARD_FFXIV_55.flac, which the matcher picked for this target (0.973 vs 0.973); listed here too so owning this album is enough to replace it. Disabled: this recording reaches 340.2s of the 360.0s this target actually carries (94%), so the replacement would cut to silence.",
+     "enable": false
+    },
+    {
+     "path": "music/ex4/BGM_EX4_Ban_Nidhogg_01.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 1.69,
+         "pcmHash": "3d5621fd"
+        }
+       },
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ]
+      }
+     ],
+     "# comment": "same recording as HEAVENSWARD_FFXIV_55.flac, which the matcher picked for this target (0.973 vs 0.973); listed here too so owning this album is enough to replace it. Disabled: this recording reaches 340.2s of the 360.0s this target actually carries (94%), so the replacement would cut to silence.",
+     "enable": false
+    }
+   ]
   },
   {
    "source": {
