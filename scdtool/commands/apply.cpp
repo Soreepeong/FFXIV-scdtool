@@ -940,35 +940,57 @@ namespace {
 		return out;
 	}
 
-	// The album directories a MusicImportConfig's `searchDirectories` name, as they exist
-	// under --ost. The config names an album ("Stormblood"); the directory carries the
-	// patch version too ("4.0 - Stormblood"), so the name is matched as a suffix.
+	// The album directory a MusicImportConfig means by a name. The config names an album
+	// ("Stormblood"); the directory carries the patch version too ("4.0 - Stormblood"), so
+	// the name is matched as a suffix.
+	//
+	// With no name, this answers with the preset's *default* album -- the one flagged
+	// `default` in `searchDirectories`, or the first listed. That is the scope of a bare
+	// pattern, and only that: MusicImporter fills a pattern's absent directory in with the
+	// default and then skips any pattern whose directory is not the folder being scanned, so
+	// a bare name never reaches another album however many the preset lists. Searching all
+	// of them instead let `ENDWALKER_001`'s disc index "00000" land on `GL_00000.flac` in
+	// Growing Light, which Endwalker.json also lists; 114 targets resolved to a recording
+	// from the wrong release that way.
 	std::vector<std::filesystem::path> resolve_search_directories(
-		const std::filesystem::path& ostDir, const nlohmann::json& config) {
+		const std::filesystem::path& ostDir,
+		const nlohmann::json& config,
+		const std::string& album = {}) {
 
-		std::vector<std::filesystem::path> dirs;
 		const auto search = config.find("searchDirectories");
 		if (search == config.end() || !search->is_object())
 			return {ostDir};
+
+		std::string wanted = album;
+		if (wanted.empty()) {
+			for (const auto& [name, spec] : search->items()) {
+				if (wanted.empty() || (spec.is_object() && spec.value("default", false)))
+					wanted = name;
+				if (spec.is_object() && spec.value("default", false))
+					break;
+			}
+		} else if (!search->contains(album)) {
+			// Naming a directory the preset never declared would reach a release the user was
+			// never told this preset needs, so it resolves to nothing instead.
+			return {};
+		}
+		if (wanted.empty())
+			return {};
 
 		const auto lower = [](std::string text) {
 			std::ranges::transform(text, text.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
 			return text;
 		};
-		std::vector<std::pair<std::string, std::filesystem::path>> candidates;
-		for (const auto& entry : std::filesystem::directory_iterator(ostDir)) {
-			if (entry.is_directory())
-				candidates.emplace_back(lower(u8(entry.path().filename())), entry.path());
+		const auto target = lower(wanted);
+		std::vector<std::filesystem::path> dirs;
+		std::error_code ec;
+		for (const auto& entry : std::filesystem::directory_iterator(ostDir, ec)) {
+			if (!entry.is_directory())
+				continue;
+			const auto name = lower(u8(entry.path().filename()));
+			if (name == target || (name.size() > target.size() && name.ends_with(target)))
+				dirs.push_back(entry.path());
 		}
-		for (const auto& [album, _unused] : search->items()) {
-			const auto wanted = lower(album);
-			for (const auto& [name, path] : candidates) {
-				if (name == wanted || (name.size() > wanted.size() && name.ends_with(wanted)))
-					dirs.push_back(path);
-			}
-		}
-		// A config whose albums are not unpacked here still resolves nothing rather than
-		// silently reaching into every other album's files.
 		return dirs;
 	}
 
@@ -982,6 +1004,7 @@ namespace {
 	// releases names each of them explicitly rather than widening the search for all of them.
 	std::optional<std::filesystem::path> resolve_source_name(
 		const std::filesystem::path& ostDir,
+		const nlohmann::json& config,
 		const std::vector<std::filesystem::path>& dirs,
 		const nlohmann::json& patterns) {
 
@@ -992,13 +1015,8 @@ namespace {
 				alternatives.emplace_back(one.get<std::string>(), dirs);
 			} else if (one.is_object() && one.contains("pattern")) {
 				auto scoped = dirs;
-				if (const auto directory = one.find("directory"); directory != one.end() && directory->is_string()) {
-					nlohmann::json named = nlohmann::json::object();
-					named[directory->get<std::string>()] = nlohmann::json::object();
-					nlohmann::json wrapper = nlohmann::json::object();
-					wrapper["searchDirectories"] = std::move(named);
-					scoped = resolve_search_directories(ostDir, wrapper);
-				}
+				if (const auto directory = one.find("directory"); directory != one.end() && directory->is_string())
+					scoped = resolve_search_directories(ostDir, config, directory->get<std::string>());
 				alternatives.emplace_back(one.at("pattern").get<std::string>(), std::move(scoped));
 			}
 		};
@@ -1084,9 +1102,14 @@ namespace {
 
 		if (target.value("enable", true) == false)
 			return;
+		// A target that needs no offset and no filter says so by leaving `segments` out
+		// altogether -- it plays its source from the start, whole. 54 targets, most of them
+		// Orchestrion rolls, are written that way, and skipping them for want of the key
+		// lost every one.
 		const auto segmentsJson = target.find("segments");
-		if (segmentsJson == target.end() || !segmentsJson->is_array() || segmentsJson->empty())
-			return;
+		const auto hasSegments = segmentsJson != target.end() && segmentsJson->is_array() && !segmentsJson->empty();
+		if (!hasSegments && target.contains("segments"))
+			return;   // present but empty: the entry says nothing to build
 
 		std::vector<std::string> paths;
 		if (const auto path = target.find("path"); path != target.end()) {
@@ -1112,7 +1135,7 @@ namespace {
 		const auto dirs = resolve_search_directories(ostDir, config);
 		std::map<std::string, std::filesystem::path> resolved;
 		for (const auto& [name, patterns] : named) {
-			const auto file = resolve_source_name(ostDir, dirs, patterns);
+			const auto file = resolve_source_name(ostDir, config, dirs, patterns);
 			if (!file) {
 				unresolved.emplace_back(paths.front(), std::format("no file for \"{}\"", name));
 				return;
@@ -1121,7 +1144,22 @@ namespace {
 		}
 
 		std::vector<apply_segment> segments;
-		for (const auto& segmentJson : *segmentsJson) {
+		if (!hasSegments) {
+			// One default span covering the whole of the single source it names. More than
+			// one source with no segments to route them through says nothing about which
+			// channel each feeds, so there is nothing to build.
+			if (resolved.size() != 1)
+				return;
+			apply_segment segment;
+			segment.Sources.emplace(resolved.begin()->first, apply_segment_source{.Path = resolved.begin()->second});
+			// Two entries, taken in order: the single-source path below reads only the source
+			// and the offset from this, and derives the channel count from the game's own file.
+			segment.Channels.emplace_back(resolved.begin()->first, 0);
+			segment.Channels.emplace_back(resolved.begin()->first, 1);
+			segments.push_back(std::move(segment));
+		}
+		static const nlohmann::json NoSegments = nlohmann::json::array();
+		for (const auto& segmentJson : hasSegments ? *segmentsJson : NoSegments) {
 			apply_segment segment{
 				.Length = segmentJson.value("length", 0.),
 				.CrossfadeSeconds = segmentJson.value("crossfadeSeconds", 0.),
