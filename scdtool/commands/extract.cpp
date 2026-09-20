@@ -88,7 +88,14 @@ int cmd_extract(const std::vector<std::string>& args) {
 				{"streamSize", static_cast<uint32_t>(item.Header->StreamSize)},
 				{"headerLoopStartOffset", static_cast<uint32_t>(item.Header->LoopStartOffset)},
 				{"headerLoopEndOffset", static_cast<uint32_t>(item.Header->LoopEndOffset)},
+				{"flags", static_cast<uint32_t>(*item.Header->Flags)},
 			};
+			// What kind of stream the file says this is. A 4- or 6-channel music entry is
+			// DynamixStream -- engine-switched stems -- rather than a surround mix, and that
+			// is a statement the file makes rather than something to infer from the channel
+			// count. Absent for files whose sound table does not reach this entry.
+			if (const auto descriptor = scd.read_sound_descriptor(entryIndex))
+				res["soundType"] = static_cast<uint32_t>(descriptor->Type);
 			if (item.Header->Format == xivres::sound::sound_entry_format::Ogg) {
 				const auto info = item.get_ogg_decoded();
 				const auto channels = info.Channels ? info.Channels : 1;

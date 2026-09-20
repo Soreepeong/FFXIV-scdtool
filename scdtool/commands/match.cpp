@@ -34,7 +34,7 @@ namespace {
 	// Extracts a game .scd's first sound entry to a temp file so it can go through
 	// the same ffmpeg decode_envelope() path as OST candidate files, rather than
 	// needing a second, native decode path just for the "target" side of a match.
-	std::filesystem::path extract_scd_audio_to_temp(const xivres::installation& installation, const std::string& relativePath, const std::filesystem::path& tempDir, uint32_t uniqueId, size_t* channels = nullptr) {
+	std::filesystem::path extract_scd_audio_to_temp(const xivres::installation& installation, const std::string& relativePath, const std::filesystem::path& tempDir, uint32_t uniqueId, size_t* channels = nullptr, bool* stemStream = nullptr) {
 		const auto stream = installation.get_file(relativePath);
 		const xivres::sound::reader reader(stream);
 		if (reader.sound_item_count() == 0)
@@ -45,6 +45,7 @@ namespace {
 		std::vector<uint8_t> bytes;
 		const wchar_t* ext = nullptr;
 		size_t foundChannels = 0;
+		bool foundStemStream = false;
 		for (size_t i = 0; i < reader.sound_item_count(); ++i) {
 			const auto item = reader.read_sound_item(i);
 			if (item.Header->Format == xivres::sound::sound_entry_format::Ogg) {
@@ -58,6 +59,13 @@ namespace {
 			}
 			if (!bytes.empty()) {
 				foundChannels = static_cast<uint32_t>(item.Header->ChannelCount);
+				// What the file says it is, rather than what its channel count suggests.
+				// A 4- or 6-channel music entry is DynamixStream -- stems the engine switches
+				// between -- and a genuine surround mix would say FourChannelSurround.
+				// Measured across the game's 2175 music files: every multichannel entry is
+				// DynamixStream and every mono or stereo one is Normal.
+				if (const auto descriptor = reader.read_sound_descriptor(i))
+					foundStemStream = descriptor->Type == xivres::sound::sound_type::DynamixStream;
 				break;
 			}
 		}
@@ -65,6 +73,8 @@ namespace {
 			throw std::runtime_error("no usable sound entry (expected a non-empty Ogg or PCM wave entry)");
 		if (channels)
 			*channels = foundChannels;
+		if (stemStream)
+			*stemStream = foundStemStream;
 
 		const auto path = tempDir / std::format(L"scdtool_match_{}{}", uniqueId, ext);
 		std::ofstream f(path, std::ios::binary);
@@ -402,7 +412,7 @@ int cmd_match(const std::vector<std::string>& args) {
 					xivres::game_language::French,
 					xivres::game_language::ChineseSimplified,
 					xivres::game_language::ChineseTraditional,
-					xivres::game_language::ChineseTraditionalTc,
+					xivres::game_language::TraditionalChinese,
 					xivres::game_language::Korean,
 				})
 					if (lower == xivres::game_language_code(language))
@@ -855,8 +865,9 @@ int cmd_match(const std::vector<std::string>& args) {
 			std::vector<float> targetEnvelope;
 			double targetDuration = 0;
 			size_t targetChannels = 0;
+			bool isStemStream = false;
 			try {
-				targetAudio = extract_scd_audio_to_temp(installation, targetPaths.front(), tempDir, tempFileCounter.fetch_add(1), &targetChannels);
+				targetAudio = extract_scd_audio_to_temp(installation, targetPaths.front(), tempDir, tempFileCounter.fetch_add(1), &targetChannels, &isStemStream);
 				{
 					const auto lock = std::scoped_lock(progressMutex);
 					tempFiles.push_back(targetAudio);
@@ -934,7 +945,7 @@ int cmd_match(const std::vector<std::string>& args) {
 			// extract_stem_to_temp for why the downmix cannot work.
 			nlohmann::json stemsJson = nlohmann::json::array();
 			bool stemsAllConfident = false;
-			if (targetChannels > 2 && targetChannels % 2 == 0 && segmentMinScore > 0.) {
+			if (targetChannels > 2 && targetChannels % 2 == 0 && segmentMinScore > 0. && isStemStream) {
 				stemsAllConfident = true;
 				std::vector<size_t> stemSources;  // candidate indices, one per confidently-matched stem
 				const auto channelPairs = discover_channel_pairing(ffmpegPath, targetAudio, targetChannels, tempDir, tempFileCounter, tempFiles, progressMutex);
@@ -997,7 +1008,7 @@ int cmd_match(const std::vector<std::string>& args) {
 			}
 
 			const auto lock = std::scoped_lock(progressMutex);
-			if (targetChannels > 2 && targetChannels % 2 == 0 && segmentMinScore > 0.) {
+			if (targetChannels > 2 && targetChannels % 2 == 0 && segmentMinScore > 0. && isStemStream) {
 				item["matchInfo"] = {
 					{"status", stemsAllConfident ? "matched" : "ambiguous"},
 					{"stems", std::move(stemsJson)},
