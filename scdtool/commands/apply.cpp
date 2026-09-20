@@ -941,6 +941,25 @@ int cmd_apply(const std::vector<std::string>& args) {
 		parallel_for(jobs.size(), [&](size_t index) {
 			const auto& job = jobs[index];
 
+			// Temp files are released when this job ends, not when the whole run does.
+			// Each job stages the template's audio and a raw decode of the source, which at
+			// 96kHz is hundreds of megabytes; holding all of them until the end meant a
+			// 1793-target batch wrote 220 GB into the temp directory and filled the drive.
+			std::vector<std::filesystem::path> jobTemps;
+			struct temp_sweeper {
+				std::vector<std::filesystem::path>& Paths;
+				~temp_sweeper() {
+					for (const auto& path : Paths) {
+						std::error_code ec;
+						std::filesystem::remove(path, ec);
+					}
+				}
+			} const releaseJobTemps{jobTemps};
+			const auto keepTemp = [&jobTemps](std::filesystem::path path) {
+				jobTemps.emplace_back(std::move(path));
+				return jobTemps.back();
+			};
+
 			// A stem job has no single source; each stem carries its own, and only the
 			// ones that resolved are going to be read.
 			if (job.Stems.empty()) {
@@ -987,10 +1006,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// the loudness measurement compares to it, and the onset check samples it, so
 			// it is wanted whatever the flags say.
 			const auto templateAudio = tempDir / std::format(L"scdtool_apply_src_{}.ogg", tempFileCounter.fetch_add(1));
-			{
-				const auto lock = std::scoped_lock(logMutex);
-				tempFiles.push_back(templateAudio);
-			}
+			keepTemp(templateAudio);
 			{
 				std::ofstream f(templateAudio, std::ios::binary);
 				if (!f)
@@ -1055,10 +1071,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 			if (!job.Stems.empty()) {
 				const auto tempFile = [&](const wchar_t* prefix, const wchar_t* extension) {
-					auto path = tempDir / std::format(L"{}_{}{}", prefix, tempFileCounter.fetch_add(1), extension);
-					const auto lock = std::scoped_lock(logMutex);
-					tempFiles.push_back(path);
-					return path;
+					return keepTemp(tempDir / std::format(L"{}_{}{}", prefix,
+						tempFileCounter.fetch_add(1), extension));
 				};
 				// Each stem carries its own offset, gain and onset correction, so the
 				// job-level values stay at their defaults and the per-stem ones are
@@ -1098,9 +1112,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 				{
 					const auto tempFile = [&](const wchar_t* prefix, const wchar_t* extension) {
 						auto path = tempDir / std::format(L"{}_{}{}", prefix, tempFileCounter.fetch_add(1), extension);
-						const auto lock = std::scoped_lock(logMutex);
-						tempFiles.push_back(path);
-						return path;
+						return keepTemp(std::move(path));
 					};
 					// Around the loop start, which is the alignment that has to be exact.
 					// A track with no loop is aligned a little way in, clear of any fade.
@@ -1117,10 +1129,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 				}
 
 				const auto rawPath = tempDir / std::format(L"scdtool_apply_{}.f32", tempFileCounter.fetch_add(1));
-				{
-					const auto lock = std::scoped_lock(logMutex);
-					tempFiles.push_back(rawPath);
-				}
+				keepTemp(rawPath);
 				floats = decode_source_to_floats(ffmpegPath, job.SourcePath, channels, samplingRate, rawPath);
 
 				// Rebase the source onto the game's timeline before anything else.
@@ -1202,10 +1211,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 				if (onsetMatch) {
 					constexpr double OnsetWindowSeconds = 3.0;  // longest observed real case was ~1.3s; ample margin
 					const auto onsetRawPath = tempDir / std::format(L"scdtool_apply_onset_{}.f32", tempFileCounter.fetch_add(1));
-					{
-						const auto lock = std::scoped_lock(logMutex);
-						tempFiles.push_back(onsetRawPath);
-					}
+					keepTemp(onsetRawPath);
 					try {
 						const auto templateOnset = decode_onset_to_floats(ffmpegPath, templateAudio, channels, samplingRate, OnsetWindowSeconds, onsetRawPath);
 						if (!templateOnset.empty())
