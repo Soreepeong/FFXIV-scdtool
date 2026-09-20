@@ -112,9 +112,6 @@
     "path": "music/ex5/BGM_EX5_Ban_04.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -7.905
-      },
       "channels": [
        {
         "source": "source",
@@ -124,10 +121,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "adelay=7905:all=1"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.972"
+    "# comment": "spectral similarity to the game's own file: 0.972. the game's file starts before this recording does, so the source is delayed rather than offset: source by 7.905s"
    }
   },
   {
@@ -432,9 +432,6 @@
     "path": "music/ex5/BGM_EX5_EndCredit01.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -326.46
-      },
       "channels": [
        {
         "source": "source",
@@ -444,11 +441,14 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "adelay=326460:all=1"
+      }
      }
     ],
     "enable": false,
-    "# comment": "source is correct (spectral 0.971 at offset +326.5s) but covers only 24% of this target: 492s of 2070s. The rest needs a multi-segment or filterComplex source; left disabled until then."
+    "# comment": "source is correct (spectral 0.971 at offset +326.5s) but covers only 24% of this target: 492s of 2070s. The rest needs a multi-segment or filterComplex source; left disabled until then. the game's file starts before this recording does, so the source is delayed rather than offset: source by 326.460s"
    }
   },
   {
@@ -1353,9 +1353,6 @@
     "path": "music/ex5/BGM_EX5_Field_Liv_Fate.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -4.285
-      },
       "channels": [
        {
         "source": "source",
@@ -1367,11 +1364,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=+4.5dB"
+       "source": "adelay=4285:all=1,volume=+4.5dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.974"
+    "# comment": "spectral similarity to the game's own file: 0.974. the game's file starts before this recording does, so the source is delayed rather than offset: source by 4.285s"
    }
   },
   {
@@ -1384,9 +1381,6 @@
     "path": "music/ex5/BGM_EX5_Field_Liv_Fate2.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -2.795
-      },
       "channels": [
        {
         "source": "source",
@@ -1398,11 +1392,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=+4.5dB"
+       "source": "adelay=2795:all=1,volume=+4.5dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.972"
+    "# comment": "spectral similarity to the game's own file: 0.972. the game's file starts before this recording does, so the source is delayed rather than offset: source by 2.795s"
    }
   },
   {

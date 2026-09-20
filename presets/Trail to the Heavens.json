@@ -373,9 +373,6 @@
     "path": "music/ex4/BGM_EX4_WKS_02.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -2.65
-      },
       "channels": [
        {
         "source": "source",
@@ -387,11 +384,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=+4dB"
+       "source": "adelay=2650:all=1,volume=+4dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.992"
+    "# comment": "spectral similarity to the game's own file: 0.992. the game's file starts before this recording does, so the source is delayed rather than offset: source by 2.650s"
    }
   },
   {
@@ -432,9 +429,6 @@
     "path": "music/ex4/BGM_EX4_WKS_04.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -6.425
-      },
       "channels": [
        {
         "source": "source",
@@ -444,10 +438,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "adelay=6425:all=1"
+      }
      }
     ],
-    "# comment": "same recording as ENDWALKER_030.flac, which the matcher picked for this target (0.855 vs 0.969); listed here too so owning this album is enough to replace it"
+    "# comment": "same recording as ENDWALKER_030.flac, which the matcher picked for this target (0.855 vs 0.969); listed here too so owning this album is enough to replace it. the game's file starts before this recording does, so the source is delayed rather than offset: source by 6.425s"
    }
   },
   {
@@ -460,9 +457,6 @@
     "path": "music/ex4/BGM_EX4_WKS_05.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -6.49
-      },
       "channels": [
        {
         "source": "source",
@@ -474,11 +468,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=+1.3dB"
+       "source": "adelay=6490:all=1,volume=+1.3dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.964"
+    "# comment": "spectral similarity to the game's own file: 0.964. the game's file starts before this recording does, so the source is delayed rather than offset: source by 6.490s"
    }
   },
   {
@@ -491,9 +485,6 @@
     "path": "music/ex4/BGM_EX4_WKS_06.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -6.89
-      },
       "channels": [
        {
         "source": "source",
@@ -505,11 +496,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=+2.2dB"
+       "source": "adelay=6890:all=1,volume=+2.2dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.986"
+    "# comment": "spectral similarity to the game's own file: 0.986. the game's file starts before this recording does, so the source is delayed rather than offset: source by 6.890s"
    }
   },
   {
@@ -618,9 +609,6 @@
     "path": "music/ex4/BGM_EX4_WKS_10.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -1.53
-      },
       "channels": [
        {
         "source": "source",
@@ -630,10 +618,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "adelay=1530:all=1"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.890; offset corrected -1.505s -> -1.530s by re-deriving the alignment and judging it on the intro (0.7534 -> 0.8757)"
+    "# comment": "spectral similarity to the game's own file: 0.890; offset corrected -1.505s -> -1.530s by re-deriving the alignment and judging it on the intro (0.7534 -> 0.8757). the game's file starts before this recording does, so the source is delayed rather than offset: source by 1.530s"
    }
   },
   {
@@ -736,9 +727,6 @@
     "path": "music/ex5/BGM_EX5_Ban_11.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -6.665
-      },
       "channels": [
        {
         "source": "source",
@@ -748,10 +736,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "adelay=6665:all=1"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.990"
+    "# comment": "spectral similarity to the game's own file: 0.990. the game's file starts before this recording does, so the source is delayed rather than offset: source by 6.665s"
    }
   },
   {
@@ -3193,10 +3184,14 @@
         "source": "TH_022",
         "channel": 1
        }
-      ]
+      ],
+      "sourceOffsets": {
+       "TH_020": 1.6,
+       "TH_022": 0.62
+      }
      }
     ],
-    "# comment": "multichannel target: 2 engine-switched stems, matched individually (TH_020 to game channels [0, 1] @0.897; TH_022 to game channels [2, 3] @0.846). The stems tile the channels in order, so a plain sequential mapping is correct -- the same shape as the hand-written BGM_EX1_PvP01 entry. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio."
+    "# comment": "multichannel target: 2 engine-switched stems, matched individually (TH_020 to game channels [0, 1] @0.897; TH_022 to game channels [2, 3] @0.846). The stems tile the channels in order, so a plain sequential mapping is correct -- the same shape as the hand-written BGM_EX1_PvP01 entry. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio. per-stem offsets: TH_020 at +1.600s, TH_022 at +0.620s."
    }
   },
   {
@@ -3361,9 +3356,6 @@
     "path": "music/ex5/BGM_EX5_MKD_08.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -6.26
-      },
       "channels": [
        {
         "source": "source",
@@ -3375,11 +3367,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=+1.2dB"
+       "source": "adelay=6260:all=1,volume=+1.2dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.983"
+    "# comment": "spectral similarity to the game's own file: 0.983. the game's file starts before this recording does, so the source is delayed rather than offset: source by 6.260s"
    }
   },
   {
@@ -3392,9 +3384,6 @@
     "path": "music/ex5/BGM_EX5_MKD_09.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -5.085
-      },
       "channels": [
        {
         "source": "source",
@@ -3404,10 +3393,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "adelay=5085:all=1"
+      }
      }
     ],
-    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.874); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.874"
+    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.874); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.874. the game's file starts before this recording does, so the source is delayed rather than offset: source by 5.085s"
    }
   },
   {
@@ -3622,9 +3614,6 @@
     "path": "music/ex5/BGM_EX5_MKD_18.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -5.235
-      },
       "channels": [
        {
         "source": "source",
@@ -3636,11 +3625,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=+1.4dB"
+       "source": "adelay=5235:all=1,volume=+1.4dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.893"
+    "# comment": "spectral similarity to the game's own file: 0.893. the game's file starts before this recording does, so the source is delayed rather than offset: source by 5.235s"
    }
   },
   {
@@ -4806,9 +4795,6 @@
     "path": "music/ffxiv/BGM_Season_Princess_Fate.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -4.215
-      },
       "channels": [
        {
         "source": "source",
@@ -4818,10 +4804,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "adelay=4215:all=1"
+      }
      }
     ],
-    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.804); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.804"
+    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.804); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.804. the game's file starts before this recording does, so the source is delayed rather than offset: source by 4.215s"
    }
   },
   {
@@ -5014,9 +5003,6 @@
     "path": "music/ffxiv/Orchestrion/BGM_ORCH_456.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -0.46
-      },
       "channels": [
        {
         "source": "source",
@@ -5028,11 +5014,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=-5.5dB"
+       "source": "adelay=460:all=1,volume=-5.5dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.989"
+    "# comment": "spectral similarity to the game's own file: 0.989. the game's file starts before this recording does, so the source is delayed rather than offset: source by 0.460s"
    }
   },
   {
@@ -5045,9 +5031,6 @@
     "path": "music/ffxiv/Orchestrion/BGM_ORCH_460.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -1.965
-      },
       "channels": [
        {
         "source": "source",
@@ -5059,11 +5042,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=-5dB"
+       "source": "adelay=1965:all=1,volume=-5dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.989"
+    "# comment": "spectral similarity to the game's own file: 0.989. the game's file starts before this recording does, so the source is delayed rather than offset: source by 1.965s"
    }
   },
   {
@@ -5075,9 +5058,6 @@
     "path": "music/ffxiv/Orchestrion/BGM_ORCH_463.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -0.89
-      },
       "channels": [
        {
         "source": "source",
@@ -5089,11 +5069,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=-4.7dB"
+       "source": "adelay=890:all=1,volume=-4.7dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.969"
+    "# comment": "spectral similarity to the game's own file: 0.969. the game's file starts before this recording does, so the source is delayed rather than offset: source by 0.890s"
    }
   },
   {

@@ -1306,9 +1306,6 @@
     "path": "music/ex3/BGM_EX3_EndCredit01.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -520.085
-      },
       "channels": [
        {
         "source": "source",
@@ -1318,11 +1315,14 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "adelay=520085:all=1"
+      }
      }
     ],
     "enable": false,
-    "# comment": "source is correct (spectral 0.974 at offset +520.1s) but covers only 47% of this target: 600s of 1277s. The rest needs a multi-segment or filterComplex source; left disabled until then."
+    "# comment": "source is correct (spectral 0.974 at offset +520.1s) but covers only 47% of this target: 600s of 1277s. The rest needs a multi-segment or filterComplex source; left disabled until then. the game's file starts before this recording does, so the source is delayed rather than offset: source by 520.085s"
    }
   },
   {
@@ -2761,10 +2761,14 @@
         "source": "SHADOWBRINGERS_14",
         "channel": 1
        }
-      ]
+      ],
+      "sourceOffsets": {
+       "SHADOWBRINGERS_13": 1.69,
+       "SHADOWBRINGERS_14": 2.15
+      }
      }
     ],
-    "# comment": "multichannel target: 2 engine-switched stems, matched individually (SHADOWBRINGERS_13 to game channels [0, 1] @0.953; SHADOWBRINGERS_14 to game channels [2, 3] @0.979). The stems tile the channels in order, so a plain sequential mapping is correct -- the same shape as the hand-written BGM_EX1_PvP01 entry. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio."
+    "# comment": "multichannel target: 2 engine-switched stems, matched individually (SHADOWBRINGERS_13 to game channels [0, 1] @0.953; SHADOWBRINGERS_14 to game channels [2, 3] @0.979). The stems tile the channels in order, so a plain sequential mapping is correct -- the same shape as the hand-written BGM_EX1_PvP01 entry. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio. per-stem offsets: SHADOWBRINGERS_13 at +1.690s, SHADOWBRINGERS_14 at +2.150s."
    }
   },
   {

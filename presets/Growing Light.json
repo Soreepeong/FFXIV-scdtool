@@ -1863,9 +1863,6 @@
     "path": "music/ex4/BGM_EX4_Raid_10.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -5.605
-      },
       "channels": [
        {
         "source": "source",
@@ -1875,10 +1872,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "adelay=5605:all=1"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.991"
+    "# comment": "spectral similarity to the game's own file: 0.991. the game's file starts before this recording does, so the source is delayed rather than offset: source by 5.605s"
    }
   },
   {

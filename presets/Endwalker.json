@@ -1659,9 +1659,6 @@
     "path": "music/ex4/BGM_EX4_WKS_04.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -6.265
-      },
       "channels": [
        {
         "source": "source",
@@ -1673,11 +1670,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=+1.4dB"
+       "source": "adelay=6265:all=1,volume=+1.4dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.966; also released as TH_014; that album's own preset carries its own entry"
+    "# comment": "spectral similarity to the game's own file: 0.966; also released as TH_014; that album's own preset carries its own entry. the game's file starts before this recording does, so the source is delayed rather than offset: source by 6.265s"
    }
   },
   {
@@ -1783,9 +1780,6 @@
     "path": "music/ffxiv/Orchestrion/BGM_ORCH_045.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -0.27
-      },
       "channels": [
        {
         "source": "source",
@@ -1797,11 +1791,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=-4.4dB"
+       "source": "adelay=270:all=1,volume=-4.4dB"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.971; also released as Before_Meteor_FFXIV_104; that album's own preset carries its own entry"
+    "# comment": "spectral similarity to the game's own file: 0.971; also released as Before_Meteor_FFXIV_104; that album's own preset carries its own entry. the game's file starts before this recording does, so the source is delayed rather than offset: source by 0.270s"
    }
   },
   {
@@ -3017,6 +3011,33 @@
      }
     ],
     "# comment": "same recording as ENDWALKER_039.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.985)"
+   }
+  },
+  {
+   "source": [
+    "ENDWALKER_040",
+    "Answers"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Con_Bahamut_Bigboss2.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 64.8
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "recovered from its numbered siblings: ENDWALKER_040 is the recording the rest of this group resolved to, and it matches this target's intro at 0.993"
    }
   }
  ]

@@ -506,9 +506,6 @@
     "path": "music/ffxiv/BGM_Battle_Ish_01.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -0.16
-      },
       "channels": [
        {
         "source": "source",
@@ -518,10 +515,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "adelay=160:all=1"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.987"
+    "# comment": "spectral similarity to the game's own file: 0.987. the game's file starts before this recording does, so the source is delayed rather than offset: source by 0.160s"
    }
   },
   {
@@ -535,9 +535,6 @@
     "path": "music/ffxiv/BGM_Battle_Lim_01.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -0.13
-      },
       "channels": [
        {
         "source": "source",
@@ -547,10 +544,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "adelay=130:all=1"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.990"
+    "# comment": "spectral similarity to the game's own file: 0.990. the game's file starts before this recording does, so the source is delayed rather than offset: source by 0.130s"
    }
   },
   {
@@ -859,9 +859,6 @@
     "path": "music/ffxiv/BGM_Con_CrystalTower_Boss_01.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -0.52
-      },
       "channels": [
        {
         "source": "source",
@@ -871,10 +868,13 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "adelay=520:all=1"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.985; offset corrected -0.505s -> -0.520s by re-deriving the alignment and judging it on the intro (0.8316 -> 0.9360)"
+    "# comment": "spectral similarity to the game's own file: 0.985; offset corrected -0.505s -> -0.520s by re-deriving the alignment and judging it on the intro (0.8316 -> 0.9360). the game's file starts before this recording does, so the source is delayed rather than offset: source by 0.520s"
    }
   },
   {
@@ -1330,9 +1330,6 @@
     "path": "music/ffxiv/BGM_Event_7thUmbralEra.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -15.61
-      },
       "channels": [
        {
         "source": "source",
@@ -1342,11 +1339,14 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "adelay=15610:all=1"
+      }
      }
     ],
     "enable": false,
-    "# comment": "source is correct (spectral 0.994 at offset +15.6s) but covers only 86% of this target: 316s of 367s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+    "# comment": "source is correct (spectral 0.994 at offset +15.6s) but covers only 86% of this target: 316s of 367s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. the game's file starts before this recording does, so the source is delayed rather than offset: source by 15.610s"
    }
   },
   {
@@ -3300,9 +3300,6 @@
     "path": "music/ffxiv/BGM_System_EndCredit01.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": -426.38
-      },
       "channels": [
        {
         "source": "source",
@@ -3312,11 +3309,14 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "adelay=426380:all=1"
+      }
      }
     ],
     "enable": false,
-    "# comment": "source is correct (spectral 0.967 at offset +426.4s) but covers only 68% of this target: 587s of 868s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+    "# comment": "source is correct (spectral 0.967 at offset +426.4s) but covers only 68% of this target: 587s of 868s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. the game's file starts before this recording does, so the source is delayed rather than offset: source by 426.380s"
    }
   },
   {
@@ -4761,6 +4761,146 @@
      }
     ],
     "# comment": "same recording as ARR_FFXIV_090.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.854)"
+   }
+  },
+  {
+   "source": [
+    "ARR_FFXIV_027",
+    "Serenity",
+    "静穏の森"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Field_Gri_01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.52
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "recovered from its numbered siblings: ARR_FFXIV_027 is the recording the rest of this group resolved to, and it matches this target's intro at 0.996"
+   }
+  },
+  {
+   "source": [
+    "ARR_FFXIV_027",
+    "Serenity",
+    "静穏の森"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Field_Gri_05.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 291.42
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "recovered from its numbered siblings: ARR_FFXIV_027 is the recording the rest of this group resolved to, and it matches this target's intro at 0.994"
+   }
+  },
+  {
+   "source": [
+    "ARR_FFXIV_018",
+    "On Westerly Winds",
+    "西風に乗せて"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Field_Lim_05.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 262.52
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "recovered from its numbered siblings: ARR_FFXIV_018 is the recording the rest of this group resolved to, and it matches this target's intro at 0.997"
+   }
+  },
+  {
+   "source": [
+    "ARR_FFXIV_005",
+    "To the Sun",
+    "灼熱の地へ"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Field_Uru_01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 0.33
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "recovered from its numbered siblings: ARR_FFXIV_005 is the recording the rest of this group resolved to, and it matches this target's intro at 0.994"
+   }
+  },
+  {
+   "source": [
+    "ARR_FFXIV_005",
+    "To the Sun",
+    "灼熱の地へ"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Field_Uru_05.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": 354.37
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "recovered from its numbered siblings: ARR_FFXIV_005 is the recording the rest of this group resolved to, and it matches this target's intro at 0.976"
    }
   }
  ]
