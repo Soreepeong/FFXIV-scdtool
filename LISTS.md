@@ -9,15 +9,15 @@ Weighted, because a cosine between two digital silences is noise and many of the
 | | count |
 |---|---:|
 | targets in the game's bgm sheet | 2175 |
-| enabled | 1827 |
-| disabled entries | 22 |
-| targets with no enabled entry at all | 13 |
+| enabled | 1830 |
+| disabled entries | 19 |
+| targets with no enabled entry at all | 10 |
 | never referenced by any preset | 267 |
 
 - confidence below 0.80: **2**
 - confidence 0.80-0.90: **83**
-- confidence 0.90-0.95: **152**
-- confidence 0.95-0.98: **435**
+- confidence 0.90-0.95: **153**
+- confidence 0.95-0.98: **437**
 - confidence 0.98 and up: **1155**
 
 Anything under about 0.90 is worth listening to before trusting it; the band from 0.95 up is where a correct match normally sits. A low score with the target's full length reproduced usually means the album's master genuinely differs from the game's, not that the wrong recording was picked.
@@ -262,6 +262,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9496 | `music/ex3/BGM_EX3_Dan_D13.scd` | DUD_080.flac | Death Unto Dawn.json |
 | 0.9496 | `music/ffxiv/Orchestrion/BGM_ORCH_207.scd` | SB_FFXIV_035.flac | Stormblood.json |
 | 0.9499 | `music/ex5/BGM_EX5_Field_Safe02.scd` | DT_016.flac | Dawntrail.json |
+| 0.9499 | `music/ffxiv/BGM_Event_Gendaishi.scd` | source | Before The Fall.json |
 | 0.9499 | `music/ffxiv/Orchestrion/BGM_ORCH_553.scd` | GL_00021.flac | Growing Light.json |
 | 0.9500 | `music/ex2/BGM_EX2_Event_36.scd` | Before_Meteor_FFXIV_044.flac | Before Meteor.json |
 | 0.9501 | `music/ffxiv/Orchestrion/BGM_ORCH_702.scd` | DT_017.flac | Dawntrail.json |
@@ -315,6 +316,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9595 | `music/ffxiv/Orchestrion/BGM_ORCH_851.scd` | TH_030.flac | Trail to the Heavens.json |
 | 0.9596 | `music/ex1/BGM_EX1_Town_Ish02_Day.scd` | HEAVENSWARD_FFXIV_03.flac | Heavensward.json |
 | 0.9597 | `music/ex3/BGM_EX3_Field_Safe_01.scd` | SHADOWBRINGERS_55.flac | Shadowbringers.json |
+| 0.9599 | `music/ex3/BGM_EX3_MYC_06.scd` | source | Death Unto Dawn.json |
 | 0.9603 | `music/ffxiv/Orchestrion/BGM_ORCH_171.scd` | SB_FFXIV_015.flac | Stormblood.json |
 | 0.9604 | `music/ex5/BGM_EX5_Boss_Battle01.scd` | DT_014.flac | Dawntrail.json |
 | 0.9606 | `music/ffxiv/Orchestrion/BGM_ORCH_185.scd` | SB_FFXIV_008.flac | Stormblood.json |
@@ -635,6 +637,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9782 | `music/ffxiv/Orchestrion/BGM_ORCH_051.scd` | HEAVENSWARD_FFXIV_29.flac | Heavensward.json |
 | 0.9782 | `music/ffxiv/Orchestrion/BGM_ORCH_237.scd` | SB_FFXIV_033.flac | Stormblood.json |
 | 0.9782 | `music/ffxiv/Orchestrion/BGM_ORCH_901.scd` | TH_071.flac | Trail to the Heavens.json |
+| 0.9783 | `music/ffxiv/BGM_Event_Bazaar.scd` | source | Before Meteor.json |
 | 0.9783 | `music/ffxiv/Orchestrion/BGM_ORCH_383.scd` | ARR_FFXIV_069.flac | A Realm Reborn.json |
 | 0.9784 | `music/ex2/BGM_EX2_Ban_20.scd` | SB_FFXIV_092.flac | Stormblood.json |
 | 0.9784 | `music/ex5/BGM_EX5_Dan_D10.scd` | TH_006.flac | Trail to the Heavens.json |
@@ -1868,15 +1871,12 @@ These reasons are now measured rather than predicted. Six entries that carried t
 | `music/ex3/BGM_EX3_Ban_06.scd` | source | The Far Edge Of Fate.json | **no** | this recording reaches 87.0s of the 122.0s this target actually carries (71%), so the replacement would cut to silence. Built and measured 2026-09-21 rather than predicted: it comes out 87.0s against the target's 122.1s and loops 35.1s early, scoring 0.946 against the game's own file over the part i |
 | `music/ex3/BGM_EX3_Ban_14.scd` | source | Death Unto Dawn.json | **no** | offset corrected +2.960s -> +31.760s: the previous value scored better on the intro (0.670 vs 0.581) but far worse over the whole file (built and measured at 0.414 against 0.842), so judging on the intro alone had locked onto the wrong pass. The recording still covers only 427.6s of this 467.5s targ |
 | `music/ex3/BGM_EX3_Event_24.scd` | source | Shadowbringers.json | **no** | source is correct (spectral 0.992 at offset -2.8s) but covers only 69% of this target: 269s of 387s. The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than predicted: it comes out 268.6s against the target's 387.6s and loses its lo |
-| `music/ex3/BGM_EX3_MYC_06.scd` | source | Death Unto Dawn.json | **no** | this recording reaches 95.1s of the 170.0s this target actually carries (56%), so the replacement would cut to silence. Built and measured 2026-09-21 rather than predicted: it comes out 95.1s against the target's 170.1s and loops 75.0s early, scoring 0.969 against the game's own file over the part i |
 | `music/ex3/BGM_EX3_Ytc_27.scd` | source | Death Unto Dawn.json | **no** | source is correct (spectral 0.972 at offset -1.4s) but covers only 94% of this target: 109s of 116s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than pr |
 | `music/ex4/BGM_EX4_Ban_Nidhogg_01.scd` | source | Growing Light.json | yes | this recording reaches 340.2s of the 360.0s this target actually carries (94%), so the replacement would cut to silence. |
-| `music/ex4/BGM_EX4_Event_15.scd` | source | Endwalker.json | **no** | this recording reaches 24.2s of the 94.0s this target actually carries (26%), so the replacement would cut to silence. Built and measured 2026-09-21 rather than predicted: it comes out 24.3s against the target's 94.1s and loops 69.9s early, scoring 0.861 against the game's own file over the part it  |
+| `music/ex4/BGM_EX4_Event_15.scd` | source | Endwalker.json | **no** | source "source" is built by a filterComplex, which segments cannot express |
 | `music/ffxiv/BGM_Ban_Moogle_Nomal.scd` | source | A Realm Reborn.json | yes | this recording reaches 68.1s of the 168.0s this target actually carries (41%), so the replacement would cut to silence. |
 | `music/ffxiv/BGM_Con_Neal.scd` | source | Before The Fall.json | yes | this recording reaches 374.7s of the 451.0s this target actually carries (83%), so the replacement would cut to silence. |
 | `music/ffxiv/BGM_Dungeon_Uru_06.scd` | source | Before The Fall.json | yes | this recording reaches 170.3s of the 265.0s this target actually carries (64%), so the replacement would cut to silence. |
-| `music/ffxiv/BGM_Event_Bazaar.scd` | source | Before Meteor.json | **no** | source is correct (spectral 0.981 at offset -0.4s) but covers only 94% of this target: 104s of 110s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than pr |
-| `music/ffxiv/BGM_Event_Gendaishi.scd` | source | Before The Fall.json | **no** | this recording reaches 99.4s of the 117.0s this target actually carries (85%), so the replacement would cut to silence. Built and measured 2026-09-21 rather than predicted: it comes out 99.4s against the target's 117.1s and loops 17.8s early, scoring 0.942 against the game's own file over the part i |
 | `music/ffxiv/BGM_Field_BanFort_Kobold.scd` | source | A Realm Reborn.json | yes | this recording reaches 150.7s of the 200.0s this target actually carries (75%), so the replacement would cut to silence. |
 | `music/ffxiv/BGM_KTG_04.scd` | source | Trail to the Heavens.json | **no** | source is correct (spectral 0.915 at offset -0.4s) but covers only 89% of this target: 38s of 43s. The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than predicted: it comes out 38.1s against the target's 43.5s and loops 5.3s early |
 | `music/ffxiv/Orchestrion/BGM_ORCH_057.scd` | source | A Realm Reborn.json | **no** | source is correct (spectral 0.983 at offset +0.0s) but covers only 93% of this target: 394s of 422s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than pr |

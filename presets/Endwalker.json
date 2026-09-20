@@ -1354,36 +1354,23 @@
    }
   },
   {
-   "source": [
-    "^00020\\.",
-    "ENDWALKER_021",
-    "Tremble",
-    "恐怖の波動"
-   ],
+   "source": {
+    "source": {
+     "inputFiles": [
+      [
+       "00020",
+       "ENDWALKER_021",
+       "恐怖の波動",
+       "Tremble"
+      ]
+     ],
+     "filterComplex": "[0:a]afade=t=in:st=65.04525:d=2[tr1];[0:a]adelay=75195:all=1[tr2];[0:a]adelay=150390:all=1[tr3];[tr1][tr2][tr3]amix=inputs=3:duration=longest:normalize=0,atrim=start=65.04525,asetpts=PTS-STARTPTS[res]",
+     "filterComplexOutName": "[res]"
+    }
+   },
    "target": {
     "path": "music/ex4/BGM_EX4_Event_15.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 65.05,
-        "pcmHash": "78a76343"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.961; offset corrected -10.140s -> +65.050s by re-deriving the alignment and judging it on the intro (0.6596 -> 0.9884). Disabled: this recording reaches 24.2s of the 94.0s this target actually carries (26%), so the replacement would cut to silence. Built and measured 2026-09-21 rather than predicted: it comes out 24.3s against the target's 94.1s and loops 69.9s early, scoring 0.861 against the game's own file over the part it does cover. Not silence -- the audio is there, the loop is short. Still off because a loop that ends 26% of the way through the target is worse than the game's own file.",
-    "enable": false
+    "# comment": "not short, layered: the target is this recording played over itself, three voices entering at 0s, 75.195s and 150.390s, trimmed to start at 65.045s. The graph is the hand-written one from presets-manual/Endwalker.json, copied rather than approximated, because segments sequence spans and this needs them to sound together. `scdtool apply` declines it for that reason and says so; the importer can build it. Previously disabled on the reading that the recording reaches only 24.2s of the 94.0s target, which measured 0.8612 and loops 69.9s early."
    }
   },
   {

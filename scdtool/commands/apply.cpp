@@ -1142,6 +1142,17 @@ namespace {
 		const auto dirs = resolve_search_directories(ostDir, config);
 		std::map<std::string, std::filesystem::path> resolved;
 		for (const auto& [name, patterns] : named) {
+			// A source may carry a `filterComplex`: an ffmpeg graph building it from several
+			// inputs, layered rather than sequenced. Segments cannot express that -- the three
+			// copies of one recording at 0s, 75.195s and 150.390s that BGM_EX4_Event_15 is
+			// made of all sound at once. Ignoring the field and reading the graph's first input
+			// as if it were the whole source would build something confidently wrong, so the
+			// entry is declined and named instead.
+			if (patterns.is_object() && patterns.contains("filterComplex")) {
+				unresolved.emplace_back(paths.front(), std::format(
+					"source \"{}\" is built by a filterComplex, which segments cannot express", name));
+				return;
+			}
 			const auto file = resolve_source_name(ostDir, config, dirs, patterns);
 			if (!file) {
 				unresolved.emplace_back(paths.front(), std::format("no file for \"{}\"", name));

@@ -1547,11 +1547,29 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 91.1
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 9.37
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 4.0
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.981; offset corrected -81.700s -> +1.220s by re-deriving the alignment and judging it on the intro (-1.0000 -> 0.9934). Disabled: this recording reaches 95.1s of the 170.0s this target actually carries (56%), so the replacement would cut to silence. Built and measured 2026-09-21 rather than predicted: it comes out 95.1s against the target's 170.1s and loops 75.0s early, scoring 0.969 against the game's own file over the part it does cover. Not silence -- the audio is there, the loop is short. Still off because a loop that ends 56% of the way through the target is worse than the game's own file.",
-    "enable": false
+    "# comment": "the recording stops at 95.1s of this 170.1s target, and the uncovered tail is a repeat of material earlier in the same recording. Built as two segments with the seam pulled 4s back from where the recording runs out, so the first segment plays its own ending under the second rather than stopping dead at it -- which is what the game does, and measures better than joining at the end. Against the game's own file, at full length with the loop intact: 0.9599, against 0.9462 for a plain join. The short build scores 0.9685, but only because the measure compares the span the two files share -- it loses 75.0s of loop. Seam jump is well under the threshold for an audible click. `presets-manual/` accepts the shortfall instead; this keeps its source and finishes the tail."
    }
   },
   {
