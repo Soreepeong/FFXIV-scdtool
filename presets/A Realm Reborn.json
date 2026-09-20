@@ -3967,18 +3967,18 @@
      "segments": [
       {
        "sourceOffsets": {
-        "ARR_FFXIV_079": {
+        "source": {
          "offset": 0.23,
          "pcmHash": "82c860e0"
         }
        },
        "channels": [
         {
-         "source": "ARR_FFXIV_079",
+         "source": "source",
          "channel": 0
         },
         {
-         "source": "ARR_FFXIV_079",
+         "source": "source",
          "channel": 1
         }
        ]

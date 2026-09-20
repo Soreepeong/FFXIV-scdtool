@@ -50,6 +50,10 @@ namespace {
 		std::filesystem::path Path;
 		double Offset = 0.;       // seconds into the source that this segment begins at
 		std::wstring Filter;
+		// Whether the preset named this offset or it is the implicit zero. The generator
+		// writes no offset at all when the match was already within 50ms, so an absent one
+		// carries that much slack; a stated one was fitted and only lost precision to JSON.
+		bool Stated = false;
 	};
 
 	// A span of the output, in the *target's* timeline. Segments run back to back in the
@@ -1146,6 +1150,31 @@ namespace {
 			resolved.emplace(name, *file);
 		}
 
+		// Every name a segment uses has to be one the item defines. Two entries referred to
+		// their recording by its stem while declaring it as a bare array -- which names it
+		// `source` -- and the offset attached to the stem name was quietly dropped, leaving
+		// BGM_EX5_Boss_Battle03 a second out of step and 0.10 worse than the previous build.
+		// Silence is the wrong answer to that, so it is reported and the entry left alone.
+		if (hasSegments) {
+			for (const auto& segmentJson : *segmentsJson) {
+				std::vector<std::string> used;
+				for (const auto& key : {"sourceOffsets", "sourceFilters"})
+					if (const auto section = segmentJson.find(key); section != segmentJson.end() && section->is_object())
+						for (const auto& [name, _spec] : section->items())
+							used.push_back(name);
+				if (const auto channels = segmentJson.find("channels"); channels != segmentJson.end() && channels->is_array())
+					for (const auto& channel : *channels)
+						used.push_back(channel.value("source", std::string("source")));
+				for (const auto& name : used) {
+					if (name == "target" || resolved.contains(name))
+						continue;
+					unresolved.emplace_back(paths.front(), std::format(
+						"segment names source \"{}\", which the item does not define", name));
+					return;
+				}
+			}
+		}
+
 		std::vector<apply_segment> segments;
 		if (!hasSegments) {
 			// One default span covering the whole of the single source it names. More than
@@ -1171,8 +1200,10 @@ namespace {
 				segment.Sources.emplace(name, apply_segment_source{.Path = path});
 			if (const auto offsets = segmentJson.find("sourceOffsets"); offsets != segmentJson.end() && offsets->is_object()) {
 				for (const auto& [name, spec] : offsets->items()) {
-					if (const auto source = segment.Sources.find(name); source != segment.Sources.end())
+					if (const auto source = segment.Sources.find(name); source != segment.Sources.end()) {
 						source->second.Offset = spec.is_object() ? spec.value("offset", 0.) : spec.get<double>();
+						source->second.Stated = true;
+					}
 				}
 			}
 			if (const auto filters = segmentJson.find("sourceFilters"); filters != segmentJson.end() && filters->is_object()) {
@@ -1308,10 +1339,30 @@ int cmd_apply(const std::vector<std::string>& args) {
 		// builds everything from the same files that ship, with no conversion step between.
 		std::vector<std::filesystem::path> presetPaths;
 		if (std::filesystem::is_directory(presetPath)) {
-			for (const auto& entry : std::filesystem::directory_iterator(presetPath))
-				if (entry.is_regular_file() && entry.path().extension() == L".json")
-					presetPaths.push_back(entry.path());
-			std::ranges::sort(presetPaths);
+			// In release order, which each preset states in its `name` -- "Final Fantasy XIV
+			// - 2.5 - Before The Fall". Order decides which album serves a target listed by
+			// more than one, and the two releases of a piece are rarely the same recording:
+			// by filename, A Realm Reborn would claim BGM_Ban_Ifrit from Before Meteor and
+			// come out 0.006 further from the game's own file.
+			std::vector<std::pair<std::string, std::filesystem::path>> ordered;
+			for (const auto& entry : std::filesystem::directory_iterator(presetPath)) {
+				if (!entry.is_regular_file() || entry.path().extension() != L".json")
+					continue;
+				std::string name;
+				try {
+					std::ifstream f(entry.path(), std::ios::binary);
+					nlohmann::json head;
+					f >> head;
+					name = head.value("name", std::string{});
+				} catch (const std::exception&) {
+					// Unreadable here is reported properly when it is loaded below.
+				}
+				// A preset that names no release sorts by its filename, after every one that does.
+				ordered.emplace_back(name.empty() ? "ÿ" + u8(entry.path().filename()) : name, entry.path());
+			}
+			std::ranges::sort(ordered);
+			for (auto& [_name, path] : ordered)
+				presetPaths.push_back(std::move(path));
 			if (presetPaths.empty())
 				throw std::runtime_error(std::format("No .json presets in {}", u8(presetPath)));
 		} else {
@@ -1715,16 +1766,13 @@ int cmd_apply(const std::vector<std::string>& args) {
 					try {
 						aligned = refine_offset_to_samples(ffmpegPath, templateAudio, job.SourcePath,
 							samplingRate, around, effectiveOffset, tempFile);
-						// A preset's offset was fitted against this file and only lost precision on
-						// its way into JSON, so refinement is allowed to recover the samples and
-						// nothing more; a larger move would be the search disagreeing with the fit,
-						// and the fit is the one that was checked.
-						constexpr double PresetRefinementSeconds = 0.005;
-						if (aligned.Refined && (!job.FromPreset
-							|| std::abs(aligned.Seconds - effectiveOffset) <= PresetRefinementSeconds))
+						// Unbounded, as it is for a matchset. A preset's offset is a millisecond-rounded
+						// record of a fit, not a ceiling on how far the truth can be from it, and holding
+						// the search to 5ms of it left 134 targets unaligned, two of them measurably worse
+						// than the build that refined them freely. The search has its own guards: a 60ms
+						// window and a correlation floor.
+						if (aligned.Refined)
 							effectiveOffset = aligned.Seconds;
-						else
-							aligned = {};
 					} catch (const std::exception&) {
 						aligned = {};
 					}

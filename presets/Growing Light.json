@@ -2858,18 +2858,18 @@
      "segments": [
       {
        "sourceOffsets": {
-        "GL_00040": {
+        "source": {
          "offset": 1.0,
          "pcmHash": "40d54824"
         }
        },
        "channels": [
         {
-         "source": "GL_00040",
+         "source": "source",
          "channel": 0
         },
         {
-         "source": "GL_00040",
+         "source": "source",
          "channel": 1
         }
        ]
