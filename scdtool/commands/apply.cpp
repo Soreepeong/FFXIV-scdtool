@@ -647,10 +647,23 @@ namespace {
 		std::vector<float> out;
 		for (size_t i = 0; i < segments.size(); i++) {
 			const auto& segment = segments[i];
-			if (segment.Channels.size() != channels)
+			// Which mapped channels feed each output channel, and at what weight. Normally
+			// one each; a mono entry -- which most Orchestrion rolls are -- is still
+			// described by a stereo preset, because the recording it names is stereo, so it
+			// folds instead of refusing. That is the same result the single-source path
+			// gets from ffmpeg's `-ac 1`.
+			std::vector<std::vector<std::pair<std::pair<std::string, size_t>, float>>> routing(channels);
+			if (segment.Channels.size() == channels) {
+				for (size_t ch = 0; ch < channels; ch++)
+					routing[ch].emplace_back(segment.Channels[ch], 1.f);
+			} else if (channels == 1) {
+				for (const auto& mapped : segment.Channels)
+					routing[0].emplace_back(mapped, 1.f / static_cast<float>(segment.Channels.size()));
+			} else {
 				throw std::runtime_error(std::format(
 					"Segment {} maps {} channel(s) but the target entry has {}.",
 					i, segment.Channels.size(), channels));
+			}
 
 			// One mono decode per (source, channel) the segment actually asks for, shared
 			// between output channels that name the same pair.
@@ -711,10 +724,11 @@ namespace {
 				out.resize(end * channels, 0.f);
 
 			for (size_t ch = 0; ch < channels; ch++) {
-				const auto& [name, channelIndex] = segment.Channels[ch];
-				const auto& samples = decoded.at({name, channelIndex});
+				for (const auto& [key, weight] : routing[ch]) {
+				const auto& [name, channelIndex] = key;
+				const auto& samples = decoded.at(key);
 				const auto offsetSamples = toSamples(segment.Sources.at(name).Offset);
-				const auto scale = static_cast<float>(gain.empty() ? 1. : gain.at(name));
+				const auto scale = weight * static_cast<float>(gain.empty() ? 1. : gain.at(name));
 				for (size_t n = 0; n < render; n++) {
 					auto value = samples[offsetSamples + n] * scale;
 					if (n < fadeIn)
@@ -722,6 +736,7 @@ namespace {
 					else if (fadeOut && n >= render - fadeOut)
 						value *= static_cast<float>(static_cast<double>(render - n) / static_cast<double>(fadeOut + 1));
 					out[(segmentStart[i] + n) * channels + ch] += value;
+				}
 				}
 			}
 		}
@@ -1391,6 +1406,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 		const auto tempDir = std::filesystem::temp_directory_path();
 		std::atomic<uint32_t> tempFileCounter{0};
 		std::atomic<size_t> writtenCount{0};
+		std::atomic<size_t> failedCount{0};
 		std::mutex logMutex;
 
 		// Each job decodes and holds a whole track as float32 in memory (hundreds of MB for
@@ -1399,6 +1415,10 @@ int cmd_apply(const std::vector<std::string>& args) {
 		constexpr size_t MaxDecodeThreads = 4;
 		parallel_for(jobs.size(), [&](size_t index) {
 			const auto& job = jobs[index];
+			// One entry that cannot be built must not cost a run of seventeen hundred: it is
+			// reported where it happened and counted again at the end, so a failure partway
+			// through a long build is neither fatal nor lost in the scrollback.
+			try {
 
 			// Temp files are released when this job ends, not when the whole run does.
 			// Each job stages the template's audio and a raw decode of the source, which at
@@ -1419,9 +1439,15 @@ int cmd_apply(const std::vector<std::string>& args) {
 				return jobTemps.back();
 			};
 
-			// A stem job has no single source; each stem carries its own, and only the
-			// ones that resolved are going to be read.
-			if (job.Stems.empty()) {
+			// Neither a stem job nor a segmented one has a single source: each stem carries
+			// its own and only the resolved ones are read, and a segment's sources were
+			// checked for existence when the preset was resolved.
+			if (!job.Segments.empty()) {
+				for (const auto& segment : job.Segments)
+					for (const auto& [name, source] : segment.Sources)
+						if (!std::filesystem::exists(source.Path))
+							throw std::runtime_error(std::format("Source file not found: {}", u8(source.Path)));
+			} else if (job.Stems.empty()) {
 				if (!std::filesystem::exists(job.SourcePath))
 					throw std::runtime_error(std::format("Source file not found: {}", u8(job.SourcePath)));
 			} else {
@@ -1454,7 +1480,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// them, a single stereo source would collapse the calm/battle switching into
 			// one state, so refuse rather than silently produce a file that behaves
 			// differently in game.
-			if (channels > 2 && job.Stems.empty()) {
+			if (channels > 2 && job.Stems.empty() && job.Segments.empty()) {
 				const auto lock = std::scoped_lock(logMutex);
 				std::cerr << std::format("  SKIPPED {}: template has {} channels (engine-switched stems); a single stereo source cannot reproduce them",
 					job.TargetPath, channels) << '\n';
@@ -1485,7 +1511,11 @@ int cmd_apply(const std::vector<std::string>& args) {
 				// A stem entry has no single source: take the highest rate across the ones
 				// that actually resolved, so a 96 kHz stem is not resampled down to meet a
 				// 44.1 kHz one sharing the same file.
-				if (job.Stems.empty()) {
+				if (!job.Segments.empty()) {
+					for (const auto& segment : job.Segments)
+						for (const auto& [name, source] : segment.Sources)
+							samplingRate = (std::max)(samplingRate, static_cast<size_t>(probe_sample_rate(ffprobePath, source.Path)));
+				} else if (job.Stems.empty()) {
 					samplingRate = (std::max)(samplingRate, static_cast<size_t>(probe_sample_rate(ffprobePath, job.SourcePath)));
 				} else {
 					for (const auto& stem : job.Stems)
@@ -1859,10 +1889,16 @@ int cmd_apply(const std::vector<std::string>& args) {
 					gainLimited ? std::format(", peak-limited from {:+.1f} dB", requestedGainDb) : "",
 					onsetSeconds > 0. ? std::format(", onset corrected {:.1f} dB over {:.2f}s", onsetDb, onsetSeconds) : "") << '\n';
 			}
+			} catch (const std::exception& e) {
+				const auto lock = std::scoped_lock(logMutex);
+				++failedCount;
+				std::cerr << std::format("  FAILED {}: {}", job.TargetPath, e.what()) << '\n';
+			}
 		}, MaxDecodeThreads);
 
 		cleanupTempFiles();
-		std::cerr << std::format("Done. Wrote {} file(s) under {}.", writtenCount.load(), u8(outputDir)) << '\n';
+		std::cerr << std::format("Done. Wrote {} file(s) under {}{}.", writtenCount.load(), u8(outputDir),
+			failedCount ? std::format("; {} entr(ies) could not be built", failedCount.load()) : "") << '\n';
 		return 0;
 
 	} catch (const std::exception& e) {

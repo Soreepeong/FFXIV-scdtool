@@ -2291,7 +2291,7 @@
       [
        {
         "directory": "Heavensward",
-        "pattern": "00002"
+        "pattern": "^00002\\."
        },
        {
         "directory": "Heavensward",
@@ -2318,7 +2318,7 @@
       [
        {
         "directory": "Heavensward",
-        "pattern": "00047"
+        "pattern": "^00047\\."
        },
        {
         "directory": "Heavensward",

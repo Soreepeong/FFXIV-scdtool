@@ -11,7 +11,7 @@
  "items": [
   {
    "source": [
-    "00000",
+    "^00000\\.",
     "HEAVENSWARD_FFXIV_01"
    ],
    "target": {
@@ -44,7 +44,7 @@
   },
   {
    "source": [
-    "00000",
+    "^00000\\.",
     "HEAVENSWARD_FFXIV_01"
    ],
    "target": {
@@ -74,7 +74,7 @@
   },
   {
    "source": [
-    "00001",
+    "^00001\\.",
     "HEAVENSWARD_FFXIV_02",
     "A Cold Wind",
     "雪風"
@@ -106,7 +106,7 @@
   },
   {
    "source": [
-    "00001",
+    "^00001\\.",
     "HEAVENSWARD_FFXIV_02",
     "A Cold Wind",
     "雪風"
@@ -138,7 +138,7 @@
   },
   {
    "source": [
-    "00002",
+    "^00002\\.",
     "HEAVENSWARD_FFXIV_03",
     "Solid",
     "堅牢 ～イシュガルド下層：昼～"
@@ -170,7 +170,7 @@
   },
   {
    "source": [
-    "00002",
+    "^00002\\.",
     "HEAVENSWARD_FFXIV_03",
     "Solid",
     "堅牢 ～イシュガルド下層：昼～"
@@ -182,7 +182,7 @@
   },
   {
    "source": [
-    "00003",
+    "^00003\\.",
     "HEAVENSWARD_FFXIV_04",
     "Against the Wind",
     "風に向かって ～クルザス西部高地：昼～"
@@ -214,7 +214,7 @@
   },
   {
    "source": [
-    "00003",
+    "^00003\\.",
     "HEAVENSWARD_FFXIV_04",
     "Against the Wind",
     "風に向かって ～クルザス西部高地：昼～"
@@ -246,7 +246,7 @@
   },
   {
    "source": [
-    "00004",
+    "^00004\\.",
     "HEAVENSWARD_FFXIV_05",
     "Melt",
     "熱戦 ～イシュガルド地方：戦闘～"
@@ -285,7 +285,7 @@
   },
   {
    "source": [
-    "00005",
+    "^00005\\.",
     "HEAVENSWARD_FFXIV_06",
     "Descent",
     "堕落 ～廃砦捜索 ダスクヴィジル～"
@@ -317,7 +317,7 @@
   },
   {
    "source": [
-    "00005",
+    "^00005\\.",
     "HEAVENSWARD_FFXIV_06",
     "Descent",
     "堕落 ～廃砦捜索 ダスクヴィジル～"
@@ -352,7 +352,7 @@
   },
   {
    "source": [
-    "00006",
+    "^00006\\.",
     "HEAVENSWARD_FFXIV_07",
     "Ominous Prognisticks",
     "不吉なる前兆"
@@ -384,7 +384,7 @@
   },
   {
    "source": [
-    "00006",
+    "^00006\\.",
     "HEAVENSWARD_FFXIV_07",
     "Ominous Prognisticks",
     "不吉なる前兆"
@@ -416,7 +416,7 @@
   },
   {
    "source": [
-    "00007",
+    "^00007\\.",
     "HEAVENSWARD_FFXIV_08",
     "Black and White",
     "黒闇と白雪 ～クルザス西部高地：夜～"
@@ -451,7 +451,7 @@
   },
   {
    "source": [
-    "00008",
+    "^00008\\.",
     "HEAVENSWARD_FFXIV_09",
     "Nobility Sleeps",
     "ノブレス・スリープス ～イシュガルド上層：夜～"
@@ -483,7 +483,7 @@
   },
   {
    "source": [
-    "00008",
+    "^00008\\.",
     "HEAVENSWARD_FFXIV_09",
     "Nobility Sleeps",
     "ノブレス・スリープス ～イシュガルド上層：夜～"
@@ -515,7 +515,7 @@
   },
   {
    "source": [
-    "00009",
+    "^00009\\.",
     "HEAVENSWARD_FFXIV_10",
     "Borderless",
     "国境なき空"
@@ -547,7 +547,7 @@
   },
   {
    "source": [
-    "00010",
+    "^00010\\.",
     "HEAVENSWARD_FFXIV_11",
     "Shelter",
     "旅の宿"
@@ -579,7 +579,7 @@
   },
   {
    "source": [
-    "00010",
+    "^00010\\.",
     "HEAVENSWARD_FFXIV_11",
     "Shelter",
     "旅の宿"
@@ -611,7 +611,7 @@
   },
   {
    "source": [
-    "00011",
+    "^00011\\.",
     "HEAVENSWARD_FFXIV_12",
     "Lost in the Clouds",
     "雲に隠れて ～アバラシア雲海：昼～"
@@ -623,7 +623,7 @@
   },
   {
    "source": [
-    "00011",
+    "^00011\\.",
     "HEAVENSWARD_FFXIV_12",
     "Lost in the Clouds",
     "雲に隠れて ～アバラシア雲海：昼～"
@@ -655,7 +655,7 @@
   },
   {
    "source": [
-    "00012",
+    "^00012\\.",
     "HEAVENSWARD_FFXIV_13",
     "Coming Home",
     "大らかな家"
@@ -687,7 +687,7 @@
   },
   {
    "source": [
-    "00012",
+    "^00012\\.",
     "HEAVENSWARD_FFXIV_13",
     "Coming Home",
     "大らかな家"
@@ -719,7 +719,7 @@
   },
   {
    "source": [
-    "00013",
+    "^00013\\.",
     "HEAVENSWARD_FFXIV_14",
     "Like a Summer Rain",
     "夏の雨の如く ～神域浮島 ネバーリープ～"
@@ -751,7 +751,7 @@
   },
   {
    "source": [
-    "00013",
+    "^00013\\.",
     "HEAVENSWARD_FFXIV_14",
     "Like a Summer Rain",
     "夏の雨の如く ～神域浮島 ネバーリープ～"
@@ -786,7 +786,7 @@
   },
   {
    "source": [
-    "00014",
+    "^00014\\.",
     "HEAVENSWARD_FFXIV_15",
     "Close to the Heavens",
     "天上の世界 ～アバラシア雲海：夜～"
@@ -837,7 +837,7 @@
   },
   {
    "source": [
-    "00015",
+    "^00015\\.",
     "HEAVENSWARD_FFXIV_16",
     "Jewel",
     "宝石 ～雲海探索 ディアデム諸島～"
@@ -869,7 +869,7 @@
   },
   {
    "source": [
-    "00015",
+    "^00015\\.",
     "HEAVENSWARD_FFXIV_16",
     "Jewel",
     "宝石 ～雲海探索 ディアデム諸島～"
@@ -904,7 +904,7 @@
   },
   {
    "source": [
-    "00016",
+    "^00016\\.",
     "HEAVENSWARD_FFXIV_17",
     "For the Sky",
     "天のため"
@@ -936,7 +936,7 @@
   },
   {
    "source": [
-    "00017",
+    "^00017\\.",
     "HEAVENSWARD_FFXIV_18",
     "Safety in Numbers",
     "みんなでいれば怖くない"
@@ -968,7 +968,7 @@
   },
   {
    "source": [
-    "00017",
+    "^00017\\.",
     "HEAVENSWARD_FFXIV_18",
     "Safety in Numbers",
     "みんなでいれば怖くない"
@@ -1000,7 +1000,7 @@
   },
   {
    "source": [
-    "00018",
+    "^00018\\.",
     "HEAVENSWARD_FFXIV_19",
     "Painted Foothills",
     "彩られし山麓 ～高地ドラヴァニア：昼～"
@@ -1032,7 +1032,7 @@
   },
   {
    "source": [
-    "00018",
+    "^00018\\.",
     "HEAVENSWARD_FFXIV_19",
     "Painted Foothills",
     "彩られし山麓 ～高地ドラヴァニア：昼～"
@@ -1083,7 +1083,7 @@
   },
   {
    "source": [
-    "00019",
+    "^00019\\.",
     "HEAVENSWARD_FFXIV_20",
     "The Hand that Gives the Rose",
     "武神降臨 ～蛮神ラーヴァナ前哨戦～"
@@ -1118,7 +1118,7 @@
   },
   {
    "source": [
-    "00020",
+    "^00020\\.",
     "HEAVENSWARD_FFXIV_21",
     "Unbending Steel",
     "曲がらぬ刃 ～蛮神ラーヴァナ討滅戦～"
@@ -1154,7 +1154,7 @@
   },
   {
    "source": [
-    "00021",
+    "^00021\\.",
     "HEAVENSWARD_FFXIV_22",
     "Painted Skies",
     "彩られし夜空 ～高地ドラヴァニア：夜～"
@@ -1186,7 +1186,7 @@
   },
   {
    "source": [
-    "00021",
+    "^00021\\.",
     "HEAVENSWARD_FFXIV_22",
     "Painted Skies",
     "彩られし夜空 ～高地ドラヴァニア：夜～"
@@ -1218,7 +1218,7 @@
   },
   {
    "source": [
-    "00022",
+    "^00022\\.",
     "HEAVENSWARD_FFXIV_23",
     "Slumber Eternal",
     "永遠の眠り ～霊峰踏破 ソーム・アル～"
@@ -1250,7 +1250,7 @@
   },
   {
    "source": [
-    "00022",
+    "^00022\\.",
     "HEAVENSWARD_FFXIV_23",
     "Slumber Eternal",
     "永遠の眠り ～霊峰踏破 ソーム・アル～"
@@ -1282,7 +1282,7 @@
   },
   {
    "source": [
-    "00023",
+    "^00023\\.",
     "HEAVENSWARD_FFXIV_24",
     "Landlords",
     "ランドロード ～ドラヴァニア雲海：昼～"
@@ -1314,7 +1314,7 @@
   },
   {
    "source": [
-    "00023",
+    "^00023\\.",
     "HEAVENSWARD_FFXIV_24",
     "Landlords",
     "ランドロード ～ドラヴァニア雲海：昼～"
@@ -1346,7 +1346,7 @@
   },
   {
    "source": [
-    "00024",
+    "^00024\\.",
     "HEAVENSWARD_FFXIV_25",
     "What is Love?",
     "それは愛くぽ？"
@@ -1378,7 +1378,7 @@
   },
   {
    "source": [
-    "00024",
+    "^00024\\.",
     "HEAVENSWARD_FFXIV_25",
     "What is Love?",
     "それは愛くぽ？"
@@ -1413,7 +1413,7 @@
   },
   {
    "source": [
-    "00025",
+    "^00025\\.",
     "HEAVENSWARD_FFXIV_26",
     "Roar of the Wyrm",
     "邪竜の咆吼 ～邪竜血戦 ドラゴンズエアリー～"
@@ -1445,7 +1445,7 @@
   },
   {
    "source": [
-    "00025",
+    "^00025\\.",
     "HEAVENSWARD_FFXIV_26",
     "Roar of the Wyrm",
     "邪竜の咆吼 ～邪竜血戦 ドラゴンズエアリー～"
@@ -1480,7 +1480,7 @@
   },
   {
    "source": [
-    "00027",
+    "^00027\\.",
     "HEAVENSWARD_FFXIV_28",
     "闘争",
     "Contention"
@@ -1515,7 +1515,7 @@
   },
   {
    "source": [
-    "00027",
+    "^00027\\.",
     "HEAVENSWARD_FFXIV_28",
     "闘争",
     "Contention"
@@ -1527,7 +1527,7 @@
   },
   {
    "source": [
-    "00028",
+    "^00028\\.",
     "HEAVENSWARD_FFXIV_29",
     "Nobility Obliges",
     "ノブレス・オブリージュ ～イシュガルド上層：昼～"
@@ -1559,7 +1559,7 @@
   },
   {
    "source": [
-    "00028",
+    "^00028\\.",
     "HEAVENSWARD_FFXIV_29",
     "Nobility Obliges",
     "ノブレス・オブリージュ ～イシュガルド上層：昼～"
@@ -1591,7 +1591,7 @@
   },
   {
    "source": [
-    "00030",
+    "^00030\\.",
     "HEAVENSWARD_FFXIV_31",
     "蒼天騎士団",
     "The Heavens' Ward"
@@ -1626,7 +1626,7 @@
   },
   {
    "source": [
-    "00030",
+    "^00030\\.",
     "HEAVENSWARD_FFXIV_31",
     "蒼天騎士団",
     "The Heavens' Ward"
@@ -1658,7 +1658,7 @@
   },
   {
    "source": [
-    "00031",
+    "^00031\\.",
     "HEAVENSWARD_FFXIV_32",
     "Night in the Brume",
     "雲霧街の夜霧 ～イシュガルド下層：夜～"
@@ -1690,7 +1690,7 @@
   },
   {
    "source": [
-    "00031",
+    "^00031\\.",
     "HEAVENSWARD_FFXIV_32",
     "Night in the Brume",
     "雲霧街の夜霧 ～イシュガルド下層：夜～"
@@ -1702,7 +1702,7 @@
   },
   {
    "source": [
-    "00032",
+    "^00032\\.",
     "HEAVENSWARD_FFXIV_33",
     "Heavy Rain",
     "雷雨の如く"
@@ -1734,7 +1734,7 @@
   },
   {
    "source": [
-    "00033",
+    "^00033\\.",
     "HEAVENSWARD_FFXIV_34",
     "Limitless Blue",
     "果てなき蒼 ～蛮神ビスマルク前哨戦～"
@@ -1769,7 +1769,7 @@
   },
   {
    "source": [
-    "00034",
+    "^00034\\.",
     "HEAVENSWARD_FFXIV_35",
     "Woe that Is Madness",
     "狂気なる災厄 ～蛮神ビスマルク討滅戦～"
@@ -1805,7 +1805,7 @@
   },
   {
    "source": [
-    "00035",
+    "^00035\\.",
     "HEAVENSWARD_FFXIV_36",
     "Misconception",
     "誤想"
@@ -1837,7 +1837,7 @@
   },
   {
    "source": [
-    "00036",
+    "^00036\\.",
     "HEAVENSWARD_FFXIV_37",
     "Missing Pages",
     "欠けた頁 ～低地ドラヴァニア：昼～"
@@ -1869,7 +1869,7 @@
   },
   {
    "source": [
-    "00036",
+    "^00036\\.",
     "HEAVENSWARD_FFXIV_37",
     "Missing Pages",
     "欠けた頁 ～低地ドラヴァニア：昼～"
@@ -1901,7 +1901,7 @@
   },
   {
    "source": [
-    "00037",
+    "^00037\\.",
     "HEAVENSWARD_FFXIV_38",
     "Paradise Found",
     "約束の地"
@@ -1936,7 +1936,7 @@
   },
   {
    "source": [
-    "00038",
+    "^00038\\.",
     "HEAVENSWARD_FFXIV_39",
     "The Mushroomery",
     "マトーヤの洞窟 ～蒼天～"
@@ -1968,7 +1968,7 @@
   },
   {
    "source": [
-    "00038",
+    "^00038\\.",
     "HEAVENSWARD_FFXIV_39",
     "The Mushroomery",
     "マトーヤの洞窟 ～蒼天～"
@@ -2000,7 +2000,7 @@
   },
   {
    "source": [
-    "00039",
+    "^00039\\.",
     "HEAVENSWARD_FFXIV_40",
     "Ink Long Dry",
     "万世の言葉 ～禁書回収 グブラ幻想図書館～"
@@ -2032,7 +2032,7 @@
   },
   {
    "source": [
-    "00039",
+    "^00039\\.",
     "HEAVENSWARD_FFXIV_40",
     "Ink Long Dry",
     "万世の言葉 ～禁書回収 グブラ幻想図書館～"
@@ -2064,7 +2064,7 @@
   },
   {
    "source": [
-    "00040",
+    "^00040\\.",
     "HEAVENSWARD_FFXIV_41",
     "Homestead",
     "ホームステッド"
@@ -2096,7 +2096,7 @@
   },
   {
    "source": [
-    "00040",
+    "^00040\\.",
     "HEAVENSWARD_FFXIV_41",
     "Homestead",
     "ホームステッド"
@@ -2128,7 +2128,7 @@
   },
   {
    "source": [
-    "00041",
+    "^00041\\.",
     "HEAVENSWARD_FFXIV_42",
     "The Silent Regard of Stars",
     "静寂の星空 ～低地ドラヴァニア：夜～"
@@ -2160,7 +2160,7 @@
   },
   {
    "source": [
-    "00041",
+    "^00041\\.",
     "HEAVENSWARD_FFXIV_42",
     "The Silent Regard of Stars",
     "静寂の星空 ～低地ドラヴァニア：夜～"
@@ -2211,7 +2211,7 @@
   },
   {
    "source": [
-    "00042",
+    "^00042\\.",
     "HEAVENSWARD_FFXIV_43",
     "Poison Ivy",
     "有毒植物 ～草木庭園　聖モシャーヌ植物園～"
@@ -2246,7 +2246,7 @@
   },
   {
    "source": [
-    "00043",
+    "^00043\\.",
     "HEAVENSWARD_FFXIV_44",
     "Upon the Rocks",
     "座礁 ～制圧巨塔 シリウス大灯台～"
@@ -2281,7 +2281,7 @@
   },
   {
    "source": [
-    "00044",
+    "^00044\\.",
     "HEAVENSWARD_FFXIV_45",
     "Aetherpause",
     "エーテル圏 ～魔航船ヴォイドアーク～"
@@ -2313,7 +2313,7 @@
   },
   {
    "source": [
-    "00046",
+    "^00046\\.",
     "HEAVENSWARD_FFXIV_47",
     "Voidal Manifest",
     "ヴォイドの棺 ～魔航船ヴォイドアーク～"
@@ -2348,7 +2348,7 @@
   },
   {
    "source": [
-    "00047",
+    "^00047\\.",
     "HEAVENSWARD_FFXIV_48",
     "Stone and Steel",
     "石と鋼"
@@ -2383,7 +2383,7 @@
   },
   {
    "source": [
-    "00047",
+    "^00047\\.",
     "HEAVENSWARD_FFXIV_48",
     "Stone and Steel",
     "石と鋼"
@@ -2415,7 +2415,7 @@
   },
   {
    "source": [
-    "00049",
+    "^00049\\.",
     "HEAVENSWARD_FFXIV_50",
     "Unbreakable",
     "アンブレーカブル ～博物戦艦 フラクタル・コンティニアム～"
@@ -2447,7 +2447,7 @@
   },
   {
    "source": [
-    "00049",
+    "^00049\\.",
     "HEAVENSWARD_FFXIV_50",
     "Unbreakable",
     "アンブレーカブル ～博物戦艦 フラクタル・コンティニアム～"
@@ -2479,7 +2479,7 @@
   },
   {
    "source": [
-    "00050",
+    "^00050\\.",
     "HEAVENSWARD_FFXIV_51",
     "Imagination",
     "イマジネーション ～蒼天聖戦 魔科学研究所～"
@@ -2511,7 +2511,7 @@
   },
   {
    "source": [
-    "00050",
+    "^00050\\.",
     "HEAVENSWARD_FFXIV_51",
     "Imagination",
     "イマジネーション ～蒼天聖戦 魔科学研究所～"
@@ -2523,7 +2523,7 @@
   },
   {
    "source": [
-    "00051",
+    "^00051\\.",
     "HEAVENSWARD_FFXIV_52",
     "Heroes Never Die",
     "英傑は死なず ～蒼天幻想 ナイツ・オブ・ラウンド討滅戦～"
@@ -2555,7 +2555,7 @@
   },
   {
    "source": [
-    "00052",
+    "^00052\\.",
     "HEAVENSWARD_FFXIV_53",
     "英傑 ～ナイツ・オブ・ラウンド討滅戦～",
     "Heroes"
@@ -2591,7 +2591,7 @@
   },
   {
    "source": [
-    "00052",
+    "^00052\\.",
     "HEAVENSWARD_FFXIV_53",
     "英傑 ～ナイツ・オブ・ラウンド討滅戦～",
     "Heroes"
@@ -2603,7 +2603,7 @@
   },
   {
    "source": [
-    "00053",
+    "^00053\\.",
     "HEAVENSWARD_FFXIV_54",
     "Inception",
     "発端"
@@ -2635,7 +2635,7 @@
   },
   {
    "source": [
-    "00054",
+    "^00054\\.",
     "HEAVENSWARD_FFXIV_55",
     "Dragonsong"
    ],
@@ -2689,7 +2689,7 @@
   },
   {
    "source": [
-    "00054",
+    "^00054\\.",
     "HEAVENSWARD_FFXIV_55",
     "Dragonsong"
    ],
@@ -2720,7 +2720,7 @@
   },
   {
    "source": [
-    "00055",
+    "^00055\\.",
     "HEAVENSWARD_FFXIV_56",
     "Sins of the Father, Sins of the Son",
     "製造者責任 ～機工城アレキサンダー：起動編～"
@@ -2755,7 +2755,7 @@
   },
   {
    "source": [
-    "00056",
+    "^00056\\.",
     "HEAVENSWARD_FFXIV_57",
     "Locus",
     "ローカス ～機工城アレキサンダー：起動編～"
@@ -2792,7 +2792,7 @@
   },
   {
    "source": [
-    "00057",
+    "^00057\\.",
     "HEAVENSWARD_FFXIV_58",
     "Metal",
     "メタル ～機工城アレキサンダー：起動編～"

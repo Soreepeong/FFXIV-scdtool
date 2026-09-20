@@ -11,7 +11,7 @@
  "items": [
   {
    "source": [
-    "00000",
+    "^00000\\.",
     "SHADOWBRINGERS_01",
     "A Land Long Dead",
     "死の大地 ～永久焦土 ザ・バーン～"
@@ -46,7 +46,7 @@
   },
   {
    "source": [
-    "00001",
+    "^00001\\.",
     "SHADOWBRINGERS_02",
     "Bedlam's Brink",
     "不穏の淵"
@@ -81,7 +81,7 @@
   },
   {
    "source": [
-    "00002",
+    "^00002\\.",
     "SHADOWBRINGERS_03",
     "Battle",
     "戦闘シーン ～次元の狭間オメガ：アルファ編～"
@@ -116,7 +116,7 @@
   },
   {
    "source": [
-    "00003",
+    "^00003\\.",
     "SHADOWBRINGERS_04",
     "エスケープ ～次元の狭間オメガ：アルファ編～",
     "eScape"
@@ -152,7 +152,7 @@
   },
   {
    "source": [
-    "00004",
+    "^00004\\.",
     "SHADOWBRINGERS_05",
     "Everywhere and Nowhere",
     "何処でもない何処か"
@@ -184,7 +184,7 @@
   },
   {
    "source": [
-    "00004",
+    "^00004\\.",
     "SHADOWBRINGERS_05",
     "Everywhere and Nowhere",
     "何処でもない何処か"
@@ -216,7 +216,7 @@
   },
   {
    "source": [
-    "00005",
+    "^00005\\.",
     "SHADOWBRINGERS_06",
     "Heartless",
     "心を持たぬ者 ～次元の狭間オメガ：アルファ編～"
@@ -251,7 +251,7 @@
   },
   {
    "source": [
-    "00005",
+    "^00005\\.",
     "SHADOWBRINGERS_06",
     "Heartless",
     "心を持たぬ者 ～次元の狭間オメガ：アルファ編～"
@@ -286,7 +286,7 @@
   },
   {
    "source": [
-    "00006",
+    "^00006\\.",
     "SHADOWBRINGERS_07",
     "From the Heavens",
     "空より現れし者 ～次元の狭間オメガ：アルファ編～"
@@ -321,7 +321,7 @@
   },
   {
    "source": [
-    "00006",
+    "^00006\\.",
     "SHADOWBRINGERS_07",
     "From the Heavens",
     "空より現れし者 ～次元の狭間オメガ：アルファ編～"
@@ -353,7 +353,7 @@
   },
   {
    "source": [
-    "00007",
+    "^00007\\.",
     "SHADOWBRINGERS_08",
     "A Dream in Flight",
     "翼に夢を"
@@ -385,7 +385,7 @@
   },
   {
    "source": [
-    "00007",
+    "^00007\\.",
     "SHADOWBRINGERS_08",
     "A Dream in Flight",
     "翼に夢を"
@@ -417,7 +417,7 @@
   },
   {
    "source": [
-    "00007",
+    "^00007\\.",
     "SHADOWBRINGERS_08",
     "A Dream in Flight",
     "翼に夢を"
@@ -449,7 +449,7 @@
   },
   {
    "source": [
-    "00008",
+    "^00008\\.",
     "SHADOWBRINGERS_09",
     "Ending",
     "エンディング"
@@ -481,7 +481,7 @@
   },
   {
    "source": [
-    "00008",
+    "^00008\\.",
     "SHADOWBRINGERS_09",
     "Ending",
     "エンディング"
@@ -516,7 +516,7 @@
   },
   {
    "source": [
-    "00009",
+    "^00009\\.",
     "SHADOWBRINGERS_10",
     "From Mud",
     "泥中の蓮 ～草木汚染 聖モシャーヌ植物園～"
@@ -551,7 +551,7 @@
   },
   {
    "source": [
-    "00010",
+    "^00010\\.",
     "SHADOWBRINGERS_11",
     "Sunset",
     "千年の誰そ彼 ～朱雀征魂戦～"
@@ -583,7 +583,7 @@
   },
   {
    "source": [
-    "00010",
+    "^00010\\.",
     "SHADOWBRINGERS_11",
     "Sunset",
     "千年の誰そ彼 ～朱雀征魂戦～"
@@ -618,7 +618,7 @@
   },
   {
    "source": [
-    "00011",
+    "^00011\\.",
     "SHADOWBRINGERS_12",
     "Sunrise",
     "千年の暁 ～朱雀征魂戦～"
@@ -655,13 +655,13 @@
   {
    "source": {
     "SHADOWBRINGERS_13": [
-     "00012",
+     "^00012\\.",
      "SHADOWBRINGERS_13",
      "星芒の歌",
      "Starlight, Starbright"
     ],
     "SHADOWBRINGERS_14": [
-     "00013",
+     "^00013\\.",
      "SHADOWBRINGERS_14",
      "絶望の歌",
      "Starlight, Not Right"
@@ -706,7 +706,7 @@
   },
   {
    "source": [
-    "00012",
+    "^00012\\.",
     "SHADOWBRINGERS_13",
     "Starlight, Starbright",
     "星芒の歌"
@@ -738,7 +738,7 @@
   },
   {
    "source": [
-    "00014",
+    "^00014\\.",
     "SHADOWBRINGERS_15",
     "Doman Distractions",
     "東方遊戯"
@@ -773,7 +773,7 @@
   },
   {
    "source": [
-    "00015",
+    "^00015\\.",
     "SHADOWBRINGERS_16",
     "TH_131",
     "Gates of Paradise - The Garden of Ru'Hmet"
@@ -808,7 +808,7 @@
   },
   {
    "source": [
-    "00015",
+    "^00015\\.",
     "SHADOWBRINGERS_16",
     "Gates of Paradise - The Garden of Ru'Hmet"
    ],
@@ -839,7 +839,7 @@
   },
   {
    "source": [
-    "00016",
+    "^00016\\.",
     "SHADOWBRINGERS_17",
     "Onslaught"
    ],
@@ -873,7 +873,7 @@
   },
   {
    "source": [
-    "00017",
+    "^00017\\.",
     "SHADOWBRINGERS_18",
     "Turmoil"
    ],
@@ -908,7 +908,7 @@
   },
   {
    "source": [
-    "00018",
+    "^00018\\.",
     "SHADOWBRINGERS_19",
     "Under The Stars"
    ],
@@ -942,7 +942,7 @@
   },
   {
    "source": [
-    "00019",
+    "^00019\\.",
     "SHADOWBRINGERS_20",
     "Pressure (No. 1)",
     "緊迫1"
@@ -977,7 +977,7 @@
   },
   {
    "source": [
-    "00020",
+    "^00020\\.",
     "SHADOWBRINGERS_21",
     "Antipyretic"
    ],
@@ -1011,7 +1011,7 @@
   },
   {
    "source": [
-    "00021",
+    "^00021\\.",
     "SHADOWBRINGERS_22",
     "Bloody Excrement"
    ],
@@ -1042,7 +1042,7 @@
   },
   {
    "source": [
-    "00022",
+    "^00022\\.",
     "SHADOWBRINGERS_23",
     "A Man Consumed",
     "異形の者"
@@ -1077,7 +1077,7 @@
   },
   {
    "source": [
-    "00023",
+    "^00023\\.",
     "SHADOWBRINGERS_24",
     "St. Ajora's Theme",
     "聖アジョラのテーマ"
@@ -1109,7 +1109,7 @@
   },
   {
    "source": [
-    "00024",
+    "^00024\\.",
     "SHADOWBRINGERS_25",
     "Descent",
     "降臨"
@@ -1141,7 +1141,7 @@
   },
   {
    "source": [
-    "00025",
+    "^00025\\.",
     "SHADOWBRINGERS_26",
     "Ultema The Perfect Body!"
    ],
@@ -1175,7 +1175,7 @@
   },
   {
    "source": [
-    "00028",
+    "^00028\\.",
     "SHADOWBRINGERS_29",
     "Brave Story",
     "ブレイブストーリー"
@@ -1207,7 +1207,7 @@
   },
   {
    "source": [
-    "00028",
+    "^00028\\.",
     "SHADOWBRINGERS_29",
     "Brave Story",
     "ブレイブストーリー"
@@ -1242,7 +1242,7 @@
   },
   {
    "source": [
-    "00029",
+    "^00029\\.",
     "SHADOWBRINGERS_30",
     "Alma's Theme",
     "アルマのテーマ"
@@ -1277,7 +1277,7 @@
   },
   {
    "source": [
-    "00030",
+    "^00030\\.",
     "SHADOWBRINGERS_31",
     "Poachers' Den",
     "毛皮骨肉商"
@@ -1309,7 +1309,7 @@
   },
   {
    "source": [
-    "00031",
+    "^00031\\.",
     "SHADOWBRINGERS_32",
     "Epilogue Movie"
    ],
@@ -1340,7 +1340,7 @@
   },
   {
    "source": [
-    "00032",
+    "^00032\\.",
     "SHADOWBRINGERS_33",
     "Staff Credit"
    ],
@@ -1374,7 +1374,7 @@
   },
   {
    "source": [
-    "00033",
+    "^00033\\.",
     "SHADOWBRINGERS_34",
     "Intrigue",
     "謀略"
@@ -1406,7 +1406,7 @@
   },
   {
    "source": [
-    "00034",
+    "^00034\\.",
     "SHADOWBRINGERS_35",
     "From the Dragon's Wake",
     "雲蒸龍変 ～青龍征魂戦～"
@@ -1441,7 +1441,7 @@
   },
   {
    "source": [
-    "00034",
+    "^00034\\.",
     "SHADOWBRINGERS_35",
     "From the Dragon's Wake",
     "雲蒸龍変 ～青龍征魂戦～"
@@ -1473,7 +1473,7 @@
   },
   {
    "source": [
-    "00035",
+    "^00035\\.",
     "SHADOWBRINGERS_36",
     "A Pall Most Murderous",
     "黒煙の戦い ～境界戦線 ギムリトダーク～"
@@ -1508,7 +1508,7 @@
   },
   {
    "source": [
-    "00036",
+    "^00036\\.",
     "SHADOWBRINGERS_37"
    ],
    "target": {
@@ -1538,7 +1538,7 @@
   },
   {
    "source": [
-    "00036",
+    "^00036\\.",
     "SHADOWBRINGERS_37"
    ],
    "target": {
@@ -1568,7 +1568,7 @@
   },
   {
    "source": [
-    "00037",
+    "^00037\\.",
     "SHADOWBRINGERS_38",
     "Four-fold Knowing",
     "四重の見聞を経て"
@@ -1600,7 +1600,7 @@
   },
   {
    "source": [
-    "00038",
+    "^00038\\.",
     "SHADOWBRINGERS_39",
     "The Dark Which Illuminates the World",
     "世界を照らす闇 ～クリスタリウム：昼～"
@@ -1635,7 +1635,7 @@
   },
   {
    "source": [
-    "00039",
+    "^00039\\.",
     "SHADOWBRINGERS_40",
     "Unmatching Pieces",
     "合わないピース"
@@ -1667,7 +1667,7 @@
   },
   {
    "source": [
-    "00039",
+    "^00039\\.",
     "SHADOWBRINGERS_40",
     "Unmatching Pieces",
     "合わないピース"
@@ -1699,7 +1699,7 @@
   },
   {
    "source": [
-    "00040",
+    "^00040\\.",
     "SHADOWBRINGERS_41",
     "Rencounter",
     "対峙"
@@ -1738,7 +1738,7 @@
   },
   {
    "source": [
-    "00041",
+    "^00041\\.",
     "SHADOWBRINGERS_42",
     "Such as it Is",
     "それなりの暮らし"
@@ -1770,7 +1770,7 @@
   },
   {
    "source": [
-    "00042",
+    "^00042\\.",
     "SHADOWBRINGERS_43",
     "Pain in Pleasure",
     "享楽の痛み"
@@ -1805,7 +1805,7 @@
   },
   {
    "source": [
-    "00043",
+    "^00043\\.",
     "SHADOWBRINGERS_44",
     "Sands of Amber",
     "琥珀の砂漠 ～アム・アレーン：昼～"
@@ -1840,7 +1840,7 @@
   },
   {
    "source": [
-    "00044",
+    "^00044\\.",
     "SHADOWBRINGERS_45",
     "No Greater Sorrow",
     "言い尽くせぬ悲哀"
@@ -1875,7 +1875,7 @@
   },
   {
    "source": [
-    "00045",
+    "^00045\\.",
     "SHADOWBRINGERS_46",
     "Paradisaical Predicaments",
     "天上の窮地"
@@ -1907,7 +1907,7 @@
   },
   {
    "source": [
-    "00046",
+    "^00046\\.",
     "SHADOWBRINGERS_47",
     "The Source",
     "始まりの湖 ～レイクランド：昼～"
@@ -1942,7 +1942,7 @@
   },
   {
    "source": [
-    "00047",
+    "^00047\\.",
     "SHADOWBRINGERS_48",
     "To Fire and Sword",
     "炎と剣によりて ～殺戮郷村 ホルミンスター～"
@@ -1977,7 +1977,7 @@
   },
   {
    "source": [
-    "00048",
+    "^00048\\.",
     "SHADOWBRINGERS_49",
     "Insatiable",
     "貪欲"
@@ -2012,7 +2012,7 @@
   },
   {
    "source": [
-    "00049",
+    "^00049\\.",
     "SHADOWBRINGERS_50",
     "Unchanging, Everchanging",
     "不変と変化 ～レイクランド：夜～"
@@ -2047,7 +2047,7 @@
   },
   {
    "source": [
-    "00050",
+    "^00050\\.",
     "SHADOWBRINGERS_51",
     "On Our Fates Alight",
     "運命の旅"
@@ -2083,7 +2083,7 @@
   },
   {
    "source": [
-    "00051",
+    "^00051\\.",
     "SHADOWBRINGERS_52",
     "Knowledge Never Sleeps",
     "知恵は眠らず ～クリスタリウム：夜～"
@@ -2118,7 +2118,7 @@
   },
   {
    "source": [
-    "00052",
+    "^00052\\.",
     "SHADOWBRINGERS_53",
     "High Treason",
     "大逆"
@@ -2150,7 +2150,7 @@
   },
   {
    "source": [
-    "00053",
+    "^00053\\.",
     "SHADOWBRINGERS_54",
     "Fierce and Free",
     "残忍と自由 ～イル・メグ：昼～"
@@ -2182,7 +2182,7 @@
   },
   {
    "source": [
-    "00053",
+    "^00053\\.",
     "SHADOWBRINGERS_54",
     "Fierce and Free",
     "残忍と自由 ～イル・メグ：昼～"
@@ -2214,7 +2214,7 @@
   },
   {
    "source": [
-    "00055",
+    "^00055\\.",
     "SHADOWBRINGERS_55",
     "A Reason to Live",
     "生きる理由"
@@ -2249,7 +2249,7 @@
   },
   {
    "source": [
-    "00056",
+    "^00056\\.",
     "SHADOWBRINGERS_56",
     "Figments",
     "虚構 ～水妖幻園 ドォーヌ・メグ～"
@@ -2284,7 +2284,7 @@
   },
   {
    "source": [
-    "00057",
+    "^00057\\.",
     "SHADOWBRINGERS_57",
     "What Angel Wakes Me",
     "目覚めの御使い ～ティターニア討滅戦～"
@@ -2319,7 +2319,7 @@
   },
   {
    "source": [
-    "00057",
+    "^00057\\.",
     "SHADOWBRINGERS_57",
     "What Angel Wakes Me",
     "目覚めの御使い ～ティターニア討滅戦～"
@@ -2351,7 +2351,7 @@
   },
   {
    "source": [
-    "00058",
+    "^00058\\.",
     "SHADOWBRINGERS_58",
     "The Faerie Ring",
     "妖精の輪 ～イル・メグ：夜～"
@@ -2386,7 +2386,7 @@
   },
   {
    "source": [
-    "00059",
+    "^00059\\.",
     "SHADOWBRINGERS_59",
     "Civilizations",
     "シヴィライゼーションズ ～ラケティカ大森林：昼～"
@@ -2421,7 +2421,7 @@
   },
   {
    "source": [
-    "00060",
+    "^00060\\.",
     "SHADOWBRINGERS_60",
     "Unwound",
     "紐解かれしもの ～古跡探索 キタンナ神影洞～"
@@ -2456,7 +2456,7 @@
   },
   {
    "source": [
-    "00061",
+    "^00061\\.",
     "SHADOWBRINGERS_61",
     "A Hopeless Race",
     "望みなき競争 ～ラケティカ大森林：夜～"
@@ -2491,7 +2491,7 @@
   },
   {
    "source": [
-    "00062",
+    "^00062\\.",
     "SHADOWBRINGERS_62",
     "Tomorrow and Tomorrow - Reprise",
     "反復する明日"
@@ -2523,7 +2523,7 @@
   },
   {
    "source": [
-    "00062",
+    "^00062\\.",
     "SHADOWBRINGERS_62",
     "Tomorrow and Tomorrow - Reprise",
     "反復する明日"
@@ -2555,7 +2555,7 @@
   },
   {
    "source": [
-    "00063",
+    "^00063\\.",
     "SHADOWBRINGERS_63",
     "Deep Down",
     "深き底 ～爽涼離宮 マリカの大井戸～"
@@ -2590,7 +2590,7 @@
   },
   {
    "source": [
-    "00064",
+    "^00064\\.",
     "SHADOWBRINGERS_64",
     "Sands of Blood",
     "鮮血の砂漠 ～アム・アレーン：夜～"
@@ -2625,7 +2625,7 @@
   },
   {
    "source": [
-    "00065",
+    "^00065\\.",
     "SHADOWBRINGERS_65",
     "A Better Tomorrow",
     "より良き明日"
@@ -2657,7 +2657,7 @@
   },
   {
    "source": [
-    "00065",
+    "^00065\\.",
     "SHADOWBRINGERS_65",
     "A Better Tomorrow",
     "より良き明日"
@@ -2689,7 +2689,7 @@
   },
   {
    "source": [
-    "00066",
+    "^00066\\.",
     "SHADOWBRINGERS_66",
     "Dangerous Words",
     "危険な言葉"
@@ -2721,7 +2721,7 @@
   },
   {
    "source": [
-    "00066",
+    "^00066\\.",
     "SHADOWBRINGERS_66",
     "Dangerous Words",
     "危険な言葉"
@@ -2753,7 +2753,7 @@
   },
   {
    "source": [
-    "00067",
+    "^00067\\.",
     "SHADOWBRINGERS_67",
     "In the Belly of the Beast",
     "獣の腹 ～偽造天界 グルグ火山～"
@@ -2788,7 +2788,7 @@
   },
   {
    "source": [
-    "00068",
+    "^00068\\.",
     "SHADOWBRINGERS_68",
     "Insanity",
     "インサニティー ～イノセンス討滅戦～"
@@ -2824,7 +2824,7 @@
   },
   {
    "source": [
-    "00069",
+    "^00069\\.",
     "SHADOWBRINGERS_69",
     "Tears in the Rain",
     "雨の中の涙"
@@ -2856,7 +2856,7 @@
   },
   {
    "source": [
-    "00070",
+    "^00070\\.",
     "SHADOWBRINGERS_70",
     "Full Fathom Five",
     "五尋の深み ～テンペスト：浅部～"
@@ -2891,7 +2891,7 @@
   },
   {
    "source": [
-    "00071",
+    "^00071\\.",
     "SHADOWBRINGERS_71",
     "'Neath Dark Waters",
     "冥き水底 ～テンペスト：深部～"
@@ -2926,7 +2926,7 @@
   },
   {
    "source": [
-    "00072",
+    "^00072\\.",
     "SHADOWBRINGERS_72",
     "More than Truth",
     "驚嘆の真実"
@@ -2958,7 +2958,7 @@
   },
   {
    "source": [
-    "00073",
+    "^00073\\.",
     "SHADOWBRINGERS_73",
     "Mortal Instants",
     "死の刻 ～終末幻想 アーモロート～"
@@ -2993,7 +2993,7 @@
   },
   {
    "source": [
-    "00074",
+    "^00074\\.",
     "SHADOWBRINGERS_74",
     "Who Brings Shadow",
     "影をもたらす者 ～ハーデス前哨戦～"
@@ -3026,36 +3026,36 @@
   {
    "source": {
     "SHADOWBRINGERS_74": [
-     "00074",
+     "^00074\\.",
      "SHADOWBRINGERS_74",
      "影をもたらす者 ～ハーデス前哨戦～",
      "Who Brings Shadow"
     ],
     "SHADOWBRINGERS_76": [
-     "00076",
+     "^00076\\.",
      "SHADOWBRINGERS_76",
      "Tomorrow and Tomorrow"
     ],
     "SHADOWBRINGERS_81": [
-     "00081",
+     "^00081\\.",
      "SHADOWBRINGERS_81",
      "耽溺 ～ユールモア：昼～",
      "Indulgence"
     ],
     "SHADOWBRINGERS_53": [
-     "00052",
+     "^00052\\.",
      "SHADOWBRINGERS_53",
      "大逆",
      "High Treason"
     ],
     "SHADOWBRINGERS_52": [
-     "00051",
+     "^00051\\.",
      "SHADOWBRINGERS_52",
      "知恵は眠らず ～クリスタリウム：夜～",
      "Knowledge Never Sleeps"
     ],
     "SHADOWBRINGERS_39": [
-     "00038",
+     "^00038\\.",
      "SHADOWBRINGERS_39",
      "世界を照らす闇 ～クリスタリウム：昼～",
      "The Dark Which Illuminates the World"
@@ -3188,7 +3188,7 @@
   },
   {
    "source": [
-    "00075",
+    "^00075\\.",
     "SHADOWBRINGERS_75",
     "Invincible",
     "砕けぬ思い ～ハーデス討滅戦～"
@@ -3224,7 +3224,7 @@
   },
   {
    "source": [
-    "00076",
+    "^00076\\.",
     "SHADOWBRINGERS_76",
     "Tomorrow and Tomorrow"
    ],
@@ -3258,7 +3258,7 @@
   },
   {
    "source": [
-    "00076",
+    "^00076\\.",
     "SHADOWBRINGERS_76",
     "Tomorrow and Tomorrow"
    ],
@@ -3289,7 +3289,7 @@
   },
   {
    "source": [
-    "00076",
+    "^00076\\.",
     "SHADOWBRINGERS_76",
     "Tomorrow and Tomorrow"
    ],
@@ -3321,7 +3321,7 @@
   },
   {
    "source": [
-    "00077",
+    "^00077\\.",
     "SHADOWBRINGERS_77",
     "The Quick Way",
     "クイックウェイ ～コルシア島：夜～"
@@ -3356,7 +3356,7 @@
   },
   {
    "source": [
-    "00078",
+    "^00078\\.",
     "SHADOWBRINGERS_78",
     "A World Divided",
     "分かたれし世界 ～コルシア島：昼～"
@@ -3391,7 +3391,7 @@
   },
   {
    "source": [
-    "00079",
+    "^00079\\.",
     "SHADOWBRINGERS_79",
     "Vamo' alla Flamenco",
     "Vamo' alla Flamenco ～漆黒～"
@@ -3426,7 +3426,7 @@
   },
   {
    "source": [
-    "00080",
+    "^00080\\.",
     "SHADOWBRINGERS_80",
     "Masquerade",
     "仮面舞踏会 ～ユールモア：夜～"
@@ -3461,7 +3461,7 @@
   },
   {
    "source": [
-    "00081",
+    "^00081\\.",
     "SHADOWBRINGERS_81",
     "Indulgence",
     "耽溺 ～ユールモア：昼～"
@@ -3496,7 +3496,7 @@
   },
   {
    "source": [
-    "00082",
+    "^00082\\.",
     "SHADOWBRINGERS_82",
     "Shadows Withal",
     "影なき影 ～創造機関 アナイダアカデミア～"
@@ -3528,7 +3528,7 @@
   },
   {
    "source": [
-    "00082",
+    "^00082\\.",
     "SHADOWBRINGERS_82",
     "Shadows Withal",
     "影なき影 ～創造機関 アナイダアカデミア～"
@@ -3560,7 +3560,7 @@
   },
   {
    "source": [
-    "00083",
+    "^00083\\.",
     "SHADOWBRINGERS_83",
     "A Long Fall",
     "ロングフォール ～異界遺構 シルクス・ツイニング～"
@@ -3595,7 +3595,7 @@
   },
   {
    "source": [
-    "00084",
+    "^00084\\.",
     "SHADOWBRINGERS_84",
     "The Lute",
     "ノアのリュート ～漆黒～"
@@ -3627,7 +3627,7 @@
   },
   {
    "source": [
-    "00085",
+    "^00085\\.",
     "SHADOWBRINGERS_85",
     "Blue Fields",
     "Blue Fields ～漆黒～"
@@ -3662,7 +3662,7 @@
   },
   {
    "source": [
-    "00086",
+    "^00086\\.",
     "SHADOWBRINGERS_86",
     "Force Your Way",
     "Force Your Way ～漆黒～"
@@ -3697,7 +3697,7 @@
   },
   {
    "source": [
-    "00087",
+    "^00087\\.",
     "SHADOWBRINGERS_87",
     "Blinding Indigo",
     "輝ける蒼 ～希望の園エデン：覚醒編～"
@@ -3732,7 +3732,7 @@
   },
   {
    "source": [
-    "00088",
+    "^00088\\.",
     "SHADOWBRINGERS_88",
     "Landslide",
     "ランドスライド ～希望の園エデン：覚醒編～"
