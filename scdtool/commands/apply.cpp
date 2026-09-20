@@ -3,6 +3,7 @@
 
 #include "utils/argactions.h"
 #include "utils/audio_match.h"
+#include "utils/lossless_vorbis.h"
 #include "utils/misc.h"
 #include "utils/win32_process.h"
 
@@ -1288,39 +1289,21 @@ namespace {
 	}
 
 namespace {
-	// Builds the sound entry as *lossless* Vorbis, by handing the finished buffer to the
-	// llogg encoder and wrapping the Ogg stream it produces rather than encoding here.
+	// Builds the sound entry as *lossless* Vorbis: the buffer goes through scdtool's own
+	// encoder, whose output decodes back to bit-identical 16-bit PCM, and the Ogg stream it
+	// produces is wrapped rather than re-encoded.
 	//
-	// libvorbis cannot do this at any quality setting: what makes it lossy is encoder
-	// policy -- a fitted floor curve and a rate-controlled residue -- not the format, and
-	// the lossless construction replaces both (flat floor, trained cascade quantiser,
-	// the real decoder in a correction loop). That encoder is a separate program, so this
-	// shells out to it instead of duplicating it.
-	//
-	// Three things have to line up, or the output is wrong rather than merely larger:
-	//
-	// * The guarantee is about *16-bit* PCM, so the float buffer is quantised here. That
-	//   is not a compromise for this pipeline: Miles hands the engine 16-bit samples and
-	//   nothing in the SCD Ogg path records a depth, so this is the step the decoder was
-	//   going to perform anyway -- doing it up front is what makes the rest exact.
-	// * The scale is 32767, not 32768, and most of the game's float-to-int conversion
-	//   truncates toward zero rather than rounding -- the whole three-or-more-channel
-	//   path does. `--mss` is the encoder's shorthand for both, and it aims a quarter LSB
-	//   away from zero so either conversion lands on the same integer.
-	// * The buffer reaching here is already in Vorbis channel order, and llogg writes PCM
-	//   channel i to Vorbis channel i with no remapping of its own, so the permutation
-	//   the caller already applied is exactly right and nothing further is wanted.
+	// What "lossless" is about here is 16-bit PCM, which is all the game's decoder emits. The
+	// float buffer is quantised to int16 once, up front -- the step the decoder was going to
+	// take anyway -- and everything after that is exact.
 	xivres::sound::writer::sound_item make_lossless_ogg_entry(
-		const std::filesystem::path& python,
-		const std::filesystem::path& llogg,
-		std::span<const float> floats,
+		const std::vector<float>& floats,
 		size_t channels,
 		size_t samplingRate,
 		size_t loopStartBlockIndex,
 		size_t loopEndBlockIndex,
 		std::span<const uint32_t> markIndices,
-		const std::filesystem::path& wavPath,
-		const std::filesystem::path& oggPath) {
+		std::string& reportOut) {
 
 		// A looping entry is only ever heard up to its loop end -- the game cuts back from
 		// there -- so encode that much and no more, which is what the libvorbis path's block
@@ -1330,66 +1313,34 @@ namespace {
 			frames = loopEndBlockIndex;
 
 		constexpr double FullScale = 32767.;
-		const auto dataBytes = frames * channels * sizeof(int16_t);
-		if (dataBytes + 0x2c > 0xFFFFFFFFull)
-			throw std::runtime_error(std::format(
-				"lossless: {} frames x {} ch does not fit a 32-bit WAV size field", frames, channels));
-
 		std::vector<int16_t> pcm(frames * channels);
 		for (size_t i = 0; i < pcm.size(); i++) {
 			const auto v = std::lround(static_cast<double>(floats[i]) * FullScale);
 			pcm[i] = static_cast<int16_t>(std::clamp<long>(v, -32768, 32767));
 		}
 
-		{
-			std::error_code ec;
-			std::filesystem::remove(oggPath, ec);
-			std::ofstream f(wavPath, std::ios::binary);
-			if (!f)
-				throw std::runtime_error(std::format("Could not create {}", u8(wavPath)));
-			const auto put32 = [&f](uint32_t v) { f.write(reinterpret_cast<const char*>(&v), 4); };
-			const auto put16 = [&f](uint16_t v) { f.write(reinterpret_cast<const char*>(&v), 2); };
-			const auto blockAlign = static_cast<uint16_t>(channels * sizeof(int16_t));
-			// Plain WAVE_FORMAT_PCM rather than the extensible form: the reader on the other
-			// side is ffmpeg, which takes either, and a channel mask would only invite a
-			// speaker-layout reinterpretation of what are actually engine-switched stems.
-			f.write("RIFF", 4);
-			put32(static_cast<uint32_t>(0x24 + dataBytes));
-			f.write("WAVEfmt ", 8);
-			put32(16);
-			put16(1);
-			put16(static_cast<uint16_t>(channels));
-			put32(static_cast<uint32_t>(samplingRate));
-			put32(static_cast<uint32_t>(samplingRate * blockAlign));
-			put16(blockAlign);
-			put16(16);
-			f.write("data", 4);
-			put32(static_cast<uint32_t>(dataBytes));
-			if (!pcm.empty())
-				f.write(reinterpret_cast<const char*>(pcm.data()), static_cast<std::streamsize>(dataBytes));
-			if (!f)
-				throw std::runtime_error(std::format("Could not write {}", u8(wavPath)));
-		}
-
-		// -X utf8 because this machine's Python follows a cp949 codepage otherwise, and the
-		// encoder's report goes through print().
-		std::vector<std::wstring> args{
-			L"-X", L"utf8", llogg.wstring(), L"encode",
-			wavPath.wstring(), oggPath.wstring(), L"--mss",
-		};
+		lossless_vorbis::options opts;
+		// The game's decoder rounds on some paths and truncates on others -- the 3-or-more
+		// channel path truncates throughout -- so aim for the value that survives either.
+		opts.Rounding = lossless_vorbis::rounding::Either;
 		if (loopStartBlockIndex || loopEndBlockIndex) {
-			args.insert(args.end(), {L"--loop-start", std::to_wstring(loopStartBlockIndex)});
-			args.insert(args.end(), {L"--loop-end", std::to_wstring(loopEndBlockIndex)});
+			opts.Comments.push_back(std::format("LoopStart={}", loopStartBlockIndex));
+			opts.Comments.push_back(std::format("LoopEnd={}", loopEndBlockIndex));
 		}
-		// A nonzero exit means the encode did not come out bit-exact, which is a failure and
-		// not a quality setting to shrug at; run_process_capture_stdout carries the
-		// encoder's own diagnosis out in the exception.
-		run_process_capture_stdout(python, args);
 
-		const xivres::file_stream oggStream(oggPath);
-		auto entry = xivres::sound::writer::sound_item::make_from_ogg(oggStream.as_linear_reader<uint8_t>());
+		const auto encoded = lossless_vorbis::encode(pcm, channels, samplingRate, opts);
+		if (!encoded.Exact)
+			throw std::runtime_error(std::format(
+				"lossless: {} of {} samples would not decode back exactly (worst {:.3f} LSB)",
+				encoded.Mismatches, pcm.size(), encoded.WorstErrorLsb));
+		reportOut = std::format("{:.2f} bits/sample, {} levels x {} rungs, {} pass(es)",
+			encoded.BitsPerSample, encoded.Levels, encoded.Stages, encoded.Iterations);
+
+		auto entry = xivres::sound::writer::sound_item::make_from_ogg(
+			xivres::memory_stream(encoded.Ogg).as_linear_reader<uint8_t>());
 		if (!markIndices.empty())
-			entry.set_mark_chunks(static_cast<uint32_t>(loopStartBlockIndex), static_cast<uint32_t>(loopEndBlockIndex), markIndices);
+			entry.set_mark_chunks(static_cast<uint32_t>(loopStartBlockIndex),
+				static_cast<uint32_t>(loopEndBlockIndex), markIndices);
 		return entry;
 	}
 }
@@ -1407,13 +1358,13 @@ int cmd_apply(const std::vector<std::string>& args) {
 				"under --output-dir using the target's game-relative path.\n"
 				"\n"
 				"--ogg-quality takes oggenc's scale, -1 to 10, and libvorbis is handed a tenth of it.\n"
-				"\"lossless\" is the far end of that same axis: the libvorbis encode is replaced by a\n"
-				"bit-exact one driven through llogg.py, named by --llogg. What it is exact about is\n"
-				"16-bit PCM, which is all the game's decoder emits, so nothing audible is lost by it --\n"
-				"but entries come out roughly 5x the size, take minutes rather than seconds each, and\n"
-				"need python with numpy plus ffmpeg on PATH. Pair it with --sampling-rate keep unless\n"
-				"you want the game file's own rate raised too; at 96 kHz the cost roughly doubles for\n"
-				"precision the decoder cannot carry.");
+				"\"lossless\" is the far end of the same axis: the libvorbis encode is replaced by one\n"
+				"built into this tool whose output decodes back to bit-identical 16-bit PCM, which is\n"
+				"all the game's decoder emits. It needs nothing installed. Entries come out about 0.7x\n"
+				"raw PCM for stereo and a little over 1x for six-channel stems -- 3 to 5 times the size\n"
+				"of a q10 encode -- and take a few seconds to half a minute each. Pair it with\n"
+				"--sampling-rate keep: at 96 kHz it costs roughly twice as much for precision the\n"
+				"decoder cannot carry.");
 		parser.add_argument("--game").required().help(R"(game installation path, or :global/:china/:korea to autodetect)");
 		parser.add_argument("--ost").required().help("directory the preset's source paths are relative to");
 		parser.add_argument("--preset").required().help("a matchset JSON produced by `scdtool match`, or a MusicImportConfig preset (or a directory of them)");
@@ -1423,8 +1374,6 @@ int cmd_apply(const std::vector<std::string>& args) {
 		parser.add_argument("--sampling-rate").default_value(std::string("auto")).help(R"(output sample rate: "auto" (highest of the game file and the source), "keep" (the game file's), or an integer)");
 		parser.add_argument("--entry-index").default_value(0u).scan<'u', uint32_t>().help("sound entry index to replace (default: 0)");
 		parser.add_argument("--ogg-quality").default_value(std::string("10")).help(R"(Ogg Vorbis encode quality: -1 to 10 on oggenc's scale, or "lossless")");
-		parser.add_argument("--llogg").default_value(std::string()).help(R"(path to llogg.py, the encoder that --ogg-quality lossless drives)");
-		parser.add_argument("--python").default_value(std::string("python")).help("python executable used to run --llogg");
 		parser.add_argument("--min-score").default_value(0.95).scan<'g', double>().help("only rewrite entries matched at or above this correlation score");
 		parser.add_argument("--dry-run").default_value(false).implicit_value(true).help("list what would be written without writing anything");
 		parser.add_argument("--verify").default_value(false).implicit_value(true).help("re-read each written file and check its loop points and length survived the round trip (slower)");
@@ -1484,14 +1433,6 @@ int cmd_apply(const std::vector<std::string>& args) {
 				throw std::runtime_error(std::format(
 					"--ogg-quality: {} is outside the -1 to 10 the encoder accepts", qualitySpec));
 			oggQuality = static_cast<float>(value / 10.);
-		}
-		const auto lloggPath = argactions::path(parser.get<std::string>("--llogg"));
-		const auto pythonPath = argactions::path(parser.get<std::string>("--python"));
-		if (lossless) {
-			if (lloggPath.empty())
-				throw std::runtime_error(R"(--ogg-quality lossless needs --llogg pointing at llogg.py.)");
-			if (!std::filesystem::is_regular_file(lloggPath))
-				throw std::runtime_error(std::format("--llogg: not an existing file: {}", u8(lloggPath)));
 		}
 		const auto minScore = parser.get<double>("--min-score");
 		const auto dryRun = parser.get<bool>("--dry-run");
@@ -2095,12 +2036,10 @@ int cmd_apply(const std::vector<std::string>& args) {
 				}
 			}
 
+			std::string losslessReport;
 			auto newEntry = lossless
-				? make_lossless_ogg_entry(
-					pythonPath, lloggPath, floats, channels, samplingRate,
-					newLoopStart, newLoopEnd, markIndices,
-					keepTemp(tempDir / std::format(L"scdtool_apply_ll_{}.wav", tempFileCounter.fetch_add(1))),
-					keepTemp(tempDir / std::format(L"scdtool_apply_ll_{}.ogg", tempFileCounter.fetch_add(1))))
+				? make_lossless_ogg_entry(floats, channels, samplingRate,
+					newLoopStart, newLoopEnd, markIndices, losslessReport)
 				: xivres::sound::writer::sound_item::make_from_ogg_encode(
 					channels,
 					samplingRate,

@@ -215,6 +215,7 @@
     </ClCompile>
     <ClCompile Include="scdtool.cpp" />
     <ClCompile Include="utils\argactions.cpp" />
+    <ClCompile Include="utils\lossless_vorbis.cpp" />
     <ClCompile Include="utils\audio_match.cpp" />
     <ClCompile Include="utils\describe_path.cpp" />
     <ClCompile Include="utils\mpls.cpp" />
@@ -228,6 +229,7 @@
     <ClInclude Include="commands\toscd.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="utils\argactions.h" />
+    <ClInclude Include="utils\lossless_vorbis.h" />
     <ClInclude Include="utils\audio_match.h" />
     <ClInclude Include="utils\describe_path.h" />
     <ClInclude Include="utils\misc.h" />
