@@ -10,6 +10,7 @@
 #include <atomic>
 #include <charconv>
 #include <chrono>
+#include <functional>
 #include <limits>
 #include <mutex>
 #include <nlohmann/json.hpp>
@@ -21,11 +22,30 @@ namespace {
 		return xivres::util::unicode::convert<std::string>(p.wstring());
 	}
 
+	// One engine-switched stem of a multichannel entry: a stereo album track, and the two
+	// raw channels of the game's entry that carry it.
+	struct apply_stem {
+		std::filesystem::path SourcePath;
+		double Score = 0.;
+		double Offset = 0.;       // seconds the source is shifted relative to the game's timeline
+		size_t LeftChannel = 0;
+		size_t RightChannel = 1;
+		bool Matched = false;     // false: these channels keep the game's own audio
+		// Filled in while building, for the log line.
+		double EffectiveOffset = 0.;
+		double GainDb = 0.;
+		double OnsetDb = 0.;
+		double OnsetSeconds = 0.;
+		double ShortfallSeconds = 0.;
+		bool Deduced = false;
+	};
+
 	struct apply_job {
 		std::string TargetPath;   // path inside the game
 		std::filesystem::path SourcePath;
 		double Score = 0.;
 		double Offset = 0.;       // seconds the source is shifted relative to the game's timeline
+		std::vector<apply_stem> Stems;  // empty unless the entry is engine-switched stems
 	};
 
 	// Loop points of the template entry, in samples.
@@ -64,7 +84,10 @@ namespace {
 	// to sit at a consistent level against everything else, and integrated loudness is
 	// the measure that actually tracks perceived level, gating out silence instead of
 	// being dragged down by it.
-	double measure_loudness(const std::filesystem::path& ffmpeg, const std::filesystem::path& file, double startSeconds, double durationSeconds) {
+	// `preFilter`, when given, runs before ebur128 -- used to measure one stereo stem of a
+	// multichannel entry ("pan=stereo|c0=c0|c1=c2") rather than the whole interleaved mix,
+	// whose loudness is the sum of every engine state at once and matches no album track.
+	double measure_loudness(const std::filesystem::path& ffmpeg, const std::filesystem::path& file, double startSeconds, double durationSeconds, const std::wstring& preFilter = {}) {
 		// -ss after -i: sample-accurate, which matters because the two sides of the
 		// comparison must cover exactly the same musical span for the difference to mean
 		// anything. The files are only minutes long, so the extra decode is cheap.
@@ -73,7 +96,7 @@ namespace {
 			args.insert(args.end(), {L"-ss", std::to_wstring(startSeconds)});
 		if (durationSeconds > 0)
 			args.insert(args.end(), {L"-t", std::to_wstring(durationSeconds)});
-		args.insert(args.end(), {L"-af", L"ebur128", L"-f", L"null", L"-"});
+		args.insert(args.end(), {L"-af", preFilter.empty() ? std::wstring(L"ebur128") : preFilter + L",ebur128", L"-f", L"null", L"-"});
 
 		const auto bytes = run_process_capture_stderr(ffmpeg, args);
 		const std::string text(bytes.begin(), bytes.end());
@@ -145,6 +168,45 @@ namespace {
 		std::vector<float> floats(size / sizeof(float));
 		if (!floats.empty() && !f.read(reinterpret_cast<char*>(floats.data()), static_cast<std::streamsize>(floats.size() * sizeof(float))))
 			throw std::runtime_error(std::format("Could not read decoded audio for {}", u8(source)));
+		return floats;
+	}
+
+	// One raw channel of a file, as mono floats at the given rate.
+	//
+	// `pan=mono|c0=cN` indexes the decoded channel directly -- no channel-layout remapping
+	// happens in this path, which matters because the game's 6-channel entries are stems
+	// laid out in the asset's own order, not a 5.1 mix, and `-ac`/`-map_channel` would be
+	// free to reinterpret them against a speaker layout they do not follow.
+	std::vector<float> decode_channel_to_floats(
+		const std::filesystem::path& ffmpeg,
+		const std::filesystem::path& source,
+		size_t channelIndex,
+		size_t samplingRate,
+		const std::filesystem::path& rawPath) {
+
+		std::error_code ec;
+		std::filesystem::remove(rawPath, ec);
+
+		run_process_capture_stdout(ffmpeg, {
+			L"-v", L"error",
+			L"-i", source.wstring(),
+			L"-map", L"0:a:0",
+			L"-af", std::format(L"pan=mono|c0=c{}", channelIndex),
+			L"-ar", std::to_wstring(samplingRate),
+			L"-resampler", L"soxr",
+			L"-f", L"f32le",
+			L"-y", rawPath.wstring(),
+		});
+
+		std::ifstream f(rawPath, std::ios::binary | std::ios::ate);
+		if (!f)
+			throw std::runtime_error(std::format("ffmpeg produced no output for channel {} of {}", channelIndex, u8(source)));
+		const auto size = static_cast<size_t>(f.tellg());
+		f.seekg(0);
+
+		std::vector<float> floats(size / sizeof(float));
+		if (!floats.empty() && !f.read(reinterpret_cast<char*>(floats.data()), static_cast<std::streamsize>(floats.size() * sizeof(float))))
+			throw std::runtime_error(std::format("Could not read decoded channel {} of {}", channelIndex, u8(source)));
 		return floats;
 	}
 
@@ -373,6 +435,194 @@ namespace {
 	}
 }
 
+	// Builds the interleaved audio for an entry whose channels are engine-switched stems.
+	//
+	// A 4- or 6-channel music entry is not a surround mix: it is two or three stereo stems
+	// the engine crossfades between -- out of combat, in combat, and a transition cymbal --
+	// and each stem is its own album track, with its own match offset and its own level. So
+	// it cannot be built the way a stereo entry is, from one decode of one source, and it
+	// also cannot be built from the resolved stems alone: a stem that did not resolve has
+	// to keep the game's own audio, or that engine state would play back silent.
+	//
+	// The pairs are not sequential either. `discover_channel_pairing` in match.cpp finds
+	// them by correlation, and 14 of the game's 21 multichannel entries pair up as
+	// (0,2)(1,4)(3,5) or similar rather than (0,1)(2,3)(4,5), so the channel indices are
+	// taken from the match and never assumed.
+	std::vector<float> build_stem_audio(
+		const std::filesystem::path& ffmpeg,
+		const std::filesystem::path& templateAudio,
+		std::vector<apply_stem>& stems,
+		size_t channels,
+		size_t samplingRate,
+		size_t templateRate,
+		size_t templateLoopStart,
+		size_t loopStart,
+		size_t loopEnd,
+		bool autoOffset,
+		bool loudnessMatch,
+		double maxGainDb,
+		bool onsetMatch,
+		const std::function<std::filesystem::path(const wchar_t*, const wchar_t*)>& tempFile) {
+
+		// Start from the game's own audio, channel by channel. Decoded one channel at a
+		// time rather than as one interleaved decode because `pan=mono|c0=cN` is the only
+		// form known to index the asset's raw channels; anything routed through a speaker
+		// layout is free to reorder stems that follow no layout at all.
+		std::vector<std::vector<float>> templateChannels(channels);
+		size_t templateSamples = 0;
+		for (size_t ch = 0; ch < channels; ++ch) {
+			templateChannels[ch] = decode_channel_to_floats(ffmpeg, templateAudio, ch, samplingRate, tempFile(L"scdtool_apply_tplch", L".f32"));
+			templateSamples = (std::max)(templateSamples, templateChannels[ch].size());
+		}
+		if (!templateSamples)
+			throw std::runtime_error("template entry decoded to no audio");
+
+		// The output runs exactly as long as the file it replaces. A stereo build has no
+		// reason to insist on that -- it takes the source's own length -- but here the
+		// channels come from several recordings of different lengths, and the game's own
+		// timeline is the only thing that says where all of them end together.
+		std::vector<float> out(templateSamples * channels, 0.f);
+		for (size_t ch = 0; ch < channels; ++ch)
+			for (size_t i = 0; i < templateChannels[ch].size(); ++i)
+				out[i * channels + ch] = templateChannels[ch][i];
+
+		constexpr double OnsetWindowSeconds = 3.0;
+		const auto onsetWindow = (std::min)(templateSamples, static_cast<size_t>(OnsetWindowSeconds * static_cast<double>(samplingRate)));
+
+		for (auto& stem : stems) {
+			if (!stem.Matched)
+				continue;
+			stem.EffectiveOffset = stem.Offset;
+
+			// This stem of the game's file on its own, for the offset deduction and nothing
+			// else. Deducing against the whole entry would compare the source against every
+			// engine state summed together, which is precisely the mono downmix that made
+			// these targets look unmatchable before stems were scored individually.
+			const auto stemAudio = tempFile(L"scdtool_apply_stem", L".wav");
+			run_process_capture_stdout(ffmpeg, {
+				L"-v", L"error",
+				L"-i", templateAudio.wstring(),
+				L"-af", std::format(L"pan=stereo|c0=c{}|c1=c{}", stem.LeftChannel, stem.RightChannel),
+				L"-c:a", L"pcm_s16le",
+				L"-y", stemAudio.wstring(),
+			});
+			// Which of the source's two channels goes into which of the game's two is not
+			// in the match: `discover_channel_pairing` reports the pair sorted, correlation
+			// cannot tell the two apart, and each stem is scored as a mono downmix. Decided
+			// by measurement instead (scratch/stem_channel_order.py, signed side-signal
+			// correlation over every stem in the game): 35 of 42 say the lower raw channel
+			// index is the left channel, 0 say the reverse, and the remaining 7 are
+			// near-mono stems where the assignment makes no audible difference.
+			auto left = decode_channel_to_floats(ffmpeg, stem.SourcePath, 0, samplingRate, tempFile(L"scdtool_apply_stem_l", L".f32"));
+			std::vector<float> right;
+			try {
+				right = decode_channel_to_floats(ffmpeg, stem.SourcePath, 1, samplingRate, tempFile(L"scdtool_apply_stem_r", L".f32"));
+			} catch (const std::exception&) {
+				right = left;  // a mono release feeds both sides of the stem
+			}
+
+			if (autoOffset) {
+				try {
+					if (const auto deduced = deduce_offset(ffmpeg, stemAudio, stem.SourcePath,
+							static_cast<double>(templateLoopStart) / static_cast<double>(templateRate), stem.Offset);
+						deduced.Deduced) {
+						// Take the deduction only if it does not cover less of the target
+						// than the offset already on record. A stem is scored as a mono
+						// downmix of two channels of a file whose other channels are the
+						// same piece in another arrangement, so the deduction has more
+						// near-identical alignments to choose between than a stereo entry
+						// does, and picking a later loop pass is not a small error here:
+						// on BGM_Con_Bahamut it moved ARR_FFXIV_117 from -171.6s to
+						// -349.9s and left 133s of the calm stem playing silence.
+						const auto covered = [&](double offset) {
+							return static_cast<double>((std::max)(left.size(), right.size())) / static_cast<double>(samplingRate) + offset;
+						};
+						if (covered(deduced.Seconds) >= covered(stem.Offset) - 0.5) {
+							stem.Deduced = std::abs(deduced.Seconds - stem.Offset) > 0.05;
+							stem.EffectiveOffset = deduced.Seconds;
+						}
+					}
+				} catch (const std::exception&) {
+					// As in the stereo path: a failed deduction keeps the recorded offset
+					// rather than losing the stem.
+				}
+			}
+
+			// Rebase onto the game's timeline while laying the stem out: the source sample
+			// at (i - offset) is what plays at game sample i. Writing straight into a
+			// target-length buffer does the padding and the trimming in one pass, and
+			// records how far the recording actually reaches.
+			const auto offsetSamples = std::llround(stem.EffectiveOffset * static_cast<double>(samplingRate));
+			std::vector<float> stereo(templateSamples * 2, 0.f);
+			size_t reached = 0;
+			for (size_t i = 0; i < templateSamples; ++i) {
+				const auto sourceIndex = static_cast<long long>(i) - offsetSamples;
+				if (sourceIndex < 0)
+					continue;  // the game's file starts before the recording does: hold silence
+				const auto si = static_cast<size_t>(sourceIndex);
+				if (si >= left.size() && si >= right.size())
+					break;
+				stereo[i * 2] = si < left.size() ? left[si] : 0.f;
+				stereo[i * 2 + 1] = si < right.size() ? right[si] : 0.f;
+				reached = i + 1;
+			}
+			// Everything past the loop end is unreachable, so a shortfall only counts up to
+			// there -- which rarely helps: a looping entry's loop end sits within about a
+			// second of its own length.
+			if (const auto needed = loopEnd > loopStart ? loopEnd : templateSamples; reached < needed)
+				stem.ShortfallSeconds = static_cast<double>(needed - reached) / static_cast<double>(samplingRate);
+
+			// Level-match this stem against the same two channels of the file it replaces.
+			// Measuring the whole entry would read every engine state at once, which is
+			// louder than any one of them and would pull every stem down.
+			if (loudnessMatch && loopEnd > loopStart) {
+				const auto spanSeconds = static_cast<double>(loopEnd - loopStart) / static_cast<double>(samplingRate);
+				const auto templateStartSeconds = static_cast<double>(templateLoopStart) / static_cast<double>(templateRate);
+				const auto sourceStartSeconds = static_cast<double>(loopStart) / static_cast<double>(samplingRate) - stem.EffectiveOffset;
+				try {
+					const auto templateLufs = measure_loudness(ffmpeg, templateAudio, templateStartSeconds, spanSeconds,
+						std::format(L"pan=stereo|c0=c{}|c1=c{}", stem.LeftChannel, stem.RightChannel));
+					const auto sourceLufs = measure_loudness(ffmpeg, stem.SourcePath, sourceStartSeconds, spanSeconds);
+					stem.GainDb = std::clamp(templateLufs - sourceLufs, -maxGainDb, maxGainDb);
+					const auto gain = std::pow(10., stem.GainDb / 20.);
+					for (auto& v : stereo)
+						v = static_cast<float>(v * gain);
+					// Backing off uniformly rather than letting the encoder fold peaks over,
+					// as the stereo path does -- but per stem, since one loud stem must not
+					// quieten the others.
+					if (const auto peak = std::abs(*std::ranges::max_element(stereo, [](float a, float b) { return std::abs(a) < std::abs(b); }));
+						peak > 1.f) {
+						for (auto& v : stereo)
+							v = v / peak;
+						stem.GainDb += 20. * std::log10(1. / static_cast<double>(peak));
+					}
+				} catch (const std::exception&) {
+					stem.GainDb = 0.;
+				}
+			}
+
+			// The onset window comes straight out of the template channels decoded above,
+			// so reproducing a stem's authored fade-in costs no extra decode.
+			if (onsetMatch && onsetWindow) {
+				std::vector<float> templateOnset(onsetWindow * 2, 0.f);
+				const auto& templateLeft = templateChannels[stem.LeftChannel];
+				const auto& templateRight = templateChannels[stem.RightChannel];
+				for (size_t i = 0; i < onsetWindow; ++i) {
+					templateOnset[i * 2] = i < templateLeft.size() ? templateLeft[i] : 0.f;
+					templateOnset[i * 2 + 1] = i < templateRight.size() ? templateRight[i] : 0.f;
+				}
+				apply_onset_correction(stereo, templateOnset, 2, samplingRate, stem.OnsetDb, stem.OnsetSeconds);
+			}
+
+			for (size_t i = 0; i < templateSamples; ++i) {
+				out[i * channels + stem.LeftChannel] = stereo[i * 2];
+				out[i * channels + stem.RightChannel] = stereo[i * 2 + 1];
+			}
+		}
+
+		return out;
+	}
+
 int cmd_apply(const std::vector<std::string>& args) {
 	argparse::ArgumentParser parser("scdtool apply");
 	try {
@@ -455,12 +705,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 		size_t skippedUnmatched = 0;
 		for (const auto& item : preset.at("items")) {
 			const auto info = item.find("matchInfo");
-			if (info == item.end() || info->value("status", "") != "matched") {
-				skippedUnmatched++;
-				continue;
-			}
-			const auto score = info->value("score", 0.);
-			if (score < minScore) {
+			if (info == item.end()) {
 				skippedUnmatched++;
 				continue;
 			}
@@ -471,6 +716,53 @@ int cmd_apply(const std::vector<std::string>& args) {
 			const auto path = target->find("path");
 			if (path == target->end() || !path->is_string())
 				continue;
+
+			// An engine-switched entry has no single source and no single score: each stem
+			// is its own album track, matched on its own. Judge them one at a time and keep
+			// the game's own audio for whichever did not resolve -- the alternative, gating
+			// the whole entry on its weakest stem, throws away the two good stems of a
+			// three-stem file because the cymbal layer is ambiguous, which is most of them.
+			if (const auto stems = info->find("stems"); stems != info->end() && stems->is_array() && !stems->empty()) {
+				apply_job job{.TargetPath = path->get<std::string>()};
+				for (const auto& stem : *stems) {
+					const auto channels = stem.find("channels");
+					const auto source = stem.find("source");
+					if (channels == stem.end() || !channels->is_array() || channels->size() != 2
+						|| source == stem.end() || !source->is_string())
+						continue;
+					const auto stemScore = stem.value("score", 0.);
+					auto first = channels->at(0).get<size_t>();
+					auto second = channels->at(1).get<size_t>();
+					// Lower raw index is the left channel; see build_stem_audio.
+					if (first > second)
+						std::swap(first, second);
+					job.Stems.push_back({
+						.SourcePath = ostDir / argactions::path(source->get<std::string>()),
+						.Score = stemScore,
+						.Offset = stem.value("offset", 0.),
+						.LeftChannel = first,
+						.RightChannel = second,
+						.Matched = stem.value("status", "") == "matched" && stemScore >= minScore,
+					});
+					job.Score = (std::max)(job.Score, job.Stems.back().Matched ? stemScore : 0.);
+				}
+				if (std::ranges::none_of(job.Stems, [](const apply_stem& stem) { return stem.Matched; })) {
+					skippedUnmatched++;
+					continue;
+				}
+				jobs.push_back(std::move(job));
+				continue;
+			}
+
+			if (info->value("status", "") != "matched") {
+				skippedUnmatched++;
+				continue;
+			}
+			const auto score = info->value("score", 0.);
+			if (score < minScore) {
+				skippedUnmatched++;
+				continue;
+			}
 
 			// "file" is the exact OST file that was scored, relative to --ost.
 			const auto file = info->find("file");
@@ -493,8 +785,18 @@ int cmd_apply(const std::vector<std::string>& args) {
 		}
 
 		if (dryRun) {
-			for (const auto& job : jobs)
-				std::cerr << std::format("  would write {} <- {} (score {:.3f})", job.TargetPath, u8(job.SourcePath), job.Score) << '\n';
+			for (const auto& job : jobs) {
+				if (job.Stems.empty()) {
+					std::cerr << std::format("  would write {} <- {} (score {:.3f})", job.TargetPath, u8(job.SourcePath), job.Score) << '\n';
+					continue;
+				}
+				std::cerr << std::format("  would write {} <- {} stem(s)", job.TargetPath, job.Stems.size());
+				for (const auto& stem : job.Stems)
+					std::cerr << std::format("\n      channels {},{} <- {}", stem.LeftChannel, stem.RightChannel,
+						stem.Matched ? std::format("{} (score {:.3f})", u8(stem.SourcePath), stem.Score)
+						             : std::format("the game's own audio (best was {} at {:.3f})", u8(stem.SourcePath), stem.Score));
+				std::cerr << '\n';
+			}
 			return 0;
 		}
 
@@ -510,8 +812,16 @@ int cmd_apply(const std::vector<std::string>& args) {
 		parallel_for(jobs.size(), [&](size_t index) {
 			const auto& job = jobs[index];
 
-			if (!std::filesystem::exists(job.SourcePath))
-				throw std::runtime_error(std::format("Source file not found: {}", u8(job.SourcePath)));
+			// A stem job has no single source; each stem carries its own, and only the
+			// ones that resolved are going to be read.
+			if (job.Stems.empty()) {
+				if (!std::filesystem::exists(job.SourcePath))
+					throw std::runtime_error(std::format("Source file not found: {}", u8(job.SourcePath)));
+			} else {
+				for (const auto& stem : job.Stems)
+					if (stem.Matched && !std::filesystem::exists(stem.SourcePath))
+						throw std::runtime_error(std::format("Source file not found: {}", u8(stem.SourcePath)));
+			}
 
 			const auto templateStream = installation.get_file(job.TargetPath);
 			const xivres::sound::reader templateScd(templateStream);
@@ -532,11 +842,12 @@ int cmd_apply(const std::vector<std::string>& args) {
 			if (!channels || !templateRate)
 				throw std::runtime_error(std::format("{} has no channels or sample rate.", job.TargetPath));
 
-			// A 4- or 6-channel entry is a set of engine-switched stems, not a surround mix,
-			// and the album source is a single stereo track. Writing that in would collapse
-			// the calm/battle switching into one state, so refuse rather than silently
-			// produce a file that behaves differently in game.
-			if (channels > 2) {
+			// A 4- or 6-channel entry is a set of engine-switched stems, not a surround mix.
+			// With per-stem matches in hand build_stem_audio can reproduce them; without
+			// them, a single stereo source would collapse the calm/battle switching into
+			// one state, so refuse rather than silently produce a file that behaves
+			// differently in game.
+			if (channels > 2 && job.Stems.empty()) {
 				const auto lock = std::scoped_lock(logMutex);
 				std::cerr << std::format("  SKIPPED {}: template has {} channels (engine-switched stems); a single stereo source cannot reproduce them",
 					job.TargetPath, channels) << '\n';
@@ -565,9 +876,19 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// SamplingRate_UseHighestAvailable did -- which is why its output was 96 kHz
 			// where the game shipped 44.1 kHz.
 			size_t samplingRate;
-			if (samplingRateSpec == "auto")
-				samplingRate = (std::max)(templateRate, static_cast<size_t>(probe_sample_rate(ffprobePath, job.SourcePath)));
-			else if (samplingRateSpec == "keep")
+			if (samplingRateSpec == "auto") {
+				samplingRate = templateRate;
+				// A stem entry has no single source: take the highest rate across the ones
+				// that actually resolved, so a 96 kHz stem is not resampled down to meet a
+				// 44.1 kHz one sharing the same file.
+				if (job.Stems.empty()) {
+					samplingRate = (std::max)(samplingRate, static_cast<size_t>(probe_sample_rate(ffprobePath, job.SourcePath)));
+				} else {
+					for (const auto& stem : job.Stems)
+						if (stem.Matched)
+							samplingRate = (std::max)(samplingRate, static_cast<size_t>(probe_sample_rate(ffprobePath, stem.SourcePath)));
+				}
+			} else if (samplingRateSpec == "keep")
 				samplingRate = templateRate;
 			else
 				samplingRate = static_cast<size_t>(std::stoul(samplingRateSpec));
@@ -581,132 +902,189 @@ int cmd_apply(const std::vector<std::string>& args) {
 			const auto loopStart = scaleLoop(templateLoopStart);
 			const auto loopEnd = scaleLoop(templateLoopEnd);
 
-			// Re-derive the offset against the game's own file. See deduce_offset: the
-			// recorded value was measured against a different copy of the album than the one
-			// in front of us, and the envelope that produced it cannot tell one loop pass
-			// from another. A failure here is never fatal -- the recorded offset still
-			// works for an untrimmed library, which is the common case.
+			// Everything from here to the encode differs between a single-source entry and
+			// an engine-switched one, but they converge on the same four values: the audio,
+			// where it was taken from, and the loop it has to carry.
+			std::vector<float> floats;
+			// A local copy: build_stem_audio fills in what each stem actually resolved to,
+			// which the log line below reports, and `jobs` is shared across workers.
+			auto stems = job.Stems;
 			auto effectiveOffset = job.Offset;
 			deduced_offset deduced;
-			if (autoOffset) {
-				try {
-					deduced = deduce_offset(ffmpegPath, templateAudio, job.SourcePath,
-						static_cast<double>(templateLoopStart) / static_cast<double>(templateRate),
-						job.Offset);
-					if (deduced.Deduced)
-						effectiveOffset = deduced.Seconds;
-				} catch (const std::exception&) {
-					deduced = {};
-				}
-			}
-
-			const auto rawPath = tempDir / std::format(L"scdtool_apply_{}.f32", tempFileCounter.fetch_add(1));
-			{
-				const auto lock = std::scoped_lock(logMutex);
-				tempFiles.push_back(rawPath);
-			}
-			auto floats = decode_source_to_floats(ffmpegPath, job.SourcePath, channels, samplingRate, rawPath);
-
-			// Rebase the source onto the game's timeline before anything else.
-			//
-			// A match at offset o means game time t holds the source's content at t - o: the
-			// OST track carries an intro the game file does not, or lacks one it has. The
-			// loop points below are expressed in the game's timeline, so without this the
-			// loop lands wherever the OST's own lead-in happens to put it -- off by the
-			// offset, typically 0.5-2s, which is enough to move the loop off its phrase
-			// boundary and produce an audible seam.
 			size_t paddingAdded = 0;
 			size_t trimmedAway = 0;
-			if (const auto offsetSamples = std::llround(effectiveOffset * static_cast<double>(samplingRate))) {
-				if (offsetSamples > 0) {
-					// The game file starts before the OST track does; the missing lead-in is
-					// unrecoverable, so pad with silence rather than shifting the music.
-					const auto pad = static_cast<size_t>(offsetSamples) * channels;
-					floats.insert(floats.begin(), pad, 0.f);
-					paddingAdded = pad / channels;
-				} else {
-					// The OST track starts before the game file does; drop its extra lead-in.
-					const auto drop = (std::min)(static_cast<size_t>(-offsetSamples), floats.size() / channels);
-					floats.erase(floats.begin(), floats.begin() + static_cast<ptrdiff_t>(drop * channels));
-					trimmedAway = drop;
-				}
-			}
-
-			// The loop points are sample indices, so they survive an unchanged sample rate.
-			// Clamp rather than emit a loop past the end of the new audio.
-			const auto totalSamples = floats.size() / channels;
-			auto newLoopStart = loopStart;
-			auto newLoopEnd = (std::min)(loopEnd, totalSamples);
-			if (newLoopStart >= totalSamples) {
-				newLoopStart = 0;
-				newLoopEnd = 0;
-			}
-
-			// Match the replacement's level to the file it replaces, measured over the same
-			// musical span on both sides. Without this the swapped track sits at the OST
-			// master's level, which is usually hotter than the game's own mix and would
-			// stand out against every other track in game.
 			double gainDb = 0.;
 			double requestedGainDb = 0.;
 			bool gainLimited = false;
-			if (loudnessMatch && newLoopEnd > newLoopStart) {
-				const auto spanSeconds = static_cast<double>(newLoopEnd - newLoopStart) / static_cast<double>(samplingRate);
-				const auto templateStartSeconds = static_cast<double>(templateLoopStart) / static_cast<double>(templateRate);
-
-				// The source still has to be measured at the position the rebased output
-				// took its samples from, which is offset by the match offset.
-				const auto sourceStartSeconds = static_cast<double>(newLoopStart) / static_cast<double>(samplingRate) - effectiveOffset;
-
-				try {
-					const auto templateLufs = measure_loudness(ffmpegPath, templateAudio, templateStartSeconds, spanSeconds);
-					const auto sourceLufs = measure_loudness(ffmpegPath, job.SourcePath, sourceStartSeconds, spanSeconds);
-					gainDb = std::clamp(templateLufs - sourceLufs, -maxGainDb, maxGainDb);
-
-					const auto requestedDb = gainDb;
-					const auto gain = std::pow(10., gainDb / 20.);
-					for (auto& v : floats)
-						v = static_cast<float>(v * gain);
-
-					// Applying the gain must not clip; if it would, back off uniformly rather
-					// than letting the encoder fold peaks over.
-					if (const auto peak = floats.empty() ? 0.f : *std::ranges::max_element(floats, [](float a, float b) { return std::abs(a) < std::abs(b); });
-						std::abs(peak) > 1.f) {
-						const auto scale = 1.f / std::abs(peak);
-						for (auto& v : floats)
-							v = v * scale;
-						gainDb += 20. * std::log10(static_cast<double>(scale));
-						gainLimited = true;
-						requestedGainDb = requestedDb;
-					}
-				} catch (const std::exception&) {
-					// A missing or unreadable measurement must not lose the whole file; the
-					// replacement is still correct, just not level-matched.
-					gainDb = 0.;
-					gainLimited = false;
-				}
-			}
-
-			// Reproduce whatever onset treatment the game's own file has (a fade-in, a
-			// held silence) that the OST recording does not, per apply_onset_correction.
 			double onsetDb = 0.;
 			double onsetSeconds = 0.;
-			if (onsetMatch) {
-				constexpr double OnsetWindowSeconds = 3.0;  // longest observed real case was ~1.3s; ample margin
-				const auto onsetRawPath = tempDir / std::format(L"scdtool_apply_onset_{}.f32", tempFileCounter.fetch_add(1));
+			size_t totalSamples = 0;
+			size_t newLoopStart = 0;
+			size_t newLoopEnd = 0;
+
+			if (!job.Stems.empty()) {
+				const auto tempFile = [&](const wchar_t* prefix, const wchar_t* extension) {
+					auto path = tempDir / std::format(L"{}_{}{}", prefix, tempFileCounter.fetch_add(1), extension);
+					const auto lock = std::scoped_lock(logMutex);
+					tempFiles.push_back(path);
+					return path;
+				};
+				// Each stem carries its own offset, gain and onset correction, so the
+				// job-level values stay at their defaults and the per-stem ones are
+				// reported individually below.
+				floats = build_stem_audio(ffmpegPath, templateAudio, stems, channels, samplingRate,
+					templateRate, templateLoopStart, loopStart, loopEnd,
+					autoOffset, loudnessMatch, maxGainDb, onsetMatch, tempFile);
+
+				totalSamples = floats.size() / channels;
+				newLoopStart = loopStart;
+				newLoopEnd = (std::min)(loopEnd, totalSamples);
+				if (newLoopStart >= totalSamples) {
+					newLoopStart = 0;
+					newLoopEnd = 0;
+				}
+			} else {
+				// Re-derive the offset against the game's own file. See deduce_offset: the
+				// recorded value was measured against a different copy of the album than the one
+				// in front of us, and the envelope that produced it cannot tell one loop pass
+				// from another. A failure here is never fatal -- the recorded offset still
+				// works for an untrimmed library, which is the common case.
+				if (autoOffset) {
+					try {
+						deduced = deduce_offset(ffmpegPath, templateAudio, job.SourcePath,
+							static_cast<double>(templateLoopStart) / static_cast<double>(templateRate),
+							job.Offset);
+						if (deduced.Deduced)
+							effectiveOffset = deduced.Seconds;
+					} catch (const std::exception&) {
+						deduced = {};
+					}
+				}
+
+				const auto rawPath = tempDir / std::format(L"scdtool_apply_{}.f32", tempFileCounter.fetch_add(1));
 				{
 					const auto lock = std::scoped_lock(logMutex);
-					tempFiles.push_back(onsetRawPath);
+					tempFiles.push_back(rawPath);
 				}
-				try {
-					const auto templateOnset = decode_onset_to_floats(ffmpegPath, templateAudio, channels, samplingRate, OnsetWindowSeconds, onsetRawPath);
-					if (!templateOnset.empty())
-						apply_onset_correction(floats, templateOnset, channels, samplingRate, onsetDb, onsetSeconds);
-				} catch (const std::exception&) {
-					// Same principle as the loudness-match catch above: a failed onset
-					// check must not lose the whole file.
-					onsetDb = 0.;
-					onsetSeconds = 0.;
+				floats = decode_source_to_floats(ffmpegPath, job.SourcePath, channels, samplingRate, rawPath);
+
+				// Rebase the source onto the game's timeline before anything else.
+				//
+				// A match at offset o means game time t holds the source's content at t - o: the
+				// OST track carries an intro the game file does not, or lacks one it has. The
+				// loop points below are expressed in the game's timeline, so without this the
+				// loop lands wherever the OST's own lead-in happens to put it -- off by the
+				// offset, typically 0.5-2s, which is enough to move the loop off its phrase
+				// boundary and produce an audible seam.
+				if (const auto offsetSamples = std::llround(effectiveOffset * static_cast<double>(samplingRate))) {
+					if (offsetSamples > 0) {
+						// The game file starts before the OST track does; the missing lead-in is
+						// unrecoverable, so pad with silence rather than shifting the music.
+						const auto pad = static_cast<size_t>(offsetSamples) * channels;
+						floats.insert(floats.begin(), pad, 0.f);
+						paddingAdded = pad / channels;
+					} else {
+						// The OST track starts before the game file does; drop its extra lead-in.
+						const auto drop = (std::min)(static_cast<size_t>(-offsetSamples), floats.size() / channels);
+						floats.erase(floats.begin(), floats.begin() + static_cast<ptrdiff_t>(drop * channels));
+						trimmedAway = drop;
+					}
 				}
+
+				// The loop points are sample indices, so they survive an unchanged sample rate.
+				// Clamp rather than emit a loop past the end of the new audio.
+				totalSamples = floats.size() / channels;
+				newLoopStart = loopStart;
+				newLoopEnd = (std::min)(loopEnd, totalSamples);
+				if (newLoopStart >= totalSamples) {
+					newLoopStart = 0;
+					newLoopEnd = 0;
+				}
+
+				// Match the replacement's level to the file it replaces, measured over the same
+				// musical span on both sides. Without this the swapped track sits at the OST
+				// master's level, which is usually hotter than the game's own mix and would
+				// stand out against every other track in game.
+				if (loudnessMatch && newLoopEnd > newLoopStart) {
+					const auto spanSeconds = static_cast<double>(newLoopEnd - newLoopStart) / static_cast<double>(samplingRate);
+					const auto templateStartSeconds = static_cast<double>(templateLoopStart) / static_cast<double>(templateRate);
+
+					// The source still has to be measured at the position the rebased output
+					// took its samples from, which is offset by the match offset.
+					const auto sourceStartSeconds = static_cast<double>(newLoopStart) / static_cast<double>(samplingRate) - effectiveOffset;
+
+					try {
+						const auto templateLufs = measure_loudness(ffmpegPath, templateAudio, templateStartSeconds, spanSeconds);
+						const auto sourceLufs = measure_loudness(ffmpegPath, job.SourcePath, sourceStartSeconds, spanSeconds);
+						gainDb = std::clamp(templateLufs - sourceLufs, -maxGainDb, maxGainDb);
+
+						const auto requestedDb = gainDb;
+						const auto gain = std::pow(10., gainDb / 20.);
+						for (auto& v : floats)
+							v = static_cast<float>(v * gain);
+
+						// Applying the gain must not clip; if it would, back off uniformly rather
+						// than letting the encoder fold peaks over.
+						if (const auto peak = floats.empty() ? 0.f : *std::ranges::max_element(floats, [](float a, float b) { return std::abs(a) < std::abs(b); });
+							std::abs(peak) > 1.f) {
+							const auto scale = 1.f / std::abs(peak);
+							for (auto& v : floats)
+								v = v * scale;
+							gainDb += 20. * std::log10(static_cast<double>(scale));
+							gainLimited = true;
+							requestedGainDb = requestedDb;
+						}
+					} catch (const std::exception&) {
+						// A missing or unreadable measurement must not lose the whole file; the
+						// replacement is still correct, just not level-matched.
+						gainDb = 0.;
+						gainLimited = false;
+					}
+				}
+
+				// Reproduce whatever onset treatment the game's own file has (a fade-in, a
+				// held silence) that the OST recording does not, per apply_onset_correction.
+				if (onsetMatch) {
+					constexpr double OnsetWindowSeconds = 3.0;  // longest observed real case was ~1.3s; ample margin
+					const auto onsetRawPath = tempDir / std::format(L"scdtool_apply_onset_{}.f32", tempFileCounter.fetch_add(1));
+					{
+						const auto lock = std::scoped_lock(logMutex);
+						tempFiles.push_back(onsetRawPath);
+					}
+					try {
+						const auto templateOnset = decode_onset_to_floats(ffmpegPath, templateAudio, channels, samplingRate, OnsetWindowSeconds, onsetRawPath);
+						if (!templateOnset.empty())
+							apply_onset_correction(floats, templateOnset, channels, samplingRate, onsetDb, onsetSeconds);
+					} catch (const std::exception&) {
+						// Same principle as the loudness-match catch above: a failed onset
+						// check must not lose the whole file.
+						onsetDb = 0.;
+						onsetSeconds = 0.;
+					}
+				}
+
+			}
+
+			// The encoder's channel i is a *Vorbis* channel, and for 6 channels Vorbis's
+			// own order (FL, FC, FR, BL, BR, LFE) is not the order a decoder hands back
+			// (FL, FR, FC, LFE, BL, BR). Everything above works in the decoded order,
+			// because that is what `pan=mono|c0=cN` and the matcher's channel pairing both
+			// see, so the buffer has to be permuted back on the way into the encoder or the
+			// stems land in each other's channels. Measured: without this, a stem left
+			// untouched read back at -0.001 correlation against the game's own file.
+			//
+			// The permutation is exactly the `sequentialToFfmpegChannelIndexMap` the
+			// hand-written presets carry -- [0, 2, 1, 4, 5, 3] -- which is what that field
+			// has always meant. 1, 2 and 4 channels need no permutation (Vorbis's mono,
+			// stereo and quad orders are the decoder's), which is why this never surfaced
+			// while `apply` refused anything above stereo.
+			if (channels == 6) {
+				constexpr size_t VorbisToDecodedChannel[6] = {0, 2, 1, 4, 5, 3};
+				std::vector<float> reordered(floats.size());
+				for (size_t i = 0; i < totalSamples; ++i)
+					for (size_t v = 0; v < 6; ++v)
+						reordered[i * 6 + v] = floats[i * 6 + VorbisToDecodedChannel[v]];
+				floats = std::move(reordered);
 			}
 
 			auto newEntry = xivres::sound::writer::sound_item::make_from_ogg_encode(
@@ -806,6 +1184,27 @@ int cmd_apply(const std::vector<std::string>& args) {
 			{
 				const auto lock = std::scoped_lock(logMutex);
 				++writtenCount;
+				if (!stems.empty()) {
+					std::cerr << std::format("  {} <- {} stem(s), loop {}-{}", job.TargetPath, stems.size(), newLoopStart, newLoopEnd);
+					for (const auto& stem : stems) {
+						if (!stem.Matched) {
+							std::cerr << std::format("\n      channels {},{} kept from the game's own file (best candidate {} scored {:.3f})",
+								stem.LeftChannel, stem.RightChannel, u8(stem.SourcePath), stem.Score);
+							continue;
+						}
+						std::cerr << std::format("\n      channels {},{} <- {} (score {:.3f}, offset {:+.3f}s{}, gain {:+.1f} dB{}{})",
+							stem.LeftChannel, stem.RightChannel, u8(stem.SourcePath), stem.Score, stem.EffectiveOffset,
+							stem.Deduced ? std::format(" [deduced, was {:+.3f}s]", stem.Offset) : "",
+							stem.GainDb,
+							stem.OnsetSeconds > 0. ? std::format(", onset corrected {:.1f} dB over {:.2f}s", stem.OnsetDb, stem.OnsetSeconds) : "",
+							// A stem that runs out before the loop end leaves that engine
+							// state silent for the rest of the track, which is audible in a
+							// way a shortfall past the loop end is not.
+							stem.ShortfallSeconds > 0.5 ? std::format(", SHORT by {:.1f}s", stem.ShortfallSeconds) : "");
+					}
+					std::cerr << '\n';
+					return;
+				}
 				std::cerr << std::format("  {} <- {} (score {:.3f}, offset {:+.3f}s{}, trim {} pad {} samples, loop {}-{}, gain {:+.1f} dB{}{})",
 					job.TargetPath, u8(job.SourcePath), job.Score, effectiveOffset,
 					deduced.Deduced && std::abs(effectiveOffset - job.Offset) > 0.05
