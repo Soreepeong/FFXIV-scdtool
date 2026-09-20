@@ -435,6 +435,135 @@ namespace {
 	}
 }
 
+	// Aligns the source to the game's file to the sample, after the offset search has got
+	// within a few milliseconds.
+	//
+	// The loop points are indices into the game's own timeline and the game loops by
+	// hard-cutting from the loop end back to the loop start, so an offset that is 10ms out
+	// puts a different sample under each marker and the join clicks -- even when the markers
+	// themselves are exactly right. Measured on BGM_EX5_BanFort_Mam_Good, whose markers were
+	// correct: the seam jumped 0.548 against the game's own 0.060.
+	//
+	// Raw waveform correlation is the right instrument here and nowhere else in this file.
+	// It is destroyed by misalignment beyond a few milliseconds -- which is exactly what
+	// makes it able to resolve what an envelope at 5ms and a log-mel at 10ms cannot, once
+	// they have got that close. Correlated around the loop start, because that is the
+	// alignment that has to be right; a track with no loop is aligned a quarter of the way
+	// in, away from any fade at either end.
+	struct sample_alignment {
+		double Seconds = 0.;
+		double Correlation = -2.;
+		bool Refined = false;
+	};
+
+	std::vector<float> decode_window_to_mono(
+		const std::filesystem::path& ffmpeg,
+		const std::filesystem::path& source,
+		double startSeconds,
+		double durationSeconds,
+		size_t samplingRate,
+		const std::filesystem::path& rawPath) {
+
+		std::error_code ec;
+		std::filesystem::remove(rawPath, ec);
+
+		// Output-side seek, deliberately. An input-side one lands on a container boundary --
+		// on Ogg Vorbis it can be tens of samples out, which is the whole quantity being
+		// measured here, and the error is invisible because both windows then agree with each
+		// other about a position that is wrong. Decoding from the start and discarding costs
+		// a second or two and is exact.
+		std::vector<std::wstring> args{
+			L"-v", L"error", L"-nostdin",
+			L"-i", source.wstring(),
+		};
+		if (startSeconds > 0)
+			args.insert(args.end(), {L"-ss", xivres::util::unicode::convert<std::wstring>(std::format("{:.6f}", startSeconds))});
+		args.insert(args.end(), {
+			L"-t", xivres::util::unicode::convert<std::wstring>(std::format("{:.6f}", durationSeconds)),
+			L"-map", L"0:a:0",
+			L"-ac", L"1",
+			L"-ar", std::to_wstring(samplingRate),
+			L"-resampler", L"soxr",
+			L"-f", L"f32le",
+			L"-y", rawPath.wstring(),
+		});
+		run_process_capture_stdout(ffmpeg, args);
+
+		std::ifstream f(rawPath, std::ios::binary | std::ios::ate);
+		std::vector<float> floats;
+		if (f) {
+			const auto size = static_cast<size_t>(f.tellg());
+			f.seekg(0);
+			floats.resize(size / sizeof(float));
+			if (!floats.empty() && !f.read(reinterpret_cast<char*>(floats.data()), static_cast<std::streamsize>(floats.size() * sizeof(float))))
+				floats.clear();
+		}
+		return floats;
+	}
+
+	sample_alignment refine_offset_to_samples(
+		const std::filesystem::path& ffmpeg,
+		const std::filesystem::path& templateAudio,
+		const std::filesystem::path& source,
+		size_t samplingRate,
+		double aroundSeconds,
+		double coarseOffset,
+		const std::function<std::filesystem::path(const wchar_t*, const wchar_t*)>& tempFile) {
+
+		constexpr double HalfWindowSeconds = 2.0;
+		constexpr double MaxShiftSeconds = 0.060;   // far past what the coarse search can be out by
+		constexpr double MinCorrelation = 0.50;     // below this the window is not comparable at all
+
+		sample_alignment out{.Seconds = coarseOffset};
+		const auto from = aroundSeconds - HalfWindowSeconds;
+		// The source plays at (game time - offset), so its window sits that much earlier.
+		const auto sourceFrom = from - coarseOffset - MaxShiftSeconds;
+		if (from < 0 || sourceFrom < 0)
+			return out;
+
+		const auto want = static_cast<size_t>(2 * HalfWindowSeconds * static_cast<double>(samplingRate));
+		const auto shift = static_cast<size_t>(MaxShiftSeconds * static_cast<double>(samplingRate));
+		const auto target = decode_window_to_mono(ffmpeg, templateAudio, from, 2 * HalfWindowSeconds,
+			samplingRate, tempFile(L"scdtool_apply_align_t", L".f32"));
+		const auto candidate = decode_window_to_mono(ffmpeg, source, sourceFrom,
+			2 * HalfWindowSeconds + 2 * MaxShiftSeconds, samplingRate,
+			tempFile(L"scdtool_apply_align_s", L".f32"));
+		if (target.size() < want || candidate.size() < want + 2 * shift)
+			return out;
+
+		double targetNorm = 0.;
+		for (size_t i = 0; i < want; ++i)
+			targetNorm += static_cast<double>(target[i]) * target[i];
+		targetNorm = std::sqrt(targetNorm);
+		if (targetNorm <= 0)
+			return out;
+
+		double best = -2.;
+		size_t bestLag = shift;
+		for (size_t lag = 0; lag <= 2 * shift; ++lag) {
+			double dot = 0., norm = 0.;
+			for (size_t i = 0; i < want; ++i) {
+				const auto v = static_cast<double>(candidate[lag + i]);
+				dot += static_cast<double>(target[i]) * v;
+				norm += v * v;
+			}
+			norm = std::sqrt(norm);
+			if (norm <= 0)
+				continue;
+			if (const auto r = dot / (targetNorm * norm); r > best) {
+				best = r;
+				bestLag = lag;
+			}
+		}
+		out.Correlation = best;
+		if (best < MinCorrelation)
+			return out;
+		// lag == shift means the coarse offset was already right; anything else moves it.
+		out.Seconds = coarseOffset - (static_cast<double>(bestLag) - static_cast<double>(shift)) / static_cast<double>(samplingRate);
+		out.Refined = bestLag != shift;
+		return out;
+	}
+
 	// Builds the interleaved audio for an entry whose channels are engine-switched stems.
 	//
 	// A 4- or 6-channel music entry is not a surround mix: it is two or three stereo stems
@@ -911,6 +1040,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 			auto stems = job.Stems;
 			auto effectiveOffset = job.Offset;
 			deduced_offset deduced;
+			sample_alignment aligned;
+			double offsetBeforeAlignment = job.Offset;
 			size_t paddingAdded = 0;
 			size_t trimmedAway = 0;
 			double gainDb = 0.;
@@ -958,6 +1089,30 @@ int cmd_apply(const std::vector<std::string>& args) {
 							effectiveOffset = deduced.Seconds;
 					} catch (const std::exception&) {
 						deduced = {};
+					}
+				}
+
+					// ...then to the sample. The coarse offset is good to a few milliseconds,
+				// which is not good enough for a loop point.
+				offsetBeforeAlignment = effectiveOffset;
+				{
+					const auto tempFile = [&](const wchar_t* prefix, const wchar_t* extension) {
+						auto path = tempDir / std::format(L"{}_{}{}", prefix, tempFileCounter.fetch_add(1), extension);
+						const auto lock = std::scoped_lock(logMutex);
+						tempFiles.push_back(path);
+						return path;
+					};
+					// Around the loop start, which is the alignment that has to be exact.
+					// A track with no loop is aligned a little way in, clear of any fade.
+					const auto around = (std::max)(2.5,
+						static_cast<double>(templateLoopStart) / static_cast<double>(templateRate));
+					try {
+						aligned = refine_offset_to_samples(ffmpegPath, templateAudio, job.SourcePath,
+							samplingRate, around, effectiveOffset, tempFile);
+						if (aligned.Refined)
+							effectiveOffset = aligned.Seconds;
+					} catch (const std::exception&) {
+						aligned = {};
 					}
 				}
 
@@ -1205,12 +1360,16 @@ int cmd_apply(const std::vector<std::string>& args) {
 					std::cerr << '\n';
 					return;
 				}
-				std::cerr << std::format("  {} <- {} (score {:.3f}, offset {:+.3f}s{}, trim {} pad {} samples, loop {}-{}, gain {:+.1f} dB{}{})",
+				std::cerr << std::format("  {} <- {} (score {:.3f}, offset {:+.3f}s{}{}, trim {} pad {} samples, loop {}-{}, gain {:+.1f} dB{}{})",
 					job.TargetPath, u8(job.SourcePath), job.Score, effectiveOffset,
 					deduced.Deduced && std::abs(effectiveOffset - job.Offset) > 0.05
 						? std::format(" [deduced, was {:+.3f}s, intro {:.3f} over {} candidates]",
 							job.Offset, deduced.Score, deduced.Candidates)
 						: "",
+					aligned.Correlation > -2.
+						? std::format(" [sample-aligned {:+.0f}, r {:.3f}]",
+							(aligned.Seconds - offsetBeforeAlignment) * static_cast<double>(samplingRate), aligned.Correlation)
+						: " [not sample-aligned]",
 					trimmedAway, paddingAdded,
 					newLoopStart, newLoopEnd, gainDb,
 					gainLimited ? std::format(", peak-limited from {:+.1f} dB", requestedGainDb) : "",
