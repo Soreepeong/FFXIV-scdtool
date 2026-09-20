@@ -5401,33 +5401,53 @@
    }
   },
   {
-   "source": [
-    "^00112\\.",
-    "ARR_FFXIV_113",
-    "The Seventh Sun",
-    "第七星暦"
-   ],
+   "source": {
+    "The Seventh Sun": [
+     "^00112\\.",
+     "ARR_FFXIV_113",
+     "The Seventh Sun",
+     "第七星暦"
+    ],
+    "Dawn of a New Era": [
+     "^00113\\.",
+     "ARR_FFXIV_114",
+     "Dawn of a New Era",
+     "新時代の暁"
+    ]
+   },
    "target": {
     "path": "music/ffxiv/BGM_Event_7thUmbralEra.scd",
     "segments": [
      {
       "channels": [
        {
-        "source": "source",
+        "source": "The Seventh Sun",
         "channel": 0
        },
        {
-        "source": "source",
+        "source": "The Seventh Sun",
         "channel": 1
        }
       ],
       "sourceFilters": {
-       "source": "adelay=15610:all=1"
-      }
+       "The Seventh Sun": "adelay=15610:all=1"
+      },
+      "length": 316.95
+     },
+     {
+      "channels": [
+       {
+        "source": "Dawn of a New Era",
+        "channel": 0
+       },
+       {
+        "source": "Dawn of a New Era",
+        "channel": 1
+       }
+      ]
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.994 at offset +15.6s) but covers only 86% of this target: 316s of 367s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. the game's file starts before this recording does, so the source is delayed rather than offset: source by 15.610s"
+    "# comment": "two pieces, not one: \"The Seventh Sun\" to 316.95s and \"Dawn of a New Era\" from there, which is what the hand-written entry says and what measuring agrees with -- the tail scores 0.979 against ARR_FFXIV_114 placed at its own start. The game's file begins before the first recording does, so that one is delayed 15.610s rather than offset. Built and measured whole against the game's own file: 0.992 across the full 383.8s, where the single-segment version reached 315.7s of it at 0.994."
    }
   },
   {

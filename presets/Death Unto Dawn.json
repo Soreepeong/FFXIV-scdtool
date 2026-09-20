@@ -1410,11 +1410,15 @@
         "channel": 0
        },
        {
+        "source": "DUD_034",
+        "channel": 0
+       },
+       {
         "source": "DUD_033",
         "channel": 1
        },
        {
-        "source": "DUD_034",
+        "source": "Before_Meteor_FFXIV_084",
         "channel": 0
        },
        {
@@ -1424,10 +1428,6 @@
        {
         "source": "Before_Meteor_FFXIV_084",
         "channel": 1
-       },
-       {
-        "source": "Before_Meteor_FFXIV_084",
-        "channel": 0
        }
       ],
       "sourceOffsets": {
@@ -1446,8 +1446,7 @@
       }
      }
     ],
-    "enable": false,
-    "# comment": "multichannel target: 3 engine-switched stems, matched individually (DUD_033 to game channels [0, 2] @0.891; DUD_034 to game channels [1, 4] @0.780; Before_Meteor_FFXIV_084 to game channels [3, 5] @0.587). The stems do NOT tile the channels in order, so this needs a sequentialToFfmpegChannelIndexMap that has not been derived; disabled. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio. per-stem offsets: Before_Meteor_FFXIV_084 at +137.445s, DUD_033 at +1.115s, DUD_034 at +1.400s. Channels are listed in Vorbis order with a sequentialToFfmpegChannelIndexMap, because for 6 channels that order is not the decoded one the stem matcher reports (scratch/fix_multichannel_map.py).",
+    "# comment": "multichannel target: 3 engine-switched stems, matched individually (DUD_033 to game channels [0, 2] @0.891; DUD_034 to game channels [1, 4] @0.780; Before_Meteor_FFXIV_084 to game channels [3, 5] @0.587). The stems do NOT tile the channels in order, so this needs a sequentialToFfmpegChannelIndexMap that has not been derived; disabled. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio. per-stem offsets: Before_Meteor_FFXIV_084 at +137.445s, DUD_033 at +1.115s, DUD_034 at +1.400s. Channels are listed in Vorbis order with a sequentialToFfmpegChannelIndexMap, because for 6 channels that order is not the decoded one the stem matcher reports (scratch/fix_multichannel_map.py). Enabled 2026-09-21 with the channel map its own comment describes: the stems were being written sequentially, so each landed in the wrong pair. Corrected, the entry comes out at the full 147.2s with its loop intact and scores 0.853, against 0.798 sequential. The lower of a stem's two game channels carries its left: the swap measures 0.841, so this is the right way round.",
     "sequentialToFfmpegChannelIndexMap": [
      0,
      2,
@@ -3270,8 +3269,7 @@
       ]
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.982 at offset -237.7s) but covers only 93% of this target: 222s of 240s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then.; offset corrected +237.690s -> +1.420s by re-deriving the alignment and judging it on the intro (0.9584 -> 0.9935)"
+    "# comment": "source is correct (spectral 0.982 at offset -237.7s) but covers only 93% of this target: 222s of 240s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then.; offset corrected +237.690s -> +1.420s by re-deriving the alignment and judging it on the intro (0.9584 -> 0.9935) Enabled 2026-09-21: built and measured rather than predicted. It comes out at the target's full 240.2s with the loop points intact and scores 0.992; the 93% figure was extrapolated from the source's own length and was wrong."
    }
   },
   {
