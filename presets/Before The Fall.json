@@ -513,11 +513,29 @@
          "source": "source",
          "channel": 1
         }
-       ]
+       ],
+       "length": 166.3
+      },
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 8.71
+        }
+       },
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ],
+       "crossfadeSeconds": 4.0
       }
      ],
-     "# comment": "same recording as Before_Meteor_FFXIV_029.flac, which the matcher picked for this target (0.802 vs 0.968); listed here too so owning this album is enough to replace it. Disabled: this recording reaches 170.3s of the 265.0s this target actually carries (64%), so the replacement would cut to silence.",
-     "enable": false
+     "# comment": "second listing for a target another album already serves, so that owning either is enough. Was off because this recording reaches 170.3s of the target; the uncovered tail is a repeat of material earlier in the same recording, so a second segment fills it, with the seam pulled 4s back so the first segment plays its ending under the second. Full length with the loop intact: 0.9572 against the game's own file, where the entry that serves this target today measures 0.9947. This preset is later in release order than that one, so it only decides anything for someone who owns this album and not that one."
     },
     {
      "path": "music/ffxiv/Orchestrion/BGM_ORCH_258.scd",
@@ -739,11 +757,29 @@
          "source": "source",
          "channel": 1
         }
-       ]
+       ],
+       "length": 370.7
+      },
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 18.87
+        }
+       },
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ],
+       "crossfadeSeconds": 4.0
       }
      ],
-     "# comment": "same recording as Before_Meteor_FFXIV_102.flac, which the matcher picked for this target (0.848 vs 0.980); listed here too so owning this album is enough to replace it. Disabled: this recording reaches 374.7s of the 451.0s this target actually carries (83%), so the replacement would cut to silence.",
-     "enable": false
+     "# comment": "second listing for a target another album already serves, so that owning either is enough. Was off because this recording reaches 374.7s of the target; the uncovered tail is a repeat of material earlier in the same recording, so a second segment fills it, with the seam pulled 4s back so the first segment plays its ending under the second. Full length with the loop intact: 0.9519 against the game's own file, where the entry that serves this target today measures 0.9919. This preset is later in release order than that one, so it only decides anything for someone who owns this album and not that one."
     },
     {
      "path": "music/ffxiv/Orchestrion/BGM_ORCH_148.scd",
@@ -1760,11 +1796,29 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 232.4
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 102.19
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 4.0
      }
     ],
-    "# comment": "same recording as BTF_FFXIV_40.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.961). Disabled: this recording reaches 236.4s of the 282.0s this target actually carries (84%), so the replacement would cut to silence.",
-    "enable": false
+    "# comment": "second listing for a target another album already serves, so that owning either is enough. Was off because this recording reaches 236.4s of the target; the uncovered tail is a repeat of material earlier in the same recording, so a second segment fills it, with the seam pulled 4s back so the first segment plays its ending under the second. Full length with the loop intact: 0.9070 against the game's own file, where the entry that serves this target today measures 0.9690. This preset is later in release order than that one, so it only decides anything for someone who owns this album and not that one."
    }
   },
   {

@@ -3240,11 +3240,29 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 146.7
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 14.92
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 4.0
      }
     ],
-    "# comment": "same recording as Before_Meteor_FFXIV_084.flac, which the matcher picked for this target (0.870 vs 0.954); listed here too so owning this album is enough to replace it. Disabled: this recording reaches 150.7s of the 200.0s this target actually carries (75%), so the replacement would cut to silence.",
-    "enable": false
+    "# comment": "second listing for a target another album already serves, so that owning either is enough. Was off because this recording reaches 150.7s of the target; the uncovered tail is a repeat of material earlier in the same recording, so a second segment fills it, with the seam pulled 4s back so the first segment plays its ending under the second. Full length with the loop intact: 0.9364 against the game's own file, where the entry that serves this target today measures 0.9941. This preset is later in release order than that one, so it only decides anything for someone who owns this album and not that one."
    }
   },
   {

@@ -10,7 +10,7 @@ Weighted, because a cosine between two digital silences is noise and many of the
 |---|---:|
 | targets in the game's bgm sheet | 2175 |
 | enabled | 1830 |
-| disabled entries | 19 |
+| disabled entries | 13 |
 | targets with no enabled entry at all | 10 |
 | never referenced by any preset | 267 |
 
@@ -1298,7 +1298,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9941 | `music/ex4/BGM_EX4_WKS_01.scd` | TH_013.flac | Trail to the Heavens.json |
 | 0.9941 | `music/ex5/BGM_EX5_Ban_19.scd` | TH_036.flac | Trail to the Heavens.json |
 | 0.9941 | `music/ffxiv/BGM_Dungeon_Lim_07.scd` | BTF_FFXIV_37.flac | Before The Fall.json |
-| 0.9941 | `music/ffxiv/BGM_Field_BanFort_Kobold.scd` | Before_Meteor_FFXIV_084.flac | Before Meteor.json |
+| 0.9941 | `music/ffxiv/BGM_Field_BanFort_Kobold.scd` | Before_Meteor_FFXIV_084.flac | A Realm Reborn.json |
 | 0.9941 | `music/ffxiv/BGM_Minigame_10th02.scd` | GL_00056.flac | Growing Light.json |
 | 0.9941 | `music/ffxiv/BGM_Ride_WKS01.scd` | TH_013.flac | Trail to the Heavens.json |
 | 0.9941 | `music/ffxiv/BGM_Season_VT_Cake_02.scd` | TH_042.flac | Trail to the Heavens.json |
@@ -1544,7 +1544,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9959 | `music/ffxiv/BGM_Event_Huon.scd` | ARR_FFXIV_013.flac | A Realm Reborn.json |
 | 0.9959 | `music/ffxiv/BGM_Field_Mor_03.scd` | ARR_FFXIV_083.flac | A Realm Reborn.json |
 | 0.9959 | `music/ffxiv/BGM_Season_NewYear.scd` | Before_Meteor_FFXIV_051.flac | Before Meteor.json |
-| 0.9960 | `music/ex1/BGM_EX1_Ban_Nidhogg_01.scd` | source | Heavensward.json |
+| 0.9960 | `music/ex1/BGM_EX1_Ban_Nidhogg_01.scd` | source | Growing Light.json |
 | 0.9960 | `music/ex1/BGM_EX1_Boss02.scd` | HEAVENSWARD_FFXIV_53.flac | Growing Light.json |
 | 0.9960 | `music/ex2/BGM_EX2_Event_34.scd` | SHADOWBRINGERS_09.flac | Shadowbringers.json |
 | 0.9960 | `music/ex4/BGM_EX4_Boss02.scd` | HEAVENSWARD_FFXIV_53.flac | Growing Light.json |
@@ -1571,7 +1571,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.9961 | `music/ex2/BGM_EX2_Rti_11.scd` | SB_FFXIV_095.flac | Stormblood.json |
 | 0.9961 | `music/ex2/BGM_EX2_Rti_13.scd` | SB_FFXIV_097.flac | Stormblood.json |
 | 0.9961 | `music/ex2/BGM_EX2_Town_R_Day.scd` | SB_FFXIV_003.flac | Stormblood.json |
-| 0.9961 | `music/ex4/BGM_EX4_Ban_Nidhogg_01.scd` | source | Heavensward.json |
+| 0.9961 | `music/ex4/BGM_EX4_Ban_Nidhogg_01.scd` | source | Growing Light.json |
 | 0.9961 | `music/ex5/BGM_EX5_Event_12.scd` | DT_018.flac | Dawntrail.json |
 | 0.9961 | `music/ex5/BGM_EX5_Event_18.scd` | DT_046.flac | Dawntrail.json |
 | 0.9961 | `music/ex5/BGM_EX5_Event_19.scd` | DT_047.flac | Dawntrail.json |
@@ -1865,25 +1865,19 @@ These reasons are now measured rather than predicted. Six entries that carried t
 
 | target | recording | preset | also enabled elsewhere | why |
 |---|---|---|:-:|---|
-| `music/ex1/BGM_EX1_Ban_Nidhogg_01.scd` | source | Growing Light.json | yes | this recording reaches 340.2s of the 360.0s this target actually carries (94%), so the replacement would cut to silence. |
 | `music/ex2/BGM_EX2_EndCredit02.scd` | source | Stormblood.json | **no** | source is correct (spectral 0.994 at offset -2.4s) but covers only 50% of this target: 426s of 859s. The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than predicted: it comes out 425.7s against the target's 703.4s and loses its lo |
 | `music/ex2/BGM_EX2_Event_PRELUDE.scd` | source | Stormblood.json | **no** | this recording reaches 16.8s of the 41.0s this target actually carries (41%), so the replacement would cut to silence. Built and measured 2026-09-21 rather than predicted: it comes out 16.8s against the target's 41.3s and loops 24.5s early, scoring 0.880 against the game's own file over the part it  |
 | `music/ex3/BGM_EX3_Ban_06.scd` | source | The Far Edge Of Fate.json | **no** | this recording reaches 87.0s of the 122.0s this target actually carries (71%), so the replacement would cut to silence. Built and measured 2026-09-21 rather than predicted: it comes out 87.0s against the target's 122.1s and loops 35.1s early, scoring 0.946 against the game's own file over the part i |
 | `music/ex3/BGM_EX3_Ban_14.scd` | source | Death Unto Dawn.json | **no** | offset corrected +2.960s -> +31.760s: the previous value scored better on the intro (0.670 vs 0.581) but far worse over the whole file (built and measured at 0.414 against 0.842), so judging on the intro alone had locked onto the wrong pass. The recording still covers only 427.6s of this 467.5s targ |
 | `music/ex3/BGM_EX3_Event_24.scd` | source | Shadowbringers.json | **no** | source is correct (spectral 0.992 at offset -2.8s) but covers only 69% of this target: 269s of 387s. The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than predicted: it comes out 268.6s against the target's 387.6s and loses its lo |
 | `music/ex3/BGM_EX3_Ytc_27.scd` | source | Death Unto Dawn.json | **no** | source is correct (spectral 0.972 at offset -1.4s) but covers only 94% of this target: 109s of 116s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than pr |
-| `music/ex4/BGM_EX4_Ban_Nidhogg_01.scd` | source | Growing Light.json | yes | this recording reaches 340.2s of the 360.0s this target actually carries (94%), so the replacement would cut to silence. |
 | `music/ex4/BGM_EX4_Event_15.scd` | source | Endwalker.json | **no** | source "source" is built by a filterComplex, which segments cannot express |
 | `music/ffxiv/BGM_Ban_Moogle_Nomal.scd` | source | A Realm Reborn.json | yes | this recording reaches 68.1s of the 168.0s this target actually carries (41%), so the replacement would cut to silence. |
-| `music/ffxiv/BGM_Con_Neal.scd` | source | Before The Fall.json | yes | this recording reaches 374.7s of the 451.0s this target actually carries (83%), so the replacement would cut to silence. |
-| `music/ffxiv/BGM_Dungeon_Uru_06.scd` | source | Before The Fall.json | yes | this recording reaches 170.3s of the 265.0s this target actually carries (64%), so the replacement would cut to silence. |
-| `music/ffxiv/BGM_Field_BanFort_Kobold.scd` | source | A Realm Reborn.json | yes | this recording reaches 150.7s of the 200.0s this target actually carries (75%), so the replacement would cut to silence. |
 | `music/ffxiv/BGM_KTG_04.scd` | source | Trail to the Heavens.json | **no** | source is correct (spectral 0.915 at offset -0.4s) but covers only 89% of this target: 38s of 43s. The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than predicted: it comes out 38.1s against the target's 43.5s and loops 5.3s early |
 | `music/ffxiv/Orchestrion/BGM_ORCH_057.scd` | source | A Realm Reborn.json | **no** | source is correct (spectral 0.983 at offset +0.0s) but covers only 93% of this target: 394s of 422s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than pr |
 | `music/ffxiv/Orchestrion/BGM_ORCH_148.scd` | source | Before The Fall.json | yes | this recording reaches 374.7s of the 451.0s this target actually carries (83%), so the replacement would cut to silence. |
 | `music/ffxiv/Orchestrion/BGM_ORCH_258.scd` | source | Before The Fall.json | yes | this recording reaches 170.3s of the 265.0s this target actually carries (64%), so the replacement would cut to silence. |
 | `music/ffxiv/Orchestrion/BGM_ORCH_489.scd` | source | Death Unto Dawn.json | **no** | source is correct (spectral 0.972 at offset -1.4s) but covers only 94% of this target: 109s of 116s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then. Built and measured 2026-09-21 rather than pr |
-| `music/ffxiv/Orchestrion/BGM_ORCH_654.scd` | source | Before The Fall.json | yes | this recording reaches 236.4s of the 282.0s this target actually carries (84%), so the replacement would cut to silence. |
 
 ## 3. Never referenced
 
