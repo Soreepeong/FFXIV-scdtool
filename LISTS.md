@@ -14,8 +14,8 @@ Weighted, because a cosine between two digital silences is noise and many of the
 | targets with no enabled entry at all | 13 |
 | never referenced by any preset | 267 |
 
-- confidence below 0.80: **3**
-- confidence 0.80-0.90: **83**
+- confidence below 0.80: **2**
+- confidence 0.80-0.90: **84**
 - confidence 0.90-0.95: **151**
 - confidence 0.95-0.98: **435**
 - confidence 0.98 and up: **1155**
@@ -27,7 +27,6 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | confidence | target | recording | preset |
 |---:|---|---|---|
 | 0.3230 | `music/ex4/BGM_EX4_Event_14.scd` | Before_Meteor_FFXIV_104.flac | Before Meteor.json |
-| 0.4902 | `music/ffxiv/Orchestrion/BGM_ORCH_025.scd` | ENDWALKER_008.flac | Endwalker.json |
 | 0.7976 | `music/ffxiv/Orchestrion/BGM_ORCH_159.scd` | GL_00070.flac | Growing Light.json |
 | 0.8062 | `music/ffxiv/Orchestrion/BGM_ORCH_832.scd` | TH_062.flac | Trail to the Heavens.json |
 | 0.8174 | `music/ffxiv/BGM_Season_Princess_Fate.scd` | TH_062.flac | Trail to the Heavens.json |
@@ -98,6 +97,7 @@ Anything under about 0.90 is worth listening to before trusting it; the band fro
 | 0.8929 | `music/ex4/BGM_EX4_Ban_07.scd` | GL_00010.flac | Growing Light.json |
 | 0.8929 | `music/ffxiv/BGM_Ride_Barb.scd` | GL_00010.flac | Growing Light.json |
 | 0.8934 | `music/ffxiv/Orchestrion/BGM_ORCH_411.scd` | DUD_044.flac | Death Unto Dawn.json |
+| 0.8937 | `music/ffxiv/Orchestrion/BGM_ORCH_025.scd` | ENDWALKER_008.flac | Endwalker.json |
 | 0.8954 | `music/ex5/timeline/BGM_EX5_Raid_10.scd` | TH_008.flac | Trail to the Heavens.json |
 | 0.8961 | `music/ex4/BGM_EX4_Dan_D11.scd` | GL_00041.flac | Growing Light.json |
 | 0.8962 | `music/ffxiv/Orchestrion/BGM_ORCH_270.scd` | SHADOWBRINGERS_03.flac | Shadowbringers.json |

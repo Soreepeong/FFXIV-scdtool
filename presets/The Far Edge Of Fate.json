@@ -97,7 +97,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.36,
+        "offset": 3.415,
         "pcmHash": "0a826792"
        }
       },
@@ -113,7 +113,7 @@
       ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.845; offset corrected +3.415s -> +1.360s by re-deriving the alignment and judging it on the intro (0.5417 -> 0.7678); also released as ENDWALKER_008; that album's own preset carries its own entry"
+    "# comment": "spectral similarity to the game's own file: 0.845; offset corrected +3.415s -> +1.360s by re-deriving the alignment and judging it on the intro (0.5417 -> 0.7678); also released as ENDWALKER_008; that album's own preset carries its own entry Offset restored 2026-09-21 from 1.360 to 3.415: the intro-judged correction above inverted a correct answer, leaving the build 2.06s out of step. Measured on the built file, 3.415 gives 0.894 against the game's own file where 1.360 gave 0.490."
    }
   },
   {

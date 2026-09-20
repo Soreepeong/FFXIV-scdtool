@@ -609,7 +609,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.35,
+        "offset": 2.4,
         "pcmHash": "b9551e56"
        }
       },
@@ -625,7 +625,7 @@
       ]
      }
     ],
-    "# comment": "same recording as TFEOF_FFXIV_02.flac, which the matcher picked for this target (0.915 vs 0.926); listed here too so owning this album is enough to replace it; offset corrected +2.400s -> +0.350s by re-deriving the alignment and judging it on the intro (0.5461 -> 0.7698)"
+    "# comment": "same recording as TFEOF_FFXIV_02.flac, which the matcher picked for this target (0.915 vs 0.926); listed here too so owning this album is enough to replace it; offset corrected +2.400s -> +0.350s by re-deriving the alignment and judging it on the intro (0.5461 -> 0.7698) Offset restored 2026-09-21 from 0.350 to 2.400: the intro-judged correction above inverted a correct answer, leaving the build 2.06s out of step. Measured on the built file, 2.400 gives 0.894 against the game's own file where 0.350 gave 0.490."
    }
   },
   {
