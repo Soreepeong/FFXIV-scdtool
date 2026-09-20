@@ -1338,11 +1338,11 @@
        },
        {
         "source": "Before_Meteor_FFXIV_084",
-        "channel": 0
+        "channel": 1
        },
        {
         "source": "Before_Meteor_FFXIV_084",
-        "channel": 1
+        "channel": 0
        }
       ],
       "sourceOffsets": {
@@ -1362,7 +1362,15 @@
      }
     ],
     "enable": false,
-    "# comment": "multichannel target: 3 engine-switched stems, matched individually (DUD_033 to game channels [0, 2] @0.891; DUD_034 to game channels [1, 4] @0.780; Before_Meteor_FFXIV_084 to game channels [3, 5] @0.587). The stems do NOT tile the channels in order, so this needs a sequentialToFfmpegChannelIndexMap that has not been derived; disabled. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio. per-stem offsets: Before_Meteor_FFXIV_084 at +137.445s, DUD_033 at +1.115s, DUD_034 at +1.400s."
+    "# comment": "multichannel target: 3 engine-switched stems, matched individually (DUD_033 to game channels [0, 2] @0.891; DUD_034 to game channels [1, 4] @0.780; Before_Meteor_FFXIV_084 to game channels [3, 5] @0.587). The stems do NOT tile the channels in order, so this needs a sequentialToFfmpegChannelIndexMap that has not been derived; disabled. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio. per-stem offsets: Before_Meteor_FFXIV_084 at +137.445s, DUD_033 at +1.115s, DUD_034 at +1.400s. Channels are listed in Vorbis order with a sequentialToFfmpegChannelIndexMap, because for 6 channels that order is not the decoded one the stem matcher reports (scratch/fix_multichannel_map.py).",
+    "sequentialToFfmpegChannelIndexMap": [
+     0,
+     2,
+     1,
+     4,
+     5,
+     3
+    ]
    }
   },
   {

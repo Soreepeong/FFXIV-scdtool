@@ -986,11 +986,11 @@
        },
        {
         "source": "SB_FFXIV_020",
-        "channel": 0
+        "channel": 1
        },
        {
         "source": "SB_FFXIV_020",
-        "channel": 1
+        "channel": 0
        }
       ],
       "sourceOffsets": {
@@ -1006,7 +1006,15 @@
      }
     ],
     "enable": false,
-    "# comment": "multichannel target: 3 engine-switched stems, matched individually (TFEOF_FFXIV_19 to game channels [0, 2] @0.974; TFEOF_FFXIV_20 to game channels [1, 4] @0.939; SB_FFXIV_020 to game channels [3, 5] @0.616). The stems do NOT tile the channels in order, so this needs a sequentialToFfmpegChannelIndexMap that has not been derived; disabled. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio. per-stem offsets: SB_FFXIV_020 at -35.285s, TFEOF_FFXIV_19 at +1.625s, TFEOF_FFXIV_20 at -7.445s. the game's file starts before this recording does, so the source is delayed rather than offset: SB_FFXIV_020 by 35.285s, TFEOF_FFXIV_20 by 7.445s"
+    "# comment": "multichannel target: 3 engine-switched stems, matched individually (TFEOF_FFXIV_19 to game channels [0, 2] @0.974; TFEOF_FFXIV_20 to game channels [1, 4] @0.939; SB_FFXIV_020 to game channels [3, 5] @0.616). The stems do NOT tile the channels in order, so this needs a sequentialToFfmpegChannelIndexMap that has not been derived; disabled. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio. per-stem offsets: SB_FFXIV_020 at -35.285s, TFEOF_FFXIV_19 at +1.625s, TFEOF_FFXIV_20 at -7.445s. the game's file starts before this recording does, so the source is delayed rather than offset: SB_FFXIV_020 by 35.285s, TFEOF_FFXIV_20 by 7.445s. Channels are listed in Vorbis order with a sequentialToFfmpegChannelIndexMap, because for 6 channels that order is not the decoded one the stem matcher reports (scratch/fix_multichannel_map.py).",
+    "sequentialToFfmpegChannelIndexMap": [
+     0,
+     2,
+     1,
+     4,
+     5,
+     3
+    ]
    }
   },
   {
