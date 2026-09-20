@@ -1382,7 +1382,14 @@ int cmd_apply(const std::vector<std::string>& args) {
 				"written; everything else is left for manual review. Each output .scd is built from the\n"
 				"game's own file as a template, so the surrounding tables, every other sound entry, and the\n"
 				"track's loop points are preserved, and only the audio is replaced. Output files are written\n"
-				"under --output-dir using the target's game-relative path.");
+				"under --output-dir using the target's game-relative path.\n"
+				"\n"
+				"--lossless replaces the libvorbis encode with a bit-exact one, driven through llogg.py.\n"
+				"What it is exact about is 16-bit PCM, which is all the game's decoder emits, so nothing is\n"
+				"lost by it -- but the entries come out roughly 5x the size, take minutes rather than seconds\n"
+				"each, and need python with numpy plus ffmpeg on PATH. Pair it with --sampling-rate keep\n"
+				"unless you want the game file's own rate raised as well; at 96 kHz the cost roughly doubles\n"
+				"for content the decoder cannot carry any more precisely.");
 		parser.add_argument("--game").required().help(R"(game installation path, or :global/:china/:korea to autodetect)");
 		parser.add_argument("--ost").required().help("directory the preset's source paths are relative to");
 		parser.add_argument("--preset").required().help("a matchset JSON produced by `scdtool match`, or a MusicImportConfig preset (or a directory of them)");
@@ -1392,7 +1399,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 		parser.add_argument("--sampling-rate").default_value(std::string("auto")).help(R"(output sample rate: "auto" (highest of the game file and the source), "keep" (the game file's), or an integer)");
 		parser.add_argument("--entry-index").default_value(0u).scan<'u', uint32_t>().help("sound entry index to replace (default: 0)");
 		parser.add_argument("--ogg-quality").default_value(1.0f).scan<'g', float>().help("Ogg Vorbis encode quality, 0..1 (ignored with --lossless)");
-		parser.add_argument("--lossless").default_value(false).implicit_value(true).help("encode bit-exact 16-bit Vorbis with the llogg encoder instead of libvorbis; needs --llogg, and produces entries roughly 7x the size");
+		parser.add_argument("--lossless").default_value(false).implicit_value(true).help("encode bit-exact 16-bit Vorbis with the llogg encoder instead of libvorbis; needs --llogg, and lands at 0.66-1.05x raw PCM -- measured 5x the libvorbis output");
 		parser.add_argument("--llogg").default_value(std::string()).help("path to llogg.py, the lossless Vorbis encoder --lossless drives");
 		parser.add_argument("--python").default_value(std::string("python")).help("python executable used to run --llogg");
 		parser.add_argument("--min-score").default_value(0.95).scan<'g', double>().help("only rewrite entries matched at or above this correlation score");
