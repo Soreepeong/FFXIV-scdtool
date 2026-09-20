@@ -16,6 +16,7 @@
  "items": [
   {
    "source": [
+    "00000",
     "BTF_FFXIV_01",
     "Wreck to the Seaman",
     "船乗りには難破を ～蛮神リヴァイアサン前哨戦～"
@@ -67,6 +68,7 @@
   },
   {
    "source": [
+    "00000",
     "BTF_FFXIV_01",
     "Wreck to the Seaman",
     "船乗りには難破を ～蛮神リヴァイアサン前哨戦～"
@@ -98,6 +100,7 @@
   },
   {
    "source": [
+    "00001",
     "BTF_FFXIV_02",
     "Through the Maelstrom",
     "混沌の渦動 ～蛮神リヴァイアサン討滅戦～"
@@ -132,6 +135,7 @@
   },
   {
    "source": [
+    "00001",
     "BTF_FFXIV_02",
     "Through the Maelstrom",
     "混沌の渦動 ～蛮神リヴァイアサン討滅戦～"
@@ -163,6 +167,7 @@
   },
   {
    "source": [
+    "00002",
     "BTF_FFXIV_03",
     "The Scars of Battle",
     "魔大戦の傷跡 ～腐敗遺跡 古アムダプール市街～"
@@ -194,6 +199,7 @@
   },
   {
    "source": [
+    "00002",
     "BTF_FFXIV_03",
     "The Scars of Battle",
     "魔大戦の傷跡 ～腐敗遺跡 古アムダプール市街～"
@@ -225,6 +231,7 @@
   },
   {
    "source": [
+    "00003",
     "BTF_FFXIV_04",
     "不屈の挑戦",
     "Persistence"
@@ -259,6 +266,7 @@
   },
   {
    "source": [
+    "00004",
     "BTF_FFXIV_05",
     "Wrath of the Eikons",
     "怒れる神々"
@@ -290,6 +298,7 @@
   },
   {
    "source": [
+    "00004",
     "BTF_FFXIV_05",
     "怒れる神々",
     "Wrath of the Eikons"
@@ -321,6 +330,7 @@
   },
   {
    "source": [
+    "00005",
     "BTF_FFXIV_06",
     "Breathless",
     "ノォヴ一味"
@@ -352,6 +362,7 @@
   },
   {
    "source": [
+    "00006",
     "BTF_FFXIV_07",
     "Gluppity-schlopp",
     "クズテツどもの歌"
@@ -383,6 +394,7 @@
   },
   {
    "source": [
+    "00008",
     "BTF_FFXIV_09",
     "Pa-Paya"
    ],
@@ -413,6 +425,7 @@
   },
   {
    "source": [
+    "00008",
     "BTF_FFXIV_09",
     "Pa-Paya"
    ],
@@ -443,6 +456,7 @@
   },
   {
    "source": [
+    "00009",
     "BTF_FFXIV_10",
     "キャラバン護衛 ～剣闘領域 ハラタリ修練所～",
     "Birds of a Feather"
@@ -474,6 +488,7 @@
   },
   {
    "source": [
+    "00010",
     "BTF_FFXIV_11",
     "紅蓮の戦旗の下に ～剣闘領域 ハラタリ修練所～",
     "Beneath Bloodied Banners"
@@ -508,6 +523,7 @@
   },
   {
    "source": [
+    "00011",
     "BTF_FFXIV_12",
     "Big-boned",
     "でぶチョコボ騎乗"
@@ -539,6 +555,7 @@
   },
   {
    "source": [
+    "00012",
     "BTF_FFXIV_13",
     "Battle on the Big Bridge",
     "ビッグブリッヂの死闘 ～新生～"
@@ -573,6 +590,7 @@
   },
   {
    "source": [
+    "00012",
     "BTF_FFXIV_13",
     "Battle on the Big Bridge",
     "ビッグブリッヂの死闘 ～新生～"
@@ -604,6 +622,7 @@
   },
   {
    "source": [
+    "00014",
     "BTF_FFXIV_15",
     "メテオ",
     "Meteor"
@@ -638,6 +657,7 @@
   },
   {
    "source": [
+    "00014",
     "BTF_FFXIV_15",
     "メテオ",
     "Meteor"
@@ -669,6 +689,7 @@
   },
   {
    "source": [
+    "00016",
     "BTF_FFXIV_17",
     "戦乱",
     "Tempest"
@@ -703,6 +724,7 @@
   },
   {
    "source": [
+    "00017",
     "BTF_FFXIV_18",
     "Rise of the White Raven",
     "白銀の凶鳥、飛翔せり"
@@ -734,6 +756,7 @@
   },
   {
    "source": [
+    "00017",
     "BTF_FFXIV_18",
     "Rise of the White Raven",
     "白銀の凶鳥、飛翔せり"
@@ -765,6 +788,7 @@
   },
   {
    "source": [
+    "00019",
     "BTF_FFXIV_20",
     "Far from Home",
     "何よりも高く"
@@ -796,6 +820,7 @@
   },
   {
    "source": [
+    "00020",
     "BTF_FFXIV_21",
     "Dark Vows",
     "漆黒の誓い ～惨劇霊殿 タムタラの墓所～"
@@ -827,6 +852,7 @@
   },
   {
    "source": [
+    "00020",
     "BTF_FFXIV_21",
     "Dark Vows",
     "漆黒の誓い ～惨劇霊殿 タムタラの墓所～"
@@ -858,6 +884,7 @@
   },
   {
    "source": [
+    "00021",
     "BTF_FFXIV_22",
     "Answers - Reprise"
    ],
@@ -891,6 +918,7 @@
   },
   {
    "source": [
+    "00021",
     "BTF_FFXIV_22",
     "Answers - Reprise"
    ],
@@ -924,6 +952,7 @@
   },
   {
    "source": [
+    "00022",
     "BTF_FFXIV_23",
     "Thunder Rolls",
     "雷光雷鳴 ～蛮神ラムウ討滅戦～"
@@ -959,6 +988,7 @@
   },
   {
    "source": [
+    "00023",
     "BTF_FFXIV_24",
     "紅蓮祭",
     "Moonfire Faire"
@@ -990,6 +1020,7 @@
   },
   {
    "source": [
+    "00023",
     "BTF_FFXIV_24",
     "Moonfire Faire",
     "紅蓮祭"
@@ -1001,6 +1032,7 @@
   },
   {
    "source": [
+    "00024",
     "BTF_FFXIV_25",
     "Thicker than a Knife's Blade",
     "刃、厚いほどに"
@@ -1035,6 +1067,7 @@
   },
   {
    "source": [
+    "00025",
     "BTF_FFXIV_26",
     "The War Room",
     "作戦会議室"
@@ -1066,6 +1099,7 @@
   },
   {
    "source": [
+    "00027",
     "BTF_FFXIV_28",
     "Blood for Blood",
     "血で血を洗って"
@@ -1097,6 +1131,7 @@
   },
   {
    "source": [
+    "00028",
     "BTF_FFXIV_29",
     "Or the Egg?",
     "卵が先か？"
@@ -1128,6 +1163,7 @@
   },
   {
    "source": [
+    "00029",
     "BTF_FFXIV_30",
     "Game Theory",
     "ゲーム理論"
@@ -1162,6 +1198,7 @@
   },
   {
    "source": [
+    "00030",
     "BTF_FFXIV_31",
     "Now I Know the Truth",
     "ドーガとウネの心"
@@ -1193,6 +1230,7 @@
   },
   {
    "source": [
+    "00030",
     "BTF_FFXIV_31",
     "Now I Know the Truth",
     "ドーガとウネの心"
@@ -1224,6 +1262,7 @@
   },
   {
    "source": [
+    "00031",
     "BTF_FFXIV_32",
     "Out of the Labyrinth",
     "絢爛 ～クリスタルタワー：シルクスの塔～"
@@ -1235,6 +1274,7 @@
   },
   {
    "source": [
+    "00032",
     "BTF_FFXIV_33",
     "Shattered",
     "破砕 ～クリスタルタワー：シルクスの塔～"
@@ -1266,6 +1306,7 @@
   },
   {
    "source": [
+    "00032",
     "BTF_FFXIV_33",
     "Shattered",
     "破砕 ～クリスタルタワー：シルクスの塔～"
@@ -1297,6 +1338,7 @@
   },
   {
    "source": [
+    "00033",
     "BTF_FFXIV_34",
     "Loss of Time",
     "時はこぼれ落ちて"
@@ -1328,6 +1370,7 @@
   },
   {
    "source": [
+    "00034",
     "BTF_FFXIV_35",
     "His Holiness",
     "教皇"
@@ -1359,6 +1402,7 @@
   },
   {
    "source": [
+    "00035",
     "BTF_FFXIV_36",
     "A Light in the Storm",
     "嵐の中の灯火 ～怪鳥巨塔 シリウス大灯台～"
@@ -1390,6 +1434,7 @@
   },
   {
    "source": [
+    "00035",
     "BTF_FFXIV_36",
     "A Light in the Storm",
     "嵐の中の灯火 ～怪鳥巨塔 シリウス大灯台～"
@@ -1421,6 +1466,7 @@
   },
   {
    "source": [
+    "00036",
     "BTF_FFXIV_37",
     "Riptide",
     "潮衝 ～逆襲要害 サスタシャ浸食洞～"
@@ -1452,6 +1498,7 @@
   },
   {
    "source": [
+    "00036",
     "BTF_FFXIV_37",
     "Riptide",
     "潮衝 ～逆襲要害 サスタシャ浸食洞～"
@@ -1483,6 +1530,7 @@
   },
   {
    "source": [
+    "00037",
     "BTF_FFXIV_38",
     "The Edge",
     "忍びの刃"
@@ -1517,6 +1565,7 @@
   },
   {
    "source": [
+    "00038",
     "BTF_FFXIV_39",
     "Forgotten by the Sun",
     "落日の遺跡 ～遺跡救援 カルン埋没寺院～"
@@ -1548,6 +1597,7 @@
   },
   {
    "source": [
+    "00038",
     "BTF_FFXIV_39",
     "Forgotten by the Sun",
     "落日の遺跡 ～遺跡救援 カルン埋没寺院～"
@@ -1582,6 +1632,7 @@
   },
   {
    "source": [
+    "00039",
     "BTF_FFXIV_40",
     "槍旗",
     "Pennons Aloft"
@@ -1616,6 +1667,7 @@
   },
   {
    "source": [
+    "00039",
     "BTF_FFXIV_40",
     "槍旗",
     "Pennons Aloft"
@@ -1647,6 +1699,7 @@
   },
   {
    "source": [
+    "00040",
     "BTF_FFXIV_41",
     "The Warrens",
     "秘密坑道 ～氷結潜窟 スノークローク大氷壁～"
@@ -1678,6 +1731,7 @@
   },
   {
    "source": [
+    "00040",
     "BTF_FFXIV_41",
     "The Warrens",
     "秘密坑道 ～氷結潜窟 スノークローク大氷壁～"
@@ -1709,6 +1763,7 @@
   },
   {
    "source": [
+    "00041",
     "BTF_FFXIV_42",
     "雪上の足跡 ～蛮神シヴァ前哨戦～",
     "Footsteps in the Snow"
@@ -1743,6 +1798,7 @@
   },
   {
    "source": [
+    "00041",
     "BTF_FFXIV_42",
     "TH_101",
     "Footsteps in the Snow",
@@ -1775,6 +1831,7 @@
   },
   {
    "source": [
+    "00042",
     "BTF_FFXIV_43",
     "Oblivion",
     "忘却の彼方 ～蛮神シヴァ討滅戦～"
@@ -1810,6 +1867,7 @@
   },
   {
    "source": [
+    "00043",
     "BTF_FFXIV_44",
     "Everbinding Oath",
     "永遠の誓い"
@@ -1841,6 +1899,7 @@
   },
   {
    "source": [
+    "00044",
     "BTF_FFXIV_45",
     "From the Ashes",
     "灰より生まれし者"
@@ -1875,6 +1934,7 @@
   },
   {
    "source": [
+    "00044",
     "BTF_FFXIV_45",
     "灰より生まれし者",
     "From the Ashes"
@@ -1886,6 +1946,7 @@
   },
   {
    "source": [
+    "00045",
     "BTF_FFXIV_46",
     "The Coil Tightens",
     "侵攻"
@@ -1917,6 +1978,7 @@
   },
   {
    "source": [
+    "00046",
     "BTF_FFXIV_47",
     "Four-sided Circle",
     "マンダヴィル・ゴールドソーサー"
@@ -1951,6 +2013,7 @@
   },
   {
    "source": [
+    "00046",
     "BTF_FFXIV_47",
     "Four-sided Circle",
     "マンダヴィル・ゴールドソーサー"
@@ -1982,6 +2045,7 @@
   },
   {
    "source": [
+    "00047",
     "BTF_FFXIV_48",
     "Gateway to Paradise",
     "天国の扉"
@@ -2016,6 +2080,7 @@
   },
   {
    "source": [
+    "00048",
     "BTF_FFXIV_49",
     "Sport of Kings",
     "チョコボレース"
@@ -2047,6 +2112,7 @@
   },
   {
    "source": [
+    "00048",
     "BTF_FFXIV_49",
     "Sport of Kings",
     "チョコボレース"
@@ -2078,6 +2144,7 @@
   },
   {
    "source": [
+    "00049",
     "BTF_FFXIV_50",
     "Aftermath",
     "戦禍 ～邪念排撃 古城アムダプール～"
@@ -2112,6 +2179,7 @@
   },
   {
    "source": [
+    "00049",
     "BTF_FFXIV_50",
     "Aftermath",
     "戦禍 ～邪念排撃 古城アムダプール～"
@@ -2146,6 +2214,7 @@
   },
   {
    "source": [
+    "00050",
     "BTF_FFXIV_51",
     "Tricksome",
     "聖域の罠 ～武装聖域 ワンダラーパレス～"
@@ -2180,6 +2249,7 @@
   },
   {
    "source": [
+    "00051",
     "BTF_FFXIV_52",
     "Magiteknical Difficulties",
     "魔導仕掛けの友"
@@ -2211,6 +2281,7 @@
   },
   {
    "source": [
+    "00052",
     "BTF_FFXIV_53",
     "Blind to the Dark",
     "薄闇 ～クリスタルタワー：闇の世界～"
@@ -2242,6 +2313,7 @@
   },
   {
    "source": [
+    "00055",
     "BTF_FFXIV_56",
     "The Reach of Darkness",
     "最後の死闘 ～新生～"
@@ -2273,6 +2345,7 @@
   },
   {
    "source": [
+    "00056",
     "BTF_FFXIV_57",
     "Eternal Wind",
     "悠久の風 ～新生～"
@@ -2304,6 +2377,7 @@
   },
   {
    "source": [
+    "00056",
     "BTF_FFXIV_57",
     "Eternal Wind",
     "悠久の風 ～新生～"
@@ -2335,6 +2409,7 @@
   },
   {
    "source": [
+    "00057",
     "BTF_FFXIV_58",
     "戦神の教義 ～皇都イシュガルド防衛戦～",
     "Faith in Her Fury"
@@ -2366,6 +2441,7 @@
   },
   {
    "source": [
+    "00057",
     "BTF_FFXIV_58",
     "戦神の教義 ～皇都イシュガルド防衛戦～",
     "Faith in Her Fury"
@@ -2397,6 +2473,7 @@
   },
   {
    "source": [
+    "00057",
     "BTF_FFXIV_58",
     "戦神の教義 ～皇都イシュガルド防衛戦～",
     "Faith in Her Fury"
@@ -2428,6 +2505,7 @@
   },
   {
    "source": [
+    "00058",
     "BTF_FFXIV_59",
     "Unworthy",
     "仇敵 ～皇都イシュガルド防衛戦～"
@@ -2459,6 +2537,7 @@
   },
   {
    "source": [
+    "00058",
     "BTF_FFXIV_59",
     "Unworthy",
     "仇敵 ～皇都イシュガルド防衛戦～"
@@ -2493,6 +2572,7 @@
   },
   {
    "source": [
+    "00059",
     "BTF_FFXIV_60",
     "Silver Tears",
     "銀の涙 ～幻龍残骸 黙約の塔～"
@@ -2524,6 +2604,7 @@
   },
   {
    "source": [
+    "00059",
     "BTF_FFXIV_60",
     "Silver Tears",
     "銀の涙 ～幻龍残骸 黙約の塔～"
@@ -2555,6 +2636,7 @@
   },
   {
    "source": [
+    "00060",
     "BTF_FFXIV_61",
     "始祖たる幻龍",
     "Primogenitor"
@@ -2589,6 +2671,7 @@
   },
   {
    "source": [
+    "00060",
     "BTF_FFXIV_61",
     "Primogenitor",
     "始祖たる幻龍"
@@ -2623,6 +2706,7 @@
   },
   {
    "source": [
+    "00060",
     "BTF_FFXIV_61",
     "Primogenitor",
     "始祖たる幻龍"

@@ -16,6 +16,7 @@
  "items": [
   {
    "source": [
+    "00000",
     "SB_FFXIV_001",
     "Storm of Blood",
     "血の嵐"
@@ -50,6 +51,7 @@
   },
   {
    "source": [
+    "00001",
     "SB_FFXIV_002",
     "Prelude - Long March Home",
     "紅蓮のプレリュード"
@@ -81,6 +83,7 @@
   },
   {
    "source": [
+    "00001",
     "SB_FFXIV_002",
     "Prelude - Long March Home",
     "紅蓮のプレリュード"
@@ -112,6 +115,7 @@
   },
   {
    "source": [
+    "00002",
     "SB_FFXIV_003",
     "Impact",
     "衝撃 ～ラールガーズリーチ：昼～"
@@ -146,6 +150,7 @@
   },
   {
    "source": [
+    "00004",
     "SB_FFXIV_005",
     "Looping in the Deepest Fringes",
     "辺境の乱戦"
@@ -184,6 +189,7 @@
   },
   {
    "source": [
+    "00004",
     "SB_FFXIV_005",
     "Looping in the Deepest Fringes",
     "辺境の乱戦"
@@ -218,6 +224,7 @@
   },
   {
    "source": [
+    "00004",
     "SB_FFXIV_005",
     "辺境の乱戦",
     "Looping in the Deepest Fringes"
@@ -249,6 +256,7 @@
   },
   {
    "source": [
+    "00005",
     "SB_FFXIV_006",
     "Afterglow",
     "余光 ～ラールガーズリーチ：夜～"
@@ -283,6 +291,7 @@
   },
   {
    "source": [
+    "00006",
     "SB_FFXIV_007",
     "Their Deadly Mission",
     "燃えよクァール ～壊神修行 星導山寺院～"
@@ -317,6 +326,7 @@
   },
   {
    "source": [
+    "00007",
     "SB_FFXIV_008",
     "On High",
     "高みより ～ギラバニア山岳地帯：昼～"
@@ -351,6 +361,7 @@
   },
   {
    "source": [
+    "00008",
     "SB_FFXIV_009",
     "With Giants Watching",
     "巨峰の眼下にて"
@@ -382,6 +393,7 @@
   },
   {
    "source": [
+    "00009",
     "SB_FFXIV_010",
     "The Garlean Territorial Anthem for Gyr Abania and Surrounding States - The Measure of Our Reach",
     "我らが支配圏"
@@ -413,6 +425,7 @@
   },
   {
    "source": [
+    "00009",
     "SB_FFXIV_010",
     "The Garlean Territorial Anthem for Gyr Abania and Surrounding States - The Measure of Our Reach",
     "我らが支配圏"
@@ -444,6 +457,7 @@
   },
   {
    "source": [
+    "00010",
     "SB_FFXIV_011",
     "Procedamus in Pace",
     "平和への道のり"
@@ -495,6 +509,7 @@
   },
   {
    "source": [
+    "00011",
     "SB_FFXIV_012",
     "Dawnbound",
     "夜明けに向かって ～漂流海域 セイレーン海～"
@@ -526,6 +541,7 @@
   },
   {
    "source": [
+    "00011",
     "SB_FFXIV_012",
     "Dawnbound",
     "夜明けに向かって ～漂流海域 セイレーン海～"
@@ -560,6 +576,7 @@
   },
   {
    "source": [
+    "00012",
     "SB_FFXIV_013",
     "Triumph",
     "鬨の声"
@@ -594,6 +611,7 @@
   },
   {
    "source": [
+    "00013",
     "SB_FFXIV_014",
     "Crimson Sunrise",
     "紅の夜明け ～クガネ：昼～"
@@ -628,6 +646,7 @@
   },
   {
    "source": [
+    "00013",
     "SB_FFXIV_014",
     "Crimson Sunrise",
     "紅の夜明け ～クガネ：昼～"
@@ -662,6 +681,7 @@
   },
   {
    "source": [
+    "00014",
     "SB_FFXIV_015",
     "Liquid Flame",
     "焔の海 ～紅玉海：昼～"
@@ -693,6 +713,7 @@
   },
   {
    "source": [
+    "00014",
     "SB_FFXIV_015",
     "Liquid Flame",
     "焔の海 ～紅玉海：昼～"
@@ -724,6 +745,7 @@
   },
   {
    "source": [
+    "00015",
     "SB_FFXIV_016",
     "Wing and a Prayer",
     "祈りの翼"
@@ -758,6 +780,7 @@
   },
   {
    "source": [
+    "00017",
     "SB_FFXIV_018",
     "The Open Box",
     "開けられた玉手箱 ～海底宮殿 紫水宮～"
@@ -792,6 +815,7 @@
   },
   {
    "source": [
+    "00018",
     "SB_FFXIV_019",
     "Westward Tide",
     "宵の海 ～紅玉海：夜～"
@@ -826,6 +850,7 @@
   },
   {
    "source": [
+    "00019",
     "SB_FFXIV_020",
     "Far East of Eorzea",
     "東方の地"
@@ -860,6 +885,7 @@
   },
   {
    "source": [
+    "00020",
     "SB_FFXIV_021",
     "Shell-shocked",
     "戦場の甲羅"
@@ -891,6 +917,7 @@
   },
   {
    "source": [
+    "00021",
     "SB_FFXIV_022",
     "Revelation",
     "啓示 ～蛮神スサノオ討滅戦～"
@@ -925,6 +952,7 @@
   },
   {
    "source": [
+    "00022",
     "SB_FFXIV_023",
     "Riot",
     "祭りである ～蛮神スサノオ討滅戦～"
@@ -956,6 +984,7 @@
   },
   {
    "source": [
+    "00023",
     "SB_FFXIV_024",
     "At Both Ends",
     "終始 ～蛮神スサノオ討滅戦～"
@@ -987,6 +1016,7 @@
   },
   {
    "source": [
+    "00024",
     "SB_FFXIV_025",
     "Harmony",
     "調和"
@@ -1021,6 +1051,7 @@
   },
   {
    "source": [
+    "00025",
     "SB_FFXIV_026",
     "A Father's Pride",
     "父の誇り ～ヤンサ：昼～"
@@ -1052,6 +1083,7 @@
   },
   {
    "source": [
+    "00025",
     "SB_FFXIV_026",
     "A Father's Pride",
     "父の誇り ～ヤンサ：昼～"
@@ -1102,6 +1134,7 @@
   },
   {
    "source": [
+    "00026",
     "SB_FFXIV_027",
     "Drowning in the Horizon",
     "地平線に沈め ～アジムステップ：昼～"
@@ -1136,6 +1169,7 @@
   },
   {
    "source": [
+    "00027",
     "SB_FFXIV_028",
     "Cyan's Theme",
     "カイエンのテーマ ～紅蓮～"
@@ -1170,6 +1204,7 @@
   },
   {
    "source": [
+    "00028",
     "SB_FFXIV_029",
     "He Rises Above",
     "地平線より昇れ ～アジムステップ：夜～"
@@ -1204,6 +1239,7 @@
   },
   {
    "source": [
+    "00029",
     "SB_FFXIV_030",
     "Most Unworthy",
     "英雄ならざる者 ～伝統試練 バルダム覇道～"
@@ -1238,6 +1274,7 @@
   },
   {
    "source": [
+    "00030",
     "SB_FFXIV_031",
     "Heroes of Stormblood",
     "血嵐の勇士"
@@ -1269,6 +1306,7 @@
   },
   {
    "source": [
+    "00031",
     "SB_FFXIV_032",
     "A Mother's Pride",
     "母の誇り ～ヤンサ：夜～"
@@ -1303,6 +1341,7 @@
   },
   {
    "source": [
+    "00032",
     "SB_FFXIV_033",
     "Gates of the Moon",
     "月亮門 ～解放決戦 ドマ城～"
@@ -1337,6 +1376,7 @@
   },
   {
    "source": [
+    "00033",
     "SB_FFXIV_034",
     "Parting Ways",
     "別れ"
@@ -1371,6 +1411,7 @@
   },
   {
    "source": [
+    "00034",
     "SB_FFXIV_035",
     "Crimson Sunset",
     "紅の夜更け ～クガネ：夜～"
@@ -1406,6 +1447,7 @@
   },
   {
    "source": [
+    "00035",
     "SB_FFXIV_036",
     "Deception",
     "策謀 ～悪党成敗 クガネ城～"
@@ -1441,6 +1483,7 @@
   },
   {
    "source": [
+    "00036",
     "SB_FFXIV_037",
     "Hope Forgotten",
     "忘れられた希望 ～ギラバニア辺境地帯：夜～"
@@ -1475,6 +1518,7 @@
   },
   {
    "source": [
+    "00037",
     "SB_FFXIV_038",
     "Beauty's Wicked Wiles",
     "美の謀略 ～蛮神ラクシュミ討滅戦～"
@@ -1510,6 +1554,7 @@
   },
   {
    "source": [
+    "00038",
     "SB_FFXIV_039",
     "The Stone Remembers",
     "石の記憶 ～ギラバニア山岳地帯：夜～"
@@ -1544,6 +1589,7 @@
   },
   {
    "source": [
+    "00039",
     "SB_FFXIV_040",
     "Alienus",
     "アリエヌス ～巨砲要塞 カストルム・アバニア～"
@@ -1578,6 +1624,7 @@
   },
   {
    "source": [
+    "00040",
     "SB_FFXIV_041",
     "Old Wounds",
     "古傷 ～ギラバニア湖畔地帯：夜～"
@@ -1631,6 +1678,7 @@
   },
   {
    "source": [
+    "00041",
     "SB_FFXIV_042",
     "Songs of Salt and Suffering",
     "塩と苦難の歌 ～ギラバニア湖畔地帯：昼～"
@@ -1665,6 +1713,7 @@
   },
   {
    "source": [
+    "00042",
     "SB_FFXIV_043",
     "Liberty or Death",
     "自由か死か ～紅蓮決戦 アラミゴ～"
@@ -1699,6 +1748,7 @@
   },
   {
    "source": [
+    "00043",
     "SB_FFXIV_044",
     "The Worm's Tail",
     "龍の尾 ～神龍討滅戦～"
@@ -1734,6 +1784,7 @@
   },
   {
    "source": [
+    "00044",
     "SB_FFXIV_045",
     "The Measure of His Reach",
     "壊神の拳が届く場所"
@@ -1766,20 +1817,24 @@
   {
    "source": {
     "SB_FFXIV_046": [
+     "00045",
      "SB_FFXIV_046",
      "Revolutions"
     ],
     "SB_FFXIV_026": [
+     "00025",
      "SB_FFXIV_026",
      "父の誇り ～ヤンサ：昼～",
      "A Father's Pride"
     ],
     "SB_FFXIV_010": [
+     "00009",
      "SB_FFXIV_010",
      "我らが支配圏",
      "The Garlean Territorial Anthem for Gyr Abania and Surrounding States - The Measure of Our Reach"
     ],
     "SB_FFXIV_031": [
+     "00030",
      "SB_FFXIV_031",
      "血嵐の勇士",
      "Heroes of Stormblood"
@@ -1872,6 +1927,7 @@
   },
   {
    "source": [
+    "00045",
     "SB_FFXIV_046",
     "Revolutions"
    ],
@@ -1903,6 +1959,7 @@
   },
   {
    "source": [
+    "00045",
     "SB_FFXIV_046",
     "Revolutions"
    ],
@@ -1936,6 +1993,7 @@
   },
   {
    "source": [
+    "00046",
     "SB_FFXIV_047",
     "Deltascape",
     "デルタスケープ ～次元の狭間オメガ：デルタ編～"
@@ -1970,6 +2028,7 @@
   },
   {
    "source": [
+    "00046",
     "SB_FFXIV_047",
     "Deltascape",
     "デルタスケープ ～次元の狭間オメガ：デルタ編～"
@@ -2004,6 +2063,7 @@
   },
   {
    "source": [
+    "00047",
     "SB_FFXIV_048",
     "TH_106",
     "Omega2",
@@ -2039,6 +2099,7 @@
   },
   {
    "source": [
+    "00048",
     "SB_FFXIV_049",
     "Decisions",
     "決戦 ～次元の狭間オメガ：デルタ編～"
@@ -2073,6 +2134,7 @@
   },
   {
    "source": [
+    "00049",
     "SB_FFXIV_050",
     "Final, Not Final",
     "最後の闘い ～次元の狭間オメガ：デルタ編～"
@@ -2108,6 +2170,7 @@
   },
   {
    "source": [
+    "00050",
     "SB_FFXIV_051",
     "Wizardly",
     "うぃざーどりー"
@@ -2139,6 +2202,7 @@
   },
   {
    "source": [
+    "00053",
     "SB_FFXIV_054",
     "Far From Home",
     "故郷より離れて ～水没遺構 スカラ～"
@@ -2170,6 +2234,7 @@
   },
   {
    "source": [
+    "00053",
     "SB_FFXIV_054",
     "Far From Home",
     "故郷より離れて ～水没遺構 スカラ～"
@@ -2201,6 +2266,7 @@
   },
   {
    "source": [
+    "00055",
     "SB_FFXIV_055",
     "Indomitable",
     "硬き者たち"
@@ -2235,6 +2301,7 @@
   },
   {
    "source": [
+    "00056",
     "SB_FFXIV_056",
     "Rival Wings",
     "ライバルウィングズ ～アストラガロス機工戦～"
@@ -2266,6 +2333,7 @@
   },
   {
    "source": [
+    "00057",
     "SB_FFXIV_057",
     "Birds of Prey",
     "鳥たちの饗宴 ～ライバルウィングズ～"
@@ -2297,6 +2365,7 @@
   },
   {
    "source": [
+    "00058",
     "SB_FFXIV_058",
     "Forever in Flames",
     "転生の炎 ～絶バハムート討滅戦～"
@@ -2328,6 +2397,7 @@
   },
   {
    "source": [
+    "00059",
     "SB_FFXIV_059",
     "Beyond Redemption",
     "贖いの果て ～絶バハムート討滅戦～"
@@ -2362,6 +2432,7 @@
   },
   {
    "source": [
+    "00060",
     "SB_FFXIV_060",
     "Character Creation",
     "プレイヤーメイク"
@@ -2393,6 +2464,7 @@
   },
   {
    "source": [
+    "00061",
     "SB_FFXIV_061",
     "Save",
     "データ画面"
@@ -2424,6 +2496,7 @@
   },
   {
    "source": [
+    "00062",
     "SB_FFXIV_062",
     "Protagonist's Theme",
     "主人公のテーマ"
@@ -2458,6 +2531,7 @@
   },
   {
    "source": [
+    "00063",
     "SB_FFXIV_063",
     "Backborn Story"
    ],
@@ -2491,6 +2565,7 @@
   },
   {
    "source": [
+    "00064",
     "SB_FFXIV_064",
     "Trisection"
    ],
@@ -2524,6 +2599,7 @@
   },
   {
    "source": [
+    "00065",
     "SB_FFXIV_065",
     "Precipitous Combat",
     "橋上の戦い"
@@ -2558,6 +2634,7 @@
   },
   {
    "source": [
+    "00066",
     "SB_FFXIV_066",
     "The Enemy Approaches",
     "敵兵襲撃"
@@ -2589,6 +2666,7 @@
   },
   {
    "source": [
+    "00067",
     "SB_FFXIV_067",
     "Ultema the Nice Body"
    ],
@@ -2622,6 +2700,7 @@
   },
   {
    "source": [
+    "00069",
     "SB_FFXIV_069",
     "Down Where Daemons Dwell",
     "鬼の棲む島 ～紅玉火山 獄之蓋～"
@@ -2653,6 +2732,7 @@
   },
   {
    "source": [
+    "00069",
     "SB_FFXIV_069",
     "Down Where Daemons Dwell",
     "鬼の棲む島 ～紅玉火山 獄之蓋～"
@@ -2684,6 +2764,7 @@
   },
   {
    "source": [
+    "00070",
     "SB_FFXIV_070",
     "Iroha"
    ],
@@ -2717,6 +2798,7 @@
   },
   {
    "source": [
+    "00071",
     "SB_FFXIV_071",
     "Answer on High",
     "天つ雷 ～白虎前哨戦～"
@@ -2751,6 +2833,7 @@
   },
   {
    "source": [
+    "00072",
     "SB_FFXIV_072",
     "Todoroki",
     "轟 ～白虎征魂戦～"
@@ -2782,6 +2865,7 @@
   },
   {
    "source": [
+    "00072",
     "SB_FFXIV_072",
     "Todoroki",
     "轟 ～白虎征魂戦～"
@@ -2816,6 +2900,7 @@
   },
   {
    "source": [
+    "00073",
     "SB_FFXIV_073",
     "Amatsu Kaze",
     "天つ風 ～白虎征魂戦～"
@@ -2847,6 +2932,7 @@
   },
   {
    "source": [
+    "00073",
     "SB_FFXIV_073",
     "Amatsu Kaze",
     "天つ風 ～白虎征魂戦～"
@@ -2881,6 +2967,7 @@
   },
   {
    "source": [
+    "00074",
     "SB_FFXIV_074",
     "Keepers of the Lock",
     "我ら国境警備隊"
@@ -2912,6 +2999,7 @@
   },
   {
    "source": [
+    "00074",
     "SB_FFXIV_074",
     "Keepers of the Lock",
     "我ら国境警備隊"
@@ -2946,6 +3034,7 @@
   },
   {
    "source": [
+    "00075",
     "SB_FFXIV_075",
     "Unbreakable (Duality)",
     "アンブレーカブル (Duality) ～博物戦艦 フラクタル・コンティニアム～"
@@ -2980,6 +3069,7 @@
   },
   {
    "source": [
+    "00076",
     "SB_FFXIV_076",
     "The Phantom Train to Sigmascape",
     "魔列車 ～次元の狭間オメガ：シグマ編～"
@@ -3011,6 +3101,7 @@
   },
   {
    "source": [
+    "00077",
     "SB_FFXIV_077",
     "TH_144",
     "A Battle Decisively",
@@ -3046,6 +3137,7 @@
   },
   {
    "source": [
+    "00077",
     "SB_FFXIV_077",
     "TH_144",
     "A Battle Decisively",
@@ -3081,6 +3173,7 @@
   },
   {
    "source": [
+    "00078",
     "SB_FFXIV_078",
     "TH_140",
     "Dancing Mad - Movement I",
@@ -3116,6 +3209,7 @@
   },
   {
    "source": [
+    "00078",
     "SB_FFXIV_078",
     "TH_140",
     "Dancing Mad - Movement I",
@@ -3151,6 +3245,7 @@
   },
   {
    "source": [
+    "00079",
     "SB_FFXIV_079",
     "TH_141",
     "Dancing Mad - Movement II",
@@ -3186,6 +3281,7 @@
   },
   {
    "source": [
+    "00079",
     "SB_FFXIV_079",
     "TH_141",
     "Dancing Mad - Movement II",
@@ -3221,6 +3317,7 @@
   },
   {
    "source": [
+    "00080",
     "SB_FFXIV_080",
     "妖星乱舞 第3楽章 ～次元の狭間オメガ：シグマ編～",
     "Dancing Mad - Movement III"
@@ -3256,6 +3353,7 @@
   },
   {
    "source": [
+    "00081",
     "SB_FFXIV_081",
     "妖星乱舞 第4楽章 ～次元の狭間オメガ：シグマ編～",
     "Dancing Mad - Movement IV"
@@ -3292,6 +3390,7 @@
   },
   {
    "source": [
+    "00082",
     "SB_FFXIV_082",
     "Wicked Winds Whisper",
     "乱風の囁き ～禁断の地 エウレカ：アネモス編～"
@@ -3323,6 +3422,7 @@
   },
   {
    "source": [
+    "00084",
     "SB_FFXIV_084",
     "ノー・クォーター",
     "No Quarter"
@@ -3357,6 +3457,7 @@
   },
   {
    "source": [
+    "00085",
     "SB_FFXIV_085",
     "セイレーンの呼び声",
     "Siren Song"
@@ -3392,6 +3493,7 @@
   },
   {
    "source": [
+    "00086",
     "SB_FFXIV_086",
     "Pa-Paya Demastered"
    ],
@@ -3425,6 +3527,7 @@
   },
   {
    "source": [
+    "00086",
     "SB_FFXIV_086",
     "Pa-Paya Demastered"
    ],
@@ -3458,6 +3561,7 @@
   },
   {
    "source": [
+    "00087",
     "SB_FFXIV_087",
     "Seven Hundred Seventy-Seven Whiskers",
     "天晴大鯰音頭"
@@ -3492,6 +3596,7 @@
   },
   {
    "source": [
+    "00088",
     "SB_FFXIV_088",
     "Wasshoi, Wasshoi!",
     "わっしょいわっしょい"
@@ -3523,6 +3628,7 @@
   },
   {
    "source": [
+    "00089",
     "SB_FFXIV_089",
     "Dangertek",
     "危険なる妙技"
@@ -3554,6 +3660,7 @@
   },
   {
    "source": [
+    "00089",
     "SB_FFXIV_089",
     "Dangertek",
     "危険なる妙技"
@@ -3588,6 +3695,7 @@
   },
   {
    "source": [
+    "00090",
     "SB_FFXIV_090",
     "Earth, Wind, and Water",
     "地風水 ～風水霊殿 ガンエン廟～"
@@ -3622,6 +3730,7 @@
   },
   {
    "source": [
+    "00091",
     "SB_FFXIV_091",
     "Fallen Angel (From Astral to Umbral)",
     "堕天せし者 (From Astral to Umbral) ～蛮神ガルーダ討伐戦～"
@@ -3653,6 +3762,7 @@
   },
   {
    "source": [
+    "00092",
     "SB_FFXIV_092",
     "Primal Judgment (From Astral to Umbral)",
     "原始の審判 (From Astral to Umbral) ～蛮神イフリート討伐戦～"
@@ -3684,6 +3794,7 @@
   },
   {
    "source": [
+    "00093",
     "SB_FFXIV_093",
     "Under the Weight (From Astral to Umbral)",
     "過重圧殺！ (From Astral to Umbral) ～蛮神タイタン討滅戦～"
@@ -3715,6 +3826,7 @@
   },
   {
    "source": [
+    "00093",
     "SB_FFXIV_093",
     "Under the Weight (From Astral to Umbral)",
     "過重圧殺！ (From Astral to Umbral) ～蛮神タイタン討滅戦～"
@@ -3749,6 +3861,7 @@
   },
   {
    "source": [
+    "00094",
     "SB_FFXIV_094",
     "Ultima (Orchestral Version)",
     "究極幻想 (Orchestral Version)"
@@ -3780,6 +3893,7 @@
   },
   {
    "source": [
+    "00094",
     "SB_FFXIV_094",
     "Ultima (Orchestral Version)",
     "究極幻想 (Orchestral Version)"
@@ -3811,6 +3925,7 @@
   },
   {
    "source": [
+    "00095",
     "SB_FFXIV_095",
     "World Map",
     "ワールドマップ"
@@ -3845,6 +3960,7 @@
   },
   {
    "source": [
+    "00096",
     "SB_FFXIV_096",
     "A Chapel"
    ],
@@ -3878,6 +3994,7 @@
   },
   {
    "source": [
+    "00097",
     "SB_FFXIV_097",
     "Ascent",
     "頂上へ"
@@ -3909,6 +4026,7 @@
   },
   {
    "source": [
+    "00098",
     "SB_FFXIV_098",
     "Boss Battle",
     "ボス戦"
@@ -3940,6 +4058,7 @@
   },
   {
    "source": [
+    "00099",
     "SB_FFXIV_099",
     "The Mystery of Giruvegan",
     "ギルヴェガンの謎"
@@ -3974,6 +4093,7 @@
   },
   {
    "source": [
+    "00100",
     "SB_FFXIV_100",
     "Apoplexy"
    ],
@@ -4007,6 +4127,7 @@
   },
   {
    "source": [
+    "00101",
     "SB_FFXIV_101",
     "Flash of Steel",
     "剣の一閃"
@@ -4041,6 +4162,7 @@
   },
   {
    "source": [
+    "00102",
     "SB_FFXIV_102",
     "Victory Fanfare (FFXII Version)",
     "勝利のファンファーレ ～FFXIIバージョン～"
@@ -4072,6 +4194,7 @@
   },
   {
    "source": [
+    "00103",
     "SB_FFXIV_103",
     "Nightbloom",
     "月下美人 ～蛮神ツクヨミ前哨戦～"
@@ -4106,6 +4229,7 @@
   },
   {
    "source": [
+    "00103",
     "SB_FFXIV_103",
     "Nightbloom",
     "月下美人 ～蛮神ツクヨミ前哨戦～"
@@ -4140,6 +4264,7 @@
   },
   {
    "source": [
+    "00104",
     "SB_FFXIV_104",
     "Lunacy",
     "狂える月夜 ～蛮神ツクヨミ討滅戦～"
@@ -4171,6 +4296,7 @@
   },
   {
    "source": [
+    "00105",
     "SB_FFXIV_105",
     "Wayward Daughter",
     "月下彼岸花 ～蛮神ツクヨミ討滅戦～"

@@ -13,10 +13,12 @@
   {
    "source": {
     "ENDWALKER_001": [
+     "00000",
      "ENDWALKER_001",
      "Endwalker - Footfalls"
     ],
     "ENDWALKER_055": [
+     "00055",
      "ENDWALKER_055",
      "多彩なる都 ～ラザハン：昼～",
      "Vibrant Voices"
@@ -24,6 +26,10 @@
     "GL_00007": {
      "inputFiles": [
       [
+       {
+        "directory": "Growing Light",
+        "pattern": "^00007\\."
+       },
        {
         "directory": "Growing Light",
         "pattern": "GL_00007"
@@ -44,6 +50,10 @@
       [
        {
         "directory": "Growing Light",
+        "pattern": "^00042\\."
+       },
+       {
+        "directory": "Growing Light",
         "pattern": "GL_00042"
        },
        {
@@ -60,6 +70,10 @@
     "GL_00074": {
      "inputFiles": [
       [
+       {
+        "directory": "Growing Light",
+        "pattern": "^00074\\."
+       },
        {
         "directory": "Growing Light",
         "pattern": "GL_00074"
@@ -80,6 +94,10 @@
       [
        {
         "directory": "Growing Light",
+        "pattern": "^00076\\."
+       },
+       {
+        "directory": "Growing Light",
         "pattern": "GL_00076"
        },
        {
@@ -94,6 +112,7 @@
      ]
     },
     "ENDWALKER_003": [
+     "00002",
      "ENDWALKER_003",
      "知恵の水瓶 ～オールド・シャーレアン：昼～",
      "The Ewer Brimmeth"
@@ -245,6 +264,7 @@
   },
   {
    "source": [
+    "00000",
     "ENDWALKER_001",
     "Endwalker - Footfalls"
    ],
@@ -278,6 +298,7 @@
   },
   {
    "source": [
+    "00002",
     "ENDWALKER_003",
     "The Ewer Brimmeth",
     "知恵の水瓶 ～オールド・シャーレアン：昼～"
@@ -309,6 +330,7 @@
   },
   {
    "source": [
+    "00002",
     "ENDWALKER_003",
     "The Ewer Brimmeth",
     "知恵の水瓶 ～オールド・シャーレアン：昼～"
@@ -340,6 +362,7 @@
   },
   {
    "source": [
+    "00003",
     "ENDWALKER_004",
     "Spoken without End",
     "語り継がれる言葉"
@@ -371,6 +394,7 @@
   },
   {
    "source": [
+    "00004",
     "ENDWALKER_005",
     "The Day Will Come (Endwalker)",
     "いつの日かきっと ～暁月～"
@@ -405,6 +429,7 @@
   },
   {
    "source": [
+    "00005",
     "ENDWALKER_006",
     "The Nautilus Knoweth",
     "知恵の巻貝 ～オールド・シャーレアン：夜～"
@@ -436,6 +461,7 @@
   },
   {
    "source": [
+    "00005",
     "ENDWALKER_006",
     "The Nautilus Knoweth",
     "知恵の巻貝 ～オールド・シャーレアン：夜～"
@@ -470,6 +496,7 @@
   },
   {
    "source": [
+    "00006",
     "ENDWALKER_007",
     "The Labyrinth",
     "迷宮 ～ラヴィリンソス：昼～"
@@ -501,6 +528,7 @@
   },
   {
    "source": [
+    "00006",
     "ENDWALKER_007",
     "The Labyrinth",
     "迷宮 ～ラヴィリンソス：昼～"
@@ -535,6 +563,7 @@
   },
   {
    "source": [
+    "00007",
     "ENDWALKER_008",
     "Down the Up Staircase",
     "上り階段をくだれ ～星海観測 逆さの塔～"
@@ -569,6 +598,7 @@
   },
   {
    "source": [
+    "00007",
     "ENDWALKER_008",
     "上り階段をくだれ ～星海観測 逆さの塔～",
     "Down the Up Staircase"
@@ -600,6 +630,7 @@
   },
   {
    "source": [
+    "00008",
     "ENDWALKER_009",
     "Unbowed",
     "抗戦"
@@ -636,6 +667,7 @@
   },
   {
    "source": [
+    "00008",
     "ENDWALKER_009",
     "Unbowed",
     "抗戦"
@@ -670,6 +702,7 @@
   },
   {
    "source": [
+    "00009",
     "ENDWALKER_010",
     "Dreams of Man",
     "迷夢 ～ラヴィリンソス：夜～"
@@ -704,6 +737,7 @@
   },
   {
    "source": [
+    "00010",
     "ENDWALKER_011",
     "Shade's Delight",
     "微笑む幽霊"
@@ -735,6 +769,7 @@
   },
   {
    "source": [
+    "00011",
     "ENDWALKER_012",
     "Divine Words",
     "神々の訓え ～サベネア島：昼～"
@@ -766,6 +801,7 @@
   },
   {
    "source": [
+    "00011",
     "ENDWALKER_012",
     "Divine Words",
     "神々の訓え ～サベネア島：昼～"
@@ -800,6 +836,7 @@
   },
   {
    "source": [
+    "00012",
     "ENDWALKER_013",
     "Twilit Terraces",
     "落日の都 ～ラザハン～"
@@ -831,6 +868,7 @@
   },
   {
    "source": [
+    "00012",
     "ENDWALKER_013",
     "Twilit Terraces",
     "落日の都 ～ラザハン～"
@@ -865,6 +903,7 @@
   },
   {
    "source": [
+    "00013",
     "ENDWALKER_014",
     "Tower of Zot (Endwalker)",
     "ゾットの塔 ～暁月～"
@@ -896,6 +935,7 @@
   },
   {
    "source": [
+    "00013",
     "ENDWALKER_014",
     "Tower of Zot (Endwalker)",
     "ゾットの塔 ～暁月～"
@@ -930,6 +970,7 @@
   },
   {
    "source": [
+    "00014",
     "ENDWALKER_015",
     "震える刃",
     "On Blade's Edge"
@@ -961,6 +1002,7 @@
   },
   {
    "source": [
+    "00014",
     "ENDWALKER_015",
     "On Blade's Edge",
     "震える刃"
@@ -995,6 +1037,7 @@
   },
   {
    "source": [
+    "00015",
     "ENDWALKER_016",
     "Prayers Repeated",
     "人々の祈り ～サベネア島：夜～"
@@ -1026,6 +1069,7 @@
   },
   {
    "source": [
+    "00015",
     "ENDWALKER_016",
     "Prayers Repeated",
     "人々の祈り ～サベネア島：夜～"
@@ -1060,6 +1104,7 @@
   },
   {
    "source": [
+    "00016",
     "ENDWALKER_017",
     "White Snow, Black Steel",
     "白雪と黒鉄 ～ガレマルド：昼～"
@@ -1091,6 +1136,7 @@
   },
   {
    "source": [
+    "00016",
     "ENDWALKER_017",
     "White Snow, Black Steel",
     "白雪と黒鉄 ～ガレマルド：昼～"
@@ -1125,6 +1171,7 @@
   },
   {
    "source": [
+    "00017",
     "ENDWALKER_018",
     "Those We Can Yet Save",
     "護るべき営み"
@@ -1156,6 +1203,7 @@
   },
   {
    "source": [
+    "00018",
     "ENDWALKER_019",
     "Home Beyond the Horizon",
     "帰らん、地平の彼方へ"
@@ -1187,6 +1235,7 @@
   },
   {
    "source": [
+    "00018",
     "ENDWALKER_019",
     "Home Beyond the Horizon",
     "帰らん、地平の彼方へ"
@@ -1218,6 +1267,7 @@
   },
   {
    "source": [
+    "00018",
     "ENDWALKER_019",
     "Home Beyond the Horizon",
     "帰らん、地平の彼方へ"
@@ -1252,6 +1302,7 @@
   },
   {
    "source": [
+    "00019",
     "ENDWALKER_020",
     "Black Steel, Cold Embers",
     "黒闇と黒鉄 ～ガレマルド：夜～"
@@ -1286,6 +1337,7 @@
   },
   {
    "source": [
+    "00020",
     "ENDWALKER_021",
     "Tremble",
     "恐怖の波動"
@@ -1317,6 +1369,7 @@
   },
   {
    "source": [
+    "00021",
     "ENDWALKER_022",
     "Each Drop",
     "小さな命"
@@ -1348,6 +1401,7 @@
   },
   {
    "source": [
+    "00022",
     "ENDWALKER_023",
     "Garlemald Express",
     "ガレマルド急行 ～ 魔導神門 バブイルの塔～"
@@ -1379,6 +1433,7 @@
   },
   {
    "source": [
+    "00022",
     "ENDWALKER_023",
     "Garlemald Express",
     "ガレマルド急行 ～ 魔導神門 バブイルの塔～"
@@ -1413,6 +1468,7 @@
   },
   {
    "source": [
+    "00023",
     "ENDWALKER_024",
     "終の戦",
     "Finality"
@@ -1447,6 +1503,7 @@
   },
   {
    "source": [
+    "00024",
     "ENDWALKER_025",
     "One Small Step",
     "小さな一歩 ～嘆きの海～"
@@ -1478,6 +1535,7 @@
   },
   {
    "source": [
+    "00024",
     "ENDWALKER_025",
     "One Small Step",
     "小さな一歩 ～嘆きの海～"
@@ -1512,6 +1570,7 @@
   },
   {
    "source": [
+    "00025",
     "ENDWALKER_026",
     "'Neath Dark Waters (Scions & Sinners)",
     "冥き水底 (Scions & Sinners) 〜テンペスト：深部〜"
@@ -1543,6 +1602,7 @@
   },
   {
    "source": [
+    "00025",
     "ENDWALKER_026",
     "'Neath Dark Waters (Scions & Sinners)",
     "冥き水底 (Scions & Sinners) 〜テンペスト：深部〜"
@@ -1574,6 +1634,7 @@
   },
   {
    "source": [
+    "00026",
     "ENDWALKER_027",
     "Endcaller",
     "ENDCALLER ～ゾディアーク討滅戦～"
@@ -1608,6 +1669,7 @@
   },
   {
    "source": [
+    "00026",
     "ENDWALKER_027",
     "Endcaller",
     "ENDCALLER ～ゾディアーク討滅戦～"
@@ -1642,6 +1704,7 @@
   },
   {
    "source": [
+    "00027",
     "ENDWALKER_028",
     "Imagination (Duality)",
     "イマジネーション (Duality) 〜蒼天聖戦 魔科学研究所〜"
@@ -1673,6 +1736,7 @@
   },
   {
    "source": [
+    "00028",
     "ENDWALKER_029",
     "Welcome to Our Town! (Endwalker)",
     "街のテーマ ～暁月～"
@@ -1704,6 +1768,7 @@
   },
   {
    "source": [
+    "00028",
     "ENDWALKER_029",
     "Welcome to Our Town! (Endwalker)",
     "街のテーマ ～暁月～"
@@ -1735,6 +1800,7 @@
   },
   {
    "source": [
+    "00029",
     "ENDWALKER_030",
     "バトル1 from FINAL FANTASY IV",
     "Battle 1 from FINAL FANTASY IV"
@@ -1766,6 +1832,7 @@
   },
   {
    "source": [
+    "00029",
     "ENDWALKER_030",
     "Battle 1 from FINAL FANTASY IV",
     "バトル1 from FINAL FANTASY IV"
@@ -1794,6 +1861,7 @@
   },
   {
    "source": [
+    "00029",
     "ENDWALKER_030",
     "バトル1 from FINAL FANTASY IV",
     "Battle 1 from FINAL FANTASY IV"
@@ -1825,6 +1893,7 @@
   },
   {
    "source": [
+    "00030",
     "ENDWALKER_031",
     "What Comes of Despair",
     "絶望の果て"
@@ -1856,6 +1925,7 @@
   },
   {
    "source": [
+    "00031",
     "ENDWALKER_032",
     "As the Sky Burns",
     "空が燃える日 ～終末樹海 ヴァナスパティ～"
@@ -1887,6 +1957,7 @@
   },
   {
    "source": [
+    "00031",
     "ENDWALKER_032",
     "As the Sky Burns",
     "空が燃える日 ～終末樹海 ヴァナスパティ～"
@@ -1921,6 +1992,7 @@
   },
   {
    "source": [
+    "00032",
     "ENDWALKER_033",
     "Heroes Forge Ahead",
     "英雄に続け"
@@ -1952,6 +2024,7 @@
   },
   {
    "source": [
+    "00033",
     "ENDWALKER_034",
     "Sky Unsundered",
     "古の空 ～エルピス：昼～"
@@ -1983,6 +2056,7 @@
   },
   {
    "source": [
+    "00033",
     "ENDWALKER_034",
     "Sky Unsundered",
     "古の空 ～エルピス：昼～"
@@ -2017,6 +2091,7 @@
   },
   {
    "source": [
+    "00034",
     "ENDWALKER_035",
     "Flow Together"
    ],
@@ -2047,6 +2122,7 @@
   },
   {
    "source": [
+    "00034",
     "ENDWALKER_035",
     "Flow Together"
    ],
@@ -2080,6 +2156,7 @@
   },
   {
    "source": [
+    "00035",
     "ENDWALKER_036",
     "Miracle Works",
     "創造の奇跡 ～創造環境 ヒュペルボレア造物院～"
@@ -2111,6 +2188,7 @@
   },
   {
    "source": [
+    "00035",
     "ENDWALKER_036",
     "Miracle Works",
     "創造の奇跡 ～創造環境 ヒュペルボレア造物院～"
@@ -2145,6 +2223,7 @@
   },
   {
    "source": [
+    "00036",
     "ENDWALKER_037",
     "Stars Long Dead",
     "古の星空 ～エルピス：夜～"
@@ -2179,6 +2258,7 @@
   },
   {
    "source": [
+    "00037",
     "ENDWALKER_038",
     "From Below",
     "地より昇りし力"
@@ -2210,6 +2290,7 @@
   },
   {
    "source": [
+    "00038",
     "ENDWALKER_039",
     "灰より生まれし者",
     "From the Ashes"
@@ -2244,6 +2325,7 @@
   },
   {
    "source": [
+    "00038",
     "ENDWALKER_039",
     "From the Ashes",
     "灰より生まれし者"
@@ -2255,6 +2337,7 @@
   },
   {
    "source": [
+    "00039",
     "ENDWALKER_040",
     "Answers",
     "Answers"
@@ -2286,6 +2369,7 @@
   },
   {
    "source": [
+    "00039",
     "ENDWALKER_040",
     "Answers"
    ],
@@ -2316,6 +2400,7 @@
   },
   {
    "source": [
+    "00039",
     "ENDWALKER_040",
     "Answers"
    ],
@@ -2346,6 +2431,7 @@
   },
   {
    "source": [
+    "00039",
     "ENDWALKER_040",
     "Answers"
    ],
@@ -2376,6 +2462,7 @@
   },
   {
    "source": [
+    "00039",
     "ENDWALKER_040",
     "Answers"
    ],
@@ -2403,6 +2490,7 @@
   },
   {
    "source": [
+    "00040",
     "ENDWALKER_041",
     "The Aetherial Sea",
     "星の海 ～星海潜航 アイティオン星晶鏡～"
@@ -2434,6 +2522,7 @@
   },
   {
    "source": [
+    "00040",
     "ENDWALKER_041",
     "The Aetherial Sea",
     "星の海 ～星海潜航 アイティオン星晶鏡～"
@@ -2468,6 +2557,7 @@
   },
   {
    "source": [
+    "00041",
     "ENDWALKER_042",
     "Your Answer",
     "Your Answer ～ハイデリン討滅戦～"
@@ -2502,6 +2592,7 @@
   },
   {
    "source": [
+    "00041",
     "ENDWALKER_042",
     "Your Answer",
     "Your Answer ～ハイデリン討滅戦～"
@@ -2536,6 +2627,7 @@
   },
   {
    "source": [
+    "00042",
     "ENDWALKER_043",
     "Answers - Piano"
    ],
@@ -2566,6 +2658,7 @@
   },
   {
    "source": [
+    "00043",
     "ENDWALKER_044",
     "The Last Stand",
     "ラストスタンド"
@@ -2597,6 +2690,7 @@
   },
   {
    "source": [
+    "00044",
     "ENDWALKER_045",
     "Echoes in the Distance"
    ],
@@ -2627,6 +2721,7 @@
   },
   {
    "source": [
+    "00044",
     "ENDWALKER_045",
     "Echoes in the Distance"
    ],
@@ -2660,6 +2755,7 @@
   },
   {
    "source": [
+    "00045",
     "ENDWALKER_046",
     "Close in the Distance - Instrumental"
    ],
@@ -2690,6 +2786,7 @@
   },
   {
    "source": [
+    "00045",
     "ENDWALKER_046",
     "Close in the Distance - Instrumental"
    ],
@@ -2723,6 +2820,7 @@
   },
   {
    "source": [
+    "00046",
     "ENDWALKER_047",
     "Close in the Distance"
    ],
@@ -2753,6 +2851,7 @@
   },
   {
    "source": [
+    "00046",
     "ENDWALKER_047",
     "Close in the Distance"
    ],
@@ -2786,6 +2885,7 @@
   },
   {
    "source": [
+    "00047",
     "ENDWALKER_048",
     "Dynamis",
     "デュナミスの欠片"
@@ -2817,6 +2917,7 @@
   },
   {
    "source": [
+    "00048",
     "ENDWALKER_049",
     "Of Countless Stars",
     "先ゆく星々 ～最終幻想 レムナント～"
@@ -2848,6 +2949,7 @@
   },
   {
    "source": [
+    "00048",
     "ENDWALKER_049",
     "Of Countless Stars",
     "先ゆく星々 ～最終幻想 レムナント～"
@@ -2882,6 +2984,7 @@
   },
   {
    "source": [
+    "00049",
     "ENDWALKER_050",
     "The Final Day",
     "終焉の戦い"
@@ -2916,6 +3019,7 @@
   },
   {
    "source": [
+    "00049",
     "ENDWALKER_050",
     "The Final Day",
     "終焉の戦い"
@@ -2950,6 +3054,7 @@
   },
   {
    "source": [
+    "00050",
     "ENDWALKER_051",
     "With Hearts Aligned",
     "想いが動かす力"
@@ -2981,6 +3086,7 @@
   },
   {
    "source": [
+    "00050",
     "ENDWALKER_051",
     "With Hearts Aligned",
     "想いが動かす力"
@@ -3015,6 +3121,7 @@
   },
   {
    "source": [
+    "00051",
     "ENDWALKER_052",
     "Flow"
    ],
@@ -3045,6 +3152,7 @@
   },
   {
    "source": [
+    "00051",
     "ENDWALKER_052",
     "Flow"
    ],
@@ -3078,6 +3186,7 @@
   },
   {
    "source": [
+    "00053",
     "ENDWALKER_054",
     "The Tale of the Star",
     "星と命を巡る物語"
@@ -3109,6 +3218,7 @@
   },
   {
    "source": [
+    "00055",
     "ENDWALKER_055",
     "Vibrant Voices",
     "多彩なる都 ～ラザハン：昼～"
@@ -3140,6 +3250,7 @@
   },
   {
    "source": [
+    "00055",
     "ENDWALKER_055",
     "Vibrant Voices",
     "多彩なる都 ～ラザハン：昼～"
@@ -3174,6 +3285,7 @@
   },
   {
    "source": [
+    "00056",
     "ENDWALKER_056",
     "Perfumed Eves",
     "薫香の都 ～ラザハン：夜～"
@@ -3208,6 +3320,7 @@
   },
   {
    "source": [
+    "00057",
     "ENDWALKER_057",
     "Carrots of Happiness",
     "ハピネスキャロット ～楽園都市 スマイルトン～"
@@ -3239,6 +3352,7 @@
   },
   {
    "source": [
+    "00057",
     "ENDWALKER_057",
     "Carrots of Happiness",
     "ハピネスキャロット ～楽園都市 スマイルトン～"
@@ -3273,6 +3387,7 @@
   },
   {
    "source": [
+    "00058",
     "ENDWALKER_058",
     "eScape (Journeys)",
     "エスケープ (Journeys) 〜次元の狭間オメガ：アルファ編〜"
@@ -3304,6 +3419,7 @@
   },
   {
    "source": [
+    "00058",
     "ENDWALKER_058",
     "eScape (Journeys)",
     "エスケープ (Journeys) 〜次元の狭間オメガ：アルファ編〜"
@@ -3338,6 +3454,7 @@
   },
   {
    "source": [
+    "00059",
     "ENDWALKER_059",
     "Roads Less Traveled",
     "旅を駆け抜けて"
@@ -3372,6 +3489,7 @@
   },
   {
    "source": [
+    "00060",
     "ENDWALKER_060",
     "魔のすべて"
    ],
@@ -3402,6 +3520,7 @@
   },
   {
    "source": [
+    "00060",
     "ENDWALKER_060",
     "魔のすべて"
    ],
@@ -3435,6 +3554,7 @@
   },
   {
    "source": [
+    "00061",
     "ENDWALKER_061",
     "Ancient Shackles",
     "縛めの鎖 ～万魔殿パンデモニウム：辺獄編～"
@@ -3466,6 +3586,7 @@
   },
   {
    "source": [
+    "00061",
     "ENDWALKER_061",
     "Ancient Shackles",
     "縛めの鎖 ～万魔殿パンデモニウム：辺獄編～"
@@ -3500,6 +3621,7 @@
   },
   {
    "source": [
+    "00062",
     "ENDWALKER_062",
     "Hic Svnt Leones",
     "此処に獅子あり ～万魔殿パンデモニウム：辺獄編～"
@@ -3534,6 +3656,7 @@
   },
   {
    "source": [
+    "00062",
     "ENDWALKER_062",
     "Hic Svnt Leones",
     "此処に獅子あり ～万魔殿パンデモニウム：辺獄編～"

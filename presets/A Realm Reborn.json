@@ -12,6 +12,7 @@
  "items": [
   {
    "source": [
+    "00000",
     "ARR_FFXIV_001",
     "Prelude – Rebirth"
    ],
@@ -42,6 +43,7 @@
   },
   {
    "source": [
+    "00001",
     "ARR_FFXIV_002",
     "Torn from the Heavens",
     "天より降りし力"
@@ -76,6 +78,7 @@
   },
   {
    "source": [
+    "00001",
     "ARR_FFXIV_002",
     "Torn from the Heavens",
     "天より降りし力"
@@ -110,6 +113,7 @@
   },
   {
    "source": [
+    "00001",
     "ARR_FFXIV_002",
     "Torn from the Heavens",
     "天より降りし力"
@@ -141,6 +145,7 @@
   },
   {
    "source": [
+    "00002",
     "ARR_FFXIV_003",
     "Prelude – Discoveries"
    ],
@@ -174,6 +179,7 @@
   },
   {
    "source": [
+    "00002",
     "ARR_FFXIV_003",
     "Prelude – Discoveries"
    ],
@@ -184,6 +190,7 @@
   },
   {
    "source": [
+    "00003",
     "ARR_FFXIV_004",
     "A New Hope",
     "希望の都"
@@ -215,6 +222,7 @@
   },
   {
    "source": [
+    "00003",
     "ARR_FFXIV_004",
     "A New Hope",
     "希望の都"
@@ -226,6 +234,7 @@
   },
   {
    "source": [
+    "00004",
     "ARR_FFXIV_005",
     "To the Sun",
     "灼熱の地へ"
@@ -260,6 +269,7 @@
   },
   {
    "source": [
+    "00004",
     "ARR_FFXIV_005",
     "To the Sun",
     "灼熱の地へ"
@@ -294,6 +304,7 @@
   },
   {
    "source": [
+    "00004",
     "ARR_FFXIV_005",
     "To the Sun",
     "灼熱の地へ"
@@ -325,6 +336,7 @@
   },
   {
    "source": [
+    "00004",
     "ARR_FFXIV_005",
     "To the Sun",
     "灼熱の地へ"
@@ -359,6 +371,7 @@
   },
   {
    "source": [
+    "00004",
     "ARR_FFXIV_005",
     "To the Sun",
     "灼熱の地へ"
@@ -390,6 +403,7 @@
   },
   {
    "source": [
+    "00004",
     "ARR_FFXIV_005",
     "To the Sun",
     "灼熱の地へ"
@@ -402,8 +416,8 @@
   },
   {
    "source": [
+    "00005",
     "ARR_FFXIV_006",
-    "ARR_FFXIV_019",
     "The Land Burns",
     "荒野の鼓動"
    ],
@@ -434,6 +448,7 @@
   },
   {
    "source": [
+    "00006",
     "ARR_FFXIV_007",
     "The Gift of Life",
     "生命の賜物"
@@ -465,6 +480,7 @@
   },
   {
    "source": [
+    "00007",
     "ARR_FFXIV_008",
     "Another Round",
     "もう一杯！"
@@ -496,6 +512,7 @@
   },
   {
    "source": [
+    "00007",
     "ARR_FFXIV_008",
     "Another Round",
     "もう一杯！"
@@ -507,6 +524,7 @@
   },
   {
    "source": [
+    "00008",
     "ARR_FFXIV_009",
     "Hard to Miss",
     "宿命"
@@ -538,6 +556,7 @@
   },
   {
    "source": [
+    "00008",
     "ARR_FFXIV_009",
     "Hard to Miss",
     "宿命"
@@ -569,6 +588,7 @@
   },
   {
    "source": [
+    "00009",
     "ARR_FFXIV_010",
     "Bo-down",
     "レンタル de チョコボ"
@@ -600,6 +620,7 @@
   },
   {
    "source": [
+    "00010",
     "ARR_FFXIV_011",
     "Sultana Dreaming",
     "夢見る女王陛下"
@@ -631,6 +652,7 @@
   },
   {
    "source": [
+    "00010",
     "ARR_FFXIV_011",
     "Sultana Dreaming",
     "夢見る女王陛下"
@@ -642,6 +664,7 @@
   },
   {
    "source": [
+    "00011",
     "ARR_FFXIV_012",
     "Bliss",
     "無常の喜び"
@@ -673,6 +696,7 @@
   },
   {
    "source": [
+    "00011",
     "ARR_FFXIV_012",
     "Bliss",
     "無常の喜び"
@@ -684,6 +708,7 @@
   },
   {
    "source": [
+    "00012",
     "ARR_FFXIV_013",
     "Fracture",
     "不穏な気配"
@@ -715,6 +740,7 @@
   },
   {
    "source": [
+    "00012",
     "ARR_FFXIV_013",
     "Fracture",
     "不穏な気配"
@@ -746,6 +772,7 @@
   },
   {
    "source": [
+    "00013",
     "ARR_FFXIV_014",
     "Tenacity",
     "不屈の闘志"
@@ -780,6 +807,7 @@
   },
   {
    "source": [
+    "00013",
     "ARR_FFXIV_014",
     "Tenacity",
     "不屈の闘志"
@@ -791,6 +819,7 @@
   },
   {
    "source": [
+    "00014",
     "ARR_FFXIV_015",
     "Return of the Hero",
     "英雄の凱旋"
@@ -822,6 +851,7 @@
   },
   {
    "source": [
+    "00014",
     "ARR_FFXIV_015",
     "Return of the Hero",
     "英雄の凱旋"
@@ -856,6 +886,7 @@
   },
   {
    "source": [
+    "00015",
     "ARR_FFXIV_016",
     "A World Apart",
     "そして世界へ"
@@ -887,6 +918,7 @@
   },
   {
    "source": [
+    "00015",
     "ARR_FFXIV_016",
     "A World Apart",
     "そして世界へ"
@@ -898,6 +930,7 @@
   },
   {
    "source": [
+    "00016",
     "ARR_FFXIV_017",
     "I Am the Sea",
     "偉大なる母港"
@@ -929,6 +962,7 @@
   },
   {
    "source": [
+    "00016",
     "ARR_FFXIV_017",
     "I Am the Sea",
     "偉大なる母港"
@@ -940,6 +974,7 @@
   },
   {
    "source": [
+    "00017",
     "ARR_FFXIV_018",
     "On Westerly Winds",
     "西風に乗せて"
@@ -974,6 +1009,7 @@
   },
   {
    "source": [
+    "00017",
     "ARR_FFXIV_018",
     "On Westerly Winds",
     "西風に乗せて"
@@ -1008,6 +1044,7 @@
   },
   {
    "source": [
+    "00017",
     "ARR_FFXIV_018",
     "On Westerly Winds",
     "西風に乗せて"
@@ -1039,6 +1076,7 @@
   },
   {
    "source": [
+    "00017",
     "ARR_FFXIV_018",
     "On Westerly Winds",
     "西風に乗せて"
@@ -1073,6 +1111,7 @@
   },
   {
    "source": [
+    "00017",
     "ARR_FFXIV_018",
     "On Westerly Winds",
     "西風に乗せて"
@@ -1104,6 +1143,7 @@
   },
   {
    "source": [
+    "00017",
     "ARR_FFXIV_018",
     "On Westerly Winds",
     "西風に乗せて"
@@ -1115,8 +1155,8 @@
   },
   {
    "source": [
+    "00018",
     "ARR_FFXIV_019",
-    "ARR_FFXIV_006",
     "The Land Breathes",
     "大地の鼓動"
    ],
@@ -1144,6 +1184,7 @@
   },
   {
    "source": [
+    "00019",
     "ARR_FFXIV_020",
     "Saltswept",
     "潮風香る街"
@@ -1178,6 +1219,7 @@
   },
   {
    "source": [
+    "00020",
     "ARR_FFXIV_021",
     "Ruby Moonrise",
     "爆ぜよ耐熱装備"
@@ -1209,6 +1251,7 @@
   },
   {
    "source": [
+    "00021",
     "ARR_FFXIV_022",
     "Eorzea de Chocobo",
     "エオルゼア de チョコボ"
@@ -1240,6 +1283,7 @@
   },
   {
    "source": [
+    "00021",
     "ARR_FFXIV_022",
     "Eorzea de Chocobo",
     "エオルゼア de チョコボ"
@@ -1271,6 +1315,7 @@
   },
   {
    "source": [
+    "00022",
     "ARR_FFXIV_023",
     "A Sailor Never Sleeps",
     "船乗りは眠らない"
@@ -1302,6 +1347,7 @@
   },
   {
    "source": [
+    "00022",
     "ARR_FFXIV_023",
     "A Sailor Never Sleeps",
     "船乗りは眠らない"
@@ -1313,6 +1359,7 @@
   },
   {
    "source": [
+    "00023",
     "ARR_FFXIV_024",
     "Currents",
     "潮流"
@@ -1344,6 +1391,7 @@
   },
   {
    "source": [
+    "00024",
     "ARR_FFXIV_025",
     "Brothers in Arms",
     "戦友"
@@ -1375,6 +1423,7 @@
   },
   {
    "source": [
+    "00024",
     "ARR_FFXIV_025",
     "Brothers in Arms",
     "戦友"
@@ -1409,6 +1458,7 @@
   },
   {
    "source": [
+    "00025",
     "ARR_FFXIV_026",
     "Wailers And Waterwheels",
     "水車の調べ"
@@ -1420,6 +1470,7 @@
   },
   {
    "source": [
+    "00026",
     "ARR_FFXIV_027",
     "Serenity",
     "静穏の森"
@@ -1451,6 +1502,7 @@
   },
   {
    "source": [
+    "00026",
     "ARR_FFXIV_027",
     "Serenity",
     "静穏の森"
@@ -1482,6 +1534,7 @@
   },
   {
    "source": [
+    "00026",
     "ARR_FFXIV_027",
     "Serenity",
     "静穏の森"
@@ -1513,6 +1566,7 @@
   },
   {
    "source": [
+    "00026",
     "ARR_FFXIV_027",
     "Serenity",
     "静穏の森"
@@ -1544,6 +1598,7 @@
   },
   {
    "source": [
+    "00026",
     "ARR_FFXIV_027",
     "Serenity",
     "静穏の森"
@@ -1575,6 +1630,7 @@
   },
   {
    "source": [
+    "00026",
     "ARR_FFXIV_027",
     "Serenity",
     "静穏の森"
@@ -1586,6 +1642,7 @@
   },
   {
    "source": [
+    "00027",
     "ARR_FFXIV_028",
     "The Land Bends",
     "森の鼓動"
@@ -1617,6 +1674,7 @@
   },
   {
    "source": [
+    "00028",
     "ARR_FFXIV_029",
     "Reign of Pain",
     "黒き悪魔"
@@ -1648,6 +1706,7 @@
   },
   {
    "source": [
+    "00029",
     "ARR_FFXIV_030",
     "The Rider's Boon",
     "その背に揺られて"
@@ -1682,6 +1741,7 @@
   },
   {
    "source": [
+    "00030",
     "ARR_FFXIV_031",
     "Dance of the Fireflies",
     "蛍たちの舞踏会"
@@ -1693,6 +1753,7 @@
   },
   {
    "source": [
+    "00031",
     "ARR_FFXIV_032",
     "Greenwrath",
     "精霊の意思"
@@ -1724,6 +1785,7 @@
   },
   {
    "source": [
+    "00032",
     "ARR_FFXIV_033",
     "From the Depths",
     "仄暗い底から"
@@ -1755,6 +1817,7 @@
   },
   {
    "source": [
+    "00032",
     "ARR_FFXIV_033",
     "From the Depths",
     "仄暗い底から"
@@ -1786,6 +1849,7 @@
   },
   {
    "source": [
+    "00033",
     "ARR_FFXIV_034",
     "The Promise of Plunder",
     "隠し財宝を求めて"
@@ -1817,6 +1881,7 @@
   },
   {
    "source": [
+    "00033",
     "ARR_FFXIV_034",
     "The Promise of Plunder",
     "隠し財宝を求めて"
@@ -1851,6 +1916,7 @@
   },
   {
    "source": [
+    "00034",
     "ARR_FFXIV_035",
     "Slumber Disturbed",
     "妨げられた眠り"
@@ -1882,6 +1948,7 @@
   },
   {
    "source": [
+    "00035",
     "ARR_FFXIV_036",
     "A Fine Death",
     "名誉に賭けて"
@@ -1913,6 +1980,7 @@
   },
   {
    "source": [
+    "00035",
     "ARR_FFXIV_036",
     "A Fine Death",
     "名誉に賭けて"
@@ -1944,6 +2012,7 @@
   },
   {
    "source": [
+    "00036",
     "ARR_FFXIV_037",
     "Below",
     "地下坑道"
@@ -1975,6 +2044,7 @@
   },
   {
    "source": [
+    "00036",
     "ARR_FFXIV_037",
     "Below",
     "地下坑道"
@@ -2006,6 +2076,7 @@
   },
   {
    "source": [
+    "00037",
     "ARR_FFXIV_038",
     "Nemesis",
     "ネメシス"
@@ -2040,6 +2111,7 @@
   },
   {
    "source": [
+    "00037",
     "ARR_FFXIV_038",
     "Nemesis",
     "ネメシス"
@@ -2051,6 +2123,7 @@
   },
   {
    "source": [
+    "00038",
     "ARR_FFXIV_039",
     "A Victory Fanfare Reborn (Full)",
     "勝利のファンファーレ　～新生（フル）～"
@@ -2065,6 +2138,7 @@
   },
   {
    "source": [
+    "00039",
     "ARR_FFXIV_040",
     "The Waking Sands",
     "砂の家"
@@ -2096,6 +2170,7 @@
   },
   {
    "source": [
+    "00039",
     "ARR_FFXIV_040",
     "The Waking Sands",
     "砂の家"
@@ -2107,6 +2182,7 @@
   },
   {
    "source": [
+    "00040",
     "ARR_FFXIV_041",
     "Smoulder",
     "燻る灰"
@@ -2138,6 +2214,7 @@
   },
   {
    "source": [
+    "00040",
     "ARR_FFXIV_041",
     "Smoulder",
     "燻る灰"
@@ -2149,6 +2226,7 @@
   },
   {
    "source": [
+    "00041",
     "ARR_FFXIV_042",
     "Pitfire",
     "炎獄の火種"
@@ -2180,6 +2258,7 @@
   },
   {
    "source": [
+    "00042",
     "ARR_FFXIV_043",
     "One Blood",
     "血脈"
@@ -2211,6 +2290,7 @@
   },
   {
    "source": [
+    "00043",
     "ARR_FFXIV_044",
     "Primal Judgment",
     "原始の審判"
@@ -2245,6 +2325,7 @@
   },
   {
    "source": [
+    "00043",
     "ARR_FFXIV_044",
     "Primal Judgment",
     "原始の審判"
@@ -2276,6 +2357,7 @@
   },
   {
    "source": [
+    "00044",
     "ARR_FFXIV_045",
     "Calling",
     "星の囁き"
@@ -2307,6 +2389,7 @@
   },
   {
    "source": [
+    "00045",
     "ARR_FFXIV_046",
     "Where the Heart Is",
     "心温まる場所"
@@ -2338,6 +2421,7 @@
   },
   {
    "source": [
+    "00046",
     "ARR_FFXIV_047",
     "Where the Hearth Is",
     "体暖まる場所"
@@ -2369,6 +2453,7 @@
   },
   {
    "source": [
+    "00047",
     "ARR_FFXIV_048",
     "Battle Theme 1.x",
     "戦闘シーン1.X"
@@ -2403,6 +2488,7 @@
   },
   {
    "source": [
+    "00047",
     "ARR_FFXIV_048",
     "Battle Theme 1.x",
     "戦闘シーン1.X"
@@ -2437,6 +2523,7 @@
   },
   {
    "source": [
+    "00047",
     "ARR_FFXIV_048",
     "Battle Theme 1.x",
     "戦闘シーン1.X"
@@ -2448,6 +2535,7 @@
   },
   {
    "source": [
+    "00048",
     "ARR_FFXIV_049",
     "Conundrum",
     "堂々巡り"
@@ -2479,6 +2567,7 @@
   },
   {
    "source": [
+    "00048",
     "ARR_FFXIV_049",
     "Conundrum",
     "堂々巡り"
@@ -2513,6 +2602,7 @@
   },
   {
    "source": [
+    "00049",
     "ARR_FFXIV_050",
     "Agent of Inquiry",
     "事件屋のアレ"
@@ -2544,6 +2634,7 @@
   },
   {
    "source": [
+    "00049",
     "ARR_FFXIV_050",
     "Agent of Inquiry",
     "事件屋のアレ"
@@ -2575,6 +2666,7 @@
   },
   {
    "source": [
+    "00050",
     "ARR_FFXIV_051",
     "The Ludus",
     "闘士の修練所"
@@ -2609,6 +2701,7 @@
   },
   {
    "source": [
+    "00051",
     "ARR_FFXIV_052",
     "Flibbertigibbet",
     "イタズラっ子たち"
@@ -2643,6 +2736,7 @@
   },
   {
    "source": [
+    "00052",
     "ARR_FFXIV_053",
     "A Curious Breed of Botherment",
     "世にも奇妙な厄介者"
@@ -2674,6 +2768,7 @@
   },
   {
    "source": [
+    "00053",
     "ARR_FFXIV_054",
     "A Thousand Screams",
     "千の悲鳴"
@@ -2705,6 +2800,7 @@
   },
   {
    "source": [
+    "00053",
     "ARR_FFXIV_054",
     "A Thousand Screams",
     "千の悲鳴"
@@ -2739,6 +2835,7 @@
   },
   {
    "source": [
+    "00054",
     "ARR_FFXIV_055",
     "My Soul to Keep",
     "我が魂を捧げて"
@@ -2770,6 +2867,7 @@
   },
   {
    "source": [
+    "00054",
     "ARR_FFXIV_055",
     "My Soul to Keep",
     "我が魂を捧げて"
@@ -2804,6 +2902,7 @@
   },
   {
    "source": [
+    "00055",
     "ARR_FFXIV_056",
     "From Fear to Fortitude",
     "豪勇の士"
@@ -2835,6 +2934,7 @@
   },
   {
    "source": [
+    "00055",
     "ARR_FFXIV_056",
     "From Fear to Fortitude",
     "豪勇の士"
@@ -2869,6 +2969,7 @@
   },
   {
    "source": [
+    "00056",
     "ARR_FFXIV_057",
     "The Maiden's Lament",
     "乙女の哀歌"
@@ -2903,6 +3004,7 @@
   },
   {
    "source": [
+    "00057",
     "ARR_FFXIV_058",
     "Ruby Sunrise",
     "輝く太陽"
@@ -2934,6 +3036,7 @@
   },
   {
    "source": [
+    "00058",
     "ARR_FFXIV_059",
     "Lipflaps on Longstops",
     "野営地のお調子者"
@@ -2965,6 +3068,7 @@
   },
   {
    "source": [
+    "00058",
     "ARR_FFXIV_059",
     "Lipflaps on Longstops",
     "野営地のお調子者"
@@ -2976,6 +3080,7 @@
   },
   {
    "source": [
+    "00059",
     "ARR_FFXIV_060",
     "Echoes of Ages Past",
     "昔日の残響"
@@ -3007,6 +3112,7 @@
   },
   {
    "source": [
+    "00059",
     "ARR_FFXIV_060",
     "Echoes of Ages Past",
     "昔日の残響"
@@ -3041,6 +3147,7 @@
   },
   {
    "source": [
+    "00060",
     "ARR_FFXIV_061",
     "Abomination",
     "憎悪"
@@ -3072,6 +3179,7 @@
   },
   {
    "source": [
+    "00060",
     "ARR_FFXIV_061",
     "Abomination",
     "憎悪"
@@ -3103,6 +3211,7 @@
   },
   {
    "source": [
+    "00061",
     "ARR_FFXIV_062",
     "Quick as Silver, Hard as Stone",
     "疾きこと銀の如く、硬きこと石の如く"
@@ -3134,6 +3243,7 @@
   },
   {
    "source": [
+    "00062",
     "ARR_FFXIV_063",
     "Weight of a Whisper",
     "タイタンの慟哭"
@@ -3165,6 +3275,7 @@
   },
   {
    "source": [
+    "00063",
     "ARR_FFXIV_064",
     "Weight of His Will",
     "タイタンの憤怒"
@@ -3196,6 +3307,7 @@
   },
   {
    "source": [
+    "00064",
     "ARR_FFXIV_065",
     "Weight of the World",
     "タイタンの激震"
@@ -3227,6 +3339,7 @@
   },
   {
    "source": [
+    "00065",
     "ARR_FFXIV_066",
     "Heartless",
     "タイタンの心核"
@@ -3258,6 +3371,7 @@
   },
   {
    "source": [
+    "00066",
     "ARR_FFXIV_067",
     "Under the Weight",
     "過重圧殺！　～蛮神タイタン討滅戦～"
@@ -3292,6 +3406,7 @@
   },
   {
    "source": [
+    "00066",
     "ARR_FFXIV_067",
     "Under the Weight",
     "過重圧殺！　～蛮神タイタン討滅戦～"
@@ -3303,6 +3418,7 @@
   },
   {
    "source": [
+    "00067",
     "ARR_FFXIV_068",
     "Forever Lost",
     "永遠の離別"
@@ -3337,6 +3453,7 @@
   },
   {
    "source": [
+    "00068",
     "ARR_FFXIV_069",
     "Fealty",
     "忠義"
@@ -3371,6 +3488,7 @@
   },
   {
    "source": [
+    "00069",
     "ARR_FFXIV_070",
     "Undying Faith",
     "鋼の信仰"
@@ -3402,6 +3520,7 @@
   },
   {
    "source": [
+    "00070",
     "ARR_FFXIV_071",
     "The Land Breaks",
     "雪山の鼓動"
@@ -3430,6 +3549,7 @@
   },
   {
    "source": [
+    "00071",
     "ARR_FFXIV_072",
     "The Dragon's Dirge",
     "竜の葬送歌"
@@ -3461,6 +3581,7 @@
   },
   {
    "source": [
+    "00071",
     "ARR_FFXIV_072",
     "The Dragon's Dirge",
     "竜の葬送歌"
@@ -3492,6 +3613,7 @@
   },
   {
    "source": [
+    "00072",
     "ARR_FFXIV_073",
     "Cold Salvation",
     "極寒戦線"
@@ -3503,6 +3625,7 @@
   },
   {
    "source": [
+    "00072",
     "ARR_FFXIV_073",
     "Cold Salvation",
     "極寒戦線"
@@ -3537,6 +3660,7 @@
   },
   {
    "source": [
+    "00073",
     "ARR_FFXIV_074",
     "The Darkhold",
     "ゼーメル要塞"
@@ -3571,6 +3695,7 @@
   },
   {
    "source": [
+    "00074",
     "ARR_FFXIV_075",
     "Miser's Folly",
     "守銭奴の愚行"
@@ -3602,6 +3727,7 @@
   },
   {
    "source": [
+    "00074",
     "ARR_FFXIV_075",
     "Miser's Folly",
     "守銭奴の愚行"
@@ -3636,6 +3762,7 @@
   },
   {
    "source": [
+    "00075",
     "ARR_FFXIV_076",
     "Thunderer",
     "雷鳴"
@@ -3670,6 +3797,7 @@
   },
   {
    "source": [
+    "00075",
     "ARR_FFXIV_076",
     "Thunderer",
     "雷鳴"
@@ -3701,6 +3829,7 @@
   },
   {
    "source": [
+    "00076",
     "ARR_FFXIV_077",
     "Kiss of Chaos",
     "混沌の予感"
@@ -3732,6 +3861,7 @@
   },
   {
    "source": [
+    "00076",
     "ARR_FFXIV_077",
     "Kiss of Chaos",
     "混沌の予感"
@@ -3766,6 +3896,7 @@
   },
   {
    "source": [
+    "00077",
     "ARR_FFXIV_078",
     "Flightless Wings",
     "猛き嵐の剣に"
@@ -3797,6 +3928,7 @@
   },
   {
    "source": [
+    "00078",
     "ARR_FFXIV_079",
     "Fleeting Rays",
     "儚き光彩"
@@ -3857,6 +3989,7 @@
   },
   {
    "source": [
+    "00079",
     "ARR_FFXIV_080",
     "Engage",
     "蒼き翼"
@@ -3871,6 +4004,7 @@
   },
   {
    "source": [
+    "00079",
     "ARR_FFXIV_080",
     "Engage",
     "蒼き翼"
@@ -3902,6 +4036,7 @@
   },
   {
    "source": [
+    "00080",
     "ARR_FFXIV_081",
     "Damnation",
     "破滅"
@@ -3933,6 +4068,7 @@
   },
   {
    "source": [
+    "00080",
     "ARR_FFXIV_081",
     "Damnation",
     "破滅"
@@ -3967,6 +4103,7 @@
   },
   {
    "source": [
+    "00081",
     "ARR_FFXIV_082",
     "Fallen Angel",
     "堕天せし者"
@@ -4001,6 +4138,7 @@
   },
   {
    "source": [
+    "00081",
     "ARR_FFXIV_082",
     "Fallen Angel",
     "堕天せし者"
@@ -4012,6 +4150,7 @@
   },
   {
    "source": [
+    "00082",
     "ARR_FFXIV_083",
     "Frontiers Within",
     "フロンティア"
@@ -4046,6 +4185,7 @@
   },
   {
    "source": [
+    "00083",
     "ARR_FFXIV_084",
     "Reflections",
     "リフレクション"
@@ -4077,6 +4217,7 @@
   },
   {
    "source": [
+    "00083",
     "ARR_FFXIV_084",
     "Reflections",
     "リフレクション"
@@ -4088,6 +4229,7 @@
   },
   {
    "source": [
+    "00084",
     "ARR_FFXIV_085",
     "Intertwined",
     "交錯"
@@ -4119,6 +4261,7 @@
   },
   {
    "source": [
+    "00085",
     "ARR_FFXIV_086",
     "The Land Bleeds",
     "水晶の鼓動"
@@ -4150,6 +4293,7 @@
   },
   {
    "source": [
+    "00086",
     "ARR_FFXIV_087",
     "Crystal Rain",
     "クリスタルの雨"
@@ -4181,6 +4325,7 @@
   },
   {
    "source": [
+    "00086",
     "ARR_FFXIV_087",
     "Crystal Rain",
     "クリスタルの雨"
@@ -4215,6 +4360,7 @@
   },
   {
    "source": [
+    "00088",
     "ARR_FFXIV_089",
     "Slither",
     "五里霧中"
@@ -4246,6 +4392,7 @@
   },
   {
    "source": [
+    "00089",
     "ARR_FFXIV_090",
     "Good King Moggle Mog XII",
     "善王モグル・モグXII世"
@@ -4281,6 +4428,7 @@
   },
   {
    "source": [
+    "00089",
     "ARR_FFXIV_090",
     "Good King Moggle Mog XII",
     "善王モグル・モグXII世"
@@ -4312,6 +4460,7 @@
   },
   {
    "source": [
+    "00089",
     "ARR_FFXIV_090",
     "Good King Moggle Mog XII",
     "善王モグル・モグXII世"
@@ -4323,6 +4472,7 @@
   },
   {
    "source": [
+    "00090",
     "ARR_FFXIV_091",
     "A Tonberry's Tears",
     "トンベリの涙"
@@ -4357,6 +4507,7 @@
   },
   {
    "source": [
+    "00091",
     "ARR_FFXIV_092",
     "A Fell Air Falleth",
     "戦士の直感"
@@ -4388,6 +4539,7 @@
   },
   {
    "source": [
+    "00091",
     "ARR_FFXIV_092",
     "A Fell Air Falleth",
     "戦士の直感"
@@ -4422,6 +4574,7 @@
   },
   {
    "source": [
+    "00092",
     "ARR_FFXIV_093",
     "Cracks in the Wall",
     "古城にて……"
@@ -4453,6 +4606,7 @@
   },
   {
    "source": [
+    "00092",
     "ARR_FFXIV_093",
     "Cracks in the Wall",
     "古城にて……"
@@ -4464,6 +4618,7 @@
   },
   {
    "source": [
+    "00093",
     "ARR_FFXIV_094",
     "Skullduggery",
     "奸計"
@@ -4495,6 +4650,7 @@
   },
   {
    "source": [
+    "00093",
     "ARR_FFXIV_094",
     "Skullduggery",
     "奸計"
@@ -4529,6 +4685,7 @@
   },
   {
    "source": [
+    "00094",
     "ARR_FFXIV_095",
     "Breaking Boundaries",
     "極限を超えて"
@@ -4563,6 +4720,7 @@
   },
   {
    "source": [
+    "00095",
     "ARR_FFXIV_096",
     "The Dark's Embrace",
     "闇の抱擁"
@@ -4594,6 +4752,7 @@
   },
   {
    "source": [
+    "00096",
     "ARR_FFXIV_097",
     "The Dark's Kiss",
     "闇の口付"
@@ -4625,6 +4784,7 @@
   },
   {
    "source": [
+    "00096",
     "ARR_FFXIV_097",
     "The Dark's Kiss",
     "闇の口付"
@@ -4656,6 +4816,7 @@
   },
   {
    "source": [
+    "00097",
     "ARR_FFXIV_098",
     "Hubris",
     "傲慢"
@@ -4667,6 +4828,7 @@
   },
   {
    "source": [
+    "00099",
     "ARR_FFXIV_100",
     "Tumbling Down",
     "奈落へ"
@@ -4695,6 +4857,7 @@
   },
   {
    "source": [
+    "00099",
     "ARR_FFXIV_100",
     "Tumbling Down",
     "奈落へ"
@@ -4706,6 +4869,7 @@
   },
   {
    "source": [
+    "00100",
     "ARR_FFXIV_101",
     "Defender of the Realm",
     "エオルゼアの守護者"
@@ -4740,6 +4904,7 @@
   },
   {
    "source": [
+    "00100",
     "ARR_FFXIV_101",
     "Defender of the Realm",
     "エオルゼアの守護者"
@@ -4751,6 +4916,7 @@
   },
   {
    "source": [
+    "00101",
     "ARR_FFXIV_102",
     "Machinations",
     "軍議"
@@ -4782,6 +4948,7 @@
   },
   {
    "source": [
+    "00101",
     "ARR_FFXIV_102",
     "Machinations",
     "軍議"
@@ -4816,6 +4983,7 @@
   },
   {
    "source": [
+    "00102",
     "ARR_FFXIV_103",
     "Discordance",
     "不調和"
@@ -4847,6 +5015,7 @@
   },
   {
    "source": [
+    "00103",
     "ARR_FFXIV_104",
     "The Emperor's Wont",
     "魔導の軍勢"
@@ -4878,6 +5047,7 @@
   },
   {
    "source": [
+    "00103",
     "ARR_FFXIV_104",
     "The Emperor's Wont",
     "魔導の軍勢"
@@ -4912,6 +5082,7 @@
   },
   {
    "source": [
+    "00104",
     "ARR_FFXIV_105",
     "Beyond the Unknown",
     "未知の領域へ"
@@ -4943,6 +5114,7 @@
   },
   {
    "source": [
+    "00105",
     "ARR_FFXIV_106",
     "The Only Path",
     "ただひとつの道"
@@ -4974,6 +5146,7 @@
   },
   {
    "source": [
+    "00105",
     "ARR_FFXIV_106",
     "The Only Path",
     "ただひとつの道"
@@ -4985,6 +5158,7 @@
   },
   {
    "source": [
+    "00106",
     "ARR_FFXIV_107",
     "Penitus",
     "魔導城プラエトリウム"
@@ -5016,6 +5190,7 @@
   },
   {
    "source": [
+    "00106",
     "ARR_FFXIV_107",
     "Penitus",
     "魔導城プラエトリウム"
@@ -5050,6 +5225,7 @@
   },
   {
    "source": [
+    "00108",
     "ARR_FFXIV_109",
     "The Maker's Ruin",
     "神なき世界"
@@ -5081,6 +5257,7 @@
   },
   {
    "source": [
+    "00108",
     "ARR_FFXIV_109",
     "The Maker's Ruin",
     "神なき世界"
@@ -5092,6 +5269,7 @@
   },
   {
    "source": [
+    "00109",
     "ARR_FFXIV_110",
     "Ultima",
     "究極幻想"
@@ -5126,6 +5304,7 @@
   },
   {
    "source": [
+    "00109",
     "ARR_FFXIV_110",
     "Ultima",
     "究極幻想"
@@ -5157,6 +5336,7 @@
   },
   {
    "source": [
+    "00109",
     "ARR_FFXIV_110",
     "Ultima",
     "究極幻想"
@@ -5188,6 +5368,7 @@
   },
   {
    "source": [
+    "00111",
     "ARR_FFXIV_112",
     "Flight",
     "終局"
@@ -5219,6 +5400,7 @@
   },
   {
    "source": [
+    "00112",
     "ARR_FFXIV_113",
     "The Seventh Sun",
     "第七星暦"
@@ -5248,6 +5430,7 @@
   },
   {
    "source": [
+    "00112",
     "ARR_FFXIV_113",
     "The Seventh Sun",
     "第七星暦"
@@ -5259,6 +5442,7 @@
   },
   {
    "source": [
+    "00115",
     "ARR_FFXIV_116",
     "The Corpse Hall",
     "斬"
@@ -5296,6 +5480,7 @@
   },
   {
    "source": [
+    "00117",
     "ARR_FFXIV_118",
     "Spiral",
     "螺旋"
@@ -5330,6 +5515,7 @@
   },
   {
    "source": [
+    "00118",
     "ARR_FFXIV_119",
     "Calamity Unbound",
     "試練を超える力"
@@ -5364,6 +5550,7 @@
   },
   {
    "source": [
+    "00118",
     "ARR_FFXIV_119",
     "Calamity Unbound",
     "試練を超える力"
@@ -5380,6 +5567,10 @@
       [
        {
         "directory": "Endwalker",
+        "pattern": "00039"
+       },
+       {
+        "directory": "Endwalker",
         "pattern": "ENDWALKER_040"
        },
        {
@@ -5390,11 +5581,13 @@
      ]
     },
     "ARR_FFXIV_115": [
+     "00114",
      "ARR_FFXIV_115",
      "And You! – A Realm Reborn Medley",
      "And You!　～新生エオルゼアメドレー～"
     ],
     "ARR_FFXIV_003": [
+     "00002",
      "ARR_FFXIV_003",
      "Prelude – Discoveries",
      "プレリュード　～冒険の序章～"
