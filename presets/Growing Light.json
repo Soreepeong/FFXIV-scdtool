@@ -2285,7 +2285,7 @@
       ]
      }
     ],
-    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.993); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.993"
+    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.993); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.993 Built and measured: whole file 0.993, across the seam 0.987, against a ceiling of 0.993 for this pairing."
    }
   },
   {
@@ -3439,8 +3439,7 @@
       ]
      }
     ],
-    "# comment": "the game's file is 30.0s longer than this recording and ends by repeating itself: from 433.2s it replays the file from 0.0s (similarity 0.993, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 1.020s. Built and measured: the two segments join at 433.2s and the second either side of that join matches the game at only 0.711 -- the recording is still in its own ending there, so the seam needs a crossfade the segment schema cannot express",
-    "enable": false
+    "# comment": "the game's file is 30.0s longer than this recording and ends by repeating itself: from 433.2s it replays the file from 0.0s (similarity 0.993, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 1.020s. Built and measured: whole file 0.979, across the seam 0.986, against a ceiling of 0.979 for this pairing."
    }
   },
   {

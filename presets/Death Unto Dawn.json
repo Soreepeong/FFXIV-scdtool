@@ -1169,7 +1169,7 @@
       ]
      }
     ],
-    "# comment": "the game's file is 49.6s longer than this recording and ends by repeating itself: from 96.2s it replays the file from 0.2s (similarity 0.991, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 1.600s"
+    "# comment": "the game's file is 49.6s longer than this recording and ends by repeating itself: from 96.2s it replays the file from 0.2s (similarity 0.991, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 1.600s Built and measured: whole file 0.992, across the seam 0.981, against a ceiling of 0.995 for this pairing."
    }
   },
   {
@@ -1219,7 +1219,7 @@
       ]
      }
     ],
-    "# comment": "the game's file is 54.8s longer than this recording and ends by repeating itself: from 88.0s it replays the file from 13.4s (similarity 0.982, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 14.655s"
+    "# comment": "the game's file is 54.8s longer than this recording and ends by repeating itself: from 88.0s it replays the file from 13.4s (similarity 0.982, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 14.655s Built and measured: whole file 0.988, across the seam 0.980, against a ceiling of 0.994 for this pairing."
    }
   },
   {

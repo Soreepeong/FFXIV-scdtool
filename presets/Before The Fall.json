@@ -261,7 +261,7 @@
         "pcmHash": "f45b151f"
        }
       },
-      "length": 118.265,
+      "length": 109.365,
       "channels": [
        {
         "source": "source",
@@ -276,7 +276,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 105.01,
+        "offset": 96.11,
         "pcmHash": "f45b151f"
        }
       },
@@ -292,8 +292,7 @@
       ]
      }
     ],
-    "# comment": "the game's file is 13.7s longer than this recording and ends by repeating itself: from 118.3s it replays the file from 103.5s (similarity 0.924, seam located by the recording's own end). Built as two segments of the same recording -- the match, then the same recording re-entered at 105.010s. Built and measured: the two segments join at 118.3s and the second either side of that join matches the game at only 0.517 -- the recording is still in its own ending there, so the seam needs a crossfade the segment schema cannot express",
-    "enable": false
+    "# comment": "the game's file is 13.7s longer than this recording and ends by repeating itself: from 118.3s it replays the file from 103.5s (similarity 0.924, seam located by the recording's own end). Built as two segments of the same recording -- the match, then the same recording re-entered at 105.010s. Seam moved 8.9s earlier, to 109.365s: the recording's own ending starts there, 4 dB below where the game's file still is, so the old seam played an album fade-out over music the game carries at full level. Segment 2 covers it from 96.110s instead. Built and measured: whole file 0.985, across the seam 0.960, against a ceiling of 0.998 for this pairing."
    }
   },
   {
