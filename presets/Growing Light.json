@@ -1408,30 +1408,56 @@
     "退路なき苦境",
     "Inexorable"
    ],
-   "target": {
-    "path": "music/ex4/BGM_EX4_Event_29.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.0,
-        "pcmHash": "40d54824"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
+   "target": [
+    {
+     "path": "music/ex4/BGM_EX4_Event_29.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 1.0,
+         "pcmHash": "40d54824"
+        }
        },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.912); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.912"
-   }
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ]
+      }
+     ],
+     "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.912); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.912"
+    },
+    {
+     "path": "music/ex5/BGM_EX5_Boss_Battle03.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "GL_00040": {
+         "offset": 1.0,
+         "pcmHash": "40d54824"
+        }
+       },
+       "channels": [
+        {
+         "source": "GL_00040",
+         "channel": 0
+        },
+        {
+         "source": "GL_00040",
+         "channel": 1
+        }
+       ]
+      }
+     ],
+     "# comment": "same recording as BGM_EX4_Event_29.scd, which this game file is a re-cut of: the two agree at 1.000, +0.000s apart. That is what nominated the source; the offset was then derived against this target directly rather than shifted, because composing the two estimates goes wrong by tens of seconds on some rolls. Scored: whole file 0.912, intro 0.920."
+    }
+   ]
   },
   {
    "source": [

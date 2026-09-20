@@ -3344,33 +3344,59 @@
     "Fleeting Rays",
     "儚き光彩"
    ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Field_Uru_06.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_129.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.22,
-        "pcmHash": "82c860e0"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
+   "target": [
+    {
+     "path": [
+      "music/ffxiv/BGM_Field_Uru_06.scd",
+      "music/ffxiv/Orchestrion/BGM_ORCH_129.scd"
+     ],
+     "segments": [
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 0.22,
+         "pcmHash": "82c860e0"
+        }
        },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "same recording as TH_068.flac, which the matcher picked for this target (0.946 vs 0.987); listed here too so owning this album is enough to replace it"
-   }
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ]
+      }
+     ],
+     "# comment": "same recording as TH_068.flac, which the matcher picked for this target (0.946 vs 0.987); listed here too so owning this album is enough to replace it"
+    },
+    {
+     "path": "music/ex5/BGM_EX5_MKD_14.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "ARR_FFXIV_079": {
+         "offset": 0.23,
+         "pcmHash": "82c860e0"
+        }
+       },
+       "channels": [
+        {
+         "source": "ARR_FFXIV_079",
+         "channel": 0
+        },
+        {
+         "source": "ARR_FFXIV_079",
+         "channel": 1
+        }
+       ]
+      }
+     ],
+     "# comment": "same recording as BGM_Field_Uru_06.scd, which this game file is a re-cut of: the two agree at 0.996, +0.000s apart. That is what nominated the source; the offset was then derived against this target directly rather than shifted, because composing the two estimates goes wrong by tens of seconds on some rolls. Scored: whole file 0.969."
+    }
+   ]
   },
   {
    "source": [
