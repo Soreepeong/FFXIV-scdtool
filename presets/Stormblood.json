@@ -1616,7 +1616,7 @@
       ]
      }
     ],
-    "# comment": "the game's file is 24.9s longer than this recording and ends by repeating itself: from 203.3s it replays the file from 0.0s (similarity 0.998, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 205.835s Built and measured: whole file 0.999, across the seam 0.997, against a ceiling of 0.999 for this pairing."
+    "# comment": "the game's file is 24.9s longer than this recording and ends by repeating itself: from 203.3s it replays the file from 0.0s (similarity 0.998, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 205.835s. Built and measured: whole file 0.999, across the seam 0.997, against a ceiling of 0.999 for this pairing."
    }
   },
   {
@@ -2996,10 +2996,11 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "crossfadeSeconds": 16.0
      }
     ],
-    "# comment": "the game's file is 13.5s longer than this recording and ends by repeating itself: from 119.6s it replays the file from 1.0s (similarity 0.955, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 2.700s Built and measured: whole file 0.983, across the seam 0.939, against a ceiling of 0.987 for this pairing."
+    "# comment": "the game's file is 13.5s longer than this recording and ends by repeating itself: from 119.6s it replays the file from 1.0s (similarity 0.955, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 2.700s. The game built its loop-out by crossfading, so this does too: segment 1 keeps playing 16s past the seam at 119.560s, into the recording's own ending, while segment 2 fades in from 2.700s. Fitted over the target's own onsets (scratch/fit_loopout_crossfade.py): the join goes 0.939 hard-cut to 0.993, the whole file 0.983 to 0.984."
    }
   },
   {

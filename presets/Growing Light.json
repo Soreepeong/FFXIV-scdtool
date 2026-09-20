@@ -2285,7 +2285,7 @@
       ]
      }
     ],
-    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.993); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.993 Built and measured: whole file 0.993, across the seam 0.987, against a ceiling of 0.993 for this pairing."
+    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.993); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.993. Built and measured: whole file 0.993, across the seam 0.987, against a ceiling of 0.993 for this pairing."
    }
   },
   {
