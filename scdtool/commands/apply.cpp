@@ -5,6 +5,7 @@
 #include "utils/audio_match.h"
 #include "utils/lossless_vorbis.h"
 #include "utils/misc.h"
+#include "utils/substitute_codec.h"
 #include "utils/win32_process.h"
 
 #include <algorithm>
@@ -1289,25 +1290,14 @@ namespace {
 	}
 
 namespace {
-	// Builds the sound entry as *lossless* Vorbis: the buffer goes through scdtool's own
-	// encoder, whose output decodes back to bit-identical 16-bit PCM, and the Ogg stream it
-	// produces is wrapped rather than re-encoded.
+	// The 16-bit samples every format here is built from.
 	//
-	// What "lossless" is about here is 16-bit PCM, which is all the game's decoder emits. The
-	// float buffer is quantised to int16 once, up front -- the step the decoder was going to
-	// take anyway -- and everything after that is exact.
-	xivres::sound::writer::sound_item make_lossless_ogg_entry(
-		const std::vector<float>& floats,
-		size_t channels,
-		size_t samplingRate,
-		size_t loopStartBlockIndex,
-		size_t loopEndBlockIndex,
-		std::span<const uint32_t> markIndices,
-		std::string& reportOut) {
-
-		// A looping entry is only ever heard up to its loop end -- the game cuts back from
-		// there -- so encode that much and no more, which is what the libvorbis path's block
-		// loop does and what --verify measures the written length against.
+	// 16-bit because that is all the game's decoder emits, whatever the stream behind it was,
+	// so quantising once up front is the step the decoder was going to take anyway. A looping
+	// entry is only ever heard up to its loop end -- the game cuts back from there -- so the
+	// audio stops there too, which is what the libvorbis path's block loop does and what
+	// --verify measures the written length against.
+	std::vector<int16_t> quantise_pcm16(const std::vector<float>& floats, size_t channels, size_t loopEndBlockIndex) {
 		auto frames = channels ? floats.size() / channels : 0;
 		if (loopEndBlockIndex && loopEndBlockIndex < frames)
 			frames = loopEndBlockIndex;
@@ -1318,6 +1308,20 @@ namespace {
 			const auto v = std::lround(static_cast<double>(floats[i]) * FullScale);
 			pcm[i] = static_cast<int16_t>(std::clamp<long>(v, -32768, 32767));
 		}
+		return pcm;
+	}
+
+	// Builds the sound entry as *lossless* Vorbis: the buffer goes through scdtool's own
+	// encoder, whose output decodes back to bit-identical 16-bit PCM, and the Ogg stream it
+	// produces is wrapped rather than re-encoded.
+	xivres::sound::writer::sound_item make_lossless_ogg_entry(
+		const std::vector<int16_t>& pcm,
+		size_t channels,
+		size_t samplingRate,
+		size_t loopStartBlockIndex,
+		size_t loopEndBlockIndex,
+		std::span<const uint32_t> markIndices,
+		std::string& reportOut) {
 
 		lossless_vorbis::options opts;
 		// The game's decoder rounds on some paths and truncates on others -- the 3-or-more
@@ -1343,6 +1347,92 @@ namespace {
 				static_cast<uint32_t>(loopEndBlockIndex), markIndices);
 		return entry;
 	}
+
+	// What --audio-format asked for: which encoder builds the entry, and the one number that
+	// encoder's own scale takes.
+	struct audio_format {
+		enum class codec {
+			OggVorbis,
+			LosslessVorbis,
+			Flac,
+			Pcm,
+		};
+
+		codec Codec = codec::OggVorbis;
+		float OggQuality = 1.f;    // libvorbis's -0.1 to 1.0, a tenth of oggenc's
+		size_t FlacLevel = 5;      // libFLAC's 0 to 8
+	};
+
+	// codec[:setting]. Malformed and out-of-range values are refused rather than clamped:
+	// silently encoding at a quality nobody asked for is worse than not encoding, and a whole
+	// run of it is expensive to discover afterwards.
+	//
+	// `option` is the spelling the value arrived under, so the message names the flag the
+	// caller actually typed.
+	audio_format parse_audio_format(const std::string& spec, const std::string& option) {
+		constexpr auto grammar = R"(ogg, ogg:<quality -1 to 10>, ogg:lossless, flac, flac:<level 0 to 8>, or wav)";
+		const auto colon = spec.find(':');
+		const auto name = spec.substr(0, colon);
+		const auto hasSetting = colon != std::string::npos;
+		const auto setting = hasSetting ? spec.substr(colon + 1) : std::string();
+
+		audio_format res;
+		if (name == "wav") {
+			if (hasSetting)
+				throw std::runtime_error(std::format(
+					R"({}: "wav" is raw PCM and takes no setting, not "{}")", option, setting));
+			res.Codec = audio_format::codec::Pcm;
+			return res;
+		}
+
+		if (name == "flac") {
+			// An integer, because libFLAC's levels are names for preset combinations of
+			// settings rather than points on a continuum -- 5.5 would mean nothing.
+			res.Codec = audio_format::codec::Flac;
+			if (!hasSetting)
+				return res;
+			if (setting.empty() || setting.find_first_not_of("0123456789") != std::string::npos)
+				throw std::runtime_error(std::format(
+					R"({}: expected a whole number from 0 to 8 after "flac:", not "{}")", option, setting));
+			const auto level = std::stoul(setting);
+			if (level > 8)
+				throw std::runtime_error(std::format(
+					"{}: FLAC compression level {} is outside the 0 to 8 the encoder accepts", option, setting));
+			res.FlacLevel = level;
+			return res;
+		}
+
+		if (name != "ogg")
+			throw std::runtime_error(std::format(
+				R"({}: expected {}, not "{}")", option, grammar, spec));
+
+		// Quality is oggenc's scale, -1 to 10, because that is the one people know; libvorbis
+		// itself takes -0.1 to 1.0 and the two differ only by a factor of ten. "lossless" sits
+		// at the end of the same axis rather than on a flag of its own: it is a choice about
+		// how the entry is encoded, which is what this option is for.
+		if (!hasSetting)
+			return res;
+		if (setting == "lossless") {
+			res.Codec = audio_format::codec::LosslessVorbis;
+			return res;
+		}
+		size_t consumed = 0;
+		double value;
+		try {
+			value = std::stod(setting, &consumed);
+		} catch (const std::exception&) {
+			consumed = 0;
+			value = 0;
+		}
+		if (!consumed || consumed != setting.size())
+			throw std::runtime_error(std::format(
+				R"({}: expected a number from -1 to 10 or "lossless" after "ogg:", not "{}")", option, setting));
+		if (value < -1. || value > 10.)
+			throw std::runtime_error(std::format(
+				"{}: quality {} is outside the -1 to 10 the encoder accepts", option, setting));
+		res.OggQuality = static_cast<float>(value / 10.);
+		return res;
+	}
 }
 
 int cmd_apply(const std::vector<std::string>& args) {
@@ -1357,14 +1447,28 @@ int cmd_apply(const std::vector<std::string>& args) {
 				"track's loop points are preserved, and only the audio is replaced. Output files are written\n"
 				"under --output-dir using the target's game-relative path.\n"
 				"\n"
-				"--ogg-quality takes oggenc's scale, -1 to 10, and libvorbis is handed a tenth of it.\n"
-				"\"lossless\" is the far end of the same axis: the libvorbis encode is replaced by one\n"
-				"built into this tool whose output decodes back to bit-identical 16-bit PCM, which is\n"
-				"all the game's decoder emits. It needs nothing installed. Entries come out about 0.7x\n"
-				"raw PCM for stereo and a little over 1x for six-channel stems -- 3 to 5 times the size\n"
-				"of a q10 encode -- and take a few seconds to half a minute each. Pair it with\n"
-				"--sampling-rate keep: at 96 kHz it costs roughly twice as much for precision the\n"
-				"decoder cannot carry.");
+				"--audio-format names the codec and its setting as codec[:setting]:\n"
+				"\n"
+				"  ogg            Ogg Vorbis at quality 10, which is the default for the whole option\n"
+				"  ogg:<quality>  Ogg Vorbis, -1 to 10 on oggenc's scale; libvorbis is handed a tenth\n"
+				"  ogg:lossless   the Vorbis encoder built into this tool, whose output decodes back\n"
+				"                 to bit-identical 16-bit PCM -- which is all the game's decoder emits\n"
+				"  flac           FLAC at compression level 5, libFLAC's own default\n"
+				"  flac:<level>   FLAC, 0 (fastest) to 8 (smallest)\n"
+				"  wav            raw interleaved 16-bit PCM\n"
+				"\n"
+				"ogg and ogg:lossless produce files the game plays as it ships. flac and wav do not:\n"
+				"they keep the entry's format 6 and its whole layout -- seek table, byte-offset loop\n"
+				"fields, MARK chunk, every other entry of the .scd -- but the stream inside it is a\n"
+				"FLAC file or a RIFF/WAVE one, which only a decoder-substitution hook can read.\n"
+				"\n"
+				"Sizes, measured on one stereo track at the game's own 44.1 kHz (44.0 MB of raw\n"
+				"samples, against 4.9 MB for the file the game ships): ogg 13.3 MB, flac 22.0 MB,\n"
+				"ogg:lossless 37.9 MB, wav 44.0 MB. Six-channel stems compress worse -- flac came out\n"
+				"at 0.64x raw PCM on the one measured. Only ogg:lossless is slow, a few seconds to\n"
+				"half a minute an entry; the rest keep up with the decode that feeds them. Pair any\n"
+				"of the three large ones with --sampling-rate keep: at 96 kHz they cost roughly twice\n"
+				"as much for precision the decoder cannot carry.");
 		parser.add_argument("--game").required().help(R"(game installation path, or :global/:china/:korea to autodetect)");
 		parser.add_argument("--ost").required().help("directory the preset's source paths are relative to");
 		parser.add_argument("--preset").required().help("a matchset JSON produced by `scdtool match`, or a MusicImportConfig preset (or a directory of them)");
@@ -1373,7 +1477,11 @@ int cmd_apply(const std::vector<std::string>& args) {
 		parser.add_argument("--ffprobe").default_value(std::string("ffprobe")).help("path to ffprobe executable");
 		parser.add_argument("--sampling-rate").default_value(std::string("auto")).help(R"(output sample rate: "auto" (highest of the game file and the source), "keep" (the game file's), or an integer)");
 		parser.add_argument("--entry-index").default_value(0u).scan<'u', uint32_t>().help("sound entry index to replace (default: 0)");
-		parser.add_argument("--ogg-quality").default_value(std::string("10")).help(R"(Ogg Vorbis encode quality: -1 to 10 on oggenc's scale, or "lossless")");
+		parser.add_argument("--audio-format").default_value(std::string("ogg")).help(R"(what the entry's audio is, as codec[:setting]: "ogg", "ogg:<-1 to 10>", "ogg:lossless", "flac", "flac:<0 to 8>" or "wav" (default: ogg, which is quality 10))");
+		// The flag was --ogg-quality while Ogg Vorbis was the only thing it could produce, and
+		// its values were bare -- "10", "lossless". Both still work, and mean the same as
+		// "ogg:10" and "ogg:lossless", so a script written against it keeps running.
+		parser.add_argument("--ogg-quality").help(R"(the former spelling of --audio-format, whose value is an Ogg Vorbis setting on its own: "10", "lossless")");
 		parser.add_argument("--min-score").default_value(0.95).scan<'g', double>().help("only rewrite entries matched at or above this correlation score");
 		parser.add_argument("--dry-run").default_value(false).implicit_value(true).help("list what would be written without writing anything");
 		parser.add_argument("--verify").default_value(false).implicit_value(true).help("re-read each written file and check its loop points and length survived the round trip (slower)");
@@ -1410,30 +1518,18 @@ int cmd_apply(const std::vector<std::string>& args) {
 		const auto ffprobePath = argactions::path(parser.get<std::string>("--ffprobe"));
 		const auto samplingRateSpec = parser.get<std::string>("--sampling-rate");
 		const auto entryIndex = parser.get<uint32_t>("--entry-index");
-		// Quality is oggenc's scale, -1 to 10, because that is the one people know; libvorbis
-		// itself takes -0.1 to 1.0 and the two differ only by a factor of ten. "lossless" sits
-		// at the end of the same axis rather than on a flag of its own: it is a choice about
-		// how the entry is encoded, which is what this option is for.
-		const auto qualitySpec = parser.get<std::string>("--ogg-quality");
-		const auto lossless = qualitySpec == "lossless";
-		float oggQuality = 1.f;
-		if (!lossless) {
-			size_t consumed = 0;
-			double value;
-			try {
-				value = std::stod(qualitySpec, &consumed);
-			} catch (const std::exception&) {
-				consumed = 0;
-				value = 0;
-			}
-			if (!consumed || consumed != qualitySpec.size())
-				throw std::runtime_error(std::format(
-					R"(--ogg-quality: expected a number from -1 to 10, or "lossless", not "{}")", qualitySpec));
-			if (value < -1. || value > 10.)
-				throw std::runtime_error(std::format(
-					"--ogg-quality: {} is outside the -1 to 10 the encoder accepts", qualitySpec));
-			oggQuality = static_cast<float>(value / 10.);
-		}
+		// The old spelling carries an Ogg Vorbis setting with no codec in front of it, which
+		// is the same thing the new one says once "ogg:" is put back on the front.
+		if (parser.is_used("--ogg-quality") && parser.is_used("--audio-format"))
+			throw std::runtime_error("--audio-format and --ogg-quality both set the same thing; give one of them.");
+		const auto audioFormat = parser.is_used("--ogg-quality")
+			? parse_audio_format("ogg:" + parser.get<std::string>("--ogg-quality"), "--ogg-quality")
+			: parse_audio_format(parser.get<std::string>("--audio-format"), "--audio-format");
+		// Whether the entry ends up holding a stream the game's own decoder can read. Two
+		// things turn on it further down: the six-channel permutation, which is a fact about
+		// Vorbis rather than about the audio, and how --verify reads the file back.
+		const auto encodesVorbis = audioFormat.Codec == audio_format::codec::OggVorbis
+			|| audioFormat.Codec == audio_format::codec::LosslessVorbis;
 		const auto minScore = parser.get<double>("--min-score");
 		const auto dryRun = parser.get<bool>("--dry-run");
 		const auto verify = parser.get<bool>("--verify");
@@ -2004,7 +2100,12 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// has always meant. 1, 2 and 4 channels need no permutation (Vorbis's mono,
 			// stereo and quad orders are the decoder's), which is why this never surfaced
 			// while `apply` refused anything above stereo.
-			if (channels == 6) {
+			//
+			// Only for a Vorbis payload. WAV and FLAC both order their channels the way the
+			// decoder hands them back -- FL, FR, FC, LFE, BL, BR -- which is the order
+			// everything above already works in, so permuting for them would be the bug this
+			// permutation exists to fix.
+			if (channels == 6 && encodesVorbis) {
 				constexpr size_t VorbisToDecodedChannel[6] = {0, 2, 1, 4, 5, 3};
 				std::vector<float> reordered(floats.size());
 				for (size_t i = 0; i < totalSamples; ++i)
@@ -2036,19 +2137,42 @@ int cmd_apply(const std::vector<std::string>& args) {
 				}
 			}
 
-			std::string losslessReport;
-			auto newEntry = lossless
-				? make_lossless_ogg_entry(floats, channels, samplingRate,
-					newLoopStart, newLoopEnd, markIndices, losslessReport)
-				: xivres::sound::writer::sound_item::make_from_ogg_encode(
-					channels,
-					samplingRate,
-					newLoopStart,
-					newLoopEnd,
-					xivres::memory_stream(xivres::util::span_cast<const uint8_t>(floats)).as_linear_reader<uint8_t>(),
-					{},
-					markIndices,
-					oggQuality);
+			std::string encodeReport;
+			xivres::sound::writer::sound_item newEntry;
+			switch (audioFormat.Codec) {
+				case audio_format::codec::LosslessVorbis:
+					newEntry = make_lossless_ogg_entry(quantise_pcm16(floats, channels, newLoopEnd),
+						channels, samplingRate, newLoopStart, newLoopEnd, markIndices, encodeReport);
+					break;
+
+				case audio_format::codec::Flac:
+					newEntry = substitute_codec::make_flac_entry(quantise_pcm16(floats, channels, newLoopEnd),
+						channels, samplingRate, newLoopStart, newLoopEnd, audioFormat.FlacLevel, encodeReport);
+					break;
+
+				case audio_format::codec::Pcm:
+					newEntry = substitute_codec::make_pcm_entry(quantise_pcm16(floats, channels, newLoopEnd),
+						channels, samplingRate, newLoopStart, newLoopEnd);
+					break;
+
+				default:
+					newEntry = xivres::sound::writer::sound_item::make_from_ogg_encode(
+						channels,
+						samplingRate,
+						newLoopStart,
+						newLoopEnd,
+						xivres::memory_stream(xivres::util::span_cast<const uint8_t>(floats)).as_linear_reader<uint8_t>(),
+						{},
+						markIndices,
+						audioFormat.OggQuality);
+					break;
+			}
+			// The two Vorbis paths attach the marks themselves, on their way through the
+			// encoder; the substituted-codec builders take no part in it, because a MARK chunk
+			// is a property of the entry rather than of the stream inside it.
+			if (!markIndices.empty() && !encodesVorbis)
+				newEntry.set_mark_chunks(static_cast<uint32_t>(newLoopStart),
+					static_cast<uint32_t>(newLoopEnd), markIndices);
 
 			auto newScd = xivres::sound::writer();
 			newScd.set_table_1(templateScd.read_table_1());
@@ -2113,25 +2237,57 @@ int cmd_apply(const std::vector<std::string>& args) {
 				if (checkScd.sound_item_count() <= entryIndex)
 					throw std::runtime_error(std::format("verification failed for {}: wrote {} sound entries", u8(outputPath), checkScd.sound_item_count()));
 				const auto checkItem = checkScd.read_sound_item(entryIndex);
-				const auto checkInfo = checkItem.get_ogg_decoded();
-				const auto checkSamples = checkInfo.Data.size() / sizeof(float) / (checkInfo.Channels ? checkInfo.Channels : 1);
-				// The encoder shifts loop points onto an Ogg page boundary, by the stream's
-				// priming offset, so an exact match is not expected -- only a small one.
-				// A larger difference would mean the loop actually moved.
-				constexpr size_t LoopToleranceSamples = 8192;
-				const auto startDelta = checkInfo.LoopStartBlockIndex > newLoopStart ? checkInfo.LoopStartBlockIndex - newLoopStart : newLoopStart - checkInfo.LoopStartBlockIndex;
-				const auto endDelta = checkInfo.LoopEndBlockIndex > newLoopEnd ? checkInfo.LoopEndBlockIndex - newLoopEnd : newLoopEnd - checkInfo.LoopEndBlockIndex;
-				if (startDelta > LoopToleranceSamples || endDelta > LoopToleranceSamples)
-					throw std::runtime_error(std::format("verification failed for {}: loop read back as {}-{}, expected {}-{}",
-						u8(outputPath), checkInfo.LoopStartBlockIndex, checkInfo.LoopEndBlockIndex, newLoopStart, newLoopEnd));
-				// A looping entry is encoded only up to its loop end: everything past that
-				// point is unreachable, because the game jumps back to the loop start. So
-				// the expected length is the loop end, not the whole source track.
-				const auto expectedSamples = newLoopEnd > 0 && newLoopEnd < totalSamples ? newLoopEnd : totalSamples;
-				const auto samplesDelta = checkSamples > expectedSamples ? checkSamples - expectedSamples : expectedSamples - checkSamples;
-				if (samplesDelta > LoopToleranceSamples)
-					throw std::runtime_error(std::format("verification failed for {}: {} samples read back, expected about {}",
-						u8(outputPath), checkSamples, expectedSamples));
+
+				// A substituted-codec entry has no Vorbis stream to decode, so it is checked
+				// against what its payload says about itself: the header region the hook reads
+				// has to describe the audio that follows it, and the entry's loop fields --
+				// byte offsets, here -- have to address that audio rather than run past it.
+				if (!encodesVorbis) {
+					const auto payload = substitute_codec::inspect(checkItem);
+					const auto expectedSamples = newLoopEnd > 0 && newLoopEnd < totalSamples ? newLoopEnd : totalSamples;
+					if (payload.Kind == substitute_codec::payload::Vorbis)
+						throw std::runtime_error(std::format("verification failed for {}: the entry did not read back as a substituted codec", u8(outputPath)));
+					if (payload.Channels != channels || payload.SamplingRate != samplingRate)
+						throw std::runtime_error(std::format("verification failed for {}: payload says {} ch at {} Hz, expected {} at {}",
+							u8(outputPath), payload.Channels, payload.SamplingRate, channels, samplingRate));
+					if (payload.TotalFrames != expectedSamples)
+						throw std::runtime_error(std::format("verification failed for {}: payload holds {} samples, expected {}",
+							u8(outputPath), payload.TotalFrames, expectedSamples));
+					const auto loopEndOffset = static_cast<size_t>(checkItem.Header->LoopEndOffset);
+					if (loopEndOffset > checkItem.Data.size() || checkItem.Header->LoopStartOffset > loopEndOffset)
+						throw std::runtime_error(std::format("verification failed for {}: loop fields {}-{} do not address the {}-byte payload",
+							u8(outputPath), static_cast<size_t>(checkItem.Header->LoopStartOffset), loopEndOffset, checkItem.Data.size()));
+					// Raw PCM is the one payload whose byte offsets map back to samples
+					// without decoding anything, so the loop can be checked exactly.
+					if (payload.Kind == substitute_codec::payload::Wave) {
+						const auto frameBytes = channels * sizeof(int16_t);
+						const auto readLoopStart = static_cast<size_t>(checkItem.Header->LoopStartOffset) / frameBytes;
+						const auto readLoopEnd = loopEndOffset / frameBytes;
+						if (readLoopStart != newLoopStart || readLoopEnd != (newLoopEnd ? expectedSamples : 0))
+							throw std::runtime_error(std::format("verification failed for {}: loop read back as {}-{}, expected {}-{}",
+								u8(outputPath), readLoopStart, readLoopEnd, newLoopStart, newLoopEnd));
+					}
+				} else {
+					const auto checkInfo = checkItem.get_ogg_decoded();
+					const auto checkSamples = checkInfo.Data.size() / sizeof(float) / (checkInfo.Channels ? checkInfo.Channels : 1);
+					// The encoder shifts loop points onto an Ogg page boundary, by the stream's
+					// priming offset, so an exact match is not expected -- only a small one.
+					// A larger difference would mean the loop actually moved.
+					constexpr size_t LoopToleranceSamples = 8192;
+					const auto startDelta = checkInfo.LoopStartBlockIndex > newLoopStart ? checkInfo.LoopStartBlockIndex - newLoopStart : newLoopStart - checkInfo.LoopStartBlockIndex;
+					const auto endDelta = checkInfo.LoopEndBlockIndex > newLoopEnd ? checkInfo.LoopEndBlockIndex - newLoopEnd : newLoopEnd - checkInfo.LoopEndBlockIndex;
+					if (startDelta > LoopToleranceSamples || endDelta > LoopToleranceSamples)
+						throw std::runtime_error(std::format("verification failed for {}: loop read back as {}-{}, expected {}-{}",
+							u8(outputPath), checkInfo.LoopStartBlockIndex, checkInfo.LoopEndBlockIndex, newLoopStart, newLoopEnd));
+					// A looping entry is encoded only up to its loop end: everything past that
+					// point is unreachable, because the game jumps back to the loop start. So
+					// the expected length is the loop end, not the whole source track.
+					const auto expectedSamples = newLoopEnd > 0 && newLoopEnd < totalSamples ? newLoopEnd : totalSamples;
+					const auto samplesDelta = checkSamples > expectedSamples ? checkSamples - expectedSamples : expectedSamples - checkSamples;
+					if (samplesDelta > LoopToleranceSamples)
+						throw std::runtime_error(std::format("verification failed for {}: {} samples read back, expected about {}",
+							u8(outputPath), checkSamples, expectedSamples));
+				}
 			}
 
 			{
@@ -2155,6 +2311,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 							// way a shortfall past the loop end is not.
 							stem.ShortfallSeconds > 0.5 ? std::format(", SHORT by {:.1f}s", stem.ShortfallSeconds) : "");
 					}
+					if (!encodeReport.empty())
+						std::cerr << std::format("\n      {}", encodeReport);
 					std::cerr << '\n';
 					return;
 				}
@@ -2182,7 +2340,11 @@ int cmd_apply(const std::vector<std::string>& args) {
 					trimmedAway, paddingAdded,
 					newLoopStart, newLoopEnd, gainDb,
 					gainLimited ? std::format(", peak-limited from {:+.1f} dB", requestedGainDb) : "",
-					onsetSeconds > 0. ? std::format(", onset corrected {:.1f} dB over {:.2f}s", onsetDb, onsetSeconds) : "") << '\n';
+					onsetSeconds > 0. ? std::format(", onset corrected {:.1f} dB over {:.2f}s", onsetDb, onsetSeconds) : "")
+					// What the encode itself cost, for the formats that have something to say
+					// about it -- the libvorbis path's quality number is already in the command
+					// line, but how big a lossless or FLAC entry came out is not.
+					<< (encodeReport.empty() ? std::string() : std::format("\n      {}", encodeReport)) << '\n';
 			}
 			} catch (const std::exception& e) {
 				const auto lock = std::scoped_lock(logMutex);

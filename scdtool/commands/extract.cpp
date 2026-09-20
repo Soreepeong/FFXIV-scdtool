@@ -2,6 +2,7 @@
 #include "extract.h"
 
 #include "utils/argactions.h"
+#include "utils/substitute_codec.h"
 
 #include <nlohmann/json.hpp>
 
@@ -15,11 +16,14 @@ int cmd_extract(const std::vector<std::string>& args) {
 	argparse::ArgumentParser parser("scdtool extract");
 	try {
 		parser
-			.add_description("Extract one sound entry of a game .scd to a standalone Ogg or WAV file.")
+			.add_description("Extract one sound entry of a game .scd to a standalone Ogg, FLAC or WAV file.")
 			.add_epilog(
 				"Useful for comparing a replacement made by `scdtool apply` against the file it\n"
-				"replaces. With --loop-info, prints the entry's loop points and length as JSON\n"
-				"instead, without writing any audio.");
+				"replaces. The format follows the entry: the game's own files come out as Ogg or\n"
+				"WAV, and one written by `apply --audio-format flac` or `wav` comes out as what its\n"
+				"payload holds -- with the extension picked for you when --output names none.\n"
+				"With --loop-info, prints the entry's loop points and length as JSON instead,\n"
+				"without writing any audio.");
 		parser.add_argument("--game").help(R"(game installation path, or :global/:china/:korea to autodetect; omit to read --input as a standalone .scd file on disk)");
 		parser.add_argument("--input").required().help("the .scd to read: a path inside the game when --game is given, otherwise a file path");
 		parser.add_argument("--output").help("file to write (.ogg or .wav, by the entry's format)");
@@ -96,7 +100,23 @@ int cmd_extract(const std::vector<std::string>& args) {
 			// count. Absent for files whose sound table does not reach this entry.
 			if (const auto descriptor = scd.read_sound_descriptor(entryIndex))
 				res["soundType"] = static_cast<uint32_t>(descriptor->Type);
-			if (item.Header->Format == xivres::sound::sound_entry_format::Ogg) {
+			// A format-6 entry whose payload is not Vorbis -- written by `apply --audio-format
+			// flac` or `wav`, for a decoder-substitution hook -- has nothing to hand an Ogg
+			// decoder, so it answers out of its own header instead.
+			if (const auto payload = substitute_codec::inspect(item);
+				payload.Kind != substitute_codec::payload::Vorbis) {
+				res["payload"] = payload.Kind == substitute_codec::payload::Wave ? "wav" : "flac";
+				res["totalSamples"] = payload.TotalFrames;
+				res["durationSeconds"] = static_cast<double>(payload.TotalFrames)
+					/ static_cast<double>(payload.SamplingRate ? payload.SamplingRate : 1);
+				// The entry's loop fields are byte offsets into the payload, which is a sample
+				// index again only where the payload is linear.
+				if (payload.Kind == substitute_codec::payload::Wave && payload.Channels) {
+					const auto frameBytes = payload.Channels * sizeof(int16_t);
+					res["loopStartSample"] = static_cast<size_t>(item.Header->LoopStartOffset) / frameBytes;
+					res["loopEndSample"] = static_cast<size_t>(item.Header->LoopEndOffset) / frameBytes;
+				}
+			} else if (item.Header->Format == xivres::sound::sound_entry_format::Ogg) {
 				const auto info = item.get_ogg_decoded();
 				const auto channels = info.Channels ? info.Channels : 1;
 				res["loopStartSample"] = info.LoopStartBlockIndex;
@@ -114,7 +134,14 @@ int cmd_extract(const std::vector<std::string>& args) {
 
 		std::vector<uint8_t> bytes;
 		const wchar_t* ext;
-		if (item.Header->Format == xivres::sound::sound_entry_format::Ogg) {
+		if (const auto payload = substitute_codec::payload_of(item);
+			payload != substitute_codec::payload::Vorbis) {
+			// Header region then data, which for these is the whole file -- the same
+			// relationship the Ogg path has between its header pages and its data pages, and
+			// the reason nothing here has to know what a FLAC or RIFF stream is made of.
+			bytes = substitute_codec::payload_file(item);
+			ext = substitute_codec::payload_extension(payload);
+		} else if (item.Header->Format == xivres::sound::sound_entry_format::Ogg) {
 			bytes = item.get_ogg_file();
 			ext = L".ogg";
 		} else if (item.Header->Format == xivres::sound::sound_entry_format::WaveFormatPcm) {
