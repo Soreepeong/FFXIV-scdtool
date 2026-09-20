@@ -20,7 +20,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.205
+       "source": {
+        "offset": 0.205,
+        "pcmHash": "3f11441e"
+       }
       },
       "channels": [
        {
@@ -51,7 +54,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 76.695
+       "source": {
+        "offset": 76.695,
+        "pcmHash": "3d5395e9"
+       }
       },
       "channels": [
        {
@@ -79,7 +85,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.225
+       "source": {
+        "offset": 0.225,
+        "pcmHash": "30ec3433"
+       }
       },
       "channels": [
        {
@@ -124,7 +133,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.345
+       "source": {
+        "offset": 0.345,
+        "pcmHash": "783b8c54"
+       }
       },
       "channels": [
        {
@@ -155,7 +167,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.215
+       "source": {
+        "offset": 0.215,
+        "pcmHash": "58d5e029"
+       }
       },
       "channels": [
        {
@@ -186,7 +201,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.37
+       "source": {
+        "offset": 0.37,
+        "pcmHash": "262a89cb"
+       }
       },
       "channels": [
        {
@@ -218,7 +236,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.385
+       "source": {
+        "offset": 0.385,
+        "pcmHash": "6fbadc2c"
+       }
       },
       "channels": [
        {
@@ -252,7 +273,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.21
+       "source": {
+        "offset": 0.21,
+        "pcmHash": "857f3fd8"
+       }
       },
       "channels": [
        {
@@ -283,7 +307,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.195
+       "source": {
+        "offset": 0.195,
+        "pcmHash": "b7fa50b8"
+       }
       },
       "channels": [
        {
@@ -311,7 +338,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.205
+       "source": {
+        "offset": 0.205,
+        "pcmHash": "ea2bb5c8"
+       }
       },
       "channels": [
        {
@@ -339,7 +369,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.2
+       "source": {
+        "offset": 0.2,
+        "pcmHash": "10a60ed5"
+       }
       },
       "channels": [
        {
@@ -367,7 +400,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.205
+       "source": {
+        "offset": 0.205,
+        "pcmHash": "f979ddaa"
+       }
       },
       "channels": [
        {
@@ -395,7 +431,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.215
+       "source": {
+        "offset": 0.215,
+        "pcmHash": "56e6f181"
+       }
       },
       "channels": [
        {
@@ -423,7 +462,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 107.0
+       "source": {
+        "offset": 107.0,
+        "pcmHash": "46341fbd"
+       }
       },
       "channels": [
        {
@@ -451,7 +493,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.145
+       "source": {
+        "offset": 0.145,
+        "pcmHash": "71bb276c"
+       }
       },
       "channels": [
        {
@@ -479,7 +524,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.22
+       "source": {
+        "offset": 0.22,
+        "pcmHash": "7f8e147e"
+       }
       },
       "channels": [
        {
@@ -564,7 +612,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.21
+       "source": {
+        "offset": 0.21,
+        "pcmHash": "0d49d0f9"
+       }
       },
       "channels": [
        {
@@ -593,7 +644,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.185
+       "source": {
+        "offset": 0.185,
+        "pcmHash": "9860d787"
+       }
       },
       "channels": [
        {
@@ -624,7 +678,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.185
+       "source": {
+        "offset": 0.185,
+        "pcmHash": "4541a457"
+       }
       },
       "channels": [
        {
@@ -652,7 +709,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.28
+       "source": {
+        "offset": 0.28,
+        "pcmHash": "2709c804"
+       }
       },
       "channels": [
        {
@@ -683,7 +743,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.225
+       "source": {
+        "offset": 0.225,
+        "pcmHash": "30ec3433"
+       }
       },
       "channels": [
        {
@@ -711,7 +774,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.305
+       "source": {
+        "offset": 0.305,
+        "pcmHash": "0f37c722"
+       }
       },
       "channels": [
        {
@@ -742,7 +808,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.405
+       "source": {
+        "offset": 0.405,
+        "pcmHash": "f7cf5bab"
+       }
       },
       "channels": [
        {
@@ -770,7 +839,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.215
+       "source": {
+        "offset": 0.215,
+        "pcmHash": "3d5395e9"
+       }
       },
       "channels": [
        {
@@ -801,7 +873,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.21
+       "source": {
+        "offset": 0.21,
+        "pcmHash": "e7209491"
+       }
       },
       "channels": [
        {
@@ -832,7 +907,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.215
+       "source": {
+        "offset": 0.215,
+        "pcmHash": "8609b26d"
+       }
       },
       "channels": [
        {
@@ -888,7 +966,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.2
+       "source": {
+        "offset": 0.2,
+        "pcmHash": "ad223a8a"
+       }
       },
       "channels": [
        {
@@ -916,7 +997,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.185
+       "source": {
+        "offset": 0.185,
+        "pcmHash": "c0aa253a"
+       }
       },
       "channels": [
        {
@@ -944,7 +1028,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.295
+       "source": {
+        "offset": 0.295,
+        "pcmHash": "6f9ccbb6"
+       }
       },
       "channels": [
        {
@@ -975,7 +1062,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.21
+       "source": {
+        "offset": 0.21,
+        "pcmHash": "443ff829"
+       }
       },
       "channels": [
        {
@@ -1003,7 +1093,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.215
+       "source": {
+        "offset": 0.215,
+        "pcmHash": "a5b3bc78"
+       }
       },
       "channels": [
        {
@@ -1031,7 +1124,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.18
+       "source": {
+        "offset": 0.18,
+        "pcmHash": "2a28e55f"
+       }
       },
       "channels": [
        {
@@ -1073,7 +1169,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.18
+       "source": {
+        "offset": 0.18,
+        "pcmHash": "5fc70a10"
+       }
       },
       "channels": [
        {
@@ -1101,7 +1200,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.18
+       "source": {
+        "offset": 0.18,
+        "pcmHash": "7625c903"
+       }
       },
       "channels": [
        {
@@ -1129,7 +1231,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.29
+       "source": {
+        "offset": 0.29,
+        "pcmHash": "bbd07077"
+       }
       },
       "channels": [
        {
@@ -1157,7 +1262,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.18
+       "source": {
+        "offset": 0.18,
+        "pcmHash": "630d62c6"
+       }
       },
       "channels": [
        {
@@ -1188,7 +1296,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.2
+       "source": {
+        "offset": 0.2,
+        "pcmHash": "04f5a2fa"
+       }
       },
       "channels": [
        {
@@ -1216,7 +1327,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.2
+       "source": {
+        "offset": 0.2,
+        "pcmHash": "d2767045"
+       }
       },
       "channels": [
        {
@@ -1247,7 +1361,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.185
+       "source": {
+        "offset": 0.185,
+        "pcmHash": "f450c446"
+       }
       },
       "channels": [
        {
@@ -1275,7 +1392,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.315
+       "source": {
+        "offset": 0.315,
+        "pcmHash": "b3e0b15d"
+       }
       },
       "channels": [
        {
@@ -1303,7 +1423,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.19
+       "source": {
+        "offset": 0.19,
+        "pcmHash": "63ecf400"
+       }
       },
       "channels": [
        {
@@ -1360,7 +1483,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.2
+       "source": {
+        "offset": 0.2,
+        "pcmHash": "21f1f02c"
+       }
       },
       "channels": [
        {
@@ -1388,7 +1514,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.19
+       "source": {
+        "offset": 0.19,
+        "pcmHash": "42e4ce30"
+       }
       },
       "channels": [
        {
@@ -1416,7 +1545,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.205
+       "source": {
+        "offset": 0.205,
+        "pcmHash": "b626a202"
+       }
       },
       "channels": [
        {
@@ -1444,7 +1576,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.2
+       "source": {
+        "offset": 0.2,
+        "pcmHash": "4ab02c5e"
+       }
       },
       "channels": [
        {
@@ -1472,7 +1607,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.19
+       "source": {
+        "offset": 0.19,
+        "pcmHash": "e06b1397"
+       }
       },
       "channels": [
        {
@@ -1500,7 +1638,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.18
+       "source": {
+        "offset": 0.18,
+        "pcmHash": "0011a327"
+       }
       },
       "channels": [
        {
@@ -1528,7 +1669,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.21
+       "source": {
+        "offset": 0.21,
+        "pcmHash": "5b3824ae"
+       }
       },
       "channels": [
        {
@@ -1559,7 +1703,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.19
+       "source": {
+        "offset": 0.19,
+        "pcmHash": "8e14aa1b"
+       }
       },
       "channels": [
        {
@@ -1587,7 +1734,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.185
+       "source": {
+        "offset": 0.185,
+        "pcmHash": "9d1a97f7"
+       }
       },
       "channels": [
        {
@@ -1615,7 +1765,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.37
+       "source": {
+        "offset": 0.37,
+        "pcmHash": "e4cd752a"
+       }
       },
       "channels": [
        {
@@ -1643,7 +1796,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.185
+       "source": {
+        "offset": 0.185,
+        "pcmHash": "8c0d8a8c"
+       }
       },
       "channels": [
        {
@@ -1674,7 +1830,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.38
+       "source": {
+        "offset": 0.38,
+        "pcmHash": "a30390fb"
+       }
       },
       "channels": [
        {
@@ -1702,7 +1861,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.19
+       "source": {
+        "offset": 0.19,
+        "pcmHash": "ad08c4a0"
+       }
       },
       "channels": [
        {
@@ -1730,7 +1892,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.275
+       "source": {
+        "offset": 0.275,
+        "pcmHash": "b0546975"
+       }
       },
       "channels": [
        {
@@ -1758,7 +1923,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.18
+       "source": {
+        "offset": 0.18,
+        "pcmHash": "25408ed3"
+       }
       },
       "channels": [
        {
@@ -1786,7 +1954,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.21
+       "source": {
+        "offset": 0.21,
+        "pcmHash": "5b7042d9"
+       }
       },
       "channels": [
        {
@@ -1817,7 +1988,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.195
+       "source": {
+        "offset": 0.195,
+        "pcmHash": "3e8d8a98"
+       }
       },
       "channels": [
        {
@@ -1845,7 +2019,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.165
+       "source": {
+        "offset": 0.165,
+        "pcmHash": "4d58393a"
+       }
       },
       "channels": [
        {
@@ -1873,7 +2050,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.2
+       "source": {
+        "offset": 0.2,
+        "pcmHash": "cfae02d6"
+       }
       },
       "channels": [
        {
@@ -1901,7 +2081,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.175
+       "source": {
+        "offset": 0.175,
+        "pcmHash": "ffc5cbfd"
+       }
       },
       "channels": [
        {
@@ -1929,7 +2112,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.2
+       "source": {
+        "offset": 0.2,
+        "pcmHash": "9b0fc0f6"
+       }
       },
       "channels": [
        {
@@ -1957,7 +2143,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.125
+       "source": {
+        "offset": 0.125,
+        "pcmHash": "a9cf55cd"
+       }
       },
       "channels": [
        {
@@ -1985,7 +2174,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.19
+       "source": {
+        "offset": 0.19,
+        "pcmHash": "cec2a689"
+       }
       },
       "channels": [
        {
@@ -2013,7 +2205,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.2
+       "source": {
+        "offset": 0.2,
+        "pcmHash": "95a96846"
+       }
       },
       "channels": [
        {
@@ -2044,7 +2239,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.185
+       "source": {
+        "offset": 0.185,
+        "pcmHash": "babbd698"
+       }
       },
       "channels": [
        {
@@ -2072,7 +2270,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.37
+       "source": {
+        "offset": 0.37,
+        "pcmHash": "fe8ab2c2"
+       }
       },
       "channels": [
        {
@@ -2100,7 +2301,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.395
+       "source": {
+        "offset": 0.395,
+        "pcmHash": "6d64271c"
+       }
       },
       "channels": [
        {
@@ -2128,7 +2332,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.22
+       "source": {
+        "offset": 0.22,
+        "pcmHash": "5eed6133"
+       }
       },
       "channels": [
        {
@@ -2156,7 +2363,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.21
+       "source": {
+        "offset": 0.21,
+        "pcmHash": "d24339e6"
+       }
       },
       "channels": [
        {
@@ -2184,7 +2394,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.17
+       "source": {
+        "offset": 0.17,
+        "pcmHash": "5e6c25ce"
+       }
       },
       "channels": [
        {
@@ -2212,7 +2425,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.23
+       "source": {
+        "offset": 0.23,
+        "pcmHash": "d70f1526"
+       }
       },
       "channels": [
        {
@@ -2240,7 +2456,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.225
+       "source": {
+        "offset": 0.225,
+        "pcmHash": "48a59c08"
+       }
       },
       "channels": [
        {
@@ -2268,7 +2487,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.335
+       "source": {
+        "offset": 0.335,
+        "pcmHash": "605518bd"
+       }
       },
       "channels": [
        {
@@ -2296,7 +2518,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 44.31
+       "source": {
+        "offset": 44.31,
+        "pcmHash": "56abae92"
+       }
       },
       "channels": [
        {
@@ -2324,7 +2549,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 114.89
+       "source": {
+        "offset": 114.89,
+        "pcmHash": "56abae92"
+       }
       },
       "channels": [
        {
@@ -2352,7 +2580,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 217.105
+       "source": {
+        "offset": 217.105,
+        "pcmHash": "56abae92"
+       }
       },
       "channels": [
        {
@@ -2380,7 +2611,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.255
+       "source": {
+        "offset": 0.255,
+        "pcmHash": "0ceb5222"
+       }
       },
       "channels": [
        {
@@ -2408,7 +2642,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.2
+       "source": {
+        "offset": 0.2,
+        "pcmHash": "e1fabdea"
+       }
       },
       "channels": [
        {
@@ -2436,7 +2673,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.21
+       "source": {
+        "offset": 0.21,
+        "pcmHash": "8de4dbdf"
+       }
       },
       "channels": [
        {
@@ -2467,7 +2707,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.205
+       "source": {
+        "offset": 0.205,
+        "pcmHash": "7b65588f"
+       }
       },
       "channels": [
        {
@@ -2495,7 +2738,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.2
+       "source": {
+        "offset": 0.2,
+        "pcmHash": "3f11441e"
+       }
       },
       "channels": [
        {
@@ -2523,7 +2769,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.185
+       "source": {
+        "offset": 0.185,
+        "pcmHash": "e237e8e4"
+       }
       },
       "channels": [
        {
@@ -2551,7 +2800,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.175
+       "source": {
+        "offset": 0.175,
+        "pcmHash": "8a132ac3"
+       }
       },
       "channels": [
        {
@@ -2582,7 +2834,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 26.205
+       "source": {
+        "offset": 26.205,
+        "pcmHash": "8a132ac3"
+       }
       },
       "channels": [
        {
@@ -2613,7 +2868,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 85.765
+       "source": {
+        "offset": 85.765,
+        "pcmHash": "8a132ac3"
+       }
       },
       "channels": [
        {
@@ -2641,7 +2899,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 149.715
+       "source": {
+        "offset": 149.715,
+        "pcmHash": "8a132ac3"
+       }
       },
       "channels": [
        {
@@ -2672,7 +2933,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.25
+       "source": {
+        "offset": 0.25,
+        "pcmHash": "5fa73d43"
+       }
       },
       "channels": [
        {
@@ -2703,7 +2967,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.18
+       "source": {
+        "offset": 0.18,
+        "pcmHash": "5fc31d55"
+       }
       },
       "channels": [
        {
@@ -2731,7 +2998,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.17
+       "source": {
+        "offset": 0.17,
+        "pcmHash": "6ba7a6a0"
+       }
       },
       "channels": [
        {
@@ -2759,7 +3029,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.235
+       "source": {
+        "offset": 0.235,
+        "pcmHash": "1f88f5e5"
+       }
       },
       "channels": [
        {
@@ -2787,7 +3060,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.23
+       "source": {
+        "offset": 0.23,
+        "pcmHash": "a726b24d"
+       }
       },
       "channels": [
        {
@@ -2818,7 +3094,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.19
+       "source": {
+        "offset": 0.19,
+        "pcmHash": "67be8833"
+       }
       },
       "channels": [
        {
@@ -2846,7 +3125,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.19
+       "source": {
+        "offset": 0.19,
+        "pcmHash": "f8bcf3a1"
+       }
       },
       "channels": [
        {
@@ -2874,7 +3156,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.195
+       "source": {
+        "offset": 0.195,
+        "pcmHash": "eb9f05f0"
+       }
       },
       "channels": [
        {
@@ -2902,7 +3187,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.245
+       "source": {
+        "offset": 0.245,
+        "pcmHash": "fbc0a35d"
+       }
       },
       "channels": [
        {
@@ -2930,7 +3218,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.19
+       "source": {
+        "offset": 0.19,
+        "pcmHash": "e7c4ea68"
+       }
       },
       "channels": [
        {
@@ -2958,7 +3249,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 30.51
+       "source": {
+        "offset": 30.51,
+        "pcmHash": "2d82cebb"
+       }
       },
       "channels": [
        {
@@ -2989,7 +3283,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 168.705
+       "source": {
+        "offset": 168.705,
+        "pcmHash": "2d82cebb"
+       }
       },
       "channels": [
        {
@@ -3017,7 +3314,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 247.39
+       "source": {
+        "offset": 247.39,
+        "pcmHash": "2d82cebb"
+       }
       },
       "channels": [
        {
@@ -3051,7 +3351,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.22
+       "source": {
+        "offset": 0.22,
+        "pcmHash": "82c860e0"
+       }
       },
       "channels": [
        {
@@ -3079,7 +3382,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.28
+       "source": {
+        "offset": 0.28,
+        "pcmHash": "2709c804"
+       }
       },
       "channels": [
        {
@@ -3110,7 +3416,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.35
+       "source": {
+        "offset": 0.35,
+        "pcmHash": "783b8c54"
+       }
       },
       "channels": [
        {
@@ -3141,7 +3450,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.22
+       "source": {
+        "offset": 0.22,
+        "pcmHash": "874fb92b"
+       }
       },
       "channels": [
        {
@@ -3169,7 +3481,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.19
+       "source": {
+        "offset": 0.19,
+        "pcmHash": "8e14aa1b"
+       }
       },
       "channels": [
        {
@@ -3202,7 +3517,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.18
+       "source": {
+        "offset": 0.18,
+        "pcmHash": "c9bff6d8"
+       }
       },
       "channels": [
        {
@@ -3230,7 +3548,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.4
+       "source": {
+        "offset": 0.4,
+        "pcmHash": "ac13476c"
+       }
       },
       "channels": [
        {
@@ -3261,7 +3582,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.34
+       "source": {
+        "offset": 0.34,
+        "pcmHash": "c6e463e8"
+       }
       },
       "channels": [
        {
@@ -3289,7 +3613,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.38
+       "source": {
+        "offset": 0.38,
+        "pcmHash": "92b83ad8"
+       }
       },
       "channels": [
        {
@@ -3344,7 +3671,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.32
+       "source": {
+        "offset": 0.32,
+        "pcmHash": "09e1f5cc"
+       }
       },
       "channels": [
        {
@@ -3386,7 +3716,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.11
+       "source": {
+        "offset": 0.11,
+        "pcmHash": "1095d718"
+       }
       },
       "channels": [
        {
@@ -3414,7 +3747,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.25
+       "source": {
+        "offset": 0.25,
+        "pcmHash": "ac8e2cfd"
+       }
       },
       "channels": [
        {
@@ -3442,7 +3778,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.12
+       "source": {
+        "offset": 0.12,
+        "pcmHash": "43d84269"
+       }
       },
       "channels": [
        {
@@ -3470,7 +3809,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.195
+       "source": {
+        "offset": 0.195,
+        "pcmHash": "f9c34b49"
+       }
       },
       "channels": [
        {
@@ -3563,7 +3905,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.26
+       "source": {
+        "offset": 0.26,
+        "pcmHash": "e4cd752a"
+       }
       },
       "channels": [
        {
@@ -3624,7 +3969,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.405
+       "source": {
+        "offset": 0.405,
+        "pcmHash": "b70e27bb"
+       }
       },
       "channels": [
        {
@@ -3652,7 +4000,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.11
+       "source": {
+        "offset": 0.11,
+        "pcmHash": "30ec3433"
+       }
       },
       "channels": [
        {
@@ -3680,7 +4031,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.095
+       "source": {
+        "offset": 0.095,
+        "pcmHash": "3d5395e9"
+       }
       },
       "channels": [
        {
@@ -3719,7 +4073,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.28
+       "source": {
+        "offset": 0.28,
+        "pcmHash": "d450f525"
+       }
       },
       "channels": [
        {
@@ -3791,7 +4148,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.08
+       "source": {
+        "offset": 0.08,
+        "pcmHash": "e7209491"
+       }
       },
       "channels": [
        {
@@ -3963,7 +4323,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.195
+       "source": {
+        "offset": 0.195,
+        "pcmHash": "cec2a689"
+       }
       },
       "channels": [
        {
@@ -3991,7 +4354,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.2
+       "source": {
+        "offset": 0.2,
+        "pcmHash": "63ecf400"
+       }
       },
       "channels": [
        {
@@ -4030,7 +4396,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 67.085
+       "source": {
+        "offset": 67.085,
+        "pcmHash": "0f37c722"
+       }
       },
       "channels": [
        {
@@ -4058,7 +4427,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.205
+       "source": {
+        "offset": 0.205,
+        "pcmHash": "d2767045"
+       }
       },
       "channels": [
        {
@@ -4086,7 +4458,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.205
+       "source": {
+        "offset": 0.205,
+        "pcmHash": "bbd07077"
+       }
       },
       "channels": [
        {
@@ -4114,7 +4489,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.375
+       "source": {
+        "offset": 0.375,
+        "pcmHash": "ac13476c"
+       }
       },
       "channels": [
        {
@@ -4142,7 +4520,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.18
+       "source": {
+        "offset": 0.18,
+        "pcmHash": "ad223a8a"
+       }
       },
       "channels": [
        {
@@ -4173,7 +4554,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.16
+       "source": {
+        "offset": 0.16,
+        "pcmHash": "c0aa253a"
+       }
       },
       "channels": [
        {
@@ -4204,7 +4588,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.15
+       "source": {
+        "offset": 0.15,
+        "pcmHash": "a5b3bc78"
+       }
       },
       "channels": [
        {
@@ -4257,7 +4644,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.15
+       "source": {
+        "offset": 0.15,
+        "pcmHash": "b3e0b15d"
+       }
       },
       "channels": [
        {
@@ -4288,7 +4678,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.15
+       "source": {
+        "offset": 0.15,
+        "pcmHash": "bebe3838"
+       }
       },
       "channels": [
        {
@@ -4319,7 +4712,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.155
+       "source": {
+        "offset": 0.155,
+        "pcmHash": "7625c903"
+       }
       },
       "channels": [
        {
@@ -4350,7 +4746,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.325
+       "source": {
+        "offset": 0.325,
+        "pcmHash": "46341fbd"
+       }
       },
       "channels": [
        {
@@ -4381,7 +4780,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.145
+       "source": {
+        "offset": 0.145,
+        "pcmHash": "a726b24d"
+       }
       },
       "channels": [
        {
@@ -4423,7 +4825,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.2
+       "source": {
+        "offset": 0.2,
+        "pcmHash": "8c0d8a8c"
+       }
       },
       "channels": [
        {
@@ -4451,7 +4856,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.175
+       "source": {
+        "offset": 0.175,
+        "pcmHash": "25408ed3"
+       }
       },
       "channels": [
        {
@@ -4482,7 +4890,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.185
+       "source": {
+        "offset": 0.185,
+        "pcmHash": "9d1a97f7"
+       }
       },
       "channels": [
        {
@@ -4513,7 +4924,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.18
+       "source": {
+        "offset": 0.18,
+        "pcmHash": "b626a202"
+       }
       },
       "channels": [
        {
@@ -4544,7 +4958,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.19
+       "source": {
+        "offset": 0.19,
+        "pcmHash": "ad08c4a0"
+       }
       },
       "channels": [
        {
@@ -4575,7 +4992,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.27
+       "source": {
+        "offset": 0.27,
+        "pcmHash": "b0546975"
+       }
       },
       "channels": [
        {
@@ -4606,7 +5026,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.17
+       "source": {
+        "offset": 0.17,
+        "pcmHash": "ffc5cbfd"
+       }
       },
       "channels": [
        {
@@ -4637,7 +5060,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.185
+       "source": {
+        "offset": 0.185,
+        "pcmHash": "e06b1397"
+       }
       },
       "channels": [
        {
@@ -4668,7 +5094,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.15
+       "source": {
+        "offset": 0.15,
+        "pcmHash": "42e4ce30"
+       }
       },
       "channels": [
        {
@@ -4699,7 +5128,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.145
+       "source": {
+        "offset": 0.145,
+        "pcmHash": "71bb276c"
+       }
       },
       "channels": [
        {
@@ -4733,7 +5165,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.38
+       "source": {
+        "offset": 0.38,
+        "pcmHash": "d450f525"
+       }
       },
       "channels": [
        {
@@ -4761,7 +5196,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 125.73
+       "source": {
+        "offset": 125.73,
+        "pcmHash": "6fbadc2c"
+       }
       },
       "channels": [
        {
@@ -4789,7 +5227,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.52
+       "source": {
+        "offset": 0.52,
+        "pcmHash": "56abae92"
+       }
       },
       "channels": [
        {
@@ -4817,7 +5258,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 291.42
+       "source": {
+        "offset": 291.42,
+        "pcmHash": "56abae92"
+       }
       },
       "channels": [
        {
@@ -4845,7 +5289,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 262.52
+       "source": {
+        "offset": 262.52,
+        "pcmHash": "8a132ac3"
+       }
       },
       "channels": [
        {
@@ -4873,7 +5320,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.33
+       "source": {
+        "offset": 0.33,
+        "pcmHash": "2d82cebb"
+       }
       },
       "channels": [
        {
@@ -4904,7 +5354,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 354.37
+       "source": {
+        "offset": 354.37,
+        "pcmHash": "2d82cebb"
+       }
       },
       "channels": [
        {
@@ -4921,5 +5374,7 @@
     "# comment": "recovered from its numbered siblings: ARR_FFXIV_005 is the recording the rest of this group resolved to, and it matches this target's intro at 0.976"
    }
   }
- ]
+ ],
+ "pcmHashAlgorithm": "crc32/s32le@native",
+ "pcmHashDecode": "ffmpeg -v error -nostdin -i <source> -map 0:a:0 -f s32le -"
 }
