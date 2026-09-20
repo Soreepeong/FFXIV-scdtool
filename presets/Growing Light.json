@@ -3096,6 +3096,7 @@
       "sourceOffsets": {
        "source": 1.02
       },
+      "length": 433.2,
       "channels": [
        {
         "source": "source",
@@ -3105,14 +3106,26 @@
         "source": "source",
         "channel": 1
        }
-      ],
-      "sourceFilters": {
-       "source": "volume=-1.8dB"
-      }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "source": 1.02
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.979 at offset -1.0s) but covers only 94% of this target: 433s of 463s. The rest needs a multi-segment or filterComplex source; left disabled until then."
+    "# comment": "the game's file is 30.0s longer than this recording and ends by repeating itself: from 433.2s it replays the file from 0.0s (similarity 0.993, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 1.020s. Built and measured: the two segments join at 433.2s and the second either side of that join matches the game at only 0.711 -- the recording is still in its own ending there, so the seam needs a crossfade the segment schema cannot express",
+    "enable": false
    }
   },
   {

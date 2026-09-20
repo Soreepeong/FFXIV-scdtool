@@ -1441,6 +1441,22 @@
       "sourceOffsets": {
        "source": 205.835
       },
+      "length": 203.29,
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "source": 205.835
+      },
       "channels": [
        {
         "source": "source",
@@ -1453,8 +1469,7 @@
       ]
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.989 at offset -205.8s) but covers only 90% of this target: 222s of 246s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+    "# comment": "the game's file is 24.9s longer than this recording and ends by repeating itself: from 203.3s it replays the file from 0.0s (similarity 0.998, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 205.835s"
    }
   },
   {
@@ -2683,6 +2698,22 @@
       "sourceOffsets": {
        "source": 1.73
       },
+      "length": 119.56,
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "source": 2.7
+      },
       "channels": [
        {
         "source": "source",
@@ -2695,8 +2726,7 @@
       ]
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.972 at offset -1.7s) but covers only 92% of this target: 137s of 150s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+    "# comment": "the game's file is 13.5s longer than this recording and ends by repeating itself: from 119.6s it replays the file from 1.0s (similarity 0.955, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 2.700s"
    }
   },
   {
@@ -3248,6 +3278,22 @@
       "sourceOffsets": {
        "source": 1.525
       },
+      "length": 170.38,
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "source": 1.525
+      },
       "channels": [
        {
         "source": "source",
@@ -3260,8 +3306,8 @@
       ]
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.952 at offset -1.5s) but covers only 93% of this target: 174s of 186s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+    "# comment": "the game's file is 12.6s longer than this recording and ends by repeating itself: from 170.4s it replays the file from 0.0s (similarity 0.991, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 1.525s. Built and measured: the two segments join at 170.4s and the second either side of that join matches the game at only 0.749 -- the recording is still in its own ending there, so the seam needs a crossfade the segment schema cannot express",
+    "enable": false
    }
   },
   {

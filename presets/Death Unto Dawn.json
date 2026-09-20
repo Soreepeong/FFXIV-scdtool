@@ -468,7 +468,7 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 2.96
+       "source": 31.76
       },
       "channels": [
        {
@@ -479,14 +479,11 @@
         "source": "source",
         "channel": 1
        }
-      ],
-      "sourceFilters": {
-       "source": "volume=-4dB"
-      }
+      ]
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.847 at offset -31.8s) but covers only 92% of this target: 428s of 467s. The rest needs a multi-segment or filterComplex source; left disabled until then.; offset corrected +31.755s -> +2.960s by re-deriving the alignment and judging it on the intro (0.5813 -> 0.6697)"
+    "# comment": "offset corrected +2.960s -> +31.760s: the previous value scored better on the intro (0.670 vs 0.581) but far worse over the whole file (built and measured at 0.414 against 0.842), so judging on the intro alone had locked onto the wrong pass. The recording still covers only 427.6s of this 467.5s target and the uncovered tail repeats earlier material at only 0.741, so it stays disabled pending a second source.",
+    "enable": false
    }
   },
   {
@@ -1030,6 +1027,22 @@
       "sourceOffsets": {
        "source": 1.41
       },
+      "length": 96.16,
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "source": 1.6
+      },
       "channels": [
        {
         "source": "source",
@@ -1042,8 +1055,7 @@
       ]
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.984 at offset -1.4s) but covers only 75% of this target: 145s of 194s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+    "# comment": "the game's file is 49.6s longer than this recording and ends by repeating itself: from 96.2s it replays the file from 0.2s (similarity 0.991, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 1.600s"
    }
   },
   {
@@ -1059,6 +1071,22 @@
       "sourceOffsets": {
        "source": 1.245
       },
+      "length": 87.97,
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "source": 14.655
+      },
       "channels": [
        {
         "source": "source",
@@ -1071,8 +1099,7 @@
       ]
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.977 at offset -1.2s) but covers only 67% of this target: 110s of 164s (predicted from the source's own length; this target has not been built). The rest needs a multi-segment or filterComplex source; left disabled until then."
+    "# comment": "the game's file is 54.8s longer than this recording and ends by repeating itself: from 88.0s it replays the file from 13.4s (similarity 0.982, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 14.655s"
    }
   },
   {

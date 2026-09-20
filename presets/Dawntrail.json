@@ -1790,6 +1790,22 @@
       "sourceOffsets": {
        "source": 1.78
       },
+      "length": 319.77,
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "source": 143.8
+      },
       "channels": [
        {
         "source": "source",
@@ -1802,8 +1818,7 @@
       ]
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.989 at offset -1.8s) but covers only 91% of this target: 333s of 368s. The rest needs a multi-segment or filterComplex source; left disabled until then."
+    "# comment": "the game's file is 35.4s longer than this recording and ends by repeating itself: from 319.8s it replays the file from 142.0s (similarity 0.986, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 143.800s"
    }
   },
   {
@@ -2825,6 +2840,7 @@
       "sourceOffsets": {
        "source": 1.78
       },
+      "length": 319.8,
       "channels": [
        {
         "source": "source",
@@ -2834,14 +2850,25 @@
         "source": "source",
         "channel": 1
        }
-      ],
-      "sourceFilters": {
-       "source": "volume=-4.1dB"
-      }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "source": 143.83
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
      }
     ],
-    "enable": false,
-    "# comment": "source is correct (spectral 0.979 at offset -1.8s) but covers only 91% of this target: 333s of 368s. The rest needs a multi-segment or filterComplex source; left disabled until then."
+    "# comment": "the game's file is 35.4s longer than this recording and ends by repeating itself: from 319.8s it replays the file from 142.1s (similarity 0.967, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 143.830s"
    }
   },
   {
