@@ -5,6 +5,7 @@
 #include "utils/audio_match.h"
 #include "utils/misc.h"
 #include "utils/win32_process.h"
+#include "utils/hca_payload.h"
 #include "utils/substitute_codec.h"
 #include "utils/verify_audio.h"
 
@@ -40,7 +41,11 @@ namespace {
 		loop_info info{.Rate = static_cast<size_t>(item.Header->SamplingRate)};
 		std::vector<uint8_t> bytes;
 		const wchar_t* ext;
-		if (const auto payload = substitute_codec::payload_of(item);
+		if (hca_payload::is_hca(item)) {
+			bytes = hca_payload::payload_file(item);
+			ext = L".hca";
+			info.TotalSamples = static_cast<size_t>(hca_payload::inspect(item).TotalFrames);
+		} else if (const auto payload = substitute_codec::payload_of(item);
 			payload != substitute_codec::payload::Vorbis) {
 			bytes = substitute_codec::payload_file(item);
 			ext = substitute_codec::payload_extension(payload);

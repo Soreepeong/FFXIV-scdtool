@@ -2,6 +2,7 @@
 #include "extract.h"
 
 #include "utils/argactions.h"
+#include "utils/hca_payload.h"
 #include "utils/substitute_codec.h"
 
 #include <nlohmann/json.hpp>
@@ -119,6 +120,21 @@ int cmd_extract(const std::vector<std::string>& args) {
 					res["loopStartSample"] = loop->Start;
 					res["loopEndSample"] = loop->End;
 				}
+			} else if (hca_payload::is_hca(item)) {
+				// Format 26, which the music folder never uses and `sound/` does. Its own
+				// header is the honest source for the rate and the length: the entry header
+				// agrees here, but the HCA header is what the decoder reads.
+				const auto hca = hca_payload::inspect(item);
+				res["payload"] = "hca";
+				res["totalSamples"] = hca.TotalFrames;
+				res["hcaBlockSize"] = hca.BlockSize;
+				res["hcaBlockCount"] = hca.BlockCount;
+				if (hca.SamplingRate)
+					res["durationSeconds"] = static_cast<double>(hca.TotalFrames)
+						/ static_cast<double>(hca.SamplingRate);
+				// The loop fields of an HCA entry are byte offsets like any other, but HCA
+				// carries its own loop section and nothing here has needed one yet, so the
+				// samples are left unstated rather than guessed.
 			} else if (item.Header->Format == xivres::sound::sound_entry_format::Ogg) {
 				const auto info = item.get_ogg_decoded();
 				const auto channels = info.Channels ? info.Channels : 1;
@@ -137,7 +153,10 @@ int cmd_extract(const std::vector<std::string>& args) {
 
 		std::vector<uint8_t> bytes;
 		const wchar_t* ext;
-		if (const auto payload = substitute_codec::payload_of(item);
+		if (hca_payload::is_hca(item)) {
+			bytes = hca_payload::payload_file(item);
+			ext = L".hca";
+		} else if (const auto payload = substitute_codec::payload_of(item);
 			payload != substitute_codec::payload::Vorbis) {
 			// Header region then data, which for these is the whole file -- the same
 			// relationship the Ogg path has between its header pages and its data pages, and

@@ -4,6 +4,7 @@
 #include "utils/argactions.h"
 #include "utils/audio_match.h"
 #include "utils/describe_path.h"
+#include "utils/hca_payload.h"
 #include "utils/misc.h"
 #include "utils/win32_process.h"
 
@@ -51,6 +52,9 @@ namespace {
 			if (item.Header->Format == xivres::sound::sound_entry_format::Ogg) {
 				bytes = item.get_ogg_file();
 				ext = L".ogg";
+			} else if (hca_payload::is_hca(item)) {
+				bytes = hca_payload::payload_file(item);
+				ext = L".hca";
 			} else if (item.Header->Format == xivres::sound::sound_entry_format::WaveFormatPcm) {
 				bytes = item.get_wav_file();
 				ext = L".wav";

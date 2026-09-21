@@ -4,6 +4,7 @@
 #include "utils/argactions.h"
 #include "utils/audio_match.h"
 #include "utils/filter_graph.h"
+#include "utils/hca_payload.h"
 #include "utils/lossless_vorbis.h"
 #include "utils/misc.h"
 #include "utils/substitute_codec.h"
@@ -2106,10 +2107,12 @@ int cmd_apply(const std::vector<std::string>& args) {
 					job.TargetPath, templateScd.sound_item_count(), entryIndex));
 
 			const auto templateItem = templateScd.read_sound_item(entryIndex);
+			const auto templateIsHca = hca_payload::is_hca(templateItem);
 			if (templateItem.Header->Format != xivres::sound::sound_entry_format::Ogg
-				&& templateItem.Header->Format != xivres::sound::sound_entry_format::WaveFormatPcm)
-				throw std::runtime_error(std::format("{} entry {} is neither Ogg nor PCM; refusing to replace it.",
-					job.TargetPath, entryIndex));
+				&& templateItem.Header->Format != xivres::sound::sound_entry_format::WaveFormatPcm
+				&& !templateIsHca)
+				throw std::runtime_error(std::format("{} entry {} is format {}, which is neither Ogg, PCM nor HCA; refusing to replace it.",
+					job.TargetPath, entryIndex, static_cast<uint32_t>(*templateItem.Header->Format)));
 
 			const auto [templateLoopStart, templateLoopEnd] = template_loop_points(templateItem);
 
@@ -2133,14 +2136,22 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// Staged once, unconditionally: the offset deduction below aligns against it,
 			// the loudness measurement compares to it, and the onset check samples it, so
 			// it is wanted whatever the flags say.
-			const auto templateAudio = tempDir / std::format(L"scdtool_apply_src_{}.ogg", tempFileCounter.fetch_add(1));
+			const auto templateAudio = tempDir / std::format(L"scdtool_apply_src_{}{}",
+				tempFileCounter.fetch_add(1), templateIsHca ? L".hca" : L".ogg");
 			keepTemp(templateAudio);
 			{
 				std::ofstream f(templateAudio, std::ios::binary);
 				if (!f)
 					throw std::runtime_error(std::format("could not stage template audio for {}", job.TargetPath));
-				const auto ogg = templateItem.get_ogg_file();
-				f.write(reinterpret_cast<const char*>(ogg.data()), static_cast<std::streamsize>(ogg.size()));
+				const auto staged = templateIsHca
+					? hca_payload::payload_file(templateItem)
+					: templateItem.get_ogg_file();
+				f.write(reinterpret_cast<const char*>(staged.data()), static_cast<std::streamsize>(staged.size()));
+			}
+			if (templateIsHca) {
+				const auto lock = std::scoped_lock(logMutex);
+				std::cerr << std::format("  note: {} is HCA (format 26) and the replacement will not be -- "
+					"the entry becomes whatever --audio-format names.", job.TargetPath) << '\n';
 			}
 
 			// The SCD must be Ogg Vorbis, so a source that is lossless and high-rate can
