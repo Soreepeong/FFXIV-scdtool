@@ -74,6 +74,20 @@ namespace {
 		// rather than one after another, which is what a canon is -- BGM_EX4_Event_15 is its
 		// own recording entering three times over itself. Negative means "follow on".
 		double StartSeconds = -1.;
+		// A fade at this segment's own edges, in its own span -- not the crossfade with a
+		// neighbour, which `CrossfadeSeconds` already covers and which only exists where two
+		// segments meet. Ten of the hand-written filterComplex graphs are one window of one
+		// recording with a fade at one or both ends and nothing else:
+		//
+		//     [0:a]atrim=114.889:217.103,asetpts=PTS-STARTPTS,afade=t=out:st=100.714:d=1
+		//
+		// `sourceFilters` cannot say that. Filters run on the whole source *before* the
+		// offset trims it, so `st=100.714` would have to be rewritten to 217.103 -- against
+		// the source's timeline rather than the window's -- and an entry whose offset differs
+		// per album would need a different number in each. Negative means "not stated", which
+		// leaves whatever the crossfade machinery decides.
+		double FadeInSeconds = -1.;
+		double FadeOutSeconds = -1.;
 	};
 
 	struct apply_job {
@@ -731,8 +745,15 @@ namespace {
 			if (!render)
 				continue;
 
-			const auto fadeIn = (std::min)(toSamples(segment.CrossfadeSeconds), render);
-			const auto fadeOut = (std::min)(tail, render - fadeIn);
+			// A stated fade wins over the one the crossfade machinery would have inferred:
+			// the crossfade describes a join, and a segment that states its own fade is
+			// describing its own edge, which is the stronger claim. Where neither is stated
+			// this is unchanged -- fade in over the crossfade with the previous segment, fade
+			// out over the one the next segment needs.
+			const auto fadeIn = (std::min)(toSamples(segment.FadeInSeconds >= 0.
+				? segment.FadeInSeconds : segment.CrossfadeSeconds), render);
+			const auto fadeOut = (std::min)(segment.FadeOutSeconds >= 0.
+				? toSamples(segment.FadeOutSeconds) : tail, render - fadeIn);
 
 			// Per-source gain, measured over this segment's own span on both sides.
 			std::map<std::string, double> gain;
@@ -1219,6 +1240,8 @@ namespace {
 				.Length = segmentJson.value("length", 0.),
 				.CrossfadeSeconds = segmentJson.value("crossfadeSeconds", 0.),
 				.StartSeconds = segmentJson.value("startSeconds", -1.),
+				.FadeInSeconds = segmentJson.value("fadeInSeconds", -1.),
+				.FadeOutSeconds = segmentJson.value("fadeOutSeconds", -1.),
 			};
 			for (const auto& [name, path] : resolved)
 				segment.Sources.emplace(name, apply_segment_source{.Path = path});
@@ -1253,7 +1276,17 @@ namespace {
 		// segment assembly has no way to reach: the sample-accurate alignment around the
 		// loop point, which a preset's millisecond-rounded offset has lost by the time it
 		// is written down. So the assembler is kept for what only it can do.
-		const auto plain = segments.size() == 1 && segments.front().Sources.size() == 1;
+		//
+		// But only when the segment asks for nothing that path cannot honour. It reads the
+		// source and the offset and nothing else, so a lone segment stating a length, a
+		// start, or a fade was having that silently dropped: a window of 40s came out as the
+		// whole 49.29s recording, with no error. No entry in presets/ or presets-manual/
+		// states any of these on a single identity-mapped segment, so this only ever turns
+		// away the shapes that were being mis-built.
+		const auto& first = segments.front();
+		const auto shaped = first.Length > 0. || first.StartSeconds >= 0.
+			|| first.CrossfadeSeconds > 0. || first.FadeInSeconds >= 0. || first.FadeOutSeconds >= 0.;
+		const auto plain = segments.size() == 1 && first.Sources.size() == 1 && !shaped;
 		bool sequential = plain;
 		if (plain) {
 			for (size_t ch = 0; ch < segments.front().Channels.size(); ch++)
@@ -1726,10 +1759,16 @@ int cmd_apply(const std::vector<std::string>& args) {
 						std::cerr << "\n     ";
 						for (const auto& [name, source] : segment.Sources)
 							std::cerr << std::format(" {} @{:+.3f}s", u8(source.Path.filename()), source.Offset);
+						if (segment.StartSeconds >= 0.)
+							std::cerr << std::format(" at {:.3f}s", segment.StartSeconds);
 						if (segment.Length > 0.)
 							std::cerr << std::format(" for {:.3f}s", segment.Length);
 						if (segment.CrossfadeSeconds > 0.)
 							std::cerr << std::format(" fading in over {:.1f}s", segment.CrossfadeSeconds);
+						if (segment.FadeInSeconds >= 0.)
+							std::cerr << std::format(" fade in {:.3f}s", segment.FadeInSeconds);
+						if (segment.FadeOutSeconds >= 0.)
+							std::cerr << std::format(" fade out {:.3f}s", segment.FadeOutSeconds);
 					}
 					std::cerr << '\n';
 					continue;
