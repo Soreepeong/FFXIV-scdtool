@@ -65,6 +65,17 @@ namespace {
 		// Set instead of `Path` when the preset builds this source from a graph; `Path` is
 		// filled in with the rendered file before the build reads it.
 		std::shared_ptr<apply_source_graph> Graph;
+		// The reserved source name `"target"`: the game's own audio for this entry, rather
+		// than anything out of the OST pool. It resolves to no file here because the file
+		// does not exist until the build stages it, so the assembler substitutes it.
+		//
+		// What it is for is material the recording simply does not contain. A tail gap can be
+		// filled by re-entering the same recording, but a *head* gap cannot -- BGM_EX4_Raid_10
+		// and BGM_EX5_Ban_11 carry `adelay=5605` and `adelay=6665` because, as their comments
+		// say, the game's file starts before the recording does, and no amount of re-entry
+		// produces an intro the release does not have. The game's own opening is the only
+		// source for it.
+		bool IsTarget = false;
 		// Whether the preset named this offset or it is the implicit zero. The generator
 		// writes no offset at all when the match was already within 50ms, so an absent one
 		// carries that much slack; a stated one was fitted and only lost precision to JSON.
@@ -731,6 +742,9 @@ namespace {
 		// graph itself, so a source named by several segments is rendered once.
 		std::map<const apply_source_graph*, std::filesystem::path> rendered;
 		const auto fileFor = [&](const apply_segment_source& source) {
+			// The game's own entry, already staged for the loudness and onset checks.
+			if (source.IsTarget)
+				return templateAudio;
 			if (!source.Graph)
 				return source.Path;
 			const auto key = source.Graph.get();
@@ -1335,6 +1349,26 @@ namespace {
 			}
 		}
 
+		// `"target"` names the game's own audio. It is validated above like any other name
+		// but resolves to no file, so it is registered here with an empty path and swapped
+		// for the staged template at build time. Without this the name passed validation and
+		// then threw in the assembler -- "maps a channel from source \"target\", which it
+		// does not define" -- which is a promise the builder could not keep.
+		auto usesTarget = false;
+		if (hasSegments) {
+			for (const auto& segmentJson : *segmentsJson) {
+				for (const auto& key : {"sourceOffsets", "sourceFilters"})
+					if (const auto section = segmentJson.find(key); section != segmentJson.end() && section->is_object())
+						for (const auto& [name, _spec] : section->items())
+							usesTarget = usesTarget || name == "target";
+				if (const auto channels = segmentJson.find("channels"); channels != segmentJson.end() && channels->is_array())
+					for (const auto& channel : *channels)
+						usesTarget = usesTarget || channel.value("source", std::string("source")) == "target";
+			}
+		}
+		if (usesTarget)
+			resolved.emplace("target", std::filesystem::path{});
+
 		std::vector<apply_segment> segments;
 		if (!hasSegments) {
 			// One default span covering the whole of the single source it names. More than
@@ -1363,7 +1397,9 @@ namespace {
 			};
 			for (const auto& [name, path] : resolved)
 				segment.Sources.emplace(name, apply_segment_source{
-					.Path = path, .Graph = graphs.contains(name) ? graphs.at(name) : nullptr});
+					.Path = path,
+					.Graph = graphs.contains(name) ? graphs.at(name) : nullptr,
+					.IsTarget = name == "target"});
 			if (const auto offsets = segmentJson.find("sourceOffsets"); offsets != segmentJson.end() && offsets->is_object()) {
 				for (const auto& [name, spec] : offsets->items()) {
 					if (const auto source = segment.Sources.find(name); source != segment.Sources.end()) {
@@ -1407,7 +1443,9 @@ namespace {
 			|| first.CrossfadeSeconds > 0. || first.FadeInSeconds >= 0. || first.FadeOutSeconds >= 0.
 			// The fast path opens `Path`, which for a graph-built source is only its first
 			// input -- so it would build one recording where the preset asked for a mix.
-			|| std::ranges::any_of(first.Sources, [](const auto& kv) { return kv.second.Graph != nullptr; });
+			|| std::ranges::any_of(first.Sources, [](const auto& kv) {
+				return kv.second.Graph != nullptr || kv.second.IsTarget;
+			});
 		const auto plain = segments.size() == 1 && first.Sources.size() == 1 && !shaped;
 		bool sequential = plain;
 		if (plain) {
@@ -1950,9 +1988,16 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// checked for existence when the preset was resolved.
 			if (!job.Segments.empty()) {
 				for (const auto& segment : job.Segments)
-					for (const auto& [name, source] : segment.Sources)
+					for (const auto& [name, source] : segment.Sources) {
+						// `"target"` has no file of its own: it is the game's entry, which is
+						// staged a few lines below this check rather than found on disk. A
+						// graph-built source's Path is only its first input, and the graph
+						// resolved its own inputs already.
+						if (source.IsTarget || source.Graph)
+							continue;
 						if (!std::filesystem::exists(source.Path))
 							throw std::runtime_error(std::format("Source file not found: {}", u8(source.Path)));
+					}
 			} else if (job.Stems.empty()) {
 				if (!std::filesystem::exists(job.SourcePath))
 					throw std::runtime_error(std::format("Source file not found: {}", u8(job.SourcePath)));
@@ -2019,8 +2064,15 @@ int cmd_apply(const std::vector<std::string>& args) {
 				// 44.1 kHz one sharing the same file.
 				if (!job.Segments.empty()) {
 					for (const auto& segment : job.Segments)
-						for (const auto& [name, source] : segment.Sources)
+						for (const auto& [name, source] : segment.Sources) {
+							// `"target"` is the game's own entry, whose rate is `templateRate`
+							// and which has no file to probe yet. A graph-built source has no
+							// single file either -- its rate follows its inputs, and taking
+							// the first one's would be a guess.
+							if (source.IsTarget || source.Graph)
+								continue;
 							samplingRate = (std::max)(samplingRate, static_cast<size_t>(probe_sample_rate(ffprobePath, source.Path)));
+						}
 				} else if (job.Stems.empty()) {
 					samplingRate = (std::max)(samplingRate, static_cast<size_t>(probe_sample_rate(ffprobePath, job.SourcePath)));
 				} else {

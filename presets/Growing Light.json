@@ -4013,6 +4013,27 @@
     "path": "music/ex4/BGM_EX4_Raid_10.scd",
     "segments": [
      {
+      "sourceOffsets": {
+       "target": 0.0
+      },
+      "length": 7.1,
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "source": 1.495
+      },
+      "startSeconds": 7.1,
+      "crossfadeSeconds": 0.25,
       "channels": [
        {
         "source": "source",
@@ -4022,13 +4043,10 @@
         "source": "source",
         "channel": 1
        }
-      ],
-      "sourceFilters": {
-       "source": "adelay=5605:all=1"
-      }
+      ]
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.991. the game's file starts before this recording does, so the source is delayed rather than offset: source by 5.605s"
+    "# comment": "spectral similarity to the game's own file: 0.991. the game's file starts before this recording does, so the source is delayed rather than offset: source by 5.605s the game's file opens 7.10s before this recording has anything to play, which left that long silent -- an intro the release does not contain, so no offset into it produces one. The game's own audio fills it: a first segment from the reserved source \"target\" up to 7.10s, then the recording entered at 1.495s, crossfaded over 0.25s."
    }
   },
   {
