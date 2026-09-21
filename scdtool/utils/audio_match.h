@@ -105,8 +105,20 @@ std::vector<int16_t> decode_mono(
 	size_t rateHz,
 	double maxSeconds = 0.);
 
+// Float rather than int16, and not as a convenience: ffmpeg's `-ac 1` downmix scales
+// differently for integer output than for float. On BGM_EX4_Raid_10 the game file's peak
+// around 3.3s reads -3.56 dB decoded as f32le and -6.57 dB as s16le -- exactly 3.01 dB, a
+// constant factor, which propagated straight into the measured depth of every deep hole.
+// Every threshold and every score already written down came from the float path, so that is
+// the one to match.
+std::vector<float> decode_mono_float(
+	const std::filesystem::path& ffmpeg,
+	const std::filesystem::path& mediaFile,
+	size_t rateHz = AnalysisRateHz,
+	double maxSeconds = 0.);
+
 // Log-mel of already-decoded samples, so a caller holding them does not decode again.
-std::vector<float> logmel_from_samples(std::span<const int16_t> samples);
+std::vector<float> logmel_from_samples(std::span<const float> samples);
 
 // Mean per-frame cosine similarity between a span of `target` and `source` read from
 // `offsetSeconds`, i.e. target frame t is compared against source frame t - offset.

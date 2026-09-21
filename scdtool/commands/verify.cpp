@@ -4,6 +4,7 @@
 #include "utils/argactions.h"
 #include "utils/audio_match.h"
 #include "utils/misc.h"
+#include "utils/win32_process.h"
 #include "utils/substitute_codec.h"
 #include "utils/verify_audio.h"
 
@@ -81,8 +82,23 @@ namespace {
 		envelope_comparison Envelope;
 		std::vector<silence_run> Silence;
 		seam_result Seam;
+		spectrum_comparison Spectrum;
 		std::string Error;
 	};
+
+	// The sample rate of a decoded file, for picking the band both sides can carry.
+	size_t probe_rate(const std::filesystem::path& ffprobe, const std::filesystem::path& file) {
+		try {
+			const auto out = run_process_capture_stdout(ffprobe, {
+				L"-v", L"error", L"-select_streams", L"a:0",
+				L"-show_entries", L"stream=sample_rate", L"-of", L"csv=p=0",
+				file.wstring(),
+			});
+			return static_cast<size_t>(std::stoul(std::string(out.begin(), out.end())));
+		} catch (const std::exception&) {
+			return 44100;
+		}
+	}
 
 	double total_silence(const std::vector<silence_run>& runs) {
 		double acc = 0;
@@ -119,6 +135,8 @@ int cmd_verify(const std::vector<std::string>& args) {
 		parser.add_argument("--output").help("write the per-file table here; omit for stdout");
 		parser.add_argument("--format").default_value(std::string("csv")).help("csv (default) or json");
 		parser.add_argument("--ffmpeg").default_value(std::string("ffmpeg")).help("path to ffmpeg executable");
+		parser.add_argument("--ffprobe").default_value(std::string("ffprobe")).help("path to ffprobe executable, used to pick the shared sample rate for --spectrum");
+		parser.add_argument("--spectrum").default_value(false).implicit_value(true).help("also compare third-octave spectra to the lower of the two files' rates: tilt, worst band, bandwidth edge, and the worst band-and-time hole. Costs a second decode of both files, and is the only measurement here that sees above 8 kHz");
 		parser.add_argument("--entry-index").default_value(0u).scan<'u', uint32_t>().help("sound entry index to compare (default: 0)");
 		parser.add_argument("--worst").default_value(20u).scan<'u', uint32_t>().help("how many of the worst files to print (default: 20)");
 		parser.add_argument("--min-score").default_value(0.95).scan<'g', double>().help("call out files scoring below this");
@@ -138,6 +156,8 @@ int cmd_verify(const std::vector<std::string>& args) {
 		const auto worstCount = parser.get<uint32_t>("--worst");
 		const auto minScore = parser.get<double>("--min-score");
 		const auto seamThreshold = parser.get<double>("--seam-threshold");
+		const auto ffprobe = argactions::path(parser.get<std::string>("--ffprobe"));
+		const auto withSpectrum = parser.get<bool>("--spectrum");
 
 		std::vector<std::pair<std::filesystem::path, std::string>> pairs;
 		for (const auto& entry : std::filesystem::recursive_directory_iterator(builtDir)) {
@@ -175,8 +195,8 @@ int cmd_verify(const std::vector<std::string>& args) {
 					entryIndex, stem.wstring() + L"_a", builtAudio);
 				unwrap_entry(installation.get_file(target), entryIndex, stem.wstring() + L"_b", gameAudio);
 
-				const auto a = decode_mono_16k(ffmpeg, builtAudio);
-				const auto b = decode_mono_16k(ffmpeg, gameAudio);
+				const auto a = decode_mono_float(ffmpeg, builtAudio);
+				const auto b = decode_mono_float(ffmpeg, gameAudio);
 				r.BuiltSeconds = static_cast<double>(a.size()) / AnalysisRateHz;
 				r.GameSeconds = static_cast<double>(b.size()) / AnalysisRateHz;
 
@@ -206,9 +226,21 @@ int cmd_verify(const std::vector<std::string>& args) {
 				// until it reads as ordinary content -- so the loop points stay the sample
 				// indices the header states rather than being scaled into another grid.
 				if (builtLoop.EndSample > builtLoop.StartSample && builtLoop.Rate) {
-					const auto native = decode_mono(ffmpeg, builtAudio, builtLoop.Rate);
+					const auto native = decode_mono_float(ffmpeg, builtAudio, builtLoop.Rate);
 					r.Seam = loop_seam_ratio(native, builtLoop.StartSample, builtLoop.EndSample,
 						builtLoop.Rate);
+				}
+
+				// The spectrogram pane, at its own rate rather than the 16 kHz the other
+				// three share -- the whole point of it is the band above 8 kHz that nothing
+				// else here has ever been able to see. That means a second decode of both
+				// files, which is why it is opt-in.
+				if (withSpectrum) {
+					const auto rate = (std::min)({SpectrumMaxRateHz,
+						probe_rate(ffprobe, builtAudio), probe_rate(ffprobe, gameAudio)});
+					const auto wa = decode_mono_float(ffmpeg, builtAudio, rate);
+					const auto wb = decode_mono_float(ffmpeg, gameAudio, rate);
+					r.Spectrum = compare_spectra(wa, wb, rate);
 				}
 			} catch (const std::exception& e) {
 				r.Error = std::string(e.what()).substr(0, 90);
@@ -254,12 +286,21 @@ int cmd_verify(const std::vector<std::string>& args) {
 					}
 					if (r.Seam.Valid)
 						one["seamRatio"] = r.Seam.Ratio;
+					if (r.Spectrum.Valid)
+						one["spectrum"] = {{"tilt", r.Spectrum.TiltDbPerDecade},
+							{"worstBandDb", r.Spectrum.WorstBandDb}, {"worstBandHz", r.Spectrum.WorstBandHz},
+							{"edgeBuiltHz", r.Spectrum.EdgeBuiltHz}, {"edgeGameHz", r.Spectrum.EdgeGameHz},
+							{"patchDb", r.Spectrum.PatchDb}, {"patchHz", r.Spectrum.PatchHz},
+							{"patchAtSeconds", r.Spectrum.PatchAtSeconds}, {"hfDb", r.Spectrum.HfDb}};
 				}
 				out.push_back(std::move(one));
 			}
 			table = out.dump(1);
 		} else {
-			table = "target,weighted,plain,built_seconds,game_seconds,r_eye,dev,span,hole,hole_at,silence_seconds,seam_ratio,error\n";
+			table = "target,weighted,plain,built_seconds,game_seconds,r_eye,dev,span,hole,hole_at,silence_seconds,seam_ratio";
+			if (withSpectrum)
+				table += ",tilt_db_per_decade,worst_band_db,worst_band_hz,edge_built_hz,edge_game_hz,patch_db,patch_hz,hf_db";
+			table += ",error\n";
 			for (const auto& r : rows) {
 				table += std::format("{},{:.4f},{:.4f},{:.1f},{:.1f},", r.Target, r.Weighted, r.Plain,
 					r.BuiltSeconds, r.GameSeconds);
@@ -269,7 +310,18 @@ int cmd_verify(const std::vector<std::string>& args) {
 				else
 					table += ",,,,,";
 				table += std::format("{:.2f},", total_silence(r.Silence));
-				table += r.Seam.Valid ? std::format("{:.3f},", r.Seam.Ratio) : ",";
+				table += r.Seam.Valid ? std::format("{:.3f}", r.Seam.Ratio) : "";
+				if (withSpectrum) {
+					table += r.Spectrum.Valid
+						? std::format(",{:.2f},{:.1f},{:.0f},{:.0f},{:.0f},{:.1f},{:.0f},{:.2f}",
+							r.Spectrum.TiltDbPerDecade, r.Spectrum.WorstBandDb, r.Spectrum.WorstBandHz,
+							r.Spectrum.EdgeBuiltHz, r.Spectrum.EdgeGameHz, r.Spectrum.PatchDb,
+							r.Spectrum.PatchHz, r.Spectrum.HfDb)
+						// Eight empty fields, one per column above -- a comma short here shifts
+						// every later column left by one and the error text lands under hf_db.
+						: ",,,,,,,,";
+				}
+				table += ',';
 				table += r.Error;
 				table += '\n';
 			}
@@ -316,6 +368,27 @@ int cmd_verify(const std::vector<std::string>& args) {
 				clicky.push_back(r);
 		if (!clicky.empty())
 			std::cerr << std::format("{} loop seam(s) above {:.2f}", clicky.size(), seamThreshold) << '\n';
+
+		if (withSpectrum) {
+			// The top end is the band the 16 kHz score has never been able to see at all, so
+			// it gets its own line rather than only a column.
+			size_t duller = 0, brighter = 0;
+			const row* worstHf = nullptr;
+			for (const auto* r : ok) {
+				if (!r->Spectrum.Valid)
+					continue;
+				if (r->Spectrum.HfDb <= -6.)
+					duller++;
+				else if (r->Spectrum.HfDb >= 6.)
+					brighter++;
+				if (!worstHf || r->Spectrum.HfDb < worstHf->Spectrum.HfDb)
+					worstHf = r;
+			}
+			std::cerr << std::format("above 5 kHz: {} file(s) at least 6 dB duller, {} at least 6 dB brighter",
+				duller, brighter) << '\n';
+			if (worstHf)
+				std::cerr << std::format("   dullest {} at {:.1f} dB", worstHf->Target, worstHf->Spectrum.HfDb) << '\n';
+		}
 
 		if (worstCount && !sorted.empty()) {
 			std::cerr << '\n' << std::format("worst {}:", (std::min<size_t>)(worstCount, sorted.size())) << '\n';

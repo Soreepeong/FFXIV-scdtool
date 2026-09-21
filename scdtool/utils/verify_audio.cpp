@@ -2,24 +2,13 @@
 #include "verify_audio.h"
 
 #include "audio_match.h"
+#include "stats.h"
 
 #include <algorithm>
 #include <cmath>
 #include <numeric>
 
 namespace {
-	double median_of(std::vector<double>& v) {
-		if (v.empty())
-			return 0.;
-		const auto mid = v.size() / 2;
-		std::ranges::nth_element(v, v.begin() + mid);
-		const auto hi = v[mid];
-		if (v.size() % 2)
-			return hi;
-		std::ranges::nth_element(v, v.begin() + (mid - 1));
-		return (hi + v[mid - 1]) / 2.;
-	}
-
 	struct pearson_result {
 		double R = 0.;
 		double Dev = 0.;
@@ -120,24 +109,21 @@ namespace {
 	}
 }
 
-std::vector<double> peak_envelope_db(std::span<const int16_t> samples, size_t bucketSamples) {
+std::vector<double> peak_envelope_db(std::span<const float> samples, size_t bucketSamples) {
 	if (!bucketSamples)
 		return {};
 	const auto n = samples.size() / bucketSamples;
 	std::vector<double> out(n);
 	for (size_t i = 0; i < n; ++i) {
-		int32_t peak = 0;
+		double peak = 0;
 		for (size_t j = 0; j < bucketSamples; ++j)
-			peak = (std::max)(peak, std::abs(static_cast<int32_t>(samples[i * bucketSamples + j])));
-		// Scaled the way the float decode the Python used is: full scale is 1.0, so the
-		// floor and the dB numbers mean the same thing in both.
-		const auto v = static_cast<double>(peak) / 32768.;
-		out[i] = (std::max)(20.0 * std::log10((std::max)(v, 1e-12)), EnvelopeFloorDb);
+			peak = (std::max)(peak, std::abs(static_cast<double>(samples[i * bucketSamples + j])));
+		out[i] = (std::max)(20.0 * std::log10((std::max)(peak, 1e-12)), EnvelopeFloorDb);
 	}
 	return out;
 }
 
-build_score_result build_score(std::span<const int16_t> built, std::span<const int16_t> game) {
+build_score_result build_score(std::span<const float> built, std::span<const float> game) {
 	const auto n = (std::min)(built.size(), game.size());
 	if (n < AnalysisRateHz * 3)
 		return {};
@@ -160,7 +146,7 @@ build_score_result build_score(std::span<const int16_t> built, std::span<const i
 
 		double sq = 0;
 		for (size_t i = 0; i < Fft; ++i) {
-			const auto v = static_cast<double>(game[f * Hop + i]) / 32768.;
+			const auto v = static_cast<double>(game[f * Hop + i]);
 			sq += v * v;
 		}
 		const auto w = std::sqrt(sq / static_cast<double>(Fft));
@@ -242,7 +228,7 @@ std::vector<silence_run> silence_gaps(
 }
 
 seam_result loop_seam_ratio(
-	std::span<const int16_t> samples, size_t loopStartSample, size_t loopEndSample, size_t rate) {
+	std::span<const float> samples, size_t loopStartSample, size_t loopEndSample, size_t rate) {
 
 	if (!loopEndSample || loopEndSample <= loopStartSample || !rate)
 		return {};

@@ -29,7 +29,7 @@ constexpr double EnvelopeBucketSeconds = 0.020;
 constexpr size_t EnvelopeCoarseFactor = 10;      // 200 ms, a seekbar column
 constexpr double EnvelopeFloorDb = -70.0;
 
-std::vector<double> peak_envelope_db(std::span<const int16_t> samples, size_t bucketSamples);
+std::vector<double> peak_envelope_db(std::span<const float> samples, size_t bucketSamples);
 
 // The level-weighted log-mel cosine, and the plain mean for comparison.
 //
@@ -43,7 +43,7 @@ struct build_score_result {
 	bool Valid = false;
 };
 
-build_score_result build_score(std::span<const int16_t> built, std::span<const int16_t> game);
+build_score_result build_score(std::span<const float> built, std::span<const float> game);
 
 // (r_eye, r_fine, dev, span, hole, holeAt, audible) between two dB envelopes.
 //
@@ -99,4 +99,43 @@ struct seam_result {
 };
 
 seam_result loop_seam_ratio(
-	std::span<const int16_t> samples, size_t loopStartSample, size_t loopEndSample, size_t rate);
+	std::span<const float> samples, size_t loopStartSample, size_t loopEndSample, size_t rate);
+
+// ---------------------------------------------------------------------------------------
+// The Audacity spectrogram pane, as the envelope above is its waveform pane.
+//
+// Not already covered by the build score, for three reasons. **Bandwidth**: the log-mel runs
+// at 16 kHz, so nothing above 8 kHz has ever been measured here -- a codec lowpass, a
+// resample's rolloff, cymbals and air are all outside it, and a hard line across the top of a
+// spectrogram is the first thing an eye catches. **Level**: the cosine is computed on
+// mean-centred unit vectors, which is what makes it immune to gain and also what makes it
+// blind to spectral tilt. **Locality**: it is a whole-file average, so a band that drops out
+// for a few seconds moves it by a fraction of a percent -- the same blind spot the envelope
+// work hit, one axis over.
+constexpr size_t SpectrumMaxRateHz = 48000;   // past this the game's own files carry nothing
+constexpr size_t SpectrumFft = 2048;
+constexpr size_t SpectrumHop = 1024;
+constexpr double SpectrumFloorDb = -120.0;
+constexpr double SpectrumEdgeDropDb = 60.0;   // how far below the peak counts as "gone dark"
+constexpr double SpectrumAudibleDb = 60.0;    // quieter than this below peak is floor, not content
+constexpr double SpectrumHfFromHz = 5000.0;   // where "the top end" starts
+constexpr double SpectrumPatchCapDb = 60.0;   // deeper is the silence the census already lists
+
+struct spectrum_comparison {
+	double TiltDbPerDecade = 0.;   // positive: the build is brighter than the game's file
+	double WorstBandDb = 0.;       // largest difference in any third-octave band
+	double WorstBandHz = 0.;
+	double EdgeBuiltHz = 0.;       // where each spectrogram goes dark at the top
+	double EdgeGameHz = 0.;
+	double PatchDb = 0.;           // worst sustained band-and-time hole
+	double PatchHz = 0.;
+	double PatchAtSeconds = 0.;
+	double HfDb = 0.;              // mean band difference above SpectrumHfFromHz
+	bool Valid = false;
+};
+
+// `built` and `game` must already be decoded mono at `rateHz`, the lower of the two files'
+// rates capped at SpectrumMaxRateHz: a 96 kHz build against a 44.1 kHz game file has nothing
+// to compare above 22 kHz, and resampling the game's file up would invent it.
+spectrum_comparison compare_spectra(
+	std::span<const float> built, std::span<const float> game, size_t rateHz);

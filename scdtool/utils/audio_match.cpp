@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "audio_match.h"
 
+#include "fft.h"
+
 #include "win32_process.h"
 
 #include <complex>
@@ -8,7 +10,7 @@
 #include <utility>
 
 namespace {
-	using cplx = std::complex<double>;
+	using cplx = fft_cplx;
 
 	size_t next_pow2(size_t n) {
 		size_t v = 1;
@@ -17,38 +19,9 @@ namespace {
 		return v;
 	}
 
-	// Iterative in-place radix-2 Cooley-Tukey FFT. a.size() must be a power of two.
-	void fft(std::vector<cplx>& a, bool invert) {
-		const auto n = a.size();
-		for (size_t i = 1, j = 0; i < n; ++i) {
-			size_t bit = n >> 1;
-			for (; j & bit; bit >>= 1)
-				j ^= bit;
-			j ^= bit;
-			if (i < j)
-				std::swap(a[i], a[j]);
-		}
-
-		for (size_t len = 2; len <= n; len <<= 1) {
-			const double ang = 2 * std::numbers::pi / static_cast<double>(len) * (invert ? 1 : -1);
-			const cplx wlen(std::cos(ang), std::sin(ang));
-			for (size_t i = 0; i < n; i += len) {
-				cplx w(1);
-				for (size_t j = 0; j < len / 2; ++j) {
-					const auto u = a[i + j];
-					const auto v = a[i + j + len / 2] * w;
-					a[i + j] = u + v;
-					a[i + j + len / 2] = u - v;
-					w *= wlen;
-				}
-			}
-		}
-
-		if (invert) {
-			for (auto& x : a)
-				x /= static_cast<double>(n);
-		}
-	}
+	// The FFT itself lives in fft.h: the third-octave spectrogram comparison needs the same
+	// transform at a different length, and two copies of one is two places for a sign or a
+	// normalisation to drift apart.
 
 	constexpr size_t LogMelFft = 1024;
 	constexpr size_t LogMelHop = 160;
@@ -326,14 +299,36 @@ std::vector<int16_t> decode_mono(
 	return {decoded.begin(), decoded.end()};
 }
 
+std::vector<float> decode_mono_float(
+	const std::filesystem::path& ffmpeg,
+	const std::filesystem::path& mediaFile,
+	size_t rateHz,
+	double maxSeconds) {
+
+	std::vector<std::wstring> args{
+		L"-v", L"error",
+		L"-i", mediaFile.wstring(),
+	};
+	if (maxSeconds > 0) {
+		args.emplace_back(L"-t");
+		args.emplace_back(xivres::util::unicode::convert<std::wstring>(std::format("{:.3f}", maxSeconds)));
+	}
+	args.insert(args.end(), {L"-map", L"0:a:0", L"-ac", L"1", L"-ar", std::to_wstring(rateHz),
+		L"-f", L"f32le", L"-"});
+
+	const auto pcmBytes = run_process_capture_stdout(ffmpeg, args);
+	const auto decoded = xivres::util::span_cast<const float>(pcmBytes);
+	return {decoded.begin(), decoded.end()};
+}
+
 std::vector<float> decode_logmel(
 	const std::filesystem::path& ffmpeg,
 	const std::filesystem::path& mediaFile,
 	double maxSeconds) {
-	return logmel_from_samples(decode_mono_16k(ffmpeg, mediaFile, maxSeconds));
+	return logmel_from_samples(decode_mono_float(ffmpeg, mediaFile, AnalysisRateHz, maxSeconds));
 }
 
-std::vector<float> logmel_from_samples(std::span<const int16_t> samples) {
+std::vector<float> logmel_from_samples(std::span<const float> samples) {
 	if (samples.size() < LogMelFft)
 		return {};
 
@@ -350,7 +345,7 @@ std::vector<float> logmel_from_samples(std::span<const int16_t> samples) {
 		// mean-centred below, so a constant scale would cancel anyway -- but the epsilon
 		// inside the logarithm would not, and it is what keeps silence well-behaved.
 		for (size_t i = 0; i < LogMelFft; ++i)
-			buf[i] = cplx(static_cast<double>(samples[f * LogMelHop + i]) / 32768. * win[i], 0.);
+			buf[i] = cplx(static_cast<double>(samples[f * LogMelHop + i]) * win[i], 0.);
 		fft(buf, false);
 		for (size_t k = 0; k < LogMelBins; ++k)
 			mag[k] = std::abs(buf[k]);
