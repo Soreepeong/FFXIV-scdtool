@@ -46,10 +46,12 @@ namespace {
 			ext = substitute_codec::payload_extension(payload);
 			const auto inspected = substitute_codec::inspect(item);
 			info.TotalSamples = inspected.TotalFrames;
-			if (payload == substitute_codec::payload::Wave && inspected.Channels) {
-				const auto frameBytes = inspected.Channels * sizeof(int16_t);
-				info.StartSample = static_cast<size_t>(item.Header->LoopStartOffset) / frameBytes;
-				info.EndSample = static_cast<size_t>(item.Header->LoopEndOffset) / frameBytes;
+			// Without this the seam check silently never runs -- it is gated on
+			// EndSample > StartSample -- and, worse, silence is counted over the whole file
+			// instead of to the loop end, which read 124.2s against a true 123.0s.
+			if (const auto loop = substitute_codec::loop_in_samples(item)) {
+				info.StartSample = static_cast<size_t>(loop->Start);
+				info.EndSample = static_cast<size_t>(loop->End);
 			}
 		} else if (item.Header->Format == xivres::sound::sound_entry_format::Ogg) {
 			const auto decoded = item.get_ogg_decoded();

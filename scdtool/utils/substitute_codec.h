@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -82,6 +83,27 @@ namespace substitute_codec {
 	};
 
 	payload_info inspect(const xivres::sound::reader::sound_item& item);
+
+	// Where the loop sits, in sample frames rather than in the byte offsets the entry header
+	// states.
+	//
+	// A byte offset is a sample index again only where the payload is linear. For PCM that is
+	// a division by the frame size. For FLAC it is not -- but the frames this writes are
+	// variable-blocksize ones, so each frame header carries the absolute index of its own
+	// first sample, and the encoder splits the stream so that a frame begins exactly at the
+	// loop point. The number is therefore written down; it just has to be read out of the
+	// frame rather than computed from the offset.
+	//
+	// Zeroes where the entry does not loop. `nullopt` where the payload is Vorbis, which has
+	// an Ogg decoder to answer this properly, or where the bytes at the offset are not the
+	// start of a frame this could have written -- an unreadable loop is reported as unknown
+	// rather than guessed at from the seek table, whose anchors are only every 1024 frames.
+	struct loop_samples {
+		uint64_t Start = 0;
+		uint64_t End = 0;
+	};
+
+	std::optional<loop_samples> loop_in_samples(const xivres::sound::reader::sound_item& item);
 
 	// Header region followed by data, verbatim. Only for version-1 entries: the game's own
 	// versions need the de-obfuscation that xivres's get_ogg_file() does, and this does none.

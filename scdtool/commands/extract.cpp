@@ -64,7 +64,10 @@ int cmd_extract(const std::vector<std::string>& args) {
 			auto out = argactions::path(*outputPath);
 			if (out.extension().empty())
 				out.replace_extension(L".scd");
-			std::filesystem::create_directories(out.parent_path());
+			// A bare filename has no parent path, and create_directories("") is an error rather
+			// than a no-op: `--output x` failed with "cannot find the path specified".
+			if (out.has_parent_path())
+				std::filesystem::create_directories(out.parent_path());
 			std::vector<uint8_t> bytes(static_cast<size_t>(stream->size()));
 			[[maybe_unused]] const auto read = stream->read(0, bytes.data(), static_cast<std::streamsize>(bytes.size()));
 			std::ofstream f(out, std::ios::binary);
@@ -109,12 +112,12 @@ int cmd_extract(const std::vector<std::string>& args) {
 				res["totalSamples"] = payload.TotalFrames;
 				res["durationSeconds"] = static_cast<double>(payload.TotalFrames)
 					/ static_cast<double>(payload.SamplingRate ? payload.SamplingRate : 1);
-				// The entry's loop fields are byte offsets into the payload, which is a sample
-				// index again only where the payload is linear.
-				if (payload.Kind == substitute_codec::payload::Wave && payload.Channels) {
-					const auto frameBytes = payload.Channels * sizeof(int16_t);
-					res["loopStartSample"] = static_cast<size_t>(item.Header->LoopStartOffset) / frameBytes;
-					res["loopEndSample"] = static_cast<size_t>(item.Header->LoopEndOffset) / frameBytes;
+				// The entry's loop fields are byte offsets into the payload. Turning those back
+				// into sample indices is the payload's own business -- a division for PCM, a
+				// frame header read for FLAC -- and is absent only when neither can answer.
+				if (const auto loop = substitute_codec::loop_in_samples(item)) {
+					res["loopStartSample"] = loop->Start;
+					res["loopEndSample"] = loop->End;
 				}
 			} else if (item.Header->Format == xivres::sound::sound_entry_format::Ogg) {
 				const auto info = item.get_ogg_decoded();
@@ -154,7 +157,8 @@ int cmd_extract(const std::vector<std::string>& args) {
 		auto out = argactions::path(*outputPath);
 		if (out.extension().empty())
 			out.replace_extension(ext);
-		std::filesystem::create_directories(out.parent_path());
+		if (out.has_parent_path())
+			std::filesystem::create_directories(out.parent_path());
 		std::ofstream f(out, std::ios::binary);
 		if (!f)
 			throw std::runtime_error(std::format("Could not create {}", u8(out)));

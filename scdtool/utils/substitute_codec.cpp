@@ -661,6 +661,89 @@ substitute_codec::payload_info substitute_codec::inspect(const xivres::sound::re
 	return res;
 }
 
+namespace {
+
+	// FLAC codes the frame's sample (or frame) number the way UTF-8 codes a code point, with
+	// one difference that matters here: it runs to 36 bits rather than Unicode's 21, so a
+	// lead byte of 0xFE and six continuation bytes is legal where UTF-8 stops at 0xFD. A
+	// 36-bit sample index is about 100 hours at 96 kHz, so the widths above four bytes are
+	// unreachable in practice and are handled only because the format defines them.
+	std::optional<uint64_t> read_coded_number(std::span<const uint8_t> at) {
+		if (at.empty())
+			return std::nullopt;
+		const auto lead = at[0];
+		size_t extra;
+		uint64_t value;
+		if (lead < 0x80) { extra = 0; value = lead; }
+		else if ((lead & 0xE0) == 0xC0) { extra = 1; value = lead & 0x1Fu; }
+		else if ((lead & 0xF0) == 0xE0) { extra = 2; value = lead & 0x0Fu; }
+		else if ((lead & 0xF8) == 0xF0) { extra = 3; value = lead & 0x07u; }
+		else if ((lead & 0xFC) == 0xF8) { extra = 4; value = lead & 0x03u; }
+		else if ((lead & 0xFE) == 0xFC) { extra = 5; value = lead & 0x01u; }
+		else if (lead == 0xFE) { extra = 6; value = 0; }
+		else return std::nullopt;      // 0xFF is a continuation of nothing
+		if (at.size() <= extra)
+			return std::nullopt;
+		for (size_t i = 1; i <= extra; i++) {
+			if ((at[i] & 0xC0) != 0x80)
+				return std::nullopt;
+			value = (value << 6) | (at[i] & 0x3Fu);
+		}
+		return value;
+	}
+
+	// The absolute index of the first sample of the frame beginning at this byte.
+	//
+	// Only a variable-blocksize frame is accepted. The blocking strategy is the low bit of the
+	// second sync byte, and it decides what the coded number *means*: FFF9 states a sample
+	// index, FFF8 states a frame number, and nothing downstream distinguishes them. Reading an
+	// FFF8 frame here would return a number about a thousand times too small and look
+	// plausible, so the sync is checked exactly rather than masked.
+	std::optional<uint64_t> flac_frame_sample(std::span<const uint8_t> data, size_t offset) {
+		if (offset + 5 > data.size())
+			return std::nullopt;
+		if (data[offset] != 0xFF || data[offset + 1] != 0xF9)
+			return std::nullopt;
+		return read_coded_number(data.subspan(offset + 4));
+	}
+
+}
+
+std::optional<substitute_codec::loop_samples> substitute_codec::loop_in_samples(
+	const xivres::sound::reader::sound_item& item) {
+
+	const auto kind = payload_of(item);
+	if (kind == payload::Vorbis)
+		return std::nullopt;
+
+	const auto loopStart = static_cast<size_t>(item.Header->LoopStartOffset);
+	const auto loopEnd = static_cast<size_t>(item.Header->LoopEndOffset);
+	if (!loopEnd)
+		return loop_samples{};      // 0/0: the entry states no loop
+
+	const auto inspected = inspect(item);
+	if (kind == payload::Wave) {
+		const auto frameBytes = inspected.Channels * sizeof(int16_t);
+		if (!frameBytes)
+			return std::nullopt;
+		return loop_samples{loopStart / frameBytes, loopEnd / frameBytes};
+	}
+
+	const auto start = flac_frame_sample(item.Data, loopStart);
+	if (!start)
+		return std::nullopt;
+	// The end offset is one past the last frame -- `make_flac_entry` truncates the audio at
+	// the loop end, as the Vorbis path does -- so there is no frame header there to read and
+	// the answer is the stream's own length. Anything short of that is a real frame boundary
+	// and is read like the start.
+	if (loopEnd >= item.Data.size())
+		return loop_samples{*start, inspected.TotalFrames};
+	const auto end = flac_frame_sample(item.Data, loopEnd);
+	if (!end)
+		return std::nullopt;
+	return loop_samples{*start, *end};
+}
+
 std::vector<uint8_t> substitute_codec::payload_file(const xivres::sound::reader::sound_item& item) {
 	const auto* const info = codec_info(item);
 	if (!info || info->Version != VersionNoObfuscation)
