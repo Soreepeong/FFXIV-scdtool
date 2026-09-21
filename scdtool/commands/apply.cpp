@@ -7,6 +7,7 @@
 #include "utils/lossless_vorbis.h"
 #include "utils/misc.h"
 #include "utils/substitute_codec.h"
+#include "utils/verify_audio.h"
 #include "utils/win32_process.h"
 
 #include <algorithm>
@@ -1490,6 +1491,90 @@ namespace {
 	// entry is only ever heard up to its loop end -- the game cuts back from there -- so the
 	// audio stops there too, which is what the libvorbis path's block loop does and what
 	// --verify measures the written length against.
+	// Make the loop close on itself.
+	//
+	// The game's own file loops seamlessly because it was authored to: the sample before its
+	// loop end continues into the sample at its loop start. A replacement inherits the two
+	// loop *points* and not that property -- it is a different master placed at the same two
+	// instants, and where the loop returns mid-phrase at full level the join opens up.
+	// Measured against the game's own files across 1658 looping targets, 245 of ours click
+	// where theirs does not, and those are the ones whose two ends sit at the same level
+	// (1.4 dB apart, against 9.6 dB for the ones that read clean) -- that is, the ones where
+	// there is loud music on both sides of the join and phase is the whole story.
+	//
+	// The standard loop crossfade fixes it, and exactly rather than approximately: over the
+	// last n frames the output fades from x(t) to x(t - period), so the final frame is
+	// x(loopStart - 1), which continues into x(loopStart) because they are adjacent samples of
+	// one recording. The material it blends in is a second pass of the same music, so where
+	// the loop really is seamless the blend changes nothing audible.
+	//
+	// Only when the seam is actually bad, because the blend is not free: it doubles the last
+	// few milliseconds of the loop, and on the 903 targets whose join is already clean that
+	// would be damage in exchange for nothing.
+	struct seam_fix {
+		double Before = 0.;
+		double After = 0.;
+		size_t Frames = 0;
+		bool Applied = false;
+	};
+
+	seam_fix close_loop_seam(std::vector<float>& floats, size_t channels, size_t samplingRate,
+		size_t loopStart, size_t loopEnd, double threshold, double maxSeconds) {
+
+		seam_fix res;
+		if (!channels || !samplingRate || loopEnd <= loopStart || maxSeconds <= 0.)
+			return res;
+		const auto frames = floats.size() / channels;
+		if (loopEnd > frames)
+			return res;
+
+		// The metric judges one signal, so the channels are summed the way it expects.
+		std::vector<float> mono(frames);
+		for (size_t i = 0; i < frames; i++) {
+			auto sum = 0.f;
+			for (size_t c = 0; c < channels; c++)
+				sum += floats[i * channels + c];
+			mono[i] = sum / static_cast<float>(channels);
+		}
+
+		const auto before = loop_seam_ratio(mono, loopStart, loopEnd, samplingRate);
+		if (!before.Valid)
+			return res;
+		res.Before = before.Ratio;
+		if (before.Ratio <= threshold)
+			return res;
+
+		// The blend reads a whole period earlier, so it cannot reach further back than the
+		// loop start, and a quarter of the loop is as much of it as is reasonable to double.
+		const auto period = loopEnd - loopStart;
+		auto n = static_cast<size_t>(maxSeconds * static_cast<double>(samplingRate));
+		n = (std::min)({n, loopStart, period / 4});
+		if (n < 8)
+			return res;
+
+		for (size_t i = 0; i < n; i++) {
+			// Linear rather than equal-power: the two sides are the same music one period
+			// apart and therefore correlated, and an equal-power curve would bulge wherever
+			// they agree. The weight reaches exactly 1 on the last frame, which is what makes
+			// the final sample x(loopStart - 1) rather than nearly it.
+			const auto w = static_cast<float>(i + 1) / static_cast<float>(n);
+			const auto at = loopEnd - n + i;
+			for (size_t c = 0; c < channels; c++)
+				floats[at * channels + c] = floats[at * channels + c] * (1.f - w)
+					+ floats[(at - period) * channels + c] * w;
+			auto sum = 0.f;
+			for (size_t c = 0; c < channels; c++)
+				sum += floats[at * channels + c];
+			mono[at] = sum / static_cast<float>(channels);
+		}
+
+		const auto after = loop_seam_ratio(mono, loopStart, loopEnd, samplingRate);
+		res.After = after.Valid ? after.Ratio : res.Before;
+		res.Frames = n;
+		res.Applied = true;
+		return res;
+	}
+
 	std::vector<int16_t> quantise_pcm16(const std::vector<float>& floats, size_t channels, size_t loopEndBlockIndex) {
 		auto frames = channels ? floats.size() / channels : 0;
 		if (loopEndBlockIndex && loopEndBlockIndex < frames)
@@ -1684,6 +1769,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 		parser.add_argument("--loudness-match").default_value(true).implicit_value(true).help("gain-match each replacement to the loudness of the loop region of the file it replaces; --no-loudness-match disables");
 		parser.add_argument("--no-loudness-match").default_value(false).implicit_value(true).help("disable --loudness-match");
 		parser.add_argument("--max-gain").default_value(12.0).scan<'g', double>().help("clamp on loudness matching gain, in dB");
+		parser.add_argument("--loop-crossfade").default_value(0.030).scan<'g', double>().help("blend this many seconds of the loop's tail with the same music one loop-period earlier, so the loop point joins cleanly; 0 disables");
+		parser.add_argument("--loop-seam-threshold").default_value(1.0).scan<'g', double>().help("only blend when the loop seam measures above this -- the jump at the loop point against the motion either side of it, where about 1 is where it starts to click");
 		parser.add_argument("--onset-match").default_value(true).implicit_value(true).help("reproduce a fade-in or held silence the game's own file has at its start but the OST source does not; --no-onset-match disables");
 		parser.add_argument("--no-onset-match").default_value(false).implicit_value(true).help("disable --onset-match");
 		parser.add_argument("--auto-offset").default_value(true).implicit_value(true).help("re-derive each match's source offset against the game's own file instead of trusting the recorded one, judged on the pre-loop intro; --no-auto-offset uses the recorded offset verbatim");
@@ -1734,6 +1821,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 		const auto autoOffset = parser.get<bool>("--auto-offset") && !parser.get<bool>("--no-auto-offset");
 		const auto emitOriginal = parser.get<bool>("--emit-original");
 		const auto maxGainDb = parser.get<double>("--max-gain");
+		const auto loopCrossfadeSeconds = parser.get<double>("--loop-crossfade");
+		const auto loopSeamThreshold = parser.get<double>("--loop-seam-threshold");
 
 		const xivres::installation installation(argactions::installation_root(gameSpec));
 
@@ -2317,6 +2406,12 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// stereo and quad orders are the decoder's), which is why this never surfaced
 			// while `apply` refused anything above stereo.
 			//
+			// Before the channel permutation below and before quantisation, so every codec
+			// gets the same audio and the blend runs in the channel order everything else
+			// above works in.
+			const auto seam = close_loop_seam(floats, channels, samplingRate,
+				newLoopStart, newLoopEnd, loopSeamThreshold, loopCrossfadeSeconds);
+
 			// Only for a Vorbis payload. WAV and FLAC both order their channels the way the
 			// decoder hands them back -- FL, FR, FC, LFE, BL, BR -- which is the order
 			// everything above already works in, so permuting for them would be the bug this
@@ -2543,7 +2638,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 							built += (built.empty() ? "" : "+") + file;
 					}
 				}
-				std::cerr << std::format("  {} <- {} (score {:.3f}, offset {:+.3f}s{}{}, trim {} pad {} samples, loop {}-{}, gain {:+.1f} dB{}{})",
+				std::cerr << std::format("  {} <- {} (score {:.3f}, offset {:+.3f}s{}{}, trim {} pad {} samples, loop {}-{}, gain {:+.1f} dB{}{}{})",
 					job.TargetPath, job.Segments.empty() ? u8(job.SourcePath) : built, job.Score, effectiveOffset,
 					deduced.Deduced && std::abs(effectiveOffset - job.Offset) > 0.05
 						? std::format(" [deduced, was {:+.3f}s, intro {:.3f} over {} candidates]",
@@ -2556,7 +2651,11 @@ int cmd_apply(const std::vector<std::string>& args) {
 					trimmedAway, paddingAdded,
 					newLoopStart, newLoopEnd, gainDb,
 					gainLimited ? std::format(", peak-limited from {:+.1f} dB", requestedGainDb) : "",
-					onsetSeconds > 0. ? std::format(", onset corrected {:.1f} dB over {:.2f}s", onsetDb, onsetSeconds) : "")
+					onsetSeconds > 0. ? std::format(", onset corrected {:.1f} dB over {:.2f}s", onsetDb, onsetSeconds) : "",
+					seam.Applied
+						? std::format(", loop seam {:.2f} -> {:.2f} over {:.0f}ms", seam.Before, seam.After,
+							1000. * static_cast<double>(seam.Frames) / static_cast<double>(samplingRate))
+						: seam.Before > 0. ? std::format(", loop seam {:.2f}", seam.Before) : "")
 					// What the encode itself cost, for the formats that have something to say
 					// about it -- the libvorbis path's quality number is already in the command
 					// line, but how big a lossless or FLAC entry came out is not.
