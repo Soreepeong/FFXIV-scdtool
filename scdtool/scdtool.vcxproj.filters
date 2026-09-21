@@ -12,6 +12,7 @@
     <ClCompile Include="utils\audio_match.cpp" />
     <ClCompile Include="utils\describe_path.cpp" />
     <ClCompile Include="utils\mpls.cpp" />
+    <ClCompile Include="utils\filter_graph.cpp" />
     <ClCompile Include="utils\substitute_codec.cpp" />
     <ClCompile Include="utils\win32_process.cpp" />
   </ItemGroup>
@@ -27,6 +28,7 @@
     <ClInclude Include="utils\describe_path.h" />
     <ClInclude Include="utils\misc.h" />
     <ClInclude Include="utils\mpls.h" />
+    <ClInclude Include="utils\filter_graph.h" />
     <ClInclude Include="utils\substitute_codec.h" />
     <ClInclude Include="utils\win32_process.h" />
   </ItemGroup>

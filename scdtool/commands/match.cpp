@@ -431,6 +431,17 @@ int cmd_match(const std::vector<std::string>& args) {
 		// are the correct match, and a floor of 0.75 was quietly discarding those.
 		parser.add_argument("--min-score").default_value(0.5).scan<'g', double>().help("minimum correlation score [-1..1] to accept a match automatically");
 		parser.add_argument("--min-margin").default_value(0.05).scan<'g', double>().help("minimum score gap over the best genuinely different candidate to accept a match unambiguously");
+		// The envelope ranks; log-mel decides. An envelope is one number per 5 ms and carries
+		// no timbre, so on a short cue it finds a plausible alignment almost anywhere: one run
+		// against the Monster Hunter World albums returned 13 "matched" targets of which 12
+		// score between -0.15 and 0.41 spectrally. In the other direction it loses real
+		// matches -- BGM_EX5_System_Title's correct source beat the runner-up by 0.0155 on
+		// envelope, under the 0.05 required, and by 0.29 on log-mel.
+		parser.add_argument("--rerank").default_value(true).implicit_value(true).help("rescore the top candidates on log-mel at the alignments the envelope found, and decide match/ambiguous on that; --no-rerank decides on envelope correlation alone");
+		parser.add_argument("--no-rerank").default_value(false).implicit_value(true).help("disable --rerank");
+		parser.add_argument("--rerank-min-score").default_value(0.75).scan<'g', double>().help("minimum log-mel similarity to accept a reranked match");
+		parser.add_argument("--rerank-min-margin").default_value(0.10).scan<'g', double>().help("minimum log-mel gap over the best genuinely different candidate");
+		parser.add_argument("--rerank-depth").default_value(5u).scan<'u', uint32_t>().help("how many of each target's best envelope candidates to rescore");
 		parser.add_argument("--duplicate-threshold").default_value(0.95).scan<'g', double>().help("candidates correlating at least this much with the winner are the same recording on another album, and are skipped when measuring the margin");
 		parser.add_argument("--segment-min-score").default_value(0.75).scan<'g', double>().help("report the distinct non-overlapping regions of the target that score at least this well, which decomposes a medley into its component tracks; 0 disables");
 		parser.add_argument("--max-duration-diff").default_value(0.0).scan<'g', double>().help("skip candidates whose length differs from the target by more than this many seconds; 0 (default) disables the filter so that long medleys can still match their component tracks");
@@ -476,6 +487,10 @@ int cmd_match(const std::vector<std::string>& args) {
 		const auto ffprobePath = argactions::path(parser.get<std::string>("--ffprobe"));
 		const auto minScore = parser.get<double>("--min-score");
 		const auto minMargin = parser.get<double>("--min-margin");
+		const auto rerank = parser.get<bool>("--rerank") && !parser.get<bool>("--no-rerank");
+		const auto rerankMinScore = parser.get<double>("--rerank-min-score");
+		const auto rerankMinMargin = parser.get<double>("--rerank-min-margin");
+		const auto rerankDepth = parser.get<uint32_t>("--rerank-depth");
 		const auto maxDurationDiff = parser.get<double>("--max-duration-diff");
 		const auto maxOffset = parser.get<double>("--max-offset");
 		const auto minOverlapSeconds = parser.get<double>("--min-overlap");
@@ -713,6 +728,10 @@ int cmd_match(const std::vector<std::string>& args) {
 			double OffsetSeconds;
 			double OverlapSeconds;
 			size_t CandidateIndex;
+			// Log-mel similarity at this candidate's own offset, filled in by the rerank in
+			// phase 3. -2 means "not measured": either the rerank is off, this candidate sat
+			// below --rerank-depth, or its overlap was too short to judge.
+			double SpectralScore = -2.;
 		};
 		struct resolution {
 			std::vector<scored> Scores;
@@ -845,6 +864,11 @@ int cmd_match(const std::vector<std::string>& args) {
 		std::vector<nlohmann::json> pendingCandidatesJson(workItems.size());
 		std::vector<nlohmann::json> pendingSegmentsJson(workItems.size());
 		std::vector needsPhase3(workItems.size(), false);
+		// The extracted target audio, kept for the rerank in phase 3. The file itself already
+		// outlives phase 1 -- it is in `tempFiles` and removed only at the end of the run --
+		// but the path was a local, so phase 3 had no way to name it again.
+		std::vector<std::filesystem::path> pendingTargetAudio(workItems.size());
+		std::vector<double> pendingTargetDuration(workItems.size());
 
 		// Filled in for every plain (mono/stereo) target that decoded successfully, so a
 		// later pass can find targets that are verbatim reuses of another target's audio
@@ -1030,6 +1054,8 @@ int cmd_match(const std::vector<std::string>& args) {
 				pendingMinOverlap[workIndex] = std::min(minOverlapSeconds, targetDuration * 0.5);
 				pendingCandidatesJson[workIndex] = std::move(candidatesJson);
 				pendingSegmentsJson[workIndex] = std::move(segmentsJson);
+				pendingTargetAudio[workIndex] = targetAudio;
+				pendingTargetDuration[workIndex] = targetDuration;
 				needsPhase3[workIndex] = true;
 			}
 		});
@@ -1084,6 +1110,47 @@ int cmd_match(const std::vector<std::string>& args) {
 				scores = std::move(filtered);
 			}
 
+			// Rescore the best few on log-mel, at the alignments the envelope already found,
+			// and re-sort on that. Only the ranking changes -- each candidate keeps the offset
+			// it was found at, because the envelope locates a match well even when it cannot
+			// choose between two of them.
+			//
+			// Done before the lock: it decodes audio, and holding the mutex across that would
+			// serialise the whole pass.
+			auto rerankScored = false;
+			if (rerank && !scores.empty()) {
+				try {
+					const auto depth = (std::min<size_t>)(rerankDepth, scores.size());
+					// Only as much of the target as the comparison will read.
+					const auto targetSpec = decode_logmel(ffmpegPath, pendingTargetAudio[workIndex],
+						pendingTargetDuration[workIndex] + 1.);
+					std::vector<double> spectral(scores.size(), -2.);
+					for (size_t i = 0; i < depth; ++i) {
+						// A short window scores high almost anywhere -- that is the defect
+						// being corrected, so it must not be reintroduced here. Judge only
+						// alignments whose overlap was already worth judging.
+						if (scores[i].OverlapSeconds < pendingMinOverlap[workIndex])
+							continue;
+						const auto& c = candidates[scores[i].CandidateIndex];
+						const auto sourceSpec = decode_logmel(ffmpegPath, c.Path,
+							std::abs(scores[i].OffsetSeconds) + pendingTargetDuration[workIndex] + 2.);
+						spectral[i] = spectral_similarity_at(targetSpec, sourceSpec,
+							scores[i].OffsetSeconds, 0., pendingTargetDuration[workIndex]);
+					}
+					if (std::ranges::any_of(spectral, [](double s) { return s > -1.5; })) {
+						for (size_t i = 0; i < scores.size(); ++i)
+							scores[i].SpectralScore = spectral[i];
+						std::ranges::stable_sort(scores, [](const auto& a, const auto& b) {
+							return a.SpectralScore > b.SpectralScore;
+						});
+						rerankScored = true;
+					}
+				} catch (const std::exception&) {
+					// A source that will not decode costs this target its rerank, never the
+					// whole run -- the envelope ranking below is still a usable answer.
+				}
+			}
+
 			const auto lock = std::scoped_lock(progressMutex);
 			if (scores.empty()) {
 				item["matchInfo"] = {{"status", "unmatched"}};
@@ -1094,8 +1161,37 @@ int cmd_match(const std::vector<std::string>& args) {
 
 			const auto [isDuplicateOfWinner, distinctRunnerUp] =
 				computeDuplicatesAndRunnerUp(scores, pendingMinOverlap[workIndex]);
-			const bool confident = scores[0].Score >= minScore
-				&& (distinctRunnerUp == scores.size() || scores[0].Score - scores[distinctRunnerUp].Score >= minMargin);
+
+			// Rebuilt rather than carried over from phase 1: the rerank may have reordered
+			// these, and a report listing them in the order they were *not* decided in is
+			// worse than no report. Both numbers are kept so a reader can see the two
+			// metrics disagree, which is the whole reason the rerank exists.
+			auto candidatesJson = pendingCandidatesJson[workIndex];
+			if (rerankScored) {
+				candidatesJson = nlohmann::json::array();
+				for (size_t i = 0; i < (std::min<size_t>)(5, scores.size()); i++) {
+					auto entry = nlohmann::json{
+						{"source", scores[i].Name},
+						{"score", scores[i].Score},
+						{"offset", scores[i].OffsetSeconds},
+						{"overlap", scores[i].OverlapSeconds},
+					};
+					if (scores[i].SpectralScore > -1.5)
+						entry["spectralScore"] = scores[i].SpectralScore;
+					if (const auto& rawTitle = candidates[scores[i].CandidateIndex].RawTitle; !rawTitle.empty())
+						entry["sourceTitle"] = rawTitle;
+					if (isDuplicateOfWinner[i])
+						entry["duplicateOfBest"] = true;
+					candidatesJson.push_back(std::move(entry));
+				}
+			}
+
+			const bool confident = rerankScored
+				? scores[0].SpectralScore >= rerankMinScore
+					&& (distinctRunnerUp == scores.size()
+						|| scores[0].SpectralScore - scores[distinctRunnerUp].SpectralScore >= rerankMinMargin)
+				: scores[0].Score >= minScore
+					&& (distinctRunnerUp == scores.size() || scores[0].Score - scores[distinctRunnerUp].Score >= minMargin);
 			if (confident) {
 				// `source` is a list of search keys matched against the OST directory
 				// (the importer treats each entry as a pattern), not a path. The file
@@ -1135,12 +1231,14 @@ int cmd_match(const std::vector<std::string>& args) {
 					{"score", scores[0].Score},
 					{"file", scores[0].Name},
 					{"offset", scores[0].OffsetSeconds},
-					{"candidates", pendingCandidatesJson[workIndex]},
+					{"candidates", std::move(candidatesJson)},
 					{"segments", std::move(pendingSegmentsJson[workIndex])},
 				};
+				if (scores[0].SpectralScore > -1.5)
+					item["matchInfo"]["spectralScore"] = scores[0].SpectralScore;
 				matchedCount++;
 			} else {
-				item["matchInfo"] = {{"status", "ambiguous"}, {"candidates", pendingCandidatesJson[workIndex]}};
+				item["matchInfo"] = {{"status", "ambiguous"}, {"candidates", std::move(candidatesJson)}};
 				item["enable"] = false;
 				ambiguousCount++;
 			}

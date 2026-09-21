@@ -3,6 +3,7 @@
 
 #include "utils/argactions.h"
 #include "utils/audio_match.h"
+#include "utils/filter_graph.h"
 #include "utils/lossless_vorbis.h"
 #include "utils/misc.h"
 #include "utils/substitute_codec.h"
@@ -46,12 +47,24 @@ namespace {
 		bool Deduced = false;
 	};
 
+	// A source built by a filter graph rather than read from one file. Rendered to a temp
+	// file once, before anything else looks at it, so every treatment downstream -- offsets,
+	// per-channel decode, fades, loudness, the loop -- works on it unchanged.
+	struct apply_source_graph {
+		std::vector<std::filesystem::path> Inputs;   // one per `inputFiles` slot the graph reads
+		std::string Description;                     // the -filter_complex argument
+		std::string OutLabel;                        // the label to -map
+	};
+
 	// One source feeding one segment: which file, where in it the segment starts, and the
 	// filter chain the preset attached to that source.
 	struct apply_segment_source {
 		std::filesystem::path Path;
 		double Offset = 0.;       // seconds into the source that this segment begins at
 		std::wstring Filter;
+		// Set instead of `Path` when the preset builds this source from a graph; `Path` is
+		// filled in with the rendered file before the build reads it.
+		std::shared_ptr<apply_source_graph> Graph;
 		// Whether the preset named this offset or it is the implicit zero. The generator
 		// writes no offset at all when the match was already within 50ms, so an absent one
 		// carries that much slack; a stated one was fitted and only lost precision to JSON.
@@ -249,6 +262,40 @@ namespace {
 	// `filter` is a preset's own filter chain for this source, run *before* the channel is
 	// picked out -- which is the order MusicImportConfig's sourceFilters have always meant:
 	// they treat the whole recording, and the offset and channel selection come after.
+	// Runs a source's filter graph and writes the result where the rest of the build can read
+	// it as an ordinary file. Rendered once per graph and kept, not re-run per channel: the
+	// graphs that need this mix several inputs, so decoding one twice would cost the whole
+	// mix twice, and a `volume=...:eval=frame` ramp has to give both channels the same curve.
+	//
+	// Written as 32-bit float wav rather than a raw stream so the sample rate and channel
+	// count survive -- everything downstream opens this by path and asks ffmpeg what it is.
+	std::filesystem::path render_source_graph(
+		const std::filesystem::path& ffmpeg,
+		const apply_source_graph& graph,
+		const std::filesystem::path& outPath) {
+
+		std::error_code ec;
+		std::filesystem::remove(outPath, ec);
+
+		std::vector<std::wstring> args{L"-v", L"error"};
+		for (const auto& input : graph.Inputs) {
+			if (input.empty())
+				throw std::runtime_error("a filter graph input was never resolved to a file");
+			args.emplace_back(L"-i");
+			args.emplace_back(input.wstring());
+		}
+		args.emplace_back(L"-filter_complex");
+		args.emplace_back(xivres::util::unicode::convert<std::wstring>(graph.Description));
+		args.emplace_back(L"-map");
+		args.emplace_back(std::format(L"[{}]", xivres::util::unicode::convert<std::wstring>(graph.OutLabel)));
+		args.insert(args.end(), {L"-c:a", L"pcm_f32le", L"-y", outPath.wstring()});
+		run_process_capture_stdout(ffmpeg, args);
+
+		if (!std::filesystem::exists(outPath))
+			throw std::runtime_error("the filter graph produced no audio");
+		return outPath;
+	}
+
 	std::vector<float> decode_channel_to_floats(
 		const std::filesystem::path& ffmpeg,
 		const std::filesystem::path& source,
@@ -680,6 +727,19 @@ namespace {
 			return static_cast<size_t>((std::max)(0LL, std::llround(seconds * rate)));
 		};
 
+		// Any source the preset builds from a graph, rendered to a file first. Keyed on the
+		// graph itself, so a source named by several segments is rendered once.
+		std::map<const apply_source_graph*, std::filesystem::path> rendered;
+		const auto fileFor = [&](const apply_segment_source& source) {
+			if (!source.Graph)
+				return source.Path;
+			const auto key = source.Graph.get();
+			if (const auto it = rendered.find(key); it != rendered.end())
+				return it->second;
+			return rendered.emplace(key, render_source_graph(ffmpeg, *source.Graph,
+				tempFile(L"scdtool_apply_graph", L".wav"))).first->second;
+		};
+
 		// Where each segment starts. One that names its own start is placed there and the
 		// rest still follow on from it, so a layered entry and a sequenced one can be
 		// described in the same list.
@@ -723,7 +783,7 @@ namespace {
 				if (source == segment.Sources.end())
 					throw std::runtime_error(std::format(
 						"Segment {} maps a channel from source \"{}\", which it does not define.", i, name));
-				decoded.emplace(key, decode_channel_to_floats(ffmpeg, source->second.Path, channelIndex,
+				decoded.emplace(key, decode_channel_to_floats(ffmpeg, fileFor(source->second), channelIndex,
 					samplingRate, tempFile(L"scdtool_apply_seg", L".f32"), source->second.Filter));
 			}
 
@@ -763,7 +823,7 @@ namespace {
 				for (const auto& [name, source] : segment.Sources) {
 					try {
 						const auto templateLufs = measure_loudness(ffmpeg, templateAudio, startSeconds, spanSeconds);
-						const auto sourceLufs = measure_loudness(ffmpeg, source.Path, source.Offset, spanSeconds);
+						const auto sourceLufs = measure_loudness(ffmpeg, fileFor(source), source.Offset, spanSeconds);
 						gain[name] = std::pow(10., std::clamp(templateLufs - sourceLufs, -maxGainDb, maxGainDb) / 20.);
 					} catch (const std::exception&) {
 						// Same rule as the single-source path: an unreadable measurement
@@ -1174,17 +1234,73 @@ namespace {
 
 		const auto dirs = resolve_search_directories(ostDir, config);
 		std::map<std::string, std::filesystem::path> resolved;
+		std::map<std::string, std::shared_ptr<apply_source_graph>> graphs;
 		for (const auto& [name, patterns] : named) {
-			// A source may carry a `filterComplex`: an ffmpeg graph building it from several
-			// inputs, layered rather than sequenced. Segments cannot express that -- the three
-			// copies of one recording at 0s, 75.195s and 150.390s that BGM_EX4_Event_15 is
-			// made of all sound at once. Ignoring the field and reading the graph's first input
-			// as if it were the whole source would build something confidently wrong, so the
-			// entry is declined and named instead.
-			if (patterns.is_object() && patterns.contains("filterComplex")) {
-				unresolved.emplace_back(paths.front(), std::format(
-					"source \"{}\" is built by a filterComplex, which segments cannot express", name));
-				return;
+			// A source may be built by a filter graph rather than read whole from one file:
+			// several inputs layered rather than sequenced, which is what BGM_EX4_Event_15's
+			// three copies of one recording at 0s, 75.195s and 150.390s are. `filterGraph` is
+			// the JSON form; `filterComplex` is the escaped string the hand-written presets
+			// have always used, and both compile to the same ffmpeg argument.
+			const auto hasGraph = patterns.is_object()
+				&& (patterns.contains("filterGraph") || patterns.contains("filterComplex"));
+			if (hasGraph) {
+				try {
+					auto built = std::make_shared<apply_source_graph>();
+					const auto outName = patterns.value("filterComplexOutName", std::string{});
+					std::vector<size_t> wanted;
+					if (const auto graphJson = patterns.find("filterGraph"); graphJson != patterns.end()) {
+						const auto compiled = compile_filter_graph(*graphJson, outName);
+						built->Description = compiled.Description;
+						built->OutLabel = compiled.OutLabel;
+						wanted = compiled.UsedInputs;
+					} else {
+						built->Description = patterns.at("filterComplex").get<std::string>();
+						if (outName.empty())
+							throw std::runtime_error("a filterComplex needs a filterComplexOutName");
+						built->OutLabel = outName.size() >= 2 && outName.front() == '['
+							? outName.substr(1, outName.size() - 2) : outName;
+						// The string form names its inputs as [N:a] inside the description, so
+						// which slots it reads is not knowable without parsing it. Resolve them
+						// all; a slot it does not read costs one lookup and nothing else.
+						const auto& files = patterns.at("inputFiles");
+						for (size_t i = 0; i < files.size(); ++i)
+							wanted.push_back(i);
+					}
+
+					// ffmpeg numbers its inputs by the order they are passed, so every slot up
+					// to the highest one read has to be present even if nothing reads it.
+					const auto& files = patterns.at("inputFiles");
+					const auto slots = wanted.empty() ? size_t{0} : wanted.back() + 1;
+					if (slots > files.size())
+						throw std::runtime_error(std::format(
+							"the graph reads input {} but inputFiles has {} slot(s)", slots - 1, files.size()));
+					const std::set used(wanted.begin(), wanted.end());
+					for (size_t i = 0; i < slots; ++i) {
+						if (!used.contains(i) || (files[i].is_array() && files[i].empty())) {
+							// An empty slot means the game's own audio in the old importer's
+							// presets, which is not available this early -- and a slot nothing
+							// reads only has to hold ffmpeg's numbering. Either way a silent
+							// placeholder is wrong to build from, so an empty slot that *is*
+							// read declines the entry rather than guessing.
+							if (used.contains(i))
+								throw std::runtime_error(std::format(
+									"input {} is the game's own audio, which this cannot supply yet", i));
+							built->Inputs.emplace_back();
+							continue;
+						}
+						const auto file = resolve_source_name(ostDir, config, dirs, files[i]);
+						if (!file)
+							throw std::runtime_error(std::format("no file for input {}", i));
+						built->Inputs.push_back(*file);
+					}
+					graphs.emplace(name, built);
+					resolved.emplace(name, built->Inputs.empty() ? std::filesystem::path{} : built->Inputs.front());
+					continue;
+				} catch (const std::exception& e) {
+					unresolved.emplace_back(paths.front(), std::format(
+						"source \"{}\" is built by a filter graph: {}", name, e.what()));
+					return;
+				}
 			}
 			const auto file = resolve_source_name(ostDir, config, dirs, patterns);
 			if (!file) {
@@ -1227,7 +1343,9 @@ namespace {
 			if (resolved.size() != 1)
 				return;
 			apply_segment segment;
-			segment.Sources.emplace(resolved.begin()->first, apply_segment_source{.Path = resolved.begin()->second});
+			segment.Sources.emplace(resolved.begin()->first, apply_segment_source{
+				.Path = resolved.begin()->second,
+				.Graph = graphs.contains(resolved.begin()->first) ? graphs.at(resolved.begin()->first) : nullptr});
 			// Two entries, taken in order: the single-source path below reads only the source
 			// and the offset from this, and derives the channel count from the game's own file.
 			segment.Channels.emplace_back(resolved.begin()->first, 0);
@@ -1244,7 +1362,8 @@ namespace {
 				.FadeOutSeconds = segmentJson.value("fadeOutSeconds", -1.),
 			};
 			for (const auto& [name, path] : resolved)
-				segment.Sources.emplace(name, apply_segment_source{.Path = path});
+				segment.Sources.emplace(name, apply_segment_source{
+					.Path = path, .Graph = graphs.contains(name) ? graphs.at(name) : nullptr});
 			if (const auto offsets = segmentJson.find("sourceOffsets"); offsets != segmentJson.end() && offsets->is_object()) {
 				for (const auto& [name, spec] : offsets->items()) {
 					if (const auto source = segment.Sources.find(name); source != segment.Sources.end()) {
@@ -1285,7 +1404,10 @@ namespace {
 		// away the shapes that were being mis-built.
 		const auto& first = segments.front();
 		const auto shaped = first.Length > 0. || first.StartSeconds >= 0.
-			|| first.CrossfadeSeconds > 0. || first.FadeInSeconds >= 0. || first.FadeOutSeconds >= 0.;
+			|| first.CrossfadeSeconds > 0. || first.FadeInSeconds >= 0. || first.FadeOutSeconds >= 0.
+			// The fast path opens `Path`, which for a graph-built source is only its first
+			// input -- so it would build one recording where the preset asked for a mix.
+			|| std::ranges::any_of(first.Sources, [](const auto& kv) { return kv.second.Graph != nullptr; });
 		const auto plain = segments.size() == 1 && first.Sources.size() == 1 && !shaped;
 		bool sequential = plain;
 		if (plain) {

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -218,6 +218,7 @@
     <ClCompile Include="utils\lossless_vorbis.cpp" />
     <ClCompile Include="utils\audio_match.cpp" />
     <ClCompile Include="utils\describe_path.cpp" />
+    <ClCompile Include="utils\filter_graph.cpp" />
     <ClCompile Include="utils\substitute_codec.cpp" />
     <ClCompile Include="utils\mpls.cpp" />
     <ClCompile Include="utils\win32_process.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="utils\lossless_vorbis.h" />
     <ClInclude Include="utils\audio_match.h" />
     <ClInclude Include="utils\describe_path.h" />
+    <ClInclude Include="utils\filter_graph.h" />
     <ClInclude Include="utils\substitute_codec.h" />
     <ClInclude Include="utils\misc.h" />
     <ClInclude Include="utils\mpls.h" />
