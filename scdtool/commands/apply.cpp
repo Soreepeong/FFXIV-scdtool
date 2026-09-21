@@ -1576,6 +1576,111 @@ namespace {
 		return res;
 	}
 
+	// How long the file runs, in seconds, or 0 if ffprobe will not say. Wanted for one
+	// reason: a target with no loop has no loop end to truncate the render at, so without
+	// this nothing bounds it and the replacement runs to the end of the recording.
+	double probe_duration(const std::filesystem::path& ffprobe, const std::filesystem::path& file) {
+		const auto bytes = run_process_capture_stdout(ffprobe, {
+			L"-v", L"error",
+			L"-select_streams", L"a:0",
+			L"-show_entries", L"format=duration",
+			L"-of", L"default=noprint_wrappers=1:nokey=1",
+			file.wstring(),
+		});
+		try {
+			return std::stod(std::string(bytes.begin(), bytes.end()));
+		} catch (const std::exception&) {
+			return 0.;
+		}
+	}
+
+	// The last `seconds` of a file. Input-side -ss, because output-side seeking is what
+	// corrupts a read deep into a file -- the same trap the loudness measurement hit.
+	std::vector<float> decode_tail_to_floats(
+		const std::filesystem::path& ffmpeg,
+		const std::filesystem::path& source,
+		size_t channels,
+		size_t samplingRate,
+		double seconds,
+		double duration,
+		const std::filesystem::path& rawPath) {
+
+		std::error_code ec;
+		std::filesystem::remove(rawPath, ec);
+		const auto from = (std::max)(0., duration - seconds);
+
+		run_process_capture_stdout(ffmpeg, {
+			L"-v", L"error",
+			L"-ss", xivres::util::unicode::convert<std::wstring>(std::format("{:.6f}", from)),
+			L"-i", source.wstring(),
+			L"-map", L"0:a:0",
+			L"-ac", std::to_wstring(channels),
+			L"-ar", std::to_wstring(samplingRate),
+			L"-resampler", L"soxr",
+			L"-f", L"f32le",
+			L"-y", rawPath.wstring(),
+		});
+
+		std::ifstream f(rawPath, std::ios::binary | std::ios::ate);
+		std::vector<float> floats;
+		if (f) {
+			const auto size = static_cast<size_t>(f.tellg());
+			f.seekg(0);
+			floats.resize(size / sizeof(float));
+			if (!floats.empty() && !f.read(reinterpret_cast<char*>(floats.data()), static_cast<std::streamsize>(floats.size() * sizeof(float))))
+				floats.clear();
+		}
+		return floats;
+	}
+
+	void reverse_frames(std::vector<float>& v, size_t channels) {
+		if (channels < 1)
+			return;
+		const auto frames = v.size() / channels;
+		for (size_t i = 0, j = frames ? frames - 1 : 0; i < j; ++i, --j)
+			for (size_t c = 0; c < channels; ++c)
+				std::swap(v[i * channels + c], v[j * channels + c]);
+	}
+
+	// Reproduce a fade-out the game's own file ends with and the recording does not.
+	//
+	// Truncating a non-looping replacement to the game's length is right, but a hard cut
+	// where the game faded is worse than the overrun it replaces. This is the onset
+	// correction's problem seen from the other end, so it is the onset correction's code:
+	// both buffers are reversed by frame, `apply_onset_correction` treats the fade as an
+	// attack, and the result is reversed back. Reusing it rather than writing the mirror
+	// keeps one calibration -- the 20 ms blocks, the ~6 dB threshold and the interpolation
+	// between block centres are all things that were tuned once.
+	void apply_tail_correction(
+		std::vector<float>& floats,
+		const std::vector<float>& templateTail,
+		size_t channels,
+		size_t samplingRate,
+		double& appliedDb,
+		double& appliedSeconds) {
+
+		appliedDb = 0.;
+		appliedSeconds = 0.;
+		if (!channels || floats.empty() || templateTail.empty())
+			return;
+
+		const auto frames = (std::min)(floats.size(), templateTail.size()) / channels;
+		if (!frames)
+			return;
+
+		std::vector<float> ours(floats.end() - static_cast<ptrdiff_t>(frames * channels), floats.end());
+		std::vector<float> theirs(templateTail.end() - static_cast<ptrdiff_t>(frames * channels), templateTail.end());
+		reverse_frames(ours, channels);
+		reverse_frames(theirs, channels);
+
+		apply_onset_correction(ours, theirs, channels, samplingRate, appliedDb, appliedSeconds);
+		if (appliedSeconds <= 0.)
+			return;
+
+		reverse_frames(ours, channels);
+		std::copy(ours.begin(), ours.end(), floats.end() - static_cast<ptrdiff_t>(frames * channels));
+	}
+
 	std::vector<int16_t> quantise_pcm16(const std::vector<float>& floats, size_t channels, size_t loopEndBlockIndex) {
 		auto frames = channels ? floats.size() / channels : 0;
 		if (loopEndBlockIndex && loopEndBlockIndex < frames)
@@ -1588,6 +1693,55 @@ namespace {
 			pcm[i] = static_cast<int16_t>(std::clamp<long>(v, -32768, 32767));
 		}
 		return pcm;
+	}
+
+	// A native format-1 entry: interleaved 16-bit PCM, no wrapper, nothing to substitute.
+	// The game reads this format as it ships, unlike the RIFF payload `wav` produces, which
+	// keeps the entry at format 6 for a hook to reinterpret.
+	xivres::sound::writer::sound_item make_native_pcm_entry(
+		const std::vector<int16_t>& samples,
+		size_t channels,
+		size_t samplingRate,
+		size_t loopStartBlockIndex,
+		size_t loopEndBlockIndex) {
+
+		const auto frameBytes = channels * sizeof(int16_t);
+		std::vector<uint8_t> data(samples.size() * sizeof(int16_t));
+		if (!samples.empty())
+			std::memcpy(data.data(), samples.data(), data.size());
+
+		// A PCM entry describes itself with a WAVEFORMATEX in its extra data, and its readers
+		// require exactly that: `get_wav_header()` asserts the extra data is one of these plus
+		// cbSize bytes, so an entry written without it throws the moment anything reads it
+		// back -- which is how the first one written here was refused by `verify`.
+		const xivres::sound::wave_format_ex format{
+			.wFormatTag = xivres::sound::wave_format_tag::Pcm,
+			.nChannels = static_cast<uint16_t>(channels),
+			.nSamplesPerSec = static_cast<uint32_t>(samplingRate),
+			.nAvgBytesPerSec = static_cast<uint32_t>(samplingRate * frameBytes),
+			.nBlockAlign = static_cast<uint16_t>(frameBytes),
+			.wBitsPerSample = 16,
+			.cbSize = 0,
+		};
+		std::vector<uint8_t> extra(sizeof format);
+		std::memcpy(extra.data(), &format, sizeof format);
+
+		return {
+			.Header = {
+				.StreamSize = static_cast<uint32_t>(data.size()),
+				.ChannelCount = static_cast<uint32_t>(channels),
+				.SamplingRate = static_cast<uint32_t>(samplingRate),
+				.Format = xivres::sound::sound_entry_format::WaveFormatPcm,
+				// Byte offsets, as every entry states them; for linear PCM that is the sample
+				// index times the frame size, which is the one case where the two agree.
+				.LoopStartOffset = static_cast<uint32_t>(loopStartBlockIndex * frameBytes),
+				.LoopEndOffset = static_cast<uint32_t>(loopEndBlockIndex * frameBytes),
+				.StreamOffset = static_cast<uint32_t>(extra.size()),
+				.Flags = xivres::sound::sound_entry_flags::None,
+			},
+			.ExtraData = std::move(extra),
+			.Data = std::move(data),
+		};
 	}
 
 	// Builds the sound entry as *lossless* Vorbis: the buffer goes through scdtool's own
@@ -1637,6 +1791,7 @@ namespace {
 			OggVorbis,
 			LosslessVorbis,
 			Flac,
+			NativePcm,
 			Pcm,
 		};
 
@@ -1652,7 +1807,7 @@ namespace {
 	// `option` is the spelling the value arrived under, so the message names the flag the
 	// caller actually typed.
 	audio_format parse_audio_format(const std::string& spec, const std::string& option) {
-		constexpr auto grammar = R"(ogg, ogg:<quality -1 to 10>, ogg:lossless, flac, flac:<level 0 to 8>, or wav)";
+		constexpr auto grammar = R"(ogg, ogg:<quality -1 to 10>, ogg:lossless, flac, flac:<level 0 to 8>, wav, or pcm)";
 		const auto colon = spec.find(':');
 		const auto name = spec.substr(0, colon);
 		const auto hasSetting = colon != std::string::npos;
@@ -1667,6 +1822,12 @@ namespace {
 			return res;
 		}
 
+		if (name == "pcm") {
+			if (!setting.empty())
+				throw std::invalid_argument(std::format(R"({}: "pcm" takes no setting)", option));
+			res.Codec = audio_format::codec::NativePcm;
+			return res;
+		}
 		if (name == "flac") {
 			// An integer, because libFLAC's levels are names for preset combinations of
 			// settings rather than points on a continuum -- 5.5 would mean nothing.
@@ -1735,6 +1896,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 				"  ogg:<quality>  Ogg Vorbis, -1 to 10 on oggenc's scale; libvorbis is handed a tenth\n"
 				"  ogg:lossless   the Vorbis encoder built into this tool, whose output decodes back\n"
 				"                 to bit-identical 16-bit PCM -- which is all the game's decoder emits\n"
+				"  pcm            16-bit PCM in the game's own format 1, which it plays unmodified\n"
 				"  flac           FLAC at compression level 5, libFLAC's own default\n"
 				"  flac:<level>   FLAC, 0 (fastest) to 8 (smallest)\n"
 				"  wav            raw interleaved 16-bit PCM\n"
@@ -1759,7 +1921,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 		parser.add_argument("--ffprobe").default_value(std::string("ffprobe")).help("path to ffprobe executable");
 		parser.add_argument("--sampling-rate").default_value(std::string("auto")).help(R"(output sample rate: "auto" (highest of the game file and the source), "keep" (the game file's), or an integer)");
 		parser.add_argument("--entry-index").default_value(0u).scan<'u', uint32_t>().help("sound entry index to replace (default: 0)");
-		parser.add_argument("--audio-format").default_value(std::string("ogg")).help(R"(what the entry's audio is, as codec[:setting]: "ogg", "ogg:<-1 to 10>", "ogg:lossless", "flac", "flac:<0 to 8>" or "wav" (default: ogg, which is quality 10))");
+		parser.add_argument("--audio-format").default_value(std::string("ogg")).help(R"(what the entry's audio is, as codec[:setting]: "ogg", "ogg:<-1 to 10>", "ogg:lossless", "flac", "flac:<0 to 8>", "wav" or "pcm" (default: ogg, which is quality 10))");
 		// The flag was --ogg-quality while Ogg Vorbis was the only thing it could produce, and
 		// its values were bare -- "10", "lossless". Both still work, and mean the same as
 		// "ogg:10" and "ogg:lossless", so a script written against it keeps running.
@@ -2148,6 +2310,11 @@ int cmd_apply(const std::vector<std::string>& args) {
 					: templateItem.get_ogg_file();
 				f.write(reinterpret_cast<const char*>(staged.data()), static_cast<std::streamsize>(staged.size()));
 			}
+			// What the game's own entry actually runs for. Only a target with no loop needs
+			// it, but it is one ffprobe against a file already on disk, so it is read for all
+			// of them rather than threaded through a condition.
+			const auto templateSeconds = probe_duration(ffprobePath, templateAudio);
+
 			if (templateIsHca) {
 				const auto lock = std::scoped_lock(logMutex);
 				std::cerr << std::format("  note: {} is HCA (format 26) and the replacement will not be -- "
@@ -2417,6 +2584,38 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// stereo and quad orders are the decoder's), which is why this never surfaced
 			// while `apply` refused anything above stereo.
 			//
+			// A target with no loop has no loop end to truncate at, so until now nothing
+			// bounded the render: 103 of the 201 non-looping targets came out longer than the
+			// game's own file, some by minutes, because the album track carries the whole
+			// piece where the game ships an excerpt. The game's own length is the bound.
+			double tailDb = 0., tailSeconds = 0.;
+			if (!newLoopEnd && templateSeconds > 0.) {
+				const auto templateFrames = static_cast<size_t>(
+					std::llround(templateSeconds * static_cast<double>(samplingRate)));
+				if (templateFrames && totalSamples > templateFrames) {
+					floats.resize(templateFrames * channels);
+					totalSamples = templateFrames;
+
+					// And if the game faded out where we now cut, fade out too.
+					try {
+						const auto tailRawPath = tempDir / std::format(L"scdtool_apply_tail_{}.f32",
+							tempFileCounter.fetch_add(1));
+						keepTemp(tailRawPath);
+						constexpr double TailWindowSeconds = 3.0;
+						const auto templateTail = decode_tail_to_floats(ffmpegPath, templateAudio,
+							channels, samplingRate, TailWindowSeconds, templateSeconds, tailRawPath);
+						if (!templateTail.empty())
+							apply_tail_correction(floats, templateTail, channels, samplingRate,
+								tailDb, tailSeconds);
+					} catch (const std::exception&) {
+						// Same principle as the onset catch: a failed tail check must not lose
+						// the file. A hard cut is a worse ending than a fade, not a broken one.
+						tailDb = 0.;
+						tailSeconds = 0.;
+					}
+				}
+			}
+
 			// Before the channel permutation below and before quantisation, so every codec
 			// gets the same audio and the blend runs in the channel order everything else
 			// above works in.
@@ -2474,6 +2673,11 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 				case audio_format::codec::Pcm:
 					newEntry = substitute_codec::make_pcm_entry(quantise_pcm16(floats, channels, newLoopEnd),
+						channels, samplingRate, newLoopStart, newLoopEnd);
+					break;
+
+				case audio_format::codec::NativePcm:
+					newEntry = make_native_pcm_entry(quantise_pcm16(floats, channels, newLoopEnd),
 						channels, samplingRate, newLoopStart, newLoopEnd);
 					break;
 
@@ -2649,7 +2853,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 							built += (built.empty() ? "" : "+") + file;
 					}
 				}
-				std::cerr << std::format("  {} <- {} (score {:.3f}, offset {:+.3f}s{}{}, trim {} pad {} samples, loop {}-{}, gain {:+.1f} dB{}{}{})",
+				std::cerr << std::format("  {} <- {} (score {:.3f}, offset {:+.3f}s{}{}, trim {} pad {} samples, loop {}-{}, gain {:+.1f} dB{}{}{}{})",
 					job.TargetPath, job.Segments.empty() ? u8(job.SourcePath) : built, job.Score, effectiveOffset,
 					deduced.Deduced && std::abs(effectiveOffset - job.Offset) > 0.05
 						? std::format(" [deduced, was {:+.3f}s, intro {:.3f} over {} candidates]",
@@ -2663,6 +2867,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 					newLoopStart, newLoopEnd, gainDb,
 					gainLimited ? std::format(", peak-limited from {:+.1f} dB", requestedGainDb) : "",
 					onsetSeconds > 0. ? std::format(", onset corrected {:.1f} dB over {:.2f}s", onsetDb, onsetSeconds) : "",
+					tailSeconds > 0. ? std::format(", tail faded {:.1f} dB over {:.2f}s", tailDb, tailSeconds) : "",
 					seam.Applied
 						? std::format(", loop seam {:.2f} -> {:.2f} over {:.0f}ms", seam.Before, seam.After,
 							1000. * static_cast<double>(seam.Frames) / static_cast<double>(samplingRate))
