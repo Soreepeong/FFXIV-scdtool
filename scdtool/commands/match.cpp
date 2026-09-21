@@ -378,15 +378,24 @@ namespace {
 	// usually already in its list and one listen settles it. An unmatched one found nothing at
 	// all, which normally means the albums searched do not contain that cue.
 	void print_attention_summary(const nlohmann::json& preset, size_t limit,
-		double minScore, double minMargin, double rerankMinScore, double rerankMinMargin) {
+		double minScore, double minMargin, double rerankMinScore, double rerankMinMargin,
+		const std::filesystem::path& csvPath) {
 
 		struct entry {
 			double Score = -2.;
 			std::string Path;
 			std::string Source;
 			std::string Detail;
+			// Carried for the CSV, which is read to decide what a target *is* rather than
+			// skimmed for what to listen to next: the game's own names for the file, how long
+			// it runs, and the runner-up as its own column so the two can be sorted on.
+			std::string Group;
+			std::string Names;
+			double Seconds = 0.;
+			std::string RunnerUp;
+			double RunnerUpScore = -2.;
 		};
-		std::vector<entry> nearMiss, partialStems, nothing, unreadable, switchedOff;
+		std::vector<entry> nearMiss, bestGuess, partialStems, nothing, unreadable, switchedOff;
 		size_t total = 0, settled = 0;
 
 		const auto hasSource = [](const nlohmann::json& item) {
@@ -407,6 +416,28 @@ namespace {
 			return s;
 		};
 		static const auto noCandidates = nlohmann::json::array();
+		// "TerritoryType:The Tempest", "Orchestrion:A New Hope" -- what the game's own sheets
+		// say the file is the music of. For a target nothing ever released a recording of,
+		// this is the only thing that says what it is, and the reason the CSV exists.
+		const auto namesOf = [](const nlohmann::json& item) {
+			std::string out;
+			const auto take = [&out](const nlohmann::json& target) {
+				const auto names = target.find("names");
+				if (names == target.end() || !names->is_array())
+					return;
+				for (const auto& name : *names)
+					if (name.is_string())
+						out += (out.empty() ? "" : "; ") + name.get<std::string>();
+			};
+			if (const auto target = item.find("target"); target != item.end()) {
+				if (target->is_array())
+					for (const auto& one : *target)
+						take(one);
+				else
+					take(*target);
+			}
+			return out;
+		};
 
 		for (const auto& item : preset.at("items")) {
 			const auto paths = preset_target_paths(item);
@@ -416,6 +447,15 @@ namespace {
 			auto path = paths.front();
 			if (paths.size() > 1)
 				path += std::format(" +{}", paths.size() - 1);
+			const auto names = namesOf(item);
+			const auto mi0 = item.find("matchInfo");
+			const auto seconds = mi0 != item.end() ? mi0->value("targetSeconds", 0.) : 0.;
+			const auto tag = [&](entry e, const char* group) {
+				e.Group = group;
+				e.Names = names;
+				e.Seconds = seconds;
+				return e;
+			};
 
 			// Two different flags, and they are not interchangeable. A preset excludes an
 			// entry deliberately by setting `enable` on the *target*, which is the one this
@@ -424,7 +464,7 @@ namespace {
 			// swallows the first, and every unmatched target gets reported as a decision
 			// somebody already made.
 			if (!preset_target_enabled(item)) {
-				switchedOff.push_back({-2., path, {}, hasSource(item) ? "carries a source" : "no source"});
+				switchedOff.push_back(tag({-2., path, {}, hasSource(item) ? "carries a source" : "no source"}, "switched off"));
 				continue;
 			}
 			const auto refused = item.contains("enable") && item["enable"].is_boolean()
@@ -432,7 +472,7 @@ namespace {
 
 			const auto mi = item.find("matchInfo");
 			if (mi != item.end() && mi->value("status", std::string()) == "error") {
-				unreadable.push_back({-2., path, {}, mi->value("error", std::string("(no message)"))});
+				unreadable.push_back(tag({-2., path, {}, mi->value("error", std::string("(no message)"))}, "unreadable"));
 				continue;
 			}
 			if (!refused && hasSource(item)) {
@@ -440,7 +480,7 @@ namespace {
 				continue;
 			}
 			if (mi == item.end()) {
-				nothing.push_back({-2., path, {}, "never attempted"});
+				nothing.push_back(tag({-2., path, {}, "never attempted"}, "nothing scored"));
 				continue;
 			}
 
@@ -467,16 +507,16 @@ namespace {
 						score,
 						stem.contains("source") ? " (" + leaf(stem.value("source", std::string())) + ")" : "");
 				}
-				partialStems.push_back({static_cast<double>(resolved), path, {},
+				partialStems.push_back(tag({-2., path, {},
 					std::format("{} of {} stems resolved; weakest {}", resolved, stems->size(),
-						worst.empty() ? "would not decode" : worst)});
+						worst.empty() ? "would not decode" : worst)}, "partial stems"));
 				continue;
 			}
 
 			const auto& candidates = mi->contains("candidates") && mi->at("candidates").is_array()
 				? mi->at("candidates") : noCandidates;
 			if (candidates.empty()) {
-				nothing.push_back({-2., path, {}, {}});
+				nothing.push_back(tag({-2., path, {}, {}}, "nothing scored"));
 				continue;
 			}
 
@@ -506,21 +546,70 @@ namespace {
 						scoreOf(candidates[i]), marginBar);
 				break;
 			}
-			nearMiss.push_back({best, path,
+			// Two different jobs wearing one label. A candidate that cleared the score bar and
+			// lost on the margin names the answer and asks which release it is -- a listen
+			// settles it. One that never cleared the bar is the best of a bad field, and on a
+			// run over targets no preset covers it is nearly all of them: 226 of 228, the best
+			// of them at 0.36. Calling those "matched" would send a reader to check 226 files
+			// that nothing actually matched.
+			auto miss = tag({best, path,
 				leaf(candidates.front().value("source", std::string("?"))),
-				why.empty() ? std::string("declined, though both bars were met") : why});
+				why.empty() ? std::string("declined, though both bars were met") : why},
+				best >= scoreBar ? "margin only" : "below the score bar");
+			for (size_t i = 1; i < candidates.size(); i++) {
+				if (candidates[i].value("duplicateOfBest", false))
+					continue;
+				miss.RunnerUp = leaf(candidates[i].value("source", std::string("?")));
+				miss.RunnerUpScore = scoreOf(candidates[i]);
+				break;
+			}
+			(best >= scoreBar ? nearMiss : bestGuess).push_back(std::move(miss));
 		}
 
-		const auto attention = nearMiss.size() + partialStems.size() + nothing.size()
-			+ unreadable.size() + switchedOff.size();
+		const auto attention = nearMiss.size() + bestGuess.size() + partialStems.size()
+			+ nothing.size() + unreadable.size() + switchedOff.size();
+
+		for (auto* rows : {&nearMiss, &bestGuess})
+			std::ranges::sort(*rows, [](const entry& a, const entry& b) { return a.Score > b.Score; });
+		for (auto* rows : {&partialStems, &nothing, &unreadable, &switchedOff})
+			std::ranges::sort(*rows, [](const entry& a, const entry& b) { return a.Path < b.Path; });
+
+		// Written before the "nothing to do" exit below, so a caller that asked for the file
+		// always gets one: an empty report and a missing report look the same to a script,
+		// and only one of them means the run went well.
+		if (!csvPath.empty()) {
+			std::ofstream csv(csvPath, std::ios::binary);
+			if (!csv)
+				throw std::runtime_error(std::format("Could not open summary CSV: {}", u8(csvPath)));
+			// Quoted per RFC 4180: the names column holds "TerritoryType:The Sea of Clouds",
+			// and several hold a comma of their own.
+			const auto field = [](std::string_view v) {
+				std::string out = "\"";
+				for (const auto c : v) {
+					if (c == '"')
+						out += '"';
+					out += c;
+				}
+				return out + '"';
+			};
+			const auto number = [](double v) {
+				return v <= -2. ? std::string() : std::format("{:.4f}", v);
+			};
+			csv << "target,group,seconds,best_source,best_score,runner_up,runner_up_score,reason,names\n";
+			for (const auto* rows : {&nearMiss, &bestGuess, &partialStems, &nothing, &unreadable, &switchedOff})
+				for (const auto& r : *rows)
+					csv << field(r.Path) << ',' << field(r.Group) << ','
+						<< (r.Seconds > 0. ? std::format("{:.2f}", r.Seconds) : std::string()) << ','
+						<< field(r.Source) << ',' << number(r.Score) << ','
+						<< field(r.RunnerUp) << ',' << number(r.RunnerUpScore) << ','
+						<< field(r.Detail) << ',' << field(r.Names) << '\n';
+			std::cerr << std::format("Wrote {} row(s) to {}.", attention, u8(csvPath)) << '\n';
+		}
+
 		if (!attention) {
 			std::cerr << std::format("Nothing needs manual attention: all {} target(s) resolved.", total) << '\n';
 			return;
 		}
-
-		std::ranges::sort(nearMiss, [](const entry& a, const entry& b) { return a.Score > b.Score; });
-		for (auto* rows : {&partialStems, &nothing, &unreadable, &switchedOff})
-			std::ranges::sort(*rows, [](const entry& a, const entry& b) { return a.Path < b.Path; });
 
 		std::cerr << '\n' << std::format("Needs manual attention: {} of {} target(s); {} resolved.",
 			attention, total, settled) << '\n';
@@ -547,9 +636,12 @@ namespace {
 					rows.size() - shown) << '\n';
 		};
 
-		dump("Matched but not enabled -- something scored, the run would not commit to it",
+		dump("Matched but not enabled -- it cleared the score bar and lost on the margin",
 			"  Nearest the bar first: these are the ones a single listen is most likely to settle.",
 			nearMiss, true);
+		dump("Best guess only -- nothing cleared the score bar",
+			"  The top of a weak field, listed so a reader can see there was nothing to find.",
+			bestGuess, true);
 		dump("Partly matched -- some of the file's stems resolved and some did not", {}, partialStems, false);
 		dump("Nothing scored -- no candidate cleared the floor at any alignment", {}, nothing, false);
 		dump("Could not be read", {}, unreadable, false);
@@ -590,6 +682,7 @@ int cmd_match(const std::vector<std::string>& args) {
 		parser.add_argument("--exclude-preset").default_value(std::string()).help("comma-separated preset JSON files whose target paths should be excluded from matching");
 		parser.add_argument("--matched-only").default_value(false).implicit_value(true).help("write only the items that were matched, so the output is directly usable as a preset");
 		parser.add_argument("--summary-limit").default_value(20u).scan<'u', uint32_t>().help("how many targets to name in each group of the closing manual-attention summary (default: 20; 0 lists every one)");
+		parser.add_argument("--summary-csv").default_value(std::string()).help("also write that summary as a CSV, one row per target, with the game's own names for each file");
 		parser.add_argument("--ffmpeg").default_value(std::string("ffmpeg")).help("path to ffmpeg executable");
 		parser.add_argument("--ffprobe").default_value(std::string("ffprobe")).help("path to ffprobe executable, used to read title tags for duplicate-release detection");
 		parser.add_argument("--language").default_value(xivres::game_language::Unspecified)
@@ -1060,6 +1153,10 @@ int cmd_match(const std::vector<std::string>& args) {
 		// but the path was a local, so phase 3 had no way to name it again.
 		std::vector<std::filesystem::path> pendingTargetAudio(workItems.size());
 		std::vector<double> pendingTargetDuration(workItems.size());
+		// How long the game's own file runs, kept for every worked item rather than only the
+		// deferred ones. It is the first thing a reader wants about a target nothing matched:
+		// a four-second cue and a four-minute field theme are different problems.
+		std::vector<double> targetSeconds(workItems.size(), 0.);
 
 		// Filled in for every plain (mono/stereo) target that decoded successfully, so a
 		// later pass can find targets that are verbatim reuses of another target's audio
@@ -1089,6 +1186,7 @@ int cmd_match(const std::vector<std::string>& args) {
 				}
 				targetEnvelope = decode_envelope(ffmpegPath, targetAudio);
 				targetDuration = static_cast<double>(targetEnvelope.size()) / EnvelopeRateHz;
+				targetSeconds[workIndex] = targetDuration;
 				if (targetChannels <= 2) {
 					dupTargetEnvelope[workIndex] = targetEnvelope;
 					dupTargetDuration[workIndex] = targetDuration;
@@ -1533,10 +1631,22 @@ int cmd_match(const std::vector<std::string>& args) {
 			}
 		}
 
+		for (size_t wi = 0; wi < workItems.size(); ++wi)
+			if (const auto mi = preset.at("items")[workItems[wi]].find("matchInfo");
+				mi != preset.at("items")[workItems[wi]].end() && targetSeconds[wi] > 0.)
+				(*mi)["targetSeconds"] = targetSeconds[wi];
+
+		// The targets carry the game's own names for what each file is the music of, from the
+		// bgm, territorytype, contentfindercondition and placename sheets.
+		for (auto& item : preset.at("items"))
+			if (const auto target = item.find("target"); target != item.end())
+				augment_target_names(*target, installation, language);
+
 		// Before --matched-only, which is the option that throws these away: the summary of
 		// what was dropped is most useful precisely in the run that stops writing it down.
 		print_attention_summary(preset, parser.get<uint32_t>("--summary-limit"),
-			minScore, minMargin, rerankMinScore, rerankMinMargin);
+			minScore, minMargin, rerankMinScore, rerankMinMargin,
+			argactions::path(parser.get<std::string>("--summary-csv")));
 
 		if (parser.get<bool>("--matched-only")) {
 			nlohmann::json kept = nlohmann::json::array();
@@ -1545,12 +1655,6 @@ int cmd_match(const std::vector<std::string>& args) {
 					kept.push_back(std::move(item));
 			preset["items"] = std::move(kept);
 		}
-
-		// The targets carry the game's own names for what each file is the music of, from the
-		// bgm, territorytype, contentfindercondition and placename sheets.
-		for (auto& item : preset.at("items"))
-			if (const auto target = item.find("target"); target != item.end())
-				augment_target_names(*target, installation, language);
 
 		{
 			std::ofstream f(outputPath, std::ios::binary);
