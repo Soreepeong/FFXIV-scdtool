@@ -3775,6 +3775,37 @@
     ],
     "# comment": "found only with the coarse shortlist disabled, then ranked on log-mel rather than envelope correlation: 0.9841 here, 0.4606 clear of the next candidate."
    }
+  },
+  {
+   "source": {
+    "Before_Meteor_FFXIV_094": [
+     "Before_Meteor_FFXIV_094",
+     "In the Arms of Althyk",
+     "時神に誘われて"
+    ]
+   },
+   "target": {
+    "path": "sound/zingle/Zingle_Sleep.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "Before_Meteor_FFXIV_094": 0.365
+      },
+      "channels": [
+       {
+        "source": "Before_Meteor_FFXIV_094",
+        "channel": 0
+       },
+       {
+        "source": "Before_Meteor_FFXIV_094",
+        "channel": 1
+       }
+      ],
+      "length": 8.753923
+     }
+    ],
+    "# comment": "the inn's sleep jingle: the first 8.75s of \"In the Arms of Althyk\". The game's entry is CRI HCA (format 26), which nothing here encodes, so the replacement is written in whatever --audio-format names and the entry's format changes. No sheet references this path -- the bgm sheet holds only music/ -- so `match --discover` will not recreate this entry and a regeneration of presets/ drops it. Length is stated because the entry does not loop and the album track runs 11.01s: with nothing to truncate at, the render would take the whole recording."
+   }
   }
  ],
  "pcmHashAlgorithm": "crc32/s32le@native",
