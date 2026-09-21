@@ -4,6 +4,7 @@
 #include "commands/match.h"
 #include "commands/match_disc.h"
 #include "commands/toscd.h"
+#include "commands/verify.h"
 
 #ifdef _WIN32
 int wmain(int argc, wchar_t** argv) {
@@ -31,6 +32,8 @@ int main(int argc, char** argv) {
 		return cmd_match_disc(std::vector(args.begin() + 1, args.end()));
 	if (command == "apply")
 		return cmd_apply(std::vector(args.begin() + 1, args.end()));
+	if (command == "verify")
+		return cmd_verify(std::vector(args.begin() + 1, args.end()));
 
 	// No subcommand, or one that does not exist: list the commands that do.
 	if (command.empty())

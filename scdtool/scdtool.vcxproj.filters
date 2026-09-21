@@ -7,12 +7,14 @@
     <ClCompile Include="commands\extract.cpp" />
     <ClCompile Include="commands\match.cpp" />
     <ClCompile Include="commands\match_disc.cpp" />
+    <ClCompile Include="commands\verify.cpp" />
     <ClCompile Include="commands\toscd.cpp" />
     <ClCompile Include="utils\argactions.cpp" />
     <ClCompile Include="utils\audio_match.cpp" />
     <ClCompile Include="utils\describe_path.cpp" />
     <ClCompile Include="utils\mpls.cpp" />
     <ClCompile Include="utils\filter_graph.cpp" />
+    <ClCompile Include="utils\verify_audio.cpp" />
     <ClCompile Include="utils\substitute_codec.cpp" />
     <ClCompile Include="utils\win32_process.cpp" />
   </ItemGroup>
@@ -22,6 +24,7 @@
     <ClInclude Include="commands\extract.h" />
     <ClInclude Include="commands\match.h" />
     <ClInclude Include="commands\match_disc.h" />
+    <ClInclude Include="commands\verify.h" />
     <ClInclude Include="commands\toscd.h" />
     <ClInclude Include="utils\argactions.h" />
     <ClInclude Include="utils\audio_match.h" />
@@ -29,6 +32,7 @@
     <ClInclude Include="utils\misc.h" />
     <ClInclude Include="utils\mpls.h" />
     <ClInclude Include="utils\filter_graph.h" />
+    <ClInclude Include="utils\verify_audio.h" />
     <ClInclude Include="utils\substitute_codec.h" />
     <ClInclude Include="utils\win32_process.h" />
   </ItemGroup>

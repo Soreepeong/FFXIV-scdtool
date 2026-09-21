@@ -1,6 +1,8 @@
 #pragma once
 
+#include <cstdint>
 #include <filesystem>
+#include <span>
 #include <vector>
 
 // Decodes the given media file's first audio stream to mono 16kHz PCM via ffmpeg,
@@ -80,6 +82,31 @@ std::vector<float> decode_logmel(
 	const std::filesystem::path& ffmpeg,
 	const std::filesystem::path& mediaFile,
 	double maxSeconds = 0.);
+
+// The decode every one of these measurements starts from: mono, 16 kHz, signed 16-bit.
+// Exposed because the verification metrics need the samples themselves and not only the
+// spectrogram -- the level weight that makes a build score readable is the game file's own
+// RMS per frame, and the peak envelope is a different reduction of the same samples. One
+// decode feeding all of them also means a sweep runs ffmpeg twice per file rather than six
+// times.
+constexpr size_t AnalysisRateHz = 16000;
+
+std::vector<int16_t> decode_mono_16k(
+	const std::filesystem::path& ffmpeg,
+	const std::filesystem::path& mediaFile,
+	double maxSeconds = 0.);
+
+// The same decode at a rate of the caller's choosing. The loop-seam measurement needs the
+// file's own rate: a click is a single-sample discontinuity, and resampling to 16 kHz spreads
+// it over neighbouring samples until it reads as ordinary content.
+std::vector<int16_t> decode_mono(
+	const std::filesystem::path& ffmpeg,
+	const std::filesystem::path& mediaFile,
+	size_t rateHz,
+	double maxSeconds = 0.);
+
+// Log-mel of already-decoded samples, so a caller holding them does not decode again.
+std::vector<float> logmel_from_samples(std::span<const int16_t> samples);
 
 // Mean per-frame cosine similarity between a span of `target` and `source` read from
 // `offsetSeconds`, i.e. target frame t is compared against source frame t - offset.

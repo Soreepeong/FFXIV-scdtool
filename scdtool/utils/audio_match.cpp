@@ -297,9 +297,17 @@ std::vector<offset_candidate> envelope_offset_candidates(
 	return out;
 }
 
-std::vector<float> decode_logmel(
+std::vector<int16_t> decode_mono_16k(
 	const std::filesystem::path& ffmpeg,
 	const std::filesystem::path& mediaFile,
+	double maxSeconds) {
+	return decode_mono(ffmpeg, mediaFile, AnalysisRateHz, maxSeconds);
+}
+
+std::vector<int16_t> decode_mono(
+	const std::filesystem::path& ffmpeg,
+	const std::filesystem::path& mediaFile,
+	size_t rateHz,
 	double maxSeconds) {
 
 	std::vector<std::wstring> args{
@@ -310,10 +318,22 @@ std::vector<float> decode_logmel(
 		args.emplace_back(L"-t");
 		args.emplace_back(xivres::util::unicode::convert<std::wstring>(std::format("{:.3f}", maxSeconds)));
 	}
-	args.insert(args.end(), {L"-map", L"0:a:0", L"-ac", L"1", L"-ar", L"16000", L"-f", L"s16le", L"-"});
+	args.insert(args.end(), {L"-map", L"0:a:0", L"-ac", L"1", L"-ar", std::to_wstring(rateHz),
+		L"-f", L"s16le", L"-"});
 
 	const auto pcmBytes = run_process_capture_stdout(ffmpeg, args);
-	const auto samples = xivres::util::span_cast<const int16_t>(pcmBytes);
+	const auto decoded = xivres::util::span_cast<const int16_t>(pcmBytes);
+	return {decoded.begin(), decoded.end()};
+}
+
+std::vector<float> decode_logmel(
+	const std::filesystem::path& ffmpeg,
+	const std::filesystem::path& mediaFile,
+	double maxSeconds) {
+	return logmel_from_samples(decode_mono_16k(ffmpeg, mediaFile, maxSeconds));
+}
+
+std::vector<float> logmel_from_samples(std::span<const int16_t> samples) {
 	if (samples.size() < LogMelFft)
 		return {};
 
