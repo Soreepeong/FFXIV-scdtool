@@ -1520,6 +1520,9 @@ namespace {
 		// The game's decoder rounds on some paths and truncates on others -- the 3-or-more
 		// channel path truncates throughout -- so aim for the value that survives either.
 		opts.Rounding = lossless_vorbis::rounding::Either;
+		// So the encoder can end a page there; see the option's comment for why the seek
+		// wants a page start rather than a byte in the middle of one.
+		opts.LoopStartSample = loopEndBlockIndex ? loopStartBlockIndex : 0;
 		if (loopStartBlockIndex || loopEndBlockIndex) {
 			opts.Comments.push_back(std::format("LoopStart={}", loopStartBlockIndex));
 			opts.Comments.push_back(std::format("LoopEnd={}", loopEndBlockIndex));

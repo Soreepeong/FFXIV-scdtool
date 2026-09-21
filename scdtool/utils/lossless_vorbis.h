@@ -53,6 +53,15 @@ namespace lossless_vorbis {
 		size_t MaxAttempts = 4;
 		rounding Rounding = rounding::Either;
 		std::vector<std::string> Comments;   // Vorbis comment tags, e.g. "LoopStart=1234"
+		// Where the loop returns to, in sample frames, or 0 for a stream that does not loop.
+		//
+		// The engine resumes a loop by seeking to the entry's loop byte offset and syncing
+		// forward to a page, so it matters that a page *starts* there: anything before the sync
+		// point is read, decompressed out of its sqpack block, and thrown away. Given this, the
+		// encoder ends a page at the last block boundary at or before the loop, which is the
+		// closest a fixed block grid can come, and `make_from_ogg` then points the offset at the
+		// page that begins there rather than at the one before it.
+		size_t LoopStartSample = 0;
 	};
 
 	struct result {

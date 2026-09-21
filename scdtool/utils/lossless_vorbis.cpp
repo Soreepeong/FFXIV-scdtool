@@ -977,6 +977,12 @@ namespace lossless_vorbis {
 				// the end trim from the last, and mis-handles both landing on one page, so at
 				// least two audio pages are always emitted.
 				const auto perPage = (std::max<size_t>)(1, (std::min<size_t>)(16, (blocks + 1) / 2));
+				// The block whose own first sample is the last block boundary at or before the
+				// loop. Ending the page before it puts a page start there, which is where the
+				// engine's loop seek lands; without this the nearest boundary fell wherever the
+				// sixteen-block grouping happened to put it, a median of 16.7 ms past the loop
+				// across 25 measured files.
+				const auto loopBlock = opts.LoopStartSample ? opts.LoopStartSample / half : 0;
 				std::vector<std::vector<uint16_t>> blockIndex(static_cast<size_t>(p.Ladder.Stages));
 				for (size_t b = 0; b < blocks; b++) {
 					for (int s = 0; s < p.Ladder.Stages; s++)
@@ -989,7 +995,11 @@ namespace lossless_vorbis {
 					const auto last = b + 1 == blocks;
 					put(encode_packet(p, blockIndex, classRow, books, floorYBits),
 						static_cast<int64_t>(last ? frames : b * half), false, last);
-					if (last || (b + 1) % perPage == 0)
+					// After block `loopBlock`, not before it: a packet's granulepos is its own
+					// first sample, so ending the page at block n leaves the page's end granule
+					// at n * half. Flushing one block early put the boundary a further half
+					// block back, which is how 578 samples of slack survived the first attempt.
+					if (last || (b + 1) % perPage == 0 || (loopBlock && b == loopBlock))
 						drain_pages(true);
 					else
 						drain_pages(false);
