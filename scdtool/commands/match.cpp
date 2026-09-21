@@ -368,6 +368,194 @@ namespace {
 		target["names"] = std::vector(names.begin(), names.end());
 	}
 
+	// Which targets a reader still has to decide for themselves, and what deciding would
+	// involve. Taken off the finished items rather than tallied as the decisions were made:
+	// phase 4 rewrites some of them afterwards, so a running count describes a state the
+	// written file no longer has.
+	//
+	// The first group is the one worth the reader's time. An ambiguous entry is not a failure
+	// to find anything -- it is a candidate the run declined to commit to, so the answer is
+	// usually already in its list and one listen settles it. An unmatched one found nothing at
+	// all, which normally means the albums searched do not contain that cue.
+	void print_attention_summary(const nlohmann::json& preset, size_t limit,
+		double minScore, double minMargin, double rerankMinScore, double rerankMinMargin) {
+
+		struct entry {
+			double Score = -2.;
+			std::string Path;
+			std::string Source;
+			std::string Detail;
+		};
+		std::vector<entry> nearMiss, partialStems, nothing, unreadable, switchedOff;
+		size_t total = 0, settled = 0;
+
+		const auto hasSource = [](const nlohmann::json& item) {
+			const auto it = item.find("source");
+			if (it == item.end() || it->is_null())
+				return false;
+			if (it->is_string())
+				return !it->get<std::string>().empty();
+			if (it->is_array())
+				return !it->empty();
+			return true;
+		};
+		// A candidate is named by its path relative to --ost; the folder is the album, which
+		// the preset's own name already says, so only the file tells a reader anything new.
+		const auto leaf = [](std::string s) {
+			if (const auto slash = s.find_last_of("/\\"); slash != std::string::npos)
+				s = s.substr(slash + 1);
+			return s;
+		};
+		static const auto noCandidates = nlohmann::json::array();
+
+		for (const auto& item : preset.at("items")) {
+			const auto paths = preset_target_paths(item);
+			if (paths.empty())
+				continue;
+			total++;
+			auto path = paths.front();
+			if (paths.size() > 1)
+				path += std::format(" +{}", paths.size() - 1);
+
+			// Two different flags, and they are not interchangeable. A preset excludes an
+			// entry deliberately by setting `enable` on the *target*, which is the one this
+			// run skips over and the only one `apply` reads; this tool records its own
+			// refusals by setting `enable` on the *item*. Read in the wrong order the second
+			// swallows the first, and every unmatched target gets reported as a decision
+			// somebody already made.
+			if (!preset_target_enabled(item)) {
+				switchedOff.push_back({-2., path, {}, hasSource(item) ? "carries a source" : "no source"});
+				continue;
+			}
+			const auto refused = item.contains("enable") && item["enable"].is_boolean()
+				&& !item["enable"].get<bool>();
+
+			const auto mi = item.find("matchInfo");
+			if (mi != item.end() && mi->value("status", std::string()) == "error") {
+				unreadable.push_back({-2., path, {}, mi->value("error", std::string("(no message)"))});
+				continue;
+			}
+			if (!refused && hasSource(item)) {
+				settled++;
+				continue;
+			}
+			if (mi == item.end()) {
+				nothing.push_back({-2., path, {}, "never attempted"});
+				continue;
+			}
+
+			// A stem container is decided pair by pair, so it can be part-resolved in a way
+			// no ordinary entry can: naming which pair fell short is the whole of the report.
+			if (const auto stems = mi->find("stems"); stems != mi->end() && stems->is_array() && !stems->empty()) {
+				size_t resolved = 0;
+				double worstScore = 2.;
+				std::string worst;
+				for (const auto& stem : *stems) {
+					if (stem.value("status", std::string()) == "matched") {
+						resolved++;
+						continue;
+					}
+					const auto score = stem.value("score", -2.);
+					if (score >= worstScore)
+						continue;
+					worstScore = score;
+					const auto& channels = stem.contains("channels") ? stem.at("channels") : noCandidates;
+					worst = std::format("{} at {:.4f}{}",
+						channels.size() >= 2
+							? std::format("ch{}+{}", channels[0].dump(), channels[1].dump())
+							: std::string("one pair"),
+						score,
+						stem.contains("source") ? " (" + leaf(stem.value("source", std::string())) + ")" : "");
+				}
+				partialStems.push_back({static_cast<double>(resolved), path, {},
+					std::format("{} of {} stems resolved; weakest {}", resolved, stems->size(),
+						worst.empty() ? "would not decode" : worst)});
+				continue;
+			}
+
+			const auto& candidates = mi->contains("candidates") && mi->at("candidates").is_array()
+				? mi->at("candidates") : noCandidates;
+			if (candidates.empty()) {
+				nothing.push_back({-2., path, {}, {}});
+				continue;
+			}
+
+			// Whichever metric the verdict actually turned on. Printing the envelope score
+			// beside a decision the rerank made would be quoting the wrong number at a reader
+			// who is about to go and check it.
+			const auto reranked = candidates.front().contains("spectralScore");
+			const auto scoreOf = [&](const nlohmann::json& candidate) {
+				return reranked ? candidate.value("spectralScore", -2.) : candidate.value("score", -2.);
+			};
+			const auto scoreBar = reranked ? rerankMinScore : minScore;
+			const auto marginBar = reranked ? rerankMinMargin : minMargin;
+
+			const auto best = scoreOf(candidates.front());
+			std::string why;
+			if (best < scoreBar)
+				why = std::format("below {:.3f}", scoreBar);
+			for (size_t i = 1; i < candidates.size(); i++) {
+				// Another release of the same recording is not a rival; the margin was never
+				// measured against it, so saying it was would send a reader after a non-issue.
+				if (candidates[i].value("duplicateOfBest", false))
+					continue;
+				if (const auto gap = best - scoreOf(candidates[i]); gap < marginBar)
+					why += std::format("{}only {:.4f} over {} ({:.4f}), needs {:.3f}",
+						why.empty() ? "" : ", ", gap,
+						leaf(candidates[i].value("source", std::string("?"))),
+						scoreOf(candidates[i]), marginBar);
+				break;
+			}
+			nearMiss.push_back({best, path,
+				leaf(candidates.front().value("source", std::string("?"))),
+				why.empty() ? std::string("declined, though both bars were met") : why});
+		}
+
+		const auto attention = nearMiss.size() + partialStems.size() + nothing.size()
+			+ unreadable.size() + switchedOff.size();
+		if (!attention) {
+			std::cerr << std::format("Nothing needs manual attention: all {} target(s) resolved.", total) << '\n';
+			return;
+		}
+
+		std::ranges::sort(nearMiss, [](const entry& a, const entry& b) { return a.Score > b.Score; });
+		for (auto* rows : {&partialStems, &nothing, &unreadable, &switchedOff})
+			std::ranges::sort(*rows, [](const entry& a, const entry& b) { return a.Path < b.Path; });
+
+		std::cerr << '\n' << std::format("Needs manual attention: {} of {} target(s); {} resolved.",
+			attention, total, settled) << '\n';
+
+		const auto dump = [&](std::string_view heading, std::string_view note,
+			const std::vector<entry>& rows, bool withScore) {
+			if (rows.empty())
+				return;
+			std::cerr << '\n' << std::format("  {} ({})", heading, rows.size()) << '\n';
+			if (!note.empty())
+				std::cerr << std::format("  {}", note) << '\n';
+			const auto shown = limit ? (std::min)(limit, rows.size()) : rows.size();
+			for (size_t i = 0; i < shown; i++) {
+				if (withScore)
+					std::cerr << std::format("    {:.4f}  {:<46} {:<30} {}",
+						rows[i].Score, rows[i].Path, rows[i].Source, rows[i].Detail) << '\n';
+				else if (rows[i].Detail.empty())
+					std::cerr << std::format("    {}", rows[i].Path) << '\n';
+				else
+					std::cerr << std::format("    {:<46} {}", rows[i].Path, rows[i].Detail) << '\n';
+			}
+			if (shown < rows.size())
+				std::cerr << std::format("    ... and {} more (--summary-limit 0 lists every one)",
+					rows.size() - shown) << '\n';
+		};
+
+		dump("Matched but not enabled -- something scored, the run would not commit to it",
+			"  Nearest the bar first: these are the ones a single listen is most likely to settle.",
+			nearMiss, true);
+		dump("Partly matched -- some of the file's stems resolved and some did not", {}, partialStems, false);
+		dump("Nothing scored -- no candidate cleared the floor at any alignment", {}, nothing, false);
+		dump("Could not be read", {}, unreadable, false);
+		dump("Switched off in the input, and left exactly as they were", {}, switchedOff, false);
+	}
+
 }
 
 int cmd_match(const std::vector<std::string>& args) {
@@ -380,7 +568,9 @@ int cmd_match(const std::vector<std::string>& args) {
 				"array of paths) and optionally a \"source\" (OST file path relative to --ost). Items that already\n"
 				"have a non-empty \"source\" are left untouched. Items this tool cannot confidently resolve are left\n"
 				"without a \"source\", get \"enable\": false, and get a \"matchInfo\" field explaining why, for manual\n"
-				"review.\n"
+				"review. Those are listed at the end of the run, grouped by what reviewing one would involve --\n"
+				"first the ones where something did score and only the score or the margin held it back, which\n"
+				"are the ones a listen can settle.\n"
 				"Its \"target\" also carries \"names\": every \"<SheetName>:<name>\" the game's own sheets\n"
 				"attach to that file, e.g. \"TerritoryType:The Tempest\" or \"Orchestrion:A New Hope\" -- from\n"
 				"territorytype/contentfindercondition/instancecontent/fate/mount/leve/weddingbgm (via bgm/\n"
@@ -399,6 +589,7 @@ int cmd_match(const std::vector<std::string>& args) {
 		parser.add_argument("--target-exclude-prefix").default_value(std::string()).help("with --discover, skip BGM paths starting with any of these comma-separated prefixes (e.g. music/ffxiv/Orchestrion/)");
 		parser.add_argument("--exclude-preset").default_value(std::string()).help("comma-separated preset JSON files whose target paths should be excluded from matching");
 		parser.add_argument("--matched-only").default_value(false).implicit_value(true).help("write only the items that were matched, so the output is directly usable as a preset");
+		parser.add_argument("--summary-limit").default_value(20u).scan<'u', uint32_t>().help("how many targets to name in each group of the closing manual-attention summary (default: 20; 0 lists every one)");
 		parser.add_argument("--ffmpeg").default_value(std::string("ffmpeg")).help("path to ffmpeg executable");
 		parser.add_argument("--ffprobe").default_value(std::string("ffprobe")).help("path to ffprobe executable, used to read title tags for duplicate-release detection");
 		parser.add_argument("--language").default_value(xivres::game_language::Unspecified)
@@ -1341,6 +1532,11 @@ int cmd_match(const std::vector<std::string>& args) {
 				}
 			}
 		}
+
+		// Before --matched-only, which is the option that throws these away: the summary of
+		// what was dropped is most useful precisely in the run that stops writing it down.
+		print_attention_summary(preset, parser.get<uint32_t>("--summary-limit"),
+			minScore, minMargin, rerankMinScore, rerankMinMargin);
 
 		if (parser.get<bool>("--matched-only")) {
 			nlohmann::json kept = nlohmann::json::array();
