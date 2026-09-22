@@ -1,5 +1,6 @@
 {
  "name": "Final Fantasy XIV - 2.0 - A Realm Reborn",
+ "offsetsAreFitted": true,
  "searchDirectories": {
   "A Realm Reborn": {
    "default": true,

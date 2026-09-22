@@ -1,5 +1,6 @@
 {
  "name": "Final Fantasy XIV - 5.5 - Death Unto Dawn",
+ "offsetsAreFitted": true,
  "searchDirectories": {
   "Death Unto Dawn": {
    "default": true,

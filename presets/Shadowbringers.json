@@ -1,5 +1,6 @@
 {
  "name": "Final Fantasy XIV - 5.0 - Shadowbringers",
+ "offsetsAreFitted": true,
  "searchDirectories": {
   "Shadowbringers": {
    "default": true,

@@ -1,5 +1,6 @@
 {
  "name": "Final Fantasy XIV - 2.5 - Before The Fall",
+ "offsetsAreFitted": true,
  "searchDirectories": {
   "Before The Fall": {
    "default": true,

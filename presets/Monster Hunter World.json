@@ -1,5 +1,6 @@
 {
  "name": "Monster Hunter World",
+ "offsetsAreFitted": true,
  "searchDirectories": {
   "Monster Hunter World Original Soundtrack": {
    "default": true,

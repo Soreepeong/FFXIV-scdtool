@@ -1,5 +1,6 @@
 {
  "name": "Final Fantasy XIV - 1.0 - Before Meteor",
+ "offsetsAreFitted": true,
  "searchDirectories": {
   "Before Meteor": {
    "default": true,

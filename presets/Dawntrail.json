@@ -1,5 +1,6 @@
 {
  "name": "Final Fantasy XIV - 7.0 - Dawntrail",
+ "offsetsAreFitted": true,
  "searchDirectories": {
   "Dawntrail": {
    "default": true

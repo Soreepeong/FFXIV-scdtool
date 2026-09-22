@@ -1,5 +1,6 @@
 {
  "name": "Final Fantasy XIV - 6.5 - Growing Light",
+ "offsetsAreFitted": true,
  "searchDirectories": {
   "Growing Light": {
    "default": true

@@ -49,11 +49,20 @@ namespace {
 		bool Deduced = false;
 	};
 
+	// One `inputFiles` slot of such a graph. A slot is usually a file out of the OST pool,
+	// but the old importer also writes an empty slot to mean the game's own entry, and that
+	// file does not exist until the build stages it -- so the slot has to survive resolution
+	// as an intention rather than as a path, and be filled in at render time.
+	struct apply_graph_input {
+		std::filesystem::path Path;
+		bool IsTarget = false;  // the game's own audio for the entry being built
+	};
+
 	// A source built by a filter graph rather than read from one file. Rendered to a temp
 	// file once, before anything else looks at it, so every treatment downstream -- offsets,
 	// per-channel decode, fades, loudness, the loop -- works on it unchanged.
 	struct apply_source_graph {
-		std::vector<std::filesystem::path> Inputs;   // one per `inputFiles` slot the graph reads
+		std::vector<apply_graph_input> Inputs;       // one per `inputFiles` slot the graph reads
 		std::string Description;                     // the -filter_complex argument
 		std::string OutLabel;                        // the label to -map
 	};
@@ -82,6 +91,20 @@ namespace {
 		// writes no offset at all when the match was already within 50ms, so an absent one
 		// carries that much slack; a stated one was fitted and only lost precision to JSON.
 		bool Stated = false;
+
+		// Set from the preset file's `offsetsAreFitted`: every offset in that file is
+		// already decided, the ones it leaves out included. See FixesAlignment.
+		bool Fitted = false;
+
+		// Whether this source's alignment is settled, so the onset alignment must leave it
+		// alone. Two ways it can be: the file declares all of its offsets fitted, which is
+		// what `presets/` says, or this offset is stated and non-zero, which is a fitted
+		// offset written out.
+		//
+		// A stated *zero* is neither. In the old importer the field set where reading
+		// begins -- zero being where it begins anyway -- and the onset alignment then ran
+		// on top of it regardless, so an explicit zero was never a claim about alignment.
+		bool FixesAlignment() const { return Fitted || (Stated && Offset != 0.); }
 	};
 
 	// A span of the output, in the *target's* timeline. Segments run back to back in the
@@ -89,10 +112,18 @@ namespace {
 	// starts, and 0 means "until its source runs out", which is what the last segment of a
 	// preset always says. `CrossfadeSeconds` lets the previous segment carry on playing
 	// past its stated length, faded out underneath this one fading in -- which is how the
+	// How loud counts as "the music has started" when a source with no stated offset is
+	// aligned onto the target by onset. The old importer's own default, and the value the
+	// 21 presets that override it were correcting: a quiet opening is already past 0.1
+	// before it is audible, and a noisy one reaches it during the room tone.
+	constexpr double DefaultOnsetThreshold = 0.1;
+
 	// game built the loop-outs these presets reproduce, so a hard cut is not a substitute.
 	struct apply_segment {
 		std::map<std::string, apply_segment_source> Sources;
 		std::vector<std::pair<std::string, size_t>> Channels;  // output channel -> (source name, channel in it)
+		// `sourceThresholds`, keyed by source name; `"target"` names the game's own entry.
+		std::map<std::string, double> Thresholds;
 		double Length = 0.;
 		double CrossfadeSeconds = 0.;
 		// Where this segment begins in the target, when it does not simply follow the one
@@ -124,14 +155,21 @@ namespace {
 		std::vector<apply_stem> Stems;  // empty unless the entry is engine-switched stems
 		std::vector<apply_segment> Segments;  // empty unless the entry needs more than one span
 		std::wstring Filter;      // the preset's filter chain for this source, if it gave one
-		// A preset is a record of decisions already taken: its offset was fitted against
-		// this very file, so it is not re-derived. A gain or a lead-in silence, though, is
-		// only written down when it was worth writing -- the generator dropped any gain
-		// under a decibel -- so the absence of one is not an instruction to leave the level
-		// alone. Measuring it where the preset is silent is what the matchset build did, and
-		// without it BGM_Town_Uru_Day came out 0.6 dB off a game file it used to match
-		// exactly. Only where the preset *does* say would measuring again apply it twice.
+		// A preset is a record of decisions already taken: an offset it states was fitted
+		// against this very file, so it is not re-derived (see OffsetStated for the offset
+		// it does not state). A gain or a lead-in silence, though, is only written down when
+		// it was worth writing -- the generator dropped any gain under a decibel -- so the
+		// absence of one is not an instruction to leave the level alone. Measuring it where
+		// the preset is silent is what the matchset build did, and without it
+		// BGM_Town_Uru_Day came out 0.6 dB off a game file it used to match exactly. Only where the preset *does* say would measuring again apply it twice.
 		bool FromPreset = false;
+		// Whether that preset fixed the offset. `FromPreset` alone is not the question the
+		// offset deduction has to answer: an item that states one has had it fitted against
+		// this very file and must be left alone, but most of the hand-written items state
+		// none at all, and their implicit zero is an absence of a decision rather than a
+		// decision to start at zero. Re-deriving where nothing was fixed is the only way
+		// those entries get an offset at all. See apply_segment_source::FixesAlignment.
+		bool OffsetStated = false;
 		std::string Note;         // the preset's own comment, echoed in the log line
 	};
 
@@ -285,6 +323,7 @@ namespace {
 	std::filesystem::path render_source_graph(
 		const std::filesystem::path& ffmpeg,
 		const apply_source_graph& graph,
+		const std::filesystem::path& templateAudio,
 		const std::filesystem::path& outPath) {
 
 		std::error_code ec;
@@ -292,10 +331,14 @@ namespace {
 
 		std::vector<std::wstring> args{L"-v", L"error"};
 		for (const auto& input : graph.Inputs) {
-			if (input.empty())
+			// The game's own entry, staged by the caller. Resolved here rather than earlier
+			// because there is one staged file per target and one graph shared by all of an
+			// item's targets, so the substitution belongs to the render, not to the preset.
+			const auto& file = input.IsTarget ? templateAudio : input.Path;
+			if (file.empty())
 				throw std::runtime_error("a filter graph input was never resolved to a file");
 			args.emplace_back(L"-i");
-			args.emplace_back(input.wstring());
+			args.emplace_back(file.wstring());
 		}
 		args.emplace_back(L"-filter_complex");
 		args.emplace_back(xivres::util::unicode::convert<std::wstring>(graph.Description));
@@ -415,7 +458,7 @@ namespace {
 
 		constexpr double EnvelopeRateHz = 200.;   // decode_envelope's default 80-sample hop at 16 kHz
 		constexpr double MaxOffsetSeconds = 900.;
-		constexpr double MinOverlapSeconds = 15.; // absolute, never a fraction of the target: a
+		constexpr double MinOverlapFloorSeconds = 15.; // never a fraction of the target: a
 		                                          // silence-padded 600s file holding 30s of audio
 		                                          // can never meet a fractional floor and would
 		                                          // otherwise score nothing at all
@@ -428,8 +471,12 @@ namespace {
 
 		const auto envTemplate = decode_envelope(ffmpeg, templateAudio);
 		const auto envSource = decode_envelope(ffmpeg, source);
+		// A target shorter than the floor cannot overlap by it however it is aligned, and
+		// asking for the impossible yields no candidates at all rather than a worse one.
+		const auto minOverlapSeconds = (std::min)(MinOverlapFloorSeconds,
+			static_cast<double>(envTemplate.size()) / EnvelopeRateHz);
 		auto candidates = envelope_offset_candidates(
-			envTemplate, envSource, EnvelopeRateHz, MaxOffsetSeconds, MinOverlapSeconds);
+			envTemplate, envSource, EnvelopeRateHz, MaxOffsetSeconds, minOverlapSeconds);
 		if (candidates.empty())
 			return result;
 
@@ -724,6 +771,20 @@ namespace {
 	//
 	// Level matching is per source per segment rather than once for the whole file: a
 	// medley stitched from eight album tracks has eight different masters in it, and one
+	// The first sample at or above `threshold`, searching from `from`.
+	//
+	// The raw signed value, not its magnitude, which is what the old importer compared and
+	// so is what the thresholds in the hand-written presets were tuned against: 0.4 on the
+	// Crystal Tower stems, 0.03 on two quiet field themes, 0.01 on Skylords. Comparing
+	// magnitudes instead would fire up to half a cycle earlier and would make every one of
+	// those numbers mean something slightly different from what its author measured.
+	std::optional<size_t> first_sample_above(const std::vector<float>& samples, size_t from, float threshold) {
+		for (size_t i = from; i < samples.size(); ++i)
+			if (samples[i] >= threshold)
+				return i;
+		return std::nullopt;
+	}
+
 	// gain for the lot leaves most of them wrong.
 	std::vector<float> build_segment_audio(
 		const std::filesystem::path& ffmpeg,
@@ -733,7 +794,9 @@ namespace {
 		size_t samplingRate,
 		bool loudnessMatch,
 		double maxGainDb,
-		const std::function<std::filesystem::path(const wchar_t*, const wchar_t*)>& tempFile) {
+		const std::function<std::filesystem::path(const wchar_t*, const wchar_t*)>& tempFile,
+		// Where the onset alignment put each source it moved, for the caller to report.
+		std::vector<std::pair<std::string, double>>* alignments = nullptr) {
 
 		const auto rate = static_cast<double>(samplingRate);
 		const auto toSamples = [rate](double seconds) {
@@ -752,7 +815,7 @@ namespace {
 			const auto key = source.Graph.get();
 			if (const auto it = rendered.find(key); it != rendered.end())
 				return it->second;
-			return rendered.emplace(key, render_source_graph(ffmpeg, *source.Graph,
+			return rendered.emplace(key, render_source_graph(ffmpeg, *source.Graph, templateAudio,
 				tempFile(L"scdtool_apply_graph", L".wav"))).first->second;
 		};
 
@@ -803,13 +866,77 @@ namespace {
 					samplingRate, tempFile(L"scdtool_apply_seg", L".f32"), source->second.Filter));
 			}
 
-			// How much of this segment its sources can actually supply, from its own offset
-			// on. A recording that stops short simply ends the segment early rather than
-			// reading past its end.
+			// Where each source is read from, in its own samples. Normally its stated
+			// offset; where it states none, the offset that lands its first audible sample
+			// on the first audible sample of the target channel it feeds.
+			//
+			// Signed, because the answer can be before the recording's start -- the game's
+			// file may open ahead of the release -- and that is leading silence rather than
+			// an error. Measured once per source and applied to all of its channels, from
+			// the first output channel that names it, which is what the importer did.
+			std::map<std::string, ptrdiff_t> start;
+			for (const auto& [name, source] : segment.Sources)
+				start.emplace(name, static_cast<ptrdiff_t>(toSamples(source.Offset)));
+
+			std::map<size_t, std::vector<float>> targetChannel;  // decoded on demand, cached
+			std::set<std::string> aligned;
+			for (size_t ci = 0; ci < segment.Channels.size(); ++ci) {
+				const auto& [name, channelIndex] = segment.Channels[ci];
+				const auto source = segment.Sources.find(name);
+				if (source == segment.Sources.end() || source->second.IsTarget || source->second.FixesAlignment())
+					continue;
+				if (aligned.contains(name))
+					continue;  // an earlier output channel already placed this source
+				aligned.insert(name);
+
+				// The target channel this one feeds. A mono entry described by a stereo
+				// preset has fewer channels than the segment lists, and both of its listed
+				// channels fold into the one it has.
+				const auto tc = (std::min)(ci, channels - 1);
+				try {
+					if (!targetChannel.contains(tc))
+						targetChannel.emplace(tc, decode_channel_to_floats(ffmpeg, templateAudio, tc,
+							samplingRate, tempFile(L"scdtool_apply_tplch", L".f32")));
+
+					const auto threshold = [&](const std::string& who) {
+						const auto it = segment.Thresholds.find(who);
+						return static_cast<float>(it == segment.Thresholds.end() ? DefaultOnsetThreshold : it->second);
+					};
+					// The target is searched from this segment's own start, not from the
+					// top of the file: a later segment is matched against the stretch of
+					// the target it actually covers.
+					const auto before = start.at(name);
+					const auto from = (std::max)(ptrdiff_t{0}, before);
+					const auto targetFirst = first_sample_above(targetChannel.at(tc), segmentStart[i], threshold("target"));
+					const auto sourceFirst = first_sample_above(decoded.at(segment.Channels[ci]),
+						static_cast<size_t>(from), threshold(name));
+					if (targetFirst && sourceFirst) {
+						// Each onset counts from where its own reading begins, so the shift
+						// is the difference between two like quantities rather than between
+						// two unrelated origins. Both starts are zero for an item's first
+						// segment, which is why taking them as absolute indices looked right
+						// until a second segment moved one of them.
+						const auto targetRelative = static_cast<ptrdiff_t>(*targetFirst) - static_cast<ptrdiff_t>(segmentStart[i]);
+						const auto sourceRelative = static_cast<ptrdiff_t>(*sourceFirst) - from;
+						start.at(name) = before + sourceRelative - targetRelative;
+						if (alignments && start.at(name) != before)
+							alignments->emplace_back(name, static_cast<double>(start.at(name)) / rate);
+					}
+				} catch (const std::exception&) {
+					// The same rule the loudness and onset checks follow: a measurement that
+					// cannot be made costs the alignment, never the entry.
+				}
+			}
+
+			// How much of this segment its sources can actually supply, from where each is
+			// read from. A recording that stops short simply ends the segment early rather
+			// than reading past its end; one read from before its start contributes the
+			// leading silence too.
 			size_t available = (std::numeric_limits<size_t>::max)();
 			for (const auto& [key, samples] : decoded) {
-				const auto offsetSamples = toSamples(segment.Sources.at(key.first).Offset);
-				available = (std::min)(available, samples.size() > offsetSamples ? samples.size() - offsetSamples : 0);
+				const auto from = start.at(key.first);
+				const auto reach = static_cast<ptrdiff_t>(samples.size()) - from;
+				available = (std::min)(available, reach > 0 ? static_cast<size_t>(reach) : 0);
 			}
 			if (available == (std::numeric_limits<size_t>::max)())
 				available = 0;
@@ -839,7 +966,8 @@ namespace {
 				for (const auto& [name, source] : segment.Sources) {
 					try {
 						const auto templateLufs = measure_loudness(ffmpeg, templateAudio, startSeconds, spanSeconds);
-						const auto sourceLufs = measure_loudness(ffmpeg, fileFor(source), source.Offset, spanSeconds);
+						const auto sourceLufs = measure_loudness(ffmpeg, fileFor(source),
+							(std::max)(0., static_cast<double>(start.at(name)) / rate), spanSeconds);
 						gain[name] = std::pow(10., std::clamp(templateLufs - sourceLufs, -maxGainDb, maxGainDb) / 20.);
 					} catch (const std::exception&) {
 						// Same rule as the single-source path: an unreadable measurement
@@ -857,10 +985,15 @@ namespace {
 				for (const auto& [key, weight] : routing[ch]) {
 				const auto& [name, channelIndex] = key;
 				const auto& samples = decoded.at(key);
-				const auto offsetSamples = toSamples(segment.Sources.at(name).Offset);
+				const auto from = start.at(name);
 				const auto scale = weight * static_cast<float>(gain.empty() ? 1. : gain.at(name));
 				for (size_t n = 0; n < render; n++) {
-					auto value = samples[offsetSamples + n] * scale;
+					// Before the recording begins, or past where it ends, is silence. Only
+					// an alignment that reaches back before the source's start can produce
+					// the first, and `available` already bounds the second.
+					const auto at = from + static_cast<ptrdiff_t>(n);
+					auto value = at >= 0 && static_cast<size_t>(at) < samples.size()
+						? samples[static_cast<size_t>(at)] * scale : 0.f;
 					if (n < fadeIn)
 						value *= static_cast<float>(static_cast<double>(n + 1) / static_cast<double>(fadeIn + 1));
 					else if (fadeOut && n >= render - fadeOut)
@@ -1218,6 +1351,8 @@ namespace {
 
 		if (target.value("enable", true) == false)
 			return;
+		// Whether this file's offsets are complete, which decides what an absent one means.
+		const auto offsetsAreFitted = config.value("offsetsAreFitted", false);
 		// A target that needs no offset and no filter says so by leaving `segments` out
 		// altogether -- it plays its source from the start, whole. 54 targets, most of them
 		// Orchestrion rolls, are written that way, and skipping them for want of the key
@@ -1294,23 +1429,20 @@ namespace {
 					for (size_t i = 0; i < slots; ++i) {
 						if (!used.contains(i) || (files[i].is_array() && files[i].empty())) {
 							// An empty slot means the game's own audio in the old importer's
-							// presets, which is not available this early -- and a slot nothing
-							// reads only has to hold ffmpeg's numbering. Either way a silent
-							// placeholder is wrong to build from, so an empty slot that *is*
-							// read declines the entry rather than guessing.
-							if (used.contains(i))
-								throw std::runtime_error(std::format(
-									"input {} is the game's own audio, which this cannot supply yet", i));
-							built->Inputs.emplace_back();
+							// presets. That file does not exist yet -- it is staged per target,
+							// later -- so the slot is carried as an intention and filled in at
+							// render time. A slot nothing reads only has to hold ffmpeg's
+							// numbering, and stays empty in both senses.
+							built->Inputs.push_back({.IsTarget = used.contains(i)});
 							continue;
 						}
 						const auto file = resolve_source_name(ostDir, config, dirs, files[i]);
 						if (!file)
 							throw std::runtime_error(std::format("no file for input {}", i));
-						built->Inputs.push_back(*file);
+						built->Inputs.push_back({.Path = *file});
 					}
 					graphs.emplace(name, built);
-					resolved.emplace(name, built->Inputs.empty() ? std::filesystem::path{} : built->Inputs.front());
+					resolved.emplace(name, built->Inputs.empty() ? std::filesystem::path{} : built->Inputs.front().Path);
 					continue;
 				} catch (const std::exception& e) {
 					unresolved.emplace_back(paths.front(), std::format(
@@ -1401,7 +1533,8 @@ namespace {
 				segment.Sources.emplace(name, apply_segment_source{
 					.Path = path,
 					.Graph = graphs.contains(name) ? graphs.at(name) : nullptr,
-					.IsTarget = name == "target"});
+					.IsTarget = name == "target",
+					.Fitted = offsetsAreFitted});
 			if (const auto offsets = segmentJson.find("sourceOffsets"); offsets != segmentJson.end() && offsets->is_object()) {
 				for (const auto& [name, spec] : offsets->items()) {
 					if (const auto source = segment.Sources.find(name); source != segment.Sources.end()) {
@@ -1409,6 +1542,11 @@ namespace {
 						source->second.Stated = true;
 					}
 				}
+			}
+			if (const auto thresholds = segmentJson.find("sourceThresholds"); thresholds != segmentJson.end() && thresholds->is_object()) {
+				for (const auto& [name, value] : thresholds->items())
+					if (value.is_number())
+						segment.Thresholds.emplace(name, value.get<double>());
 			}
 			if (const auto filters = segmentJson.find("sourceFilters"); filters != segmentJson.end() && filters->is_object()) {
 				for (const auto& [name, filter] : filters->items()) {
@@ -1470,6 +1608,7 @@ namespace {
 					.Offset = -only.Offset,
 					.Filter = only.Filter,
 					.FromPreset = true,
+					.OffsetStated = only.FixesAlignment(),
 					.Note = target.value("# comment", std::string{}),
 				});
 				continue;
@@ -2382,6 +2521,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 			bool gainLimited = false;
 			double onsetDb = 0.;
 			double onsetSeconds = 0.;
+			std::vector<std::pair<std::string, double>> segmentAlignments;
 			size_t totalSamples = 0;
 			size_t newLoopStart = 0;
 			size_t newLoopEnd = 0;
@@ -2396,7 +2536,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 				// written -- re-deriving them here would throw away the one thing the preset knows
 				// that the matcher does not, which is where the seams go.
 				floats = build_segment_audio(ffmpegPath, templateAudio, job.Segments, channels,
-					samplingRate, loudnessMatch, maxGainDb, tempFile);
+					samplingRate, loudnessMatch, maxGainDb, tempFile, &segmentAlignments);
 
 				totalSamples = floats.size() / channels;
 				newLoopStart = loopStart;
@@ -2430,7 +2570,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 				// in front of us, and the envelope that produced it cannot tell one loop pass
 				// from another. A failure here is never fatal -- the recorded offset still
 				// works for an untrimmed library, which is the common case.
-				if (autoOffset && !job.FromPreset) {
+				if (autoOffset && (!job.FromPreset || !job.OffsetStated)) {
 					try {
 						deduced = deduce_offset(ffmpegPath, templateAudio, job.SourcePath,
 							static_cast<double>(templateLoopStart) / static_cast<double>(templateRate),
@@ -2853,7 +2993,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 							built += (built.empty() ? "" : "+") + file;
 					}
 				}
-				std::cerr << std::format("  {} <- {} (score {:.3f}, offset {:+.3f}s{}{}, trim {} pad {} samples, loop {}-{}, gain {:+.1f} dB{}{}{}{})",
+				std::cerr << std::format("  {} <- {} (score {:.3f}, offset {:+.3f}s{}{}, trim {} pad {} samples, loop {}-{}, gain {:+.1f} dB{}{}{}{}{})",
 					job.TargetPath, job.Segments.empty() ? u8(job.SourcePath) : built, job.Score, effectiveOffset,
 					deduced.Deduced && std::abs(effectiveOffset - job.Offset) > 0.05
 						? std::format(" [deduced, was {:+.3f}s, intro {:.3f} over {} candidates]",
@@ -2868,6 +3008,14 @@ int cmd_apply(const std::vector<std::string>& args) {
 					gainLimited ? std::format(", peak-limited from {:+.1f} dB", requestedGainDb) : "",
 					onsetSeconds > 0. ? std::format(", onset corrected {:.1f} dB over {:.2f}s", onsetDb, onsetSeconds) : "",
 					tailSeconds > 0. ? std::format(", tail faded {:.1f} dB over {:.2f}s", tailDb, tailSeconds) : "",
+					[&] {
+						if (segmentAlignments.empty())
+							return std::string();
+						std::string res = ", aligned";
+						for (const auto& [name, seconds] : segmentAlignments)
+							res += std::format(" {}@{:+.3f}s", name, seconds);
+						return res;
+					}(),
 					seam.Applied
 						? std::format(", loop seam {:.2f} -> {:.2f} over {:.0f}ms", seam.Before, seam.After,
 							1000. * static_cast<double>(seam.Frames) / static_cast<double>(samplingRate))

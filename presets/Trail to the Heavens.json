@@ -1,5 +1,6 @@
 {
  "name": "Final Fantasy XIV - 7.5 - Trail to the Heavens",
+ "offsetsAreFitted": true,
  "searchDirectories": {
   "Trail to the Heavens": {
    "default": true

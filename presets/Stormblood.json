@@ -1,5 +1,6 @@
 {
  "name": "Final Fantasy XIV - 4.0 - Stormblood",
+ "offsetsAreFitted": true,
  "searchDirectories": {
   "Stormblood": {
    "default": true,
