@@ -932,12 +932,53 @@ namespace {
 				}
 			}
 			for (const auto& [key, best] : longest) {
+				// Both sides as they will be heard: of the game's file, only the channels this
+				// recording feeds -- not a stem another recording or "target" supplies -- and the
+				// recording mixed the way the routing below mixes it, mono fold included.
+				// Measured whole, a 6-channel entry's reference was all three stems at once, and
+				// a mono entry's stereo recording read 3-6 dB louder than its own fold: the 68
+				// mono targets of a 175-target check sat 3.95 dB under the game (stereo: 0.29).
+				const auto& seg = segments[best.Segment];
+				std::map<size_t, std::vector<std::pair<size_t, double>>> feeds;  // output -> (recording channel, weight)
+				if (seg.Channels.size() == channels) {
+					for (size_t ci = 0; ci < channels; ci++)
+						if (seg.Channels[ci].first == best.Name)
+							feeds[seat(ci)].emplace_back(seg.Channels[ci].second, 1.);
+				} else if (channels == 1) {
+					for (const auto& [name, channelIndex] : seg.Channels)
+						if (name == best.Name)
+							feeds[0].emplace_back(channelIndex, 1. / static_cast<double>(seg.Channels.size()));
+				}
+				const auto identity = channels == 2 && feeds.size() == 2
+					&& feeds[0] == std::vector<std::pair<size_t, double>>{{0, 1.}}
+					&& feeds[1] == std::vector<std::pair<size_t, double>>{{1, 1.}};
+				std::wstring templatePan, sourcePan;
+				if (!identity && !feeds.empty()) {
+					const auto layout = feeds.size() == 1 ? std::wstring(L"mono")
+						: feeds.size() == 2 ? std::wstring(L"stereo") : std::format(L"{}c", feeds.size());
+					templatePan = sourcePan = L"pan=" + layout;
+					size_t k = 0;
+					for (const auto& [output, inputs] : feeds) {
+						templatePan += std::format(L"|c{}=c{}", k, output);
+						sourcePan += std::format(L"|c{}=", k);
+						for (size_t j = 0; j < inputs.size(); j++)
+							sourcePan += std::format(L"{}{:.6f}*c{}", j ? L"+" : L"", inputs[j].second, inputs[j].first);
+						k++;
+					}
+				}
+				// A mono entry is compared against the game's file folded to mono: an
+				// Orchestrion roll is built mono even where the game ships it in stereo,
+				// because the game folds it on playback.
+				if (channels == 1)
+					templatePan = L"aformat=channel_layouts=mono";
+				const auto sourceChain = sourcePan.empty() ? key.second
+					: key.second.empty() ? sourcePan : key.second + L"," + sourcePan;
 				try {
 					const auto spanSeconds = static_cast<double>(best.Span) / rate;
 					const auto templateLufs = measure_loudness(ffmpeg, templateAudio,
-						static_cast<double>(segmentStart[best.Segment]) / rate, spanSeconds);
+						static_cast<double>(segmentStart[best.Segment]) / rate, spanSeconds, templatePan);
 					const auto sourceLufs = measure_loudness(ffmpeg, key.first,
-						static_cast<double>(best.From) / rate, spanSeconds, key.second);
+						static_cast<double>(best.From) / rate, spanSeconds, sourceChain);
 					const auto db = std::clamp(templateLufs - sourceLufs, -maxGainDb, maxGainDb);
 					gainOf.emplace(key, std::pow(10., db / 20.));
 					if (gains)
@@ -2593,7 +2634,16 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 			const auto [templateLoopStart, templateLoopEnd] = template_loop_points(templateItem);
 
-			const auto channels = static_cast<size_t>(templateItem.Header->ChannelCount);
+			const auto templateChannels = static_cast<size_t>(templateItem.Header->ChannelCount);
+			// An Orchestrion roll is built mono: the game folds a stereo roll to mono on
+			// playback, so its second channel only costs size -- and a stereo build would be
+			// level-matched against a stereo reference no listener hears.
+			const auto orchestrion = [&] {
+				auto lower = job.TargetPath;
+				std::ranges::transform(lower, lower.begin(), [](char c) { return static_cast<char>(std::tolower(static_cast<unsigned char>(c))); });
+				return lower.starts_with("music/ffxiv/orchestrion/");
+			}();
+			const auto channels = orchestrion && templateChannels == 2 ? size_t{1} : templateChannels;
 			const auto templateRate = static_cast<size_t>(templateItem.Header->SamplingRate);
 			if (!channels || !templateRate)
 				throw std::runtime_error(std::format("{} has no channels or sample rate.", job.TargetPath));
@@ -2850,9 +2900,16 @@ int cmd_apply(const std::vector<std::string>& args) {
 						static_cast<double>(spanFrom) / static_cast<double>(samplingRate) - effectiveOffset);
 
 					try {
-						const auto templateLufs = measure_loudness(ffmpegPath, templateAudio, templateStartSeconds, spanSeconds);
-						// Through the preset's filter, which is what plays.
-						const auto sourceLufs = measure_loudness(ffmpegPath, job.SourcePath, sourceStartSeconds, spanSeconds, job.Filter);
+						// Through the preset's filter and the same channel conversion the decode
+						// applies (-ac), which is what plays: a stereo recording measured unfolded
+						// reads 3-6 dB louder than the mono entry it becomes. The game's side
+						// takes the same fold where the entry is built with fewer channels than it has.
+						const auto fold = std::format(L"aformat=channel_layouts={}",
+							channels == 1 ? L"mono" : channels == 2 ? L"stereo" : std::format(L"{}c", channels));
+						const auto templateLufs = measure_loudness(ffmpegPath, templateAudio, templateStartSeconds, spanSeconds,
+							channels < templateChannels ? fold : std::wstring());
+						const auto sourceLufs = measure_loudness(ffmpegPath, job.SourcePath, sourceStartSeconds, spanSeconds,
+							job.Filter.empty() ? fold : job.Filter + L"," + fold);
 						gainDb = std::clamp(templateLufs - sourceLufs, -maxGainDb, maxGainDb);
 
 						const auto requestedDb = gainDb;
