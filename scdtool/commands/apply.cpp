@@ -1149,6 +1149,11 @@ namespace {
 			// single-source and stem paths do, rather than left to the whole-file back-off
 			// below -- which quietened every segment of a medley for one loud one:
 			// BGM_System_EndCredit01's ARR_FFXIV_003 at +3.8 dB cost all three 2.2 dB.
+			//
+			// Only as far as the target runs: a last segment states no length and renders to the
+			// end of its recording, and a peak past the loop end -- which nobody hears -- held
+			// BGM_Event_Tanoshii1's re-entry at -5.9 dB under a filter that lifts late material.
+			const auto heard = targetEnd > segmentStart[i] ? (std::min)(render, targetEnd - segmentStart[i]) : render;
 			for (auto& [name, g] : gain) {
 				if (g <= 1.)
 					continue;
@@ -1158,7 +1163,7 @@ namespace {
 						continue;
 					const auto from = start.at(name);
 					const auto first = static_cast<size_t>((std::max)(ptrdiff_t{0}, from));
-					const auto last = static_cast<size_t>((std::clamp)(from + static_cast<ptrdiff_t>(render),
+					const auto last = static_cast<size_t>((std::clamp)(from + static_cast<ptrdiff_t>(heard),
 						ptrdiff_t{0}, static_cast<ptrdiff_t>(samples.size())));
 					for (auto n = first; n < last; n++)
 						peak = (std::max)(peak, std::abs(samples[n]));
