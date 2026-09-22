@@ -3405,7 +3405,7 @@
      {
       "sourceOffsets": {
        "SHADOWBRINGERS_76": {
-        "offset": 2.82
+        "offset": 2.81949
        }
       },
       "channels": [
@@ -3418,13 +3418,16 @@
         "channel": 1
        }
       ],
-      "length": 258.8
+      "length": 258.5
      },
      {
       "sourceOffsets": {
        "SHADOWBRINGERS_62": {
-        "offset": 93.16
+        "offset": 1.476011
        }
+      },
+      "sourceFilters": {
+       "SHADOWBRINGERS_62": "aresample=81600,asetrate=81601"
       },
       "channels": [
        {
@@ -3436,29 +3439,31 @@
         "channel": 1
        }
       ],
-      "length": 113.7,
-      "crossfadeSeconds": 2.0
+      "crossfadeSeconds": 0.0
      },
      {
+      "startSeconds": 258.5,
       "sourceOffsets": {
-       "SHADOWBRINGERS_62": {
-        "offset": 24.09
+       "SHADOWBRINGERS_76": {
+        "offset": 261.31949
        }
       },
       "channels": [
        {
-        "source": "SHADOWBRINGERS_62",
+        "source": "SHADOWBRINGERS_76",
         "channel": 0
        },
        {
-        "source": "SHADOWBRINGERS_62",
+        "source": "SHADOWBRINGERS_76",
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 2.0
+      "length": 10.0,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.5
      }
     ],
-    "# comment": "two pieces, not a short track: SHADOWBRINGERS_76 to 259s then SHADOWBRINGERS_62, which itself runs out 15s before the target and is re-entered at 24.090s. Spans located by scan_credits_medley.py over the whole pool (0.976, 0.995) and the re-entry by the tail check (0.998). Full length with the loop intact: 0.9914 against the game's own file, from 0.9805 for a build that stopped 119s short."
+    "# comment": "two pieces: SHADOWBRINGERS_76 to 258.5s, then SHADOWBRINGERS_62 to the loop end. SHADOWBRINGERS_62 plays one 91.3883s passage twice, sample-identical (self-correlation 0.9996-1.0000), then fades from about 183s into the recording. The old layout read it from 93.16s (the second pass) with a 2s crossfade at 258.8, ran it into that fade and re-entered two periods back at 372.5s, 2s after the album had already faded (join flagged 'outgoing runs out before the join', build 41.7 dB under the game in the second before it, envelope hole 44.9 dB at 371.9s); its offset was also 4.4 ms off, so the build's waveform correlation with the game over 260-372s was only 0.25-0.94. Waveform correlation of the game against each pass shows the game reads the recording from its very start (lag -257.0240 s, 0.98 at 258-262s against 0.67-0.77 for the second pass) and keeps that one lag to the loop end: game 372s correlates 0.995 with the first pass and 0.815 with the faded second, its level holds a steady 2.5 dB over the first pass through 344-387s (no fade-in, fade-out or sum anywhere), and loop start and loop end read recording 39.22s and 130.61s, exactly one period apart, so the loop wraps inside the recording's own repeat. SHADOWBRINGERS_62 is therefore one segment from 258.5s to the loop end at the recording's start (it is silent until its attack at 258.70s). The game does not crossfade the two pieces: a least-squares fit of the game against both recordings holds SHADOWBRINGERS_76 at 0 dB through its own natural decay to 260s while SHADOWBRINGERS_62 comes in at full level, so the join is a plain switch plus a layered segment (startSeconds 258.5) carrying SHADOWBRINGERS_76 on to its end. Offsets are sample-level lags by waveform correlation (SHADOWBRINGERS_76 +2.81949 s, was 2.82); SHADOWBRINGERS_62 runs 12.26 ppm fast against the game and is corrected by aresample=81600,asetrate=81601, offset in that filtered timeline. Against the game's own file: weighted 0.9914 -> 0.9922, envelope hole 44.9 dB at 371.9s -> 1.1 dB at 25.3s, the 372.5 flag gone (that join no longer exists), join 258.5 window 0.989 vs control 0.980 (was 0.980 vs 0.979 at 258.8), head 0.987 at -0.5 ms -> 0.991 at 0.0 ms, tail 0.997 vs control 0.998 (was 0.997 vs 0.995; the control moved into the new segment); the build now correlates with the game sample for sample at 0.990-0.999 per window from 256s to 385s (lag 0.02 ms throughout). Left: 385.2-386.7s, a -38 to -41 dB passage just before the loop end, correlates only 0.91-0.96 in every layout tried (codec floor at that level, not a timing error), which keeps the tail a hair under its control."
    }
   },
   {
