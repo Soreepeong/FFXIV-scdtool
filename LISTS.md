@@ -59,9 +59,9 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.8398 | 0.78 | 19 | - | +1 | +5.1 | 52 | 0.10 | `music/ex2/BGM_EX2_Event_37.scd` | Before_Meteor_FFXIV_049.flac | Before Meteor.json |
 | 0.8421 | 0.91 | 3 | - | -0 | +0.1 | 22 | 0.18 | `music/ex5/BGM_EX5_System_Title.scd` | DT_002.flac | Dawntrail.json |
 | 0.8432 | 0.79 | 1 | - | -0 | +0.6 | 4 | 0.55 | `music/ffxiv/Orchestrion/BGM_ORCH_647.scd` | GL_00079.flac | Growing Light.json |
-| 0.8508 | 0.69 | 5 | - | -1 | -0.8 | 14 | 0.11 | `music/ex5/BGM_EX5_Raid_26.scd` | TH_055.flac | Trail to the Heavens.json |
-| 0.8508 | 0.69 | 5 | - | -1 | -0.8 | 14 | 0.11 | `music/ffxiv/BGM_Ride_Arcadion03.scd` | TH_055.flac | Trail to the Heavens.json |
 | 0.8531 | 0.79 | 4 | - | +1 | +1.1 | 9 | 0.61 | `music/ffxiv/Orchestrion/BGM_ORCH_602.scd` | GL_00075.flac | Growing Light.json |
+| 0.8538 | 0.72 | 2 | - | -1 | -0.9 | 6 | 0.12 | `music/ex5/BGM_EX5_Raid_26.scd` | TH_055.flac | Trail to the Heavens.json |
+| 0.8538 | 0.72 | 2 | - | -1 | -0.9 | 6 | 0.12 | `music/ffxiv/BGM_Ride_Arcadion03.scd` | TH_055.flac | Trail to the Heavens.json |
 | 0.8555 | 0.93 | 10 | - | +2 | +1.9 | 25 | 0.06 | `music/ffxiv/Orchestrion/BGM_ORCH_273.scd` | SHADOWBRINGERS_06.flac | Growing Light.json |
 | 0.8591 | 0.86 | 1 | - | +2 | +2.4 | 8 | 0.30 | `music/ex3/BGM_EX3_MYC_01.scd` | Before_Meteor_FFXIV_084.flac+DUD_033.flac+DUD_034.flac | Death Unto Dawn.json |
 | 0.8603 | 0.93 | 2 | - | +1 | +1.5 | 11 | 0.82 | `music/ffxiv/Orchestrion/BGM_ORCH_610.scd` | GL_00062.flac | Growing Light.json |
@@ -126,6 +126,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.8925 | 0.96 | 7 | - | +1 | +0.0 | 7 | - | `music/ex4/BGM_EX4_Event_26.scd` | GL_00093.flac | Growing Light.json |
 | 0.8927 | 0.80 | 2 | - | +0 | +0.1 | 10 | 0.48 | `music/ex5/BGM_EX5_Dan_D12.scd` | TH_046.flac | Trail to the Heavens.json |
 | 0.8928 | 0.92 | 8 | - | +2 | +0.9 | 45 | 0.50 | `music/ex4/BGM_EX4_Event_17.scd` | ENDWALKER_059.flac | Endwalker.json |
+| 0.8928 | 0.82 | 2 | - | -0 | -0.8 | 9 | 0.99 | `music/ex5/BGM_EX5_Raid_22.scd` | TH_011.flac | Trail to the Heavens.json |
 | 0.8928 | 0.92 | 8 | - | +2 | +0.9 | 45 | 0.96 | `music/ffxiv/BGM_Ride_EX4Common.scd` | ENDWALKER_059.flac | Endwalker.json |
 | 0.8928 | 0.92 | 8 | - | +2 | +0.9 | 45 | 0.96 | `music/ffxiv/BGM_Ride_Ex4common.scd` | ENDWALKER_059.flac | Endwalker.json |
 | 0.8928 | 0.91 | 2 | - | -0 | +0.6 | 8 | 0.92 | `music/ffxiv/Orchestrion/BGM_ORCH_384.scd` | HEAVENSWARD_FFXIV_48.flac | Heavensward.json |
@@ -148,7 +149,6 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.8993 | 0.75 | 2 | - | +1 | +7.6 | 6 | 0.06 | `music/ffxiv/Orchestrion/BGM_ORCH_413.scd` | DUD_034.flac | Death Unto Dawn.json |
 | 0.8995 | 0.84 | 1 | - | +1 | +1.2 | 6 | 0.54 | `music/ffxiv/BGM_Event_ClashOnTheBigBridge.scd` | BTF_FFXIV_13.flac | Before The Fall.json |
 | 0.8995 | 0.84 | 1 | - | +1 | +1.2 | 6 | 0.54 | `music/ffxiv/BGM_LoV_Boss06.scd` | BTF_FFXIV_13.flac | Before The Fall.json |
-| 0.8999 | 0.78 | 5 | - | -0 | -0.8 | 8 | 0.99 | `music/ex5/BGM_EX5_Raid_22.scd` | TH_011.flac | Trail to the Heavens.json |
 | 0.9002 | 0.93 | 2 | - | +0 | -0.5 | 7 | 0.44 | `music/ex2/BGM_EX2_Omega_03.scd` | SB_FFXIV_049.flac | Stormblood.json |
 | 0.9006 | 0.93 | 3 | - | +2 | +1.8 | 8 | 0.13 | `music/ffxiv/Orchestrion/BGM_ORCH_773.scd` | TH_028.flac | Trail to the Heavens.json |
 | 0.9018 | 0.96 | 2 | - | +0 | +0.3 | 6 | 0.05 | `music/ex4/BGM_EX4_BanFort_Ark_Good.scd` | GL_00006.flac | Growing Light.json |

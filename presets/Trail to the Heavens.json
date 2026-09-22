@@ -893,10 +893,10 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 12.0
+      "crossfadeSeconds": 4.0
      }
     ],
-    "# comment": "the game's file is 18.9s longer than this recording and ends by repeating itself: from 266.3s it replays the file from 122.0s (similarity 0.892, seam located by the recording's own end). Built as two segments of the same recording -- the match, then the same recording re-entered at 124.120s. The game built its loop-out by crossfading, so this does too: segment 1 keeps playing 12s past the seam at 251.930s, into the recording's own ending, while segment 2 fades in from 109.705s. Fitted over the target's own onsets (scratch/fit_loopout_crossfade.py): the join goes 0.721 hard-cut to 0.923, the whole file 0.902 to 0.900."
+    "# comment": "the game's file is 18.9s longer than this recording and ends by repeating itself: from 266.3s it replays the file from 122.0s (similarity 0.892). Built as two segments of the same recording, the second re-entering at 109.705s, which puts the loop's wrap on an exact repeat period of the piece -- measured on spectral flux, the two ends line up to 8 ms. The crossfade was 12s and outran the recording: TH_011 holds level to its own 259.0s (target 256.9s) and then falls off a cliff, so the last seven seconds of the fade had the second segment at 40-70% gain with nothing underneath, 5-7 dB below the game's own file. At 4s the fade ends at target 255.93s, a second inside the recording: worst point over the join -7.2 dB -> -5.3, mean -4.1 -> -2.5, envelope hole 5.3 -> 1.9."
    }
   },
   {
