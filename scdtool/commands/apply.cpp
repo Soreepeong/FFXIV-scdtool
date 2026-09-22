@@ -895,11 +895,13 @@ namespace {
 		// (BGM_ORCH_899's 3.5s re-entry: +12 dB, and the file came out 9 dB quiet). A medley
 		// of different recordings still gets one gain each.
 		//
-		// A source whose filter states a volume= keeps it and gets no gain of its own, the
-		// rule the single-source path follows: generated presets carry apply's own measured
-		// gain that way for importers that do not level-match, and matching on top of it
-		// applied it twice. Otherwise the recording is measured through its filter, since that
-		// is what plays.
+		// The recording is measured through its own filter, since that is what plays, so a
+		// volume= the preset states is where the match starts rather than a second gain on
+		// top of it. Generated presets carry apply's own measured gain that way for importers
+		// that do not level-match; measured without the filter, it was applied twice. Nor is
+		// it kept as the final level: those were measured by the -ss-after--i reading, and
+		// keeping them left ORCH_252 2.5 dB and ORCH_899 2.4 dB further from the game than
+		// matching through them, with nothing the other way across 115 stitched targets.
 		std::map<std::pair<std::filesystem::path, std::wstring>, double> gainOf;
 		if (loudnessMatch) {
 			struct longest_span { size_t Segment = 0; std::string Name; size_t From = 0; size_t Span = 0; };
@@ -907,7 +909,7 @@ namespace {
 			std::map<std::filesystem::path, size_t> recordingLength;
 			for (size_t i = 0; i < segments.size(); i++) {
 				for (const auto& [name, source] : segments[i].Sources) {
-					if (source.IsTarget || source.Filter.find(L"volume=") != std::wstring::npos)
+					if (source.IsTarget)
 						continue;
 					// Only what this segment plays. Its source list is the item's whole list,
 					// so a medley's every recording is "in" every segment: measured there,

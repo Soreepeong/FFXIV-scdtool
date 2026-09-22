@@ -9838,7 +9838,10 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 4.0
+      "crossfadeSeconds": 4.0,
+      "sourceFilters": {
+       "source": "volume=+2.9dB"
+      }
      }
     ],
     "# comment": "the recording covers 38.1s of this target and the uncovered tail repeats material from earlier in it (matching at 0.966), so a second segment re-enters there, with the seam pulled 4s back so the first segment plays its ending under the second. Full length with the loop intact: 0.9709 against the game's own file, where the short build this replaces scored 0.9202 while losing the rest of the loop."
