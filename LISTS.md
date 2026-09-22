@@ -10,8 +10,9 @@ Weighted, because a cosine between two digital silences is noise and many of the
 |---|---:|
 | targets in the game's bgm sheet | 2175 |
 | enabled | 1917 |
-| disabled entries | 18 |
-| targets with no enabled entry at all | 18 |
+| disabled entries | 9 |
+| preset rows whose path the game has no file for | 9 |
+| targets with no enabled entry at all | 9 |
 | never referenced by any preset | 258 |
 
 - confidence below 0.80: **8**
@@ -1966,24 +1967,31 @@ These reasons are now measured rather than predicted. Six entries that carried t
 
 | target | recording | preset | also enabled elsewhere | why |
 |---|---|---|:-:|---|
-| `` | source | Endwalker.json | **no** | Unused in-game (maybe exists as an Orchestrion?) |
-| `music/ex1/BGM_EX1_.scd` | source | The Far Edge Of Fate.json | **no** | In-game Statis Loop has longer repeat cycle than blu-ray version. |
-| `music/ex1/movie/heavensward_loop.scd` | source | Heavensward.json | **no** | - |
 | `music/ex2/BGM_EX2_Event_END.scd` | source | Stormblood.json | **no** | event_end has two segments which both segments are short versions |
-| `music/ex2/BGM_EX2_endcredits01.scd` | source | Stormblood.json | **no** | Plays full length Revolutions, Yanxia day theme, The Measure of Our Reach, and then loop Heroes of Stormblood. |
-| `music/ex2/BGM_EX2_endcredits02.scd` | source | Stormblood.json | **no** | Plays full length Revolutions, The Measure of Our Reach, and then loop Heroes of Stormblood. |
 | `music/ex2/movie/stormblood_loop.scd` | source | Stormblood.json | **no** | - |
 | `music/ex3/BGM_EX3_Ban_08.scd` | source | Death Unto Dawn.json | **no** | Blu-ray version has statis loop-esque sequence in it, rendering it incompatible with in-game resource. |
 | `music/ex3/BGM_EX3_Ytc_26.scd` | source | Death Unto Dawn.json | **no** | Incomplete. |
-| `music/ex3/movie/shadowbringers_loop_chs.scd` | source | Shadowbringers.json | **no** | audio track in the movie has voices in it, and thus not replaceable |
 | `music/ex3/movie/shadowbringers_loop_de.scd` | source | Shadowbringers.json | **no** | audio track in the movie has voices in it, and thus not replaceable |
 | `music/ex3/movie/shadowbringers_loop_en.scd` | source | Shadowbringers.json | **no** | audio track in the movie has voices in it, and thus not replaceable |
 | `music/ex3/movie/shadowbringers_loop_fr.scd` | source | Shadowbringers.json | **no** | audio track in the movie has voices in it, and thus not replaceable |
 | `music/ex3/movie/shadowbringers_loop_ja.scd` | source | Shadowbringers.json | **no** | audio track in the movie has voices in it, and thus not replaceable |
-| `music/ex3/movie/shadowbringers_loop_ko.scd` | source | Shadowbringers.json | **no** | audio track in the movie has voices in it, and thus not replaceable |
-| `music/ex4/BGM_` | source | Endwalker.json | **no** | - |
-| `music/ffxiv/BGM_.scd` | source | Before Meteor.json | **no** | - |
 | `music/ffxiv/Orchestrion/BGM_ORCH_488.scd` | source | Death Unto Dawn.json | **no** | Incomplete. |
+
+### 2a. Preset rows the game has no file for
+
+These are not disabled targets and are not missing coverage. Three kinds: a **parking spot**, where a path that cannot exist (`BGM_.scd`, `BGM_EX1_.scd`, `music/ex4/BGM_`, or the empty string) records an OST track with no game target, so the album's item list stays complete; a cut **this client does not ship**, which is what the Chinese and Korean movie loops are; and a **misspelling**. Existence is asked of the installation rather than of the bgm sheet, because the `movie/` loops are real files the sheet never names.
+
+| path | preset | why it is here |
+|---|---|---|
+| `` | Endwalker.json | Unused in-game (maybe exists as an Orchestrion?) |
+| `music/ex1/BGM_EX1_.scd` | The Far Edge Of Fate.json | In-game Statis Loop has longer repeat cycle than blu-ray version. |
+| `music/ex1/movie/heavensward_loop.scd` | Heavensward.json | - |
+| `music/ex2/BGM_EX2_endcredits01.scd` | Stormblood.json | Plays full length Revolutions, Yanxia day theme, The Measure of Our Reach, and then loop Heroes of Stormblood. |
+| `music/ex2/BGM_EX2_endcredits02.scd` | Stormblood.json | Plays full length Revolutions, The Measure of Our Reach, and then loop Heroes of Stormblood. |
+| `music/ex3/movie/shadowbringers_loop_chs.scd` | Shadowbringers.json | audio track in the movie has voices in it, and thus not replaceable |
+| `music/ex3/movie/shadowbringers_loop_ko.scd` | Shadowbringers.json | audio track in the movie has voices in it, and thus not replaceable |
+| `music/ex4/BGM_` | Endwalker.json | - |
+| `music/ffxiv/BGM_.scd` | Before Meteor.json | - |
 
 ## 3. Never referenced
 
