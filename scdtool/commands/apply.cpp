@@ -2829,18 +2829,30 @@ int cmd_apply(const std::vector<std::string>& args) {
 				// musical span on both sides. Without this the swapped track sits at the OST
 				// master's level, which is usually hotter than the game's own mix and would
 				// stand out against every other track in game.
+				//
+				// Over the loop where there is one; otherwise over as much of the file as both
+				// sides have. Requiring a loop left every non-looping target at the master's
+				// own level: BGM_EX2_Field_Safe_01 came out 3.7 dB quiet, which neither the
+				// weighted score nor the envelope hole shows -- only a level comparison does.
 				const auto presetSetsGain = job.Filter.find(L"volume=") != std::wstring::npos;
-				if (loudnessMatch && !presetSetsGain && newLoopEnd > newLoopStart) {
-					const auto spanSeconds = static_cast<double>(newLoopEnd - newLoopStart) / static_cast<double>(samplingRate);
-					const auto templateStartSeconds = static_cast<double>(templateLoopStart) / static_cast<double>(templateRate);
+				const auto looped = newLoopEnd > newLoopStart;
+				const auto spanFrom = looped ? newLoopStart : size_t{0};
+				const auto spanTo = looped ? newLoopEnd : (std::min)(totalSamples,
+					static_cast<size_t>(std::llround(templateSeconds * static_cast<double>(samplingRate))));
+				if (loudnessMatch && !presetSetsGain && spanTo > spanFrom) {
+					const auto spanSeconds = static_cast<double>(spanTo - spanFrom) / static_cast<double>(samplingRate);
+					const auto templateStartSeconds = looped
+						? static_cast<double>(templateLoopStart) / static_cast<double>(templateRate) : 0.;
 
 					// The source still has to be measured at the position the rebased output
 					// took its samples from, which is offset by the match offset.
-					const auto sourceStartSeconds = static_cast<double>(newLoopStart) / static_cast<double>(samplingRate) - effectiveOffset;
+					const auto sourceStartSeconds = (std::max)(0.,
+						static_cast<double>(spanFrom) / static_cast<double>(samplingRate) - effectiveOffset);
 
 					try {
 						const auto templateLufs = measure_loudness(ffmpegPath, templateAudio, templateStartSeconds, spanSeconds);
-						const auto sourceLufs = measure_loudness(ffmpegPath, job.SourcePath, sourceStartSeconds, spanSeconds);
+						// Through the preset's filter, which is what plays.
+						const auto sourceLufs = measure_loudness(ffmpegPath, job.SourcePath, sourceStartSeconds, spanSeconds, job.Filter);
 						gainDb = std::clamp(templateLufs - sourceLufs, -maxGainDb, maxGainDb);
 
 						const auto requestedDb = gainDb;
