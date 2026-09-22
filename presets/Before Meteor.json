@@ -651,28 +651,12 @@
         "channel": 1
        }
       ],
-      "length": 99.9
-     },
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 24.57
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "crossfadeSeconds": 4.0
+      "sourceFilters": {
+       "source": "asplit[a][b];[b]adelay=7275742S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
+      }
      }
     ],
-    "# comment": "the recording stops at 103.9s of this 110.5s target, and the uncovered tail is a repeat of material earlier in the same recording. Built as two segments with the seam pulled 4s back from where the recording runs out, so the first segment plays its own ending under the second rather than stopping dead at it -- which is what the game does, and measures better than joining at the end. Against the game's own file, at full length with the loop intact: 0.9783, against 0.9714 for a plain join. The short build scores 0.9821, but only because the measure compares the span the two files share -- it loses 6.6s of loop. Seam jump is well under the threshold for an audible click. `presets-manual/` accepts the shortfall instead; this keeps its source and finishes the tail."
+    "# comment": "Over the loop's end the game plays the recording's own ending and its opening one loop period (75.789s) later at once, summed rather than cut to (as the game does on BGM_ORCH_295 and BGM_EX5_Raid_24); the old layout cut to the opening at 99.90s. Now one segment, the recording mixed with itself delayed by exactly one period (7275742 samples at its own 96000 Hz), which also closes the loop wrap. BGM_Event_Bazaar weighted 0.9781 -> 0.9766, hole 18.9 -> 0.8 dB, tail 0.816 -> 0.983 against mid-loop 0.975; no joins left. The two-segment layout this replaced: the recording stops at 103.9s of this 110.5s target, and the uncovered tail is a repeat of material earlier in the same recording. Built as two segments with the seam pulled 4s back from where the recording runs out, so the first segment plays its own ending under the second rather than stopping dead at it -- which is what the game does, and measures better than joining at the end. Against the game's own file, at full length with the loop intact: 0.9783, against 0.9714 for a plain join. The short build scores 0.9821, but only because the measure compares the span the two files share -- it loses 6.6s of loop. Seam jump is well under the threshold for an audible click. `presets-manual/` accepts the shortfall instead; this keeps its source and finishes the tail."
    }
   },
   {

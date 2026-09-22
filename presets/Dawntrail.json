@@ -302,31 +302,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=-3.6dB"
-      },
-      "length": 329.58
-     },
-     {
-      "sourceOffsets": {
-       "source": 4.11839
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "crossfadeSeconds": 0.5,
-      "sourceFilters": {
-       "source": "volume=-3.6dB"
+       "source": "volume=-3.6dB,asplit[a][b];[b]adelay=31393115S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.991 the recording runs out 2.0s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 3.07s (similarity 0.988 against 0.644 for the next-best placement, and the distance back is the game file's own loop period of 327.012s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 4.118s, seamed 0.50s early and crossfaded over that."
+    "# comment": "Over the loop's end the game plays the recording's own ending and its opening one loop period (327.012s) later at once, summed rather than cut to (as the game does on BGM_ORCH_295 and BGM_EX5_Raid_24); the old layout cut to the opening at 329.58s. Now one segment, the recording mixed with itself delayed by exactly one period (31393115 samples at its own 96000 Hz), which also closes the loop wrap. BGM_EX5_Event_01 weighted 0.9868 -> 0.9915, hole 29.6 -> 1.3 dB, tail 0.873 -> 0.984 against mid-loop 0.991; BGM_EX5_Event_28 weighted 0.9868 -> 0.9915, hole 29.6 -> 1.3 dB, tail 0.873 -> 0.984 against mid-loop 0.991; no joins left. Over the loop's end the game plays the recording's own ending and its opening one loop period (327.012s) later at once, summed rather than cut to (as the game does on BGM_ORCH_295 and BGM_EX5_Raid_24); the old layout cut to the opening at 329.58s. Now one segment, the recording mixed with itself delayed by exactly one period (31393115 samples at its own 96000 Hz), which also closes the loop wrap. BGM_EX5_Event_01 weighted 0.9868 -> 0.9915, hole 29.6 -> 1.3 dB, tail 0.873 -> 0.984 against mid-loop 0.991; BGM_EX5_Event_28 weighted 0.9868 -> 0.9915, hole 29.6 -> 1.3 dB, tail 0.873 -> 0.984 against mid-loop 0.991; no joins left. The two-segment layout this replaced: spectral similarity to the game's own file: 0.991 the recording runs out 2.0s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 3.07s (similarity 0.988 against 0.644 for the next-best placement, and the distance back is the game file's own loop period of 327.012s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 4.118s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
@@ -356,31 +336,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=-7.4dB"
-      },
-      "length": 329.48
-     },
-     {
-      "sourceOffsets": {
-       "source": 4.01839
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "crossfadeSeconds": 0.5,
-      "sourceFilters": {
-       "source": "volume=-7.4dB"
+       "source": "volume=-7.4dB,asplit[a][b];[b]adelay=31393115S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.980 the recording runs out 2.1s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.97s (similarity 0.974 against 0.599 for the next-best placement, and the distance back is the game file's own loop period of 327.012s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 4.018s, seamed 0.50s early and crossfaded over that."
+    "# comment": "Over the loop's end the game plays the recording's own ending and its opening one loop period (327.012s) later at once, summed rather than cut to (as the game does on BGM_ORCH_295 and BGM_EX5_Raid_24); the old layout cut to the opening at 329.48s. Now one segment, the recording mixed with itself delayed by exactly one period (31393115 samples at its own 96000 Hz), which also closes the loop wrap. BGM_ORCH_725 weighted 0.9747 -> 0.9791, hole 27.4 -> 1.1 dB, tail 0.859 -> 0.965 against mid-loop 0.976; no joins left. The two-segment layout this replaced: spectral similarity to the game's own file: 0.980 the recording runs out 2.1s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.97s (similarity 0.974 against 0.599 for the next-best placement, and the distance back is the game file's own loop period of 327.012s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 4.018s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
@@ -1605,26 +1565,12 @@
         "channel": 1
        }
       ],
-      "length": 329.34
-     },
-     {
-      "sourceOffsets": {
-       "source": 3.67839
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "crossfadeSeconds": 0.5
+      "sourceFilters": {
+       "source": "asplit[a][b];[b]adelay=31393115S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
+      }
      }
     ],
-    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.974); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.974 the recording runs out 2.2s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.83s (similarity 0.985 against 0.615 for the next-best placement, and the distance back is the game file's own loop period of 327.012s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 3.678s, seamed 0.50s early and crossfaded over that."
+    "# comment": "Over the loop's end the game plays the recording's own ending and its opening one loop period (327.012s) later at once, summed rather than cut to (as the game does on BGM_ORCH_295 and BGM_EX5_Raid_24); the old layout cut to the opening at 329.34s. Now one segment, the recording mixed with itself delayed by exactly one period (31393115 samples at its own 96000 Hz), which also closes the loop wrap. BGM_EX5_Event_02 weighted 0.9818 -> 0.9913, hole 22.1 -> 1.2 dB, tail 0.891 -> 0.984 against mid-loop 0.991; no joins left. The two-segment layout this replaced: resolved from an ambiguous shortlist by spectral verification (similarity 0.974); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.974 the recording runs out 2.2s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.83s (similarity 0.985 against 0.615 for the next-best placement, and the distance back is the game file's own loop period of 327.012s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 3.678s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
@@ -1984,31 +1930,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=+1dB"
-      },
-      "length": 400.94
-     },
-     {
-      "sourceOffsets": {
-       "source": 2.396633
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "crossfadeSeconds": 0.5,
-      "sourceFilters": {
-       "source": "volume=+1dB"
+       "source": "volume=+1dB,asplit[a][b];[b]adelay=38401763S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.956 the recording runs out 2.6s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 1.42s (similarity 0.965 against 0.881 for the next-best placement, and the distance back is the game file's own loop period of 400.018s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 2.397s, seamed 0.50s early and crossfaded over that."
+    "# comment": "Over the loop's end the game plays the recording's own ending and its opening one loop period (400.018s) later at once, summed rather than cut to (as the game does on BGM_ORCH_295 and BGM_EX5_Raid_24); the old layout cut to the opening at 400.94s. Now one segment, the recording mixed with itself delayed by exactly one period (38401763 samples at its own 96000 Hz), which also closes the loop wrap. BGM_EX5_Town_T_Night weighted 0.9542 -> 0.9560, hole 32.2 -> 5.0 dB, tail 0.839 -> 0.904 against mid-loop 0.950; no joins left. The two-segment layout this replaced: spectral similarity to the game's own file: 0.956 the recording runs out 2.6s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 1.42s (similarity 0.965 against 0.881 for the next-best placement, and the distance back is the game file's own loop period of 400.018s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 2.397s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
@@ -2039,31 +1965,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=-1.7dB"
-      },
-      "length": 400.68
-     },
-     {
-      "sourceOffsets": {
-       "source": 2.136633
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "crossfadeSeconds": 0.5,
-      "sourceFilters": {
-       "source": "volume=-1.7dB"
+       "source": "volume=-1.7dB,asplit[a][b];[b]adelay=38401763S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.939 the recording runs out 2.8s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 1.16s (similarity 0.943 against 0.852 for the next-best placement, and the distance back is the game file's own loop period of 400.018s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 2.137s, seamed 0.50s early and crossfaded over that."
+    "# comment": "Over the loop's end the game plays the recording's own ending and its opening one loop period (400.018s) later at once, summed rather than cut to (as the game does on BGM_ORCH_295 and BGM_EX5_Raid_24); the old layout cut to the opening at 400.68s. Now one segment, the recording mixed with itself delayed by exactly one period (38401763 samples at its own 96000 Hz), which also closes the loop wrap. BGM_ORCH_735 weighted 0.9371 -> 0.9381, hole 22.3 -> 5.3 dB, tail 0.854 -> 0.888 against mid-loop 0.929; no joins left. The two-segment layout this replaced: spectral similarity to the game's own file: 0.939 the recording runs out 2.8s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 1.16s (similarity 0.943 against 0.852 for the next-best placement, and the distance back is the game file's own loop period of 400.018s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 2.137s, seamed 0.50s early and crossfaded over that."
    }
   },
   {
