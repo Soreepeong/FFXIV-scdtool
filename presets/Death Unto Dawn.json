@@ -1586,27 +1586,12 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.22,
+        "offset": 1.215634,
         "pcmHash": "976e5ec8"
        }
       },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "length": 91.1
-     },
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 9.37
-       }
+      "sourceFilters": {
+       "source": "asplit=4[a][b][c][d];[b]adelay=7960960S:all=1,aeval='val(ch)*(if(lt(t,84.6156),0,if(lt(t,85.2156),0+(0.13)*(t-84.6156)/0.6,if(lt(t,86.2156),0.13+(0.2)*(t-85.2156)/1.0,if(lt(t,87.2156),0.33+(0.25)*(t-86.2156)/1.0,if(lt(t,88.2156),0.58+(0.29)*(t-87.2156)/1.0,if(lt(t,89.2156),0.87+(0.16)*(t-88.2156)/1.0,if(lt(t,90.2156),1.03+(0.1)*(t-89.2156)/1.0,if(lt(t,91.2156),1.13+(0.02)*(t-90.2156)/1.0,if(lt(t,97.2156),1.15+(-0.03)*(t-91.2156)/6.0,if(lt(t,105.2156),1.12+(-0.09)*(t-97.2156)/8.0,if(lt(t,111.2156),1.03+(-0.03)*(t-105.2156)/6.0,if(lt(t,131.2156),1+(-0.01)*(t-111.2156)/20.0,if(lt(t,146.2156),0.99+(-0.04)*(t-131.2156)/15.0,if(lt(t,166.2156),0.95+(0)*(t-146.2156)/20.0,0.95)))))))))))))))':c=same,afade=t=out:st=167.0556:d=0.02[bd];[c]adelay=15922170S:all=1[cd];[d]adelay=7961210S:all=1,afade=t=in:st=167.0556:d=0.02,afade=t=out:st=167.8156:d=1.2[dd];[a][bd][cd][dd]amix=inputs=4:normalize=0"
       },
       "channels": [
        {
@@ -1617,11 +1602,10 @@
         "source": "source",
         "channel": 1
        }
-      ],
-      "crossfadeSeconds": 4.0
+      ]
      }
     ],
-    "# comment": "the recording stops at 95.1s of this 170.1s target, and the uncovered tail is a repeat of material earlier in the same recording. Built as two segments with the seam pulled 4s back from where the recording runs out, so the first segment plays its own ending under the second rather than stopping dead at it -- which is what the game does, and measures better than joining at the end. Against the game's own file, at full length with the loop intact: 0.9599, against 0.9462 for a plain join. The short build scores 0.9685, but only because the measure compares the span the two files share -- it loses 75.0s of loop. Seam jump is well under the threshold for an audible click. `presets-manual/` accepts the shortfall instead; this keeps its source and finishes the tail."
+    "# comment": "The game's file is this recording played twice and a bit, summed at the joins, not cut. The recording's own ending restates its opening exactly one period later (82.9267s; self-correlation 0.93), and the game reads it at three lags: pass 1 at +1.215634s from the start; pass 2 at -81.711033s, faded in under pass 1's natural ending from 83.4s and full by about 89s (pass 1 keeps playing its own ending at full level until it dies at 93s); and from 165.86s the file's own head copied at one loop length (lag -164.64033s), which is what makes the loop wrap continuous, with pass 2's ending carrying on under it for about 2s. Pass 2 also sits about 1.2 dB above pass 1 as it enters, settling to -0.4 dB by the loop end. The old item cut to pass 2 at 91.1s, after pass 1 had run out, with both offsets 4-19 ms off. Rebuilt as ONE segment: the recording at +1.215634s, summed with itself delayed by 7960960 samples at 96 kHz (pass 2, through a piecewise gain that follows the measured fade-in and level), by 15922170 samples (the head copy; equal to the loop length, so the wrap is sample-continuous) and by 7961210 samples from 165.84s (pass 2's ending, fading out from 166.6s over 1.2s). Against the game's own file: weighted 0.9599 -> 0.9945, envelope hole 35.9 dB at 90.5s -> 0.9 dB, tail 0.906 -> 0.991 against a control of 0.995, no joins left (was: outgoing runs out before the join at 91.1s). The exact offsets alone gave 0.9944 but kept the 36 dB hole. Level: apply's gain is peak-limited to +0.7 dB (matched +2.1 dB) because the game's file peaks at +0.9 dBFS, so the whole build sits about 0.8 dB under the game; raising pass 3's own +0.7 dB lowers the limit by the same amount, so it is left at unity."
    }
   },
   {
