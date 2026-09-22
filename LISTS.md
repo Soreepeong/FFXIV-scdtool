@@ -9,17 +9,17 @@ Weighted, because a cosine between two digital silences is noise and many of the
 | | count |
 |---|---:|
 | targets in the game's bgm sheet | 2175 |
-| enabled | 1917 |
+| enabled | 1915 |
 | disabled entries | 9 |
 | preset rows whose path the game has no file for | 9 |
 | targets with no enabled entry at all | 9 |
 | never referenced by any preset | 258 |
 
 - confidence below 0.80: **4**
-- confidence 0.80-0.90: **104**
-- confidence 0.90-0.95: **173**
-- confidence 0.95-0.98: **445**
-- confidence 0.98 and up: **1191**
+- confidence 0.80-0.90: **103**
+- confidence 0.90-0.95: **174**
+- confidence 0.95-0.98: **444**
+- confidence 0.98 and up: **1190**
 
 Anything under about 0.90 is worth listening to before trusting it; the band from 0.95 up is where a correct match normally sits. A low score with the target's full length reproduced usually means the album's master genuinely differs from the game's, not that the wrong recording was picked.
 
@@ -36,8 +36,8 @@ Confidence is one number over the whole file, which makes it blind to anything l
 
 Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC and WAV builds carry identical audio (checked sample for sample on 200 targets) but state their loop points as byte offsets only, so a seam cannot be found in them and silence is counted past the loop end rather than to it.
 
-- **0** of the 1707 entries that have a loop seam louder than the music around it (seam above 1.00). That is not new and not a property of this build -- the lossy Ogg build measures 702 -- but it is the largest unaddressed defect in the set, and it was invisible until this column existed.
-- **144** with a hole of 20 dB or more, which is where a dropout becomes audible.
+- **0** of the 1705 entries that have a loop seam louder than the music around it (seam above 1.00). That is not new and not a property of this build -- the lossy Ogg build measures 702 -- but it is the largest unaddressed defect in the set, and it was invisible until this column existed.
+- **141** with a hole of 20 dB or more, which is where a dropout becomes audible.
 
 | confidence | env | hole | mute | tilt | HF | patch | seam | target | recording | preset |
 |---:|---:|---:|---:|---:|---:|---:|---:|---|---|---|
@@ -60,8 +60,8 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.8421 | 0.91 | 3 | - | -0 | +0.1 | 22 | 0.18 | `music/ex5/BGM_EX5_System_Title.scd` | DT_002.flac | Dawntrail.json |
 | 0.8432 | 0.79 | 1 | - | -0 | +0.6 | 4 | 0.55 | `music/ffxiv/Orchestrion/BGM_ORCH_647.scd` | GL_00079.flac | Growing Light.json |
 | 0.8531 | 0.79 | 4 | - | +1 | +1.1 | 9 | 0.61 | `music/ffxiv/Orchestrion/BGM_ORCH_602.scd` | GL_00075.flac | Growing Light.json |
-| 0.8537 | 0.72 | 2 | - | -1 | -0.8 | 9 | 0.12 | `music/ex5/BGM_EX5_Raid_26.scd` | TH_055.flac | Trail to the Heavens.json |
-| 0.8537 | 0.72 | 2 | - | -1 | -0.8 | 9 | 0.12 | `music/ffxiv/BGM_Ride_Arcadion03.scd` | TH_055.flac | Trail to the Heavens.json |
+| 0.8537 | 0.73 | 1 | - | -1 | -0.8 | 8 | 0.12 | `music/ex5/BGM_EX5_Raid_26.scd` | TH_055.flac | Trail to the Heavens.json |
+| 0.8537 | 0.73 | 1 | - | -1 | -0.8 | 8 | 0.12 | `music/ffxiv/BGM_Ride_Arcadion03.scd` | TH_055.flac | Trail to the Heavens.json |
 | 0.8555 | 0.93 | 10 | - | +2 | +1.9 | 25 | 0.06 | `music/ffxiv/Orchestrion/BGM_ORCH_273.scd` | SHADOWBRINGERS_06.flac | Growing Light.json |
 | 0.8591 | 0.86 | 1 | - | +2 | +2.4 | 8 | 0.30 | `music/ex3/BGM_EX3_MYC_01.scd` | Before_Meteor_FFXIV_084.flac+DUD_033.flac+DUD_034.flac | Death Unto Dawn.json |
 | 0.8603 | 0.93 | 2 | - | +1 | +1.5 | 11 | 0.82 | `music/ffxiv/Orchestrion/BGM_ORCH_610.scd` | GL_00062.flac | Growing Light.json |
@@ -103,13 +103,13 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.8855 | 0.88 | 2 | - | +1 | +0.2 | 11 | 0.37 | `music/ffxiv/Orchestrion/BGM_ORCH_850.scd` | TH_035.flac | Trail to the Heavens.json |
 | 0.8864 | 0.90 | 2 | - | -0 | +0.7 | 8 | 0.34 | `music/ex4/BGM_EX4_Raid_09.scd` | GL_00061.flac | Growing Light.json |
 | 0.8866 | 0.82 | 2 | - | +1 | +1.5 | 6 | 0.50 | `music/ffxiv/BGM_EX1_PvP01.scd` | SB_FFXIV_089.flac+TFEOF_FFXIV_08.flac | The Far Edge Of Fate.json |
+| 0.8871 | 0.81 | 4 | - | +0 | +0.7 | 7 | 0.12 | `music/ffxiv/Orchestrion/BGM_ORCH_783.scd` | TH_011.flac | Trail to the Heavens.json |
 | 0.8873 | 0.79 | 2 | - | -4 | -0.1 | 9 | 0.59 | `music/ex2/BGM_EX2_Event_10.scd` | SB_FFXIV_016.flac | Stormblood.json |
 | 0.8873 | 0.79 | 2 | - | -4 | -0.1 | 9 | 0.59 | `music/ex2/BGM_EX2_Mount01.scd` | SB_FFXIV_016.flac | Stormblood.json |
 | 0.8875 | 0.44 | 18 | - | +3 | +5.7 | 27 | 0.08 | `music/ex3/BGM_EX3_Ytc_12.scd` | DUD_079.flac | Death Unto Dawn.json |
 | 0.8875 | 0.66 | 20 | 0.3 | -0 | +0.0 | 36 | 0.03 | `music/ex4/BGM_EX4_Event_13.scd` | ENDWALKER_028.flac | Endwalker.json |
 | 0.8878 | 0.88 | 3 | - | -1 | -0.1 | 6 | 0.17 | `music/ffxiv/BGM_PvP_Mogi_01.scd` | SB_FFXIV_057.flac+SB_FFXIV_056.flac | Stormblood.json |
 | 0.8881 | 0.71 | 1 | - | -1 | -0.3 | 18 | 0.30 | `music/ex5/timeline/BGM_EX5_Raid_09.scd` | TH_008.flac | Trail to the Heavens.json |
-| 0.8885 | 0.76 | 7 | - | +0 | +0.7 | 10 | 0.12 | `music/ffxiv/Orchestrion/BGM_ORCH_783.scd` | TH_011.flac | Trail to the Heavens.json |
 | 0.8887 | 0.94 | 18 | 0.5 | +2 | +3.3 | 35 | 0.28 | `music/ffxiv/BGM_Ban_Ramuh.scd` | BTF_FFXIV_23.flac | Before The Fall.json |
 | 0.8887 | 0.94 | 18 | 0.5 | +2 | +3.3 | 35 | 0.28 | `music/ffxiv/BGM_Ride_Ramuh.scd` | BTF_FFXIV_23.flac | Before The Fall.json |
 | 0.8888 | 0.94 | 5 | - | -0 | +1.4 | 15 | 0.04 | `music/ffxiv/Orchestrion/BGM_ORCH_501.scd` | ENDWALKER_061.flac | Endwalker.json |
@@ -126,14 +126,13 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.8925 | 0.96 | 7 | - | +1 | +0.0 | 7 | - | `music/ex4/BGM_EX4_Event_26.scd` | GL_00093.flac | Growing Light.json |
 | 0.8927 | 0.80 | 2 | - | +0 | +0.1 | 10 | 0.48 | `music/ex5/BGM_EX5_Dan_D12.scd` | TH_046.flac | Trail to the Heavens.json |
 | 0.8928 | 0.92 | 8 | - | +2 | +0.9 | 45 | 0.50 | `music/ex4/BGM_EX4_Event_17.scd` | ENDWALKER_059.flac | Endwalker.json |
-| 0.8928 | 0.82 | 2 | - | -0 | -0.8 | 9 | 0.99 | `music/ex5/BGM_EX5_Raid_22.scd` | TH_011.flac | Trail to the Heavens.json |
 | 0.8928 | 0.92 | 8 | - | +2 | +0.9 | 45 | 0.96 | `music/ffxiv/BGM_Ride_EX4Common.scd` | ENDWALKER_059.flac | Endwalker.json |
-| 0.8928 | 0.92 | 8 | - | +2 | +0.9 | 45 | 0.96 | `music/ffxiv/BGM_Ride_Ex4common.scd` | ENDWALKER_059.flac | Endwalker.json |
 | 0.8928 | 0.91 | 2 | - | -0 | +0.6 | 8 | 0.92 | `music/ffxiv/Orchestrion/BGM_ORCH_384.scd` | HEAVENSWARD_FFXIV_48.flac | Heavensward.json |
 | 0.8930 | 0.87 | 2 | - | -1 | +0.1 | 7 | 0.01 | `music/ex4/BGM_EX4_Ban_07.scd` | GL_00010.flac | Growing Light.json |
+| 0.8930 | 0.82 | 2 | - | -0 | -0.8 | 7 | 0.99 | `music/ex5/BGM_EX5_Raid_22.scd` | TH_011.flac | Trail to the Heavens.json |
 | 0.8930 | 0.87 | 2 | - | -1 | +0.1 | 7 | 0.01 | `music/ffxiv/BGM_Ride_Barb.scd` | GL_00010.flac | Growing Light.json |
 | 0.8934 | 0.82 | 22 | - | +2 | +6.7 | 38 | 0.23 | `music/ffxiv/Orchestrion/BGM_ORCH_411.scd` | DUD_044.flac | Death Unto Dawn.json |
-| 0.8940 | 0.56 | 45 | - | +2 | +4.1 | 60 | 0.07 | `music/ffxiv/Orchestrion/BGM_ORCH_899.scd` | TH_145.mp3 | Trail to the Heavens.json |
+| 0.8941 | 0.56 | 45 | - | +2 | +4.1 | 60 | 0.07 | `music/ffxiv/Orchestrion/BGM_ORCH_899.scd` | TH_145.mp3 | Trail to the Heavens.json |
 | 0.8948 | 0.59 | 60 | 3.2 | +3 | +5.9 | 60 | 0.55 | `music/ffxiv/Orchestrion/BGM_ORCH_170.scd` | SB_FFXIV_004.flac | Stormblood.json |
 | 0.8953 | 0.83 | 6 | - | -1 | +2.0 | 14 | 0.30 | `music/ffxiv/Orchestrion/BGM_ORCH_354.scd` | DUD_008.flac | Death Unto Dawn.json |
 | 0.8955 | 0.66 | 2 | - | -1 | -0.3 | 11 | 0.03 | `music/ex5/timeline/BGM_EX5_Raid_10.scd` | TH_008.flac | Trail to the Heavens.json |
@@ -154,9 +153,9 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9018 | 0.96 | 2 | - | +0 | +0.3 | 6 | 0.05 | `music/ex4/BGM_EX4_BanFort_Ark_Good.scd` | GL_00006.flac | Growing Light.json |
 | 0.9023 | 0.89 | 2 | - | +1 | -0.3 | 11 | 0.10 | `music/ex5/BGM_EX5_Event_32.scd` | TH_035.flac | Trail to the Heavens.json |
 | 0.9025 | 0.92 | 4 | - | -1 | -2.9 | 12 | 0.22 | `music/ex2/BGM_EX2_Dan_D09.scd` | SB_FFXIV_054.flac | Stormblood.json |
+| 0.9028 | 0.80 | 4 | - | -0 | -0.7 | 7 | 0.12 | `music/ffxiv/BGM_Ride_Arcadia02.scd` | TH_011.flac | Trail to the Heavens.json |
 | 0.9040 | 0.96 | 2 | - | +0 | +0.8 | 9 | 0.70 | `music/ex2/BGM_EX2_Field_G_Lake_Day.scd` | SB_FFXIV_042.flac | Stormblood.json |
 | 0.9040 | 0.92 | 1 | - | +1 | +0.9 | 4 | 0.57 | `music/ex5/BGM_EX5_Dan_D01.scd` | DT_013.flac | Dawntrail.json |
-| 0.9040 | 0.73 | 8 | - | -0 | -0.7 | 11 | 0.12 | `music/ffxiv/BGM_Ride_Arcadia02.scd` | TH_011.flac | Trail to the Heavens.json |
 | 0.9041 | 0.81 | 3 | - | -0 | +0.2 | 10 | 0.12 | `music/ffxiv/Orchestrion/BGM_ORCH_519.scd` | GL_00005.flac | Growing Light.json |
 | 0.9043 | 0.94 | 2 | - | -1 | +0.5 | 9 | 0.43 | `music/ffxiv/Orchestrion/BGM_ORCH_581.scd` | GL_00036.flac | Growing Light.json |
 | 0.9045 | 0.71 | 2 | - | +0 | +0.2 | 9 | 0.17 | `music/ffxiv/BGM_Con_Bahamut_v2.scd` | BTF_FFXIV_16.flac+ARR_FFXIV_118.flac | Before The Fall.json |
@@ -255,10 +254,10 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9332 | 0.89 | 1 | - | +1 | +1.0 | 4 | 0.24 | `music/ffxiv/BGM_Ride_Byakko.scd` | SB_FFXIV_073.flac | Stormblood.json |
 | 0.9334 | 0.96 | 5 | - | +1 | +0.0 | 13 | 0.12 | `music/ex1/BGM_EX1_Dungeon_DravaniaL_04.scd` | TFEOF_FFXIV_34.flac | The Far Edge Of Fate.json |
 | 0.9334 | 0.91 | 3 | - | +0 | +0.4 | 11 | 0.14 | `music/ffxiv/BGM_Field_BanColony_Kobold.scd` | BTF_FFXIV_07.flac | Before The Fall.json |
+| 0.9337 | 0.64 | 15 | - | -1 | -0.9 | 17 | 0.27 | `music/ex2/BGM_EX2_Event_PRELUDE.scd` | SB_FFXIV_002.flac | Stormblood.json |
 | 0.9338 | 0.96 | 2 | - | +3 | +0.0 | 16 | 0.33 | `music/ffxiv/Orchestrion/BGM_ORCH_291.scd` | SB_FFXIV_006.flac | Stormblood.json |
 | 0.9339 | 0.98 | 1 | - | +0 | +0.5 | 8 | 0.48 | `music/ex5/BGM_EX5_Dan_D13.scd` | TH_063.flac | Trail to the Heavens.json |
 | 0.9339 | 0.88 | 1 | - | +0 | +1.8 | 4 | 0.22 | `music/ffxiv/Orchestrion/BGM_ORCH_840.scd` | TH_054.flac | Trail to the Heavens.json |
-| 0.9341 | 0.58 | 19 | - | -1 | -0.9 | 19 | 0.27 | `music/ex2/BGM_EX2_Event_PRELUDE.scd` | SB_FFXIV_002.flac | Stormblood.json |
 | 0.9341 | 0.88 | 23 | - | +1 | +1.1 | 13 | 0.16 | `music/ffxiv/Orchestrion/BGM_ORCH_720.scd` | DT_016.flac | Dawntrail.json |
 | 0.9344 | 0.90 | 5 | - | +0 | +0.6 | 11 | 0.34 | `music/ex1/BGM_EX1_Makosen_Nomal02.scd` | SB_FFXIV_020.flac+TFEOF_FFXIV_19.flac+TFEOF_FFXIV_20.flac | The Far Edge Of Fate.json |
 | 0.9344 | 0.50 | 58 | 4.7 | +3 | +0.0 | 60 | 0.64 | `music/ffxiv/Orchestrion/BGM_ORCH_210.scd` | SB_FFXIV_029.flac | Stormblood.json |
@@ -276,7 +275,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9362 | 0.88 | 2 | - | +1 | +1.8 | 6 | 0.39 | `music/ffxiv/BGM_Ride_Fanfes2021.scd` | DUD_084.flac | Death Unto Dawn.json |
 | 0.9370 | 0.85 | 5 | - | -0 | +0.1 | 13 | 0.98 | `music/ex4/BGM_EX4_Event_25.scd` | GL_00009.flac | Growing Light.json |
 | 0.9372 | 0.97 | 2 | - | +0 | +0.4 | 7 | 0.05 | `music/ffxiv/Orchestrion/BGM_ORCH_474.scd` | DUD_080.flac | Death Unto Dawn.json |
-| 0.9372 | 0.83 | 24 | - | +2 | +3.3 | 32 | 0.00 | `music/ffxiv/Orchestrion/BGM_ORCH_735.scd` | DT_026.flac | Dawntrail.json |
+| 0.9372 | 0.84 | 22 | - | +2 | +3.3 | 30 | 0.00 | `music/ffxiv/Orchestrion/BGM_ORCH_735.scd` | DT_026.flac | Dawntrail.json |
 | 0.9373 | 0.97 | 2 | - | +1 | -0.5 | 7 | 0.45 | `music/ex5/BGM_EX5_Dan_D07.scd` | DT_059.flac | Dawntrail.json |
 | 0.9373 | 0.92 | 1 | - | -0 | -0.3 | 2 | 0.62 | `music/ffxiv/BGM_Rade_01.scd` | Before_Meteor_FFXIV_068.flac+Before_Meteor_FFXIV_069.flac | Before Meteor.json |
 | 0.9376 | 0.91 | 3 | - | -0 | -0.0 | 14 | 0.45 | `music/ex1/BGM_EX1_Dungeon_DravaniaC_01.scd` | HEAVENSWARD_FFXIV_26.flac | Heavensward.json |
@@ -321,8 +320,8 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9494 | 0.90 | 1 | - | +1 | +2.1 | 5 | 0.04 | `music/ffxiv/Orchestrion/BGM_ORCH_838.scd` | TH_059.flac | Trail to the Heavens.json |
 | 0.9496 | 0.98 | 3 | - | +2 | +2.9 | 10 | 0.38 | `music/ffxiv/Orchestrion/BGM_ORCH_207.scd` | SB_FFXIV_035.flac | Stormblood.json |
 | 0.9498 | 0.97 | 2 | - | -0 | -0.7 | 8 | 0.05 | `music/ex3/BGM_EX3_Dan_D13.scd` | DUD_080.flac | Death Unto Dawn.json |
+| 0.9499 | 0.39 | 19 | - | +1 | +1.0 | 22 | 0.22 | `music/ffxiv/BGM_Event_Gendaishi.scd` | BTF_FFXIV_34.flac | Before The Fall.json |
 | 0.9499 | 0.55 | 59 | 0.3 | +0 | -0.5 | 60 | 0.04 | `music/ffxiv/Orchestrion/BGM_ORCH_553.scd` | GL_00021.flac | Growing Light.json |
-| 0.9500 | 0.36 | 20 | - | +1 | +1.0 | 23 | 0.22 | `music/ffxiv/BGM_Event_Gendaishi.scd` | BTF_FFXIV_34.flac | Before The Fall.json |
 | 0.9501 | 0.98 | 2 | - | +0 | -0.3 | 13 | - | `music/ex5/BGM_EX5_Field_Safe02.scd` | DT_016.flac | Dawntrail.json |
 | 0.9502 | 0.87 | 0 | - | +1 | +1.9 | 7 | 0.08 | `music/ex2/BGM_EX2_Event_36.scd` | Before_Meteor_FFXIV_044.flac | Before Meteor.json |
 | 0.9503 | 0.95 | 4 | - | +0 | +0.7 | 8 | 0.05 | `music/ffxiv/BGM_Season_HalloweenD.scd` | TFEOF_FFXIV_32.flac | The Far Edge Of Fate.json |
@@ -348,7 +347,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9538 | 0.96 | 1 | - | +1 | +1.3 | 2 | 0.55 | `music/ffxiv/Orchestrion/BGM_ORCH_147.scd` | TFEOF_FFXIV_48.flac | The Far Edge Of Fate.json |
 | 0.9539 | 0.90 | 3 | - | -0 | +1.0 | 10 | 0.09 | `music/ex5/BGM_EX5_Event_09.scd` | DT_031.flac | Dawntrail.json |
 | 0.9540 | 0.84 | 51 | - | +1 | +0.7 | 60 | 0.16 | `music/ffxiv/Orchestrion/BGM_ORCH_716.scd` | DT_027.flac | Dawntrail.json |
-| 0.9543 | 0.78 | 34 | - | +1 | +0.7 | 48 | 0.05 | `music/ex5/BGM_EX5_Town_T_Night.scd` | DT_026.flac | Dawntrail.json |
+| 0.9543 | 0.78 | 32 | - | +1 | +0.7 | 46 | 0.05 | `music/ex5/BGM_EX5_Town_T_Night.scd` | DT_026.flac | Dawntrail.json |
 | 0.9543 | 0.84 | 3 | - | +0 | -0.2 | 10 | 0.23 | `music/ffxiv/BGM_Con_Teikoku_Gaius.scd` | ARR_FFXIV_108.flac | A Realm Reborn.json |
 | 0.9547 | 0.99 | 1 | - | -0 | -0.2 | 4 | 0.15 | `music/ex3/BGM_EX3_Dan_D11.scd` | DUD_042.flac | Death Unto Dawn.json |
 | 0.9548 | 0.99 | 1 | - | +1 | +1.2 | 5 | 0.34 | `music/ex2/BGM_EX2_Event_08.scd` | SB_FFXIV_020.flac | Stormblood.json |
@@ -378,7 +377,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9597 | 0.89 | 1 | - | -0 | +0.3 | 10 | 0.36 | `music/ffxiv/BGM_Field_BanColony_Sahagin.scd` | BTF_FFXIV_06.flac | Before The Fall.json |
 | 0.9598 | 0.96 | 2 | - | -0 | +0.3 | 6 | 0.16 | `music/ex1/BGM_EX1_Town_Ish02_Day.scd` | HEAVENSWARD_FFXIV_03.flac | Heavensward.json |
 | 0.9598 | 0.98 | 2 | - | +1 | +1.3 | 11 | - | `music/ex3/BGM_EX3_Field_Safe_01.scd` | SHADOWBRINGERS_55.flac | Shadowbringers.json |
-| 0.9600 | 0.70 | 37 | - | +1 | +1.2 | 38 | 0.10 | `music/ex3/BGM_EX3_MYC_06.scd` | DUD_035.flac | Death Unto Dawn.json |
+| 0.9600 | 0.72 | 36 | - | +1 | +1.2 | 38 | 0.10 | `music/ex3/BGM_EX3_MYC_06.scd` | DUD_035.flac | Death Unto Dawn.json |
 | 0.9600 | 0.97 | 2 | - | +2 | +3.2 | 4 | 0.34 | `music/ffxiv/Orchestrion/BGM_ORCH_247.scd` | 3-19 - 英雄の証 ～ Monster Hunter World version | Monster Hunter World.json |
 | 0.9601 | 0.99 | 2 | - | +3 | +5.5 | 12 | 0.46 | `music/ffxiv/Orchestrion/BGM_ORCH_355.scd` | DUD_007.flac | Death Unto Dawn.json |
 | 0.9602 | 0.68 | 45 | - | +1 | +0.3 | 60 | 0.08 | `music/ex4/BGM_EX4_Event_18.scd` | source | Endwalker.json |
@@ -438,7 +437,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9657 | 0.97 | 2 | - | +3 | +6.5 | 12 | 0.11 | `music/ffxiv/Orchestrion/BGM_ORCH_389.scd` | SHADOWBRINGERS_51.flac | Shadowbringers.json |
 | 0.9657 | 0.99 | 0 | - | +3 | +8.6 | 6 | 0.45 | `music/ffxiv/Orchestrion/BGM_ORCH_444.scd` | SHADOWBRINGERS_05.flac | Shadowbringers.json |
 | 0.9658 | 1.00 | 1 | - | +0 | +0.8 | 5 | - | `music/ex5/BGM_EX5_Field_Sha_Day.scd` | DT_027.flac | Dawntrail.json |
-| 0.9658 | 0.86 | 23 | - | +0 | +0.6 | 53 | 0.07 | `music/ffxiv/Orchestrion/BGM_ORCH_881.scd` | TH_128.mp3 | Trail to the Heavens.json |
+| 0.9659 | 0.87 | 22 | - | +0 | +0.6 | 53 | 0.07 | `music/ffxiv/Orchestrion/BGM_ORCH_881.scd` | TH_128.mp3 | Trail to the Heavens.json |
 | 0.9660 | 0.99 | 4 | - | +1 | +1.5 | 16 | 0.14 | `music/ex4/BGM_EX4_Dan_D12.scd` | GL_00073.flac | Growing Light.json |
 | 0.9660 | 0.98 | 1 | - | +4 | +0.0 | 6 | 0.91 | `music/ffxiv/Orchestrion/BGM_ORCH_302.scd` | SHADOWBRINGERS_19.flac | Shadowbringers.json |
 | 0.9660 | 0.98 | 2 | - | +0 | +0.0 | 9 | 0.51 | `music/ffxiv/Orchestrion/BGM_ORCH_332.scd` | SHADOWBRINGERS_63.flac | Shadowbringers.json |
@@ -461,15 +460,15 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9673 | 1.00 | 1 | - | +3 | +4.9 | 7 | 0.44 | `music/ffxiv/Orchestrion/BGM_ORCH_808.scd` | TH_081.mp3 | Trail to the Heavens.json |
 | 0.9674 | 0.98 | 3 | - | +0 | +0.6 | 10 | 0.38 | `music/ex2/BGM_EX2_Town_K_Night.scd` | SB_FFXIV_035.flac | Stormblood.json |
 | 0.9674 | 0.98 | 3 | - | +0 | +0.6 | 10 | 0.38 | `music/ffxiv/BGM_Town_K_Night.scd` | SB_FFXIV_035.flac | Stormblood.json |
-| 0.9674 | 0.91 | 9 | - | -0 | +0.6 | 13 | 0.42 | `music/ffxiv/Orchestrion/BGM_ORCH_358.scd` | DUD_010.flac | Death Unto Dawn.json |
 | 0.9675 | 0.86 | 9 | - | +3 | +0.0 | 28 | 0.06 | `music/ffxiv/Orchestrion/BGM_ORCH_169.scd` | HEAVENSWARD_FFXIV_42.flac | Heavensward.json |
+| 0.9675 | 0.92 | 8 | - | -0 | +0.6 | 13 | 0.42 | `music/ffxiv/Orchestrion/BGM_ORCH_358.scd` | DUD_010.flac | Death Unto Dawn.json |
 | 0.9676 | 0.94 | 1 | - | +1 | +2.1 | 9 | 0.20 | `music/ffxiv/Orchestrion/BGM_ORCH_607.scd` | GL_00072.flac | Growing Light.json |
 | 0.9677 | 1.00 | 1 | - | +2 | +2.1 | 13 | 0.13 | `music/ffxiv/Orchestrion/BGM_ORCH_806.scd` | TH_123.mp3 | Trail to the Heavens.json |
+| 0.9678 | 0.80 | 23 | - | +1 | +0.9 | 42 | 0.19 | `music/ex5/BGM_EX5_EndCredit02.scd` | DT_001.flac+TH_002.flac+TH_007.flac+TH_036.flac+TH_037.flac+TH_048.flac+TH_063.flac+TH_079.flac | Trail to the Heavens.json |
 | 0.9678 | 0.94 | 1 | - | +0 | +1.5 | 4 | 0.68 | `music/ex5/BGM_EX5_Field_Liv_Fate.scd` | DT_058.flac | Dawntrail.json |
-| 0.9678 | 0.87 | 26 | - | +2 | +3.7 | 40 | 0.46 | `music/ffxiv/Orchestrion/BGM_ORCH_185.scd` | SB_FFXIV_008.flac | Stormblood.json |
+| 0.9678 | 0.88 | 23 | - | +2 | +3.7 | 38 | 0.46 | `music/ffxiv/Orchestrion/BGM_ORCH_185.scd` | SB_FFXIV_008.flac | Stormblood.json |
 | 0.9678 | 0.98 | 1 | - | +1 | +0.0 | 14 | 0.66 | `music/ffxiv/Orchestrion/BGM_ORCH_234.scd` | SB_FFXIV_034.flac | Stormblood.json |
 | 0.9678 | 1.00 | 0 | - | +2 | +2.2 | 10 | 0.07 | `music/ffxiv/Orchestrion/BGM_ORCH_887.scd` | TH_138.mp3 | Trail to the Heavens.json |
-| 0.9679 | 0.78 | 24 | - | +1 | +0.9 | 42 | 0.19 | `music/ex5/BGM_EX5_EndCredit02.scd` | DT_001.flac+TH_002.flac+TH_007.flac+TH_036.flac+TH_037.flac+TH_048.flac+TH_063.flac+TH_079.flac | Trail to the Heavens.json |
 | 0.9679 | 1.00 | 0 | - | +2 | +4.9 | 6 | 0.08 | `music/ffxiv/Orchestrion/BGM_ORCH_175.scd` | Before_Meteor_FFXIV_009.flac | Before Meteor.json |
 | 0.9679 | 1.00 | 0 | - | +1 | +1.8 | 4 | 0.17 | `music/ffxiv/Orchestrion/BGM_ORCH_455.scd` | DUD_063.flac | Death Unto Dawn.json |
 | 0.9681 | 0.96 | 2 | - | +1 | +2.0 | 2 | 0.24 | `music/ex2/BGM_EX2_Ban_14.scd` | 1-15 - 森を牛耳る蛮顎の竜.flac | Monster Hunter World.json |
@@ -494,7 +493,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9697 | 0.77 | 1 | - | +0 | +0.1 | 6 | 0.27 | `music/ex3/BGM_EX3_Ban_05.scd` | DUD_002.flac | Death Unto Dawn.json |
 | 0.9697 | 0.80 | 2 | - | +2 | +2.5 | 2 | 0.13 | `music/ffxiv/BGM_Ride_Omega.scd` | SB_FFXIV_050.flac | Stormblood.json |
 | 0.9697 | 0.49 | 58 | 3.7 | +1 | +1.1 | 60 | 0.53 | `music/ffxiv/Orchestrion/BGM_ORCH_011.scd` | HEAVENSWARD_FFXIV_12.flac | Heavensward.json |
-| 0.9699 | 1.00 | 1 | - | +3 | +7.6 | 12 | 0.30 | `music/ffxiv/Orchestrion/BGM_ORCH_359.scd` | HEAVENSWARD_FFXIV_18.flac | Heavensward.json |
+| 0.9699 | 1.00 | 1 | - | +3 | +7.6 | 11 | 0.30 | `music/ffxiv/Orchestrion/BGM_ORCH_359.scd` | HEAVENSWARD_FFXIV_18.flac | Heavensward.json |
 | 0.9700 | 0.95 | 5 | - | +1 | +1.0 | 21 | 0.15 | `music/ex2/BGM_EX2_Dan_D12.scd` | SB_FFXIV_090.flac | Stormblood.json |
 | 0.9700 | 0.63 | 55 | 2.3 | +1 | +0.0 | 60 | 0.74 | `music/ffxiv/Orchestrion/BGM_ORCH_292.scd` | SB_FFXIV_037.flac | Stormblood.json |
 | 0.9701 | 0.92 | 1 | - | +0 | +0.2 | 7 | 0.11 | `music/ex1/BGM_EX1_FATE01.scd` | ARR_FFXIV_110.flac | A Realm Reborn.json |
@@ -537,8 +536,8 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9718 | 1.00 | 1 | - | +2 | +4.0 | 9 | - | `music/ffxiv/Orchestrion/BGM_ORCH_235.scd` | SB_FFXIV_046.flac | Stormblood.json |
 | 0.9719 | 1.00 | 1 | - | +3 | +6.1 | 5 | - | `music/ffxiv/Orchestrion/BGM_ORCH_634.scd` | GL_00095.flac | Growing Light.json |
 | 0.9720 | 0.97 | 1 | - | +3 | +5.7 | 6 | 0.22 | `music/ffxiv/Orchestrion/BGM_ORCH_484.scd` | DUD_075.flac | Death Unto Dawn.json |
-| 0.9722 | 0.84 | 42 | - | +1 | +1.6 | 60 | 0.10 | `music/ffxiv/Orchestrion/BGM_ORCH_252.scd` | GL_00035.flac | Growing Light.json |
 | 0.9722 | 0.97 | 1 | - | +0 | +0.2 | 6 | 0.86 | `music/ffxiv/Orchestrion/BGM_ORCH_880.scd` | TH_127.mp3 | Trail to the Heavens.json |
+| 0.9723 | 0.84 | 42 | - | +1 | +1.6 | 60 | 0.10 | `music/ffxiv/Orchestrion/BGM_ORCH_252.scd` | GL_00035.flac | Growing Light.json |
 | 0.9723 | 0.99 | 1 | - | +1 | +0.9 | 9 | 0.11 | `music/ffxiv/Orchestrion/BGM_ORCH_810.scd` | TH_098.mp3 | Trail to the Heavens.json |
 | 0.9724 | 0.98 | 2 | - | +0 | +0.0 | 10 | 0.51 | `music/ex3/BGM_EX3_Dan_D04.scd` | SHADOWBRINGERS_63.flac | Shadowbringers.json |
 | 0.9724 | 1.00 | 1 | - | +2 | +2.3 | 6 | 0.03 | `music/ffxiv/Orchestrion/BGM_ORCH_891.scd` | TH_139.mp3 | Trail to the Heavens.json |
@@ -549,7 +548,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9726 | 0.96 | 4 | - | -2 | +0.0 | 10 | - | `music/ffxiv/Orchestrion/BGM_ORCH_259.scd` | SHADOWBRINGERS_10.flac | Shadowbringers.json |
 | 0.9726 | 0.99 | 3 | - | +2 | +0.0 | 12 | - | `music/ffxiv/Orchestrion/BGM_ORCH_534.scd` | ENDWALKER_020.flac | Endwalker.json |
 | 0.9726 | 0.99 | 2 | - | +1 | +2.1 | 7 | 0.02 | `music/ffxiv/Orchestrion/BGM_ORCH_774.scd` | TH_026.flac | Trail to the Heavens.json |
-| 0.9727 | 0.99 | 10 | - | +1 | +2.8 | 40 | 0.10 | `music/ffxiv/Orchestrion/BGM_ORCH_045.scd` | Before_Meteor_FFXIV_104.flac | Before Meteor.json |
+| 0.9727 | 1.00 | 7 | - | +1 | +2.8 | 40 | 0.10 | `music/ffxiv/Orchestrion/BGM_ORCH_045.scd` | Before_Meteor_FFXIV_104.flac | Before Meteor.json |
 | 0.9727 | 0.65 | 57 | 0.3 | +1 | +2.3 | 60 | 0.18 | `music/ffxiv/Orchestrion/BGM_ORCH_251.scd` | DUD_025.flac | Death Unto Dawn.json |
 | 0.9728 | 0.99 | 1 | - | +2 | +4.0 | 10 | 0.14 | `music/ffxiv/Orchestrion/BGM_ORCH_330.scd` | SHADOWBRINGERS_56.flac | Shadowbringers.json |
 | 0.9729 | 0.98 | 2 | - | +0 | +0.7 | 5 | 0.22 | `music/ex1/BGM_EX1_Dungeon_DravaniaC_02.scd` | TFEOF_FFXIV_12.flac | The Far Edge Of Fate.json |
@@ -561,12 +560,12 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9731 | 0.98 | 1 | - | +1 | +2.8 | 3 | 0.18 | `music/ffxiv/Orchestrion/BGM_ORCH_361.scd` | Before_Meteor_FFXIV_100.flac | Before Meteor.json |
 | 0.9731 | 1.00 | 0 | - | +3 | +1.8 | 11 | 0.14 | `music/ffxiv/Orchestrion/BGM_ORCH_636.scd` | GL_00081.flac | Growing Light.json |
 | 0.9732 | 0.94 | 32 | - | +1 | +2.4 | 60 | 0.19 | `music/ffxiv/Orchestrion/BGM_ORCH_061.scd` | HEAVENSWARD_FFXIV_01.flac | Growing Light.json |
-| 0.9732 | 0.93 | 16 | - | +1 | +2.9 | 39 | 0.07 | `music/ffxiv/Orchestrion/BGM_ORCH_130.scd` | ARR_FFXIV_020.flac | A Realm Reborn.json |
 | 0.9733 | 0.91 | 16 | - | +2 | +3.0 | 32 | 0.37 | `music/ex2/BGM_EX2_Event_15.scd` | 1-06 - 新大陸への礎 ～ 調査拠点アステラ.flac | Monster Hunter World.json |
+| 0.9733 | 0.94 | 15 | - | +1 | +2.9 | 39 | 0.07 | `music/ffxiv/Orchestrion/BGM_ORCH_130.scd` | ARR_FFXIV_020.flac | A Realm Reborn.json |
 | 0.9733 | 0.93 | 45 | 2.0 | -1 | +0.0 | 60 | 0.09 | `music/ffxiv/Orchestrion/BGM_ORCH_403.scd` | ENDWALKER_028.flac | Endwalker.json |
 | 0.9733 | 0.98 | 1 | - | +1 | +1.4 | 4 | 0.55 | `music/ffxiv/Orchestrion/BGM_ORCH_886.scd` | TH_065.flac | Trail to the Heavens.json |
 | 0.9734 | 0.99 | 1 | - | +2 | +3.9 | 3 | 0.64 | `music/ffxiv/Orchestrion/BGM_ORCH_306.scd` | SHADOWBRINGERS_26.flac | Shadowbringers.json |
-| 0.9734 | 1.00 | 2 | - | +2 | +2.7 | 8 | 0.97 | `music/ffxiv/Orchestrion/BGM_ORCH_314.scd` | DUD_004.flac | Death Unto Dawn.json |
+| 0.9734 | 1.00 | 1 | - | +2 | +2.7 | 8 | 0.97 | `music/ffxiv/Orchestrion/BGM_ORCH_314.scd` | DUD_004.flac | Death Unto Dawn.json |
 | 0.9734 | 0.99 | 2 | - | +2 | +3.5 | 7 | 0.52 | `music/ffxiv/Orchestrion/BGM_ORCH_559.scd` | Before_Meteor_FFXIV_076.flac | A Realm Reborn.json |
 | 0.9734 | 1.00 | 1 | - | +3 | +5.5 | 6 | 0.25 | `music/ffxiv/Orchestrion/BGM_ORCH_763.scd` | TH_004.flac | Trail to the Heavens.json |
 | 0.9735 | 0.99 | 1 | - | +2 | +3.8 | 5 | 0.04 | `music/ffxiv/Orchestrion/BGM_ORCH_189.scd` | SB_FFXIV_018.flac | Stormblood.json |
@@ -598,10 +597,11 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9745 | 0.99 | 1 | - | +0 | +0.7 | 8 | 0.05 | `music/ffxiv/Orchestrion/BGM_ORCH_757.scd` | TH_087.mp3 | Trail to the Heavens.json |
 | 0.9745 | 0.99 | 1 | - | +2 | +4.3 | 6 | 0.33 | `music/ffxiv/Orchestrion/BGM_ORCH_776.scd` | TH_013.flac | Trail to the Heavens.json |
 | 0.9746 | 0.99 | 1 | - | +1 | +2.6 | 4 | 0.03 | `music/ffxiv/Orchestrion/BGM_ORCH_030.scd` | Before_Meteor_FFXIV_066.flac | A Realm Reborn.json |
+| 0.9746 | 0.64 | 28 | - | +3 | +4.1 | 56 | 0.57 | `music/ffxiv/Orchestrion/BGM_ORCH_489.scd` | DUD_071.flac | Death Unto Dawn.json |
 | 0.9747 | 0.84 | 49 | 4.9 | +2 | +3.5 | 60 | 0.92 | `music/ffxiv/Orchestrion/BGM_ORCH_079.scd` | HEAVENSWARD_FFXIV_55.flac | Growing Light.json |
 | 0.9747 | 0.97 | 1 | - | -0 | +2.2 | 8 | 0.97 | `music/ffxiv/Orchestrion/BGM_ORCH_512.scd` | ENDWALKER_015.flac | Endwalker.json |
 | 0.9748 | 0.98 | 1 | - | +2 | +1.9 | 3 | 0.20 | `music/ffxiv/Orchestrion/BGM_ORCH_540.scd` | GL_00026.flac | Growing Light.json |
-| 0.9748 | 0.82 | 29 | - | +1 | +1.7 | 47 | 0.18 | `music/ffxiv/Orchestrion/BGM_ORCH_725.scd` | DT_001.flac | Dawntrail.json |
+| 0.9748 | 0.83 | 27 | - | +1 | +1.7 | 46 | 0.18 | `music/ffxiv/Orchestrion/BGM_ORCH_725.scd` | DT_001.flac | Dawntrail.json |
 | 0.9748 | 0.99 | 0 | - | +1 | +2.1 | 4 | 0.39 | `music/ffxiv/Orchestrion/BGM_ORCH_787.scd` | SB_FFXIV_072.flac | Stormblood.json |
 | 0.9749 | 0.99 | 1 | - | +2 | +3.5 | 10 | 0.37 | `music/ffxiv/Orchestrion/BGM_ORCH_199.scd` | SB_FFXIV_063.flac | Stormblood.json |
 | 0.9749 | 1.00 | 1 | - | +2 | +2.6 | 9 | 0.35 | `music/ffxiv/Orchestrion/BGM_ORCH_276.scd` | SHADOWBRINGERS_08.flac | Shadowbringers.json |
@@ -609,7 +609,6 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9749 | 0.99 | 1 | - | +1 | +0.7 | 4 | 0.17 | `music/ffxiv/Orchestrion/BGM_ORCH_761.scd` | TH_091.mp3 | Trail to the Heavens.json |
 | 0.9749 | 0.97 | 1 | - | +1 | +1.8 | 5 | 0.29 | `music/ffxiv/Orchestrion/BGM_ORCH_879.scd` | TH_126.mp3 | Trail to the Heavens.json |
 | 0.9750 | 0.99 | 1 | - | +2 | +3.2 | 6 | 0.01 | `music/ffxiv/Orchestrion/BGM_ORCH_244.scd` | SB_FFXIV_100.flac | Stormblood.json |
-| 0.9750 | 0.63 | 28 | - | +3 | +4.1 | 60 | 0.57 | `music/ffxiv/Orchestrion/BGM_ORCH_489.scd` | DUD_071.flac | Death Unto Dawn.json |
 | 0.9750 | 0.88 | 1 | - | +2 | +2.9 | 4 | 0.06 | `music/ffxiv/Orchestrion/BGM_ORCH_823.scd` | TH_061.flac | Trail to the Heavens.json |
 | 0.9751 | 0.93 | 17 | - | +1 | +0.0 | 30 | - | `music/ex1/BGM_EX1_Field_Abaracia03.scd` | HEAVENSWARD_FFXIV_15.flac | Heavensward.json |
 | 0.9751 | 1.00 | 1 | - | +2 | +5.4 | 7 | 0.01 | `music/ffxiv/Orchestrion/BGM_ORCH_062.scd` | BTF_FFXIV_41.flac | Before The Fall.json |
@@ -629,16 +628,16 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9755 | 1.00 | 9 | - | +2 | +0.0 | 12 | 0.41 | `music/ffxiv/Orchestrion/BGM_ORCH_348.scd` | SHADOWBRINGERS_64.flac | Shadowbringers.json |
 | 0.9755 | 0.99 | 1 | - | +1 | +0.6 | 4 | 0.31 | `music/ffxiv/Orchestrion/BGM_ORCH_613.scd` | SB_FFXIV_005.flac | Growing Light.json |
 | 0.9756 | 0.95 | 8 | - | +1 | +2.8 | 10 | 0.07 | `music/ffxiv/Orchestrion/BGM_ORCH_047.scd` | Before_Meteor_FFXIV_033.flac | Before Meteor.json |
-| 0.9756 | 0.75 | 35 | - | +1 | +3.0 | 60 | 0.47 | `music/ffxiv/Orchestrion/BGM_ORCH_453.scd` | ARR_FFXIV_037.flac | A Realm Reborn.json |
 | 0.9756 | 0.79 | 6 | - | +1 | +1.4 | 7 | 0.07 | `music/ffxiv/Orchestrion/BGM_ORCH_731.scd` | DT_066.flac | Dawntrail.json |
 | 0.9757 | 0.97 | 1 | - | +1 | +1.9 | 1 | 0.61 | `music/ffxiv/Orchestrion/BGM_ORCH_226.scd` | SB_FFXIV_013.flac | Growing Light.json |
+| 0.9757 | 0.76 | 34 | - | +1 | +3.0 | 60 | 0.47 | `music/ffxiv/Orchestrion/BGM_ORCH_453.scd` | ARR_FFXIV_037.flac | A Realm Reborn.json |
 | 0.9757 | 1.00 | 0 | - | +2 | +2.8 | 8 | 0.04 | `music/ffxiv/Orchestrion/BGM_ORCH_476.scd` | HEAVENSWARD_FFXIV_25.flac | Heavensward.json |
-| 0.9758 | 0.94 | 12 | - | +1 | +1.0 | 45 | 0.07 | `music/ex4/BGM_EX4_EndCredit02.scd` | ENDWALKER_001.flac+ENDWALKER_003.flac+ENDWALKER_055.flac+GL_00007.flac+GL_00042.flac+GL_00074.flac+GL_00076.flac | Endwalker.json |
 | 0.9758 | 0.95 | 2 | - | +1 | +0.8 | 8 | 0.05 | `music/ex5/BGM_EX5_Event_33.scd` | TH_030.flac | Trail to the Heavens.json |
 | 0.9758 | 1.00 | 0 | - | +1 | +1.8 | 3 | 0.45 | `music/ffxiv/BGM_GlodSaucer_TripleWaiting.scd` | DUD_063.flac | Death Unto Dawn.json |
 | 0.9758 | 1.00 | 0 | - | +2 | +3.3 | 3 | 0.34 | `music/ffxiv/Orchestrion/BGM_ORCH_039.scd` | BTF_FFXIV_53.flac | Before The Fall.json |
 | 0.9758 | 0.99 | 1 | - | +2 | +2.9 | 6 | 0.73 | `music/ffxiv/Orchestrion/BGM_ORCH_269.scd` | SB_FFXIV_081.flac | Stormblood.json |
 | 0.9758 | 0.98 | 1 | - | +0 | +2.0 | 3 | 0.17 | `music/ffxiv/Orchestrion/BGM_ORCH_382.scd` | HEAVENSWARD_FFXIV_38.flac | Heavensward.json |
+| 0.9759 | 0.94 | 12 | - | +1 | +1.0 | 45 | 0.07 | `music/ex4/BGM_EX4_EndCredit02.scd` | ENDWALKER_001.flac+ENDWALKER_003.flac+ENDWALKER_055.flac+GL_00007.flac+GL_00042.flac+GL_00074.flac+GL_00076.flac | Endwalker.json |
 | 0.9759 | 0.95 | 2 | - | +1 | +1.4 | 8 | 0.84 | `music/ex5/BGM_EX5_Ban_18.scd` | TH_036.flac | Trail to the Heavens.json |
 | 0.9759 | 0.99 | 1 | - | +1 | +1.3 | 10 | 0.03 | `music/ffxiv/Orchestrion/BGM_ORCH_125.scd` | TFEOF_FFXIV_07.flac | The Far Edge Of Fate.json |
 | 0.9759 | 1.00 | 0 | - | +2 | +5.1 | 5 | 0.29 | `music/ffxiv/Orchestrion/BGM_ORCH_304.scd` | SHADOWBRINGERS_21.flac | Shadowbringers.json |
@@ -694,15 +693,16 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9779 | 1.00 | 0 | - | +2 | +2.3 | 11 | 0.16 | `music/ffxiv/Orchestrion/BGM_ORCH_873.scd` | DT_031.flac | Dawntrail.json |
 | 0.9779 | 0.96 | 1 | - | +1 | +1.6 | 2 | 0.30 | `music/ffxiv/Orchestrion/BGM_ORCH_909.scd` | TH_151.mp3 | Trail to the Heavens.json |
 | 0.9780 | 0.86 | 64 | 2.1 | +1 | +2.0 | 60 | 0.02 | `music/ex3/BGM_EX3_Event_26.scd` | DUD_083.flac | Death Unto Dawn.json |
-| 0.9780 | 0.56 | 35 | - | -0 | +2.5 | 38 | 0.13 | `music/ffxiv/BGM_KTG_04.scd` | TH_149.mp3 | Trail to the Heavens.json |
 | 0.9780 | 0.83 | 46 | 3.3 | +2 | +0.0 | 60 | 0.48 | `music/ffxiv/Orchestrion/BGM_ORCH_209.scd` | SB_FFXIV_032.flac | Stormblood.json |
 | 0.9780 | 0.98 | 2 | - | +1 | +2.3 | 3 | 0.30 | `music/ffxiv/Orchestrion/BGM_ORCH_492.scd` | ENDWALKER_014.flac | Endwalker.json |
 | 0.9780 | 0.97 | 1 | - | +3 | +4.4 | 3 | 0.58 | `music/ffxiv/Orchestrion/BGM_ORCH_495.scd` | ENDWALKER_036.flac | Endwalker.json |
 | 0.9780 | 0.97 | 1 | - | +1 | +2.4 | 4 | 0.01 | `music/ffxiv/Orchestrion/BGM_ORCH_545.scd` | Before_Meteor_FFXIV_022.flac | Before Meteor.json |
 | 0.9780 | 0.99 | 1 | - | +1 | +0.7 | 3 | 0.30 | `music/ffxiv/Orchestrion/BGM_ORCH_652.scd` | GL_00097.flac | Growing Light.json |
-| 0.9782 | 0.98 | 10 | - | +1 | +1.8 | 15 | - | `music/ffxiv/Orchestrion/BGM_ORCH_327.scd` | SHADOWBRINGERS_37.flac | Shadowbringers.json |
+| 0.9782 | 0.56 | 35 | - | -0 | +2.4 | 37 | 0.13 | `music/ffxiv/BGM_KTG_04.scd` | TH_149.mp3 | Trail to the Heavens.json |
+| 0.9782 | 0.98 | 8 | - | +1 | +1.8 | 15 | - | `music/ffxiv/Orchestrion/BGM_ORCH_327.scd` | SHADOWBRINGERS_37.flac | Shadowbringers.json |
 | 0.9782 | 0.98 | 1 | - | +0 | +0.7 | 3 | 0.48 | `music/ffxiv/Orchestrion/BGM_ORCH_520.scd` | ENDWALKER_050.flac | Endwalker.json |
 | 0.9782 | 0.98 | 1 | - | -0 | +1.0 | 3 | 0.59 | `music/ffxiv/Orchestrion/BGM_ORCH_608.scd` | GL_00060.flac | Growing Light.json |
+| 0.9783 | 0.74 | 19 | - | +1 | +2.1 | 21 | 0.35 | `music/ffxiv/BGM_Event_Bazaar.scd` | Before_Meteor_FFXIV_025.flac | Before Meteor.json |
 | 0.9783 | 0.99 | 2 | - | +1 | +1.3 | 16 | 0.17 | `music/ffxiv/Orchestrion/BGM_ORCH_653.scd` | GL_00098.flac | Growing Light.json |
 | 0.9783 | 0.97 | 1 | - | +1 | +2.4 | 24 | 0.90 | `music/ffxiv/Orchestrion/BGM_ORCH_730.scd` | DT_065.flac | Dawntrail.json |
 | 0.9783 | 0.97 | 1 | - | -0 | +0.5 | 7 | 0.03 | `music/ffxiv/Orchestrion/BGM_ORCH_901.scd` | TH_071.flac | Trail to the Heavens.json |
@@ -712,7 +712,6 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9784 | 1.00 | 1 | - | +3 | +5.4 | 8 | 0.51 | `music/ffxiv/Orchestrion/BGM_ORCH_504.scd` | ENDWALKER_013.flac | Endwalker.json |
 | 0.9784 | 1.00 | 1 | - | +3 | +4.5 | 9 | 0.34 | `music/ffxiv/Orchestrion/BGM_ORCH_800.scd` | TH_115.mp3 | Trail to the Heavens.json |
 | 0.9785 | 0.98 | 3 | - | +1 | +0.8 | 13 | 0.40 | `music/ex5/BGM_EX5_Dan_D10.scd` | TH_006.flac | Trail to the Heavens.json |
-| 0.9785 | 0.70 | 22 | - | +1 | +2.1 | 24 | 0.35 | `music/ffxiv/BGM_Event_Bazaar.scd` | Before_Meteor_FFXIV_025.flac | Before Meteor.json |
 | 0.9785 | 0.91 | 12 | - | +0 | +0.8 | 12 | 1.00 | `music/ffxiv/Orchestrion/BGM_ORCH_836.scd` | TH_060.flac | Trail to the Heavens.json |
 | 0.9786 | 0.87 | 2 | - | +2 | +2.7 | 20 | 0.21 | `music/ex2/BGM_EX2_Event_24.scd` | 1-26 - QUEST FAILED.flac | Monster Hunter World.json |
 | 0.9786 | 0.99 | 1 | - | +1 | +1.7 | 5 | 0.80 | `music/ffxiv/Orchestrion/BGM_ORCH_109.scd` | TFEOF_FFXIV_28.flac | The Far Edge Of Fate.json |
@@ -743,7 +742,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9791 | 0.92 | 3 | - | +2 | +3.8 | 21 | 0.79 | `music/ffxiv/Orchestrion/BGM_ORCH_558.scd` | GL_00019.flac | Growing Light.json |
 | 0.9792 | 0.98 | 1 | - | +1 | +1.6 | 2 | 0.18 | `music/ffxiv/Orchestrion/BGM_ORCH_214.scd` | SB_FFXIV_007.flac | Stormblood.json |
 | 0.9792 | 0.98 | 0 | - | +1 | +3.4 | 4 | 0.12 | `music/ffxiv/Orchestrion/BGM_ORCH_258.scd` | Before_Meteor_FFXIV_029.flac | Before Meteor.json |
-| 0.9792 | 0.83 | 22 | - | +1 | +2.1 | 24 | 0.15 | `music/ffxiv/Orchestrion/BGM_ORCH_316.scd` | ENDWALKER_058.flac | Endwalker.json |
+| 0.9792 | 0.83 | 21 | - | +1 | +2.1 | 22 | 0.15 | `music/ffxiv/Orchestrion/BGM_ORCH_316.scd` | ENDWALKER_058.flac | Endwalker.json |
 | 0.9792 | 0.92 | 8 | - | +1 | +1.5 | 13 | 0.32 | `music/ffxiv/Orchestrion/BGM_ORCH_898.scd` | TH_066.flac | Trail to the Heavens.json |
 | 0.9793 | 0.96 | 1 | - | +1 | +1.8 | 3 | 0.11 | `music/ffxiv/Orchestrion/BGM_ORCH_287.scd` | SHADOWBRINGERS_35.flac | Shadowbringers.json |
 | 0.9793 | 0.93 | 1 | - | +3 | +0.0 | 15 | 0.14 | `music/ffxiv/Orchestrion/BGM_ORCH_410.scd` | DUD_045.flac | Death Unto Dawn.json |
@@ -842,7 +841,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9818 | 0.73 | 1 | - | +1 | +2.1 | 6 | 0.73 | `music/ffxiv/Orchestrion/BGM_ORCH_216.scd` | SB_FFXIV_071.flac | Stormblood.json |
 | 0.9818 | 0.78 | 21 | - | +0 | +0.4 | 23 | 0.30 | `music/ffxiv/Orchestrion/BGM_ORCH_883.scd` | TH_130.mp3 | Trail to the Heavens.json |
 | 0.9819 | 0.47 | 66 | 2.4 | -1 | -0.1 | 60 | 0.05 | `music/ex5/BGM_EX5_DD_09.scd` | TH_114.mp3 | Trail to the Heavens.json |
-| 0.9819 | 0.87 | 25 | - | +1 | +1.7 | 42 | 0.26 | `music/ex5/BGM_EX5_Event_02.scd` | DT_020.flac | Dawntrail.json |
+| 0.9819 | 0.88 | 22 | - | +1 | +1.7 | 41 | 0.26 | `music/ex5/BGM_EX5_Event_02.scd` | DT_020.flac | Dawntrail.json |
 | 0.9819 | 0.99 | 1 | - | +0 | +0.5 | 12 | 0.31 | `music/ffxiv/BGM_Field_BanFort_Sylph.scd` | ARR_FFXIV_053.flac | A Realm Reborn.json |
 | 0.9819 | 1.00 | 0 | - | +1 | +3.1 | 6 | 0.60 | `music/ffxiv/Orchestrion/BGM_ORCH_345.scd` | SHADOWBRINGERS_80.flac | Shadowbringers.json |
 | 0.9819 | 0.98 | 1 | - | +1 | +1.4 | 4 | 0.07 | `music/ffxiv/Orchestrion/BGM_ORCH_372.scd` | DUD_027.flac | Death Unto Dawn.json |
@@ -863,7 +862,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9823 | 0.75 | 50 | 0.2 | +2 | +4.0 | 53 | 0.62 | `music/ffxiv/Orchestrion/BGM_ORCH_756.scd` | TH_086.mp3 | Trail to the Heavens.json |
 | 0.9823 | 0.98 | 0 | - | +0 | +0.7 | 5 | 0.40 | `music/ffxiv/Orchestrion/BGM_ORCH_775.scd` | TH_024.flac | Trail to the Heavens.json |
 | 0.9824 | 0.64 | 45 | - | -0 | -0.5 | 60 | 0.12 | `music/ex4/BGM_EX4_Ban_09.scd` | GL_00050.flac | Growing Light.json |
-| 0.9824 | 0.80 | 36 | - | +0 | +0.0 | 60 | 0.21 | `music/ffxiv/Orchestrion/BGM_ORCH_129.scd` | ARR_FFXIV_079.flac | A Realm Reborn.json |
+| 0.9824 | 0.81 | 36 | - | +0 | +0.0 | 60 | 0.21 | `music/ffxiv/Orchestrion/BGM_ORCH_129.scd` | ARR_FFXIV_079.flac | A Realm Reborn.json |
 | 0.9824 | 0.98 | 0 | - | +1 | +1.7 | 11 | 0.69 | `music/ffxiv/Orchestrion/BGM_ORCH_298.scd` | SHADOWBRINGERS_18.flac | Shadowbringers.json |
 | 0.9824 | 1.00 | 1 | - | +1 | +1.5 | 9 | 0.37 | `music/ffxiv/Orchestrion/BGM_ORCH_591.scd` | BTF_FFXIV_39.flac | Before The Fall.json |
 | 0.9824 | 0.97 | 1 | - | +2 | +3.3 | 13 | 0.32 | `music/ffxiv/Orchestrion/BGM_ORCH_601.scd` | GL_00074.flac | Growing Light.json |
@@ -873,6 +872,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9826 | 0.99 | 1 | - | +1 | +2.0 | 8 | 0.72 | `music/ffxiv/Orchestrion/BGM_ORCH_128.scd` | ARR_FFXIV_083.flac | A Realm Reborn.json |
 | 0.9826 | 0.86 | 4 | - | +2 | +3.5 | 13 | 0.17 | `music/ffxiv/Orchestrion/BGM_ORCH_537.scd` | ENDWALKER_029.flac | Endwalker.json |
 | 0.9826 | 0.56 | 1 | - | +1 | +2.2 | 3 | 0.54 | `music/ffxiv/Orchestrion/BGM_ORCH_782.scd` | TH_010.flac | Trail to the Heavens.json |
+| 0.9827 | 0.99 | 5 | - | +0 | +0.5 | 14 | 0.17 | `music/ex2/BGM_EX2_Town_R_Sad.scd` | SB_FFXIV_011.flac | Stormblood.json |
 | 0.9827 | 1.00 | 0 | - | +2 | +3.4 | 6 | 0.16 | `music/ffxiv/Orchestrion/BGM_ORCH_002.scd` | ARR_FFXIV_026.flac | A Realm Reborn.json |
 | 0.9827 | 1.00 | 0 | - | +1 | +2.0 | 4 | 0.31 | `music/ffxiv/Orchestrion/BGM_ORCH_038.scd` | BTF_FFXIV_32.flac | Before The Fall.json |
 | 0.9827 | 1.00 | 0 | - | +1 | +1.1 | 6 | 0.26 | `music/ffxiv/Orchestrion/BGM_ORCH_040.scd` | BTF_FFXIV_56.flac | Before The Fall.json |
@@ -888,29 +888,28 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9828 | 0.98 | 4 | - | -0 | -0.6 | 36 | - | `music/ffxiv/Orchestrion/BGM_ORCH_856.scd` | SB_FFXIV_093.flac | Stormblood.json |
 | 0.9828 | 0.99 | 1 | - | +1 | +0.2 | 4 | 0.38 | `music/ffxiv/Orchestrion/BGM_ORCH_888.scd` | TH_136.mp3 | Trail to the Heavens.json |
 | 0.9829 | 0.99 | 1 | - | +0 | +1.7 | 4 | 0.01 | `music/ffxiv/Orchestrion/BGM_ORCH_118.scd` | HEAVENSWARD_FFXIV_57.flac | Heavensward.json |
-| 0.9830 | 0.83 | 47 | 0.5 | +0 | +0.7 | 55 | 0.25 | `music/ex3/BGM_EX3_EndCredit01.scd` | SHADOWBRINGERS_39.flac+SHADOWBRINGERS_52.flac+SHADOWBRINGERS_53.flac+SHADOWBRINGERS_74.flac+SHADOWBRINGERS_76.flac+SHADOWBRINGERS_81.flac | Shadowbringers.json |
+| 0.9830 | 0.83 | 47 | 0.5 | +0 | +0.7 | 54 | 0.25 | `music/ex3/BGM_EX3_EndCredit01.scd` | SHADOWBRINGERS_39.flac+SHADOWBRINGERS_52.flac+SHADOWBRINGERS_53.flac+SHADOWBRINGERS_74.flac+SHADOWBRINGERS_76.flac+SHADOWBRINGERS_81.flac | Shadowbringers.json |
 | 0.9830 | 0.99 | 2 | - | +0 | +0.2 | 7 | 0.26 | `music/ex5/BGM_EX5_Event_38.scd` | TH_048.flac | Trail to the Heavens.json |
-| 0.9830 | 0.52 | 54 | 0.5 | +0 | +0.0 | 60 | 0.05 | `music/ffxiv/BGM_Ban_Leviathan1.scd` | BTF_FFXIV_01.flac | Before The Fall.json |
 | 0.9830 | 0.92 | 1 | - | +0 | +1.1 | 4 | 0.22 | `music/ffxiv/BGM_Con_Bahamut_Bigboss1.scd` | BTF_FFXIV_45.flac | Before The Fall.json |
 | 0.9830 | 0.92 | 1 | - | +0 | +1.1 | 4 | 0.22 | `music/ffxiv/BGM_Ride_Bennu.scd` | BTF_FFXIV_45.flac | Before The Fall.json |
 | 0.9830 | 1.00 | 1 | - | +0 | +0.4 | 3 | 0.09 | `music/ffxiv/Orchestrion/BGM_ORCH_111.scd` | BTF_FFXIV_60.flac | Before The Fall.json |
-| 0.9830 | 0.99 | 3 | - | +1 | +1.9 | 10 | 0.39 | `music/ffxiv/Orchestrion/BGM_ORCH_182.scd` | SB_FFXIV_010.flac | Stormblood.json |
+| 0.9830 | 0.99 | 1 | - | +1 | +1.9 | 10 | 0.39 | `music/ffxiv/Orchestrion/BGM_ORCH_182.scd` | SB_FFXIV_010.flac | Stormblood.json |
 | 0.9830 | 0.96 | 0 | - | +1 | +1.2 | 5 | 0.97 | `music/ffxiv/Orchestrion/BGM_ORCH_420.scd` | ARR_FFXIV_091.flac | A Realm Reborn.json |
 | 0.9830 | 0.99 | 1 | - | +2 | +3.5 | 7 | 0.39 | `music/ffxiv/Orchestrion/BGM_ORCH_529.scd` | ENDWALKER_005.flac | Endwalker.json |
 | 0.9830 | 1.00 | 1 | - | +1 | +1.4 | 3 | - | `music/ffxiv/Orchestrion/BGM_ORCH_630.scd` | GL_00044.flac | Growing Light.json |
-| 0.9831 | 0.97 | 8 | - | +0 | +0.4 | 17 | 0.17 | `music/ex2/BGM_EX2_Town_R_Sad.scd` | SB_FFXIV_011.flac | Stormblood.json |
 | 0.9831 | 0.99 | 1 | - | -0 | +0.2 | 5 | - | `music/ffxiv/BGM_Season_XmasCho_02.scd` | DUD_010.flac+DUD_011.flac | Death Unto Dawn.json |
 | 0.9831 | 0.99 | 2 | - | +1 | +2.2 | 6 | 0.77 | `music/ffxiv/Orchestrion/BGM_ORCH_065.scd` | HEAVENSWARD_FFXIV_50.flac | Heavensward.json |
 | 0.9831 | 1.00 | 0 | - | +2 | +0.0 | 5 | 0.38 | `music/ffxiv/Orchestrion/BGM_ORCH_593.scd` | Before_Meteor_FFXIV_034.flac | Before Meteor.json |
 | 0.9831 | 0.97 | 0 | - | +1 | +1.1 | 10 | 0.32 | `music/ffxiv/Orchestrion/BGM_ORCH_796.scd` | SHADOWBRINGERS_29.flac | Shadowbringers.json |
 | 0.9832 | 0.98 | 1 | - | -2 | -0.5 | 2 | 0.28 | `music/ex3/BGM_EX3_Dan_D07.scd` | SHADOWBRINGERS_82.flac | Shadowbringers.json |
+| 0.9832 | 0.53 | 54 | 0.5 | +0 | +0.0 | 60 | 0.05 | `music/ffxiv/BGM_Ban_Leviathan1.scd` | BTF_FFXIV_01.flac | Before The Fall.json |
 | 0.9832 | 1.00 | 0 | - | +1 | +1.3 | 6 | 0.15 | `music/ffxiv/Orchestrion/BGM_ORCH_029.scd` | ARR_FFXIV_109.flac | A Realm Reborn.json |
 | 0.9832 | 1.00 | 0 | - | +2 | +0.0 | 7 | 0.20 | `music/ffxiv/Orchestrion/BGM_ORCH_046.scd` | HEAVENSWARD_FFXIV_28.flac | Growing Light.json |
 | 0.9832 | 0.98 | 0 | - | +0 | +0.8 | 3 | 0.93 | `music/ffxiv/Orchestrion/BGM_ORCH_138.scd` | Before_Meteor_FFXIV_092.flac | A Realm Reborn.json |
 | 0.9832 | 0.99 | 1 | - | +1 | +1.6 | 3 | 0.06 | `music/ffxiv/Orchestrion/BGM_ORCH_146.scd` | HEAVENSWARD_FFXIV_21.flac | Heavensward.json |
 | 0.9832 | 0.99 | 1 | - | +1 | +2.7 | 2 | 0.12 | `music/ffxiv/Orchestrion/BGM_ORCH_365.scd` | DUD_015.flac | Death Unto Dawn.json |
 | 0.9833 | 0.97 | 4 | - | +1 | +2.2 | 4 | 0.68 | `music/ex2/BGM_EX2_Event_14.scd` | 1-17 - クエストクリア | Monster Hunter World.json |
-| 0.9833 | 0.94 | 16 | - | +2 | +4.8 | 22 | 0.17 | `music/ffxiv/Orchestrion/BGM_ORCH_377.scd` | ARR_FFXIV_057.flac | A Realm Reborn.json |
+| 0.9833 | 0.94 | 14 | - | +2 | +4.8 | 19 | 0.17 | `music/ffxiv/Orchestrion/BGM_ORCH_377.scd` | ARR_FFXIV_057.flac | A Realm Reborn.json |
 | 0.9833 | 0.69 | 21 | - | +2 | +5.0 | 24 | 0.13 | `music/ffxiv/Orchestrion/BGM_ORCH_424.scd` | DUD_051.flac | Death Unto Dawn.json |
 | 0.9833 | 0.98 | 0 | - | +1 | +1.1 | 1 | 0.01 | `music/ffxiv/Orchestrion/BGM_ORCH_446.scd` | SHADOWBRINGERS_66.flac | Shadowbringers.json |
 | 0.9833 | 0.99 | 1 | - | -0 | +0.6 | 2 | 0.03 | `music/ffxiv/Orchestrion/BGM_ORCH_513.scd` | ENDWALKER_024.flac | Endwalker.json |
@@ -921,7 +920,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9836 | 0.99 | 1 | - | +1 | +1.4 | 4 | 0.11 | `music/ffxiv/Orchestrion/BGM_ORCH_471.scd` | DUD_082.flac | Death Unto Dawn.json |
 | 0.9836 | 0.97 | 1 | - | +1 | +2.7 | 4 | 0.05 | `music/ffxiv/Orchestrion/BGM_ORCH_710.scd` | DT_041.flac | Dawntrail.json |
 | 0.9836 | 0.96 | 1 | - | +1 | +1.4 | 4 | 0.17 | `music/ffxiv/Orchestrion/BGM_ORCH_727.scd` | DT_062.flac | Dawntrail.json |
-| 0.9837 | 0.98 | 8 | - | +0 | +0.9 | 33 | 0.42 | `music/ex1/BGM_EX1_EndCredit01.scd` | GL_00032.flac+GL_00033.flac+HEAVENSWARD_FFXIV_03.flac+HEAVENSWARD_FFXIV_48.flac | Growing Light.json |
+| 0.9837 | 0.98 | 4 | - | +0 | +0.9 | 32 | 0.42 | `music/ex1/BGM_EX1_EndCredit01.scd` | GL_00032.flac+GL_00033.flac+HEAVENSWARD_FFXIV_03.flac+HEAVENSWARD_FFXIV_48.flac | Growing Light.json |
 | 0.9837 | 0.99 | 4 | - | -1 | +0.0 | 8 | - | `music/ex4/BGM_EX4_Field_Lab_Night.scd` | ENDWALKER_010.flac | Endwalker.json |
 | 0.9837 | 0.99 | 0 | - | -0 | +0.1 | 8 | 0.15 | `music/ffxiv/Orchestrion/BGM_ORCH_033.scd` | HEAVENSWARD_FFXIV_53.flac | Growing Light.json |
 | 0.9837 | 0.96 | 5 | - | +1 | +2.2 | 16 | 0.61 | `music/ffxiv/Orchestrion/BGM_ORCH_500.scd` | ENDWALKER_042.flac | Endwalker.json |
@@ -962,16 +961,16 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9846 | 1.00 | 0 | - | +1 | +1.9 | 7 | - | `music/ffxiv/Orchestrion/BGM_ORCH_571.scd` | ARR_FFXIV_054.flac | A Realm Reborn.json |
 | 0.9847 | 1.00 | 0 | - | +2 | +3.7 | 16 | 0.99 | `music/ffxiv/Orchestrion/BGM_ORCH_012.scd` | ARR_FFXIV_003.flac | A Realm Reborn.json |
 | 0.9847 | 0.99 | 0 | - | +1 | +1.6 | 39 | 0.57 | `music/ffxiv/Orchestrion/BGM_ORCH_044.scd` | BTF_FFXIV_45.flac | Before The Fall.json |
-| 0.9847 | 1.00 | 9 | - | +1 | +2.2 | 13 | 0.02 | `music/ffxiv/Orchestrion/BGM_ORCH_057.scd` | ARR_FFXIV_005.flac | A Realm Reborn.json |
+| 0.9847 | 1.00 | 5 | - | +1 | +2.2 | 8 | 0.02 | `music/ffxiv/Orchestrion/BGM_ORCH_057.scd` | ARR_FFXIV_005.flac | A Realm Reborn.json |
 | 0.9847 | 0.97 | 1 | - | +2 | +0.0 | 6 | - | `music/ffxiv/Orchestrion/BGM_ORCH_509.scd` | ENDWALKER_034.flac | Endwalker.json |
 | 0.9847 | 0.99 | 1 | - | +1 | +0.8 | 6 | 0.10 | `music/ffxiv/Orchestrion/BGM_ORCH_809.scd` | TH_093.mp3 | Trail to the Heavens.json |
 | 0.9848 | 0.99 | 1 | - | +1 | +2.5 | 11 | 0.07 | `music/ffxiv/Orchestrion/BGM_ORCH_150.scd` | TFEOF_FFXIV_37.flac | The Far Edge Of Fate.json |
-| 0.9848 | 0.99 | 9 | - | +2 | +0.0 | 17 | 0.13 | `music/ffxiv/Orchestrion/BGM_ORCH_350.scd` | SHADOWBRINGERS_61.flac | Shadowbringers.json |
 | 0.9848 | 0.99 | 1 | - | +1 | +1.4 | 2 | 0.23 | `music/ffxiv/Orchestrion/BGM_ORCH_381.scd` | DUD_014.flac | Death Unto Dawn.json |
-| 0.9848 | 0.62 | 33 | - | +1 | +1.8 | 60 | 0.27 | `music/ffxiv/Orchestrion/BGM_ORCH_448.scd` | ARR_FFXIV_051.flac | A Realm Reborn.json |
+| 0.9848 | 0.63 | 33 | - | +1 | +1.8 | 60 | 0.27 | `music/ffxiv/Orchestrion/BGM_ORCH_448.scd` | ARR_FFXIV_051.flac | A Realm Reborn.json |
 | 0.9849 | 0.93 | 1 | - | +1 | +1.2 | 2 | 0.44 | `music/ffxiv/BGM_Ban_Leviathan2.scd` | BTF_FFXIV_02.flac | Before The Fall.json |
 | 0.9849 | 0.93 | 1 | - | +1 | +1.2 | 2 | 0.44 | `music/ffxiv/BGM_Ride_Leviathan.scd` | BTF_FFXIV_02.flac | Before The Fall.json |
 | 0.9849 | 0.91 | 31 | - | +1 | +0.0 | 48 | 0.98 | `music/ffxiv/Orchestrion/BGM_ORCH_322.scd` | SHADOWBRINGERS_54.flac | Shadowbringers.json |
+| 0.9849 | 1.00 | 7 | - | +2 | +0.0 | 14 | 0.13 | `music/ffxiv/Orchestrion/BGM_ORCH_350.scd` | SHADOWBRINGERS_61.flac | Shadowbringers.json |
 | 0.9849 | 0.93 | 1 | - | +1 | +0.9 | 2 | 0.03 | `music/ffxiv/Orchestrion/BGM_ORCH_724.scd` | DT_025.flac | Dawntrail.json |
 | 0.9849 | 0.98 | 2 | - | +2 | +0.0 | 14 | - | `music/ffxiv/Orchestrion/BGM_ORCH_737.scd` | DT_015.flac | Dawntrail.json |
 | 0.9849 | 0.99 | 0 | - | +3 | +6.8 | 6 | 0.10 | `music/ffxiv/Orchestrion/BGM_ORCH_803.scd` | TH_120.mp3 | Trail to the Heavens.json |
@@ -986,7 +985,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9852 | 0.99 | 1 | - | +1 | +2.1 | 4 | 0.38 | `music/ffxiv/Orchestrion/BGM_ORCH_552.scd` | GL_00020.flac | Growing Light.json |
 | 0.9853 | 0.73 | 62 | 1.7 | +0 | +0.6 | 60 | 0.09 | `music/ex3/BGM_EX3_Event_27.scd` | HEAVENSWARD_FFXIV_01.flac | Growing Light.json |
 | 0.9853 | 0.73 | 62 | 1.7 | +0 | +0.6 | 60 | 0.09 | `music/ex4/BGM_EX4_Event_27.scd` | HEAVENSWARD_FFXIV_01.flac | Growing Light.json |
-| 0.9853 | 0.92 | 34 | - | +1 | +2.1 | 54 | 0.05 | `music/ffxiv/Orchestrion/BGM_ORCH_054.scd` | HEAVENSWARD_FFXIV_04.flac | Heavensward.json |
+| 0.9853 | 0.92 | 34 | - | +1 | +2.2 | 54 | 0.05 | `music/ffxiv/Orchestrion/BGM_ORCH_054.scd` | HEAVENSWARD_FFXIV_04.flac | Heavensward.json |
 | 0.9853 | 0.99 | 1 | - | +1 | +1.3 | 3 | 0.13 | `music/ffxiv/Orchestrion/BGM_ORCH_070.scd` | Before_Meteor_FFXIV_090.flac | A Realm Reborn.json |
 | 0.9853 | 1.00 | 1 | - | +1 | +1.1 | 2 | 0.54 | `music/ffxiv/Orchestrion/BGM_ORCH_305.scd` | SHADOWBRINGERS_23.flac | Shadowbringers.json |
 | 0.9854 | 0.94 | 5 | - | -1 | +0.1 | 11 | 0.07 | `music/ex1/BGM_EX1_Event_Nidhogg_02.scd` | HEAVENSWARD_FFXIV_48.flac | Heavensward.json |
@@ -1039,8 +1038,8 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9869 | 1.00 | 0 | - | +1 | +2.5 | 3 | 0.23 | `music/ffxiv/Orchestrion/BGM_ORCH_598.scd` | ARR_FFXIV_012.flac | A Realm Reborn.json |
 | 0.9869 | 0.93 | 44 | 0.6 | +2 | +0.0 | 60 | 0.71 | `music/ffxiv/Orchestrion/BGM_ORCH_738.scd` | DT_023.flac | Dawntrail.json |
 | 0.9869 | 0.99 | 0 | - | +1 | +2.9 | 3 | 0.40 | `music/ffxiv/Orchestrion/BGM_ORCH_845.scd` | ARR_FFXIV_092.flac | A Realm Reborn.json |
-| 0.9870 | 0.80 | 33 | - | +1 | +1.7 | 52 | 0.18 | `music/ex5/BGM_EX5_Event_01.scd` | DT_001.flac | Dawntrail.json |
-| 0.9870 | 0.80 | 33 | - | +1 | +1.7 | 52 | 0.18 | `music/ex5/BGM_EX5_Event_28.scd` | DT_001.flac | Dawntrail.json |
+| 0.9870 | 0.82 | 30 | - | +1 | +1.7 | 51 | 0.18 | `music/ex5/BGM_EX5_Event_01.scd` | DT_001.flac | Dawntrail.json |
+| 0.9870 | 0.82 | 30 | - | +1 | +1.7 | 51 | 0.18 | `music/ex5/BGM_EX5_Event_28.scd` | DT_001.flac | Dawntrail.json |
 | 0.9870 | 0.50 | 1 | - | +0 | +0.6 | 2 | 0.36 | `music/ffxiv/BGM_Ban_Shiva2.scd` | BTF_FFXIV_43.flac | Before The Fall.json |
 | 0.9870 | 0.50 | 1 | - | +0 | +0.6 | 2 | 0.36 | `music/ffxiv/BGM_Ride_Shiva.scd` | BTF_FFXIV_43.flac | Before The Fall.json |
 | 0.9870 | 0.99 | 1 | - | +1 | +1.2 | 2 | 0.27 | `music/ffxiv/Orchestrion/BGM_ORCH_071.scd` | TFEOF_FFXIV_16.flac | The Far Edge Of Fate.json |
@@ -1075,7 +1074,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9878 | 0.97 | 1 | - | +2 | +3.0 | 8 | 0.90 | `music/ex5/BGM_EX5_Raid_06.scd` | DT_065.flac | Dawntrail.json |
 | 0.9878 | 0.97 | 1 | - | +2 | +3.0 | 8 | 0.90 | `music/ffxiv/BGM_Ride_Arcadia.scd` | DT_065.flac | Dawntrail.json |
 | 0.9878 | 0.78 | 1 | - | -0 | +0.3 | 3 | 0.35 | `music/ffxiv/BGM_Ride_Glasya.scd` | TH_051.flac | Trail to the Heavens.json |
-| 0.9879 | 0.83 | 39 | - | +1 | +1.8 | 43 | 0.23 | `music/ex2/BGM_EX2_EndCredit02.scd` | SB_FFXIV_010.flac+SB_FFXIV_031.flac+SB_FFXIV_046.flac | Stormblood.json |
+| 0.9879 | 0.84 | 39 | - | +1 | +1.8 | 42 | 0.23 | `music/ex2/BGM_EX2_EndCredit02.scd` | SB_FFXIV_010.flac+SB_FFXIV_031.flac+SB_FFXIV_046.flac | Stormblood.json |
 | 0.9879 | 0.95 | 1 | - | -0 | +0.3 | 2 | 0.91 | `music/ex5/BGM_EX5_Ban_20.scd` | TH_051.flac | Trail to the Heavens.json |
 | 0.9879 | 1.00 | 0 | - | +1 | +1.3 | 7 | 0.23 | `music/ffxiv/Orchestrion/BGM_ORCH_006.scd` | ARR_FFXIV_040.flac | A Realm Reborn.json |
 | 0.9879 | 0.59 | 60 | 2.7 | +1 | +0.0 | 60 | 0.37 | `music/ffxiv/Orchestrion/BGM_ORCH_739.scd` | DT_029.flac | Dawntrail.json |
@@ -1097,6 +1096,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9885 | 0.99 | 1 | - | +0 | +1.7 | 4 | 0.89 | `music/ffxiv/BGM_Field_BanFort_Ixal.scd` | Before_Meteor_FFXIV_085.flac | A Realm Reborn.json |
 | 0.9885 | 1.00 | 1 | - | +1 | +1.4 | 12 | 0.17 | `music/ffxiv/Orchestrion/BGM_ORCH_048.scd` | ARR_FFXIV_011.flac | A Realm Reborn.json |
 | 0.9886 | 0.95 | 1 | - | +1 | +0.9 | 4 | 0.52 | `music/ex3/BGM_EX3_Raid_06.scd` | DUD_028.flac | Death Unto Dawn.json |
+| 0.9886 | 0.64 | 28 | - | +2 | +3.1 | 56 | 0.57 | `music/ex3/BGM_EX3_Ytc_27.scd` | DUD_071.flac | Death Unto Dawn.json |
 | 0.9887 | 1.00 | 1 | - | +1 | +0.0 | 9 | 0.35 | `music/ffxiv/Orchestrion/BGM_ORCH_164.scd` | HEAVENSWARD_FFXIV_43.flac | Heavensward.json |
 | 0.9887 | 1.00 | 0 | - | +2 | +0.0 | 6 | - | `music/ffxiv/Orchestrion/BGM_ORCH_597.scd` | ARR_FFXIV_087.flac | A Realm Reborn.json |
 | 0.9888 | 0.99 | 2 | - | +1 | +0.0 | 9 | 0.56 | `music/ffxiv/Orchestrion/BGM_ORCH_426.scd` | DUD_047.flac | Death Unto Dawn.json |
@@ -1110,7 +1110,6 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9890 | 0.97 | 1 | - | -1 | +0.1 | 9 | 0.24 | `music/ex1/BGM_EX1_Battle_DravaniaL_01.scd` | HEAVENSWARD_FFXIV_05.flac | Heavensward.json |
 | 0.9890 | 0.97 | 1 | - | -1 | +0.1 | 9 | 0.24 | `music/ex1/BGM_EX1_Battle_IshSebu_01.scd` | HEAVENSWARD_FFXIV_05.flac | Heavensward.json |
 | 0.9890 | 0.97 | 1 | - | -1 | +0.1 | 9 | 0.24 | `music/ex1/BGM_EX1_Battle_MagicC_01.scd` | HEAVENSWARD_FFXIV_05.flac | Heavensward.json |
-| 0.9890 | 0.63 | 28 | - | +2 | +3.1 | 59 | 0.57 | `music/ex3/BGM_EX3_Ytc_27.scd` | DUD_071.flac | Death Unto Dawn.json |
 | 0.9890 | 0.99 | 2 | - | +0 | +0.0 | 3 | 0.11 | `music/ex4/BGM_EX4_WKS_02.scd` | TH_045.flac | Trail to the Heavens.json |
 | 0.9890 | 0.99 | 0 | - | +1 | +2.1 | 6 | 0.56 | `music/ffxiv/Orchestrion/BGM_ORCH_153.scd` | TFEOF_FFXIV_19.flac | The Far Edge Of Fate.json |
 | 0.9890 | 1.00 | 1 | - | +2 | +0.0 | 7 | 0.25 | `music/ffxiv/Orchestrion/BGM_ORCH_294.scd` | SB_FFXIV_041.flac | Stormblood.json |
@@ -1129,10 +1128,10 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9893 | 1.00 | 0 | - | +2 | +0.0 | 4 | - | `music/ffxiv/Orchestrion/BGM_ORCH_819.scd` | TH_108.mp3 | Trail to the Heavens.json |
 | 0.9893 | 0.99 | 0 | - | +0 | +1.0 | 1 | 0.84 | `music/ffxiv/Orchestrion/BGM_ORCH_874.scd` | DT_003.flac | Dawntrail.json |
 | 0.9894 | 1.00 | 1 | - | +2 | +0.0 | 4 | - | `music/ex2/BGM_EX2_Field_Kohgyoku_Day.scd` | SB_FFXIV_015.flac | Stormblood.json |
-| 0.9894 | 0.74 | 2 | - | -0 | -0.9 | 9 | - | `music/ex2/BGM_EX2_Field_Safe_01.scd` | SB_FFXIV_025.flac | Stormblood.json |
+| 0.9894 | 0.73 | 2 | - | -0 | -0.9 | 9 | - | `music/ex2/BGM_EX2_Field_Safe_01.scd` | SB_FFXIV_025.flac | Stormblood.json |
 | 0.9894 | 0.98 | 1 | - | -0 | -0.3 | 2 | 0.30 | `music/ffxiv/BGM_Boss_05.scd` | BTF_FFXIV_04.flac | Before The Fall.json |
 | 0.9894 | 0.99 | 14 | - | +1 | +0.0 | 37 | 0.00 | `music/ffxiv/Orchestrion/BGM_ORCH_451.scd` | HEAVENSWARD_FFXIV_22.flac | Heavensward.json |
-| 0.9897 | 0.83 | 30 | - | -1 | -0.0 | 32 | 0.01 | `music/ffxiv/BGM_Season_Wedding.scd` | Before_Meteor_FFXIV_050.flac | Before Meteor.json |
+| 0.9897 | 0.83 | 30 | - | -1 | -0.0 | 31 | 0.01 | `music/ffxiv/BGM_Season_Wedding.scd` | Before_Meteor_FFXIV_050.flac | Before Meteor.json |
 | 0.9898 | 0.98 | 2 | - | +0 | +0.8 | 5 | 0.22 | `music/ex2/BGM_EX2_Ban_23.scd` | SB_FFXIV_094.flac | Stormblood.json |
 | 0.9898 | 0.98 | 1 | - | +0 | -0.2 | 2 | 0.55 | `music/ex5/BGM_EX5_EoV_42.scd` | TH_065.flac | Trail to the Heavens.json |
 | 0.9898 | 0.97 | 1 | - | +1 | +3.4 | 10 | - | `music/ffxiv/Orchestrion/BGM_ORCH_518.scd` | ARR_FFXIV_033.flac | A Realm Reborn.json |
@@ -1172,7 +1171,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9909 | 1.00 | 1 | - | +0 | +0.0 | 1 | 0.13 | `music/ffxiv/Orchestrion/BGM_ORCH_386.scd` | SHADOWBRINGERS_02.flac | Shadowbringers.json |
 | 0.9910 | 0.99 | 1 | - | +1 | +0.7 | 2 | 0.72 | `music/ex1/BGM_EX1_Ban_Sephiroth02.scd` | TFEOF_FFXIV_01.flac | The Far Edge Of Fate.json |
 | 0.9910 | 0.99 | 1 | - | +1 | +0.9 | 1 | 0.04 | `music/ex1/BGM_EX1_Event_Strategy.scd` | HEAVENSWARD_FFXIV_17.flac | Heavensward.json |
-| 0.9910 | 0.88 | 14 | - | +1 | +1.7 | 21 | 0.98 | `music/ex2/BGM_EX2_EndCredit01.scd` | SB_FFXIV_010.flac+SB_FFXIV_026.flac+SB_FFXIV_031.flac+SB_FFXIV_046.flac | Stormblood.json |
+| 0.9910 | 0.88 | 10 | - | +1 | +1.7 | 19 | 0.98 | `music/ex2/BGM_EX2_EndCredit01.scd` | SB_FFXIV_010.flac+SB_FFXIV_026.flac+SB_FFXIV_031.flac+SB_FFXIV_046.flac | Stormblood.json |
 | 0.9910 | 0.99 | 1 | - | +1 | +0.9 | 4 | - | `music/ex3/BGM_EX3_Event_01.scd` | SHADOWBRINGERS_76.flac | Shadowbringers.json |
 | 0.9910 | 0.98 | 2 | - | +1 | +0.5 | 1 | 0.04 | `music/ex3/BGM_EX3_Ytc_17.scd` | DUD_050.flac | Death Unto Dawn.json |
 | 0.9910 | 0.97 | 1 | - | +0 | -0.6 | 1 | 0.35 | `music/ex4/BGM_EX4_Raid_07.scd` | GL_00023.flac | Growing Light.json |
@@ -1206,7 +1205,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9915 | 0.97 | 1 | - | +0 | +1.2 | 2 | 0.38 | `music/ffxiv/Orchestrion/BGM_ORCH_022.scd` | Before_Meteor_FFXIV_068.flac | A Realm Reborn.json |
 | 0.9916 | 0.98 | 2 | - | -1 | -0.6 | 3 | 0.51 | `music/ex1/BGM_EX1_Event_Nidhogg_01.scd` | BTF_FFXIV_58.flac | Before The Fall.json |
 | 0.9916 | 0.98 | 0 | - | +1 | +1.6 | 5 | 0.12 | `music/ex2/BGM_EX2_Event_13.scd` | Before_Meteor_FFXIV_071.flac | Before Meteor.json |
-| 0.9916 | 0.84 | 42 | - | +1 | +1.4 | 46 | 0.35 | `music/ex3/BGM_EX3_Event_24.scd` | SHADOWBRINGERS_62.flac+SHADOWBRINGERS_76.flac | Shadowbringers.json |
+| 0.9916 | 0.84 | 42 | - | +1 | +1.4 | 45 | 0.35 | `music/ex3/BGM_EX3_Event_24.scd` | SHADOWBRINGERS_62.flac+SHADOWBRINGERS_76.flac | Shadowbringers.json |
 | 0.9916 | 0.99 | 0 | - | +0 | +0.7 | 6 | 0.59 | `music/ex4/BGM_EX4_Dan_D03.scd` | ENDWALKER_032.flac | Endwalker.json |
 | 0.9916 | 1.00 | 1 | - | +0 | +1.1 | 4 | 0.65 | `music/ffxiv/BGM_Dungeon_Deep01.scd` | Before_Meteor_FFXIV_011.flac | Before Meteor.json |
 | 0.9916 | 1.00 | 0 | - | +0 | +0.3 | 2 | - | `music/ffxiv/Orchestrion/BGM_ORCH_587.scd` | ARR_FFXIV_093.flac | A Realm Reborn.json |
@@ -1232,7 +1231,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9921 | 0.99 | 1 | - | +1 | +1.2 | 32 | 0.56 | `music/ex2/BGM_EX2_Rti_01.scd` | SB_FFXIV_064.flac | Stormblood.json |
 | 0.9921 | 0.97 | 1 | - | +1 | +0.9 | 2 | 0.00 | `music/ex3/BGM_EX3_MYC_10.scd` | DUD_067.flac | Death Unto Dawn.json |
 | 0.9921 | 0.98 | 0 | - | +1 | +0.8 | 2 | 0.22 | `music/ex4/BGM_EX4_Boss_Battle03.scd` | GL_00008.flac | Growing Light.json |
-| 0.9921 | 0.99 | 3 | - | -1 | -1.4 | 24 | - | `music/ex5/BGM_EX5_Ban_11.scd` | TH_105.mp3 | Trail to the Heavens.json |
+| 0.9921 | 0.99 | 2 | - | -1 | -1.4 | 24 | - | `music/ex5/BGM_EX5_Ban_11.scd` | TH_105.mp3 | Trail to the Heavens.json |
 | 0.9921 | 0.50 | 45 | - | -0 | -0.4 | 60 | 0.00 | `music/ex5/BGM_EX5_DD_06.scd` | TH_111.mp3 | Trail to the Heavens.json |
 | 0.9921 | 0.96 | 1 | - | +1 | +0.9 | 3 | 0.45 | `music/ffxiv/BGM_PvP_Mogi_04.scd` | TFEOF_FFXIV_10.flac | The Far Edge Of Fate.json |
 | 0.9921 | 0.97 | 1 | - | +0 | +0.4 | 4 | 0.05 | `music/ffxiv/BGM_Season_SummerFes03.scd` | TH_017.flac | Trail to the Heavens.json |
@@ -1434,7 +1433,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9948 | 1.00 | 0 | - | +0 | +0.4 | 4 | 0.25 | `music/ex5/BGM_EX5_EoV_15.scd` | TH_098.mp3 | Trail to the Heavens.json |
 | 0.9948 | 0.99 | 0 | - | +1 | +2.2 | 9 | 0.11 | `music/ffxiv/BGM_Dungeon_Deep00.scd` | TFEOF_FFXIV_23.flac | The Far Edge Of Fate.json |
 | 0.9948 | 1.00 | 0 | - | -1 | -0.6 | 3 | 0.03 | `music/ffxiv/BGM_Event_FFXI01.scd` | TH_087.mp3 | Trail to the Heavens.json |
-| 0.9948 | 0.64 | 32 | - | +0 | +0.9 | 34 | 0.10 | `music/ffxiv/BGM_Event_Tanoshii1.scd` | Before_Meteor_FFXIV_041.flac | Before Meteor.json |
+| 0.9948 | 0.65 | 31 | - | +0 | +0.9 | 34 | 0.10 | `music/ffxiv/BGM_Event_Tanoshii1.scd` | Before_Meteor_FFXIV_041.flac | Before Meteor.json |
 | 0.9948 | 0.99 | 1 | - | +0 | +0.9 | 2 | 0.66 | `music/ffxiv/BGM_Field_BanFort_Amaruja.scd` | Before_Meteor_FFXIV_086.flac | A Realm Reborn.json |
 | 0.9948 | 0.98 | 1 | - | -0 | +0.2 | 2 | 0.04 | `music/ffxiv/BGM_GlodSaucer_Race.scd` | BTF_FFXIV_49.flac | Before The Fall.json |
 | 0.9948 | 0.99 | 0 | - | +1 | +2.2 | 9 | 0.11 | `music/ffxiv/BGM_Ride_Kyellow.scd` | TFEOF_FFXIV_23.flac | The Far Edge Of Fate.json |
@@ -1576,7 +1575,6 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9957 | 1.00 | 1 | - | -1 | +0.3 | 4 | - | `music/ffxiv/BGM_Field_Ish_02.scd` | ARR_FFXIV_072.flac | A Realm Reborn.json |
 | 0.9957 | 1.00 | 0 | - | -1 | +0.1 | 4 | - | `music/ffxiv/BGM_Field_Lim_06.scd` | ARR_FFXIV_024.flac | A Realm Reborn.json |
 | 0.9957 | 1.00 | 1 | - | +1 | +2.0 | 6 | 0.38 | `music/ffxiv/BGM_Season_Christmas.scd` | Before_Meteor_FFXIV_054.flac | Before Meteor.json |
-| 0.9957 | 0.99 | 20 | - | +0 | +0.6 | 54 | 0.69 | `music/ffxiv/BGM_System_EndCredit01.scd` | ARR_FFXIV_003.flac+ARR_FFXIV_115.flac+ENDWALKER_040.flac | A Realm Reborn.json |
 | 0.9958 | 1.00 | 0 | - | +1 | +2.0 | 33 | 0.21 | `music/ex2/BGM_EX2_Rti_05.scd` | SB_FFXIV_061.flac | Stormblood.json |
 | 0.9958 | 0.99 | 0 | - | -0 | -0.0 | 10 | 0.02 | `music/ex3/BGM_EX3_Dan_D03.scd` | SHADOWBRINGERS_60.flac | Shadowbringers.json |
 | 0.9958 | 1.00 | 0 | - | +0 | +0.8 | 4 | 0.69 | `music/ex4/BGM_EX4_Event_11.scd` | ENDWALKER_054.flac | Endwalker.json |
@@ -1591,6 +1589,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9958 | 0.99 | 1 | - | +0 | +0.7 | 1 | 0.88 | `music/ffxiv/BGM_LoV_Boss01.scd` | ARR_FFXIV_025.flac | A Realm Reborn.json |
 | 0.9958 | 0.99 | 0 | - | -0 | -0.1 | 1 | 0.05 | `music/ffxiv/BGM_Ride_CommonMonster.scd` | Before_Meteor_FFXIV_091.flac | A Realm Reborn.json |
 | 0.9958 | 0.99 | 0 | - | -0 | -0.1 | 1 | 0.05 | `music/ffxiv/BGM_Ride_CoolMount.scd` | Before_Meteor_FFXIV_091.flac | A Realm Reborn.json |
+| 0.9958 | 0.99 | 17 | - | +0 | +0.6 | 53 | 0.69 | `music/ffxiv/BGM_System_EndCredit01.scd` | ARR_FFXIV_003.flac+ARR_FFXIV_115.flac+ENDWALKER_040.flac | A Realm Reborn.json |
 | 0.9959 | 0.99 | 1 | - | +0 | +0.1 | 2 | 0.36 | `music/ex1/BGM_EX1_Deep02.scd` | TFEOF_FFXIV_29.flac | The Far Edge Of Fate.json |
 | 0.9959 | 1.00 | 0 | - | +1 | +1.4 | 2 | 0.07 | `music/ex1/BGM_EX1_Event_Moogle.scd` | HEAVENSWARD_FFXIV_25.flac | Heavensward.json |
 | 0.9959 | 0.98 | 0 | - | -0 | -0.2 | 1 | 0.85 | `music/ex3/BGM_EX3_Event_05.scd` | SHADOWBRINGERS_66.flac | Shadowbringers.json |
@@ -1634,7 +1633,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9961 | 0.98 | 1 | - | -0 | -0.2 | 5 | 0.17 | `music/ffxiv/BGM_Ride_KoR.scd` | HEAVENSWARD_FFXIV_53.flac | Growing Light.json |
 | 0.9961 | 0.99 | 1 | - | +1 | +0.8 | 2 | 0.50 | `music/ffxiv/BGM_Ride_Mogle.scd` | Before_Meteor_FFXIV_090.flac | A Realm Reborn.json |
 | 0.9961 | 1.00 | 1 | - | +0 | +0.3 | 3 | 0.21 | `music/ffxiv/BGM_Town_Uru_Day.scd` | ARR_FFXIV_004.flac | A Realm Reborn.json |
-| 0.9962 | 1.00 | 5 | - | +1 | +1.1 | 16 | 0.81 | `music/ex1/BGM_EX1_Ban_Nidhogg_01.scd` | HEAVENSWARD_FFXIV_55.flac | Growing Light.json |
+| 0.9962 | 1.00 | 4 | - | +1 | +1.1 | 14 | 0.81 | `music/ex1/BGM_EX1_Ban_Nidhogg_01.scd` | HEAVENSWARD_FFXIV_55.flac | Growing Light.json |
 | 0.9962 | 0.99 | 1 | - | -0 | +0.5 | 2 | 0.06 | `music/ex1/BGM_EX1_Ban_Ravana_02.scd` | HEAVENSWARD_FFXIV_21.flac | Heavensward.json |
 | 0.9962 | 0.99 | 0 | - | -0 | +0.6 | 4 | 1.00 | `music/ex1/BGM_EX1_Rest_Matoya.scd` | HEAVENSWARD_FFXIV_39.flac | Heavensward.json |
 | 0.9962 | 0.97 | 1 | - | -0 | -0.3 | 2 | 0.51 | `music/ex2/BGM_EX2_Town_R_Day.scd` | SB_FFXIV_003.flac | Stormblood.json |
@@ -1654,7 +1653,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9963 | 1.00 | 1 | - | +0 | +0.3 | 3 | 0.07 | `music/ex1/BGM_EX1_Town_Ish01_Night.scd` | HEAVENSWARD_FFXIV_09.flac | Heavensward.json |
 | 0.9963 | 1.00 | 0 | - | +0 | +1.1 | 2 | 0.29 | `music/ex2/BGM_EX2_Event_34.scd` | SHADOWBRINGERS_09.flac | Shadowbringers.json |
 | 0.9963 | 1.00 | 0 | - | +0 | +0.7 | 3 | 0.12 | `music/ex2/BGM_EX2_Rti_13.scd` | SB_FFXIV_097.flac | Stormblood.json |
-| 0.9963 | 0.99 | 6 | - | +0 | +1.0 | 16 | 0.80 | `music/ex4/BGM_EX4_Ban_Nidhogg_01.scd` | HEAVENSWARD_FFXIV_55.flac | Growing Light.json |
+| 0.9963 | 0.99 | 4 | - | +0 | +1.0 | 14 | 0.80 | `music/ex4/BGM_EX4_Ban_Nidhogg_01.scd` | HEAVENSWARD_FFXIV_55.flac | Growing Light.json |
 | 0.9963 | 1.00 | 1 | - | +0 | +0.6 | 4 | 0.57 | `music/ex4/BGM_EX4_WKS_09.scd` | TH_066.flac | Trail to the Heavens.json |
 | 0.9963 | 0.99 | 1 | - | +1 | +1.2 | 1 | 0.04 | `music/ex5/BGM_EX5_Dan_D09.scd` | TH_002.flac | Trail to the Heavens.json |
 | 0.9963 | 0.90 | 3 | - | -0 | -0.1 | 8 | 0.17 | `music/ex5/BGM_EX5_EoV_41.scd` | TH_133.mp3 | Trail to the Heavens.json |
@@ -1784,9 +1783,8 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9970 | 1.00 | 3 | - | +0 | +0.4 | 7 | - | `music/ffxiv/BGM_Dungeon_Uru_04.scd` | ARR_FFXIV_061.flac | A Realm Reborn.json |
 | 0.9970 | 1.00 | 1 | - | +1 | +2.2 | 6 | 0.36 | `music/ffxiv/BGM_Event_Sad.scd` | ARR_FFXIV_068.flac | A Realm Reborn.json |
 | 0.9970 | 1.00 | 0 | - | +1 | +1.6 | 1 | 0.14 | `music/ffxiv/BGM_Event_ShinAyashii.scd` | ENDWALKER_011.flac | Endwalker.json |
-| 0.9970 | 1.00 | 0 | - | +1 | +1.6 | 1 | 0.14 | `music/ffxiv/BGM_Event_Shinayashii.scd` | ENDWALKER_011.flac | Endwalker.json |
 | 0.9970 | 0.99 | 0 | - | +0 | +0.6 | 3 | - | `music/ffxiv/BGM_Field_Gri_03.scd` | ARR_FFXIV_027.flac | A Realm Reborn.json |
-| 0.9970 | 0.99 | 1 | - | +0 | +0.5 | 20 | - | `music/ffxiv/BGM_Field_Lim_07.scd` | ARR_FFXIV_020.flac | A Realm Reborn.json |
+| 0.9970 | 0.99 | 1 | - | +0 | +0.5 | 21 | - | `music/ffxiv/BGM_Field_Lim_07.scd` | ARR_FFXIV_020.flac | A Realm Reborn.json |
 | 0.9970 | 0.99 | 1 | - | +0 | +0.7 | 2 | 0.19 | `music/ffxiv/BGM_LoV_Boss04.scd` | BTF_FFXIV_50.flac | Before The Fall.json |
 | 0.9970 | 1.00 | 0 | - | +1 | +1.1 | 8 | 0.84 | `music/ffxiv/BGM_Ride_DD4.scd` | TH_039.flac | Trail to the Heavens.json |
 | 0.9970 | 1.00 | 0 | - | -0 | +0.2 | 3 | 0.02 | `music/ffxiv/BGM_Season_NewYear.scd` | Before_Meteor_FFXIV_051.flac | Before Meteor.json |
@@ -1853,7 +1851,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9975 | 1.00 | 1 | - | -1 | +0.1 | 4 | - | `music/ex5/BGM_EX5_MKD_14.scd` | ARR_FFXIV_079.flac | A Realm Reborn.json |
 | 0.9975 | 1.00 | 0 | - | +0 | +1.0 | 3 | 0.45 | `music/ffxiv/BGM_Event_Truth.scd` | Before_Meteor_FFXIV_064.flac | Before Meteor.json |
 | 0.9975 | 0.99 | 1 | - | +0 | +0.6 | 4 | - | `music/ffxiv/BGM_Field_Gri_02.scd` | ARR_FFXIV_027.flac | A Realm Reborn.json |
-| 0.9975 | 0.99 | 1 | - | +1 | +1.1 | 18 | - | `music/ffxiv/BGM_Field_Ish_01.scd` | ARR_FFXIV_069.flac | A Realm Reborn.json |
+| 0.9975 | 1.00 | 1 | - | +1 | +1.1 | 18 | - | `music/ffxiv/BGM_Field_Ish_01.scd` | ARR_FFXIV_069.flac | A Realm Reborn.json |
 | 0.9975 | 1.00 | 0 | - | +0 | +0.9 | 5 | 0.73 | `music/ffxiv/BGM_Field_Mor_04.scd` | ARR_FFXIV_084.flac | A Realm Reborn.json |
 | 0.9976 | 1.00 | 0 | - | +0 | +0.9 | 2 | 0.08 | `music/ex1/BGM_EX1_Dungeon_DravaniaL_01.scd` | HEAVENSWARD_FFXIV_40.flac | Heavensward.json |
 | 0.9976 | 1.00 | 0 | - | -0 | +0.1 | 2 | 0.37 | `music/ex1/BGM_EX1_System_Title.scd` | HEAVENSWARD_FFXIV_02.flac | Heavensward.json |
@@ -1896,7 +1894,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9979 | 1.00 | 1 | - | +1 | +1.5 | 2 | - | `music/ex4/BGM_EX4_Field_Elp_Day.scd` | ENDWALKER_034.flac | Endwalker.json |
 | 0.9979 | 1.00 | 1 | - | +0 | +0.1 | 3 | 0.91 | `music/ex5/BGM_EX5_EoV_37.scd` | TH_129.mp3 | Trail to the Heavens.json |
 | 0.9979 | 1.00 | 0 | - | +0 | +0.8 | 2 | 0.57 | `music/ex5/BGM_EX5_Event_15.scd` | DT_049.flac | Dawntrail.json |
-| 0.9979 | 1.00 | 0 | - | +1 | +1.2 | 7 | - | `music/ffxiv/BGM_Dungeon_Gri_02.scd` | ARR_FFXIV_057.flac | A Realm Reborn.json |
+| 0.9979 | 1.00 | 0 | - | +1 | +1.2 | 8 | - | `music/ffxiv/BGM_Dungeon_Gri_02.scd` | ARR_FFXIV_057.flac | A Realm Reborn.json |
 | 0.9979 | 1.00 | 3 | - | +0 | +1.3 | 4 | - | `music/ffxiv/BGM_Dungeon_Lim_01.scd` | ARR_FFXIV_033.flac | A Realm Reborn.json |
 | 0.9979 | 1.00 | 1 | - | +1 | +1.0 | 4 | 0.38 | `music/ffxiv/BGM_Ride_Bcomp.scd` | ARR_FFXIV_003.flac | A Realm Reborn.json |
 | 0.9979 | 1.00 | 1 | - | +1 | +1.0 | 4 | 0.38 | `music/ffxiv/BGM_System_Chara.scd` | ARR_FFXIV_003.flac | A Realm Reborn.json |
@@ -1914,7 +1912,7 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.9981 | 0.99 | 1 | - | -0 | +0.2 | 2 | 0.45 | `music/ex5/BGM_EX5_EoV_39.scd` | SHADOWBRINGERS_16.flac | Shadowbringers.json |
 | 0.9981 | 1.00 | 0 | - | +0 | +0.6 | 1 | 0.13 | `music/ffxiv/BGM_Event_SXT05.scd` | GL_00083.flac | Growing Light.json |
 | 0.9981 | 1.00 | 0 | - | +0 | +0.6 | 2 | 0.18 | `music/ffxiv/BGM_Event_SXT10.scd` | GL_00090.flac | Growing Light.json |
-| 0.9982 | 1.00 | 3 | - | +0 | +0.0 | 19 | - | `music/ex3/BGM_EX3_Field_Rak_Night.scd` | SHADOWBRINGERS_61.flac | Shadowbringers.json |
+| 0.9982 | 1.00 | 3 | - | +0 | +0.0 | 20 | - | `music/ex3/BGM_EX3_Field_Rak_Night.scd` | SHADOWBRINGERS_61.flac | Shadowbringers.json |
 | 0.9982 | 1.00 | 1 | - | +1 | +0.8 | 3 | 0.49 | `music/ex4/BGM_EX4_Field_Ult_Day01.scd` | ENDWALKER_045.flac | Endwalker.json |
 | 0.9982 | 1.00 | 0 | - | +1 | +1.1 | 1 | 0.01 | `music/ex5/BGM_EX5_BanFort_Pel_Good.scd` | TH_003.flac | Trail to the Heavens.json |
 | 0.9982 | 1.00 | 0 | - | +1 | +1.3 | 2 | 0.78 | `music/ex5/BGM_EX5_EoV_19.scd` | TH_097.mp3 | Trail to the Heavens.json |
