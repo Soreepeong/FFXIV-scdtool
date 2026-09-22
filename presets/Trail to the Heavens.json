@@ -3687,7 +3687,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.725,
+        "offset": 1.7226,
         "pcmHash": "40c44821"
        }
       },
@@ -3701,26 +3701,12 @@
         "channel": 1
        }
       ],
-      "length": 186.3
-     },
-     {
-      "sourceOffsets": {
-       "source": 4.195227
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "crossfadeSeconds": 0.5
+      "sourceFilters": {
+       "source": "asplit[a][b];[b]adelay=17647658S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.908 the recording runs out 1.3s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.97s (similarity 0.966 against 0.897 for the next-best placement, and the distance back is the game file's own loop period of 183.830s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 4.195s, seamed 0.50s early and crossfaded over that."
+    "# comment": "spectral similarity to the game's own file: 0.908. The recording is the game's file to the end: mapped window by window the game plays TH_053 at one constant lag (1.7226s at the head, drifting 2 ms to 1.7248s by 175s) until the recording's own ending dies away at game 183.5s; from 183.83s -- the game file's loop period of 183.830s after its start, to the sample -- the game replays its own opening (the recording from 1.72s) up to the loop end, and its level there is the recording's decay plus that opening, summed. The previous layout switched to the re-entry at 186.3s, 2.8s after the recording had already gone silent, so the build held a 2.8s hole (-46 dB against the game the second before the join, envelope hole 49.4 dB) and the join was flagged 'outgoing runs out before the join'. Now one segment whose filter sums the recording with itself delayed one loop period in the recording's own 96 kHz samples (17647658), which closes the loop wrap by construction; the offset is the head's lag, so the single-segment path aligns head and loop start to the sample (lag -2.4 ms -> 0) and the wrap now matches the game's own (waveform correlation over the 0.1s either side of it -0.03 -> 0.84). weighted 0.9229 -> 0.9252, envelope hole 49.4 -> 1.9 dB, last 10s 0.878 -> 0.954 against 0.920 mid-loop, at loop 0.892 -> 0.898, no join left to flag. A two-segment cut at 184.0s (0.06s crossfade) scored 0.9250 / 1.9 dB but kept the 2.4 ms wrap misalignment. The build stays 1.3 dB quieter than the game: the recording is mastered to full scale, so apply holds its +1.4 dB to +0.0; the game's file is a hotter master, and stating volume=+1.4dB matched the level but put 129k samples over full scale against the game's 3.5k, so it is not stated."
    }
   },
   {
