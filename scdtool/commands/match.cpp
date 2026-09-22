@@ -978,7 +978,8 @@ int cmd_match(const std::vector<std::string>& args) {
 
 		size_t matchedCount = 0, ambiguousCount = 0, unmatchedCount = 0, skippedCount = 0;
 		std::mutex progressMutex;
-		const auto tempDir = std::filesystem::temp_directory_path();
+		const process_temp_directory tempRoot(L"match");
+		const auto& tempDir = tempRoot.path();
 		std::atomic<uint32_t> tempFileCounter{0};
 
 		// Pick the items to resolve first, so the expensive per-target work below can be

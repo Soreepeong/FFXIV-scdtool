@@ -599,8 +599,8 @@ int cmd_verify(const std::vector<std::string>& args) {
 			return -1;
 		}
 
-		const auto tempDir = std::filesystem::temp_directory_path() / L"scdtool_verify";
-		std::filesystem::create_directories(tempDir);
+		const process_temp_directory tempRoot(L"verify");
+		const auto& tempDir = tempRoot.path();
 		std::atomic_size_t counter = 0;
 		std::atomic_size_t done = 0;
 		std::mutex progressMutex;
@@ -1110,8 +1110,6 @@ int cmd_verify(const std::vector<std::string>& args) {
 				std::cerr << std::format("   {:<46} {}", failed[i]->Target, failed[i]->Error) << '\n';
 		}
 
-		std::error_code ec;
-		std::filesystem::remove_all(tempDir, ec);
 		return 0;
 	} catch (const std::exception& e) {
 		std::cerr << "Error verifying.\n" << e.what() << '\n';
