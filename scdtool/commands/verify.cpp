@@ -11,6 +11,10 @@
 
 #include <nlohmann/json.hpp>
 
+#include <map>
+#include <optional>
+#include <set>
+#include <fstream>
 #include <atomic>
 #include <mutex>
 #include <ranges>
@@ -138,8 +142,12 @@ namespace {
 		}
 		res.Level = sum / static_cast<double>(seconds);
 		res.Worst = worst;
-		if (const auto score = build_score(b, g); score.Valid)
-			res.Match = score.Weighted;
+		// A span the score cannot judge is not a span with a match of zero. Reporting it
+		// valid left BGM_EX3_Field_Ama_Night's join reading exactly 0.000.
+		const auto score = build_score(b, g);
+		if (!score.Valid)
+			return res;
+		res.Match = score.Weighted;
 		res.Valid = true;
 		return res;
 	}
@@ -223,6 +231,229 @@ namespace {
 		return res;
 	}
 
+	// One place two segments of a preset meet, on the target's own timeline.
+	struct join_point {
+		double AtSeconds = 0.;         // where the incoming segment starts
+		double CrossfadeSeconds = 0.;  // how long the outgoing one keeps playing under it
+		bool SameRecording = false;    // both sides read the same source: a loop-out, not a medley
+	};
+
+	struct join_comparison {
+		join_point Join;
+		window_comparison Window;      // centred on the crossfade
+		window_comparison Control;     // same length, from inside the outgoing segment
+		// Build minus game over the second before the join and the second after its crossfade,
+		// and where the game sits against its own median there. Separate sides, because the
+		// two things that go wrong at a join happen on different sides: the outgoing recording
+		// runs out before it, or the incoming one plays where the game is silent after it.
+		double BeforeDb = 0., AfterDb = 0.;
+		double GameBeforeRel = 0., GameAfterRel = 0.;
+		double BuiltBeforeRel = 0., BuiltAfterRel = 0.;
+		double Seam = 0.;              // click ratio at a hard cut
+		bool HasBefore = false, HasAfter = false, HasSeam = false;
+	};
+
+	// Where the segments of each target meet, read out of the presets a build came from.
+	//
+	// A join leaves no mark in the file it produces -- hiding it is what a crossfade is for --
+	// and an .scd records nothing about where one was, so this is the only place to learn it.
+	// Which listing a path is built from follows `apply`: files in release order by their
+	// `name`, and the first enabled listing wins. `apply` also passes over a listing whose
+	// source does not resolve, which this cannot see.
+	std::map<std::string, std::vector<join_point>> read_joins(const std::string& spec) {
+		std::vector<std::pair<std::string, std::filesystem::path>> files;
+		for (size_t begin = 0, end; begin <= spec.size(); begin = end + 1) {
+			end = spec.find(',', begin);
+			if (end == std::string::npos)
+				end = spec.size();
+			const auto part = spec.substr(begin, end - begin);
+			if (part.empty())
+				continue;
+			const auto path = argactions::path(part);
+			std::vector<std::filesystem::path> found;
+			if (std::filesystem::is_directory(path)) {
+				for (const auto& entry : std::filesystem::directory_iterator(path))
+					if (entry.is_regular_file() && entry.path().extension() == L".json")
+						found.push_back(entry.path());
+			} else {
+				found.push_back(path);
+			}
+			for (auto& one : found) {
+				std::string name;
+				try {
+					std::ifstream f(one, std::ios::binary);
+					nlohmann::json head;
+					f >> head;
+					name = head.value("name", std::string{});
+				} catch (const std::exception&) {
+				}
+				files.emplace_back(name.empty() ? "\xff" + u8(one.filename()) : name, std::move(one));
+			}
+		}
+		std::ranges::sort(files);
+
+		std::map<std::string, std::vector<join_point>> res;
+		std::set<std::string> seen;
+		for (const auto& [_name, file] : files) {
+			nlohmann::json preset;
+			try {
+				std::ifstream f(file, std::ios::binary);
+				f >> preset;
+			} catch (const std::exception& e) {
+				std::cerr << std::format("Warning: could not read {}: {}", u8(file), e.what()) << '\n';
+				continue;
+			}
+			if (!preset.contains("items") || !preset["items"].is_array())
+				continue;
+			for (const auto& item : preset["items"]) {
+				const auto target = item.find("target");
+				if (target == item.end())
+					continue;
+				for (const auto& one : target->is_array() ? *target : nlohmann::json::array({*target})) {
+					if (!one.is_object() || one.value("enable", true) == false)
+						continue;
+					std::vector<std::string> paths;
+					if (const auto p = one.find("path"); p != one.end()) {
+						if (p->is_string())
+							paths.push_back(p->get<std::string>());
+						else if (p->is_array())
+							for (const auto& x : *p)
+								if (x.is_string())
+									paths.push_back(x.get<std::string>());
+					}
+
+					// The same walk `apply` makes: a segment starts where it says, or where
+					// the previous one's stated length ends.
+					std::vector<join_point> joins;
+					if (const auto segs = one.find("segments"); segs != one.end() && segs->is_array()) {
+						auto cursor = 0.;
+						std::set<std::string> previous;
+						for (size_t i = 0; i < segs->size(); ++i) {
+							const auto& seg = (*segs)[i];
+							std::set<std::string> sources;
+							if (const auto ch = seg.find("channels"); ch != seg.end() && ch->is_array())
+								for (const auto& c : *ch) {
+									const auto n = c.value("source", std::string("source"));
+									if (n != "target")
+										sources.insert(n);
+								}
+							const auto stated = seg.value("startSeconds", -1.);
+							const auto start = stated >= 0. ? stated : cursor;
+							if (i > 0)
+								joins.push_back({
+									.AtSeconds = start,
+									.CrossfadeSeconds = seg.value("crossfadeSeconds", 0.),
+									.SameRecording = !sources.empty() && sources == previous,
+								});
+							cursor = start + seg.value("length", 0.);
+							previous = std::move(sources);
+						}
+					}
+					// Keyed in lower case: SqPack lowercases a path before hashing it, so two
+					// spellings that differ only in case are one file, and the presets do not
+					// always agree with the build on which spelling to use.
+					for (const auto& path : paths) {
+						auto key = path;
+						std::ranges::transform(key, key.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+						if (seen.insert(key).second && !joins.empty())
+							res.emplace(std::move(key), joins);
+					}
+				}
+			}
+		}
+		return res;
+	}
+
+	// Mean level of one stretch of a file, in dB. The step across a join is built from two of
+	// these on each side.
+	std::optional<double> level_db(std::span<const float> x, double fromSeconds, double toSeconds) {
+		if (fromSeconds < 0. || toSeconds <= fromSeconds)
+			return std::nullopt;
+		const auto begin = static_cast<size_t>(fromSeconds * AnalysisRateHz);
+		const auto end = static_cast<size_t>(toSeconds * AnalysisRateHz);
+		if (end > x.size() || end <= begin)
+			return std::nullopt;
+		auto e = 0.;
+		for (size_t i = begin; i < end; ++i)
+			e += static_cast<double>(x[i]) * x[i];
+		// Floored, so digital silence reads as very quiet rather than as -120 dB, which would
+		// otherwise dominate any difference it takes part in.
+		return (std::max)(-90., 10. * std::log10(e / static_cast<double>(end - begin) + 1e-12));
+	}
+
+	// The loop-seam click ratio, at a point inside a file rather than across a wrap: the jump
+	// between the last sample of one segment and the first of the next, against the largest
+	// step the audio takes on its own either side of it.
+	std::optional<double> join_seam_ratio(std::span<const float> x, size_t at, size_t rate) {
+		const auto w = (std::max<size_t>)(4, static_cast<size_t>(0.02 * static_cast<double>(rate)));
+		if (at < w + 1 || at + w >= x.size())
+			return std::nullopt;
+		const auto jump = std::abs(static_cast<double>(x[at]) - static_cast<double>(x[at - 1]));
+		auto peak = 0.;
+		for (size_t i = at - w; i + 1 < at; ++i)
+			peak = (std::max)(peak, std::abs(static_cast<double>(x[i + 1]) - static_cast<double>(x[i])));
+		for (size_t i = at; i + 1 < at + w; ++i)
+			peak = (std::max)(peak, std::abs(static_cast<double>(x[i + 1]) - static_cast<double>(x[i])));
+		if (peak <= 0.)
+			return std::nullopt;
+		return jump / peak;
+	}
+
+	// The join that looks worst: the one whose window falls furthest below its own control,
+	// or, where none has a control, the one with the lowest match.
+	const join_comparison* worst_join(const std::vector<join_comparison>& joins) {
+		const join_comparison* worst = nullptr;
+		auto worstGap = 0.;
+		for (const auto& j : joins) {
+			if (!j.Window.Valid)
+				continue;
+			const auto gap = j.Control.Valid ? j.Window.Match - j.Control.Match : j.Window.Match - 1.;
+			if (!worst || gap < worstGap) {
+				worst = &j;
+				worstGap = gap;
+			}
+		}
+		return worst;
+	}
+
+	// How far below its own median a file may sit and still be carrying something audible.
+	constexpr double AudibleWithinDb = 30.;
+	// How far the build may sit from the game on one side of a join before that side is wrong.
+	constexpr double JoinSideDb = 10.;
+	// How far a join window's match may fall below its control. Calibrated over the 86 joins
+	// with room either side: -0.011 at the median, -0.132 at the tenth percentile; the two
+	// joins judged by ear sit at -0.222 (reported wrong) and +0.011 (reported fixed).
+	constexpr double JoinMatchGap = 0.10;
+
+	// What, if anything, is wrong at one join. Empty when nothing is.
+	std::string join_problem(const join_comparison& j, double seamThreshold) {
+		std::string res;
+		const auto add = [&](std::string_view what) {
+			if (!res.empty())
+				res += "; ";
+			res += what;
+		};
+		// Quieter only counts where the game is audible, louder only where the build is, so a
+		// silence in both is never a finding.
+		if (j.HasBefore && j.BeforeDb <= -JoinSideDb && j.GameBeforeRel >= -AudibleWithinDb)
+			add("outgoing runs out before the join");
+		if (j.HasAfter && j.AfterDb <= -JoinSideDb && j.GameAfterRel >= -AudibleWithinDb)
+			add("incoming too quiet after it");
+		if (j.HasAfter && j.AfterDb >= JoinSideDb && j.BuiltAfterRel >= -AudibleWithinDb)
+			add("plays where the game is silent after it");
+		if (j.HasBefore && j.BeforeDb >= JoinSideDb && j.BuiltBeforeRel >= -AudibleWithinDb)
+			add("plays where the game is silent before it");
+		if (j.Window.Valid && j.Control.Valid && j.Window.Match < j.Control.Match - JoinMatchGap)
+			add("different material across the join");
+		if (j.HasSeam && j.Seam > seamThreshold)
+			add("clicks at the cut");
+		return res;
+	}
+
+	bool join_is_suspect(const join_comparison& j, double seamThreshold) {
+		return !join_problem(j, seamThreshold).empty();
+	}
+
 	struct row {
 		std::string Target;
 		double Weighted = 0., Plain = 0.;
@@ -237,6 +468,8 @@ namespace {
 		// start. The head is not what `apply` aligned on, so it is an independent check;
 		// the difference between the two is clock drift rather than a bad offset.
 		lag_probe Head, AtLoop;
+		// Every place two segments meet, when --preset says where they are.
+		std::vector<join_comparison> Joins;
 		std::string Error;
 	};
 
@@ -292,6 +525,12 @@ int cmd_verify(const std::vector<std::string>& args) {
 				"            around the loop start, so the head is an independent check; the same\n"
 				"            probe at the loop start is reported beside it, and the difference\n"
 				"            between the two is clock drift rather than a wrong offset.\n"
+				"  joins     with --preset, every place two segments meet: a window centred on the\n"
+				"            crossfade against a control from inside the outgoing segment; each side\n"
+				"            of it against the game, which catches an outgoing recording that has run\n"
+				"            out before the join and an incoming one playing where the game is\n"
+				"            silent; and a click ratio at a hard cut. A join leaves no mark in the\n"
+				"            file, so the presets are the only place to learn where one is.\n"
 				"  seam      whether the loop point clicks, judged from the built file alone. Above\n"
 				"            about 1 the seam is a bigger jump than anything happening near it.\n"
 				"\n"
@@ -312,6 +551,8 @@ int cmd_verify(const std::vector<std::string>& args) {
 		parser.add_argument("--tail-seconds").default_value(10.0).scan<'g', double>().help("how long the window before the loop end is, in seconds (default: 10). Raise it past the longest crossfade in the presets being judged -- a crossfade has to sit inside the window that judges it");
 		parser.add_argument("--head-seconds").default_value(3.0).scan<'g', double>().help("how long the head window is, in seconds (default: 3), measured from the first moment the game's own file is carrying something");
 		parser.add_argument("--max-lag-ms").default_value(25.0).scan<'g', double>().help("how far either way the head and loop-start lag is searched, in milliseconds (default: 25)");
+		parser.add_argument("--preset").default_value(std::string()).help("the presets the build came from -- files or directories, comma-separated -- so every place two segments meet can be judged. A join leaves no mark in the .scd it produces, so without this the joins are not checked");
+		parser.add_argument("--join-seconds").default_value(6.0).scan<'g', double>().help("how long the window centred on each join is, in seconds (default: 6; never less than twice the crossfade plus a second either side)");
 		parser.parse_args(args);
 	} catch (const std::exception& e) {
 		std::cerr << "Error parsing arguments. Use `verify -h` to show help.\n" << e.what() << '\n';
@@ -332,6 +573,15 @@ int cmd_verify(const std::vector<std::string>& args) {
 		const auto tailSeconds = parser.get<double>("--tail-seconds");
 		const auto headSeconds = parser.get<double>("--head-seconds");
 		const auto maxLagMs = parser.get<double>("--max-lag-ms");
+		const auto joinSeconds = parser.get<double>("--join-seconds");
+		const auto joinsByTarget = read_joins(parser.get<std::string>("--preset"));
+		if (!parser.get<std::string>("--preset").empty()) {
+			size_t count = 0;
+			for (const auto& [_t, j] : joinsByTarget)
+				count += j.size();
+			std::cerr << std::format("{} join(s) across {} target(s) from the presets.",
+				count, joinsByTarget.size()) << '\n';
+		}
 
 		std::vector<std::pair<std::filesystem::path, std::string>> pairs;
 		for (const auto& entry : std::filesystem::recursive_directory_iterator(builtDir)) {
@@ -422,6 +672,79 @@ int cmd_verify(const std::vector<std::string>& args) {
 						r.AtLoop = probe_lag(a, b, loopStartSeconds, headSeconds, maxLagMs);
 				}
 
+				// Every place two segments meet. The window is centred on the crossfade and
+				// always wide enough to hold it with a second to spare either side; the control
+				// comes from inside the outgoing segment, clear of the join before it, so a
+				// recording that matches poorly throughout is not blamed on its joins.
+				auto targetKey = target;
+				std::ranges::transform(targetKey, targetKey.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+				if (const auto it = joinsByTarget.find(targetKey); it != joinsByTarget.end()) {
+					// Each file's own typical level, for judging whether a side is audible.
+					const auto median_db = [](std::span<const float> x) {
+						std::vector<double> v;
+						for (size_t i = 0; i + AnalysisRateHz <= x.size(); i += AnalysisRateHz) {
+							auto e = 0.;
+							for (size_t k = i; k < i + AnalysisRateHz; ++k)
+								e += static_cast<double>(x[k]) * x[k];
+							v.push_back((std::max)(-90., 10. * std::log10(e / AnalysisRateHz + 1e-12)));
+						}
+						if (v.empty())
+							return -90.;
+						std::ranges::nth_element(v, v.begin() + static_cast<ptrdiff_t>(v.size() / 2));
+						return v[v.size() / 2];
+					};
+					const auto builtMedian = median_db(a);
+					const auto gameMedian = median_db(b);
+					const auto builtEnd = static_cast<double>(a.size()) / AnalysisRateHz;
+					std::vector<float> native;
+					auto previousEnd = 0.;
+					for (const auto& j : it->second) {
+						join_comparison jc{.Join = j};
+						const auto width = (std::max)(joinSeconds, 2. * j.CrossfadeSeconds + 2.);
+						const auto centre = j.AtSeconds + j.CrossfadeSeconds / 2.;
+						// Not scored unless there is at least a second of build after the
+						// crossfade: a window clamped to the side before the join is judging
+						// the outgoing segment, not the join.
+						if (j.AtSeconds + j.CrossfadeSeconds + 1. <= builtEnd)
+							jc.Window = measure_window(a, b, centre - width / 2.,
+								(std::min)(centre + width / 2., builtEnd));
+						if (j.AtSeconds - 2. * width >= previousEnd)
+							jc.Control = measure_window(a, b, j.AtSeconds - 2. * width, j.AtSeconds - width);
+
+						// Each side on its own, against the game at the same moment.
+						const auto bb = level_db(a, j.AtSeconds - 1.5, j.AtSeconds - 0.5);
+						const auto gb = level_db(b, j.AtSeconds - 1.5, j.AtSeconds - 0.5);
+						const auto ba = level_db(a, j.AtSeconds + j.CrossfadeSeconds + 0.5, j.AtSeconds + j.CrossfadeSeconds + 1.5);
+						const auto ga = level_db(b, j.AtSeconds + j.CrossfadeSeconds + 0.5, j.AtSeconds + j.CrossfadeSeconds + 1.5);
+						if (bb && gb) {
+							jc.BeforeDb = *bb - *gb;
+							jc.BuiltBeforeRel = *bb - builtMedian;
+							jc.GameBeforeRel = *gb - gameMedian;
+							jc.HasBefore = true;
+						}
+						if (ba && ga) {
+							jc.AfterDb = *ba - *ga;
+							jc.BuiltAfterRel = *ba - builtMedian;
+							jc.GameAfterRel = *ga - gameMedian;
+							jc.HasAfter = true;
+						}
+
+						// A hard cut is the one join that can click. At the file's own rate for
+						// the reason the loop seam is: resampling smears a single-sample jump.
+						if (j.CrossfadeSeconds <= 0. && builtLoop.Rate) {
+							if (native.empty())
+								native = decode_mono_float(ffmpeg, builtAudio, builtLoop.Rate);
+							const auto at = static_cast<size_t>(std::llround(j.AtSeconds * static_cast<double>(builtLoop.Rate)));
+							if (const auto ratio = join_seam_ratio(native, at, builtLoop.Rate)) {
+								jc.Seam = *ratio;
+								jc.HasSeam = true;
+							}
+						}
+						previousEnd = j.AtSeconds + j.CrossfadeSeconds;
+						r.Joins.push_back(std::move(jc));
+					}
+				}
+
 				// At the file's own rate, not the analysis rate. A click is a single-sample
 				// discontinuity, and resampling to 16 kHz spreads it over its neighbours
 				// until it reads as ordinary content -- so the loop points stay the sample
@@ -504,6 +827,31 @@ int cmd_verify(const std::vector<std::string>& args) {
 						one["head"] = {{"lagMs", r.Head.LagMs}, {"match", r.Head.Match}};
 					if (r.AtLoop.Valid)
 						one["atLoop"] = {{"lagMs", r.AtLoop.LagMs}, {"match", r.AtLoop.Match}};
+					if (!r.Joins.empty()) {
+						auto joins = nlohmann::json::array();
+						for (const auto& j : r.Joins) {
+							nlohmann::json x{{"at", j.Join.AtSeconds}, {"crossfade", j.Join.CrossfadeSeconds},
+								{"sameRecording", j.Join.SameRecording}};
+							if (j.Window.Valid)
+								x["window"] = {{"level", j.Window.Level}, {"worst", j.Window.Worst},
+									{"match", j.Window.Match}};
+							if (j.Control.Valid)
+								x["control"] = {{"level", j.Control.Level}, {"worst", j.Control.Worst},
+									{"match", j.Control.Match}};
+							if (j.HasBefore)
+								x["before"] = {{"db", j.BeforeDb}, {"gameRel", j.GameBeforeRel},
+									{"builtRel", j.BuiltBeforeRel}};
+							if (j.HasAfter)
+								x["after"] = {{"db", j.AfterDb}, {"gameRel", j.GameAfterRel},
+									{"builtRel", j.BuiltAfterRel}};
+							if (const auto problem = join_problem(j, seamThreshold); !problem.empty())
+								x["problem"] = problem;
+							if (j.HasSeam)
+								x["seam"] = j.Seam;
+							joins.push_back(std::move(x));
+						}
+						one["joins"] = std::move(joins);
+					}
 				out.push_back(std::move(one));
 			}
 			table = out.dump(1);
@@ -513,6 +861,7 @@ int cmd_verify(const std::vector<std::string>& args) {
 				table += ",tilt_db_per_decade,worst_band_db,worst_band_hz,edge_built_hz,edge_game_hz,patch_db,patch_hz,hf_db";
 			table += ",tail_level,tail_worst,tail_match,ctrl_level,ctrl_worst,ctrl_match";
 			table += ",head_lag_ms,head_match,loop_lag_ms,loop_match";
+			table += ",joins,joins_wrong,join_at,join_match,join_ctrl_match,join_before_db,join_after_db,join_seam,join_problem";
 			table += ",error\n";
 			for (const auto& r : rows) {
 				table += std::format("{},{:.4f},{:.4f},{:.1f},{:.1f},", r.Target, r.Weighted, r.Plain,
@@ -547,6 +896,37 @@ int cmd_verify(const std::vector<std::string>& args) {
 				table += r.AtLoop.Valid
 					? std::format(",{:.2f},{:.4f}", r.AtLoop.LagMs, r.AtLoop.Match)
 					: ",,";
+				// The worst join only; every join is in the JSON.
+				{
+					// The worst join by what is wrong with it, falling back to the lowest match;
+					// every join is in the JSON.
+					const join_comparison* shown = nullptr;
+					size_t wrong = 0;
+					for (const auto& j : r.Joins)
+						if (join_is_suspect(j, seamThreshold)) {
+							++wrong;
+							if (!shown)
+								shown = &j;
+						}
+					if (!shown)
+						shown = worst_join(r.Joins);
+					if (!shown && !r.Joins.empty())
+						shown = &r.Joins.front();
+					if (shown) {
+						auto problem = join_problem(*shown, seamThreshold);
+						std::ranges::replace(problem, ',', ' ');
+						table += std::format(",{},{},{:.2f},{},{},{},{},{},{}", r.Joins.size(), wrong,
+							shown->Join.AtSeconds,
+							shown->Window.Valid ? std::format("{:.4f}", shown->Window.Match) : "",
+							shown->Control.Valid ? std::format("{:.4f}", shown->Control.Match) : "",
+							shown->HasBefore ? std::format("{:.2f}", shown->BeforeDb) : "",
+							shown->HasAfter ? std::format("{:.2f}", shown->AfterDb) : "",
+							shown->HasSeam ? std::format("{:.3f}", shown->Seam) : "",
+							problem);
+					} else {
+						table += ",,,,,,,,,";
+					}
+				}
 				table += ',';
 				table += r.Error;
 				table += '\n';
@@ -670,6 +1050,43 @@ int cmd_verify(const std::vector<std::string>& args) {
 						r->AtLoop.Valid
 							? std::format(", loop start {:+.2f} ms", r->AtLoop.LagMs)
 							: "") << '\n';
+				}
+			}
+		}
+
+		// The joins that look broken: matching worse than the same recording does just before
+		// them, stepping in level where the game's own file does not, or clicking at a cut.
+		{
+			struct flagged { const row* Row; const join_comparison* Join; };
+			std::vector<flagged> bad;
+			size_t checked = 0;
+			for (const auto& r : rows)
+				for (const auto& j : r.Joins) {
+					++checked;
+					if (join_is_suspect(j, seamThreshold))
+						bad.push_back({&r, &j});
+				}
+			if (checked) {
+				std::cerr << std::format("{} join(s) checked; {} look wrong", checked, bad.size())
+					<< (bad.empty() ? "" : "; worst:") << '\n';
+				// Worst side first: the side of a join the build gets furthest from the game.
+				const auto severity = [](const join_comparison* j) {
+					auto v = 0.;
+					if (j->HasBefore) v = (std::max)(v, std::abs(j->BeforeDb));
+					if (j->HasAfter) v = (std::max)(v, std::abs(j->AfterDb));
+					if (j->Window.Valid && j->Control.Valid)
+						v = (std::max)(v, 100. * (j->Control.Match - j->Window.Match));
+					return v;
+				};
+				std::sort(bad.begin(), bad.end(), [&](const flagged& x, const flagged& y) {
+					return severity(x.Join) > severity(y.Join);
+				});
+				for (size_t i = 0; i < (std::min<size_t>)(bad.size(), 12); ++i) {
+					const auto& [r, j] = bad[i];
+					std::cerr << std::format("   {:<40} at {:7.2f}s {:>8}  {}",
+						r->Target.size() > 40 ? r->Target.substr(r->Target.size() - 40) : r->Target,
+						j->Join.AtSeconds, j->Join.SameRecording ? "loop-out" : "medley",
+						join_problem(*j, seamThreshold)) << '\n';
 				}
 			}
 		}
