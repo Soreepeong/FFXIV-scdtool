@@ -2099,7 +2099,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 31.76,
+        "offset": 2.96766,
         "pcmHash": "c61bbf1d"
        }
       },
@@ -2113,12 +2113,12 @@
         "channel": 1
        }
       ],
-      "length": 423.6
+      "length": 28.74
      },
      {
       "sourceOffsets": {
        "source": {
-        "offset": 42.57
+        "offset": 60.49594
        }
       },
       "channels": [
@@ -2131,10 +2131,29 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 4.0
+      "length": 374.52,
+      "crossfadeSeconds": 0.06
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 22.21941
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.06
      }
     ],
-    "# comment": "the recording covers 427.6s of this target and the uncovered tail repeats material from earlier in it (matching at 0.886), so a second segment re-enters there, with the seam pulled 4s back so the first segment plays its ending under the second. Full length with the loop intact: 0.8761 against the game's own file, where the short build this replaces scored 0.8786 while losing the rest of the loop."
+    "# comment": "the game's file is not the album track played straight through: it opens on the album's own intro (album 2.968s) and cuts to album 60.496s at 28.74s, and at 403.26s it cuts back to album 22.219s and plays that through to the loop end, which lands exactly on the loop start's album 86.417s. The old build read album 31.76s from the top, so its first 28.7s were the wrong music about 9dB too loud (head match 0.05), and it stayed on the album until 423.6s, playing 20s of the album's ending where the game has already cut back -- the last 5s of that fade to silence under a 4s crossfade (-69dB before the join, envelope hole 66.7dB). Three segments now follow the game's own two cuts, each found by searching the recording for the game's audio either side and timed to 10ms by waveform correlation, with 60ms equal-power crossfades; the base offset is refined 31.76 -> 31.75594, which removes the 4ms lag the whole file had. Against the game's own file: weighted 0.8761 -> 0.9200, envelope hole 66.7 -> 2.1dB, head match 0.05 -> 0.36, both joins clean (0.913 and 0.874 against controls 0.932 and 0.924, within 0.7dB either side), tail 0.807 -> 0.862 against mid-loop 0.974 -- the rest of that gap is the album's mix of this passage, which matches the game's pre-loop copy of it no better (0.867). The game also shifts 3.5ms at 413.3s inside the re-entry; reproducing that with a fourth segment is exact in waveform but apply's per-segment loudness match measures from the top of each file and set that 10s segment 4dB loud, so it is left out."
    }
   },
   {
