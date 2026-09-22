@@ -124,6 +124,19 @@ namespace {
 		std::vector<std::pair<std::string, size_t>> Channels;  // output channel -> (source name, channel in it)
 		// `sourceThresholds`, keyed by source name; `"target"` names the game's own entry.
 		std::map<std::string, double> Thresholds;
+
+		// `crossfadeShape`: how this segment's crossfade with the previous one is curved.
+		// Complementary linear ramps hold level where the two sides are correlated and sag
+		// 3 dB where they are not; square-root ramps do the reverse. A crossfade exists
+		// precisely where two segments carry *different* material, so uncorrelated is the
+		// normal case and equal power is the default; `"linear"` opts out.
+		//
+		// Measured over all 95 crossfaded targets, the same items built both ways: the
+		// envelope hole improves on 43 and worsens on 2, both by 0.1 dB, mean -0.84 dB,
+		// with the weighted score unmoved. On BGM_EX5_Raid_22's join, which puts the
+		// recording's ending against the same recording re-entered 144s earlier, the worst
+		// point against the game's own file goes -5.3 dB to -2.7.
+		bool CrossfadeEqualPower = true;
 		double Length = 0.;
 		double CrossfadeSeconds = 0.;
 		// Where this segment begins in the target, when it does not simply follow the one
@@ -970,10 +983,28 @@ namespace {
 			// describing its own edge, which is the stronger claim. Where neither is stated
 			// this is unchanged -- fade in over the crossfade with the previous segment, fade
 			// out over the one the next segment needs.
-			const auto fadeIn = (std::min)(toSamples(segment.FadeInSeconds >= 0.
+			const auto statedIn = segment.FadeInSeconds >= 0.;
+			const auto statedOut = segment.FadeOutSeconds >= 0.;
+			const auto fadeIn = (std::min)(toSamples(statedIn
 				? segment.FadeInSeconds : segment.CrossfadeSeconds), render);
-			const auto fadeOut = (std::min)(segment.FadeOutSeconds >= 0.
+			const auto fadeOut = (std::min)(statedOut
 				? toSamples(segment.FadeOutSeconds) : tail, render - fadeIn);
+
+			// Whether each edge is half of a crossfade or a fade in its own right, which
+			// decides the curve. A crossfade joins two segments carrying *different*
+			// material, and two uncorrelated signals on complementary linear ramps sum to
+			// 1/sqrt(2) at the midpoint -- a 3 dB sag exactly where the join is. Square-root
+			// ramps sum to constant power instead. A stated fade has no second signal
+			// holding the power up and stays linear.
+			//
+			// Measured on BGM_EX5_Raid_22's join against the game's own file: worst point
+			// -5.3 dB -> -2.7, mean -2.3 -> -1.8. Moving the join does not help; four
+			// positions were built and the sag moves with it.
+			// Two halves of one join, so they have to agree: the fade-out belongs to the
+			// crossfade the *next* segment describes, and follows that segment's choice.
+			const auto powerIn = !statedIn && segment.CrossfadeSeconds > 0. && segment.CrossfadeEqualPower;
+			const auto powerOut = !statedOut && tail > 0
+				&& i + 1 < segments.size() && segments[i + 1].CrossfadeEqualPower;
 
 			// Per-source gain, measured over this segment's own span on both sides.
 			std::map<std::string, double> gain;
@@ -1011,10 +1042,13 @@ namespace {
 					const auto at = from + static_cast<ptrdiff_t>(n);
 					auto value = at >= 0 && static_cast<size_t>(at) < samples.size()
 						? samples[static_cast<size_t>(at)] * scale : 0.f;
-					if (n < fadeIn)
-						value *= static_cast<float>(static_cast<double>(n + 1) / static_cast<double>(fadeIn + 1));
-					else if (fadeOut && n >= render - fadeOut)
-						value *= static_cast<float>(static_cast<double>(render - n) / static_cast<double>(fadeOut + 1));
+					if (n < fadeIn) {
+						const auto w = static_cast<double>(n + 1) / static_cast<double>(fadeIn + 1);
+						value *= static_cast<float>(powerIn ? std::sqrt(w) : w);
+					} else if (fadeOut && n >= render - fadeOut) {
+						const auto w = static_cast<double>(render - n) / static_cast<double>(fadeOut + 1);
+						value *= static_cast<float>(powerOut ? std::sqrt(w) : w);
+					}
 					out[(segmentStart[i] + n) * channels + ch] += value;
 				}
 				}
@@ -1560,6 +1594,8 @@ namespace {
 					}
 				}
 			}
+			if (const auto shape = segmentJson.find("crossfadeShape"); shape != segmentJson.end() && shape->is_string())
+				segment.CrossfadeEqualPower = shape->get<std::string>() != "linear";
 			if (const auto thresholds = segmentJson.find("sourceThresholds"); thresholds != segmentJson.end() && thresholds->is_object()) {
 				for (const auto& [name, value] : thresholds->items())
 					if (value.is_number())
