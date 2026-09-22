@@ -1693,7 +1693,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.18,
+        "offset": 1.175475,
         "pcmHash": "c19e36d3"
        }
       },
@@ -1710,12 +1710,12 @@
       "sourceFilters": {
        "source": "volume=+1.1dB"
       },
-      "length": 83.0
+      "length": 54.857143
      },
      {
       "sourceOffsets": {
        "source": {
-        "offset": 43.07
+        "offset": 1.175464
        }
       },
       "channels": [
@@ -1728,13 +1728,14 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 4.0,
+      "crossfadeSeconds": 0.1,
       "sourceFilters": {
        "source": "volume=+1.1dB"
-      }
+      },
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "the recording covers 87.0s of this target and the uncovered tail repeats material from earlier in it (matching at 0.962), so a second segment re-enters there, with the seam pulled 4s back so the first segment plays its ending under the second. Full length with the loop intact: 0.9472 against the game's own file, where the short build this replaces scored 0.9456 while losing the rest of the loop."
+    "# comment": "Stasis Loop is a stationary loop on a 3.4286 s bar (151200 samples at 44.1 kHz) whose 4-bar cycle repeats for the whole piece; the game file is a different render of it (waveform correlation with the recording tops out at 0.84 at every bar-aligned lag; above 1 kHz nothing matches sample-for-sample), so any lag that keeps the 4-bar phase is as right as any other. The recording's body ends at 71.5 s and fades out by 86 s. The old layout read segment 1 into that fade (join at 83.00 flagged 'outgoing runs out before the join', hole 35.6 dB) and re-entered at a lag 37 ms off the bar grid that reached the fade again by the loop end (the build fell 25 dB over the last 10 s). Now: segment 1 at the head's sample-level lag 1.175475 (was 1.18, 4.6 ms off), segment 2 exactly 16 bars back (lag -53.681679, no drift: lag constant within 40 us from 0 to 120 s) from bar 16 (54.857) with a 0.1 s linear crossfade (the two sides are the same loop; equal-power bumped the join +3 dB and made apply's peak cap lower the whole file by 2.2 dB), so the loop end reads the body at 68.46 s. Weighted 0.9472 -> 0.9573, hole 35.6 -> 0.7 dB, tail 0.941 -> 0.963 (control 0.951 -> 0.960), head lag -4.6 -> -0.1 ms, join clean (window 0.957 vs control 0.947). Switch points from bar 16 to bar 20 all clear the flag (0.9554-0.9573). The build stays ~2.4 dB under the game: the game's master peaks above full scale and apply caps the gain at the recording's peak."
    }
   },
   {
