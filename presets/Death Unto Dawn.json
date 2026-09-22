@@ -1004,7 +1004,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.355,
+        "offset": 1.36137,
         "pcmHash": "dbda61fb"
        }
       },
@@ -1018,11 +1018,14 @@
         "channel": 1
        }
       ],
-      "length": 222.06
+      "length": 218.2,
+      "sourceFilters": {
+       "source": "allpass=f=196.40:t=q:w=0.2199,allpass=f=196.35:t=q:w=0.6016,allpass=f=1263.43:t=q:w=0.5215"
+      }
      },
      {
       "sourceOffsets": {
-       "source": 22.412937
+       "source": 18.559284
       },
       "channels": [
        {
@@ -1034,10 +1037,14 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 0.5
+      "crossfadeSeconds": 0.9,
+      "crossfadeShape": "linear",
+      "sourceFilters": {
+       "source": "allpass=f=196.40:t=q:w=0.2199,allpass=f=196.35:t=q:w=0.6016,allpass=f=1263.43:t=q:w=0.5215"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.963 the recording runs out 2.2s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 21.56s (similarity 0.984 against 0.851 for the next-best placement, and the distance back is the game file's own loop period of 201.002s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 22.413s, seamed 0.50s early and crossfaded over that."
+    "# comment": "The game's file is DUD_024 through three 2nd-order allpass sections (196.40 Hz Q 0.2199, 196.35 Hz Q 0.6016, 1263.43 Hz Q 0.5215 -- the phase a multiband crossover leaves: level flat, lows up to ~6 ms late), which is why the plain recording correlated only 0.5 with it and log-mel preferred offsets several ms off; with the same allpasses in the filter it correlates 0.98 at one lag, 1.361370, with no drift. The game does not use the album's fade: it crossfades from 218.2 to 219.1s into its own opening one loop period (+1 sample) back, before the album fades from ~219.5s. So segment 1 runs to 218.2 and segment 2 re-enters at offset1 + 218.2 - 8864192/44100 with a 0.9s linear crossfade (equal-power held the game's level through it, but its peak made apply lower the whole file 2.1 dB; linear dips ~3 dB for half a second instead). Before: switch at 222.06 inside the album's fade, offset 1.355: Ban_09/Ride_Ruby weighted 0.9735, hole 25.2 dB, tail 0.815 vs control 0.983, head waveform 0.38, join flagged (outgoing runs out; different material); ORCH_375 0.9624, hole 25.1, tail 0.810 vs 0.968. After: Ban_09/Ride_Ruby 0.9933, hole 1.4, tail 0.993 vs 0.995, head 0.990, join clean (0.992 vs 0.993); ORCH_375 0.9813, hole 1.2, tail 0.985 vs 0.980, join clean."
    }
   },
   {
