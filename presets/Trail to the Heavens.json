@@ -3807,7 +3807,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.785,
+        "offset": 1.783401,
         "pcmHash": "4710626b"
        }
       },
@@ -3821,28 +3821,12 @@
         "channel": 1
        }
       ],
-      "length": 290.0
-     },
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 14.451
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "crossfadeSeconds": 1.0
+      "sourceFilters": {
+       "source": "asplit[a][b];[a]aeval='val(ch)*(if(lt(t,279.28708),1,if(lt(t,293.16727),sqrt(0.5),if(lt(t,293.62727),sqrt(0.5-0.5*(t-293.16727)/0.46001),0))))':c=same[ae];[b]adelay=26624353S:all=1,aeval='val(ch)*(if(lt(t,279.28708),0,if(lt(t,293.16727),sqrt(0.5),if(lt(t,293.62727),sqrt(0.5+0.5*(t-293.16727)/0.46001),1))))':c=same[be];[ae][be]amix=inputs=2:normalize=0,aresample=75815,asetrate=75816"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.860. The recording runs 14s past what this target needs and fades over its last seconds, so a straight build ends every loop on a fade the jump back then cancels. Only that fade is wrong: measured band by band the recording tracks the game to within about 3 dB right up to its own 291.8s, and where the two differ earlier it is a different guitar line, not a missing one -- material worth keeping. So the second segment replaces the last 3.6s and no more. It re-enters at the recording's 14.451s: the game's own file duplicates its pre-loop region at the end (its 285-293.59s is its 7.65-16.24s), and the offset is set so the album position reached at the loop end is the one the loop start reads (o = length - 275.549), leaving the music continuous across the wrap. Last five seconds against the game: -4.6 dB -> +0.5 at the end, envelope hole 4.5 dB -> 2.3."
+    "# comment": "The game's file does not cut to its opening at the loop's end: from 277.5s it plays the recording's own opening (one measured period later: 277.337s of recording time, 3.1 ms more than one loop period) under the recording's ending, both at -3 dB so the level holds, and fades the ending out equal-power over 291.38-291.84s, leaving the opening alone into the wrap. Found by synthesising candidate crossfades from the two sample-aligned copies and scoring them against the game's waveform (full band and the 3-4 kHz guitar band); the listener confirmed crossfade and loop point by ear. One segment: the recording split, the copy delayed 26624353 samples at its own 96 kHz, each through its envelope, summed, then sped up by the measured 13.19 ppm drift (the old build was 3.7 ms off by the loop end). Against the old layout (a 1s crossfade at 290s, which dropped the ending's guitar early): waveform correlation over the last 23s -0.12 -> 0.24, tail 0.805 -> 0.832 against mid-loop 0.816, weighted 0.8536 -> 0.8554, no joins. The summed peaks hold apply's gain at -1.6 dB, so the build sits about 2 dB under the game."
    }
   },
   {
