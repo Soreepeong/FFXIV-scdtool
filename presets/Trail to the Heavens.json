@@ -3875,12 +3875,12 @@
         "channel": 1
        }
       ],
-      "length": 283.0
+      "length": 290.0
      },
      {
       "sourceOffsets": {
        "source": {
-        "offset": 7.451
+        "offset": 14.451
        }
       },
       "channels": [
@@ -3893,10 +3893,10 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 4.0
+      "crossfadeSeconds": 1.0
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.860. The recording fades from its own 290.5s while the game holds level to its loop end at 293.59s, so a straight build spends the last five seconds of every loop fading and then cancels it by looping. The game's own file duplicates its pre-loop region at the end -- its 285-293.59s is its 7.65-16.24s, which is what makes its loop seamless -- so a second segment re-enters there. Its offset is set so the album position at the loop end is the one the loop start reads (o = length - 275.549), leaving the music continuous across the join. Envelope hole 4.5 dB -> 1.8 dB; the last four seconds go from -4.6 dB against the game's level to +0.5."
+    "# comment": "spectral similarity to the game's own file: 0.860. The recording runs 14s past what this target needs and fades over its last seconds, so a straight build ends every loop on a fade the jump back then cancels. Only that fade is wrong: measured band by band the recording tracks the game to within about 3 dB right up to its own 291.8s, and where the two differ earlier it is a different guitar line, not a missing one -- material worth keeping. So the second segment replaces the last 3.6s and no more. It re-enters at the recording's 14.451s: the game's own file duplicates its pre-loop region at the end (its 285-293.59s is its 7.65-16.24s), and the offset is set so the album position reached at the loop end is the one the loop start reads (o = length - 275.549), leaving the music continuous across the wrap. Last five seconds against the game: -4.6 dB -> +0.5 at the end, envelope hole 4.5 dB -> 2.3."
    }
   },
   {

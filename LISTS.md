@@ -60,8 +60,8 @@ Measured on the `ogg:lossless` build, which is the one the game plays: the FLAC 
 | 0.8421 | 0.91 | 3 | - | -0 | +0.1 | 22 | 0.18 | `music/ex5/BGM_EX5_System_Title.scd` | DT_002.flac | Dawntrail.json |
 | 0.8432 | 0.79 | 1 | - | -0 | +0.6 | 4 | 0.55 | `music/ffxiv/Orchestrion/BGM_ORCH_647.scd` | GL_00079.flac | Growing Light.json |
 | 0.8531 | 0.79 | 4 | - | +1 | +1.1 | 9 | 0.61 | `music/ffxiv/Orchestrion/BGM_ORCH_602.scd` | GL_00075.flac | Growing Light.json |
-| 0.8538 | 0.72 | 2 | - | -1 | -0.9 | 6 | 0.12 | `music/ex5/BGM_EX5_Raid_26.scd` | TH_055.flac | Trail to the Heavens.json |
-| 0.8538 | 0.72 | 2 | - | -1 | -0.9 | 6 | 0.12 | `music/ffxiv/BGM_Ride_Arcadion03.scd` | TH_055.flac | Trail to the Heavens.json |
+| 0.8537 | 0.72 | 2 | - | -1 | -0.8 | 9 | 0.12 | `music/ex5/BGM_EX5_Raid_26.scd` | TH_055.flac | Trail to the Heavens.json |
+| 0.8537 | 0.72 | 2 | - | -1 | -0.8 | 9 | 0.12 | `music/ffxiv/BGM_Ride_Arcadion03.scd` | TH_055.flac | Trail to the Heavens.json |
 | 0.8555 | 0.93 | 10 | - | +2 | +1.9 | 25 | 0.06 | `music/ffxiv/Orchestrion/BGM_ORCH_273.scd` | SHADOWBRINGERS_06.flac | Growing Light.json |
 | 0.8591 | 0.86 | 1 | - | +2 | +2.4 | 8 | 0.30 | `music/ex3/BGM_EX3_MYC_01.scd` | Before_Meteor_FFXIV_084.flac+DUD_033.flac+DUD_034.flac | Death Unto Dawn.json |
 | 0.8603 | 0.93 | 2 | - | +1 | +1.5 | 11 | 0.82 | `music/ffxiv/Orchestrion/BGM_ORCH_610.scd` | GL_00062.flac | Growing Light.json |
