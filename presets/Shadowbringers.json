@@ -3121,11 +3121,11 @@
      {
       "sourceOffsets": {
        "SHADOWBRINGERS_74": {
-        "offset": 1.41,
+        "offset": 1.412,
         "pcmHash": "376271a7"
        }
       },
-      "length": 232.23,
+      "length": 233.3,
       "channels": [
        {
         "source": "SHADOWBRINGERS_74",
@@ -3140,12 +3140,12 @@
      {
       "sourceOffsets": {
        "SHADOWBRINGERS_76": {
-        "offset": 64.21,
+        "offset": 65.279817,
         "pcmHash": "92270fe3"
        }
       },
-      "length": 195.67,
-      "crossfadeSeconds": 3.0,
+      "length": 194.6,
+      "crossfadeSeconds": 1.2,
       "channels": [
        {
         "source": "SHADOWBRINGERS_76",
@@ -3164,7 +3164,7 @@
         "pcmHash": "d7670573"
        }
       },
-      "length": 95.76,
+      "length": 95.66,
       "crossfadeSeconds": 6.0,
       "channels": [
        {
@@ -3180,12 +3180,12 @@
      {
       "sourceOffsets": {
        "SHADOWBRINGERS_53": {
-        "offset": 3.56,
+        "offset": 3.4553,
         "pcmHash": "69e760b3"
        }
       },
-      "length": 257.89,
-      "crossfadeSeconds": 2.0,
+      "length": 259.44,
+      "crossfadeSeconds": 0.0,
       "channels": [
        {
         "source": "SHADOWBRINGERS_53",
@@ -3200,12 +3200,12 @@
      {
       "sourceOffsets": {
        "SHADOWBRINGERS_52": {
-        "offset": 255.31,
+        "offset": 1.693443,
         "pcmHash": "47fc6913"
        }
       },
-      "length": 255.43,
-      "crossfadeSeconds": 8.0,
+      "length": 253.98,
+      "crossfadeSeconds": 0.0,
       "channels": [
        {
         "source": "SHADOWBRINGERS_52",
@@ -3220,7 +3220,7 @@
      {
       "sourceOffsets": {
        "SHADOWBRINGERS_39": {
-        "offset": 2.24,
+        "offset": 2.237521,
         "pcmHash": "c3864c32"
        }
       },
@@ -3235,9 +3235,53 @@
         "channel": 1
        }
       ]
+     },
+     {
+      "sourceOffsets": {
+       "SHADOWBRINGERS_81": {
+        "offset": 95.91,
+        "pcmHash": "d7670573"
+       }
+      },
+      "startSeconds": 523.56,
+      "length": 5.2,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 5.0,
+      "channels": [
+       {
+        "source": "SHADOWBRINGERS_81",
+        "channel": 0
+       },
+       {
+        "source": "SHADOWBRINGERS_81",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "SHADOWBRINGERS_53": {
+        "offset": 262.8953,
+        "pcmHash": "69e760b3"
+       }
+      },
+      "startSeconds": 783.0,
+      "length": 5.6,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 5.0,
+      "channels": [
+       {
+        "source": "SHADOWBRINGERS_53",
+        "channel": 0
+       },
+       {
+        "source": "SHADOWBRINGERS_53",
+        "channel": 1
+       }
+      ]
      }
     ],
-    "# comment": "credits roll: a medley of 6 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). SHADOWBRINGERS_74 from 0s, SHADOWBRINGERS_76 from 232s, SHADOWBRINGERS_81 from 428s, SHADOWBRINGERS_53 from 524s, SHADOWBRINGERS_52 from 782s, SHADOWBRINGERS_39 from 1037s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.982, worst segment 0.939, worst join 0.840."
+    "# comment": "credits roll: a medley of 6 pieces. SHADOWBRINGERS_74 from 0s, SHADOWBRINGERS_76 from 233.3s, SHADOWBRINGERS_81 from 427.9s, SHADOWBRINGERS_53 from 523.56s, SHADOWBRINGERS_52 from 783.0s, SHADOWBRINGERS_39 from 1036.98s. SHADOWBRINGERS_52 plays its piece twice and the game uses the FIRST pass (lag -781.3066 s, waveform correlation 0.99 to 1033s); the old layout read the second pass (offset 255.31), whose fade-out ending left the build 37.6 dB under the game in the second before 1036.98 ('outgoing runs out before the join', envelope hole 47.6 dB). At 523.56 and 783.0 the game does not crossfade: the incoming piece starts at full level on its own attack while the outgoing one keeps playing underneath and fades out linearly over 5 s (band-power fit of game minus incoming against the outgoing: 0 dB, -3.6, -7.1, -11, -20 dB a second apart); each join is a plain switch (the incoming recording is silent up to its attack) plus a layered segment (startSeconds) carrying the outgoing recording on, full level then fadeOutSeconds 5.0 to 528.76 / 788.6. The 74->76 switch is where the game lets 74 go (233.3s, 1.2 s crossfade, not 232.23 with 3 s). Every offset is the sample-level lag from waveform correlation against the game (74 and 81 drift ~12 ppm against the game; 74's offset is the mid-segment value, correcting the drift with asetrate gained nothing). Measured against the game's own file: weighted 0.9829 -> 0.9866, envelope hole 47.6 dB at 1036.5 -> 3.5 dB at 432.7, tail 0.996 vs control 0.996 (unchanged), atLoop 0.941 -> 0.948; joins: 1036.98 flag cleared (window 0.983 -> 0.994 vs control 0.997, before -37.6 -> -0.6 dB), 523.56 0.891 -> 0.939 (control 0.921), 783.0 0.967 -> 0.995 (control 0.995), 233.3 0.940 -> 0.945 (control 0.945), 427.9 unchanged 0.972. Left: 427.9-433 is 2-3 dB off in places because the game's SHADOWBRINGERS_81 is a different mix (waveform correlation only 0.6-0.8 against it, 0.99 for the others); SHADOWBRINGERS_52's gain is held at +1.1 dB of +1.7 by its own peak, so that segment reads 0.6 dB quiet."
    }
   },
   {
