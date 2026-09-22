@@ -2031,7 +2031,7 @@
      {
       "sourceOffsets": {
        "SB_FFXIV_046": {
-        "offset": 2.375
+        "offset": 2.37197
        }
       },
       "channels": [
@@ -2044,12 +2044,15 @@
         "channel": 1
        }
       ],
-      "length": 422.0
+      "length": 421.6,
+      "sourceFilters": {
+       "SB_FFXIV_046": "aresample=78400,asetrate=78401"
+      }
      },
      {
       "sourceOffsets": {
        "SB_FFXIV_010": {
-        "offset": 2.32
+        "offset": 1.93297
        }
       },
       "channels": [
@@ -2062,13 +2065,13 @@
         "channel": 1
        }
       ],
-      "length": 127.1,
-      "crossfadeSeconds": 2.0
+      "length": 127.6,
+      "crossfadeSeconds": 0.2
      },
      {
       "sourceOffsets": {
        "SB_FFXIV_031": {
-        "offset": 153.5
+        "offset": 153.59777
        }
       },
       "channels": [
@@ -2081,13 +2084,16 @@
         "channel": 1
        }
       ],
-      "length": 120.2,
-      "crossfadeSeconds": 2.0
+      "length": 90.8,
+      "crossfadeSeconds": 1.0,
+      "sourceFilters": {
+       "SB_FFXIV_031": "aresample=141120,asetrate=141121"
+      }
      },
      {
       "sourceOffsets": {
        "SB_FFXIV_031": {
-        "offset": 122.12
+        "offset": 92.817214
        }
       },
       "channels": [
@@ -2100,10 +2106,14 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 2.0
+      "crossfadeSeconds": 2.0,
+      "crossfadeShape": "linear",
+      "sourceFilters": {
+       "SB_FFXIV_031": "aresample=141120,asetrate=141121"
+      }
      }
     ],
-    "# comment": "a medley of three pieces, not a short track: SB_FFXIV_046 to 422s, SB_FFXIV_010 to 552s, SB_FFXIV_031 to 669s, then SB_FFXIV_031 re-entered at 122.120s for the last 34s, which the recording does not reach the first time. Spans located by scan_credits_medley.py over the whole pool (0.982, 0.986, 0.996) and the re-entry by the same tail check the loop-out entries use (0.993). Full length with the loop intact: 0.9877 against the game's own file, from 0.9841 for a build that stopped 278s short."
+    "# comment": "a medley of three pieces: SB_FFXIV_046 to 421.6s, SB_FFXIV_010 to 549.2s, then SB_FFXIV_031 to the loop end. SB_FFXIV_031 is one 151.58s piece played twice, sample-identical (self-correlation 1.000), and the game's loop is that period: the loop start (551.82s) reads the second pass and the end reads the first. The second pass carries the album's fade from about 651s, and the switch back to the first pass sat at 669.3s, inside it (join flagged 'outgoing runs out before the join', envelope hole 41.9 dB). The switch is now at 640s, exactly one recorded period back (so a linear crossfade of the two copies is seamless), well before the fade. Every offset was off by 1-13 ms (SB_FFXIV_010 by 13 ms), so each is now fitted by waveform correlation against the game; SB_FFXIV_046 and SB_FFXIV_031 also run 12.8 and 7.2 ppm fast against the game, corrected by aresample/asetrate pairs (78400->78401, 141120->141121) so the build stays within 0.07 ms of the game end to end. The first join moved to 421.6s, the silence between SB_FFXIV_046's decay and SB_FFXIV_010's attack (it used to fade SB_FFXIV_010 in from 422s, a second after its attack), and the second to 549.2s with a 1s crossfade, matching where the game ramps SB_FFXIV_031 in. Against the game's own file: weighted 0.9877 -> 0.9943, envelope hole 41.9 -> 1.0 dB, joins 0.960/0.978/flagged -> 0.991/0.993/0.995 (controls 0.995/0.996/0.995), tail 0.989 -> 0.990 (control 0.995). The last 1.6s before the loop end in the game is not the recording at any lag (waveform correlation drops from 0.97 to ~0.3 at 701.8s, level 3 dB lower); nothing tried reproduced it, which is what keeps the tail under its control."
    }
   },
   {
