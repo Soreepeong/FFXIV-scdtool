@@ -226,15 +226,34 @@ namespace {
 	// multichannel entry ("pan=stereo|c0=c0|c1=c2") rather than the whole interleaved mix,
 	// whose loudness is the sum of every engine state at once and matches no album track.
 	double measure_loudness(const std::filesystem::path& ffmpeg, const std::filesystem::path& file, double startSeconds, double durationSeconds, const std::wstring& preFilter = {}) {
-		// -ss after -i: sample-accurate, which matters because the two sides of the
-		// comparison must cover exactly the same musical span for the difference to mean
-		// anything. The files are only minutes long, so the extra decode is cheap.
-		std::vector<std::wstring> args{L"-v", L"info", L"-nostdin", L"-i", file.wstring()};
-		if (startSeconds > 0)
-			args.insert(args.end(), {L"-ss", std::to_wstring(startSeconds)});
-		if (durationSeconds > 0)
-			args.insert(args.end(), {L"-t", std::to_wstring(durationSeconds)});
-		args.insert(args.end(), {L"-af", preFilter.empty() ? std::wstring(L"ebur128") : preFilter + L",ebur128", L"-f", L"null", L"-"});
+		// The span is cut by atrim inside the chain: sample-accurate, which matters because
+		// the two sides of the comparison must cover exactly the same musical span for the
+		// difference to mean anything. Not -ss/-t after -i: those only trim what is muxed,
+		// so ebur128 would integrate everything from the top of the file to the span's end
+		// -- measured on BGM_EX3_Ban_14 at 403.26s for 10s, -11.8 LUFS against -15.2.
+		// Not -ss before -i either: an input seek into Ogg lands up to ~20 ms off.
+		//
+		// `preFilter` runs first: a preset's source filter works in recording time (an
+		// afade's st=, an adelay), so it has to see the recording from its top, as it does
+		// when the audio is decoded for real.
+		std::wstring chain;
+		if (!preFilter.empty())
+			chain += preFilter + L",";
+		if (startSeconds > 0 || durationSeconds > 0) {
+			chain += L"atrim";
+			if (startSeconds > 0)
+				chain += std::format(L"=start={:.6f}", startSeconds);
+			if (durationSeconds > 0)
+				chain += std::format(L"{}duration={:.6f}", startSeconds > 0 ? L":" : L"=", durationSeconds);
+			chain += L",";
+		}
+		chain += L"ebur128";
+		std::vector<std::wstring> args{L"-v", L"info", L"-nostdin"};
+		// Stop decoding at the span's end; an input -to seeks nothing, so it cannot land off.
+		// Not under a filter, which may move audio later than where the decode would stop.
+		if (durationSeconds > 0 && preFilter.empty())
+			args.insert(args.end(), {L"-to", std::format(L"{:.6f}", startSeconds + durationSeconds + 1.)});
+		args.insert(args.end(), {L"-i", file.wstring(), L"-af", chain, L"-f", L"null", L"-"});
 
 		const auto bytes = run_process_capture_stderr(ffmpeg, args);
 		const std::string text(bytes.begin(), bytes.end());
@@ -759,31 +778,6 @@ namespace {
 		return out;
 	}
 
-	// Builds the interleaved audio for an entry whose channels are engine-switched stems.
-	//
-	// A 4- or 6-channel music entry is not a surround mix: it is two or three stereo stems
-	// the engine crossfades between -- out of combat, in combat, and a transition cymbal --
-	// and each stem is its own album track, with its own match offset and its own level. So
-	// it cannot be built the way a stereo entry is, from one decode of one source, and it
-	// also cannot be built from the resolved stems alone: a stem that did not resolve has
-	// to keep the game's own audio, or that engine state would play back silent.
-	//
-	// The pairs are not sequential either. `discover_channel_pairing` in match.cpp finds
-	// them by correlation, and 14 of the game's 21 multichannel entries pair up as
-	// (0,2)(1,4)(3,5) or similar rather than (0,1)(2,3)(4,5), so the channel indices are
-	// taken from the match and never assumed.
-	// Lay a preset's segments onto the target's timeline and sum them into one buffer.
-	//
-	// Every segment is placed at the cumulative sum of the lengths before it, and the
-	// overlaps are complementary linear ramps, so a crossfade region adds to unit gain
-	// rather than dipping through it. That "keep playing and fade under" shape is the point
-	// of the whole path: the 20 loop-out entries here are targets whose game file outlasts
-	// its recording and ends by re-entering the same piece earlier on, and a hard cut at
-	// the seam measures 0.939 against the game's own file where the crossfade measures
-	// 0.993. The 7 credits rolls are the same machinery with a different source per segment.
-	//
-	// Level matching is per source per segment rather than once for the whole file: a
-	// medley stitched from eight album tracks has eight different masters in it, and one
 	// Vorbis's own six-channel order is FL, FC, FR, BL, BR, LFE; a decoder hands back
 	// FL, FR, FC, LFE, BL, BR. So sequential channel i is decoded channel this[i], which is
 	// what every hand-written preset carries as `sequentialToFfmpegChannelIndexMap`. One,
@@ -804,18 +798,56 @@ namespace {
 		return std::nullopt;
 	}
 
-	// gain for the lot leaves most of them wrong.
+	// How long the file runs, in seconds, or 0 if ffprobe will not say. Wanted for one
+	// reason: a target with no loop has no loop end to truncate the render at, so without
+	// this nothing bounds it and the replacement runs to the end of the recording.
+	double probe_duration(const std::filesystem::path& ffprobe, const std::filesystem::path& file) {
+		const auto bytes = run_process_capture_stdout(ffprobe, {
+			L"-v", L"error",
+			L"-select_streams", L"a:0",
+			L"-show_entries", L"format=duration",
+			L"-of", L"default=noprint_wrappers=1:nokey=1",
+			file.wstring(),
+		});
+		try {
+			return std::stod(std::string(bytes.begin(), bytes.end()));
+		} catch (const std::exception&) {
+			return 0.;
+		}
+	}
+
+	// Lay a preset's segments onto the target's timeline and sum them into one buffer.
+	//
+	// Every segment is placed at the cumulative sum of the lengths before it, and the
+	// overlaps are complementary ramps -- equal-power by default, linear where the preset
+	// says both sides are the same signal -- so a crossfade holds its level rather than
+	// dipping through it. That "keep playing and fade under" shape is the point
+	// of the whole path: the 20 loop-out entries here are targets whose game file outlasts
+	// its recording and ends by re-entering the same piece earlier on, and a hard cut at
+	// the seam measures 0.939 against the game's own file where the crossfade measures
+	// 0.993. The 7 credits rolls are the same machinery with a different source per segment.
+	//
+	// Level matching is per recording rather than once for the whole file: a medley
+	// stitched from eight album tracks has eight different masters in it, and one gain for
+	// the lot leaves most of them wrong. See the measurement below for why it is not per
+	// segment either.
 	std::vector<float> build_segment_audio(
 		const std::filesystem::path& ffmpeg,
+		const std::filesystem::path& ffprobe,
 		const std::filesystem::path& templateAudio,
 		const std::vector<apply_segment>& segments,
 		size_t channels,
 		size_t samplingRate,
+		// Where the target stops being heard: its loop end, or its length when it does not loop.
+		size_t targetEnd,
 		bool loudnessMatch,
 		double maxGainDb,
 		const std::function<std::filesystem::path(const wchar_t*, const wchar_t*)>& tempFile,
 		// Where the onset alignment put each source it moved, for the caller to report.
-		std::vector<std::pair<std::string, double>>* alignments = nullptr) {
+		std::vector<std::pair<std::string, double>>* alignments = nullptr,
+		// The level each recording was given, in dB, and the whole-file back-off a peak over
+		// full scale forced (as a final entry named "peak"), for the caller to report.
+		std::vector<std::pair<std::string, double>>* gains = nullptr) {
 
 		// Which decoded channel entry i of a segment's `channels` list describes. The list
 		// is in sequential order and every buffer here is in decoded order; see
@@ -854,6 +886,65 @@ namespace {
 				? toSamples(segments[i].StartSeconds)
 				: cursor;
 			cursor = segmentStart[i] + toSamples(segments[i].Length);
+		}
+
+		// One gain per recording (file and filter), measured over the longest span any
+		// segment reads from it, on both sides. Per segment was fragile: a short span is a
+		// noisy reading, and one that does not hold what the game plays there -- a misplaced
+		// re-entry -- asks for the full --max-gain, whose peaks then pull the whole file down
+		// (BGM_ORCH_899's 3.5s re-entry: +12 dB, and the file came out 9 dB quiet). A medley
+		// of different recordings still gets one gain each.
+		//
+		// A source whose filter states a volume= keeps it and gets no gain of its own, the
+		// rule the single-source path follows: generated presets carry apply's own measured
+		// gain that way for importers that do not level-match, and matching on top of it
+		// applied it twice. Otherwise the recording is measured through its filter, since that
+		// is what plays.
+		std::map<std::pair<std::filesystem::path, std::wstring>, double> gainOf;
+		if (loudnessMatch) {
+			struct longest_span { size_t Segment = 0; std::string Name; size_t From = 0; size_t Span = 0; };
+			std::map<std::pair<std::filesystem::path, std::wstring>, longest_span> longest;
+			std::map<std::filesystem::path, size_t> recordingLength;
+			for (size_t i = 0; i < segments.size(); i++) {
+				for (const auto& [name, source] : segments[i].Sources) {
+					if (source.IsTarget || source.Filter.find(L"volume=") != std::wstring::npos)
+						continue;
+					// Only what this segment plays. Its source list is the item's whole list,
+					// so a medley's every recording is "in" every segment: measured there,
+					// ARR_FFXIV_115 took its longest span from the part of
+					// BGM_System_EndCredit01 that ARR_FFXIV_003 plays, and came out -10.2 dB.
+					if (std::ranges::none_of(segments[i].Channels, [&](const auto& c) { return c.first == name; }))
+						continue;
+					const auto file = fileFor(source);
+					if (!recordingLength.contains(file))
+						recordingLength.emplace(file, toSamples(probe_duration(ffprobe, file)));
+					const auto from = toSamples(source.Offset);
+					// As far as the segment states, the target runs and the recording lasts.
+					auto span = segments[i].Length > 0. ? toSamples(segments[i].Length) : (std::numeric_limits<size_t>::max)();
+					span = (std::min)(span, targetEnd > segmentStart[i] ? targetEnd - segmentStart[i] : 0);
+					if (const auto length = recordingLength.at(file); length)
+						span = (std::min)(span, length > from ? length - from : 0);
+					auto& best = longest[{file, source.Filter}];
+					if (span > best.Span)
+						best = {i, name, from, span};
+				}
+			}
+			for (const auto& [key, best] : longest) {
+				try {
+					const auto spanSeconds = static_cast<double>(best.Span) / rate;
+					const auto templateLufs = measure_loudness(ffmpeg, templateAudio,
+						static_cast<double>(segmentStart[best.Segment]) / rate, spanSeconds);
+					const auto sourceLufs = measure_loudness(ffmpeg, key.first,
+						static_cast<double>(best.From) / rate, spanSeconds, key.second);
+					const auto db = std::clamp(templateLufs - sourceLufs, -maxGainDb, maxGainDb);
+					gainOf.emplace(key, std::pow(10., db / 20.));
+					if (gains)
+						gains->emplace_back(best.Name, db);
+				} catch (const std::exception&) {
+					// Same rule as the single-source path: an unreadable measurement costs
+					// the level match, never the file.
+				}
+			}
 		}
 
 		std::vector<float> out;
@@ -1006,22 +1097,33 @@ namespace {
 			const auto powerOut = !statedOut && tail > 0
 				&& i + 1 < segments.size() && segments[i + 1].CrossfadeEqualPower;
 
-			// Per-source gain, measured over this segment's own span on both sides.
 			std::map<std::string, double> gain;
-			if (loudnessMatch) {
-				const auto spanSeconds = static_cast<double>(stated) / rate;
-				const auto startSeconds = static_cast<double>(segmentStart[i]) / rate;
-				for (const auto& [name, source] : segment.Sources) {
-					try {
-						const auto templateLufs = measure_loudness(ffmpeg, templateAudio, startSeconds, spanSeconds);
-						const auto sourceLufs = measure_loudness(ffmpeg, fileFor(source),
-							(std::max)(0., static_cast<double>(start.at(name)) / rate), spanSeconds);
-						gain[name] = std::pow(10., std::clamp(templateLufs - sourceLufs, -maxGainDb, maxGainDb) / 20.);
-					} catch (const std::exception&) {
-						// Same rule as the single-source path: an unreadable measurement
-						// costs the level match, never the file.
-						gain[name] = 1.;
-					}
+			for (const auto& [name, source] : segment.Sources) {
+				const auto it = source.IsTarget ? gainOf.end() : gainOf.find({fileFor(source), source.Filter});
+				gain[name] = it == gainOf.end() ? 1. : it->second;
+			}
+			// A gain that would clip what this segment plays is held to its own peak, as the
+			// single-source and stem paths do, rather than left to the whole-file back-off
+			// below -- which quietened every segment of a medley for one loud one:
+			// BGM_System_EndCredit01's ARR_FFXIV_003 at +3.8 dB cost all three 2.2 dB.
+			for (auto& [name, g] : gain) {
+				if (g <= 1.)
+					continue;
+				float peak = 0.f;
+				for (const auto& [key, samples] : decoded) {
+					if (key.first != name)
+						continue;
+					const auto from = start.at(name);
+					const auto first = static_cast<size_t>((std::max)(ptrdiff_t{0}, from));
+					const auto last = static_cast<size_t>((std::clamp)(from + static_cast<ptrdiff_t>(render),
+						ptrdiff_t{0}, static_cast<ptrdiff_t>(samples.size())));
+					for (auto n = first; n < last; n++)
+						peak = (std::max)(peak, std::abs(samples[n]));
+				}
+				if (peak > 0.f && g * peak > 1.) {
+					g = 1. / peak;
+					if (gains)
+						gains->emplace_back(name + " held", 20. * std::log10(g));
 				}
 			}
 
@@ -1061,10 +1163,25 @@ namespace {
 			[](float a, float b) { return std::abs(a) < std::abs(b); })); peak > 1.f) {
 			for (auto& v : out)
 				v /= peak;
+			if (gains)
+				gains->emplace_back("peak", -20. * std::log10(static_cast<double>(peak)));
 		}
 		return out;
 	}
 
+	// Builds the interleaved audio for an entry whose channels are engine-switched stems.
+	//
+	// A 4- or 6-channel music entry is not a surround mix: it is two or three stereo stems
+	// the engine crossfades between -- out of combat, in combat, and a transition cymbal --
+	// and each stem is its own album track, with its own match offset and its own level. So
+	// it cannot be built the way a stereo entry is, from one decode of one source, and it
+	// also cannot be built from the resolved stems alone: a stem that did not resolve has
+	// to keep the game's own audio, or that engine state would play back silent.
+	//
+	// The pairs are not sequential either. `discover_channel_pairing` in match.cpp finds
+	// them by correlation, and 14 of the game's 21 multichannel entries pair up as
+	// (0,2)(1,4)(3,5) or similar rather than (0,1)(2,3)(4,5), so the channel indices are
+	// taken from the match and never assumed.
 	std::vector<float> build_stem_audio(
 		const std::filesystem::path& ffmpeg,
 		const std::filesystem::path& templateAudio,
@@ -1789,24 +1906,6 @@ namespace {
 		return res;
 	}
 
-	// How long the file runs, in seconds, or 0 if ffprobe will not say. Wanted for one
-	// reason: a target with no loop has no loop end to truncate the render at, so without
-	// this nothing bounds it and the replacement runs to the end of the recording.
-	double probe_duration(const std::filesystem::path& ffprobe, const std::filesystem::path& file) {
-		const auto bytes = run_process_capture_stdout(ffprobe, {
-			L"-v", L"error",
-			L"-select_streams", L"a:0",
-			L"-show_entries", L"format=duration",
-			L"-of", L"default=noprint_wrappers=1:nokey=1",
-			file.wstring(),
-		});
-		try {
-			return std::stod(std::string(bytes.begin(), bytes.end()));
-		} catch (const std::exception&) {
-			return 0.;
-		}
-	}
-
 	// The last `seconds` of a file. Input-side -ss, because output-side seeking is what
 	// corrupts a read deep into a file -- the same trap the loudness measurement hit.
 	std::vector<float> decode_tail_to_floats(
@@ -2415,7 +2514,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 			return 0;
 		}
 
-		const auto tempDir = std::filesystem::temp_directory_path();
+		const process_temp_directory tempRoot(L"apply");
+		const auto& tempDir = tempRoot.path();
 		std::atomic<uint32_t> tempFileCounter{0};
 		std::atomic<size_t> writtenCount{0};
 		std::atomic<size_t> failedCount{0};
@@ -2596,6 +2696,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 			double onsetDb = 0.;
 			double onsetSeconds = 0.;
 			std::vector<std::pair<std::string, double>> segmentAlignments;
+			std::vector<std::pair<std::string, double>> segmentGains;
 			size_t totalSamples = 0;
 			size_t newLoopStart = 0;
 			size_t newLoopEnd = 0;
@@ -2609,8 +2710,10 @@ int cmd_apply(const std::vector<std::string>& args) {
 				// and carry a checksum of the recording they were fitted to, so they are used as
 				// written -- re-deriving them here would throw away the one thing the preset knows
 				// that the matcher does not, which is where the seams go.
-				floats = build_segment_audio(ffmpegPath, templateAudio, job.Segments, channels,
-					samplingRate, loudnessMatch, maxGainDb, tempFile, &segmentAlignments);
+				floats = build_segment_audio(ffmpegPath, ffprobePath, templateAudio, job.Segments, channels,
+					samplingRate, loopEnd > loopStart ? loopEnd
+						: static_cast<size_t>(std::llround(templateSeconds * static_cast<double>(samplingRate))),
+					loudnessMatch, maxGainDb, tempFile, &segmentAlignments, &segmentGains);
 
 				totalSamples = floats.size() / channels;
 				newLoopStart = loopStart;
@@ -3087,6 +3190,13 @@ int cmd_apply(const std::vector<std::string>& args) {
 						std::string res = ", aligned";
 						for (const auto& [name, seconds] : segmentAlignments)
 							res += std::format(" {}@{:+.3f}s", name, seconds);
+						return res;
+					}() + [&] {
+						if (segmentGains.empty())
+							return std::string();
+						std::string res = ", levels";
+						for (const auto& [name, db] : segmentGains)
+							res += std::format(" {} {:+.1f} dB", name, db);
 						return res;
 					}(),
 					seam.Applied
