@@ -1077,7 +1077,43 @@
    ],
    "target": {
     "path": [
-     "music/ex2/BGM_EX2_Field_Safe_01.scd",
+     "music/ex2/BGM_EX2_Field_Safe_01.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.785,
+        "pcmHash": "c1881217"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+3.7dB,apad=whole_dur=79.816"
+      }
+     }
+    ],
+    "# comment": "The game's own file does not loop (loop 0-0, 78.03s): it plays the recording straight through from 1.785s and lets it end, silent from 72s on. This item used to share one layout with BGM_ORCH_295, whose second segment re-entered the recording at 72.30s, so this file played the piece's opening again where the game is silent (join flagged 'plays where the game is silent after it', +63 dB). Now one segment, no re-entry. The +3.7 dB level match is stated with volume= for importers that do not level-match (apply measures the same +3.7 dB on its own), and apad keeps the game's 78.031s length. Weighted 0.9893 -> 0.9896, hole 2.1 -> 2.2 dB, envelope deviation 1.82 -> 0.31 dB, level within 0.1 dB of the game everywhere, no joins left."
+   }
+  },
+  {
+   "source": [
+    "^00024\\.",
+    "SB_FFXIV_025",
+    "Harmony",
+    "調和"
+   ],
+   "target": {
+    "path": [
      "music/ffxiv/Orchestrion/BGM_ORCH_295.scd"
     ],
     "segments": [
@@ -1098,26 +1134,12 @@
         "channel": 1
        }
       ],
-      "length": 72.3
-     },
-     {
-      "sourceOffsets": {
-       "source": 3.824524
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "crossfadeSeconds": 0.5
+      "sourceFilters": {
+       "source": "asplit[a][b];[b]adelay=6745006S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.956 the recording runs out 1.3s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.54s (similarity 0.976 against 0.846 for the next-best placement, and the distance back is the game file's own loop period of 70.260s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 3.825s, seamed 0.50s early and crossfaded over that."
+    "# comment": "The game's file loops 3.877-74.137s (period 70.2605s = 3098487 samples); over its last 3.9s it plays the recording's fading ending and its own opening at once (the opening is summed in, not cut to: from 70.45s the game tracks the opening at 70.26s back while the ending's tail is still sounding). The recording is therefore mixed with itself delayed by exactly one loop period (6745006 samples at 96 kHz) and read from 1.785s in one segment, which also closes the loop wrap on itself (seam 0.84). Before, a second segment switched to the opening at 72.30s, 2s after the game had: join flagged 'outgoing runs out before the join; different material across the join' (window 0.861 vs control 0.990). Weighted 0.9796 -> 0.9813, hole 33.6 -> 2.1 dB, tail 0.951 -> 0.983 against control 0.990, no joins left."
    }
   },
   {
