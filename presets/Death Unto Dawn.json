@@ -3450,14 +3450,7 @@
      "DUD_071",
      "Widespread Illness (From NieR:Automata)",
      "茫洋タル病 (From NieR:Automata)"
-    ],
-    "game": {
-     "inputFiles": [
-      []
-     ],
-     "filterComplex": "[0:a]asplit[x][y];[x][y]amerge=inputs=2,pan=stereo|c0=c0|c1=c1[o]",
-     "filterComplexOutName": "[o]"
-    }
+    ]
    },
    "target": {
     "path": [
@@ -3489,15 +3482,15 @@
      },
      {
       "sourceOffsets": {
-       "game": 106.6
+       "target": 106.6
       },
       "channels": [
        {
-        "source": "game",
+        "source": "target",
         "channel": 0
        },
        {
-        "source": "game",
+        "source": "target",
         "channel": 1
        }
       ],
@@ -3505,7 +3498,7 @@
       "crossfadeShape": "linear"
      }
     ],
-    "# comment": "The game holds the album's UNFADED master up to 106.6s (waveform correlation 0.99 while the recording fades by up to -60 dB), then plays its own opening one loop period (+9 samples) back mixed with material no recording has (only 0.75 correlated with that opening; the rest is found nowhere in DUD_071 or earlier in the game's file). The recording also runs 12.3 ppm fast against the game (1.7 ms by the loop end). So segment 1 undoes the album's measured fade (aeval, piecewise-linear ln gain over recording time 94.5-108.4s, muted from 108.6s) and is resampled 81268->81269 Hz to cancel the drift (offset 1.368282 in that timeline); at 106.6s a 0.5s linear crossfade hands over to the game's own audio (source \"game\", the empty slot made 2-channel so the mono Orchestrion roll folds it at full level; plain \"target\" channel 1 is silent on a mono entry) for the last 9.5s. Before: switch at 105.2 inside the recording's fade (-25 dB before the join), re-entry at 13.7 with a 4s crossfade: Ytc_27 weighted 0.9876, hole 28.3 dB, tail 0.891 vs control 0.997, join flagged (outgoing runs out; different material); ORCH_489 0.9737, hole 28.2, tail 0.869 vs 0.984. After: Ytc_27 0.9951, hole 0.3, tail 0.986 vs 0.997, join clean (0.982 vs 0.997); ORCH_489 0.9824, hole 0.5, tail 0.982 vs 0.985, join clean; build-vs-game lag within 0.011 ms over the whole file (was -1.68 drifting to -0.46 ms). Re-entering the recording's opening instead of the game's audio scored 0.9905 / 0.9768 with the join still flagged (0.871)."
+    "# comment": "The game holds the album's UNFADED master up to 106.6s (waveform correlation 0.99 while the recording fades by up to -60 dB), then plays its own opening one loop period (+9 samples) back mixed with material no recording has (only 0.75 correlated with that opening; the rest is found nowhere in DUD_071 or earlier in the game's file). The recording also runs 12.3 ppm fast against the game (1.7 ms by the loop end). So segment 1 undoes the album's measured fade (aeval, piecewise-linear ln gain over recording time 94.5-108.4s, muted from 108.6s) and is resampled 81268->81269 Hz to cancel the drift (offset 1.368282 in that timeline); at 106.6s a 0.5s linear crossfade hands over to the game's own audio (source \"target\") for the last 9.5s. Before: switch at 105.2 inside the recording's fade (-25 dB before the join), re-entry at 13.7 with a 4s crossfade: Ytc_27 weighted 0.9876, hole 28.3 dB, tail 0.891 vs control 0.997, join flagged (outgoing runs out; different material); ORCH_489 0.9737, hole 28.2, tail 0.869 vs 0.984. After: Ytc_27 0.9951, hole 0.3, tail 0.986 vs 0.997, join clean (0.982 vs 0.997); ORCH_489 0.9824, hole 0.5, tail 0.982 vs 0.985, join clean; build-vs-game lag within 0.011 ms over the whole file (was -1.68 drifting to -0.46 ms). Re-entering the recording's opening instead of the game's audio scored 0.9905 / 0.9768 with the join still flagged (0.871)."
    }
   },
   {

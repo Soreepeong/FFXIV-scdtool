@@ -1024,10 +1024,17 @@ namespace {
 						"Segment {} maps a channel from source \"{}\", which it does not define.", i, name));
 				// `target` is the game's own entry, whose channels the preset names in the
 				// same sequential order; an OST track's two channels are its own and need no
-				// translation.
+				// translation. A mono entry reads every `target` channel as the game's file
+				// folded to mono, so the routing's average of them is that fold: a preset
+				// naming `target` channels 0 and 1 of a mono file read channel 1 as silence
+				// and came out 6 dB quiet there (BGM_ORCH_489).
+				const auto targetFold = source->second.IsTarget && channels == 1;
+				const auto& filter = source->second.Filter;
 				decoded.emplace(key, decode_channel_to_floats(ffmpeg, fileFor(source->second),
-					source->second.IsTarget ? seat(channelIndex) : channelIndex,
-					samplingRate, tempFile(L"scdtool_apply_seg", L".f32"), source->second.Filter));
+					targetFold ? 0 : source->second.IsTarget ? seat(channelIndex) : channelIndex,
+					samplingRate, tempFile(L"scdtool_apply_seg", L".f32"),
+					!targetFold ? filter : filter.empty() ? std::wstring(L"aformat=channel_layouts=mono")
+						: filter + L",aformat=channel_layouts=mono"));
 			}
 
 			// Where each source is read from, in its own samples. Normally its stated
