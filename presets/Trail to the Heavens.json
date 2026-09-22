@@ -3874,10 +3874,29 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 283.0
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 7.451
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 4.0
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.860"
+    "# comment": "spectral similarity to the game's own file: 0.860. The recording fades from its own 290.5s while the game holds level to its loop end at 293.59s, so a straight build spends the last five seconds of every loop fading and then cancels it by looping. The game's own file duplicates its pre-loop region at the end -- its 285-293.59s is its 7.65-16.24s, which is what makes its loop seamless -- so a second segment re-enters there. Its offset is set so the album position at the loop end is the one the loop start reads (o = length - 275.549), leaving the music continuous across the join. Envelope hole 4.5 dB -> 1.8 dB; the last four seconds go from -4.6 dB against the game's level to +0.5."
    }
   },
   {
