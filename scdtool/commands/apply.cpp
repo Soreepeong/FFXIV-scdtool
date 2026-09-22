@@ -771,6 +771,12 @@ namespace {
 	//
 	// Level matching is per source per segment rather than once for the whole file: a
 	// medley stitched from eight album tracks has eight different masters in it, and one
+	// Vorbis's own six-channel order is FL, FC, FR, BL, BR, LFE; a decoder hands back
+	// FL, FR, FC, LFE, BL, BR. So sequential channel i is decoded channel this[i], which is
+	// what every hand-written preset carries as `sequentialToFfmpegChannelIndexMap`. One,
+	// two and four channels are the same order either way.
+	constexpr size_t VorbisToDecodedChannel[6] = {0, 2, 1, 4, 5, 3};
+
 	// The first sample at or above `threshold`, searching from `from`.
 	//
 	// The raw signed value, not its magnitude, which is what the old importer compared and
@@ -797,6 +803,13 @@ namespace {
 		const std::function<std::filesystem::path(const wchar_t*, const wchar_t*)>& tempFile,
 		// Where the onset alignment put each source it moved, for the caller to report.
 		std::vector<std::pair<std::string, double>>* alignments = nullptr) {
+
+		// Which decoded channel entry i of a segment's `channels` list describes. The list
+		// is in sequential order and every buffer here is in decoded order; see
+		// VorbisToDecodedChannel. Identity below six channels.
+		const auto seat = [channels](size_t sequential) {
+			return channels == 6 && sequential < 6 ? VorbisToDecodedChannel[sequential] : sequential;
+		};
 
 		const auto rate = static_cast<double>(samplingRate);
 		const auto toSamples = [rate](double seconds) {
@@ -841,7 +854,7 @@ namespace {
 			std::vector<std::vector<std::pair<std::pair<std::string, size_t>, float>>> routing(channels);
 			if (segment.Channels.size() == channels) {
 				for (size_t ch = 0; ch < channels; ch++)
-					routing[ch].emplace_back(segment.Channels[ch], 1.f);
+					routing[seat(ch)].emplace_back(segment.Channels[ch], 1.f);
 			} else if (channels == 1) {
 				for (const auto& mapped : segment.Channels)
 					routing[0].emplace_back(mapped, 1.f / static_cast<float>(segment.Channels.size()));
@@ -862,7 +875,11 @@ namespace {
 				if (source == segment.Sources.end())
 					throw std::runtime_error(std::format(
 						"Segment {} maps a channel from source \"{}\", which it does not define.", i, name));
-				decoded.emplace(key, decode_channel_to_floats(ffmpeg, fileFor(source->second), channelIndex,
+				// `target` is the game's own entry, whose channels the preset names in the
+				// same sequential order; an OST track's two channels are its own and need no
+				// translation.
+				decoded.emplace(key, decode_channel_to_floats(ffmpeg, fileFor(source->second),
+					source->second.IsTarget ? seat(channelIndex) : channelIndex,
 					samplingRate, tempFile(L"scdtool_apply_seg", L".f32"), source->second.Filter));
 			}
 
@@ -892,7 +909,7 @@ namespace {
 				// The target channel this one feeds. A mono entry described by a stereo
 				// preset has fewer channels than the segment lists, and both of its listed
 				// channels fold into the one it has.
-				const auto tc = (std::min)(ci, channels - 1);
+				const auto tc = (std::min)(seat(ci), channels - 1);
 				try {
 					if (!targetChannel.contains(tc))
 						targetChannel.emplace(tc, decode_channel_to_floats(ffmpeg, templateAudio, tc,
@@ -1668,16 +1685,40 @@ namespace {
 		if (loopEnd > frames)
 			return res;
 
-		// The metric judges one signal, so the channels are summed the way it expects.
-		std::vector<float> mono(frames);
-		for (size_t i = 0; i < frames; i++) {
-			auto sum = 0.f;
-			for (size_t c = 0; c < channels; c++)
-				sum += floats[i * channels + c];
-			mono[i] = sum / static_cast<float>(channels);
-		}
+		// The metric judges one signal. For mono and stereo that is the channels summed: a
+		// stereo pair is heard as one thing, and the metric was calibrated that way over
+		// 1658 looping targets. Above two channels it is not -- those are two or three
+		// independent stems the engine switches between, only one audible at a time -- so
+		// each channel is judged on its own.
+		const auto measure = [&](size_t channel) {
+			std::vector<float> one(frames);
+			for (size_t i = 0; i < frames; i++) {
+				if (channels <= 2) {
+					auto sum = 0.f;
+					for (size_t c = 0; c < channels; c++)
+						sum += floats[i * channels + c];
+					one[i] = sum / static_cast<float>(channels);
+				} else {
+					one[i] = floats[i * channels + channel];
+				}
+			}
+			return loop_seam_ratio(one, loopStart, loopEnd, samplingRate);
+		};
 
-		const auto before = loop_seam_ratio(mono, loopStart, loopEnd, samplingRate);
+		// The worst channel decides: a click in the stem that is playing is audible whatever
+		// the silent ones are doing. Reads `floats`, so calling it after the blend measures
+		// the blend.
+		const auto worst = [&] {
+			auto found = measure(0);
+			for (size_t c = 1; channels > 2 && c < channels; c++) {
+				const auto here = measure(c);
+				if (here.Valid && (!found.Valid || here.Ratio > found.Ratio))
+					found = here;
+			}
+			return found;
+		};
+
+		const auto before = worst();
 		if (!before.Valid)
 			return res;
 		res.Before = before.Ratio;
@@ -1702,13 +1743,10 @@ namespace {
 			for (size_t c = 0; c < channels; c++)
 				floats[at * channels + c] = floats[at * channels + c] * (1.f - w)
 					+ floats[(at - period) * channels + c] * w;
-			auto sum = 0.f;
-			for (size_t c = 0; c < channels; c++)
-				sum += floats[at * channels + c];
-			mono[at] = sum / static_cast<float>(channels);
 		}
 
-		const auto after = loop_seam_ratio(mono, loopStart, loopEnd, samplingRate);
+		// Measured the same way as `before`, from the buffer the blend just wrote.
+		const auto after = worst();
 		res.After = after.Valid ? after.Ratio : res.Before;
 		res.Frames = n;
 		res.Applied = true;
@@ -2767,7 +2805,6 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// everything above already works in, so permuting for them would be the bug this
 			// permutation exists to fix.
 			if (channels == 6 && encodesVorbis) {
-				constexpr size_t VorbisToDecodedChannel[6] = {0, 2, 1, 4, 5, 3};
 				std::vector<float> reordered(floats.size());
 				for (size_t i = 0; i < totalSamples; ++i)
 					for (size_t v = 0; v < 6; ++v)
