@@ -82,6 +82,147 @@ namespace {
 		return info;
 	}
 
+	// One stretch of the build measured against the same stretch of the game's own file.
+	struct window_comparison {
+		double Level = 0.;   // mean dB, built minus game: negative is quieter
+		double Worst = 0.;   // the worst single second of that, which is what a dip sounds like
+		double Match = 0.;   // weighted log-mel cosine, the same metric as the whole-file score
+		bool Valid = false;
+	};
+
+	// How far the build sits from the game's own file over one window, in milliseconds.
+	//
+	// Reported instead of a score because a score cannot answer "is the sync right": a
+	// different master scores low while perfectly aligned, and a misaligned copy of the same
+	// master scores low too. The lag is zero when the two line up, whatever else differs.
+	struct lag_probe {
+		double LagMs = 0.;   // built against the game; positive means the build is late
+		double Match = 0.;   // correlation at that lag
+		bool Valid = false;
+	};
+
+	// Both files are decoded at the same rate and laid on the same timeline, so one pair of
+	// indices addresses the same music in each.
+	window_comparison measure_window(std::span<const float> built, std::span<const float> game,
+		double fromSeconds, double toSeconds) {
+
+		window_comparison res;
+		if (toSeconds <= fromSeconds || fromSeconds < 0.)
+			return res;
+		const auto rate = static_cast<double>(AnalysisRateHz);
+		const auto begin = static_cast<size_t>(fromSeconds * rate);
+		const auto want = static_cast<size_t>((toSeconds - fromSeconds) * rate);
+		if (begin >= built.size() || begin >= game.size())
+			return res;
+		const auto n = (std::min)({want, built.size() - begin, game.size() - begin});
+		const auto seconds = n / AnalysisRateHz;
+		if (!seconds)
+			return res;
+
+		const auto b = built.subspan(begin, n);
+		const auto g = game.subspan(begin, n);
+
+		auto sum = 0.;
+		auto worst = 0.;
+		for (size_t sec = 0; sec < seconds; ++sec) {
+			auto eb = 0., eg = 0.;
+			for (size_t i = sec * AnalysisRateHz; i < (sec + 1) * AnalysisRateHz; ++i) {
+				eb += static_cast<double>(b[i]) * b[i];
+				eg += static_cast<double>(g[i]) * g[i];
+			}
+			const auto d = 10. * std::log10(eb / AnalysisRateHz + 1e-12)
+				- 10. * std::log10(eg / AnalysisRateHz + 1e-12);
+			sum += d;
+			if (!sec || d < worst)
+				worst = d;
+		}
+		res.Level = sum / static_cast<double>(seconds);
+		res.Worst = worst;
+		if (const auto score = build_score(b, g); score.Valid)
+			res.Match = score.Weighted;
+		res.Valid = true;
+		return res;
+	}
+
+	// The first moment the game's own file is carrying something, so a probe does not try to
+	// align two silences. Judged against the file's own median so a quiet piece is not
+	// mistaken for a silent one.
+	double first_audible_second(std::span<const float> game) {
+		constexpr double StepSeconds = 0.25;
+		const auto step = static_cast<size_t>(StepSeconds * AnalysisRateHz);
+		if (!step || game.size() < step)
+			return 0.;
+		std::vector<double> level;
+		level.reserve(game.size() / step);
+		for (size_t i = 0; i + step <= game.size(); i += step) {
+			auto e = 0.;
+			for (size_t j = i; j < i + step; ++j)
+				e += static_cast<double>(game[j]) * game[j];
+			level.push_back(10. * std::log10(e / static_cast<double>(step) + 1e-12));
+		}
+		if (level.empty())
+			return 0.;
+		auto sorted = level;
+		std::sort(sorted.begin(), sorted.end());
+		const auto floorDb = sorted[sorted.size() / 2] - 20.;
+		for (size_t i = 0; i < level.size(); ++i)
+			if (level[i] >= floorDb)
+				return static_cast<double>(i) * StepSeconds;
+		return 0.;
+	}
+
+	lag_probe probe_lag(std::span<const float> built, std::span<const float> game,
+		double fromSeconds, double lengthSeconds, double maxLagMs) {
+
+		lag_probe res;
+		const auto rate = static_cast<double>(AnalysisRateHz);
+		const auto maxLag = static_cast<ptrdiff_t>(maxLagMs * rate / 1000.);
+		const auto begin = static_cast<ptrdiff_t>(fromSeconds * rate);
+		const auto n = static_cast<ptrdiff_t>(lengthSeconds * rate);
+		if (n < static_cast<ptrdiff_t>(AnalysisRateHz) || maxLag < 1)
+			return res;
+		// Room to shift the build either way without running off either end.
+		if (begin < maxLag
+			|| begin + n + maxLag > static_cast<ptrdiff_t>(built.size())
+			|| begin + n > static_cast<ptrdiff_t>(game.size()))
+			return res;
+
+		const auto g = game.subspan(static_cast<size_t>(begin), static_cast<size_t>(n));
+		auto gm = 0.;
+		for (const auto v : g)
+			gm += v;
+		gm /= static_cast<double>(n);
+		auto gd = 0.;
+		for (const auto v : g)
+			gd += (v - gm) * (v - gm);
+		gd = std::sqrt(gd);
+		if (gd <= 0.)
+			return res;   // silence on the game's side: nothing to align to
+
+		for (ptrdiff_t lag = -maxLag; lag <= maxLag; ++lag) {
+			const auto b = built.subspan(static_cast<size_t>(begin + lag), static_cast<size_t>(n));
+			auto bm = 0.;
+			for (const auto v : b)
+				bm += v;
+			bm /= static_cast<double>(n);
+			auto num = 0., bd = 0.;
+			for (ptrdiff_t i = 0; i < n; ++i) {
+				const auto x = static_cast<double>(b[i]) - bm;
+				const auto y = static_cast<double>(g[i]) - gm;
+				num += x * y;
+				bd += x * x;
+			}
+			if (bd <= 0.)
+				continue;
+			if (const auto c = num / (std::sqrt(bd) * gd); !res.Valid || c > res.Match) {
+				res.Match = c;
+				res.LagMs = static_cast<double>(lag) * 1000. / rate;
+				res.Valid = true;
+			}
+		}
+		return res;
+	}
+
 	struct row {
 		std::string Target;
 		double Weighted = 0., Plain = 0.;
@@ -90,6 +231,12 @@ namespace {
 		std::vector<silence_run> Silence;
 		seam_result Seam;
 		spectrum_comparison Spectrum;
+		// The seconds before the loop end, and a same-length control from mid-loop.
+		window_comparison Tail, Control;
+		// Where the build sits against the game's own file, at the head and at the loop
+		// start. The head is not what `apply` aligned on, so it is an independent check;
+		// the difference between the two is clock drift rather than a bad offset.
+		lag_probe Head, AtLoop;
 		std::string Error;
 	};
 
@@ -131,6 +278,20 @@ int cmd_verify(const std::vector<std::string>& args) {
 				"            correlations measure noise; read `dev` instead.\n"
 				"  silence   stretches the build is digitally silent and the game is not, reported\n"
 				"            against the loop end because silence past it is never played.\n"
+				"  tail      the last --tail-seconds before the loop end, against a control window\n"
+				"            of the same length from mid-loop. Everything else here averages over\n"
+				"            the file and cannot see five bad seconds in two hundred and ninety,\n"
+				"            which is exactly where a recording runs out or a loop-out takes over.\n"
+				"            Read the two together: a low tail *and* a low control is a recording\n"
+				"            that matches poorly throughout, while a low tail against a good\n"
+				"            control is something the build did at the loop end.\n"
+				"  head      how far the build sits from the game's own file at the start, in\n"
+				"            milliseconds, measured from where the game's file first carries\n"
+				"            something. A lag rather than a score, because a score cannot tell a\n"
+				"            different master from a misaligned one. `apply` fits its alignment\n"
+				"            around the loop start, so the head is an independent check; the same\n"
+				"            probe at the loop start is reported beside it, and the difference\n"
+				"            between the two is clock drift rather than a wrong offset.\n"
 				"  seam      whether the loop point clicks, judged from the built file alone. Above\n"
 				"            about 1 the seam is a bigger jump than anything happening near it.\n"
 				"\n"
@@ -148,6 +309,9 @@ int cmd_verify(const std::vector<std::string>& args) {
 		parser.add_argument("--worst").default_value(20u).scan<'u', uint32_t>().help("how many of the worst files to print (default: 20)");
 		parser.add_argument("--min-score").default_value(0.95).scan<'g', double>().help("call out files scoring below this");
 		parser.add_argument("--seam-threshold").default_value(1.0).scan<'g', double>().help("call out loop seams above this ratio");
+		parser.add_argument("--tail-seconds").default_value(10.0).scan<'g', double>().help("how long the window before the loop end is, in seconds (default: 10). Raise it past the longest crossfade in the presets being judged -- a crossfade has to sit inside the window that judges it");
+		parser.add_argument("--head-seconds").default_value(3.0).scan<'g', double>().help("how long the head window is, in seconds (default: 3), measured from the first moment the game's own file is carrying something");
+		parser.add_argument("--max-lag-ms").default_value(25.0).scan<'g', double>().help("how far either way the head and loop-start lag is searched, in milliseconds (default: 25)");
 		parser.parse_args(args);
 	} catch (const std::exception& e) {
 		std::cerr << "Error parsing arguments. Use `verify -h` to show help.\n" << e.what() << '\n';
@@ -165,6 +329,9 @@ int cmd_verify(const std::vector<std::string>& args) {
 		const auto seamThreshold = parser.get<double>("--seam-threshold");
 		const auto ffprobe = argactions::path(parser.get<std::string>("--ffprobe"));
 		const auto withSpectrum = parser.get<bool>("--spectrum");
+		const auto tailSeconds = parser.get<double>("--tail-seconds");
+		const auto headSeconds = parser.get<double>("--head-seconds");
+		const auto maxLagMs = parser.get<double>("--max-lag-ms");
 
 		std::vector<std::pair<std::filesystem::path, std::string>> pairs;
 		for (const auto& entry : std::filesystem::recursive_directory_iterator(builtDir)) {
@@ -227,6 +394,33 @@ int cmd_verify(const std::vector<std::string>& args) {
 					? static_cast<double>(builtLoop.EndSample) / static_cast<double>(builtLoop.Rate)
 					: 0.;
 				r.Silence = silence_gaps(ea, eb, loopEndSeconds);
+
+				// What the loop actually ends on, against a control from the middle of the
+				// same loop. Needs no extra decode -- both files are already here at the
+				// analysis rate. Skipped where the loop is too short to hold three windows,
+				// since the control would then overlap the tail and compare it with itself.
+				const auto loopStartSeconds = builtLoop.Rate
+					? static_cast<double>(builtLoop.StartSample) / static_cast<double>(builtLoop.Rate)
+					: 0.;
+				if (loopEndSeconds > 0. && builtLoop.Rate && tailSeconds > 0.
+					&& loopEndSeconds - loopStartSeconds >= 3. * tailSeconds) {
+					r.Tail = measure_window(a, b, loopEndSeconds - tailSeconds, loopEndSeconds);
+					const auto mid = (loopStartSeconds + loopEndSeconds) / 2.;
+					r.Control = measure_window(a, b, mid - tailSeconds / 2., mid + tailSeconds / 2.);
+				}
+
+				// Is the first sync right? Taken from where the game's file starts carrying
+				// something rather than from zero, because an entry that opens with silence
+				// or a fade-in would otherwise have two silences correlated against each
+				// other. The loop start gets the same probe: that *is* what `apply` aligned
+				// on, so the two together say whether a head error is a bad offset or drift.
+				if (headSeconds > 0. && maxLagMs > 0.) {
+					const auto audible = first_audible_second(b);
+					r.Head = probe_lag(a, b, (std::max)(audible, maxLagMs / 1000.),
+						headSeconds, maxLagMs);
+					if (loopStartSeconds > 0.)
+						r.AtLoop = probe_lag(a, b, loopStartSeconds, headSeconds, maxLagMs);
+				}
 
 				// At the file's own rate, not the analysis rate. A click is a single-sample
 				// discontinuity, and resampling to 16 kHz spreads it over its neighbours
@@ -300,6 +494,16 @@ int cmd_verify(const std::vector<std::string>& args) {
 							{"patchDb", r.Spectrum.PatchDb}, {"patchHz", r.Spectrum.PatchHz},
 							{"patchAtSeconds", r.Spectrum.PatchAtSeconds}, {"hfDb", r.Spectrum.HfDb}};
 				}
+					if (r.Tail.Valid)
+						one["tail"] = {{"level", r.Tail.Level}, {"worst", r.Tail.Worst},
+							{"match", r.Tail.Match}};
+					if (r.Control.Valid)
+						one["control"] = {{"level", r.Control.Level}, {"worst", r.Control.Worst},
+							{"match", r.Control.Match}};
+					if (r.Head.Valid)
+						one["head"] = {{"lagMs", r.Head.LagMs}, {"match", r.Head.Match}};
+					if (r.AtLoop.Valid)
+						one["atLoop"] = {{"lagMs", r.AtLoop.LagMs}, {"match", r.AtLoop.Match}};
 				out.push_back(std::move(one));
 			}
 			table = out.dump(1);
@@ -307,6 +511,8 @@ int cmd_verify(const std::vector<std::string>& args) {
 			table = "target,weighted,plain,built_seconds,game_seconds,r_eye,dev,span,hole,hole_at,silence_seconds,seam_ratio";
 			if (withSpectrum)
 				table += ",tilt_db_per_decade,worst_band_db,worst_band_hz,edge_built_hz,edge_game_hz,patch_db,patch_hz,hf_db";
+			table += ",tail_level,tail_worst,tail_match,ctrl_level,ctrl_worst,ctrl_match";
+			table += ",head_lag_ms,head_match,loop_lag_ms,loop_match";
 			table += ",error\n";
 			for (const auto& r : rows) {
 				table += std::format("{},{:.4f},{:.4f},{:.1f},{:.1f},", r.Target, r.Weighted, r.Plain,
@@ -328,6 +534,19 @@ int cmd_verify(const std::vector<std::string>& args) {
 						// every later column left by one and the error text lands under hf_db.
 						: ",,,,,,,,";
 				}
+				// A comma short in any of these shifts the error text left by a column.
+				table += r.Tail.Valid
+					? std::format(",{:.2f},{:.2f},{:.4f}", r.Tail.Level, r.Tail.Worst, r.Tail.Match)
+					: ",,,";
+				table += r.Control.Valid
+					? std::format(",{:.2f},{:.2f},{:.4f}", r.Control.Level, r.Control.Worst, r.Control.Match)
+					: ",,,";
+				table += r.Head.Valid
+					? std::format(",{:.2f},{:.4f}", r.Head.LagMs, r.Head.Match)
+					: ",,";
+				table += r.AtLoop.Valid
+					? std::format(",{:.2f},{:.4f}", r.AtLoop.LagMs, r.AtLoop.Match)
+					: ",,";
 				table += ',';
 				table += r.Error;
 				table += '\n';
@@ -395,6 +614,64 @@ int cmd_verify(const std::vector<std::string>& args) {
 				duller, brighter) << '\n';
 			if (worstHf)
 				std::cerr << std::format("   dullest {} at {:.1f} dB", worstHf->Target, worstHf->Spectrum.HfDb) << '\n';
+		}
+
+		// Where the loop ends worse than the middle of the same loop. The comparison is the
+		// point of the control window: a poor tail on its own usually means the recording is
+		// a poor match throughout, which is not something the build did to it.
+		{
+			std::vector<const row*> tailWorse;
+			for (const auto& r : rows) {
+				if (!r.Tail.Valid || !r.Control.Valid)
+					continue;
+				if (r.Tail.Match < r.Control.Match - 0.05 || r.Tail.Worst < r.Control.Worst - 4.)
+					tailWorse.push_back(&r);
+			}
+			if (!tailWorse.empty()) {
+				std::sort(tailWorse.begin(), tailWorse.end(), [](const row* x, const row* y) {
+					return (x->Tail.Match - x->Control.Match) < (y->Tail.Match - y->Control.Match);
+				});
+				std::cerr << std::format("{} file(s) end their loop worse than they run mid-loop; worst:",
+					tailWorse.size()) << '\n';
+				for (size_t i = 0; i < (std::min<size_t>)(tailWorse.size(), 8); ++i) {
+					const auto* r = tailWorse[i];
+					std::cerr << std::format("   {:<46} tail {:.3f} at {:+.1f} dB, mid-loop {:.3f} at {:+.1f} dB",
+						r->Target.size() > 46 ? r->Target.substr(r->Target.size() - 46) : r->Target,
+						r->Tail.Match, r->Tail.Worst, r->Control.Match, r->Control.Worst) << '\n';
+				}
+			}
+		}
+
+		// And where the head does not line up. Only counted where the probe found something
+		// to align to -- a confident match at a non-zero lag is a real offset error, while a
+		// low match at any lag is a recording that does not correspond there at all.
+		{
+			std::vector<const row*> offSync;
+			// 0.90, calibrated on the library rather than guessed: of 1915 probes 1610 reach
+			// it, and among those the lag is 0.00 ms at the median and 0.38 ms at the 90th
+			// percentile -- so a confident probe that still reads a millisecond out is
+			// saying something. Below about 0.70 the lag is not reliable at all, and a
+			// looser bar of 0.50 called out 96 entries whose real problem is that the
+			// recording does not correspond at the head, which the weighted score already
+			// reports.
+			for (const auto& r : rows)
+				if (r.Head.Valid && r.Head.Match >= 0.90 && std::abs(r.Head.LagMs) >= 1.0)
+					offSync.push_back(&r);
+			if (!offSync.empty()) {
+				std::sort(offSync.begin(), offSync.end(), [](const row* x, const row* y) {
+					return std::abs(x->Head.LagMs) > std::abs(y->Head.LagMs);
+				});
+				std::cerr << std::format("{} file(s) do not start in sync; worst:", offSync.size()) << '\n';
+				for (size_t i = 0; i < (std::min<size_t>)(offSync.size(), 8); ++i) {
+					const auto* r = offSync[i];
+					std::cerr << std::format("   {:<46} head {:+.2f} ms at {:.3f}{}",
+						r->Target.size() > 46 ? r->Target.substr(r->Target.size() - 46) : r->Target,
+						r->Head.LagMs, r->Head.Match,
+						r->AtLoop.Valid
+							? std::format(", loop start {:+.2f} ms", r->AtLoop.LagMs)
+							: "") << '\n';
+				}
+			}
 		}
 
 		if (worstCount && !sorted.empty()) {
