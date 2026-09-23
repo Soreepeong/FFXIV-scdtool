@@ -637,10 +637,11 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.41,
+        "offset": 0.410362,
         "pcmHash": "7f8f72a6"
        }
       },
+      "length": 101.2,
       "channels": [
        {
         "source": "source",
@@ -652,11 +653,34 @@
        }
       ],
       "sourceFilters": {
-       "source": "asplit[a][b];[b]adelay=7275742S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
+       "source": "aeval='val(ch)*exp(if(lt(t,12.42),0.3436,if(lt(t,12.52),0.3436+(0.1264)*(t-12.42)/0.1,if(lt(t,90.435),0.4700+(0.0242)*(t-12.52)/77.915,if(lt(t,90.685),0.4942+(0.0058)*(t-90.435)/0.25,if(lt(t,90.935),0.4999+(0.0253)*(t-90.685)/0.25,if(lt(t,91.185),0.5253+(0.0207)*(t-90.935)/0.25,if(lt(t,91.435),0.5460+(0.0000)*(t-91.185)/0.25,if(lt(t,91.685),0.5460+(0.0184)*(t-91.435)/0.25,if(lt(t,91.935),0.5644+(0.0000)*(t-91.685)/0.25,if(lt(t,92.185),0.5644+(0.0311)*(t-91.935)/0.25,if(lt(t,92.435),0.5955+(0.0265)*(t-92.185)/0.25,if(lt(t,92.685),0.6220+(0.0265)*(t-92.435)/0.25,if(lt(t,92.935),0.6485+(0.0161)*(t-92.685)/0.25,if(lt(t,93.185),0.6646+(0.0253)*(t-92.935)/0.25,if(lt(t,93.435),0.6899+(0.0610)*(t-93.185)/0.25,if(lt(t,93.685),0.7509+(0.0265)*(t-93.435)/0.25,if(lt(t,93.935),0.7774+(0.0196)*(t-93.685)/0.25,if(lt(t,94.185),0.7970+(0.0334)*(t-93.935)/0.25,if(lt(t,94.435),0.8304+(0.0345)*(t-94.185)/0.25,if(lt(t,94.685),0.8649+(0.0553)*(t-94.435)/0.25,if(lt(t,94.935),0.9202+(0.0691)*(t-94.685)/0.25,if(lt(t,95.185),0.9892+(0.0207)*(t-94.935)/0.25,if(lt(t,95.435),1.0100+(0.0484)*(t-95.185)/0.25,if(lt(t,95.685),1.0583+(0.0967)*(t-95.435)/0.25,if(lt(t,95.935),1.1550+(0.0449)*(t-95.685)/0.25,if(lt(t,96.185),1.1999+(0.0242)*(t-95.935)/0.25,if(lt(t,96.435),1.2241+(0.0345)*(t-96.185)/0.25,if(lt(t,96.685),1.2586+(0.1105)*(t-96.435)/0.25,if(lt(t,96.935),1.3692+(0.0530)*(t-96.685)/0.25,if(lt(t,97.185),1.4221+(0.0380)*(t-96.935)/0.25,if(lt(t,97.435),1.4601+(0.1163)*(t-97.185)/0.25,if(lt(t,97.685),1.5764+(0.0806)*(t-97.435)/0.25,if(lt(t,97.935),1.6570+(0.0668)*(t-97.685)/0.25,if(lt(t,98.185),1.7238+(0.1635)*(t-97.935)/0.25,if(lt(t,98.435),1.8872+(0.0760)*(t-98.185)/0.25,if(lt(t,98.685),1.9632+(0.1140)*(t-98.435)/0.25,if(lt(t,98.935),2.0772+(0.1117)*(t-98.685)/0.25,if(lt(t,99.185),2.1889+(0.1174)*(t-98.935)/0.25,if(lt(t,99.435),2.3063+(0.1612)*(t-99.185)/0.25,if(lt(t,99.685),2.4675+(0.1405)*(t-99.435)/0.25,if(lt(t,99.935),2.6080+(0.1589)*(t-99.685)/0.25,if(lt(t,100.185),2.7668+(0.1934)*(t-99.935)/0.25,if(lt(t,100.435),2.9602+(0.2383)*(t-100.185)/0.25,if(lt(t,100.685),3.1986+(0.1969)*(t-100.435)/0.25,if(lt(t,100.935),3.3954+(0.2544)*(t-100.685)/0.25,if(lt(t,101.185),3.6499+(0.2936)*(t-100.935)/0.25,if(lt(t,101.435),3.9435+(0.4582)*(t-101.185)/0.25,if(lt(t,101.685),4.4017+(0.3465)*(t-101.435)/0.25,if(lt(t,101.935),4.7482+(0.5699)*(t-101.685)/0.25,if(lt(t,102.185),5.3181+(0.6470)*(t-101.935)/0.25,if(lt(t,102.435),5.9651+(1.1294)*(t-102.185)/0.25,if(lt(t,102.91),7.0945+(0.0000)*(t-102.435)/0.475,if(lt(t,102.92),7.0945+(-20.9101)*(t-102.91)/0.01,-13.8155))))))))))))))))))))))))))))))))))))))))))))))))))))))':c=same,alimiter=limit=0.98:level=0:latency=1"
+      }
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 25.820884,
+        "pcmHash": "7f8f72a6"
+       }
+      },
+      "crossfadeSeconds": 1.0,
+      "crossfadeShape": "linear",
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,12.42),0.3436,if(lt(t,12.52),0.3436+(0.1264)*(t-12.42)/0.1,if(lt(t,90.435),0.4700+(0.0242)*(t-12.52)/77.915,if(lt(t,90.685),0.4942+(0.0058)*(t-90.435)/0.25,if(lt(t,90.935),0.4999+(0.0253)*(t-90.685)/0.25,if(lt(t,91.185),0.5253+(0.0207)*(t-90.935)/0.25,if(lt(t,91.435),0.5460+(0.0000)*(t-91.185)/0.25,if(lt(t,91.685),0.5460+(0.0184)*(t-91.435)/0.25,if(lt(t,91.935),0.5644+(0.0000)*(t-91.685)/0.25,if(lt(t,92.185),0.5644+(0.0311)*(t-91.935)/0.25,if(lt(t,92.435),0.5955+(0.0265)*(t-92.185)/0.25,if(lt(t,92.685),0.6220+(0.0265)*(t-92.435)/0.25,if(lt(t,92.935),0.6485+(0.0161)*(t-92.685)/0.25,if(lt(t,93.185),0.6646+(0.0253)*(t-92.935)/0.25,if(lt(t,93.435),0.6899+(0.0610)*(t-93.185)/0.25,if(lt(t,93.685),0.7509+(0.0265)*(t-93.435)/0.25,if(lt(t,93.935),0.7774+(0.0196)*(t-93.685)/0.25,if(lt(t,94.185),0.7970+(0.0334)*(t-93.935)/0.25,if(lt(t,94.435),0.8304+(0.0345)*(t-94.185)/0.25,if(lt(t,94.685),0.8649+(0.0553)*(t-94.435)/0.25,if(lt(t,94.935),0.9202+(0.0691)*(t-94.685)/0.25,if(lt(t,95.185),0.9892+(0.0207)*(t-94.935)/0.25,if(lt(t,95.435),1.0100+(0.0484)*(t-95.185)/0.25,if(lt(t,95.685),1.0583+(0.0967)*(t-95.435)/0.25,if(lt(t,95.935),1.1550+(0.0449)*(t-95.685)/0.25,if(lt(t,96.185),1.1999+(0.0242)*(t-95.935)/0.25,if(lt(t,96.435),1.2241+(0.0345)*(t-96.185)/0.25,if(lt(t,96.685),1.2586+(0.1105)*(t-96.435)/0.25,if(lt(t,96.935),1.3692+(0.0530)*(t-96.685)/0.25,if(lt(t,97.185),1.4221+(0.0380)*(t-96.935)/0.25,if(lt(t,97.435),1.4601+(0.1163)*(t-97.185)/0.25,if(lt(t,97.685),1.5764+(0.0806)*(t-97.435)/0.25,if(lt(t,97.935),1.6570+(0.0668)*(t-97.685)/0.25,if(lt(t,98.185),1.7238+(0.1635)*(t-97.935)/0.25,if(lt(t,98.435),1.8872+(0.0760)*(t-98.185)/0.25,if(lt(t,98.685),1.9632+(0.1140)*(t-98.435)/0.25,if(lt(t,98.935),2.0772+(0.1117)*(t-98.685)/0.25,if(lt(t,99.185),2.1889+(0.1174)*(t-98.935)/0.25,if(lt(t,99.435),2.3063+(0.1612)*(t-99.185)/0.25,if(lt(t,99.685),2.4675+(0.1405)*(t-99.435)/0.25,if(lt(t,99.935),2.6080+(0.1589)*(t-99.685)/0.25,if(lt(t,100.185),2.7668+(0.1934)*(t-99.935)/0.25,if(lt(t,100.435),2.9602+(0.2383)*(t-100.185)/0.25,if(lt(t,100.685),3.1986+(0.1969)*(t-100.435)/0.25,if(lt(t,100.935),3.3954+(0.2544)*(t-100.685)/0.25,if(lt(t,101.185),3.6499+(0.2936)*(t-100.935)/0.25,if(lt(t,101.435),3.9435+(0.4582)*(t-101.185)/0.25,if(lt(t,101.685),4.4017+(0.3465)*(t-101.435)/0.25,if(lt(t,101.935),4.7482+(0.5699)*(t-101.685)/0.25,if(lt(t,102.185),5.3181+(0.6470)*(t-101.935)/0.25,if(lt(t,102.435),5.9651+(1.1294)*(t-102.185)/0.25,if(lt(t,102.91),7.0945+(0.0000)*(t-102.435)/0.475,if(lt(t,102.92),7.0945+(-20.9101)*(t-102.91)/0.01,-13.8155))))))))))))))))))))))))))))))))))))))))))))))))))))))':c=same,alimiter=limit=0.98:level=0:latency=1"
       }
      }
     ],
-    "# comment": "Over the loop's end the game plays the recording's own ending and its opening one loop period (75.789s) later at once, summed rather than cut to (as the game does on BGM_ORCH_295 and BGM_EX5_Raid_24); the old layout cut to the opening at 99.90s. Now one segment, the recording mixed with itself delayed by exactly one period (7275742 samples at its own 96000 Hz), which also closes the loop wrap. BGM_Event_Bazaar weighted 0.9781 -> 0.9766, hole 18.9 -> 0.8 dB, tail 0.816 -> 0.983 against mid-loop 0.975; no joins left. The two-segment layout this replaced: the recording stops at 103.9s of this 110.5s target, and the uncovered tail is a repeat of material earlier in the same recording. Built as two segments with the seam pulled 4s back from where the recording runs out, so the first segment plays its own ending under the second rather than stopping dead at it -- which is what the game does, and measures better than joining at the end. Against the game's own file, at full length with the loop intact: 0.9783, against 0.9714 for a plain join. The short build scores 0.9821, but only because the measure compares the span the two files share -- it loses 6.6s of loop. Seam jump is well under the threshold for an audible click. `presets-manual/` accepts the shortfall instead; this keeps its source and finishes the tail."
+    "# comment": "Agent 24 (verify's join detector: 'arrangement differs from the game's at 78.1 s; level off +5.0 dB at 90.6 s'; whole-file level -6.62 dB). The game does not sum the recording with its own opening, as the previous layout (one segment, the recording mixed with itself one period later) assumed: least squares per 0.5 s put the delayed opening copy at gain ~0 until 98.5 s, and build vs game waveform correlation over 75-100 s was 0.80-0.95. The game plays the recording at one lag with the album's fade UNDONE (M11) -- the album fades its ending, which restates the opening exactly one internal repeat (75.78948 s) later, from about 90.5 s of recording time (-3.6 dB at 94.5, -15.4 at 99, -34.7 at 101.5, measured on the recording alone as restatement-minus-opening level) -- and moves to the opening copy only around 101-102.4 s (the game correlates with the ending's own material until ~101.9 s and with the opening's from ~101.4 s). The whole-file -6.6 dB was peak-limiting (apply: 'gain -2.7 dB, peak-limited from +3.5 dB'): the sum's peaks, and a game master ~4.1 dB hotter than the recording and limited to full scale. Now two segments with one filter string: an aeval gain in recording time that sets the game's level (+3.0 dB to 12.42 s, where the game steps up 0.9 dB, then +4.1 dB) and undoes the album's fade, muted past the last sample used, then alimiter=limit=0.98 (the game peaks at full scale); the switch at 101.2 s with a 1 s linear crossfade; offsets to the sample (0.410362 and 25.820884, i.e. rec - game = +0.410362 / -75.379116; the game's own wrap skips ~0.5 ms, which the build follows). Weighted 0.9766 -> 0.9952, hole 0.8 -> 0.5 dB, whole-file level -6.62 dB (90 % within 6.88) -> +0.12 dB (0.35), detector region clear (shape 0.457 -> 0.046); build vs game waveform correlation 0.97-0.998 through 70-101 s (was 0.80-0.99) and 0.89-0.98 over the last 9 s (was 0.37-0.82). tail 0.982 -> 0.986, now under its control (0.973 -> 0.996): the game's last ~8 s correlate only ~0.96 with the opening copy and 0.93-0.99 with the game's own head one loop back -- the same music in a different mix, not material no release has, so it stays on the recording. Earlier history: an old two-segment layout cut to the opening at 99.90 s; the first campaign made it a one-segment sum (0.9781 -> 0.9766)."
    }
   },
   {
@@ -1262,7 +1286,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.375,
+        "offset": 0.37736,
         "pcmHash": "24fd6dfc"
        }
       },
@@ -1281,7 +1305,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.375,
+        "offset": 0.374512,
         "pcmHash": "24fd6dfc"
        }
       },
@@ -1297,7 +1321,7 @@
       ]
      }
     ],
-    "# comment": "the game's file is 19.8s longer than this recording and ends by repeating itself: from 162.2s it replays the file from 0.0s (similarity 0.993, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 0.375s. Built and measured: whole file 0.995, across the seam 0.997, against a ceiling of 0.995 for this pairing."
+    "# comment": "the game's file is 19.8s longer than this recording and ends by repeating itself: from 162.2s it replays the file from 0.0s (similarity 0.993, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 0.375s. Built and measured: whole file 0.995, across the seam 0.997, against a ceiling of 0.995 for this pairing. Agent 24 (verify's join detector: 'copies 2.9 ms apart'): the game reads the recording at rec - game = +0.377360 up to the re-entry and at -161.865488 after it -- the two copies' own lags differ by 2.86 ms, while the build had both on the 10 ms-rounded 0.375 (its loop wrap jumped 2.8 ms: apply's loop seam 1.20). Offsets are now to the sample, 0.37736 and 0.374512. Weighted 0.9944 -> 0.9956, hole 0.6 -> 0.5 dB, tail 0.995 vs control 0.992 -> 0.995 vs 0.994, head 0.988 -> 0.990, loop seam 1.20 -> 0.07, copies 2.86 -> 0.01 ms apart. verify's at-loop reads 0.996 -> 0.988 only because its 16 kHz lag grid now lands between samples; build vs game waveform correlation at the loop start is 0.995-0.999 in both builds."
    }
   },
   {
@@ -1395,7 +1419,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.34,
+        "offset": 0.337962,
         "pcmHash": "225aad11"
        }
       },
@@ -1414,7 +1438,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.34,
+        "offset": 0.340816,
         "pcmHash": "225aad11"
        }
       },
@@ -1430,7 +1454,7 @@
       ]
      }
     ],
-    "# comment": "the game's file is 29.2s longer than this recording and ends by repeating itself: from 126.9s it replays the file from 0.0s (similarity 0.997, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 0.340s. Built and measured: whole file 0.995, across the seam 0.997, against a ceiling of 0.995 for this pairing."
+    "# comment": "the game's file is 29.2s longer than this recording and ends by repeating itself: from 126.9s it replays the file from 0.0s (similarity 0.997, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 0.340s. Built and measured: whole file 0.995, across the seam 0.997, against a ceiling of 0.995 for this pairing. Agent 24 (verify's join detector: 'copies 2.9 ms apart'): the game reads the recording at rec - game = -0.002038 + 0.34 up to the re-entry and at -126.519184 after it (the copies' own lags 2.85 ms apart); the build had both on the 10 ms-rounded 0.34. Offsets are now to the sample, 0.337962 and 0.340816. Weighted 0.9965 -> 0.9969, hole 3.0 -> 2.9 dB, tail 0.998 vs control 0.996 -> 0.998 vs 0.997, head/at-loop unchanged (0.993 / 0.991), loop seam 0.05 -> 0.01, copies 2.85 -> 0.00 ms apart."
    }
   },
   {
@@ -3722,13 +3746,13 @@
        }
       ],
       "sourceFilters": {
-       "source": "adelay=780:all=1"
+       "source": "adelay=74747S:all=1"
       },
-      "length": 426.38
+      "length": 425.85
      },
      {
       "sourceOffsets": {
-       "source": 1.575374
+       "source": 1.04535
       },
       "channels": [
        {
@@ -3740,13 +3764,13 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 0.5,
+      "crossfadeSeconds": 0.05,
       "sourceFilters": {
-       "source": "adelay=780:all=1"
+       "source": "adelay=74747S:all=1"
       }
      }
     ],
-    "# comment": "same recording as ENDWALKER_040.flac, which the matcher picked for this target (0.976 vs 0.987); listed here too so owning this album is enough to replace it. the game's file starts before this recording does, so the source is delayed rather than offset: source by 0.780s the recording runs out 2.8s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.08s (similarity 0.987 against 0.834 for the next-best placement, and the distance back is the game file's own loop period of 424.805s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 1.575s, seamed 0.50s early and crossfaded over that."
+    "# comment": "same recording as ENDWALKER_040.flac, which the matcher picked for this target (0.976 vs 0.987); listed here too so owning this album is enough to replace it. the game's file starts before this recording does, so the source is delayed rather than offset: source by 0.780s the recording runs out 2.8s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.08s (similarity 0.987 against 0.834 for the next-best placement, and the distance back is the game file's own loop period of 424.805s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 1.575s, seamed 0.50s early and crossfaded over that. Agent 24 (verify's join detector: 'arrangement differs from the game's at 426.4 s; level off -7.3 dB at 426.4 s'): the opening copy's attack sits at 425.95 s and the old 0.5 s crossfade from 426.38 s faded it in late (build 14.6 / 11.6 dB under the game at 426.0 / 426.25 s, waveform correlation 0.07 / 0.56). The game's copy of this recording's decay loses correlation with it from ~424.9 s at the same level (another release, ENDWALKER_040, still correlates 0.99 there, so this release has a different tail; kept, as it is level-matched), so the switch is now a hard one (0.05 s) at 425.85 s, just before the attack. The delay is now to the sample: the game reads the recording 1.385 ms later than adelay=780 ms put it (the whole build was 1.3 ms early), so adelay=74747S (at the recording's 96 kHz), and the opening copy at rec - game = -425.583265 (re-entry offset 1.04535 in the delayed timeline). Weighted 0.9724 -> 0.9732, hole 7.3 dB at 426.5 s -> 1.6 dB, join window 0.979 -> 0.982 (control 0.984), lag probes 1.31..1.38 ms -> -0.06..0, at-loop 0.956 -> 0.960, detector region clear (shape 0.275 -> 0.002); build vs game correlation 0.98 at 426.0-427.75 s."
    }
   },
   {
