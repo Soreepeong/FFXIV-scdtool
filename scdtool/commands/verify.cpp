@@ -105,6 +105,28 @@ namespace {
 		bool Valid = false;
 	};
 
+	// The same lag, probed at several points from the head to near the end. The head and
+	// loop-start probes cannot see an offset that is wrong only after a cut, or a recording
+	// that runs fast: a join campaign over 61 stitched targets found offsets 1-13 ms out on
+	// most of them, and recordings 7-13 ppm fast (3.7 ms by BGM_EX5_Raid_26's loop end),
+	// while every log-mel score read 0.98. The slope is the drift, the spread the offset.
+	struct lag_span {
+		size_t Probes = 0;         // confident probes (match >= 0.90) that went into it
+		double MinMs = 0., MaxMs = 0.;
+		double Ppm = 0.;           // lag against time: positive means the build falls behind
+		bool Valid = false;
+	};
+
+	// The build's level against the game's, per second over the seconds the game is
+	// audible. Neither the weighted score nor the envelope hole sees a whole-file level
+	// error: BGM_EX2_Field_Safe_01 built 3.7 dB quiet and every mono entry about 4 dB quiet
+	// while both read clean.
+	struct level_offset {
+		double MedianDb = 0.;      // build minus game
+		double P90AbsDb = 0.;      // 90th percentile of the per-second |difference|
+		bool Valid = false;
+	};
+
 	// Both files are decoded at the same rate and laid on the same timeline, so one pair of
 	// indices addresses the same music in each.
 	window_comparison measure_window(std::span<const float> built, std::span<const float> game,
@@ -228,6 +250,78 @@ namespace {
 				res.Valid = true;
 			}
 		}
+		return res;
+	}
+
+	lag_span probe_lag_span(std::span<const float> built, std::span<const float> game,
+		double fromSeconds, double toSeconds, double lengthSeconds, double maxLagMs) {
+
+		constexpr size_t Points = 7;
+		lag_span res;
+		if (toSeconds - fromSeconds < 2. * lengthSeconds)
+			return res;
+		std::vector<std::pair<double, double>> at;   // (seconds, lag ms)
+		for (size_t k = 0; k < Points; ++k) {
+			const auto t = fromSeconds + (toSeconds - fromSeconds - lengthSeconds) * static_cast<double>(k) / (Points - 1);
+			if (const auto p = probe_lag(built, game, t, lengthSeconds, maxLagMs); p.Valid && p.Match >= 0.90)
+				at.emplace_back(t + lengthSeconds / 2., p.LagMs);
+		}
+		if (at.size() < 2)
+			return res;
+		res.Probes = at.size();
+		res.MinMs = res.MaxMs = at.front().second;
+		auto st = 0., sl = 0.;
+		for (const auto& [t, l] : at) {
+			res.MinMs = (std::min)(res.MinMs, l);
+			res.MaxMs = (std::max)(res.MaxMs, l);
+			st += t;
+			sl += l;
+		}
+		st /= static_cast<double>(at.size());
+		sl /= static_cast<double>(at.size());
+		auto num = 0., den = 0.;
+		for (const auto& [t, l] : at) {
+			num += (t - st) * (l - sl);
+			den += (t - st) * (t - st);
+		}
+		// ms per second is thousandths; a thousandth of that is a millionth.
+		res.Ppm = den > 0. ? num / den * 1000. : 0.;
+		res.Valid = true;
+		return res;
+	}
+
+	level_offset measure_level(std::span<const float> built, std::span<const float> game) {
+		level_offset res;
+		const auto seconds = (std::min)(built.size(), game.size()) / AnalysisRateHz;
+		if (seconds < 2)
+			return res;
+		std::vector<double> gb(seconds), gg(seconds);
+		for (size_t sec = 0; sec < seconds; ++sec) {
+			auto eb = 0., eg = 0.;
+			for (size_t i = sec * AnalysisRateHz; i < (sec + 1) * AnalysisRateHz; ++i) {
+				eb += static_cast<double>(built[i]) * built[i];
+				eg += static_cast<double>(game[i]) * game[i];
+			}
+			gb[sec] = 10. * std::log10(eb / AnalysisRateHz + 1e-12);
+			gg[sec] = 10. * std::log10(eg / AnalysisRateHz + 1e-12);
+		}
+		auto sorted = gg;
+		std::ranges::sort(sorted);
+		const auto floorDb = sorted[sorted.size() / 2] - 20.;
+		std::vector<double> d;
+		for (size_t sec = 0; sec < seconds; ++sec)
+			if (gg[sec] >= floorDb)
+				d.push_back(gb[sec] - gg[sec]);
+		if (d.size() < 2)
+			return res;
+		auto m = d;
+		std::ranges::sort(m);
+		res.MedianDb = m[m.size() / 2];
+		for (auto& v : d)
+			v = std::abs(v);
+		std::ranges::sort(d);
+		res.P90AbsDb = d[(d.size() * 9) / 10 < d.size() ? (d.size() * 9) / 10 : d.size() - 1];
+		res.Valid = true;
 		return res;
 	}
 
@@ -468,6 +562,8 @@ namespace {
 		// start. The head is not what `apply` aligned on, so it is an independent check;
 		// the difference between the two is clock drift rather than a bad offset.
 		lag_probe Head, AtLoop;
+		lag_span Lags;
+		level_offset Level;
 		// Every place two segments meet, when --preset says where they are.
 		std::vector<join_comparison> Joins;
 		std::string Error;
@@ -670,7 +766,11 @@ int cmd_verify(const std::vector<std::string>& args) {
 						headSeconds, maxLagMs);
 					if (loopStartSeconds > 0.)
 						r.AtLoop = probe_lag(a, b, loopStartSeconds, headSeconds, maxLagMs);
+					const auto end = static_cast<double>((std::min)(a.size(), b.size())) / AnalysisRateHz;
+					r.Lags = probe_lag_span(a, b, (std::max)(audible, maxLagMs / 1000.),
+						end - maxLagMs / 1000., headSeconds, maxLagMs);
 				}
+				r.Level = measure_level(a, b);
 
 				// Every place two segments meet. The window is centred on the crossfade and
 				// always wide enough to hold it with a second to spare either side; the control
@@ -827,6 +927,11 @@ int cmd_verify(const std::vector<std::string>& args) {
 						one["head"] = {{"lagMs", r.Head.LagMs}, {"match", r.Head.Match}};
 					if (r.AtLoop.Valid)
 						one["atLoop"] = {{"lagMs", r.AtLoop.LagMs}, {"match", r.AtLoop.Match}};
+					if (r.Lags.Valid)
+						one["lags"] = {{"probes", r.Lags.Probes}, {"minMs", r.Lags.MinMs},
+							{"maxMs", r.Lags.MaxMs}, {"ppm", r.Lags.Ppm}};
+					if (r.Level.Valid)
+						one["level"] = {{"medianDb", r.Level.MedianDb}, {"p90AbsDb", r.Level.P90AbsDb}};
 					if (!r.Joins.empty()) {
 						auto joins = nlohmann::json::array();
 						for (const auto& j : r.Joins) {
@@ -861,6 +966,7 @@ int cmd_verify(const std::vector<std::string>& args) {
 				table += ",tilt_db_per_decade,worst_band_db,worst_band_hz,edge_built_hz,edge_game_hz,patch_db,patch_hz,hf_db";
 			table += ",tail_level,tail_worst,tail_match,ctrl_level,ctrl_worst,ctrl_match";
 			table += ",head_lag_ms,head_match,loop_lag_ms,loop_match";
+			table += ",lag_min_ms,lag_max_ms,lag_ppm,level_db,level_p90_db";
 			table += ",joins,joins_wrong,join_at,join_match,join_ctrl_match,join_before_db,join_after_db,join_seam,join_problem";
 			table += ",error\n";
 			for (const auto& r : rows) {
@@ -895,6 +1001,12 @@ int cmd_verify(const std::vector<std::string>& args) {
 					: ",,";
 				table += r.AtLoop.Valid
 					? std::format(",{:.2f},{:.4f}", r.AtLoop.LagMs, r.AtLoop.Match)
+					: ",,";
+				table += r.Lags.Valid
+					? std::format(",{:.2f},{:.2f},{:.1f}", r.Lags.MinMs, r.Lags.MaxMs, r.Lags.Ppm)
+					: ",,,";
+				table += r.Level.Valid
+					? std::format(",{:.2f},{:.2f}", r.Level.MedianDb, r.Level.P90AbsDb)
 					: ",,";
 				// The worst join only; every join is in the JSON.
 				{
@@ -1050,6 +1162,48 @@ int cmd_verify(const std::vector<std::string>& args) {
 						r->AtLoop.Valid
 							? std::format(", loop start {:+.2f} ms", r->AtLoop.LagMs)
 							: "") << '\n';
+				}
+			}
+
+			// Out of sync somewhere along the file, or drifting. The same 0.90 bar and 1 ms
+			// as the head; 5 ppm is where a drift reaches a millisecond within 200 s, and
+			// the recordings the join campaign had to resample ran 7-13 ppm.
+			std::vector<const row*> drifting;
+			for (const auto& r : rows)
+				if (r.Lags.Valid && ((std::max)(std::abs(r.Lags.MinMs), std::abs(r.Lags.MaxMs)) >= 1.0
+					|| std::abs(r.Lags.Ppm) >= 5.))
+					drifting.push_back(&r);
+			if (!drifting.empty()) {
+				std::ranges::sort(drifting, [](const row* x, const row* y) {
+					return (std::max)(std::abs(x->Lags.MinMs), std::abs(x->Lags.MaxMs))
+						> (std::max)(std::abs(y->Lags.MinMs), std::abs(y->Lags.MaxMs));
+				});
+				std::cerr << std::format("{} file(s) lose sync along the way; worst:", drifting.size()) << '\n';
+				for (size_t i = 0; i < (std::min<size_t>)(drifting.size(), 8); ++i) {
+					const auto* r = drifting[i];
+					std::cerr << std::format("   {:<46} lag {:+.2f} to {:+.2f} ms over {} probes, {:+.1f} ppm",
+						r->Target.size() > 46 ? r->Target.substr(r->Target.size() - 46) : r->Target,
+						r->Lags.MinMs, r->Lags.MaxMs, r->Lags.Probes, r->Lags.Ppm) << '\n';
+				}
+			}
+
+			// A whole-file level error. 3 dB rather than the 0.5-1 dB a listener can pick
+			// out side by side: entries whose game master peaks above the recording's
+			// headroom sit 1-2.5 dB under by design (apply does not clip), and are not news.
+			std::vector<const row*> offLevel;
+			for (const auto& r : rows)
+				if (r.Level.Valid && std::abs(r.Level.MedianDb) >= 3.)
+					offLevel.push_back(&r);
+			if (!offLevel.empty()) {
+				std::ranges::sort(offLevel, [](const row* x, const row* y) {
+					return std::abs(x->Level.MedianDb) > std::abs(y->Level.MedianDb);
+				});
+				std::cerr << std::format("{} file(s) sit 3 dB or more off the game's level; worst:", offLevel.size()) << '\n';
+				for (size_t i = 0; i < (std::min<size_t>)(offLevel.size(), 8); ++i) {
+					const auto* r = offLevel[i];
+					std::cerr << std::format("   {:<46} {:+.2f} dB (90% within {:.2f} dB)",
+						r->Target.size() > 46 ? r->Target.substr(r->Target.size() - 46) : r->Target,
+						r->Level.MedianDb, r->Level.P90AbsDb) << '\n';
 				}
 			}
 		}
