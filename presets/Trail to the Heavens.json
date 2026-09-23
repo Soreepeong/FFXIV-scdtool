@@ -860,26 +860,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 2.13,
-        "pcmHash": "9d192f84"
-       }
-      },
-      "length": 251.93,
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     },
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 109.705,
+        "offset": 2.130484,
         "pcmHash": "9d192f84"
        }
       },
@@ -893,10 +874,12 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 4.0
+      "sourceFilters": {
+       "source": "asplit=3[a][o][b];[a]aeval='val(ch)*(if(lt(t,259.48389),1,if(lt(t,259.56389),sqrt(1-(t-259.48389)/0.08000),0.0000)))':c=same[ae];[o]adelay=24709890S:all=1,aeval='val(ch)*(if(lt(t,259.88389),1,if(lt(t,259.98390),sqrt(1-0.64000*(t-259.88389)/0.10000),if(lt(t,260.43390),0.6000,if(lt(t,261.43392),0.6000*sqrt(1-(t-260.43390)/1.00001),0)))))':c=same[oe];[b]adelay=13857573S:all=1,aeval='val(ch)*(if(lt(t,259.88389),0,if(lt(t,259.98390),0.6000*sqrt((t-259.88389)/0.10000),if(lt(t,260.43390),0.6000,if(lt(t,261.43392),sqrt(0.36000+0.64000*(t-260.43390)/1.00001),1)))))':c=same[be];[ae][oe][be]amix=inputs=3:normalize=0,alimiter=limit=0.98:level=0:latency=1,aresample=76196,asetrate=76197"
+      }
      }
     ],
-    "# comment": "the game's file is 18.9s longer than this recording and ends by repeating itself: from 266.3s it replays the file from 122.0s (similarity 0.892). Built as two segments of the same recording, the second re-entering at 109.705s, which puts the loop's wrap on an exact repeat period of the piece -- measured on spectral flux, the two ends line up to 8 ms. The crossfade was 12s and outran the recording: TH_011 holds level to its own 259.0s (target 256.9s) and then falls off a cliff, so the last seven seconds of the fade had the second segment at 40-70% gain with nothing underneath, 5-7 dB below the game's own file. At 4s the fade ends at target 255.93s, a second inside the recording: worst point over the join -7.2 dB -> -5.3, mean -4.1 -> -2.5, envelope hole 5.3 -> 1.9."
+    "# comment": "The game plays TH_011 at one lag to 257.38s, then cuts from it to the recording's own opening and from that into the re-entry -- nothing in this loop end is missing from the recording. Mapped window by window on the waveform: game 0-257.35s is the recording at +2.1305s (drifting to +2.1338s: the recording runs 13.12 ppm fast); at 257.38s, where the album's ending falls off a cliff, the game drops it and plays the recording from its very first sample (its opening hit, the recording delayed 257.3947s); from 257.75s the re-entry (the recording delayed 144.3497s, rec 115.78s at game 258) comes in under it, both at about -4.4 dB (energy-matched to the game), and the opening fades out equal-power over 258.3-259.3s, leaving the re-entry to the loop end (waveform correlation 0.80-0.93 there). The old layout switched to the re-entry 5.4s early at 251.93s, 9 ms off its lag and without drift correction, and never had the opening hit. One segment now: the recording split three ways, two copies delayed in its own 96 kHz samples (24709890, 13857573), each through an aeval envelope, summed, an alimiter at 0.98 to hold the overlap's summed peaks (+0.7 dBFS; the game's own master peaks at full scale) so apply's gain stays at +0.0 dB rather than -0.8, then sped up 13.12 ppm (aresample=76196,asetrate=76197). Before -> after: weighted 0.8930 -> 0.9093, envelope hole 1.9 -> 1.9 dB, last 16s 0.859 -> 0.904 against mid-loop 0.926 -> 0.928, the join at 251.93 ('different material across the join', 0.649 vs 0.871) gone with no join left; waveform correlation over 254-257s ~0.1-0.6 -> 0.87-0.94 and over the 0.1s before the loop end 0.13 -> 0.90. The build still sits a constant 9 samples early (apply's single-source alignment moves it 18 of 96 kHz samples; the game's bass runs 0.3 ms behind its highs) and about 2 dB under the game, whose master is hotter than the recording's full scale."
    }
   },
   {
