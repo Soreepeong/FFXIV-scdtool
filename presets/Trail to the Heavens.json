@@ -895,26 +895,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 2.075,
-        "pcmHash": "9d192f84"
-       }
-      },
-      "length": 253.89,
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     },
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 111.615,
+        "offset": 2.071305,
         "pcmHash": "9d192f84"
        }
       },
@@ -928,10 +909,58 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 12.0
+      "sourceFilters": {
+       "source": "aresample=76418,asetrate=76419"
+      },
+      "length": 257.445
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.125018,
+        "pcmHash": "9d192f84"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "aresample=76418,asetrate=76419"
+      },
+      "length": 0.4
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 115.568491,
+        "pcmHash": "9d192f84"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "aresample=76418,asetrate=76419"
+      },
+      "crossfadeSeconds": 1.35,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "the game's file is 18.9s longer than this recording and ends by repeating itself: from 266.4s it replays the file from 122.0s (similarity 0.890, seam located by the recording's own end). Built as two segments of the same recording -- the match, then the same recording re-entered at 124.125s. The game built its loop-out by crossfading, so this does too: segment 1 keeps playing 12s past the seam at 253.890s, into the recording's own ending, while segment 2 fades in from 111.615s. Fitted over the target's own onsets (scratch/fit_loopout_crossfade.py): the join goes 0.725 hard-cut to 0.934, the whole file 0.904 to 0.903."
+    "# comment": "The game plays TH_011 at one lag to 257.445s, cuts hard to the recording's opening downbeat (the recording from 2.125s, the same hit the file opens on) and 0.4s later crossfades from it into the piece's second pass (the recording 142.2765s behind the game) over 257.845-259.195; it does not fade the recording's ending under a 12s crossfade as the old layout did (that read correlation 0.3-0.6 against the game over 257.5-262 and the join detector flagged 'arrangement differs at 256.9s', Arcadia02 also -3.8 dB at 258.6). Found model-free: per-window least squares of the game on the recording at each lag and a whole-recording search for the 257.3-259 stretch (scratch/_agent/20_trail_det). The recording also runs 13.09 ppm fast against the game (lag -3.26 ms at the head, +0.32 ms at 281s), so every segment reads it through aresample=76418,asetrate=76419, offsets in that timeline (constant to 0.005 ms). The h->b crossfade is linear: equal-power matched the game's level through the crossfade but its overlap peak pulled the whole file down 1.2-1.4 dB. Arcadia02 weighted 0.9028 -> 0.9074, hole 4.1 -> 2.5 dB, head 0.893 -> 0.907, lags -3.06..-1.19 ms -> 0, level -2.56 -> -2.44 dB; ORCH_783 0.8869 -> 0.8921, hole 3.4 -> 2.8, head 0.887 -> 0.901, level -2.61 -> -2.19 dB; tails unchanged (0.897 / 0.883, the recording's own mix); detector shape 0.18 / 0.25 -> 0.05, no flags; build-vs-game waveform correlation 257.5-262 0.3-0.8 -> 0.64-0.91, and 0.75-0.90 -> 0.92-0.95 before the join (the drift). Replaces: the recording into its ending, re-entered at 111.615s (Arcadia02) / 111.085s (ORCH_783) under a 12s crossfade from 253.89 / 253.36."
    }
   },
   {
@@ -947,26 +976,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 2.075,
-        "pcmHash": "9d192f84"
-       }
-      },
-      "length": 253.36,
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     },
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 111.085,
+        "offset": 2.071305,
         "pcmHash": "9d192f84"
        }
       },
@@ -980,10 +990,58 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 12.0
+      "sourceFilters": {
+       "source": "aresample=76418,asetrate=76419"
+      },
+      "length": 257.445
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.125018,
+        "pcmHash": "9d192f84"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "aresample=76418,asetrate=76419"
+      },
+      "length": 0.4
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 115.568491,
+        "pcmHash": "9d192f84"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "aresample=76418,asetrate=76419"
+      },
+      "crossfadeSeconds": 1.35,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "the game's file is 18.9s longer than this recording and ends by repeating itself: from 266.4s it replays the file from 122.0s (similarity 0.871, seam located by the recording's own end). Built as two segments of the same recording -- the match, then the same recording re-entered at 124.125s. The game built its loop-out by crossfading, so this does too: segment 1 keeps playing 12s past the seam at 253.360s, into the recording's own ending, while segment 2 fades in from 111.085s. Fitted over the target's own onsets (scratch/fit_loopout_crossfade.py): the join goes 0.710 hard-cut to 0.908, the whole file 0.888 to 0.888."
+    "# comment": "The game plays TH_011 at one lag to 257.445s, cuts hard to the recording's opening downbeat (the recording from 2.125s, the same hit the file opens on) and 0.4s later crossfades from it into the piece's second pass (the recording 142.2765s behind the game) over 257.845-259.195; it does not fade the recording's ending under a 12s crossfade as the old layout did (that read correlation 0.3-0.6 against the game over 257.5-262 and the join detector flagged 'arrangement differs at 256.9s', Arcadia02 also -3.8 dB at 258.6). Found model-free: per-window least squares of the game on the recording at each lag and a whole-recording search for the 257.3-259 stretch (scratch/_agent/20_trail_det). The recording also runs 13.09 ppm fast against the game (lag -3.26 ms at the head, +0.32 ms at 281s), so every segment reads it through aresample=76418,asetrate=76419, offsets in that timeline (constant to 0.005 ms). The h->b crossfade is linear: equal-power matched the game's level through the crossfade but its overlap peak pulled the whole file down 1.2-1.4 dB. Arcadia02 weighted 0.9028 -> 0.9074, hole 4.1 -> 2.5 dB, head 0.893 -> 0.907, lags -3.06..-1.19 ms -> 0, level -2.56 -> -2.44 dB; ORCH_783 0.8869 -> 0.8921, hole 3.4 -> 2.8, head 0.887 -> 0.901, level -2.61 -> -2.19 dB; tails unchanged (0.897 / 0.883, the recording's own mix); detector shape 0.18 / 0.25 -> 0.05, no flags; build-vs-game waveform correlation 257.5-262 0.3-0.8 -> 0.64-0.91, and 0.75-0.90 -> 0.92-0.95 before the join (the drift). Replaces: the recording into its ending, re-entered at 111.615s (Arcadia02) / 111.085s (ORCH_783) under a 12s crossfade from 253.89 / 253.36."
    }
   },
   {
@@ -3650,7 +3708,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.7226,
+        "offset": 1.722515,
         "pcmHash": "40c44821"
        }
       },
@@ -3665,11 +3723,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "asplit[a][b];[b]adelay=17647658S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
+       "source": "asplit[a][b];[b]adelay=17647889S:all=1[bd];[a][bd]amix=inputs=2:normalize=0,aresample=76377,asetrate=76378"
       }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.908. The recording is the game's file to the end: mapped window by window the game plays TH_053 at one constant lag (1.7226s at the head, drifting 2 ms to 1.7248s by 175s) until the recording's own ending dies away at game 183.5s; from 183.83s -- the game file's loop period of 183.830s after its start, to the sample -- the game replays its own opening (the recording from 1.72s) up to the loop end, and its level there is the recording's decay plus that opening, summed. The previous layout switched to the re-entry at 186.3s, 2.8s after the recording had already gone silent, so the build held a 2.8s hole (-46 dB against the game the second before the join, envelope hole 49.4 dB) and the join was flagged 'outgoing runs out before the join'. Now one segment whose filter sums the recording with itself delayed one loop period in the recording's own 96 kHz samples (17647658), which closes the loop wrap by construction; the offset is the head's lag, so the single-segment path aligns head and loop start to the sample (lag -2.4 ms -> 0) and the wrap now matches the game's own (waveform correlation over the 0.1s either side of it -0.03 -> 0.84). weighted 0.9229 -> 0.9252, envelope hole 49.4 -> 1.9 dB, last 10s 0.878 -> 0.954 against 0.920 mid-loop, at loop 0.892 -> 0.898, no join left to flag. A two-segment cut at 184.0s (0.06s crossfade) scored 0.9250 / 1.9 dB but kept the 2.4 ms wrap misalignment. The build stays 1.3 dB quieter than the game: the recording is mastered to full scale, so apply holds its +1.4 dB to +0.0; the game's file is a hotter master, and stating volume=+1.4dB matched the level but put 129k samples over full scale against the game's 3.5k, so it is not stated."
+    "# comment": "The recording runs 13.09 ppm fast against the game along the whole file (lag +1.7226s at the head, 1.7248s by 175s, linear to 0.003 ms), and the game's opening copy over the loop's end drifts with it, so the drift belongs to the SUM: the filter now ends in aresample=76377,asetrate=76378 after the amix, and the opening copy's delay is one game loop period in that timeline (17647889 samples at the recording's 96 kHz, 183.83218s before the time-scale). Before, copy A ran up to 2.3 ms off the game while the opening copy sat on it (join detector: 'copies 2.3 ms apart'). Now both within 0.01 ms, no flags; build-vs-game waveform correlation mid-file, typically 0.45 -> 0.86 (4 s windows; log-mel cannot see it); weighted 0.9252 -> 0.9257, hole 1.9 -> 2.0 dB, tail 0.959 against 0.926, head 0.525 -> 0.530. Level -1.34 -> -1.52 dB: the resampled render's intersample peaks hold apply's gain 0.2 dB lower (peak-limited). The drift sits after the amix rather than before the asplit because the join detector reads an adelay's samples at the recording's native rate and only time-scales post-amix delays. Earlier: spectral similarity to the game's own file: 0.908. The recording is the game's file to the end: mapped window by window the game plays TH_053 at one constant lag (1.7226s at the head, drifting 2 ms to 1.7248s by 175s) until the recording's own ending dies away at game 183.5s; from 183.83s -- the game file's loop period of 183.830s after its start, to the sample -- the game replays its own opening (the recording from 1.72s) up to the loop end, and its level there is the recording's decay plus that opening, summed. The previous layout switched to the re-entry at 186.3s, 2.8s after the recording had already gone silent, so the build held a 2.8s hole (-46 dB against the game the second before the join, envelope hole 49.4 dB) and the join was flagged 'outgoing runs out before the join'. Now one segment whose filter sums the recording with itself delayed one loop period in the recording's own 96 kHz samples (17647658), which closes the loop wrap by construction; the offset is the head's lag, so the single-segment path aligns head and loop start to the sample (lag -2.4 ms -> 0) and the wrap now matches the game's own (waveform correlation over the 0.1s either side of it -0.03 -> 0.84). weighted 0.9229 -> 0.9252, envelope hole 49.4 -> 1.9 dB, last 10s 0.878 -> 0.954 against 0.920 mid-loop, at loop 0.892 -> 0.898, no join left to flag. A two-segment cut at 184.0s (0.06s crossfade) scored 0.9250 / 1.9 dB but kept the 2.4 ms wrap misalignment. The build stays 1.3 dB quieter than the game: the recording is mastered to full scale, so apply holds its +1.4 dB to +0.0; the game's file is a hotter master, and stating volume=+1.4dB matched the level but put 129k samples over full scale against the game's 3.5k, so it is not stated."
    }
   },
   {
@@ -7370,11 +7428,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "asplit[a][b];[b]adelay=12085826S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
+       "source": "asplit[a][b];[a]afade=t=out:st=273.0883:d=3.0[af];[b]adelay=12086210S:all=1,afade=t=in:st=273.0883:d=3.0[bd];[af][bd]amix=inputs=2:normalize=0"
       }
      }
     ],
-    "# comment": "Over the loop's end the game plays the recording's own ending and its opening one loop period (274.055s) later at once, summed rather than cut to (as the game does on BGM_ORCH_295 and BGM_EX5_Raid_24); the old layout cut to the opening at 277.88s. Now one segment, the recording mixed with itself delayed by exactly one period (12085826 samples at its own 44100 Hz), which also closes the loop wrap. BGM_EX5_DD_07 weighted 0.9901 -> 0.9929, hole 21.5 -> 0.4 dB, tail 0.985 -> 0.987 against mid-loop 0.991; no joins left. The two-segment layout this replaced: spectral similarity to the game's own file: 0.992 the recording runs out 4.4s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 4.32s (similarity 0.995 against 0.909 for the next-best placement, and the distance back is the game file's own loop period of 274.055s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 4.815s, seamed 0.50s early and crossfaded over that."
+    "# comment": "Over the loop's end the game plays the recording's own ending and its opening at once (as on BGM_ORCH_295 and BGM_EX5_Raid_24), but the opening copy is NOT one loop period back: measured window by window it sits 274.063708s behind the first pass (12086210 samples at the recording's 44100 Hz), 384 samples (8.7 ms) more than the loop length -- so the game's own loop wrap skips 8.7 ms (its seam jump is 1.3-1.7x the local sample delta; the build's is now 1.6x, the old build's 0.05). And the game crossfades the two linearly over 272.1-275.1s (first pass out, opening in), rather than summing them at full. Now one segment: the recording with itself delayed 12086210S, each branch through afade (out / in, st=273.0883 in recording time, d=3). Before, the delay was the loop length (12085826S) and both at full: the build correlated 0.07-0.8 with the game over 274-290s and sat +4.7 dB hot at 273.8 (join detector: 'level off +4.7 dB at 273.8 s; copies 8.7 ms apart'). Now 0.98-0.997 there, no flags; weighted 0.9929 -> 0.9931, hole 0.4 -> 0.4 dB, tail 0.987 -> 0.994 against mid-loop 0.991, lags -8.69..0 ms -> 0. (Replaced before that: a two-segment layout cutting to the opening at 277.88s.)"
    }
   },
   {
@@ -8433,7 +8491,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.735,
+        "offset": 0.733672,
         "pcmHash": "cd7d597c"
        }
       },
@@ -8448,13 +8506,16 @@
        }
       ],
       "sourceFilters": {
-       "source": "volume=+3.4dB"
+       "source": "aresample=137137,asetrate=137138"
       },
-      "length": 118.24
+      "length": 114.728
      },
      {
       "sourceOffsets": {
-       "source": 6.077132
+       "source": {
+        "offset": 113.643493,
+        "pcmHash": "cd7d597c"
+       }
       },
       "channels": [
        {
@@ -8466,13 +8527,39 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 0.5,
       "sourceFilters": {
-       "source": "volume=+3.4dB"
-      }
+       "source": "aresample=137137,asetrate=137138"
+      },
+      "length": 1.802,
+      "crossfadeSeconds": 0.025,
+      "crossfadeShape": "linear"
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 4.365812,
+        "pcmHash": "cd7d597c"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "aresample=137137,asetrate=137138"
+      },
+      "crossfadeSeconds": 0.13,
+      "crossfadeShape": "linear",
+      "fadeInSeconds": 0
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.974 the recording runs out 1.0s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 5.84s (similarity 0.992 against 0.925 for the next-best placement, and the distance back is the game file's own loop period of 112.898s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 6.077s, seamed 0.50s early and crossfaded over that."
+    "# comment": "The game cuts twice near the end, both found model-free (per-window waveform correlation of the game against the recording at each lag, scratch/_agent/20_trail_det): it plays TH_128 at one lag to 114.73s, then jumps back 1.8187s in the recording (a bar) with a ~25 ms linear crossfade and plays that to 116.53s, then switches to its own opening one loop period back (112.898s), the incoming at full from its onset and the outgoing fading out linearly over 0.13s. Between 114.75 and 116.5 neither the old two-segment layout (recording into its ending, re-entry at 118.24) nor the one-segment sum played what the game plays (waveform correlation ~0, -0.2..0.5), which the join detector read as 'arrangement differs at 117.2/116.9s' and, on EoV_36, a -23.4 dB hole. Now three segments at the game's own lags; the recording also runs 7.29 ppm fast against the game (lag -1.32 ms at the head, -0.50 ms at 113s), so every segment reads it through aresample=137137,asetrate=137138 and offsets are in that timeline (constant to 0.01 ms); the last segment reads exactly one loop period behind the first, so the loop wrap is continuous. BGM_EX5_EoV_36 weighted 0.9845 -> 0.9952, hole 27.8 -> 1.0 dB, tail 0.908 -> 0.996 against mid-loop 0.995, lags -1.31..-0.63 ms -> 0; BGM_ORCH_881 0.9713 -> 0.9759, tail 0.940 -> 0.978 against 0.970, lags -0.06..+0.63 ms -> 0, level -2.0 -> -1.4 dB; detector shape 0.91 / 0.27 -> 0.002 / 0.006, no flags; build-vs-game waveform correlation over 114.75-116.5 ~0 -> 0.98-0.99. (Replaces: one segment summing the recording with itself delayed one period; before that, recording into its ending and a re-entry at 118.24.)"
    }
   },
   {
@@ -8486,7 +8573,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.735,
+        "offset": 0.733672,
         "pcmHash": "cd7d597c"
        }
       },
@@ -8501,11 +8588,60 @@
        }
       ],
       "sourceFilters": {
-       "source": "asplit[a][b];[b]adelay=4978797S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
-      }
+       "source": "aresample=137137,asetrate=137138"
+      },
+      "length": 114.728
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 113.643493,
+        "pcmHash": "cd7d597c"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "aresample=137137,asetrate=137138"
+      },
+      "length": 1.802,
+      "crossfadeSeconds": 0.025,
+      "crossfadeShape": "linear"
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 4.365812,
+        "pcmHash": "cd7d597c"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "aresample=137137,asetrate=137138"
+      },
+      "crossfadeSeconds": 0.13,
+      "crossfadeShape": "linear",
+      "fadeInSeconds": 0
      }
     ],
-    "# comment": "Over the loop's end the game plays the recording's own ending and its opening one loop period (112.898s) later at once, summed rather than cut to (as the game does on BGM_ORCH_295 and BGM_EX5_Raid_24); the old layout cut to the opening at 118.10s. Now one segment, the recording mixed with itself delayed by exactly one period (4978797 samples at its own 44100 Hz), which also closes the loop wrap. BGM_ORCH_881 weighted 0.9660 -> 0.9714, hole 22.2 -> 1.0 dB, tail 0.890 -> 0.937 against mid-loop 0.970; no joins left. The two-segment layout this replaced: spectral similarity to the game's own file: 0.954 the recording runs out 1.1s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 5.70s (similarity 0.980 against 0.919 for the next-best placement, and the distance back is the game file's own loop period of 112.898s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 5.937s, seamed 0.50s early and crossfaded over that."
+    "# comment": "The game cuts twice near the end, both found model-free (per-window waveform correlation of the game against the recording at each lag, scratch/_agent/20_trail_det): it plays TH_128 at one lag to 114.73s, then jumps back 1.8187s in the recording (a bar) with a ~25 ms linear crossfade and plays that to 116.53s, then switches to its own opening one loop period back (112.898s), the incoming at full from its onset and the outgoing fading out linearly over 0.13s. Between 114.75 and 116.5 neither the old two-segment layout (recording into its ending, re-entry at 118.24) nor the one-segment sum played what the game plays (waveform correlation ~0, -0.2..0.5), which the join detector read as 'arrangement differs at 117.2/116.9s' and, on EoV_36, a -23.4 dB hole. Now three segments at the game's own lags; the recording also runs 7.29 ppm fast against the game (lag -1.32 ms at the head, -0.50 ms at 113s), so every segment reads it through aresample=137137,asetrate=137138 and offsets are in that timeline (constant to 0.01 ms); the last segment reads exactly one loop period behind the first, so the loop wrap is continuous. BGM_EX5_EoV_36 weighted 0.9845 -> 0.9952, hole 27.8 -> 1.0 dB, tail 0.908 -> 0.996 against mid-loop 0.995, lags -1.31..-0.63 ms -> 0; BGM_ORCH_881 0.9713 -> 0.9759, tail 0.940 -> 0.978 against 0.970, lags -0.06..+0.63 ms -> 0, level -2.0 -> -1.4 dB; detector shape 0.91 / 0.27 -> 0.002 / 0.006, no flags; build-vs-game waveform correlation over 114.75-116.5 ~0 -> 0.98-0.99. (Replaces: one segment summing the recording with itself delayed one period; before that, recording into its ending and a re-entry at 118.24.)"
    }
   },
   {
