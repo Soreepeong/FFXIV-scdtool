@@ -591,7 +591,8 @@ namespace {
 		double startSeconds,
 		double durationSeconds,
 		size_t samplingRate,
-		const std::filesystem::path& rawPath) {
+		const std::filesystem::path& rawPath,
+		const std::wstring& filter = {}) {
 
 		std::error_code ec;
 		std::filesystem::remove(rawPath, ec);
@@ -601,10 +602,17 @@ namespace {
 		// measured here, and the error is invisible because both windows then agree with each
 		// other about a position that is wrong. Decoding from the start and discarding costs
 		// a second or two and is exact.
+		//
+		// Through the source's own filter when it has one, which is run from the top of the
+		// recording like the real decode: a preset's offsets count in the FILTERED timeline,
+		// so a filter that moves time -- a drift resample, an adelay -- would otherwise have
+		// the window read from the wrong place.
 		std::vector<std::wstring> args{
 			L"-v", L"error", L"-nostdin",
 			L"-i", source.wstring(),
 		};
+		if (!filter.empty())
+			args.insert(args.end(), {L"-af", filter});
 		if (startSeconds > 0)
 			args.insert(args.end(), {L"-ss", xivres::util::unicode::convert<std::wstring>(std::format("{:.6f}", startSeconds))});
 		args.insert(args.end(), {
@@ -637,7 +645,12 @@ namespace {
 		size_t samplingRate,
 		double aroundSeconds,
 		double coarseOffset,
-		const std::function<std::filesystem::path(const wchar_t*, const wchar_t*)>& tempFile) {
+		const std::function<std::filesystem::path(const wchar_t*, const wchar_t*)>& tempFile,
+		// The source's preset filter. The offset lives in the filtered timeline; correlated
+		// against the bare recording, a drift-corrected one-segment item was "corrected" by
+		// the drift accumulated to the loop start (BGM_ORCH_402: 38 samples, 0.4 ms), and an
+		// item with a long adelay fell under the correlation floor and was never aligned.
+		const std::wstring& sourceFilter = {}) {
 
 		constexpr double HalfWindowSeconds = 2.0;
 		constexpr double MaxShiftSeconds = 0.060;   // far past what the coarse search can be out by
@@ -656,7 +669,7 @@ namespace {
 			samplingRate, tempFile(L"scdtool_apply_align_t", L".f32"));
 		const auto candidate = decode_window_to_mono(ffmpeg, source, sourceFrom,
 			2 * HalfWindowSeconds + 2 * MaxShiftSeconds, samplingRate,
-			tempFile(L"scdtool_apply_align_s", L".f32"));
+			tempFile(L"scdtool_apply_align_s", L".f32"), sourceFilter);
 		if (target.size() < want || candidate.size() < want + 2 * shift)
 			return out;
 
@@ -2388,7 +2401,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 						static_cast<double>(templateLoopStart) / static_cast<double>(templateRate));
 					try {
 						aligned = refine_offset_to_samples(ffmpegPath, templateAudio, job.SourcePath,
-							samplingRate, around, effectiveOffset, tempFile);
+							samplingRate, around, effectiveOffset, tempFile, job.Filter);
 						// Unbounded, as it is for a matchset. A preset's offset is a millisecond-rounded
 						// record of a fit, not a ceiling on how far the truth can be from it, and holding
 						// the search to 5ms of it left 134 targets unaligned, two of them measurably worse
