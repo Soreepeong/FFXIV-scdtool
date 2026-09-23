@@ -4327,11 +4327,11 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.78,
+        "offset": 1.778835,
         "pcmHash": "8116c3e6"
        }
       },
-      "length": 319.8,
+      "length": 319.7905,
       "channels": [
        {
         "source": "source",
@@ -4346,10 +4346,12 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 143.83,
+        "offset": 143.816836,
         "pcmHash": "8116c3e6"
        }
       },
+      "crossfadeSeconds": 0.005,
+      "crossfadeShape": "linear",
       "channels": [
        {
         "source": "source",
@@ -4362,7 +4364,7 @@
       ]
      }
     ],
-    "# comment": "the game's file is 35.4s longer than this recording and ends by repeating itself: from 319.8s it replays the file from 142.1s (similarity 0.967, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 143.830s. Built and measured: whole file 0.978, across the seam 0.977, against a ceiling of 0.979 for this pairing."
+    "# comment": "the game reads this recording at lag 1.778835s up to 319.793s, then cuts one repeat period (177.752499s) back, lag -175.973664s, and plays to its loop end (the recording's next pass, so the loop wraps continuously). The old offsets were 1.2 ms and 3.7 ms off, so the hard cut at 319.8s clicked and the waveform correlation was 0.20 (negative after the cut). Now offsets to the sample and the switch where the game cuts, with a 5 ms linear crossfade (a 0s cut at the same place still reads as a click to verify). Measured against the game: weighted 0.9781 -> 0.9798, hole 0.8 -> 0.6 dB, tail 0.973 -> 0.982 (control 0.984), click flag cleared, waveform correlation 0.20 -> 0.956."
    }
   },
   {

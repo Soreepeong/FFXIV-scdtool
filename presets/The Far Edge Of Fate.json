@@ -98,10 +98,11 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.36,
+        "offset": 1.3564,
         "pcmHash": "0a826792"
        }
       },
+      "length": 19.59,
       "channels": [
        {
         "source": "source",
@@ -112,14 +113,20 @@
         "channel": 1
        }
       ],
-      "length": 18.5
+      "sourceFilters": {
+       "source": "aeval='val(ch)*if(lt(t,19.0364),0.7110,if(lt(t,22.7051),0.7110*exp(-2.1300*(t-19.0364)),1))':c=same"
+      }
      },
      {
       "sourceOffsets": {
        "source": {
-        "offset": 21.92
+        "offset": 23.00508,
+        "pcmHash": "0a826792"
        }
       },
+      "length": 108.53,
+      "crossfadeSeconds": 0.005,
+      "crossfadeShape": "linear",
       "channels": [
        {
         "source": "source",
@@ -129,10 +136,36 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "aeval='val(ch)*if(lt(t,19.0364),0.7110,if(lt(t,22.7051),0.7110*exp(-2.1300*(t-19.0364)),1))':c=same"
+      }
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 131.57819,
+        "pcmHash": "0a826792"
+       }
+      },
+      "crossfadeSeconds": 0.1,
+      "crossfadeShape": "linear",
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "aeval='val(ch)*if(lt(t,19.0364),0.7110,if(lt(t,22.7051),0.7110*exp(-2.1300*(t-19.0364)),1))':c=same"
+      }
      }
     ],
-    "# comment": "the game's roll is an edit of this recording, not a trim of it: up to ~16.5s the recording runs 1.360s ahead of the target, and from ~19s it runs 3.420s ahead -- about two seconds are dropped at a point where the target fades to -62 dBFS and comes back at -22.8 dB. So it is two segments joined in that silence at 18.5s; the seam's exact value hardly matters, 17.5/18.5/19.4 all measure within 0.0002. Built and measured against the game's own file: 0.921, no 10s window below 0.85. A single offset cannot do it -- 1.360 alone gives 0.490 because it breaks the body, 21.920 alone gives 0.894 and sounds trimmed at the start."
+    "# comment": "the game's roll is an edit of this recording in a different mix (mono waveform correlation 0.4-0.9, coherence low above 125 Hz), so ~0.92 is this pairing's ceiling. Up to 19.59s it reads the intro at lag 1.3564s, 3.0 dB quieter against the body than on the album, and fades it out from 17.68s at ~18.5 dB/s into near silence; the body attacks at 19.60s at lag 3.41508s. At 128.17s the game jumps 43 ms back onto a copy of its own opening (lag 3.45819s, the recording's next pass), which is what makes its loop wrap continuous; the old layout ran one lag to the end and left a 44 ms jump at the wrap, and cut hard at 18.5s from the unfaded intro (+4.0 dB before the join, 'clicks at the cut'). Built: the same aeval on every segment (0.711 gain, then exp(-2.13 t) from recording 19.036s, unity again from 22.7s, so all three share one level match), a 5 ms linear crossfade at 19.59s into the body and 0.1s linear at 128.17s onto the copy. Measured against the game: weighted 0.9209 -> 0.9233, hole 2.5 -> 2.1 dB, tail 0.908 -> 0.931 (control 0.900), click flag cleared (before-join level +4.0 -> -1.2 dB), loop seam 37.5 -> 0.5. head/atLoop stay ~0.5-0.6: the different mix, not an offset."
    }
   },
   {

@@ -1701,26 +1701,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 205.835,
-        "pcmHash": "d77fbf71"
-       }
-      },
-      "length": 203.29,
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     },
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 205.835,
+        "offset": 2.546356,
         "pcmHash": "d77fbf71"
        }
       },
@@ -1736,7 +1717,7 @@
       ]
      }
     ],
-    "# comment": "the game's file is 24.9s longer than this recording and ends by repeating itself: from 203.3s it replays the file from 0.0s (similarity 0.998, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 205.835s. Built and measured: whole file 0.999, across the seam 0.997, against a ceiling of 0.999 for this pairing."
+    "# comment": "the game plays this recording straight through at ONE lag, 2.546356s (waveform correlation 0.99+ from 0.5s to 240s, drift -0.1 ppm): the recording holds the piece twice, sample-identical, 203.289s apart, and the game's loop start and end sit exactly that far apart on its first pass, so it never cuts. The old layout read the second pass (205.835s) and re-entered it at the same offset at 203.29s -- a hard cut 0.9 ms off the repeat period that verify flagged as a click, with the offset ~1 ms off throughout (waveform correlation 0.34). Now one segment. Measured against the game: BGM_EX2_Field_G_Lake_Night weighted 0.9986 -> 0.9986, hole 0.3 -> 0.3 dB, head 0.976 -> 0.995, waveform correlation 0.34 -> 0.995; BGM_ORCH_294 0.9889 -> 0.9890, hole 0.5 -> 0.5 dB, head 0.973 -> 0.991, correlation 0.34 -> 0.992; no join left to click."
    }
   },
   {

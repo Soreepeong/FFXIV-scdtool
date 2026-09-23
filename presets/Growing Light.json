@@ -4285,11 +4285,11 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 35.67,
+        "offset": 35.672109,
         "pcmHash": "ea94d610"
        }
       },
-      "length": 75.3,
+      "length": 75.5375,
       "channels": [
        {
         "source": "source",
@@ -4299,16 +4299,21 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,2.250),0.6147,if(gte(t,110.750),0.2416,if(lt(t,45.750),if(lt(t,17.250),if(lt(t,9.750),if(lt(t,7.250),0.6147+-0.00874*(t-2.250),if(lt(t,8.750),0.5710+0.04038*(t-7.250),0.6316+-0.06852*(t-8.750))),if(lt(t,11.250),0.5631+-0.15548*(t-9.750),if(lt(t,15.750),0.3298+-0.01212*(t-11.250),0.2753+0.03709*(t-15.750)))),if(lt(t,36.250),if(lt(t,35.250),0.3309+-0.00118*(t-17.250),if(lt(t,35.750),0.3097+0.64040*(t-35.250),0.6299+0.27361*(t-35.750))),if(lt(t,36.750),0.7667+0.02977*(t-36.250),if(lt(t,45.250),0.7816+-0.00418*(t-36.750),0.7461+-0.11670*(t-45.250))))),if(lt(t,99.750),if(lt(t,81.750),if(lt(t,50.250),0.6877+0.01738*(t-45.750),if(lt(t,56.750),0.7660+-0.01135*(t-50.250),0.6922+-0.00237*(t-56.750))),if(lt(t,93.750),0.6330+-0.00167*(t-81.750),if(lt(t,97.250),0.6129+0.01396*(t-93.750),0.6617+-0.03383*(t-97.250)))),if(lt(t,107.250),if(lt(t,106.250),0.5772+0.00248*(t-99.750),if(lt(t,106.750),0.5933+-0.13325*(t-106.250),0.5267+-0.30652*(t-106.750))),if(lt(t,108.750),0.3734+-0.00801*(t-107.250),if(lt(t,109.750),0.3614+-0.16053*(t-108.750),0.2009+0.04071*(t-109.750)))))))))':c=same,alimiter=limit=1:level=0:latency=1"
+      }
      },
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.91,
+        "offset": 2.149858,
         "pcmHash": "ea94d610"
        }
       },
-      "length": 113.82,
+      "length": 109.059751,
+      "crossfadeSeconds": 0.005,
+      "crossfadeShape": "linear",
       "channels": [
        {
         "source": "source",
@@ -4318,10 +4323,36 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,2.250),0.6147,if(gte(t,110.750),0.2416,if(lt(t,45.750),if(lt(t,17.250),if(lt(t,9.750),if(lt(t,7.250),0.6147+-0.00874*(t-2.250),if(lt(t,8.750),0.5710+0.04038*(t-7.250),0.6316+-0.06852*(t-8.750))),if(lt(t,11.250),0.5631+-0.15548*(t-9.750),if(lt(t,15.750),0.3298+-0.01212*(t-11.250),0.2753+0.03709*(t-15.750)))),if(lt(t,36.250),if(lt(t,35.250),0.3309+-0.00118*(t-17.250),if(lt(t,35.750),0.3097+0.64040*(t-35.250),0.6299+0.27361*(t-35.750))),if(lt(t,36.750),0.7667+0.02977*(t-36.250),if(lt(t,45.250),0.7816+-0.00418*(t-36.750),0.7461+-0.11670*(t-45.250))))),if(lt(t,99.750),if(lt(t,81.750),if(lt(t,50.250),0.6877+0.01738*(t-45.750),if(lt(t,56.750),0.7660+-0.01135*(t-50.250),0.6922+-0.00237*(t-56.750))),if(lt(t,93.750),0.6330+-0.00167*(t-81.750),if(lt(t,97.250),0.6129+0.01396*(t-93.750),0.6617+-0.03383*(t-97.250)))),if(lt(t,107.250),if(lt(t,106.250),0.5772+0.00248*(t-99.750),if(lt(t,106.750),0.5933+-0.13325*(t-106.250),0.5267+-0.30652*(t-106.750))),if(lt(t,108.750),0.3734+-0.00801*(t-107.250),if(lt(t,109.750),0.3614+-0.16053*(t-108.750),0.2009+0.04071*(t-109.750)))))))))':c=same,alimiter=limit=1:level=0:latency=1"
+      }
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.149858,
+        "pcmHash": "ea94d610"
+       }
+      },
+      "crossfadeSeconds": 0.005,
+      "crossfadeShape": "linear",
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,2.250),0.6147,if(gte(t,110.750),0.2416,if(lt(t,45.750),if(lt(t,17.250),if(lt(t,9.750),if(lt(t,7.250),0.6147+-0.00874*(t-2.250),if(lt(t,8.750),0.5710+0.04038*(t-7.250),0.6316+-0.06852*(t-8.750))),if(lt(t,11.250),0.5631+-0.15548*(t-9.750),if(lt(t,15.750),0.3298+-0.01212*(t-11.250),0.2753+0.03709*(t-15.750)))),if(lt(t,36.250),if(lt(t,35.250),0.3309+-0.00118*(t-17.250),if(lt(t,35.750),0.3097+0.64040*(t-35.250),0.6299+0.27361*(t-35.750))),if(lt(t,36.750),0.7667+0.02977*(t-36.250),if(lt(t,45.250),0.7816+-0.00418*(t-36.750),0.7461+-0.11670*(t-45.250))))),if(lt(t,99.750),if(lt(t,81.750),if(lt(t,50.250),0.6877+0.01738*(t-45.750),if(lt(t,56.750),0.7660+-0.01135*(t-50.250),0.6922+-0.00237*(t-56.750))),if(lt(t,93.750),0.6330+-0.00167*(t-81.750),if(lt(t,97.250),0.6129+0.01396*(t-93.750),0.6617+-0.03383*(t-97.250)))),if(lt(t,107.250),if(lt(t,106.250),0.5772+0.00248*(t-99.750),if(lt(t,106.750),0.5933+-0.13325*(t-106.250),0.5267+-0.30652*(t-106.750))),if(lt(t,108.750),0.3734+-0.00801*(t-107.250),if(lt(t,109.750),0.3614+-0.16053*(t-108.750),0.2009+0.04071*(t-109.750)))))))))':c=same,alimiter=limit=1:level=0:latency=1"
+      }
      }
     ],
-    "# comment": "resolved from an ambiguous shortlist by spectral verification (similarity 0.993); the envelope matcher could not separate the candidates; spectral similarity to the game's own file: 0.993. Built and measured: whole file 0.993, across the seam 0.987, against a ceiling of 0.993 for this pairing."
+    "# comment": "the game is the recording's first pass (0 - 109.059751s) looped, cut sample-exactly: lag 35.672109s up to 75.54s, then the pass from its start (lag -73.387642s) for one loop period, then again (lag -182.447393s) to the loop end -- both cuts at the same place in the piece, where the recording's pass ends. The old switch at 75.3s re-entered 0.24s early, into the recording's leading silence (a click and a 4 dB drop), and read the last 4.5s from the recording's second pass (tail 0.856). The game is also a louder, limited master that rides the level +1 to +6.7 dB over the recording; the build sat ~5 dB under it, held by the recording's own peaks. So every segment carries one aeval envelope in recording time (0.5s least-squares gains, one correction round from a build, 25 knots) and alimiter at 0 dBFS; 5 ms linear crossfades at the two cuts. Measured against the game: weighted 0.9849 -> 0.9947, hole 2.1 -> 0.6 dB, tail 0.856 -> 0.991 (control 0.995), both joins clean, mean level error per second 5.0 -> 0.3 dB, waveform correlation 0.12 -> 0.995."
    }
   },
   {
