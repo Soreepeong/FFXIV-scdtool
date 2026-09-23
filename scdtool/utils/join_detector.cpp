@@ -434,9 +434,14 @@ namespace {
 		return s;
 	}
 
+	struct branch_copy {
+		double Seconds = 0.;      // delay in the rendered timeline
+		std::string Label;        // the asplit branch, or empty
+		std::string Render;       // the waveform chain this copy is read through
+	};
+
 	struct filter_copies {
-		std::string Render;
-		std::vector<std::pair<double, std::string>> Delays;   // (seconds in the rendered timeline, branch label)
+		std::vector<branch_copy> Delays;
 		std::vector<std::string> Notes;
 		std::string Unsupported;
 	};
@@ -445,7 +450,7 @@ namespace {
 	filter_copies copies_from_filter(const std::string& filter, double nativeRate) {
 		filter_copies res;
 		if (filter.empty()) {
-			res.Delays.emplace_back(0., "");
+			res.Delays.push_back({0., "", ""});
 			return res;
 		}
 		const auto chains = split_top(filter, ';');
@@ -461,8 +466,7 @@ namespace {
 					list += (list.empty() ? "" : "/") + d;
 				res.Notes.push_back("stripped " + list);
 			}
-			res.Render = join_tokens(keep);
-			res.Delays.emplace_back(0., "");
+			res.Delays.push_back({0., "", join_tokens(keep)});
 			return res;
 		}
 		if (filter.find("asplit") == std::string::npos) {
@@ -509,6 +513,7 @@ namespace {
 		}
 		// Follow each branch through its chains, adding up its adelays.
 		std::vector<std::pair<std::string, double>> delays;
+		std::map<std::string, std::vector<std::string>> branchOps;   // waveform ops on one branch only
 		std::map<std::string, std::string> rootOf;
 		for (const auto& b : splitOuts) {
 			delays.emplace_back(b, 0.);
@@ -533,10 +538,10 @@ namespace {
 						d += adelay_seconds(op.Args, splitRate);
 					} else if (!GainOps.contains(op.Op)) {
 						// A waveform filter on one branch only makes that branch a different
-						// waveform from the render every copy is read from, and the fit would
-						// then be judging the filter.
-						res.Unsupported = std::format("\"{}\" inside an asplit branch", op.Op);
-						return res;
+						// waveform from the others, so it is read through its own render --
+						// BGM_Ban_Leviathan1's bass-only branch (a firequalizer) is a copy of its
+						// own. The filter's latency comes with the render, as it does in the build.
+						branchOps[root].push_back(op.Token);
 					}
 				}
 				delay_of(root) = d;
@@ -545,14 +550,17 @@ namespace {
 			}
 		}
 		const auto sc = time_scale(post);
-		auto render = pre;
-		for (const auto& op : post)
-			if (!GainOps.contains(op.Op))
-				render.push_back(op.Token);
-		res.Render = join_tokens(render);
 		std::string list;
 		for (const auto& [b, d] : delays) {
-			res.Delays.emplace_back(d * sc, b);
+			auto render = pre;
+			if (const auto it = branchOps.find(b); it != branchOps.end()) {
+				render.insert(render.end(), it->second.begin(), it->second.end());
+				res.Notes.push_back(std::format("branch {} filtered: {}", b, join_tokens(it->second)));
+			}
+			for (const auto& op : post)
+				if (!GainOps.contains(op.Op))
+					render.push_back(op.Token);
+			res.Delays.push_back({d * sc, b, join_tokens(render)});
 			list += std::format("{}{:.4f}", list.empty() ? "" : ", ", d * sc);
 		}
 		res.Notes.push_back(std::format("asplit x{} delays {}", delays.size(), list));
@@ -1316,14 +1324,15 @@ detector_plan plan_copies(const std::vector<apply_segment>& segments, size_t gam
 			for (const auto& [n, ch] : seg.Channels)
 				if (n == name)
 					chmap.push_back(ch);
-			for (const auto& [d, label] : fc.Delays) {
+			for (const auto& bc : fc.Delays) {
+				const auto d = bc.Seconds;
 				detector_copy cp{
 					.Source = name,
 					.File = src.Path,
-					.Render = fc.Render,
+					.Render = bc.Render,
 					.C = src.Offset - st - d,
 					.ChannelMap = chmap,
-					.Label = label,
+					.Label = bc.Label,
 				};
 				if (!byKey.contains(cp.key())) {
 					byKey.emplace(cp.key(), plan.Copies.size());
