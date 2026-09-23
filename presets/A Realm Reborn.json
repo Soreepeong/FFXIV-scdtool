@@ -4054,15 +4054,12 @@
    ],
    "target": [
     {
-     "path": [
-      "music/ffxiv/BGM_Field_Uru_06.scd",
-      "music/ffxiv/Orchestrion/BGM_ORCH_129.scd"
-     ],
+     "path": "music/ffxiv/BGM_Field_Uru_06.scd",
      "segments": [
       {
        "sourceOffsets": {
         "source": {
-         "offset": 0.22,
+         "offset": 0.221905,
          "pcmHash": "82c860e0"
         }
        },
@@ -4075,12 +4072,23 @@
          "source": "source",
          "channel": 1
         }
-       ],
-       "length": 93.9
-      },
+       ]
+      }
+     ],
+     "# comment": "same recording as TH_068.flac, which the matcher picked for this target (0.946 vs 0.987); listed here too so owning this album is enough to replace it. This file does not loop: it is the recording read at one lag (0.221905s, no drift over the file) to the recording's own ending, so one segment. It used to share an entry with BGM_ORCH_129, whose re-entry at 93.9s put the recording's opening into the last 0.8s where this file is silent (build +5.0 dB over the game there, waveform corr 0.02; now -1.0 dB, 0.92). Scored: whole file 0.9969 -> 0.9974, envelope hole 0.9 -> 0.7 dB, head 1.9ms -> 0.0ms."
+    },
+    {
+     "path": "music/ffxiv/Orchestrion/BGM_ORCH_129.scd",
+     "segments": [
       {
        "sourceOffsets": {
-        "source": 2.120023
+        "source": {
+         "offset": 0.221905,
+         "pcmHash": "82c860e0"
+        }
+       },
+       "sourceFilters": {
+        "source": "asplit[a][b];[b]adelay=8832000S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
        },
        "channels": [
         {
@@ -4091,11 +4099,10 @@
          "source": "source",
          "channel": 1
         }
-       ],
-       "crossfadeSeconds": 0.5
+       ]
       }
      ],
-     "# comment": "same recording as TH_068.flac, which the matcher picked for this target (0.946 vs 0.987); listed here too so owning this album is enough to replace it the recording runs out 2.6s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.40s (similarity 0.989 against 0.908 for the next-best placement, and the distance back is the game file's own loop period of 92.000s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 2.120s, seamed 0.50s early and crossfaded over that."
+     "# comment": "the Orchestrion roll is a different edit from BGM_Field_Uru_06 (which does not loop): it loops 5.005-97.005s and from 91.778s the game SUMS the recording's opening, delayed by exactly its 92.000s loop period (lag to the sample), under the recording's own decaying ending (the tail stays in at gain 0.93, the same as the body, correlation of the residual with the tail 0.68 -> 0.12 as it dies by 93.5s). One segment reproduces that with the opening copy delayed 92s in the recording's native 96 kHz samples, which also closes the loop on itself. Before, a re-entry at 93.9s left the 2.1s after the recording ran out silent and the head sat 1.9ms late (offset 0.22 vs 0.221905). Scored: whole file 0.9829 -> 0.9882, envelope hole 35.8 -> 0.8 dB, tail 0.878 -> 0.987 (control 0.985), head/loop match 0.989/0.990 -> 0.995/0.995, join problem at 93.9 gone (there is no join); build vs game waveform corr 0.99 in every 5s window, level within +-0.5 dB, no drift."
     },
     {
      "path": "music/ex5/BGM_EX5_MKD_14.scd",
