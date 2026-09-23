@@ -1548,7 +1548,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 3.76,
+        "offset": 3.760253,
         "pcmHash": "c899b5e6"
        }
       },
@@ -1562,12 +1562,12 @@
         "channel": 1
        }
       ],
-      "length": 62.0
+      "length": 62.76
      },
      {
       "sourceOffsets": {
        "source": {
-        "offset": 67.46
+        "offset": 68.217026
        }
       },
       "channels": [
@@ -1580,10 +1580,10 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 0.5
+      "crossfadeSeconds": 0.03
      }
     ],
-    "# comment": "the game's roll edits this recording rather than trimming it: up to ~61s the recording runs 3.760s ahead of the target, from ~63s it runs 5.460s ahead, and every window is confident either side (0.97-0.98), so a single offset is wrong for one half whichever value it takes. The entry carried the body's alignment, so only the first 62s of 372s were off -- which is why it still measured 0.9557. Two segments joined at 62.0s with a half-second crossfade, the cut not being hidden in silence the way BGM_ORCH_025's is: 0.9785 against the game's own file. Seam and crossfade are both immaterial -- 61.5/62.0/62.5 and 0/0.5/1.5s all measure within 0.0002."
+    "# comment": "the game's roll edits this recording rather than trimming it: up to ~61s the recording runs 3.760s ahead of the target, from ~63s it runs 5.460s ahead, and every window is confident either side (0.97-0.98), so a single offset is wrong for one half whichever value it takes. The entry carried the body's alignment, so only the first 62s of 372s were off -- which is why it still measured 0.9557. Two segments joined at 62.0s with a half-second crossfade, the cut not being hidden in silence the way BGM_ORCH_025's is: 0.9785 against the game's own file. Seam and crossfade are both immaterial -- 61.5/62.0/62.5 and 0/0.5/1.5s all measure within 0.0002. Agent 29 (verify's join detector: 'copies 3.2 ms apart'): real. Lag maps: the game reads the recording at +0.253 ms off the first offset and -2.974 ms off the second, each flat to 0.003 ms (no drift) -- the 10 ms-rounded offsets. And the cut sits where the game makes it: SHADOWBRINGERS_37 plays on (decaying, correlation 0.99) until the second part's own attack at 62.80 s; the old switch at 62.0 s faded that decay away (build -44/-62 dB against the game's -38/-41 dB at 62.25-62.75 s). Now offsets 3.760253 and 5.457026 (+ segment start), the switch at 62.76 s with a 0.03 s crossfade, still in the silence before the attack. Weighted 0.9784 -> 0.9818, hole 6.8 dB at 62.7 -> 0.9 dB at 365.1, tail 0.984 -> 0.986 against control 0.984, lag probes -2.99..0.25 -> -0.01..0.01 ms, detector region clear (copies 3.22 -> 0.01 ms apart); build vs game correlation 0.36-0.81 -> 0.97-0.998 at 58-62.75 s, level within 0.3 dB there."
    }
   },
   {
@@ -2482,15 +2482,44 @@
     "望みなき競争 ～ラケティカ大森林：夜～"
    ],
    "target": {
-    "path": [
-     "music/ex3/BGM_EX3_Field_Rak_Night.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_350.scd"
-    ],
+    "path": "music/ex3/BGM_EX3_Field_Rak_Night.scd",
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 3.15,
+        "offset": 3.15141667,
+        "pcmHash": "d86c7248"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "spectral similarity to the game's own file: 0.997 the recording runs out 3.2s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 0.98s (similarity 0.985 against 0.907 for the next-best placement, and the distance back is the game file's own loop period of 214.222s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 3.628s, seamed 0.50s early and crossfaded over that. Agent 29: split from BGM_ORCH_350's item -- this file does not loop (215.52 s) and the game plays SHADOWBRINGERS_61 straight to its own decay (-60..-74 dB at 214.5-215.3 s, correlation 0.99 with the recording); the shared layout put the recording's head back in at 214.7 s at -18 dB, music the game does not play here (build vs game correlation 0.01 at 214.75-215.25 s). Now one segment at the exact lag 3.151417 (was 3.15): weighted 0.9982 -> 0.9983, lag probes 1.33..1.42 -> -0.09..0.00 ms, the decay matching the game at 0.99 to 215.0 s."
+   }
+  },
+  {
+   "source": [
+    "^00061\\.",
+    "SHADOWBRINGERS_61",
+    "A Hopeless Race",
+    "望みなき競争 ～ラケティカ大森林：夜～"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_350.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.15141667,
         "pcmHash": "d86c7248"
        }
       },
@@ -2504,11 +2533,13 @@
         "channel": 1
        }
       ],
-      "length": 214.7
+      "length": 214.35
      },
      {
       "sourceOffsets": {
-       "source": 3.627642
+       "source": {
+        "offset": 3.27907292
+       }
       },
       "channels": [
        {
@@ -2520,10 +2551,10 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 0.5
+      "crossfadeSeconds": 0.05
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.997 the recording runs out 3.2s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 0.98s (similarity 0.985 against 0.907 for the next-best placement, and the distance back is the game file's own loop period of 214.222s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 3.628s, seamed 0.50s early and crossfaded over that."
+    "# comment": "spectral similarity to the game's own file: 0.997 the recording runs out 3.2s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 0.98s (similarity 0.985 against 0.907 for the next-best placement, and the distance back is the game file's own loop period of 214.222s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 3.628s, seamed 0.50s early and crossfaded over that. Agent 29 (verify's join detector: 'arrangement differs from the game's at 214.7 s; level off -6.2 dB at 214.7 s'): real. This item used to list BGM_EX3_Field_Rak_Night too; the two are different edits (that one does not loop and the game plays only the recording's decay there), so it is now split, this entry keeping the loop-out. Model-free: the recording is silent (-57..-60 dB) from 214.0 s and the head copy's own attack is at 214.47 s, where the game plays it at full; the old second segment started only at 214.7 s (its crossfade runs 214.7-215.2 s), so it cut the attack and faded the next half second in (build -35.0 dB against the game's -19.7 dB at 214.5-214.75 s, correlation 0.71). Also the whole file ran 1.42 ms late (offset 3.15 against the game's exact lag 3.151417). Now: offset 3.151417 to 214.35 s (in the silence before the attack), 0.05 s crossfade, re-entry at the loop length back (both offsets whole 96 kHz samples, o1 - o2 + L = the build's loop length minus one sample, which is what apply needs for a continuous wrap: loop seam 0.34 -> 0.02). Weighted 0.9848 -> 0.9851, hole 6.7 dB at 214.9 -> 2.1 dB at 0.5, tail 0.973 -> 0.978 against control 0.989, lag probes 1.39..1.42 -> -0.03..0.00 ms, detector region clear (shape 0.170 -> 0.004, level -6.2 -> +0.2 dB); build vs game at 214.5-214.75 s: -19.8 dB, correlation 0.997."
    }
   },
   {
@@ -2641,7 +2672,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.725,
+        "offset": 1.72393572,
         "pcmHash": "26732188"
        }
       },
@@ -2655,11 +2686,16 @@
         "channel": 1
        }
       ],
-      "length": 244.911315
+      "length": 244.911315,
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,244.930),0,if(lt(t,245.080),0.00000+(0.07714)*(t-244.930)/0.150,if(lt(t,245.180),0.07714+(0.06793)*(t-245.080)/0.100,if(lt(t,245.280),0.14506+(0.07483)*(t-245.180)/0.100,if(lt(t,245.380),0.21990+(0.03684)*(t-245.280)/0.100,if(lt(t,245.480),0.25674+(0.10477)*(t-245.380)/0.100,if(lt(t,245.580),0.36151+(0.11283)*(t-245.480)/0.100,if(lt(t,245.680),0.47433+(0.10131)*(t-245.580)/0.100,if(lt(t,245.780),0.57565+(0.08865)*(t-245.680)/0.100,if(lt(t,245.880),0.66430+(0.13931)*(t-245.780)/0.100,if(lt(t,245.980),0.80360+(0.13585)*(t-245.880)/0.100,if(lt(t,246.080),0.93945+(0.19227)*(t-245.980)/0.100,if(lt(t,246.180),1.13172+(0.21069)*(t-246.080)/0.100,if(lt(t,246.280),1.34241+(0.21529)*(t-246.180)/0.100,if(lt(t,246.380),1.55770+(0.29588)*(t-246.280)/0.100,if(lt(t,246.480),1.85358+(0.35690)*(t-246.380)/0.100,if(lt(t,246.800),2.21048,-30))))))))))))))))))':c=same,aresample=80632,asetrate=80633"
+      }
      },
      {
       "sourceOffsets": {
-       "source": 1.725
+       "source": {
+        "offset": 1.72394364
+       }
       },
       "channels": [
        {
@@ -2671,10 +2707,13 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 0.048685
+      "crossfadeSeconds": 0.048685,
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,244.930),0,if(lt(t,245.080),0.00000+(0.07714)*(t-244.930)/0.150,if(lt(t,245.180),0.07714+(0.06793)*(t-245.080)/0.100,if(lt(t,245.280),0.14506+(0.07483)*(t-245.180)/0.100,if(lt(t,245.380),0.21990+(0.03684)*(t-245.280)/0.100,if(lt(t,245.480),0.25674+(0.10477)*(t-245.380)/0.100,if(lt(t,245.580),0.36151+(0.11283)*(t-245.480)/0.100,if(lt(t,245.680),0.47433+(0.10131)*(t-245.580)/0.100,if(lt(t,245.780),0.57565+(0.08865)*(t-245.680)/0.100,if(lt(t,245.880),0.66430+(0.13931)*(t-245.780)/0.100,if(lt(t,245.980),0.80360+(0.13585)*(t-245.880)/0.100,if(lt(t,246.080),0.93945+(0.19227)*(t-245.980)/0.100,if(lt(t,246.180),1.13172+(0.21069)*(t-246.080)/0.100,if(lt(t,246.280),1.34241+(0.21529)*(t-246.180)/0.100,if(lt(t,246.380),1.55770+(0.29588)*(t-246.280)/0.100,if(lt(t,246.480),1.85358+(0.35690)*(t-246.380)/0.100,if(lt(t,246.800),2.21048,-30))))))))))))))))))':c=same,aresample=80632,asetrate=80633"
+      }
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.995 the recording runs out 2.4s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 0.05s (similarity 0.976 against 0.918 for the next-best placement, and the distance back is the game file's own loop period of 244.911s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 1.725s, seamed 0.05s early and crossfaded over that."
+    "# comment": "spectral similarity to the game's own file: 0.995 the recording runs out 2.4s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 0.05s (similarity 0.976 against 0.918 for the next-best placement, and the distance back is the game file's own loop period of 244.911s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 1.725s, seamed 0.05s early and crossfaded over that. Agent 29 (verify's join detector on BGM_ORCH_348: 'level off -6.3 dB at 244.2 s; copies 3.0 ms apart'): both real, and both shared by BGM_EX3_Field_Ama_Night (the same edit up to its end at 244.90 s, so the item stays whole). Model-free: SHADOWBRINGERS_64 runs 12.40 ppm slow against the game (lag -1.04 ms at 0 s to +1.94 ms at 241 s, rms residual 0.01 ms), so the body and the head copy re-entered at the loop point ended 3 ms apart; and the album fades its last 1.7 s (243.2-244.9 s game time) while the game does not -- game over recording rises smoothly 0 -> +19 dB over it, correlation 0.99 throughout (M11), leaving the build 7 dB under the game at 244.0-244.5 s. Now both segments carry the same filter: an aeval gain that undoes the fade (exp of a piecewise-linear fit of the measured per-0.1 s ratio, in recording time, muted after 246.8 s), then aresample=80632,asetrate=80633 (12.40 ppm); offsets in the filtered timeline, 1.723936 and the loop-consistent re-entry. ORCH_348: weighted 0.9751 -> 0.9751, hole 8.8 dB at 244.3 -> 0.4 dB, tail 0.953 against control 0.977 (unchanged), lag probes -1.05..1.50 -> -0.06..-0.01 ms, loop seam 0.46 -> 0.05, detector region clear (level -6.3 -> +0.4 dB, copies 2.96 -> 0.04 ms apart); build vs game at 236-244.75 s: correlation -0.07..-0.69 -> 0.99, level within 0.3 dB. Field_Ama_Night: weighted 0.9963 -> 0.9963, hole 8.5 dB at 244.3 -> 0.3 dB, lag probes -1.05..1.86 -> -0.11..-0.01 ms."
    }
   },
   {
@@ -3121,7 +3160,7 @@
      {
       "sourceOffsets": {
        "SHADOWBRINGERS_74": {
-        "offset": 1.412,
+        "offset": 1.410599,
         "pcmHash": "376271a7"
        }
       },
@@ -3135,7 +3174,10 @@
         "source": "SHADOWBRINGERS_74",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "SHADOWBRINGERS_74": "aresample=81573,asetrate=81574"
+      }
      },
      {
       "sourceOffsets": {
@@ -3160,7 +3202,7 @@
      {
       "sourceOffsets": {
        "SHADOWBRINGERS_81": {
-        "offset": 0.25,
+        "offset": 0.247846,
         "pcmHash": "d7670573"
        }
       },
@@ -3175,7 +3217,10 @@
         "source": "SHADOWBRINGERS_81",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "SHADOWBRINGERS_81": "aresample=78524,asetrate=78525"
+      }
      },
      {
       "sourceOffsets": {
@@ -3239,7 +3284,7 @@
      {
       "sourceOffsets": {
        "SHADOWBRINGERS_81": {
-        "offset": 95.91,
+        "offset": 95.907846,
         "pcmHash": "d7670573"
        }
       },
@@ -3256,7 +3301,10 @@
         "source": "SHADOWBRINGERS_81",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "SHADOWBRINGERS_81": "aresample=78524,asetrate=78525"
+      }
      },
      {
       "sourceOffsets": {
@@ -3281,7 +3329,7 @@
       ]
      }
     ],
-    "# comment": "credits roll: a medley of 6 pieces. SHADOWBRINGERS_74 from 0s, SHADOWBRINGERS_76 from 233.3s, SHADOWBRINGERS_81 from 427.9s, SHADOWBRINGERS_53 from 523.56s, SHADOWBRINGERS_52 from 783.0s, SHADOWBRINGERS_39 from 1036.98s. SHADOWBRINGERS_52 plays its piece twice and the game uses the FIRST pass (lag -781.3066 s, waveform correlation 0.99 to 1033s); the old layout read the second pass (offset 255.31), whose fade-out ending left the build 37.6 dB under the game in the second before 1036.98 ('outgoing runs out before the join', envelope hole 47.6 dB). At 523.56 and 783.0 the game does not crossfade: the incoming piece starts at full level on its own attack while the outgoing one keeps playing underneath and fades out linearly over 5 s (band-power fit of game minus incoming against the outgoing: 0 dB, -3.6, -7.1, -11, -20 dB a second apart); each join is a plain switch (the incoming recording is silent up to its attack) plus a layered segment (startSeconds) carrying the outgoing recording on, full level then fadeOutSeconds 5.0 to 528.76 / 788.6. The 74->76 switch is where the game lets 74 go (233.3s, 1.2 s crossfade, not 232.23 with 3 s). Every offset is the sample-level lag from waveform correlation against the game (74 and 81 drift ~12 ppm against the game; 74's offset is the mid-segment value, correcting the drift with asetrate gained nothing). Measured against the game's own file: weighted 0.9829 -> 0.9866, envelope hole 47.6 dB at 1036.5 -> 3.5 dB at 432.7, tail 0.996 vs control 0.996 (unchanged), atLoop 0.941 -> 0.948; joins: 1036.98 flag cleared (window 0.983 -> 0.994 vs control 0.997, before -37.6 -> -0.6 dB), 523.56 0.891 -> 0.939 (control 0.921), 783.0 0.967 -> 0.995 (control 0.995), 233.3 0.940 -> 0.945 (control 0.945), 427.9 unchanged 0.972. Left: 427.9-433 is 2-3 dB off in places because the game's SHADOWBRINGERS_81 is a different mix (waveform correlation only 0.6-0.8 against it, 0.99 for the others); SHADOWBRINGERS_52's gain is held at +1.1 dB of +1.7 by its own peak, so that segment reads 0.6 dB quiet."
+    "# comment": "credits roll: a medley of 6 pieces. SHADOWBRINGERS_74 from 0s, SHADOWBRINGERS_76 from 233.3s, SHADOWBRINGERS_81 from 427.9s, SHADOWBRINGERS_53 from 523.56s, SHADOWBRINGERS_52 from 783.0s, SHADOWBRINGERS_39 from 1036.98s. SHADOWBRINGERS_52 plays its piece twice and the game uses the FIRST pass (lag -781.3066 s, waveform correlation 0.99 to 1033s); the old layout read the second pass (offset 255.31), whose fade-out ending left the build 37.6 dB under the game in the second before 1036.98 ('outgoing runs out before the join', envelope hole 47.6 dB). At 523.56 and 783.0 the game does not crossfade: the incoming piece starts at full level on its own attack while the outgoing one keeps playing underneath and fades out linearly over 5 s (band-power fit of game minus incoming against the outgoing: 0 dB, -3.6, -7.1, -11, -20 dB a second apart); each join is a plain switch (the incoming recording is silent up to its attack) plus a layered segment (startSeconds) carrying the outgoing recording on, full level then fadeOutSeconds 5.0 to 528.76 / 788.6. The 74->76 switch is where the game lets 74 go (233.3s, 1.2 s crossfade, not 232.23 with 3 s). Every offset is the sample-level lag from waveform correlation against the game (74 and 81 drift ~12 ppm against the game; 74's offset is the mid-segment value, correcting the drift with asetrate gained nothing). Measured against the game's own file: weighted 0.9829 -> 0.9866, envelope hole 47.6 dB at 1036.5 -> 3.5 dB at 432.7, tail 0.996 vs control 0.996 (unchanged), atLoop 0.941 -> 0.948; joins: 1036.98 flag cleared (window 0.983 -> 0.994 vs control 0.997, before -37.6 -> -0.6 dB), 523.56 0.891 -> 0.939 (control 0.921), 783.0 0.967 -> 0.995 (control 0.995), 233.3 0.940 -> 0.945 (control 0.945), 427.9 unchanged 0.972. Left: 427.9-433 is 2-3 dB off in places because the game's SHADOWBRINGERS_81 is a different mix (waveform correlation only 0.6-0.8 against it, 0.99 for the others); SHADOWBRINGERS_52's gain is held at +1.1 dB of +1.7 by its own peak, so that segment reads 0.6 dB quiet. Agent 29 (verify's join detector: 'copies 2.2 ms apart' at 427.9 s): real. Lag maps: SHADOWBRINGERS_81 runs 12.74 ppm against the game (-2.14 ms at 431 s to -0.96 ms at 523 s, rms residual 0.006 ms) and offset 0.25 was not its mid-segment value, so it entered 2.1 ms early; SHADOWBRINGERS_74 likewise runs 12.26 ppm (-1.37 ms at 0 s to +1.34 ms at 222 s), which left the 233.3 s join 1.46 ms out of step. Both now drift-corrected on all their segments (aresample=78524,asetrate=78525 and aresample=81573,asetrate=81574) with offsets in the filtered timeline (81: 0.247846 and 95.907846; 74: 1.410599). Weighted 0.9866 -> 0.9867, hole 3.5 -> 3.4 dB at 432.7, tail 0.996 against control 0.996 (unchanged), joins clean, lag probes -1.38..0.81 -> -0.03..0.81 ms, level -0.05 dB (unchanged); detector regions: 427.9 s copies 2.18 -> 0.03 ms apart (flag cleared), 233.3 s 1.46 -> 0.02, 523.56 s 0.94 -> 0.01. Build vs game waveform correlation over 74's span -0.26..0.63 -> 0.88-0.99; over 81's 0 -> 0.40-0.88 (81 is a different mix: its best lag correlates only ~0.85 with the game)."
    }
   },
   {

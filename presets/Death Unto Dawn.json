@@ -473,7 +473,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.585,
+        "offset": 1.58334375,
         "pcmHash": "bbdcaa09"
        }
       },
@@ -487,11 +487,13 @@
         "channel": 1
        }
       ],
-      "length": 56.86
+      "length": 56.6
      },
      {
       "sourceOffsets": {
-       "source": 1.779921
+       "source": {
+        "offset": 1.51827083
+       }
       },
       "channels": [
        {
@@ -503,10 +505,10 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 0.5
+      "crossfadeSeconds": 0.04
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.894 the recording runs out 3.5s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 0.69s (similarity 0.984 against 0.756 for the next-best placement, and the distance back is the game file's own loop period of 56.665s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 1.780s, seamed 0.50s early and crossfaded over that."
+    "# comment": "spectral similarity to the game's own file: 0.894 the recording runs out 3.5s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 0.69s (similarity 0.984 against 0.756 for the next-best placement, and the distance back is the game file's own loop period of 56.665s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 1.780s, seamed 0.50s early and crossfaded over that. Agent 29 (verify's join detector: 'level off -7.9 dB at 56.9 s'): real. The game's end is its own head copied at the loop length -- the attack at 0.0 s recurs at 56.665 s -- but the second segment started at 56.86 s and faded in over 56.86-57.36 s, so the build cut the attack (build -60.5 dB against the game's -35.7 dB at 56.5-56.75 s, correlation 0.08). Both offsets were also 1.66 ms off the game's lag (flat, no drift). Now offset 1.583344 to 56.60 s (the recording at -56 dB, the head copy still silent), 0.04 s crossfade, re-entry one loop length back, whole 96 kHz samples (loop seam 0.46 -> 0.01). Weighted 0.9623 -> 0.9630, hole 7.8 -> 1.5 dB at 56.7, tail 0.954 -> 0.956 against control 0.967, head 0.812 -> 0.813, detector region clear (level -7.9 -> -1.0 dB); build vs game at 56.5-56.75 s: -38.6 dB, correlation 0.99. Whole-file level checked: median +0.05 dB (unchanged), p90 0.67 -> 0.62 dB, apply's gain -4.9 dB as before. The rest of the file correlates only ~0.85 with the recording in every band at one common lag (a different mix, not an allpass phase -- M12 does not apply)."
    }
   },
   {
@@ -2096,7 +2098,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 22.21941
+        "offset": 22.21593
        }
       },
       "channels": [
@@ -2109,10 +2111,30 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 0.06
+      "crossfadeSeconds": 0.06,
+      "length": 10.04
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 32.25941
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.2,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "the game's file is not the album track played straight through: it opens on the album's own intro (album 2.968s) and cuts to album 60.496s at 28.74s, and at 403.26s it cuts back to album 22.219s and plays that through to the loop end, which lands exactly on the loop start's album 86.417s. The old build read album 31.76s from the top, so its first 28.7s were the wrong music about 9dB too loud (head match 0.05), and it stayed on the album until 423.6s, playing 20s of the album's ending where the game has already cut back -- the last 5s of that fade to silence under a 4s crossfade (-69dB before the join, envelope hole 66.7dB). Three segments now follow the game's own two cuts, each found by searching the recording for the game's audio either side and timed to 10ms by waveform correlation, with 60ms equal-power crossfades; the base offset is refined 31.76 -> 31.75594, which removes the 4ms lag the whole file had. Against the game's own file: weighted 0.8761 -> 0.9200, envelope hole 66.7 -> 2.1dB, head match 0.05 -> 0.36, both joins clean (0.913 and 0.874 against controls 0.932 and 0.924, within 0.7dB either side), tail 0.807 -> 0.862 against mid-loop 0.974 -- the rest of that gap is the album's mix of this passage, which matches the game's pre-loop copy of it no better (0.867). The game also shifts 3.5ms at 413.3s inside the re-entry; reproducing that with a fourth segment is exact in waveform but apply's per-segment loudness match measures from the top of each file and set that 10s segment 4dB loud, so it is left out."
+    "# comment": "the game's file is not the album track played straight through: it opens on the album's own intro (album 2.968s) and cuts to album 60.496s at 28.74s, and at 403.26s it cuts back to album 22.219s and plays that through to the loop end, which lands exactly on the loop start's album 86.417s. The old build read album 31.76s from the top, so its first 28.7s were the wrong music about 9dB too loud (head match 0.05), and it stayed on the album until 423.6s, playing 20s of the album's ending where the game has already cut back -- the last 5s of that fade to silence under a 4s crossfade (-69dB before the join, envelope hole 66.7dB). Three segments now follow the game's own two cuts, each found by searching the recording for the game's audio either side and timed to 10ms by waveform correlation, with 60ms equal-power crossfades; the base offset is refined 31.76 -> 31.75594, which removes the 4ms lag the whole file had. Against the game's own file: weighted 0.8761 -> 0.9200, envelope hole 66.7 -> 2.1dB, head match 0.05 -> 0.36, both joins clean (0.913 and 0.874 against controls 0.932 and 0.924, within 0.7dB either side), tail 0.807 -> 0.862 against mid-loop 0.974 -- the rest of that gap is the album's mix of this passage, which matches the game's pre-loop copy of it no better (0.867). The game also shifts 3.5ms at 413.3s inside the re-entry; reproducing that with a fourth segment is exact in waveform but apply's per-segment loudness match measures from the top of each file and set that 10s segment 4dB loud, so it is left out. Agent 29 (the first detector pass flagged 'copies 2.4 ms apart' at 403.26 s; the current build no longer flags it): real all the same. Lag map of the re-entry: the game reads it at -3.48 ms from 403.26 to 413.3 s, then at -0.02 ms to the loop end (the 3.5 ms shift noted above); build vs game correlation over 403-413 s was -0.5..0.3. apply now gives a recording one gain across its segments, so the fourth segment works: the re-entry at offset 22.21593 to 413.30 s, then 32.25941 (the old lag, which closes the loop wrap) with a 0.2 s linear crossfade where the game's two copies trade places (413.30-413.50 s). Correlation over 403-413 s -> 0.55-0.95; weighted 0.9200 -> 0.9200, hole 2.1 dB (unchanged), tail 0.863 against 0.974 (unchanged), joins clean (403.26: 0.874 -> 0.875, 413.3: 0.948), loop seam 0.10 (unchanged), region shape 0.133 -> 0.073, copies 0.02 ms apart."
    }
   },
   {
