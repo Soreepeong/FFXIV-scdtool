@@ -2582,6 +2582,88 @@
    }
   },
   {
+   "source": {
+    "BTF_55": [
+     "^00054\\.",
+     "BTF_FFXIV_55"
+    ],
+    "BTF_56": [
+     "^00055\\.",
+     "BTF_FFXIV_56",
+     "The Reach of Darkness",
+     "最後の死闘 ～新生～"
+    ]
+   },
+   "target": {
+    "path": "music/ffxiv/BGM_Ride_CT71.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "BTF_55": {
+        "offset": 1.6226,
+        "driftPpm": 12.4
+       }
+      },
+      "length": 30.8,
+      "channels": [
+       {
+        "source": "BTF_55",
+        "channel": 0
+       },
+       {
+        "source": "BTF_55",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "BTF_56": {
+        "offset": 1.3463,
+        "pcmHash": "188ec7b7",
+        "driftPpm": 12.4
+       }
+      },
+      "crossfadeSeconds": 0.0,
+      "fadeInSeconds": 0.0,
+      "channels": [
+       {
+        "source": "BTF_56",
+        "channel": 0
+       },
+       {
+        "source": "BTF_56",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "BTF_55": {
+        "offset": 32.4226,
+        "driftPpm": 12.4
+       }
+      },
+      "startSeconds": 30.8,
+      "length": 4.2,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "channels": [
+       {
+        "source": "BTF_55",
+        "channel": 0
+       },
+       {
+        "source": "BTF_55",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "user: BTF 55 + BTF 56. The game sums the two at full level: BTF_55 from its onset (lag +1.6226), and BTF_56 placed so its own onset lands at 30.9 s (lag -29.4537) while BTF_55's ending rings on to 34.8 s (least squares over 30-35 s: gains 1.0/1.0, fit 0.97-0.98). So BTF_55 plays to 30.8 (BTF_56 is still digital silence there), BTF_56 from 30.8 to the end, and BTF_55's tail is a layered segment over 30.8-35.0. The game's loop (36.68-159.16, 122.48 s) is BTF_56's own repeat period. Both run 12.4 ppm slow against the game (driftPpm). Verified: weighted 0.9958, head 0.993, loop 0.991, lag -0.46..-0.06 ms, level -0.5 dB, joins clean."
+   }
+  },
+  {
    "source": [
     "^00056\\.",
     "BTF_FFXIV_57",
