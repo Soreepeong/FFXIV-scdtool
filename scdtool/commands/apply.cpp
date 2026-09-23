@@ -1161,19 +1161,31 @@ namespace {
 			// end of its recording, and a peak past the loop end -- which nobody hears -- held
 			// BGM_Event_Tanoshii1's re-entry at -5.9 dB under a filter that lifts late material.
 			const auto heard = targetEnd > segmentStart[i] ? (std::min)(render, targetEnd - segmentStart[i]) : render;
+			//
+			// The peak of what this recording puts on each output channel, through the
+			// routing -- not of its raw channels: on a mono entry the fold of a decorrelated
+			// stereo recording peaks lower than either channel (BGM_ORCH_899: 2.16 against
+			// 2.64, a 1.7 dB tighter hold than needed).
 			for (auto& [name, g] : gain) {
 				if (g <= 1.)
 					continue;
+				const auto from = start.at(name);
 				float peak = 0.f;
-				for (const auto& [key, samples] : decoded) {
-					if (key.first != name)
+				for (size_t ch = 0; ch < channels; ch++) {
+					std::vector<std::pair<const std::vector<float>*, float>> inputs;
+					for (const auto& [key, weight] : routing[ch])
+						if (key.first == name)
+							inputs.emplace_back(&decoded.at(key), weight);
+					if (inputs.empty())
 						continue;
-					const auto from = start.at(name);
-					const auto first = static_cast<size_t>((std::max)(ptrdiff_t{0}, from));
-					const auto last = static_cast<size_t>((std::clamp)(from + static_cast<ptrdiff_t>(heard),
-						ptrdiff_t{0}, static_cast<ptrdiff_t>(samples.size())));
-					for (auto n = first; n < last; n++)
-						peak = (std::max)(peak, std::abs(samples[n]));
+					for (size_t n = 0; n < heard; n++) {
+						const auto at = from + static_cast<ptrdiff_t>(n);
+						float v = 0.f;
+						for (const auto& [samples, weight] : inputs)
+							if (at >= 0 && at < static_cast<ptrdiff_t>(samples->size()))
+								v += weight * (*samples)[static_cast<size_t>(at)];
+						peak = (std::max)(peak, std::abs(v));
+					}
 				}
 				if (peak > 0.f && g * peak > 1.) {
 					g = 1. / peak;
@@ -1214,7 +1226,10 @@ namespace {
 
 		// Summed ramps cannot clip on their own, but two segments of the same loud master
 		// overlapping can, and the encoder would fold the peaks over rather than refuse.
-		if (const auto peak = out.empty() ? 0.f : std::abs(*std::ranges::max_element(out,
+		// Judged only where the target runs: an unbounded last segment renders on to the
+		// end of its recording, and a peak out there cost BGM_ORCH_899 4.1 dB everywhere.
+		const auto heardEnd = (std::min)(out.size(), targetEnd < out.size() / channels ? targetEnd * channels : out.size());
+		if (const auto peak = heardEnd == 0 ? 0.f : std::abs(*std::ranges::max_element(out.begin(), out.begin() + static_cast<ptrdiff_t>(heardEnd),
 			[](float a, float b) { return std::abs(a) < std::abs(b); })); peak > 1.f) {
 			for (auto& v : out)
 				v /= peak;
