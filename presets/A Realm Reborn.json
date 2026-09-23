@@ -416,7 +416,7 @@
    ],
    "target": {
     "path": "music/ffxiv/Orchestrion/BGM_ORCH_057.scd",
-    "# comment": "the recording covers 394.5s of this target and the uncovered tail repeats material from earlier in it (matching at 0.989), so a second segment re-enters there, with the seam pulled 2s back so the first segment plays its ending under the second. Full length with the loop intact: 0.9846 against the game's own file, where the short build this replaces scored 0.9845 while losing the rest of the loop.",
+    "# comment": "Over the loop's end the game plays the recording's own ending at full gain (least squares 1.00 to 393.1 s, then silent) and its opening one loop period (391.4677 s) later at full gain from 391.7 s: a sum, not a crossfade. The old layout crossfaded 2.49 s from 392.01 s to a re-entry at 0.5 s, 42.3 ms away from the loop period (the wrap formula gives 0.5423), so the opening copy correlated ~0 with the game's and the loop wrap was 42 ms out (verify's join detector: 'level off -3.6 dB at 393.5 s; copies 42.3 ms apart'). Now one segment, the recording mixed with itself delayed by exactly the loop period (37580900 samples at its own 96000 Hz; the game's two copies are 2 samples at 96 kHz off that), which closes the loop wrap. Weighted 0.9846 -> 0.9859, hole 5.1 -> 0.4 dB, tail 0.944 -> 0.990 (control 0.984), at-loop match 0.975 -> 0.988, detector flags cleared (level -0.1 dB, copies 0.03 ms apart). The layout this replaced: the recording covers 394.5s of this target and the uncovered tail repeats material from earlier in it (matching at 0.989), so a second segment re-enters there.",
     "segments": [
      {
       "sourceOffsets": {
@@ -434,25 +434,9 @@
         "channel": 1
        }
       ],
-      "length": 392.01
-     },
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.5
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "crossfadeSeconds": 2.49
+      "sourceFilters": {
+       "source": "asplit[a][b];[b]adelay=37580900S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
+      }
      }
     ]
    }
@@ -1232,50 +1216,76 @@
     "Saltswept",
     "潮風香る街"
    ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Field_Lim_07.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_130.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.18,
-        "pcmHash": "5fc31d55"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
+   "target": [
+    {
+     "path": "music/ffxiv/BGM_Field_Lim_07.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 0.18,
+         "pcmHash": "5fc31d55"
+        }
        },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "length": 108.32
-     },
-     {
-      "sourceOffsets": {
-       "source": 1.614785
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ],
+       "length": 108.32
       },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
+      {
+       "sourceOffsets": {
+        "source": 1.614785
        },
-       {
-        "source": "source",
-        "channel": 1
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ],
+       "crossfadeSeconds": 0.5
+      }
+     ],
+     "# comment": "spectral similarity to the game's own file: 0.995. This file does not loop: the game plays the recording at one lag to its end. Split from BGM_ORCH_130 (agent 22) with its layout unchanged: the second segment only fills the last 0.8 s at about -50 dB (where the recording fades to silence and the game holds its unfaded tail); one plain segment scored the same (0.9972) but left a 5.8 dB hole there, so the old layout stays. Weighted 0.9969."
+    },
+    {
+     "path": "music/ffxiv/Orchestrion/BGM_ORCH_130.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 0.18,
+         "pcmHash": "5fc31d55"
+        }
+       },
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ],
+       "sourceFilters": {
+        "source": "asplit[a][b];[b]adelay=10260981S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
        }
-      ],
-      "crossfadeSeconds": 0.5
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.995 the recording runs out 0.9s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 1.93s (similarity 0.975 against 0.750 for the next-best placement, and the distance back is the game file's own loop period of 106.885s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 1.615s, seamed 0.50s early and crossfaded over that."
-   }
+      }
+     ],
+     "# comment": "Over the loop's end the game SUMS the recording's own ending (which keeps its gain, fading naturally to 108.5 s) and its opening one loop period (106.885 s) later, from 106.7 s at full gain (least squares per 0.1 s: ending 0.83 -> 0.7, opening 0.80-0.86 from 106.85 s), rather than crossfading at 108.32 s as the old layout did: that left the build 14-20 dB under the game at 107.75-108.25 s (correlation 0.46/0.12/0.06) and verify's join detector flagged 'arrangement differs from the game's at 107.6 s' (shape 0.79) and 'level off -11.3 dB at 108.1 s'. Now one segment, the recording mixed with itself delayed by exactly the loop period (10260981 samples at its own 96000 Hz; measured lag difference in the game 1.4 samples at 44.1 kHz off that), which also closes the loop wrap (the head copy and the opening copy both land within 0.01 ms of the game's lags). Split from BGM_Field_Lim_07, which does not loop and has no sum (agent 22). Weighted 0.9732 -> 0.9749, hole 14.7 -> 0.7 dB, tail 0.962 -> 0.982 (control 0.977), detector flags cleared (shape 0.000, level -0.5 dB); build vs game correlation 0.96-0.99 at every 0.25 s from 105.5 s to the end."
+    }
+   ]
   },
   {
    "source": [
@@ -2734,36 +2744,59 @@
     "The Ludus",
     "闘士の修練所"
    ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Dungeon_Uru_02.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_448.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.185,
-        "pcmHash": "f450c446"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
+   "target": [
+    {
+     "path": "music/ffxiv/BGM_Dungeon_Uru_02.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 0.185,
+         "pcmHash": "f450c446"
+        }
        },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceFilters": {
-       "source": "asplit[a][b];[b]adelay=7679528S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ]
       }
-     }
-    ],
-    "# comment": "Over the loop's end the game plays the recording's own ending and its opening one loop period (79.995s) later at once, summed rather than cut to (as the game does on BGM_ORCH_295 and BGM_EX5_Raid_24); the old layout cut to the opening at 82.30s. Now one segment, the recording mixed with itself delayed by exactly one period (7679528 samples at its own 96000 Hz), which also closes the loop wrap. BGM_Dungeon_Uru_02 weighted 0.9970 -> 0.9963, hole 0.8 -> 0.6 dB; BGM_ORCH_448 weighted 0.9855 -> 0.9918, hole 33.3 -> 0.4 dB, tail 0.950 -> 0.995 against mid-loop 0.990; no joins left. The two-segment layout this replaced: spectral similarity to the game's own file: 0.996 the recording runs out 2.3s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.80s (similarity 0.992 against 0.936 for the next-best placement, and the distance back is the game file's own loop period of 79.995s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 2.490s, seamed 0.50s early and crossfaded over that."
-   }
+     ],
+     "# comment": "BGM_Dungeon_Uru_02 does not loop and is a different edit from the Orchestrion roll: the game plays the recording alone at one lag through its own fade to the end (waveform correlation 0.998 at 80-82 s), with no copy of the opening summed in -- the shared sum put the opening at 80 s where the game has none (build +5.7 dB over the game at 80 s, correlation 0.17 -> 0.0 to the end; verify's join detector: 'arrangement differs from the game's at 80.6 s', shape 0.94). Split from BGM_ORCH_448 (agent 22) and read as one plain segment: correlation 0.998-0.97 to the end, weighted 0.9963 -> 0.9971, detector region gone. Envelope hole 0.6 -> 0.8 dB at 82.5 s is the build's constant ~1.5 dB peak-limited offset at -70 dB, not a shape error."
+    },
+    {
+     "path": "music/ffxiv/Orchestrion/BGM_ORCH_448.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 0.185,
+         "pcmHash": "f450c446"
+        }
+       },
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ],
+       "sourceFilters": {
+        "source": "asplit[a][b];[b]adelay=7679528S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
+       }
+      }
+     ],
+     "# comment": "Over the loop's end the game plays the recording's own ending and its opening one loop period (79.995s) later at once, summed rather than cut to (as the game does on BGM_ORCH_295 and BGM_EX5_Raid_24); the old layout cut to the opening at 82.30s. Now one segment, the recording mixed with itself delayed by exactly one period (7679528 samples at its own 96000 Hz), which also closes the loop wrap. BGM_Dungeon_Uru_02 weighted 0.9970 -> 0.9963, hole 0.8 -> 0.6 dB; BGM_ORCH_448 weighted 0.9855 -> 0.9918, hole 33.3 -> 0.4 dB, tail 0.950 -> 0.995 against mid-loop 0.990; no joins left. The two-segment layout this replaced: spectral similarity to the game's own file: 0.996 the recording runs out 2.3s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 2.80s (similarity 0.992 against 0.936 for the next-best placement, and the distance back is the game file's own loop period of 79.995s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 2.490s, seamed 0.50s early and crossfaded over that. (Agent 22: split from BGM_Dungeon_Uru_02, which does not sum; this entry is unchanged, 0.9918.)"
+    }
+   ]
   },
   {
    "source": [
@@ -3040,50 +3073,59 @@
     "The Maiden's Lament",
     "乙女の哀歌"
    ],
-   "target": {
-    "path": [
-     "music/ffxiv/BGM_Dungeon_Gri_02.scd",
-     "music/ffxiv/Orchestrion/BGM_ORCH_377.scd"
-    ],
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.21,
-        "pcmHash": "443ff829"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
+   "target": [
+    {
+     "path": "music/ffxiv/BGM_Dungeon_Gri_02.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 0.21,
+         "pcmHash": "443ff829"
+        }
        },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "length": 77.1
-     },
-     {
-      "sourceOffsets": {
-       "source": 0.659229
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ]
+      }
+     ],
+     "# comment": "This file does not loop: the game plays the recording at one lag through its own fade to the end (correlation 0.95-0.99 to 76.75 s). Split from BGM_ORCH_377 (agent 22) and read as one plain segment, which drops the old re-entry the game does not have: weighted 0.9977 -> 0.9978, head 0.990 -> 0.997, hole 0.4 dB unchanged."
+    },
+    {
+     "path": "music/ffxiv/Orchestrion/BGM_ORCH_377.scd",
+     "segments": [
+      {
+       "sourceOffsets": {
+        "source": {
+         "offset": 0.21,
+         "pcmHash": "443ff829"
+        }
        },
-       {
-        "source": "source",
-        "channel": 1
+       "channels": [
+        {
+         "source": "source",
+         "channel": 0
+        },
+        {
+         "source": "source",
+         "channel": 1
+        }
+       ],
+       "sourceFilters": {
+        "source": "asplit[a][b];[b]afade=t=in:st=0.159:d=1.0:curve=qsin,adelay=7358474S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
        }
-      ],
-      "crossfadeSeconds": 0.5
-     }
-    ],
-    "# comment": "spectral similarity to the game's own file: 0.998 the recording runs out 1.0s before this target's loop end, which left that long silent; the game's file fills it by replaying itself from 0.95s (similarity 0.985 against 0.883 for the next-best placement, and the distance back is the game file's own loop period of 76.651s to the sample, so the loop still closes on itself), so a second segment re-enters the same recording at 0.659s, seamed 0.50s early and crossfaded over that."
-   }
+      }
+     ],
+     "# comment": "Over the loop's end the game plays the recording's own ending (silent, -60 dB, by 76.4 s) and FADES IN its opening one loop period (76.651 s) later: least-squares gain of the game on the opening copy, per 0.1 s, rises 0.07 -> 1 (of its steady 0.80) over 76.60-77.55 s along a quarter-sine. The old layout switched at 77.1 s, so the build was silent at 76.5-77.0 s where the game is at -31..-38 dB (verify's join detector: 'level off -10.9 dB at 77.1 s'; hole 13.5 dB). Now one segment, the recording summed with itself delayed by exactly the loop period (7358474 samples at its own 96000 Hz, which closes the loop wrap; opening copy within 0.02 ms of the game's lag) with that branch faded in afade=t=in:st=0.159:d=1.0:curve=qsin in recording time. Split from BGM_Dungeon_Gri_02, which does not loop (agent 22). Weighted 0.9832 -> 0.9838, hole 13.5 -> 0.5 dB, tail 0.984 -> 0.988 (control 0.981), detector flag cleared (level +0.2 dB); build vs game correlation 0.96-0.99 and level within 0.4 dB at every 0.1 s over 76.3-78.3 s, except +4.5 dB at -55 dB in the first 0.1 s of the fade."
+    }
+   ]
   },
   {
    "source": [
@@ -5590,7 +5632,7 @@
        }
       ],
       "sourceFilters": {
-       "The Seventh Sun": "adelay=15610:all=1"
+       "The Seventh Sun": "adelay=1498539S:all=1"
       },
       "length": 316.95
      },
@@ -5604,10 +5646,13 @@
         "source": "Dawn of a New Era",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "Dawn of a New Era": "adelay=510S:all=1"
+      }
      }
     ],
-    "# comment": "two pieces, not one: \"The Seventh Sun\" to 316.95s and \"Dawn of a New Era\" from there, which is what the hand-written entry says and what measuring agrees with -- the tail scores 0.979 against ARR_FFXIV_114 placed at its own start. The game's file begins before the first recording does, so that one is delayed 15.610s rather than offset. Built and measured whole against the game's own file: 0.992 across the full 383.8s, where the single-segment version reached 315.7s of it at 0.994."
+    "# comment": "two pieces, not one: \"The Seventh Sun\" to 316.95s and \"Dawn of a New Era\" from there, which is what the hand-written entry says and what measuring agrees with -- the tail scores 0.979 against ARR_FFXIV_114 placed at its own start. The game's file begins before the first recording does, so that one is delayed 15.610s rather than offset. Built and measured whole against the game's own file: 0.992 across the full 383.8s, where the single-segment version reached 315.7s of it at 0.994. Agent 22 (verify's join detector: 'copies 5.5 ms apart'): the game reads \"Dawn of a New Era\" 5.317 ms later than the build did (waveform lag -5.32 ms at every 5 s from 318 s to 378 s, no drift), and \"The Seventh Sun\" 0.22 ms earlier than a 15.610 s delay. Both are now delays in the recordings' native 96000 Hz samples: The Seventh Sun adelay 1498539S (15.609781 s), Dawn of a New Era adelay 510S (5.3125 ms) at offset 0. Build lags now 0.219 / -5.312 ms against the game's 0.219 / -5.318 ms. Weighted 0.9925 -> 0.9943, lag probes -5.4..0.2 -> -0.06..0 ms, detector flag cleared (0.01 ms). The 25.8 dB envelope hole at 316.3 s is a -50 dB blip in the game's silent gap between the pieces, unchanged."
    }
   },
   {
@@ -5807,7 +5852,7 @@
         "pcmHash": "05a88142"
        }
       },
-      "length": 153.29,
+      "length": 152.69,
       "crossfadeSeconds": 0.25,
       "channels": [
        {
@@ -5823,11 +5868,11 @@
      {
       "sourceOffsets": {
        "ARR_FFXIV_003": {
-        "offset": 0.6,
+        "offset": 0.0,
         "pcmHash": "c9bff6d8"
        }
       },
-      "crossfadeSeconds": 2.0,
+      "crossfadeSeconds": 0.0,
       "channels": [
        {
         "source": "ARR_FFXIV_003",
@@ -5837,10 +5882,36 @@
         "source": "ARR_FFXIV_003",
         "channel": 1
        }
+      ],
+      "sourceFilters": {
+       "ARR_FFXIV_003": "adelay=188S:all=1"
+      },
+      "fadeInSeconds": 0.0
+     },
+     {
+      "startSeconds": 579.28,
+      "sourceOffsets": {
+       "ARR_FFXIV_115": {
+        "offset": 152.88,
+        "pcmHash": "05a88142"
+       }
+      },
+      "length": 7.2,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.5,
+      "channels": [
+       {
+        "source": "ARR_FFXIV_115",
+        "channel": 0
+       },
+       {
+        "source": "ARR_FFXIV_115",
+        "channel": 1
+       }
       ]
      }
     ],
-    "# comment": "credits roll: a medley of 3 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). ENDWALKER_040 from 0s, ARR_FFXIV_115 from 427s, ARR_FFXIV_003 from 580s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.994, worst segment 0.992, worst join 0.973."
+    "# comment": "credits roll: a medley of 3 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). ENDWALKER_040 from 0s, ARR_FFXIV_115 from 427s, ARR_FFXIV_003 from 580s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.994, worst segment 0.992, worst join 0.973. Agent 22 (verify's join detector: 'level off -3.6 dB at 581.1 s; copies 2.1 ms apart'): at the change to ARR_FFXIV_003 the game does not crossfade. Least squares per 0.25 s: ARR_FFXIV_115 keeps a constant gain (0.86-0.96) through its own natural decay to ~583 s, and ARR_FFXIV_003 enters at full gain at its own first sample, 579.28 s, 1.96 ms later than the old offset put it. The old 2 s equal-power crossfade from 579.88 s faded both (build 2-4 dB under the game at 580.5-587.5 s, waveform correlation -0.67..0.53). Now ARR_FFXIV_115 hands over at 579.28 s with no crossfade, ARR_FFXIV_003 starts at offset 0 behind adelay 188S (1.958 ms at its 96000 Hz; build lag -1.957 vs the game's -1.955 ms), and ARR_FFXIV_115's decay continues as a layered last segment (startSeconds 579.28, offset 152.88, 7.2 s to the recording's end). Endwalker item: weighted 0.9955 -> 0.9957, join window 0.983 -> 0.993, level after the join -2.30 -> -0.26 dB, detector flags cleared; build vs game correlation 0.62-0.97 at 580.5-587.5 s. Before Meteor item: 0.9953 -> 0.9955, hole 3.3 dB at 581.1 s -> 2.8 dB at 426.7 s. The overlap the game has costs 0.1 dB of whole-file peak back-off (median level -0.41 -> -0.54 dB)."
    }
   },
   {
@@ -5907,7 +5978,7 @@
         "pcmHash": "05a88142"
        }
       },
-      "length": 153.29,
+      "length": 152.69,
       "crossfadeSeconds": 0.25,
       "channels": [
        {
@@ -5923,11 +5994,11 @@
      {
       "sourceOffsets": {
        "ARR_FFXIV_003": {
-        "offset": 0.6,
+        "offset": 0.0,
         "pcmHash": "c9bff6d8"
        }
       },
-      "crossfadeSeconds": 2.0,
+      "crossfadeSeconds": 0.0,
       "channels": [
        {
         "source": "ARR_FFXIV_003",
@@ -5937,10 +6008,36 @@
         "source": "ARR_FFXIV_003",
         "channel": 1
        }
+      ],
+      "sourceFilters": {
+       "ARR_FFXIV_003": "adelay=188S:all=1"
+      },
+      "fadeInSeconds": 0.0
+     },
+     {
+      "startSeconds": 579.28,
+      "sourceOffsets": {
+       "ARR_FFXIV_115": {
+        "offset": 152.88,
+        "pcmHash": "05a88142"
+       }
+      },
+      "length": 7.2,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.5,
+      "channels": [
+       {
+        "source": "ARR_FFXIV_115",
+        "channel": 0
+       },
+       {
+        "source": "ARR_FFXIV_115",
+        "channel": 1
+       }
       ]
      }
     ],
-    "# comment": "the same credits roll as the item above, with its first piece taken from Before Meteor's \"Answers\" instead of Endwalker's, so owning either album is enough. The two releases are 0.5s apart -- each scores 0.993 against this target at its own offset and 0.61 at the other's -- so this cannot be a naming variant of the same source and is a separate item, which is what the format provides for. The game's file starts before the recording does, so the recording is delayed 780ms rather than offset (Endwalker's copy needs 280ms). Built whole and measured against the game's own file: 0.9953, against 0.9955 for the Endwalker item above."
+    "# comment": "the same credits roll as the item above, with its first piece taken from Before Meteor's \"Answers\" instead of Endwalker's, so owning either album is enough. The two releases are 0.5s apart -- each scores 0.993 against this target at its own offset and 0.61 at the other's -- so this cannot be a naming variant of the same source and is a separate item, which is what the format provides for. The game's file starts before the recording does, so the recording is delayed 780ms rather than offset (Endwalker's copy needs 280ms). Built whole and measured against the game's own file: 0.9953, against 0.9955 for the Endwalker item above. Agent 22 (verify's join detector: 'level off -3.6 dB at 581.1 s; copies 2.1 ms apart'): at the change to ARR_FFXIV_003 the game does not crossfade. Least squares per 0.25 s: ARR_FFXIV_115 keeps a constant gain (0.86-0.96) through its own natural decay to ~583 s, and ARR_FFXIV_003 enters at full gain at its own first sample, 579.28 s, 1.96 ms later than the old offset put it. The old 2 s equal-power crossfade from 579.88 s faded both (build 2-4 dB under the game at 580.5-587.5 s, waveform correlation -0.67..0.53). Now ARR_FFXIV_115 hands over at 579.28 s with no crossfade, ARR_FFXIV_003 starts at offset 0 behind adelay 188S (1.958 ms at its 96000 Hz; build lag -1.957 vs the game's -1.955 ms), and ARR_FFXIV_115's decay continues as a layered last segment (startSeconds 579.28, offset 152.88, 7.2 s to the recording's end). Endwalker item: weighted 0.9955 -> 0.9957, join window 0.983 -> 0.993, level after the join -2.30 -> -0.26 dB, detector flags cleared; build vs game correlation 0.62-0.97 at 580.5-587.5 s. Before Meteor item: 0.9953 -> 0.9955, hole 3.3 dB at 581.1 s -> 2.8 dB at 426.7 s. The overlap the game has costs 0.1 dB of whole-file peak back-off (median level -0.41 -> -0.54 dB)."
    }
   }
  ],
