@@ -335,11 +335,15 @@ std::optional<config_target> read_config_target(
 				.Graph = graphs.contains(name) ? graphs.at(name) : nullptr,
 				.IsTarget = name == "target",
 				.Fitted = offsetsAreFitted});
+		std::map<std::string, double> driftPpm;
 		if (const auto offsets = segmentJson.find("sourceOffsets"); offsets != segmentJson.end() && offsets->is_object()) {
 			for (const auto& [name, spec] : offsets->items()) {
 				if (const auto source = segment.Sources.find(name); source != segment.Sources.end()) {
 					source->second.Offset = spec.is_object() ? spec.value("offset", 0.) : spec.get<double>();
 					source->second.Stated = true;
+					if (spec.is_object())
+						if (const auto drift = spec.find("driftPpm"); drift != spec.end() && drift->is_number())
+							driftPpm.emplace(name, drift->get<double>());
 				}
 			}
 		}
@@ -355,6 +359,25 @@ std::optional<config_target> read_config_target(
 				if (const auto source = segment.Sources.find(name); source != segment.Sources.end() && filter.is_string())
 					source->second.Filter = xivres::util::unicode::convert<std::wstring>(filter.get<std::string>());
 			}
+		}
+		// `driftPpm` on a source's offset: the recording and the game run on slightly
+		// different clocks, and the build's lag against the game grows by this many parts per
+		// million -- the number `verify` reports as lag_ppm (positive: the build falls
+		// behind). A quarter of the library's one-segment builds drift about 7.5 or 12.5 ppm,
+		// 3 ms by the end of a four-minute track. It is cancelled by time-scaling the source
+		// at the END of its filter -- after a summed graph, so every copy in the sum drifts
+		// with the recording -- by aresample=N,asetrate=N+-1, N about a million over the ppm:
+		// the construction the join campaigns wrote by hand as filter strings. Offsets stay
+		// in the filtered timeline, which is now game time.
+		for (const auto& [name, ppm] : driftPpm) {
+			if (std::abs(ppm) < 0.5)
+				continue;   // under 0.1 ms over three minutes, and N would pass 2 MHz
+			const auto source = segment.Sources.find(name);
+			if (source == segment.Sources.end())
+				continue;
+			const auto n = static_cast<long long>(std::llround(1e6 / std::abs(ppm)));
+			auto& filter = source->second.Filter;
+			filter += std::format(L"{}aresample={},asetrate={}", filter.empty() ? L"" : L",", n, ppm > 0 ? n + 1 : n - 1);
 		}
 		if (const auto channels = segmentJson.find("channels"); channels != segmentJson.end() && channels->is_array()) {
 			for (const auto& channel : *channels)
