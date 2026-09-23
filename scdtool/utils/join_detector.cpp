@@ -42,6 +42,16 @@ namespace {
 	// buried under the other copy scatters under 0.35 at lags anywhere in the range.
 	constexpr double LagRhoMin = 0.45;
 	constexpr double LagOutlierSamples = 22.;   // 0.5 ms from the line: a window that locked elsewhere
+	// 2 ms from the weighted median before any line is fitted: wide enough for a real drift over
+	// a region (60 ppm x 20 s = 1.2 ms), narrow enough to drop the other copy of the same
+	// recording, whose alias peaks at +5..+30 ms reached rho 0.45-0.60 on BGM_EX5_EndCredit02.
+	constexpr double LagSeedSamples = 88.;
+	// A drift slope only where it explains the scatter: it must at least halve the weighted
+	// squared error of a constant. Noisy lags from a copy the game plays in a different mix
+	// (BGM_EX5_EndCredit01's polarity-inverted DT_053) otherwise fit a line that tilts by a
+	// millisecond across a region and invents a flag. Correlation cannot make this call -- the
+	// Raid recordings that really drift 13 ppm are a different mix too, at rho 0.5-0.7.
+	constexpr double LagDriftGain = 0.5;
 	constexpr double LagMinSpan = 8.;           // s of accepted windows before a drift slope is fitted
 	constexpr double MaxDrift = 60e-6;          // 60 ppm; the worst real recording ran 13
 	// Truncated eigen-solve: eigenvalues of the unit-diagonal Gram under 0.15^2 of the largest
@@ -466,13 +476,26 @@ namespace {
 		std::vector<std::string> pre;
 		std::vector<filter_op> post;
 		std::vector<std::string> splitOuts;
+		// The stream's rate where it splits. A branch's adelay=NS counts samples at THAT rate,
+		// and a resample before the split is already in the render, so nothing rescales it
+		// afterwards: read at the native rate, BGM_EX5_Raid_24's drift-corrected delay put its
+		// region at 124.5-164.5 s instead of 162-192 s and missed the join entirely.
+		auto splitRate = nativeRate;
 		for (const auto& chain : parsed) {
 			for (size_t i = 0; i < chain.Ops.size(); ++i) {
 				if (chain.Ops[i].Op == "asplit") {
 					pre.clear();
-					for (size_t k = 0; k < i; ++k)
-						if (!GainOps.contains(chain.Ops[k].Op))
-							pre.push_back(chain.Ops[k].Token);
+					for (size_t k = 0; k < i; ++k) {
+						const auto& op = chain.Ops[k];
+						if (!GainOps.contains(op.Op))
+							pre.push_back(op.Token);
+						if (op.Op == "aresample" || op.Op == "asetrate") {
+							try {
+								splitRate = std::stod(op.Args.substr(0, op.Args.find(':')));
+							} catch (const std::exception&) {
+							}
+						}
+					}
 					splitOuts = chain.Outs;
 					break;
 				}
@@ -507,7 +530,7 @@ namespace {
 				auto d = delay_of(root);
 				for (const auto& op : chain.Ops) {
 					if (op.Op == "adelay") {
-						d += adelay_seconds(op.Args, nativeRate);
+						d += adelay_seconds(op.Args, splitRate);
 					} else if (!GainOps.contains(op.Op)) {
 						// A waveform filter on one branch only makes that branch a different
 						// waveform from the render every copy is read from, and the fit would
@@ -768,6 +791,27 @@ namespace {
 			if (good.size() > 3)
 				good.resize(3);
 		}
+		// The rho^2-weighted median lag: the seed, and the answer when no line holds.
+		const auto weightedMedian = [](const std::vector<pt>& ps) {
+			std::vector<size_t> o(ps.size());
+			std::iota(o.begin(), o.end(), size_t{0});
+			std::ranges::stable_sort(o, [&](size_t x, size_t y) { return ps[x].Lag < ps[y].Lag; });
+			std::vector<double> cw(o.size());
+			auto acc = 0.;
+			for (size_t i = 0; i < o.size(); ++i)
+				cw[i] = acc += ps[o[i]].Rho * ps[o[i]].Rho;
+			const auto at = static_cast<size_t>(std::ranges::lower_bound(cw, cw.back() / 2) - cw.begin());
+			return ps[o[(std::min)(at, o.size() - 1)]].Lag;
+		};
+		{
+			const auto seed = weightedMedian(good);
+			std::vector<pt> closeToSeed;
+			for (const auto& p : good)
+				if (std::abs(p.Lag - seed) <= LagSeedSamples)
+					closeToSeed.push_back(p);
+			if (!closeToSeed.empty())
+				good = std::move(closeToSeed);
+		}
 		std::vector<double> ts;
 		for (const auto& p : good)
 			ts.push_back(p.T);
@@ -791,28 +835,36 @@ namespace {
 					y1 += w * x * p.Lag;
 				}
 				const auto det = s0 * s2 - s1 * s1;
-				a = (s2 * y0 - s1 * y1) / det;
-				b = (s0 * y1 - s1 * y0) / det;
-				b = std::clamp(b, -MaxDrift * Sr, MaxDrift * Sr);
+				b = std::clamp((s0 * y1 - s1 * y0) / det, -MaxDrift * Sr, MaxDrift * Sr);
+				// The intercept for the slope actually kept: refitting only the slope's
+				// clamp left a line that missed every point by 22+ samples.
+				a = (y0 - b * s1) / s0;
+				const auto mean = y0 / s0;
+				auto sseLine = 0., sseConst = 0.;
+				for (const auto& p : good) {
+					const auto w = p.Rho * p.Rho, x = p.T - tref;
+					sseLine += w * (p.Lag - (a + b * x)) * (p.Lag - (a + b * x));
+					sseConst += w * (p.Lag - mean) * (p.Lag - mean);
+				}
+				if (!(sseLine <= LagDriftGain * sseConst)) {
+					a = mean;
+					b = 0.;
+				}
 			} else {
-				// The rho^2-weighted median lag, no drift.
-				std::vector<size_t> o(good.size());
-				std::iota(o.begin(), o.end(), size_t{0});
-				std::ranges::stable_sort(o, [&](size_t x, size_t y) { return good[x].Lag < good[y].Lag; });
-				std::vector<double> cw(o.size());
-				auto acc = 0.;
-				for (size_t i = 0; i < o.size(); ++i)
-					cw[i] = acc += good[o[i]].Rho * good[o[i]].Rho;
-				const auto half = cw.back() / 2;
-				const auto at = static_cast<size_t>(std::ranges::lower_bound(cw, half) - cw.begin());
-				a = good[o[(std::min)(at, o.size() - 1)]].Lag;
+				a = weightedMedian(good);
 				b = 0.;
 			}
 			std::vector<pt> kept;
 			for (const auto& p : good)
 				if (std::abs(p.Lag - (a + b * (p.T - tref))) <= LagOutlierSamples)
 					kept.push_back(p);
-			if (kept.size() == good.size() || kept.empty())
+			if (kept.empty()) {
+				// No line explains any window: the median, not the line that just failed.
+				a = weightedMedian(good);
+				b = 0.;
+				break;
+			}
+			if (kept.size() == good.size())
 				break;
 			good = std::move(kept);
 		}
