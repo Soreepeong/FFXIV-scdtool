@@ -235,6 +235,11 @@ namespace {
 		if (gd <= 0.)
 			return res;   // silence on the game's side: nothing to align to
 
+		// Every lag's correlation, so the peak can be refined between grid points: at the
+		// 16 kHz analysis rate one step is 62.5 us, and a build aligned to the sample sat
+		// between steps and read LOWER than one that happened to be off by a whole step
+		// (BGM_Event_VerySad's loop start 0.996 misaligned, 0.988 exact).
+		std::vector<double> corr(static_cast<size_t>(2 * maxLag + 1), -2.);
 		for (ptrdiff_t lag = -maxLag; lag <= maxLag; ++lag) {
 			const auto b = built.subspan(static_cast<size_t>(begin + lag), static_cast<size_t>(n));
 			auto bm = 0.;
@@ -250,10 +255,27 @@ namespace {
 			}
 			if (bd <= 0.)
 				continue;
-			if (const auto c = num / (std::sqrt(bd) * gd); !res.Valid || c > res.Match) {
+			const auto c = num / (std::sqrt(bd) * gd);
+			corr[static_cast<size_t>(lag + maxLag)] = c;
+			if (!res.Valid || c > res.Match) {
 				res.Match = c;
 				res.LagMs = static_cast<double>(lag) * 1000. / rate;
 				res.Valid = true;
+			}
+		}
+		if (res.Valid) {
+			// A parabola through the peak and its neighbours: the lag between grid points,
+			// and the correlation the peak actually reaches there.
+			const auto k = static_cast<ptrdiff_t>(std::llround(res.LagMs * rate / 1000.)) + maxLag;
+			if (k > 0 && k + 1 < static_cast<ptrdiff_t>(corr.size())) {
+				const auto y0 = corr[static_cast<size_t>(k - 1)], y1 = corr[static_cast<size_t>(k)], y2 = corr[static_cast<size_t>(k + 1)];
+				if (y0 > -2. && y2 > -2.) {
+					if (const auto den = y0 - 2. * y1 + y2; den < 0.) {
+						const auto d = std::clamp(0.5 * (y0 - y2) / den, -0.5, 0.5);
+						res.LagMs += d * 1000. / rate;
+						res.Match = (std::min)(1., y1 - 0.25 * (y0 - y2) * d);
+					}
+				}
 			}
 		}
 		return res;
