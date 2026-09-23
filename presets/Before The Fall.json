@@ -28,11 +28,11 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.52,
+        "offset": 1.520297,
         "pcmHash": "f45b151f"
        }
       },
-      "length": 98.78,
+      "length": 112.5,
       "channels": [
        {
         "source": "source",
@@ -42,14 +42,35 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,106.25),0,if(lt(t,106.5),0.0000+(0.0037)*(t-106.25)/0.25,if(lt(t,106.75),0.0037+(0.0059)*(t-106.5)/0.25,if(lt(t,107.0),0.0096+(0.0102)*(t-106.75)/0.25,if(lt(t,107.25),0.0198+(0.0116)*(t-107.0)/0.25,if(lt(t,107.5),0.0314+(0.0086)*(t-107.25)/0.25,if(lt(t,107.75),0.0400+(0.0060)*(t-107.5)/0.25,if(lt(t,108.0),0.0461+(0.0083)*(t-107.75)/0.25,if(lt(t,108.25),0.0544+(0.0158)*(t-108.0)/0.25,if(lt(t,108.5),0.0703+(0.0241)*(t-108.25)/0.25,if(lt(t,108.75),0.0943+(0.0250)*(t-108.5)/0.25,if(lt(t,109.0),0.1194+(0.0265)*(t-108.75)/0.25,if(lt(t,109.25),0.1458+(0.0233)*(t-109.0)/0.25,if(lt(t,109.5),0.1691+(0.0248)*(t-109.25)/0.25,if(lt(t,109.75),0.1940+(0.0319)*(t-109.5)/0.25,if(lt(t,110.0),0.2259+(0.0367)*(t-109.75)/0.25,if(lt(t,110.25),0.2626+(0.0447)*(t-110.0)/0.25,if(lt(t,110.5),0.3072+(0.0438)*(t-110.25)/0.25,if(lt(t,110.75),0.3511+(0.0534)*(t-110.5)/0.25,if(lt(t,111.0),0.4045+(0.0497)*(t-110.75)/0.25,if(lt(t,111.25),0.4542+(0.0503)*(t-111.0)/0.25,if(lt(t,111.5),0.5046+(0.0430)*(t-111.25)/0.25,if(lt(t,111.75),0.5475+(0.0518)*(t-111.5)/0.25,if(lt(t,112.0),0.5993+(0.0568)*(t-111.75)/0.25,if(lt(t,112.25),0.6561+(0.0620)*(t-112.0)/0.25,if(lt(t,112.5),0.7181+(0.0639)*(t-112.25)/0.25,if(lt(t,112.75),0.7819+(0.0625)*(t-112.5)/0.25,if(lt(t,113.0),0.8445+(0.0689)*(t-112.75)/0.25,if(lt(t,113.25),0.9134+(0.0818)*(t-113.0)/0.25,if(lt(t,113.5),0.9952+(0.1010)*(t-113.25)/0.25,if(lt(t,113.75),1.0962+(0.1011)*(t-113.5)/0.25,if(lt(t,114.0),1.1973+(0.0942)*(t-113.75)/0.25,if(lt(t,114.25),1.2915+(0.0991)*(t-114.0)/0.25,if(lt(t,114.5),1.3905+(0.1228)*(t-114.25)/0.25,if(lt(t,114.75),1.5134+(0.1394)*(t-114.5)/0.25,if(lt(t,115.0),1.6528+(0.1399)*(t-114.75)/0.25,1.79265)))))))))))))))))))))))))))))))))))))':c=same"
+      }
      },
      {
       "sourceOffsets": {
-       "source": {
-        "offset": 85.525,
-        "pcmHash": "f45b151f"
+       "source": 99.251078
+      },
+      "length": 9.38,
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
        }
+      ],
+      "crossfadeSeconds": 0.5,
+      "crossfadeShape": "linear",
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,106.25),0,if(lt(t,106.5),0.0000+(0.0037)*(t-106.25)/0.25,if(lt(t,106.75),0.0037+(0.0059)*(t-106.5)/0.25,if(lt(t,107.0),0.0096+(0.0102)*(t-106.75)/0.25,if(lt(t,107.25),0.0198+(0.0116)*(t-107.0)/0.25,if(lt(t,107.5),0.0314+(0.0086)*(t-107.25)/0.25,if(lt(t,107.75),0.0400+(0.0060)*(t-107.5)/0.25,if(lt(t,108.0),0.0461+(0.0083)*(t-107.75)/0.25,if(lt(t,108.25),0.0544+(0.0158)*(t-108.0)/0.25,if(lt(t,108.5),0.0703+(0.0241)*(t-108.25)/0.25,if(lt(t,108.75),0.0943+(0.0250)*(t-108.5)/0.25,if(lt(t,109.0),0.1194+(0.0265)*(t-108.75)/0.25,if(lt(t,109.25),0.1458+(0.0233)*(t-109.0)/0.25,if(lt(t,109.5),0.1691+(0.0248)*(t-109.25)/0.25,if(lt(t,109.75),0.1940+(0.0319)*(t-109.5)/0.25,if(lt(t,110.0),0.2259+(0.0367)*(t-109.75)/0.25,if(lt(t,110.25),0.2626+(0.0447)*(t-110.0)/0.25,if(lt(t,110.5),0.3072+(0.0438)*(t-110.25)/0.25,if(lt(t,110.75),0.3511+(0.0534)*(t-110.5)/0.25,if(lt(t,111.0),0.4045+(0.0497)*(t-110.75)/0.25,if(lt(t,111.25),0.4542+(0.0503)*(t-111.0)/0.25,if(lt(t,111.5),0.5046+(0.0430)*(t-111.25)/0.25,if(lt(t,111.75),0.5475+(0.0518)*(t-111.5)/0.25,if(lt(t,112.0),0.5993+(0.0568)*(t-111.75)/0.25,if(lt(t,112.25),0.6561+(0.0620)*(t-112.0)/0.25,if(lt(t,112.5),0.7181+(0.0639)*(t-112.25)/0.25,if(lt(t,112.75),0.7819+(0.0625)*(t-112.5)/0.25,if(lt(t,113.0),0.8445+(0.0689)*(t-112.75)/0.25,if(lt(t,113.25),0.9134+(0.0818)*(t-113.0)/0.25,if(lt(t,113.5),0.9952+(0.1010)*(t-113.25)/0.25,if(lt(t,113.75),1.0962+(0.1011)*(t-113.5)/0.25,if(lt(t,114.0),1.1973+(0.0942)*(t-113.75)/0.25,if(lt(t,114.25),1.2915+(0.0991)*(t-114.0)/0.25,if(lt(t,114.5),1.3905+(0.1228)*(t-114.25)/0.25,if(lt(t,114.75),1.5134+(0.1394)*(t-114.5)/0.25,if(lt(t,115.0),1.6528+(0.1399)*(t-114.75)/0.25,1.79265)))))))))))))))))))))))))))))))))))))':c=same"
+      }
+     },
+     {
+      "sourceOffsets": {
+       "source": 108.631078
       },
       "channels": [
        {
@@ -61,10 +82,14 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 12.0
+      "crossfadeSeconds": 0.02,
+      "crossfadeShape": "linear",
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,106.25),0,if(lt(t,106.5),0.0000+(0.0037)*(t-106.25)/0.25,if(lt(t,106.75),0.0037+(0.0059)*(t-106.5)/0.25,if(lt(t,107.0),0.0096+(0.0102)*(t-106.75)/0.25,if(lt(t,107.25),0.0198+(0.0116)*(t-107.0)/0.25,if(lt(t,107.5),0.0314+(0.0086)*(t-107.25)/0.25,if(lt(t,107.75),0.0400+(0.0060)*(t-107.5)/0.25,if(lt(t,108.0),0.0461+(0.0083)*(t-107.75)/0.25,if(lt(t,108.25),0.0544+(0.0158)*(t-108.0)/0.25,if(lt(t,108.5),0.0703+(0.0241)*(t-108.25)/0.25,if(lt(t,108.75),0.0943+(0.0250)*(t-108.5)/0.25,if(lt(t,109.0),0.1194+(0.0265)*(t-108.75)/0.25,if(lt(t,109.25),0.1458+(0.0233)*(t-109.0)/0.25,if(lt(t,109.5),0.1691+(0.0248)*(t-109.25)/0.25,if(lt(t,109.75),0.1940+(0.0319)*(t-109.5)/0.25,if(lt(t,110.0),0.2259+(0.0367)*(t-109.75)/0.25,if(lt(t,110.25),0.2626+(0.0447)*(t-110.0)/0.25,if(lt(t,110.5),0.3072+(0.0438)*(t-110.25)/0.25,if(lt(t,110.75),0.3511+(0.0534)*(t-110.5)/0.25,if(lt(t,111.0),0.4045+(0.0497)*(t-110.75)/0.25,if(lt(t,111.25),0.4542+(0.0503)*(t-111.0)/0.25,if(lt(t,111.5),0.5046+(0.0430)*(t-111.25)/0.25,if(lt(t,111.75),0.5475+(0.0518)*(t-111.5)/0.25,if(lt(t,112.0),0.5993+(0.0568)*(t-111.75)/0.25,if(lt(t,112.25),0.6561+(0.0620)*(t-112.0)/0.25,if(lt(t,112.5),0.7181+(0.0639)*(t-112.25)/0.25,if(lt(t,112.75),0.7819+(0.0625)*(t-112.5)/0.25,if(lt(t,113.0),0.8445+(0.0689)*(t-112.75)/0.25,if(lt(t,113.25),0.9134+(0.0818)*(t-113.0)/0.25,if(lt(t,113.5),0.9952+(0.1010)*(t-113.25)/0.25,if(lt(t,113.75),1.0962+(0.1011)*(t-113.5)/0.25,if(lt(t,114.0),1.1973+(0.0942)*(t-113.75)/0.25,if(lt(t,114.25),1.2915+(0.0991)*(t-114.0)/0.25,if(lt(t,114.5),1.3905+(0.1228)*(t-114.25)/0.25,if(lt(t,114.75),1.5134+(0.1394)*(t-114.5)/0.25,if(lt(t,115.0),1.6528+(0.1399)*(t-114.75)/0.25,1.79265)))))))))))))))))))))))))))))))))))))':c=same,asplit=4[pb][pd][pc][pl];[pb]afade=t=out:st=108.631078:d=0.700[ob];[pd]adelay=5850084S:all=1,afade=t=out:st=112.191078:d=0.050[od];[pl]adelay=5849124S:all=1,firequalizer=gain='if(lt(f,640),0,-120)',afade=t=in:st=112.191078:d=0.050,afade=t=out:st=113.941078:d=0.200[ol];[pc]adelay=5671381S:all=1,afade=t=in:st=112.191078:d=0.010[oc];[ob][od][ol][oc]amix=inputs=4:normalize=0,alimiter=limit=0.8603:level=0:latency=1"
+      }
      }
     ],
-    "# comment": "the game's file is 13.7s longer than this recording and ends by repeating itself: from 118.3s it replays the file from 103.5s (similarity 0.924, seam located by the recording's own end). Built as two segments of the same recording -- the match, then the same recording re-entered at 105.010s. The game built its loop-out by crossfading, so this does too: segment 1 keeps playing 12s past the seam at 98.780s, into the recording's own ending, while segment 2 fades in from 85.525s. Fitted over the target's own onsets (scratch/fit_loopout_crossfade.py): the join goes 0.960 hard-cut to 0.999, the whole file 0.985 to 0.983."
+    "# comment": "Mapped against the game by waveform (lag per window, then per-copy least squares): the game plays the recording at +1.520297 s (copy A; the old 1.52 was 13 samples off) as the UNFADED master right through the album's fade (A correlates 0.96-0.97 to game 116 s while the album is already 30 dB down), then from ~111 s the same material one repeat back (B, lag -13.248922; A and B correlate 0.99 with each other at 113-114.5 s), a hard cut at 121.88 s to lag -74.1873 (D) with B fading under it for ~0.7 s, and at 125.44 s the head copy one loop length back (C, lag -72.325803 = A - loop length, so the wrap is continuous by construction) summed with D's bass, which rings on to ~127.3 s while D's highs are gone (above 640 Hz D correlates 0.82 at 125.4 s and 0.05-0.2 after 125.6 s). The old layout crossfaded 12 s from 98.78 s into B, mixing in material the game does not play (build-vs-game correlation fell to -0.1..-0.45 from 108 s on), with B 5.8 ms off, and ran B into the recording's silent end (hole 54.5 dB at 131.3 s). Now: A with the album fade undone (energy ratio against the game per 0.25 s, smoothed and monotone, an aeval gain in recording time, the same filter on every segment since B also reads into the fade); B from 112.5 s with a 0.5 s linear crossfade; from 121.88 s one segment whose filter sums B (linear fade-out 0.7 s), D (full to 125.44 s), D's bass (firequalizer below 640 Hz, its 10 ms delay taken off the adelay, fading out at 127.19-127.39 s) and C (in at 125.44 s), with alimiter at the recording's own peak (0.8603) so the sum's peaks do not make apply back the whole file off (unlimited: -3.8 dB peak back-off). Against the game's own file: weighted 0.9837 -> 0.9952, hole 54.5 -> 1.05 dB, tail 0.912 -> 0.982 vs control 0.999, level -1.68 -> -1.52 dB (p90 2.64 -> 1.65), joins clean; build-vs-game waveform correlation 0.96-0.97 everywhere except 121.5-122.5 s (0.75-0.91: the game there is only ~0.77 explained by B+D under any envelope tried) and 126-126.5 s (0.93; the game's highs there match nothing in the recording, best 0.3-0.5 -- not filled from \"target\" because the bass under them is on the recording). verify's join detector cannot model this item (a waveform filter inside an asplit branch); the same layout without the bass-only D branch is modelled, clears the 110 s / 5.8 ms finding, and flags only D's highs at 126.8 s (weighted 0.9934, tail 0.965)."
    }
   },
   {
@@ -1486,7 +1511,49 @@
         "channel": 1
        }
       ],
-      "length": 97.4,
+      "length": 93.93,
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,86.75),0,if(lt(t,87.0),0.0000+(0.0409)*(t-86.75)/0.25,if(lt(t,87.25),0.0409+(0.0403)*(t-87.0)/0.25,if(lt(t,87.5),0.0813+(0.0367)*(t-87.25)/0.25,if(lt(t,87.75),0.1180+(0.0273)*(t-87.5)/0.25,if(lt(t,88.0),0.1453+(0.0098)*(t-87.75)/0.25,if(lt(t,88.25),0.1551+(0.0075)*(t-88.0)/0.25,if(lt(t,88.5),0.1626+(0.0114)*(t-88.25)/0.25,if(lt(t,88.75),0.1740+(0.0200)*(t-88.5)/0.25,if(lt(t,89.0),0.1940+(0.0227)*(t-88.75)/0.25,if(lt(t,89.25),0.2167+(0.0195)*(t-89.0)/0.25,if(lt(t,89.5),0.2362+(0.0252)*(t-89.25)/0.25,if(lt(t,89.75),0.2614+(0.0322)*(t-89.5)/0.25,if(lt(t,90.0),0.2936+(0.0377)*(t-89.75)/0.25,if(lt(t,90.25),0.3313+(0.0340)*(t-90.0)/0.25,if(lt(t,90.5),0.3653+(0.0309)*(t-90.25)/0.25,if(lt(t,90.75),0.3963+(0.0355)*(t-90.5)/0.25,if(lt(t,91.0),0.4318+(0.0403)*(t-90.75)/0.25,if(lt(t,91.25),0.4721+(0.0386)*(t-91.0)/0.25,if(lt(t,91.5),0.5106+(0.0339)*(t-91.25)/0.25,if(lt(t,91.75),0.5445+(0.0444)*(t-91.5)/0.25,if(lt(t,92.0),0.5889+(0.0511)*(t-91.75)/0.25,if(lt(t,92.25),0.6401+(0.0604)*(t-92.0)/0.25,if(lt(t,92.5),0.7004+(0.0582)*(t-92.25)/0.25,if(lt(t,92.75),0.7586+(0.0604)*(t-92.5)/0.25,if(lt(t,93.0),0.8190+(0.0796)*(t-92.75)/0.25,if(lt(t,93.25),0.8986+(0.0836)*(t-93.0)/0.25,if(lt(t,93.5),0.9822+(0.0790)*(t-93.25)/0.25,if(lt(t,93.75),1.0612+(0.0618)*(t-93.5)/0.25,if(lt(t,94.0),1.1230+(0.0679)*(t-93.75)/0.25,if(lt(t,94.25),1.1909+(0.0991)*(t-94.0)/0.25,if(lt(t,94.5),1.2901+(0.1138)*(t-94.25)/0.25,if(lt(t,94.75),1.4038+(0.0928)*(t-94.5)/0.25,if(lt(t,95.0),1.4966+(0.0810)*(t-94.75)/0.25,if(lt(t,95.25),1.5776+(0.0752)*(t-95.0)/0.25,if(lt(t,95.5),1.6528+(0.1073)*(t-95.25)/0.25,if(lt(t,95.75),1.7602+(0.1118)*(t-95.5)/0.25,if(lt(t,96.0),1.8719+(0.1156)*(t-95.75)/0.25,if(lt(t,96.25),1.9875+(0.1263)*(t-96.0)/0.25,if(lt(t,96.5),2.1137+(0.1432)*(t-96.25)/0.25,if(lt(t,96.75),2.2569+(0.1583)*(t-96.5)/0.25,if(lt(t,97.0),2.4153+(0.1689)*(t-96.75)/0.25,if(lt(t,97.25),2.5842+(0.2118)*(t-97.0)/0.25,if(lt(t,97.5),2.7959+(0.2757)*(t-97.25)/0.25,if(lt(t,97.75),3.0717+(0.2989)*(t-97.5)/0.25,if(lt(t,98.0),3.3706+(0.3341)*(t-97.75)/0.25,if(lt(t,98.25),3.7047+(0.4008)*(t-98.0)/0.25,if(lt(t,98.5),4.1055+(0.4964)*(t-98.25)/0.25,if(lt(t,98.75),4.6019+(0.5448)*(t-98.5)/0.25,if(lt(t,99.0),5.1467+(0.5423)*(t-98.75)/0.25,5.68908)))))))))))))))))))))))))))))))))))))))))))))))))))':c=same"
+      }
+     },
+     {
+      "sourceOffsets": {
+       "source": 38.54215
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "length": 1.52,
+      "crossfadeSeconds": 0.1,
+      "crossfadeShape": "linear",
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,86.75),0,if(lt(t,87.0),0.0000+(0.0409)*(t-86.75)/0.25,if(lt(t,87.25),0.0409+(0.0403)*(t-87.0)/0.25,if(lt(t,87.5),0.0813+(0.0367)*(t-87.25)/0.25,if(lt(t,87.75),0.1180+(0.0273)*(t-87.5)/0.25,if(lt(t,88.0),0.1453+(0.0098)*(t-87.75)/0.25,if(lt(t,88.25),0.1551+(0.0075)*(t-88.0)/0.25,if(lt(t,88.5),0.1626+(0.0114)*(t-88.25)/0.25,if(lt(t,88.75),0.1740+(0.0200)*(t-88.5)/0.25,if(lt(t,89.0),0.1940+(0.0227)*(t-88.75)/0.25,if(lt(t,89.25),0.2167+(0.0195)*(t-89.0)/0.25,if(lt(t,89.5),0.2362+(0.0252)*(t-89.25)/0.25,if(lt(t,89.75),0.2614+(0.0322)*(t-89.5)/0.25,if(lt(t,90.0),0.2936+(0.0377)*(t-89.75)/0.25,if(lt(t,90.25),0.3313+(0.0340)*(t-90.0)/0.25,if(lt(t,90.5),0.3653+(0.0309)*(t-90.25)/0.25,if(lt(t,90.75),0.3963+(0.0355)*(t-90.5)/0.25,if(lt(t,91.0),0.4318+(0.0403)*(t-90.75)/0.25,if(lt(t,91.25),0.4721+(0.0386)*(t-91.0)/0.25,if(lt(t,91.5),0.5106+(0.0339)*(t-91.25)/0.25,if(lt(t,91.75),0.5445+(0.0444)*(t-91.5)/0.25,if(lt(t,92.0),0.5889+(0.0511)*(t-91.75)/0.25,if(lt(t,92.25),0.6401+(0.0604)*(t-92.0)/0.25,if(lt(t,92.5),0.7004+(0.0582)*(t-92.25)/0.25,if(lt(t,92.75),0.7586+(0.0604)*(t-92.5)/0.25,if(lt(t,93.0),0.8190+(0.0796)*(t-92.75)/0.25,if(lt(t,93.25),0.8986+(0.0836)*(t-93.0)/0.25,if(lt(t,93.5),0.9822+(0.0790)*(t-93.25)/0.25,if(lt(t,93.75),1.0612+(0.0618)*(t-93.5)/0.25,if(lt(t,94.0),1.1230+(0.0679)*(t-93.75)/0.25,if(lt(t,94.25),1.1909+(0.0991)*(t-94.0)/0.25,if(lt(t,94.5),1.2901+(0.1138)*(t-94.25)/0.25,if(lt(t,94.75),1.4038+(0.0928)*(t-94.5)/0.25,if(lt(t,95.0),1.4966+(0.0810)*(t-94.75)/0.25,if(lt(t,95.25),1.5776+(0.0752)*(t-95.0)/0.25,if(lt(t,95.5),1.6528+(0.1073)*(t-95.25)/0.25,if(lt(t,95.75),1.7602+(0.1118)*(t-95.5)/0.25,if(lt(t,96.0),1.8719+(0.1156)*(t-95.75)/0.25,if(lt(t,96.25),1.9875+(0.1263)*(t-96.0)/0.25,if(lt(t,96.5),2.1137+(0.1432)*(t-96.25)/0.25,if(lt(t,96.75),2.2569+(0.1583)*(t-96.5)/0.25,if(lt(t,97.0),2.4153+(0.1689)*(t-96.75)/0.25,if(lt(t,97.25),2.5842+(0.2118)*(t-97.0)/0.25,if(lt(t,97.5),2.7959+(0.2757)*(t-97.25)/0.25,if(lt(t,97.75),3.0717+(0.2989)*(t-97.5)/0.25,if(lt(t,98.0),3.3706+(0.3341)*(t-97.75)/0.25,if(lt(t,98.25),3.7047+(0.4008)*(t-98.0)/0.25,if(lt(t,98.5),4.1055+(0.4964)*(t-98.25)/0.25,if(lt(t,98.75),4.6019+(0.5448)*(t-98.5)/0.25,if(lt(t,99.0),5.1467+(0.5423)*(t-98.75)/0.25,5.68908)))))))))))))))))))))))))))))))))))))))))))))))))))':c=same"
+      }
+     },
+     {
+      "sourceOffsets": {
+       "source": 96.95107
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "length": 1.95,
+      "crossfadeSeconds": 0.1,
+      "crossfadeShape": "linear",
       "sourceFilters": {
        "source": "aeval='val(ch)*exp(if(lt(t,86.75),0,if(lt(t,87.0),0.0000+(0.0409)*(t-86.75)/0.25,if(lt(t,87.25),0.0409+(0.0403)*(t-87.0)/0.25,if(lt(t,87.5),0.0813+(0.0367)*(t-87.25)/0.25,if(lt(t,87.75),0.1180+(0.0273)*(t-87.5)/0.25,if(lt(t,88.0),0.1453+(0.0098)*(t-87.75)/0.25,if(lt(t,88.25),0.1551+(0.0075)*(t-88.0)/0.25,if(lt(t,88.5),0.1626+(0.0114)*(t-88.25)/0.25,if(lt(t,88.75),0.1740+(0.0200)*(t-88.5)/0.25,if(lt(t,89.0),0.1940+(0.0227)*(t-88.75)/0.25,if(lt(t,89.25),0.2167+(0.0195)*(t-89.0)/0.25,if(lt(t,89.5),0.2362+(0.0252)*(t-89.25)/0.25,if(lt(t,89.75),0.2614+(0.0322)*(t-89.5)/0.25,if(lt(t,90.0),0.2936+(0.0377)*(t-89.75)/0.25,if(lt(t,90.25),0.3313+(0.0340)*(t-90.0)/0.25,if(lt(t,90.5),0.3653+(0.0309)*(t-90.25)/0.25,if(lt(t,90.75),0.3963+(0.0355)*(t-90.5)/0.25,if(lt(t,91.0),0.4318+(0.0403)*(t-90.75)/0.25,if(lt(t,91.25),0.4721+(0.0386)*(t-91.0)/0.25,if(lt(t,91.5),0.5106+(0.0339)*(t-91.25)/0.25,if(lt(t,91.75),0.5445+(0.0444)*(t-91.5)/0.25,if(lt(t,92.0),0.5889+(0.0511)*(t-91.75)/0.25,if(lt(t,92.25),0.6401+(0.0604)*(t-92.0)/0.25,if(lt(t,92.5),0.7004+(0.0582)*(t-92.25)/0.25,if(lt(t,92.75),0.7586+(0.0604)*(t-92.5)/0.25,if(lt(t,93.0),0.8190+(0.0796)*(t-92.75)/0.25,if(lt(t,93.25),0.8986+(0.0836)*(t-93.0)/0.25,if(lt(t,93.5),0.9822+(0.0790)*(t-93.25)/0.25,if(lt(t,93.75),1.0612+(0.0618)*(t-93.5)/0.25,if(lt(t,94.0),1.1230+(0.0679)*(t-93.75)/0.25,if(lt(t,94.25),1.1909+(0.0991)*(t-94.0)/0.25,if(lt(t,94.5),1.2901+(0.1138)*(t-94.25)/0.25,if(lt(t,94.75),1.4038+(0.0928)*(t-94.5)/0.25,if(lt(t,95.0),1.4966+(0.0810)*(t-94.75)/0.25,if(lt(t,95.25),1.5776+(0.0752)*(t-95.0)/0.25,if(lt(t,95.5),1.6528+(0.1073)*(t-95.25)/0.25,if(lt(t,95.75),1.7602+(0.1118)*(t-95.5)/0.25,if(lt(t,96.0),1.8719+(0.1156)*(t-95.75)/0.25,if(lt(t,96.25),1.9875+(0.1263)*(t-96.0)/0.25,if(lt(t,96.5),2.1137+(0.1432)*(t-96.25)/0.25,if(lt(t,96.75),2.2569+(0.1583)*(t-96.5)/0.25,if(lt(t,97.0),2.4153+(0.1689)*(t-96.75)/0.25,if(lt(t,97.25),2.5842+(0.2118)*(t-97.0)/0.25,if(lt(t,97.5),2.7959+(0.2757)*(t-97.25)/0.25,if(lt(t,97.75),3.0717+(0.2989)*(t-97.5)/0.25,if(lt(t,98.0),3.3706+(0.3341)*(t-97.75)/0.25,if(lt(t,98.25),3.7047+(0.4008)*(t-98.0)/0.25,if(lt(t,98.5),4.1055+(0.4964)*(t-98.25)/0.25,if(lt(t,98.75),4.6019+(0.5448)*(t-98.5)/0.25,if(lt(t,99.0),5.1467+(0.5423)*(t-98.75)/0.25,5.68908)))))))))))))))))))))))))))))))))))))))))))))))))))':c=same"
       }
@@ -1512,7 +1579,7 @@
       }
      }
     ],
-    "# comment": "The album fades this recording out from 86.75 s (recording time) and stops at 100.9 s, but the game file is the unfaded master: it follows the recording at one lag (+1.50107 s) right through the album's fade (waveform correlation 0.93-0.97 at game 96.75-97.25, where the album is already 50 dB down) with its level held. The old layout read segment 1 into that fade (join at 95.40 flagged 'outgoing runs out before the join', 16.4 dB quiet in the second before it, envelope hole 19.0 dB). The piece repeats every 56.889 s (two 28.44 s phrases; the loop is exactly two repeats, so the re-entry is two repeats back, not one loop period -- bass is sample-identical at that period, the mid-range parts differ between passes, and the game is a separate render whose mids match either pass only ~0.5). Now: segment 1 at +1.50107 s with the album's fade undone (energy ratio against the game, per 0.25 s, 3-point smoothed and monotone, as an aeval gain in recording time, same filter on both segments so they share one gain), switching at game 97.4 s with a 0.3 s linear crossfade to the pass one repeat earlier (offset 42.01215, lag -55.38785), which keeps the loop wrap on the 56.889 s period. Against the game's own file: weighted 0.9499 -> 0.9535, hole 19.0 -> 1.4 dB, join clean (window 0.950 vs control 0.960, 0.6 dB quiet before / 0.3 dB loud after), tail 0.923 -> 0.939 vs control 0.952 (the last 18 s have no unfaded recording; the earlier pass stands in). Build lag within 2 samples and level within 0.3 dB of the game across the whole file. Switching before the fade instead (85.4 s) cleared the flag too but scored 0.9516; offsets 2 ms either side scored lower."
+    "# comment": "The album fades this recording out from 86.75 s (recording time) and stops at 100.9 s, but the game file is the unfaded master: it follows the recording at one lag (+1.50107 s) right through the album's fade (waveform correlation 0.93-0.97 at game 96.75-97.25, where the album is already 50 dB down) with its level held. The old layout read segment 1 into that fade (join at 95.40 flagged 'outgoing runs out before the join', 16.4 dB quiet in the second before it, envelope hole 19.0 dB). The piece repeats every 56.889 s (two 28.44 s phrases; the loop is exactly two repeats, so the re-entry is two repeats back, not one loop period -- bass is sample-identical at that period, the mid-range parts differ between passes, and the game is a separate render whose mids match either pass only ~0.5). Now: segment 1 at +1.50107 s with the album's fade undone (energy ratio against the game, per 0.25 s, 3-point smoothed and monotone, as an aeval gain in recording time, same filter on both segments so they share one gain), switching at game 97.4 s with a 0.3 s linear crossfade to the pass one repeat earlier (offset 42.01215, lag -55.38785), which keeps the loop wrap on the 56.889 s period. Against the game's own file: weighted 0.9499 -> 0.9535, hole 19.0 -> 1.4 dB, join clean (window 0.950 vs control 0.960, 0.6 dB quiet before / 0.3 dB loud after), tail 0.923 -> 0.939 vs control 0.952 (the last 18 s have no unfaded recording; the earlier pass stands in). Build lag within 2 samples and level within 0.3 dB of the game across the whole file. Switching before the fade instead (85.4 s) cleared the flag too but scored 0.9516; offsets 2 ms either side scored lower. Agent 21 (join detector, 'arrangement differs at 95.2 s'): confirmed model-free -- over game 93.98-95.45 s the game is the EARLIER pass (lag -55.38785: correlation 0.82-0.97, least-squares gain on the later pass ~0) and only then returns to the unfaded later pass (0.88-0.98 at 95.9-97.4 s) before the 97.4 s switch; both bass and mids follow the earlier pass there. Now the earlier pass is inserted over 93.93-95.45 s (0.1 s linear crossfades both sides, same filter): build-vs-game correlation over 94.0-95.25 s 0.51-0.88 -> 0.85-0.97, level within 0.3 dB, detector flag cleared (shape 0.228 -> 0.122, under 0.14), weighted 0.9535 -> 0.9536, hole 1.44 dB and tail 0.939 vs 0.952 unchanged, all three joins clean."
    }
   },
   {
