@@ -96,6 +96,25 @@ namespace {
 		return {info.LoopStartBlockIndex, info.LoopEndBlockIndex};
 	}
 
+	// The source's channel layout as ffmpeg names it ("stereo", "mono"), or empty.
+	std::wstring probe_channel_layout(const std::filesystem::path& ffprobe, const std::filesystem::path& file) {
+		try {
+			const auto bytes = run_process_capture_stdout(ffprobe, {
+				L"-v", L"error",
+				L"-select_streams", L"a:0",
+				L"-show_entries", L"stream=channel_layout",
+				L"-of", L"default=noprint_wrappers=1:nokey=1",
+				file.wstring(),
+			});
+			std::wstring text(bytes.begin(), bytes.end());
+			while (!text.empty() && (text.back() == L'\n' || text.back() == L'\r' || text.back() == L' '))
+				text.pop_back();
+			return text == L"unknown" ? std::wstring() : text;
+		} catch (const std::exception&) {
+			return {};
+		}
+	}
+
 	int probe_sample_rate(const std::filesystem::path& ffprobe, const std::filesystem::path& file) {
 		const auto bytes = run_process_capture_stdout(ffprobe, {
 			L"-v", L"error",
@@ -2384,7 +2403,18 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 				const auto rawPath = tempDir / std::format(L"scdtool_apply_{}.f32", tempFileCounter.fetch_add(1));
 				keepTemp(rawPath);
-				floats = decode_source_to_floats(ffmpegPath, job.SourcePath, channels, samplingRate, rawPath, job.Filter);
+				// An aeval leaves its output's channel layout unset even with c=same, and the -ac
+				// fold then keeps only the left channel: BGM_ORCH_169's mono build correlated
+				// 0.9996 with the recording's left and 0.886 with its fold. Restore the source's
+				// own layout after one. Only there -- a filter that changes the channel count on
+				// purpose must keep what it made.
+				const auto filter = [&] {
+					if (job.Filter.find(L"aeval") == std::wstring::npos)
+						return job.Filter;
+					const auto layout = probe_channel_layout(ffprobePath, job.SourcePath);
+					return layout.empty() ? job.Filter : job.Filter + L",aformat=channel_layouts=" + layout;
+				}();
+				floats = decode_source_to_floats(ffmpegPath, job.SourcePath, channels, samplingRate, rawPath, filter);
 
 				// Rebase the source onto the game's timeline before anything else.
 				//
@@ -2458,7 +2488,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 						const auto templateLufs = measure_loudness(ffmpegPath, templateAudio, templateStartSeconds, spanSeconds,
 							channels < templateChannels ? fold : std::wstring());
 						const auto sourceLufs = measure_loudness(ffmpegPath, job.SourcePath, sourceStartSeconds, spanSeconds,
-							job.Filter.empty() ? fold : job.Filter + L"," + fold);
+							filter.empty() ? fold : filter + L"," + fold);
 						gainDb = std::clamp(templateLufs - sourceLufs, -maxGainDb, maxGainDb);
 
 						const auto requestedDb = gainDb;
@@ -2467,8 +2497,13 @@ int cmd_apply(const std::vector<std::string>& args) {
 							v = static_cast<float>(v * gain);
 
 						// Applying the gain must not clip; if it would, back off uniformly rather
-						// than letting the encoder fold peaks over.
-						if (const auto peak = floats.empty() ? 0.f : *std::ranges::max_element(floats, [](float a, float b) { return std::abs(a) < std::abs(b); });
+						// than letting the encoder fold peaks over. Judged only over what is heard
+						// -- to the loop end, or the game's length -- as the segment path does: a
+						// summed copy running past the loop end held BGM_EX4_Ban_Nidhogg_01 at
+						// -2.9 dB where +0.4 was wanted.
+						const auto heard = (std::min)(floats.size(), spanTo * channels);
+						if (const auto peak = heard == 0 ? 0.f : *std::ranges::max_element(floats.begin(), floats.begin() + static_cast<ptrdiff_t>(heard),
+								[](float a, float b) { return std::abs(a) < std::abs(b); });
 							std::abs(peak) > 1.f) {
 							const auto scale = 1.f / std::abs(peak);
 							for (auto& v : floats)
