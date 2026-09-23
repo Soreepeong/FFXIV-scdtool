@@ -4303,7 +4303,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 0.37,
-        "pcmHash": "262a89cb"
+        "pcmHash": "262a89cb",
+        "driftPpm": 12.5
        }
       },
       "channels": [
@@ -4557,7 +4558,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 0.335,
-        "pcmHash": "605518bd"
+        "pcmHash": "605518bd",
+        "driftPpm": -9.1
        }
       },
       "channels": [

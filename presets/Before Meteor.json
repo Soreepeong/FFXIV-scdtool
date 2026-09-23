@@ -3492,7 +3492,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 0.37,
-        "pcmHash": "a39d1e4b"
+        "pcmHash": "a39d1e4b",
+        "driftPpm": 12.5
        }
       },
       "channels": [

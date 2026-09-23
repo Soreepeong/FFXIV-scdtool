@@ -173,7 +173,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.99,
-        "pcmHash": "0f102a77"
+        "pcmHash": "0f102a77",
+        "driftPpm": 12.5
        }
       },
       "channels": [
@@ -205,7 +206,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.99,
-        "pcmHash": "0f102a77"
+        "pcmHash": "0f102a77",
+        "driftPpm": 12.5
        }
       },
       "channels": [
@@ -310,7 +312,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.59,
-        "pcmHash": "f8c7c7cf"
+        "pcmHash": "f8c7c7cf",
+        "driftPpm": 12.7
        }
       },
       "channels": [
@@ -963,7 +966,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.91,
-        "pcmHash": "472da9b9"
+        "pcmHash": "472da9b9",
+        "driftPpm": 12.7
        }
       },
       "channels": [
@@ -995,7 +999,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 2.225,
-        "pcmHash": "cced55ae"
+        "pcmHash": "cced55ae",
+        "driftPpm": 12.7
        }
       },
       "channels": [
@@ -1027,7 +1032,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 2.38,
-        "pcmHash": "c029aff7"
+        "pcmHash": "c029aff7",
+        "driftPpm": 12.4
        }
       },
       "channels": [
@@ -1133,7 +1139,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.525,
-        "pcmHash": "ecece5d3"
+        "pcmHash": "ecece5d3",
+        "driftPpm": 12.7
        }
       },
       "channels": [
@@ -1219,7 +1226,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.255,
-        "pcmHash": "6eabbbfb"
+        "pcmHash": "6eabbbfb",
+        "driftPpm": 12.4
        }
       },
       "channels": [
@@ -1356,7 +1364,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 2.07,
-        "pcmHash": "6556b5ea"
+        "pcmHash": "6556b5ea",
+        "driftPpm": 7.2
        }
       },
       "channels": [
@@ -1426,7 +1435,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.77,
-        "pcmHash": "46408e5e"
+        "pcmHash": "46408e5e",
+        "driftPpm": 12.5
        }
       },
       "channels": [
@@ -1533,7 +1543,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 2.2,
-        "pcmHash": "b3156a58"
+        "pcmHash": "b3156a58",
+        "driftPpm": 12.6
        }
       },
       "channels": [
@@ -1674,7 +1685,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.585,
-        "pcmHash": "c189d305"
+        "pcmHash": "c189d305",
+        "driftPpm": 13.0
        }
       },
       "channels": [
@@ -1779,7 +1791,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 2.025,
-        "pcmHash": "09ae3096"
+        "pcmHash": "09ae3096",
+        "driftPpm": 12.8
        }
       },
       "channels": [
@@ -1815,7 +1828,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 2.65,
-        "pcmHash": "632c92e0"
+        "pcmHash": "632c92e0",
+        "driftPpm": 7.3
        }
       },
       "channels": [
@@ -2242,7 +2256,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 2.375,
-        "pcmHash": "72bf459d"
+        "pcmHash": "72bf459d",
+        "driftPpm": 12.8
        }
       },
       "channels": [
@@ -2351,7 +2366,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 136.225,
-        "pcmHash": "15605499"
+        "pcmHash": "15605499",
+        "driftPpm": 12.8
        }
       },
       "channels": [
@@ -2422,7 +2438,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 2.25,
-        "pcmHash": "247236c6"
+        "pcmHash": "247236c6",
+        "driftPpm": 12.8
        }
       },
       "channels": [
@@ -3050,7 +3067,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 2.08,
-        "pcmHash": "0c5b9d51"
+        "pcmHash": "0c5b9d51",
+        "driftPpm": 6.9
        }
       },
       "channels": [
@@ -3353,7 +3371,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.94,
-        "pcmHash": "50a68b43"
+        "pcmHash": "50a68b43",
+        "driftPpm": 11.8
        }
       },
       "channels": [
@@ -3880,7 +3899,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.64,
-        "pcmHash": "427afdd3"
+        "pcmHash": "427afdd3",
+        "driftPpm": 11.8
        }
       },
       "channels": [

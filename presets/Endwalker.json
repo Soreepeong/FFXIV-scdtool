@@ -1920,7 +1920,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 0.805,
-        "pcmHash": "794a21f9"
+        "pcmHash": "794a21f9",
+        "driftPpm": -13.0
        }
       },
       "channels": [
@@ -2509,7 +2510,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.6,
-        "pcmHash": "613bc304"
+        "pcmHash": "613bc304",
+        "driftPpm": 12.9
        }
       },
       "channels": [

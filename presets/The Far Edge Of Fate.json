@@ -752,7 +752,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 145.195,
-        "pcmHash": "a496bcb4"
+        "pcmHash": "a496bcb4",
+        "driftPpm": 13.0
        }
       },
       "channels": [
@@ -791,7 +792,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.255,
-        "pcmHash": "a496bcb4"
+        "pcmHash": "a496bcb4",
+        "driftPpm": 12.8
        }
       },
       "channels": [
@@ -826,7 +828,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.73,
-        "pcmHash": "5198422c"
+        "pcmHash": "5198422c",
+        "driftPpm": 12.7
        }
       },
       "channels": [
@@ -858,7 +861,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.715,
-        "pcmHash": "5198422c"
+        "pcmHash": "5198422c",
+        "driftPpm": 12.7
        }
       },
       "channels": [
@@ -957,7 +961,8 @@
       "sourceOffsets": {
        "source": {
         "offset": 1.71,
-        "pcmHash": "427f2406"
+        "pcmHash": "427f2406",
+        "driftPpm": 12.5
        }
       },
       "channels": [
