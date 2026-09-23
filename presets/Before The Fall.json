@@ -1472,7 +1472,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.5,
+        "offset": 1.50107,
         "pcmHash": "e4229aed"
        }
       },
@@ -1486,13 +1486,14 @@
         "channel": 1
        }
       ],
-      "length": 95.4
+      "length": 97.4,
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,86.75),0,if(lt(t,87.0),0.0000+(0.0409)*(t-86.75)/0.25,if(lt(t,87.25),0.0409+(0.0403)*(t-87.0)/0.25,if(lt(t,87.5),0.0813+(0.0367)*(t-87.25)/0.25,if(lt(t,87.75),0.1180+(0.0273)*(t-87.5)/0.25,if(lt(t,88.0),0.1453+(0.0098)*(t-87.75)/0.25,if(lt(t,88.25),0.1551+(0.0075)*(t-88.0)/0.25,if(lt(t,88.5),0.1626+(0.0114)*(t-88.25)/0.25,if(lt(t,88.75),0.1740+(0.0200)*(t-88.5)/0.25,if(lt(t,89.0),0.1940+(0.0227)*(t-88.75)/0.25,if(lt(t,89.25),0.2167+(0.0195)*(t-89.0)/0.25,if(lt(t,89.5),0.2362+(0.0252)*(t-89.25)/0.25,if(lt(t,89.75),0.2614+(0.0322)*(t-89.5)/0.25,if(lt(t,90.0),0.2936+(0.0377)*(t-89.75)/0.25,if(lt(t,90.25),0.3313+(0.0340)*(t-90.0)/0.25,if(lt(t,90.5),0.3653+(0.0309)*(t-90.25)/0.25,if(lt(t,90.75),0.3963+(0.0355)*(t-90.5)/0.25,if(lt(t,91.0),0.4318+(0.0403)*(t-90.75)/0.25,if(lt(t,91.25),0.4721+(0.0386)*(t-91.0)/0.25,if(lt(t,91.5),0.5106+(0.0339)*(t-91.25)/0.25,if(lt(t,91.75),0.5445+(0.0444)*(t-91.5)/0.25,if(lt(t,92.0),0.5889+(0.0511)*(t-91.75)/0.25,if(lt(t,92.25),0.6401+(0.0604)*(t-92.0)/0.25,if(lt(t,92.5),0.7004+(0.0582)*(t-92.25)/0.25,if(lt(t,92.75),0.7586+(0.0604)*(t-92.5)/0.25,if(lt(t,93.0),0.8190+(0.0796)*(t-92.75)/0.25,if(lt(t,93.25),0.8986+(0.0836)*(t-93.0)/0.25,if(lt(t,93.5),0.9822+(0.0790)*(t-93.25)/0.25,if(lt(t,93.75),1.0612+(0.0618)*(t-93.5)/0.25,if(lt(t,94.0),1.1230+(0.0679)*(t-93.75)/0.25,if(lt(t,94.25),1.1909+(0.0991)*(t-94.0)/0.25,if(lt(t,94.5),1.2901+(0.1138)*(t-94.25)/0.25,if(lt(t,94.75),1.4038+(0.0928)*(t-94.5)/0.25,if(lt(t,95.0),1.4966+(0.0810)*(t-94.75)/0.25,if(lt(t,95.25),1.5776+(0.0752)*(t-95.0)/0.25,if(lt(t,95.5),1.6528+(0.1073)*(t-95.25)/0.25,if(lt(t,95.75),1.7602+(0.1118)*(t-95.5)/0.25,if(lt(t,96.0),1.8719+(0.1156)*(t-95.75)/0.25,if(lt(t,96.25),1.9875+(0.1263)*(t-96.0)/0.25,if(lt(t,96.5),2.1137+(0.1432)*(t-96.25)/0.25,if(lt(t,96.75),2.2569+(0.1583)*(t-96.5)/0.25,if(lt(t,97.0),2.4153+(0.1689)*(t-96.75)/0.25,if(lt(t,97.25),2.5842+(0.2118)*(t-97.0)/0.25,if(lt(t,97.5),2.7959+(0.2757)*(t-97.25)/0.25,if(lt(t,97.75),3.0717+(0.2989)*(t-97.5)/0.25,if(lt(t,98.0),3.3706+(0.3341)*(t-97.75)/0.25,if(lt(t,98.25),3.7047+(0.4008)*(t-98.0)/0.25,if(lt(t,98.5),4.1055+(0.4964)*(t-98.25)/0.25,if(lt(t,98.75),4.6019+(0.5448)*(t-98.5)/0.25,if(lt(t,99.0),5.1467+(0.5423)*(t-98.75)/0.25,5.68908)))))))))))))))))))))))))))))))))))))))))))))))))))':c=same"
+      }
      },
      {
       "sourceOffsets": {
-       "source": {
-        "offset": 40.0
-       }
+       "source": 42.01215
       },
       "channels": [
        {
@@ -1504,10 +1505,14 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 4.0
+      "crossfadeSeconds": 0.3,
+      "crossfadeShape": "linear",
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,86.75),0,if(lt(t,87.0),0.0000+(0.0409)*(t-86.75)/0.25,if(lt(t,87.25),0.0409+(0.0403)*(t-87.0)/0.25,if(lt(t,87.5),0.0813+(0.0367)*(t-87.25)/0.25,if(lt(t,87.75),0.1180+(0.0273)*(t-87.5)/0.25,if(lt(t,88.0),0.1453+(0.0098)*(t-87.75)/0.25,if(lt(t,88.25),0.1551+(0.0075)*(t-88.0)/0.25,if(lt(t,88.5),0.1626+(0.0114)*(t-88.25)/0.25,if(lt(t,88.75),0.1740+(0.0200)*(t-88.5)/0.25,if(lt(t,89.0),0.1940+(0.0227)*(t-88.75)/0.25,if(lt(t,89.25),0.2167+(0.0195)*(t-89.0)/0.25,if(lt(t,89.5),0.2362+(0.0252)*(t-89.25)/0.25,if(lt(t,89.75),0.2614+(0.0322)*(t-89.5)/0.25,if(lt(t,90.0),0.2936+(0.0377)*(t-89.75)/0.25,if(lt(t,90.25),0.3313+(0.0340)*(t-90.0)/0.25,if(lt(t,90.5),0.3653+(0.0309)*(t-90.25)/0.25,if(lt(t,90.75),0.3963+(0.0355)*(t-90.5)/0.25,if(lt(t,91.0),0.4318+(0.0403)*(t-90.75)/0.25,if(lt(t,91.25),0.4721+(0.0386)*(t-91.0)/0.25,if(lt(t,91.5),0.5106+(0.0339)*(t-91.25)/0.25,if(lt(t,91.75),0.5445+(0.0444)*(t-91.5)/0.25,if(lt(t,92.0),0.5889+(0.0511)*(t-91.75)/0.25,if(lt(t,92.25),0.6401+(0.0604)*(t-92.0)/0.25,if(lt(t,92.5),0.7004+(0.0582)*(t-92.25)/0.25,if(lt(t,92.75),0.7586+(0.0604)*(t-92.5)/0.25,if(lt(t,93.0),0.8190+(0.0796)*(t-92.75)/0.25,if(lt(t,93.25),0.8986+(0.0836)*(t-93.0)/0.25,if(lt(t,93.5),0.9822+(0.0790)*(t-93.25)/0.25,if(lt(t,93.75),1.0612+(0.0618)*(t-93.5)/0.25,if(lt(t,94.0),1.1230+(0.0679)*(t-93.75)/0.25,if(lt(t,94.25),1.1909+(0.0991)*(t-94.0)/0.25,if(lt(t,94.5),1.2901+(0.1138)*(t-94.25)/0.25,if(lt(t,94.75),1.4038+(0.0928)*(t-94.5)/0.25,if(lt(t,95.0),1.4966+(0.0810)*(t-94.75)/0.25,if(lt(t,95.25),1.5776+(0.0752)*(t-95.0)/0.25,if(lt(t,95.5),1.6528+(0.1073)*(t-95.25)/0.25,if(lt(t,95.75),1.7602+(0.1118)*(t-95.5)/0.25,if(lt(t,96.0),1.8719+(0.1156)*(t-95.75)/0.25,if(lt(t,96.25),1.9875+(0.1263)*(t-96.0)/0.25,if(lt(t,96.5),2.1137+(0.1432)*(t-96.25)/0.25,if(lt(t,96.75),2.2569+(0.1583)*(t-96.5)/0.25,if(lt(t,97.0),2.4153+(0.1689)*(t-96.75)/0.25,if(lt(t,97.25),2.5842+(0.2118)*(t-97.0)/0.25,if(lt(t,97.5),2.7959+(0.2757)*(t-97.25)/0.25,if(lt(t,97.75),3.0717+(0.2989)*(t-97.5)/0.25,if(lt(t,98.0),3.3706+(0.3341)*(t-97.75)/0.25,if(lt(t,98.25),3.7047+(0.4008)*(t-98.0)/0.25,if(lt(t,98.5),4.1055+(0.4964)*(t-98.25)/0.25,if(lt(t,98.75),4.6019+(0.5448)*(t-98.5)/0.25,if(lt(t,99.0),5.1467+(0.5423)*(t-98.75)/0.25,5.68908)))))))))))))))))))))))))))))))))))))))))))))))))))':c=same"
+      }
      }
     ],
-    "# comment": "the recording stops at 99.4s of this 117.1s target, and the uncovered tail is a repeat of material earlier in the same recording. Built as two segments with the seam pulled 4s back from where the recording runs out, so the first segment plays its own ending under the second rather than stopping dead at it -- which is what the game does, and measures better than joining at the end. Against the game's own file, at full length with the loop intact: 0.9499, against 0.9393 for a plain join. The short build scores 0.9415, but only because the measure compares the span the two files share -- it loses 17.8s of loop. Seam jump is well under the threshold for an audible click. `presets-manual/` accepts the shortfall instead; this keeps its source and finishes the tail."
+    "# comment": "The album fades this recording out from 86.75 s (recording time) and stops at 100.9 s, but the game file is the unfaded master: it follows the recording at one lag (+1.50107 s) right through the album's fade (waveform correlation 0.93-0.97 at game 96.75-97.25, where the album is already 50 dB down) with its level held. The old layout read segment 1 into that fade (join at 95.40 flagged 'outgoing runs out before the join', 16.4 dB quiet in the second before it, envelope hole 19.0 dB). The piece repeats every 56.889 s (two 28.44 s phrases; the loop is exactly two repeats, so the re-entry is two repeats back, not one loop period -- bass is sample-identical at that period, the mid-range parts differ between passes, and the game is a separate render whose mids match either pass only ~0.5). Now: segment 1 at +1.50107 s with the album's fade undone (energy ratio against the game, per 0.25 s, 3-point smoothed and monotone, as an aeval gain in recording time, same filter on both segments so they share one gain), switching at game 97.4 s with a 0.3 s linear crossfade to the pass one repeat earlier (offset 42.01215, lag -55.38785), which keeps the loop wrap on the 56.889 s period. Against the game's own file: weighted 0.9499 -> 0.9535, hole 19.0 -> 1.4 dB, join clean (window 0.950 vs control 0.960, 0.6 dB quiet before / 0.3 dB loud after), tail 0.923 -> 0.939 vs control 0.952 (the last 18 s have no unfaded recording; the earlier pass stands in). Build lag within 2 samples and level within 0.3 dB of the game across the whole file. Switching before the fade instead (85.4 s) cleared the flag too but scored 0.9516; offsets 2 ms either side scored lower."
    }
   },
   {
