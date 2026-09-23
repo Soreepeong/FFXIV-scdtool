@@ -490,165 +490,423 @@
    }
   },
   {
-   "source": [
-    "^00007\\.",
-    "TH_008",
-    "Ride the Rhythm",
-    "Ride the Rhythm ～至天の座アルカディア：クルーザー級～"
-   ],
+   "source": {
+    "TH_008": [
+     "^00007\\.",
+     "TH_008",
+     "Ride the Rhythm",
+     "Ride the Rhythm ～至天の座アルカディア：クルーザー級～"
+    ]
+   },
    "target": {
     "path": "music/ex5/timeline/BGM_EX5_Raid_08.scd",
     "segments": [
      {
       "sourceOffsets": {
-       "source": {
-        "offset": 3.51,
+       "TH_008": {
+        "offset": 3.5073,
         "pcmHash": "2ac6bf4f"
        }
       },
       "channels": [
        {
-        "source": "source",
+        "source": "TH_008",
         "channel": 0
        },
        {
-        "source": "source",
+        "source": "TH_008",
         "channel": 1
        }
-      ]
+      ],
+      "length": 52.0
+     },
+     {
+      "sourceOffsets": {
+       "TH_008": {
+        "offset": 23.5075,
+        "pcmHash": "2ac6bf4f"
+       }
+      },
+      "channels": [
+       {
+        "source": "TH_008",
+        "channel": 0
+       },
+       {
+        "source": "TH_008",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.898"
+    "# comment": "timeline piece of TH_008. Tiled from the recording by verify's own log-mel measure over every lag the 1 s lag map found (scratch/_agent/th008_tile_lm.py; the waveform picks other phrases, led by the bass, and scores worse): 0.00-52.00 TH_008 at lag +3.5073; 52.00-56.00 TH_008 at lag -28.4925. 50 ms linear crossfades. Before: weighted 0.8976, head 0.9755. After: weighted 0.9395, head 0.9737, loop 0.8648, joins clean."
    }
   },
   {
-   "source": [
-    "^00007\\.",
-    "TH_008",
-    "Ride the Rhythm",
-    "Ride the Rhythm ～至天の座アルカディア：クルーザー級～"
-   ],
+   "source": {
+    "TH_008": [
+     "^00007\\.",
+     "TH_008",
+     "Ride the Rhythm",
+     "Ride the Rhythm ～至天の座アルカディア：クルーザー級～"
+    ]
+   },
    "target": {
     "path": "music/ex5/timeline/BGM_EX5_Raid_09.scd",
     "segments": [
      {
       "sourceOffsets": {
-       "source": {
-        "offset": 52.51,
-        "pcmHash": "2ac6bf4f",
-        "driftPpm": 12.6
+       "target": 0.0
+      },
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 2.75
+     },
+     {
+      "sourceOffsets": {
+       "TH_008": {
+        "offset": 55.2584,
+        "pcmHash": "2ac6bf4f"
        }
       },
       "channels": [
        {
-        "source": "source",
+        "source": "TH_008",
         "channel": 0
        },
        {
-        "source": "source",
+        "source": "TH_008",
         "channel": 1
        }
-      ]
+      ],
+      "length": 32.25,
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear"
+     },
+     {
+      "sourceOffsets": {
+       "TH_008": {
+        "offset": 55.4948,
+        "pcmHash": "2ac6bf4f"
+       }
+      },
+      "channels": [
+       {
+        "source": "TH_008",
+        "channel": 0
+       },
+       {
+        "source": "TH_008",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.856; offset corrected +212.510s -> +52.510s by re-deriving the alignment and judging it on the intro (0.5564 -> 0.6064)"
+    "# comment": "timeline piece of TH_008. Tiled from the recording by verify's own log-mel measure over every lag the 1 s lag map found (scratch/_agent/th008_tile_lm.py; the waveform picks other phrases, led by the bass, and scores worse): 0.00-2.75 the game's own audio (no TH_008 there); 2.75-35.00 TH_008 at lag +52.5084; 35.00-39.00 TH_008 at lag +20.4948. 50 ms linear crossfades. Before: weighted 0.8880, head 0.1070. After: weighted 0.9668, head 0.9584, loop 0.9483, joins clean."
    }
   },
   {
-   "source": [
-    "^00007\\.",
-    "TH_008",
-    "Ride the Rhythm",
-    "Ride the Rhythm ～至天の座アルカディア：クルーザー級～"
-   ],
+   "source": {
+    "TH_008": [
+     "^00007\\.",
+     "TH_008",
+     "Ride the Rhythm",
+     "Ride the Rhythm ～至天の座アルカディア：クルーザー級～"
+    ]
+   },
    "target": {
     "path": "music/ex5/timeline/BGM_EX5_Raid_10.scd",
     "segments": [
      {
       "sourceOffsets": {
-       "source": {
-        "offset": 83.61,
+       "target": 0.0
+      },
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 3.5
+     },
+     {
+      "sourceOffsets": {
+       "TH_008": {
+        "offset": 87.1089,
         "pcmHash": "2ac6bf4f"
        }
       },
       "channels": [
        {
-        "source": "source",
+        "source": "TH_008",
         "channel": 0
        },
        {
-        "source": "source",
+        "source": "TH_008",
         "channel": 1
        }
-      ]
+      ],
+      "length": 64.25,
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear"
+     },
+     {
+      "sourceOffsets": {
+       "TH_008": {
+        "offset": 247.3609,
+        "pcmHash": "2ac6bf4f"
+       }
+      },
+      "channels": [
+       {
+        "source": "TH_008",
+        "channel": 0
+       },
+       {
+        "source": "TH_008",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.875"
+    "# comment": "timeline piece of TH_008. Tiled from the recording by verify's own log-mel measure over every lag the 1 s lag map found (scratch/_agent/th008_tile_lm.py; the waveform picks other phrases, led by the bass, and scores worse): 0.00-3.50 the game's own audio (no TH_008 there); 3.50-67.75 TH_008 at lag +83.6089; 67.75-68.66 TH_008 at lag +179.6109. 50 ms linear crossfades. Before: weighted 0.8955, head 0.1447. After: weighted 0.9205, head 0.9543, loop 0.9430, joins clean."
    }
   },
   {
-   "source": [
-    "^00007\\.",
-    "TH_008",
-    "Ride the Rhythm",
-    "Ride the Rhythm ～至天の座アルカディア：クルーザー級～"
-   ],
+   "source": {
+    "TH_008": [
+     "^00007\\.",
+     "TH_008",
+     "Ride the Rhythm",
+     "Ride the Rhythm ～至天の座アルカディア：クルーザー級～"
+    ]
+   },
    "target": {
     "path": "music/ex5/timeline/BGM_EX5_Raid_11.scd",
     "segments": [
      {
       "sourceOffsets": {
-       "source": {
-        "offset": 163.61,
+       "target": 0.0
+      },
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 0.75
+     },
+     {
+      "sourceOffsets": {
+       "TH_008": {
+        "offset": 324.362,
         "pcmHash": "2ac6bf4f"
        }
       },
       "channels": [
        {
-        "source": "source",
+        "source": "TH_008",
         "channel": 0
        },
        {
-        "source": "source",
+        "source": "TH_008",
         "channel": 1
        }
-      ]
+      ],
+      "length": 35.25,
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear"
+     },
+     {
+      "sourceOffsets": {
+       "TH_008": {
+        "offset": 167.6099,
+        "pcmHash": "2ac6bf4f"
+       }
+      },
+      "channels": [
+       {
+        "source": "TH_008",
+        "channel": 0
+       },
+       {
+        "source": "TH_008",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.819"
+    "# comment": "timeline piece of TH_008. Tiled from the recording by verify's own log-mel measure over every lag the 1 s lag map found (scratch/_agent/th008_tile_lm.py; the waveform picks other phrases, led by the bass, and scores worse): 0.00-0.75 the game's own audio (no TH_008 there); 0.75-36.00 TH_008 at lag +323.6120; 36.00-38.90 TH_008 at lag +131.6099. 50 ms linear crossfades. Before: weighted 0.8387, head 0.6193. After: weighted 0.8931, head 0.6157, loop 0.7641, joins clean."
    }
   },
   {
-   "source": [
-    "^00007\\.",
-    "TH_008",
-    "Ride the Rhythm",
-    "Ride the Rhythm ～至天の座アルカディア：クルーザー級～"
-   ],
+   "source": {
+    "TH_008": [
+     "^00007\\.",
+     "TH_008",
+     "Ride the Rhythm",
+     "Ride the Rhythm ～至天の座アルカディア：クルーザー級～"
+    ]
+   },
+   "target": {
+    "path": "music/ex5/timeline/BGM_EX5_Raid_12.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "target": 0.0
+      },
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 3.75
+     },
+     {
+      "sourceOffsets": {
+       "TH_008": {
+        "offset": 359.2616,
+        "pcmHash": "2ac6bf4f"
+       }
+      },
+      "channels": [
+       {
+        "source": "TH_008",
+        "channel": 0
+       },
+       {
+        "source": "TH_008",
+        "channel": 1
+       }
+      ],
+      "length": 32.0,
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear"
+     },
+     {
+      "sourceOffsets": {
+       "TH_008": {
+        "offset": 359.2612,
+        "pcmHash": "2ac6bf4f"
+       }
+      },
+      "channels": [
+       {
+        "source": "TH_008",
+        "channel": 0
+       },
+       {
+        "source": "TH_008",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear"
+     }
+    ],
+    "# comment": "timeline piece of TH_008. Tiled from the recording by verify's own log-mel measure over every lag the 1 s lag map found (scratch/_agent/th008_tile_lm.py; the waveform picks other phrases, led by the bass, and scores worse): 0.00-3.75 the game's own audio (no TH_008 there); 3.75-35.75 TH_008 at lag +355.5116; 35.75-40.00 TH_008 at lag +323.5112. 50 ms linear crossfades. Before: not built (below the match bar). After: weighted 0.9331, head 1.0000, loop 0.8576, joins clean."
+   }
+  },
+  {
+   "source": {
+    "TH_008": [
+     "^00007\\.",
+     "TH_008",
+     "Ride the Rhythm",
+     "Ride the Rhythm ～至天の座アルカディア：クルーザー級～"
+    ]
+   },
    "target": {
     "path": "music/ex5/timeline/BGM_EX5_Raid_13.scd",
     "segments": [
      {
       "sourceOffsets": {
-       "source": {
-        "offset": 196.5,
-        "pcmHash": "2ac6bf4f",
-        "driftPpm": 13.1
+       "target": 0.0
+      },
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 3.0
+     },
+     {
+      "sourceOffsets": {
+       "TH_008": {
+        "offset": 199.5012,
+        "pcmHash": "2ac6bf4f"
        }
       },
       "channels": [
        {
-        "source": "source",
+        "source": "TH_008",
         "channel": 0
        },
        {
-        "source": "source",
+        "source": "TH_008",
         "channel": 1
        }
-      ]
+      ],
+      "length": 48.0,
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear"
+     },
+     {
+      "sourceOffsets": {
+       "TH_008": {
+        "offset": 55.496,
+        "pcmHash": "2ac6bf4f"
+       }
+      },
+      "channels": [
+       {
+        "source": "TH_008",
+        "channel": 0
+       },
+       {
+        "source": "TH_008",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.886"
+    "# comment": "timeline piece of TH_008. Tiled from the recording by verify's own log-mel measure over every lag the 1 s lag map found (scratch/_agent/th008_tile_lm.py; the waveform picks other phrases, led by the bass, and scores worse): 0.00-3.00 the game's own audio (no TH_008 there); 3.00-51.00 TH_008 at lag +196.5012; 51.00-54.97 TH_008 at lag +4.4960. 50 ms linear crossfades. Before: weighted 0.9047, head 0.2373. After: weighted 0.9555, head 0.9998, loop 0.9483, joins clean."
    }
   },
   {
