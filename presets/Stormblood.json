@@ -492,11 +492,11 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.73,
+        "offset": 1.730773,
         "pcmHash": "7bd3681b"
        }
       },
-      "length": 119.56,
+      "length": 129.6,
       "channels": [
        {
         "source": "source",
@@ -506,12 +506,15 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,123.0),-0.0000,if(lt(t,124.5),-0.0000+(0.0921)*(t-123.0)/1.5,if(lt(t,125.5),0.0921+(0.1151)*(t-124.5)/1.0,if(lt(t,126.5),0.2072+(0.0921)*(t-125.5)/1.0,if(lt(t,127.5),0.2993+(0.1497)*(t-126.5)/1.0,if(lt(t,128.5),0.4490+(0.0806)*(t-127.5)/1.0,if(lt(t,129.5),0.5296+(0.1497)*(t-128.5)/1.0,if(lt(t,130.5),0.6793+(0.3454)*(t-129.5)/1.0,if(lt(t,131.0),1.0247+(0.1612)*(t-130.5)/0.5,if(lt(t,132.0),1.1858+(0.2418)*(t-131.0)/1.0,if(lt(t,133.0),1.4276+(0.3914)*(t-132.0)/1.0,if(lt(t,133.5),1.8190+(0.3108)*(t-133.0)/0.5,if(lt(t,134.0),2.1299+(0.4375)*(t-133.5)/0.5,if(lt(t,134.5),2.5674+(0.3339)*(t-134.0)/0.5,if(lt(t,135.0),2.9013+(0.3339)*(t-134.5)/0.5,if(lt(t,135.5),3.2351+(0.4490)*(t-135.0)/0.5,3.6841)))))))))))))))))':c=same"
+      }
      },
      {
       "sourceOffsets": {
        "source": {
-        "offset": 2.7,
+        "offset": 12.736131,
         "pcmHash": "7bd3681b"
        }
       },
@@ -525,10 +528,14 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 16.0
+      "crossfadeSeconds": 3.0,
+      "crossfadeShape": "linear",
+      "sourceFilters": {
+       "source": "aeval='val(ch)*exp(if(lt(t,123.0),-0.0000,if(lt(t,124.5),-0.0000+(0.0921)*(t-123.0)/1.5,if(lt(t,125.5),0.0921+(0.1151)*(t-124.5)/1.0,if(lt(t,126.5),0.2072+(0.0921)*(t-125.5)/1.0,if(lt(t,127.5),0.2993+(0.1497)*(t-126.5)/1.0,if(lt(t,128.5),0.4490+(0.0806)*(t-127.5)/1.0,if(lt(t,129.5),0.5296+(0.1497)*(t-128.5)/1.0,if(lt(t,130.5),0.6793+(0.3454)*(t-129.5)/1.0,if(lt(t,131.0),1.0247+(0.1612)*(t-130.5)/0.5,if(lt(t,132.0),1.1858+(0.2418)*(t-131.0)/1.0,if(lt(t,133.0),1.4276+(0.3914)*(t-132.0)/1.0,if(lt(t,133.5),1.8190+(0.3108)*(t-133.0)/0.5,if(lt(t,134.0),2.1299+(0.4375)*(t-133.5)/0.5,if(lt(t,134.5),2.5674+(0.3339)*(t-134.0)/0.5,if(lt(t,135.0),2.9013+(0.3339)*(t-134.5)/0.5,if(lt(t,135.5),3.2351+(0.4490)*(t-135.0)/0.5,3.6841)))))))))))))))))':c=same"
+      }
      }
     ],
-    "# comment": "the game's file is 13.5s longer than this recording and ends by repeating itself: from 119.6s it replays the file from 1.0s (similarity 0.955, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 2.700s. The game built its loop-out by crossfading, so this does too: segment 1 keeps playing 16s past the seam at 119.560s, into the recording's own ending, while segment 2 fades in from 2.700s. Fitted over the target's own onsets (scratch/fit_loopout_crossfade.py): the join goes 0.939 hard-cut to 0.993, the whole file 0.983 to 0.984."
+    "# comment": "the game's file is 13.5s longer than this recording and ends by repeating itself: from 119.6s it replays the file from 1.0s (similarity 0.955, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 2.700s. The game built its loop-out by crossfading, so this does too: segment 1 keeps playing 16s past the seam at 119.560s, into the recording's own ending, while segment 2 fades in from 2.700s. Fitted over the target's own onsets (scratch/fit_loopout_crossfade.py): the join goes 0.939 hard-cut to 0.993, the whole file 0.983 to 0.984. Agent 23 (verify's join detector: 'arrangement differs from the game's at 128.1 s; level off -3.9 dB at 127.6 s; copies 4.6 ms apart'): the recording's ending restates its opening exactly one internal repeat (118.594642 s) later, and the album fades that restatement from about 123 s of recording time (-1 dB at 124.5, -5 at 129.5, -12 at 132, -25 at 134.5). The game has it unfaded (the game's level projected on the recording falls exactly as the restatement-minus-opening level does, within ~1 dB) and moves to the opening copy only over ~129.5-132.5 s (the game correlates with the restatement's own material, orthogonal to the opening, 0.3-0.8 up to 129.3 s, with the opening's from 129.8 s, the opening's alone from 132.8 s). The 16 s equal-power crossfade from 119.56 s left the build 1.4-4.8 dB under the game at 124-128 s with waveform correlation 0.45-0.67. Now both segments carry an aeval gain that undoes the album's fade (exp of a piecewise-linear dB curve in recording time; one filter string on both so they share one level match), the switch is at 129.6 s with a 3 s linear crossfade, and both offsets are to the sample: 1.730773 (the head lag was 0.773 ms) and 12.736131 (the opening copy at rec - game = -116.863869, 3.869 ms off the old one; the game's own loop wrap skips ~4.5 ms of the recording, which the build now follows). Weighted 0.9826 -> 0.9846, hole 4.7 -> 1.6 dB, join window 0.974 -> 0.981, head 0.949 -> 0.960, at-loop 0.992 -> 0.998, detector flags cleared (shape 0.07, copies 0.01 ms apart); build vs game waveform correlation 0.92-0.97 over 121-133 s (was 0.45-0.95). The tail stays under its control (0.971 vs 0.983, as before): the game's last 16 s correlate only 0.6-0.8 even with its own head one loop back -- a different mix, not something a layout can follow."
    }
   },
   {
@@ -1907,11 +1914,11 @@
      {
       "sourceOffsets": {
        "SB_FFXIV_046": {
-        "offset": 2.37,
+        "offset": 2.371955,
         "pcmHash": "72bf459d"
        }
       },
-      "length": 420.68,
+      "length": 420.0,
       "channels": [
        {
         "source": "SB_FFXIV_046",
@@ -1921,17 +1928,21 @@
         "source": "SB_FFXIV_046",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "SB_FFXIV_046": "aresample=78400,asetrate=78401"
+      }
      },
      {
       "sourceOffsets": {
        "SB_FFXIV_026": {
-        "offset": 2.22,
+        "offset": 1.537721,
         "pcmHash": "ecece5d3"
        }
       },
-      "length": 158.66,
-      "crossfadeSeconds": 1.0,
+      "length": 159.25,
+      "crossfadeSeconds": 0.0,
+      "fadeInSeconds": 0.0,
       "channels": [
        {
         "source": "SB_FFXIV_026",
@@ -1941,17 +1952,21 @@
         "source": "SB_FFXIV_026",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "SB_FFXIV_026": "aresample=78400,asetrate=78401,afade=t=out:st=163.538:d=3.7"
+      }
      },
      {
       "sourceOffsets": {
        "SB_FFXIV_010": {
-        "offset": 2.1,
+        "offset": 2.007291,
         "pcmHash": "24ded18d"
        }
       },
-      "length": 125.52,
-      "crossfadeSeconds": 0.25,
+      "length": 72.75,
+      "crossfadeSeconds": 0.0,
+      "fadeInSeconds": 0.0,
       "channels": [
        {
         "source": "SB_FFXIV_010",
@@ -1961,16 +1976,41 @@
         "source": "SB_FFXIV_010",
         "channel": 1
        }
-      ]
+      ],
+      "sourceFilters": {
+       "SB_FFXIV_010": "aresample=476190,asetrate=476189"
+      }
+     },
+     {
+      "sourceOffsets": {
+       "SB_FFXIV_010": {
+        "offset": 74.757138,
+        "pcmHash": "24ded18d"
+       }
+      },
+      "length": 54.8,
+      "crossfadeSeconds": 0.1,
+      "channels": [
+       {
+        "source": "SB_FFXIV_010",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_010",
+        "channel": 1
+       }
+      ],
+      "crossfadeShape": "linear"
      },
      {
       "sourceOffsets": {
        "SB_FFXIV_031": {
-        "offset": 0.1,
+        "offset": 2.038025,
         "pcmHash": "6556b5ea"
        }
       },
-      "crossfadeSeconds": 2.0,
+      "crossfadeSeconds": 0.0,
+      "fadeInSeconds": 0.0,
       "channels": [
        {
         "source": "SB_FFXIV_031",
@@ -1978,12 +2018,87 @@
        },
        {
         "source": "SB_FFXIV_031",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "SB_FFXIV_031": "aresample=141120,asetrate=141121"
+      }
+     },
+     {
+      "startSeconds": 420.0,
+      "sourceOffsets": {
+       "SB_FFXIV_046": {
+        "offset": 422.371955,
+        "pcmHash": "72bf459d"
+       }
+      },
+      "length": 2.5,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.5,
+      "channels": [
+       {
+        "source": "SB_FFXIV_046",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_046",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "SB_FFXIV_046": "aresample=78400,asetrate=78401"
+      }
+     },
+     {
+      "startSeconds": 579.25,
+      "sourceOffsets": {
+       "SB_FFXIV_026": {
+        "offset": 160.787721,
+        "pcmHash": "ecece5d3"
+       }
+      },
+      "length": 7.0,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.1,
+      "channels": [
+       {
+        "source": "SB_FFXIV_026",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_026",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "SB_FFXIV_026": "aresample=78400,asetrate=78401,afade=t=out:st=163.538:d=3.7"
+      }
+     },
+     {
+      "startSeconds": 706.8,
+      "sourceOffsets": {
+       "SB_FFXIV_010": {
+        "offset": 129.557138,
+        "pcmHash": "24ded18d"
+       }
+      },
+      "length": 3.5,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.5,
+      "channels": [
+       {
+        "source": "SB_FFXIV_010",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_010",
         "channel": 1
        }
       ]
      }
     ],
-    "# comment": "credits roll: a medley of 4 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). SB_FFXIV_046 from 0s, SB_FFXIV_026 from 421s, SB_FFXIV_010 from 579s, SB_FFXIV_031 from 705s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.992, worst segment 0.989, worst join 0.961."
+    "# comment": "credits roll: a medley of 4 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). SB_FFXIV_046 from 0s, SB_FFXIV_026 from 421s, SB_FFXIV_010 from 579s, SB_FFXIV_031 from 705s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.992, worst segment 0.989, worst join 0.961. Agent 23 (verify's join detector: 'arrangement differs from the game's at 420.4 s; level off -9.8 dB at 420.4 s; copies 9.6 ms apart', 'copies 2.5 ms apart' near 579 s, 'arrangement differs from the game's at 707.1 s; level off -6.6 dB at 706.6 s'). Measured every change of piece (least squares per 0.25 s at each copy's exact lag): the game never crossfades. SB_FFXIV_046 keeps a constant gain through its own decay (silent by ~422 s) while SB_FFXIV_026 is at full from its first sample (420.05 s); the old 1 s crossfade from 420.68 s cut 026's first 0.7 s (build 8-14 dB under the game at 420.0-420.75 s, correlation 0.2-0.5). SB_FFXIV_010 enters at full at 579.32 s while the game FADES SB_FFXIV_026's quiet tail (-35..-40 dB) out linearly over 582.0-585.7 s. SB_FFXIV_010 plays at constant gain through its own ending to ~710 s and SB_FFXIV_031 enters at full at 706.85 s; the old 2 s crossfade from 704.86 s faded 010 out 2 s early (build 1-9 dB under the game at 705-706.75 s). Now: hard switches at 420.0, 579.25 and 706.8 s (just before each incoming attack; crossfade 0, no fade-in), each outgoing piece continued as a layered segment at the end of the list (046 for 2.5 s, 026 for 7 s through afade=t=out:st=163.538:d=3.7 in its recording time, 010 for 3.5 s), each with the same filter string as its main segment so they share one level match. Offsets were 10 ms-rounded and three recordings drift: 046 and 026 run 12.8 and 12.6 ppm fast (aresample=78400,asetrate=78401 on both, as on BGM_EX2_EndCredit02), 031 7.2 ppm (141120->141121), and 010 drifts -2.1 ppm for its first ~70 s and then holds (the same in BGM_EX2_EndCredit02), so it is split at 652 s: aresample=476190,asetrate=476189 before, none after, 0.1 s linear crossfade between the two identical reads. Offsets to the sample by waveform lag maps: 2.371955, 1.537721, 2.007291 / 74.757138, 2.038025. SB_FFXIV_031 is read at one lag from its first pass to the loop end (loop start and end are one recorded period apart). Weighted 0.9908 -> 0.9943, hole 11.0 dB at 420.5 s -> 1.0 dB, joins 0.960/0.993/0.985 -> 0.986/0.996/0.997 (and 0.994 at 652), tail 0.995 -> 0.996 (control 0.995), at-loop 0.967 -> 0.971, lag probes -2.19..5.63 ms -> -0.06..0 ms, all three detector regions cleared; build vs game waveform correlation 0.97-0.998 at every 0.25 s across each join and at 0.99 through SB_FFXIV_010 (was 0.82-0.99 at the integer lag). verify's head match reads 0.982 -> 0.974 only because its lag grid now lands 0.03 ms off (the old build was 2 ms late and happened to sit on a grid point); waveform correlation over the first 8 s at zero lag went 0.08 -> 0.97."
    }
   },
   {
@@ -2052,7 +2167,7 @@
      {
       "sourceOffsets": {
        "SB_FFXIV_031": {
-        "offset": 153.59777
+        "offset": 2.01721
        }
       },
       "channels": [
@@ -2065,34 +2180,12 @@
         "channel": 1
        }
       ],
-      "length": 90.8,
-      "crossfadeSeconds": 1.0,
-      "sourceFilters": {
-       "SB_FFXIV_031": "aresample=141120,asetrate=141121"
-      }
-     },
-     {
-      "sourceOffsets": {
-       "SB_FFXIV_031": {
-        "offset": 92.817214
-       }
-      },
-      "channels": [
-       {
-        "source": "SB_FFXIV_031",
-        "channel": 0
-       },
-       {
-        "source": "SB_FFXIV_031",
-        "channel": 1
-       }
-      ],
-      "crossfadeSeconds": 2.0,
-      "crossfadeShape": "linear",
+      "length": 152.6,
+      "crossfadeSeconds": 0.0,
       "sourceFilters": {
        "SB_FFXIV_031": "aresample=141120,asetrate=141121"
       },
-      "length": 61.8
+      "fadeInSeconds": 0.0
      },
      {
       "sourceOffsets": {
@@ -2110,9 +2203,30 @@
       ],
       "crossfadeSeconds": 0.05,
       "crossfadeShape": "linear"
+     },
+     {
+      "startSeconds": 549.2,
+      "sourceOffsets": {
+       "SB_FFXIV_010": {
+        "offset": 129.53297
+       }
+      },
+      "length": 2.3,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.3,
+      "channels": [
+       {
+        "source": "SB_FFXIV_010",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_010",
+        "channel": 1
+       }
+      ]
      }
     ],
-    "# comment": "a medley of three pieces: SB_FFXIV_046 to 421.6s, SB_FFXIV_010 to 549.2s, then SB_FFXIV_031 to the loop end. SB_FFXIV_031 is one 151.58s piece played twice, sample-identical (self-correlation 1.000), and the game's loop is that period: the loop start (551.82s) reads the second pass and the end reads the first. The second pass carries the album's fade from about 651s, and the switch back to the first pass sat at 669.3s, inside it (join flagged 'outgoing runs out before the join', envelope hole 41.9 dB). The switch is now at 640s, exactly one recorded period back (so a linear crossfade of the two copies is seamless), well before the fade. Every offset was off by 1-13 ms (SB_FFXIV_010 by 13 ms), so each is now fitted by waveform correlation against the game; SB_FFXIV_046 and SB_FFXIV_031 also run 12.8 and 7.2 ppm fast against the game, corrected by aresample/asetrate pairs (78400->78401, 141120->141121) so the build stays within 0.07 ms of the game end to end. The first join moved to 421.6s, the silence between SB_FFXIV_046's decay and SB_FFXIV_010's attack (it used to fade SB_FFXIV_010 in from 422s, a second after its attack), and the second to 549.2s with a 1s crossfade, matching where the game ramps SB_FFXIV_031 in. Against the game's own file: weighted 0.9877 -> 0.9943, envelope hole 41.9 -> 1.0 dB, joins 0.960/0.978/flagged -> 0.991/0.993/0.995 (controls 0.995/0.996/0.995), tail 0.989 -> 0.990 (control 0.995). The last 1.6s before the loop end in the game is not the recording at any lag (waveform correlation drops from 0.97 to ~0.3 at 701.8s, level 3 dB lower); nothing tried reproduced it, which is what keeps the tail under its control. The game's last 1.6s (701.8-703.4) is material no album release contains -- no lag of SB_FFXIV_031, 010 or 046 matches it (whole-recording search, single and paired lags, mid/side) -- so it is filled from the game's own audio with a 50 ms linear crossfade: tail 0.990 -> 0.996 against mid-loop 0.995, waveform correlation over those seconds -0.4..0.3 -> 1.00."
+    "# comment": "a medley of three pieces: SB_FFXIV_046 to 421.6s, SB_FFXIV_010 to 549.2s, then SB_FFXIV_031 to the loop end. SB_FFXIV_031 is one 151.58s piece played twice, sample-identical (self-correlation 1.000), and the game's loop is that period: the loop start (551.82s) reads the second pass and the end reads the first. The second pass carries the album's fade from about 651s, and the switch back to the first pass sat at 669.3s, inside it (join flagged 'outgoing runs out before the join', envelope hole 41.9 dB). The switch is now at 640s, exactly one recorded period back (so a linear crossfade of the two copies is seamless), well before the fade. Every offset was off by 1-13 ms (SB_FFXIV_010 by 13 ms), so each is now fitted by waveform correlation against the game; SB_FFXIV_046 and SB_FFXIV_031 also run 12.8 and 7.2 ppm fast against the game, corrected by aresample/asetrate pairs (78400->78401, 141120->141121) so the build stays within 0.07 ms of the game end to end. The first join moved to 421.6s, the silence between SB_FFXIV_046's decay and SB_FFXIV_010's attack (it used to fade SB_FFXIV_010 in from 422s, a second after its attack), and the second to 549.2s with a 1s crossfade, matching where the game ramps SB_FFXIV_031 in. Against the game's own file: weighted 0.9877 -> 0.9943, envelope hole 41.9 -> 1.0 dB, joins 0.960/0.978/flagged -> 0.991/0.993/0.995 (controls 0.995/0.996/0.995), tail 0.989 -> 0.990 (control 0.995). The last 1.6s before the loop end in the game is not the recording at any lag (waveform correlation drops from 0.97 to ~0.3 at 701.8s, level 3 dB lower); nothing tried reproduced it, which is what keeps the tail under its control. The game's last 1.6s (701.8-703.4) is material no album release contains -- no lag of SB_FFXIV_031, 010 or 046 matches it (whole-recording search, single and paired lags, mid/side) -- so it is filled from the game's own audio with a 50 ms linear crossfade: tail 0.990 -> 0.996 against mid-loop 0.995, waveform correlation over those seconds -0.4..0.3 -> 1.00. Agent 23 (verify's join detector: 'arrangement differs from the game's at 549.7 s', shape 0.41): real, but not where the detector's fit put it -- SB_FFXIV_010 is correctly gone by 550.3 s (build vs game correlation 0.96-0.98 at 550.5-554 s). SB_FFXIV_031's two passes are sample-identical only from 3.0 s into the piece: the second pass's first 0.9 s carries the end of the first pass instead of the piece's quiet lead-in, and the game plays the FIRST pass's lead-in (correlation 0.42-0.76 with it, ~0 with the second pass's, 549.2-550.1 s) at full from its first sample (549.27 s), while SB_FFXIV_010 keeps a constant gain through its own decay (-45 dB by 550.3 s). The build read the second pass there through a 1 s crossfade: correlation 0.38-0.55, 1.5-2.7 dB under at 549.3-550.0 s. Now SB_FFXIV_031 is read from its first pass from 549.2 s (offset 2.01721, lag measured to 0.02 ms) with no crossfade or fade-in, and that read already arrives at the old third segment's offset at 640 s, so the second-pass stretch and the 640 s switch are gone (one segment to 701.8 s; the first pass carries no fade there). SB_FFXIV_010's decay continues as a layered last segment (startSeconds 549.2, offset 129.53297, 2.3 s, 0.3 s fade-out). The 'target' fill for 701.8-703.4 s is unchanged. Weighted 0.99441 -> 0.99445, hole 1.0 dB at 549.5 s -> 0.9 dB at 57.7 s, join 549.2 window 0.993 -> 0.997, detector flag cleared (shape 0.002); build vs game correlation 0.95-0.99 and level within 0.3 dB over 549.2-550.2 s."
    }
   },
   {
