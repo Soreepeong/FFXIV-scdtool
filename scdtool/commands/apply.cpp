@@ -7,6 +7,7 @@
 #include "utils/hca_payload.h"
 #include "utils/lossless_vorbis.h"
 #include "utils/misc.h"
+#include "utils/preset_model.h"
 #include "utils/substitute_codec.h"
 #include "utils/verify_audio.h"
 #include "utils/win32_process.h"
@@ -49,116 +50,11 @@ namespace {
 		bool Deduced = false;
 	};
 
-	// One `inputFiles` slot of such a graph. A slot is usually a file out of the OST pool,
-	// but the old importer also writes an empty slot to mean the game's own entry, and that
-	// file does not exist until the build stages it -- so the slot has to survive resolution
-	// as an intention rather than as a path, and be filled in at render time.
-	struct apply_graph_input {
-		std::filesystem::path Path;
-		bool IsTarget = false;  // the game's own audio for the entry being built
-	};
-
-	// A source built by a filter graph rather than read from one file. Rendered to a temp
-	// file once, before anything else looks at it, so every treatment downstream -- offsets,
-	// per-channel decode, fades, loudness, the loop -- works on it unchanged.
-	struct apply_source_graph {
-		std::vector<apply_graph_input> Inputs;       // one per `inputFiles` slot the graph reads
-		std::string Description;                     // the -filter_complex argument
-		std::string OutLabel;                        // the label to -map
-	};
-
-	// One source feeding one segment: which file, where in it the segment starts, and the
-	// filter chain the preset attached to that source.
-	struct apply_segment_source {
-		std::filesystem::path Path;
-		double Offset = 0.;       // seconds into the source that this segment begins at
-		std::wstring Filter;
-		// Set instead of `Path` when the preset builds this source from a graph; `Path` is
-		// filled in with the rendered file before the build reads it.
-		std::shared_ptr<apply_source_graph> Graph;
-		// The reserved source name `"target"`: the game's own audio for this entry, rather
-		// than anything out of the OST pool. It resolves to no file here because the file
-		// does not exist until the build stages it, so the assembler substitutes it.
-		//
-		// What it is for is material the recording simply does not contain. A tail gap can be
-		// filled by re-entering the same recording, but a *head* gap cannot -- BGM_EX4_Raid_10
-		// and BGM_EX5_Ban_11 carry `adelay=5605` and `adelay=6665` because, as their comments
-		// say, the game's file starts before the recording does, and no amount of re-entry
-		// produces an intro the release does not have. The game's own opening is the only
-		// source for it.
-		bool IsTarget = false;
-		// Whether the preset named this offset or it is the implicit zero. The generator
-		// writes no offset at all when the match was already within 50ms, so an absent one
-		// carries that much slack; a stated one was fitted and only lost precision to JSON.
-		bool Stated = false;
-
-		// Set from the preset file's `offsetsAreFitted`: every offset in that file is
-		// already decided, the ones it leaves out included. See FixesAlignment.
-		bool Fitted = false;
-
-		// Whether this source's alignment is settled, so the onset alignment must leave it
-		// alone. Two ways it can be: the file declares all of its offsets fitted, which is
-		// what `presets/` says, or this offset is stated and non-zero, which is a fitted
-		// offset written out.
-		//
-		// A stated *zero* is neither. In the old importer the field set where reading
-		// begins -- zero being where it begins anyway -- and the onset alignment then ran
-		// on top of it regardless, so an explicit zero was never a claim about alignment.
-		bool FixesAlignment() const { return Fitted || (Stated && Offset != 0.); }
-	};
-
-	// A span of the output, in the *target's* timeline. Segments run back to back in the
-	// order given: `Length` is how long this one holds the output before the next one
-	// starts, and 0 means "until its source runs out", which is what the last segment of a
-	// preset always says. `CrossfadeSeconds` lets the previous segment carry on playing
-	// past its stated length, faded out underneath this one fading in -- which is how the
 	// How loud counts as "the music has started" when a source with no stated offset is
 	// aligned onto the target by onset. The old importer's own default, and the value the
 	// 21 presets that override it were correcting: a quiet opening is already past 0.1
 	// before it is audible, and a noisy one reaches it during the room tone.
 	constexpr double DefaultOnsetThreshold = 0.1;
-
-	// game built the loop-outs these presets reproduce, so a hard cut is not a substitute.
-	struct apply_segment {
-		std::map<std::string, apply_segment_source> Sources;
-		std::vector<std::pair<std::string, size_t>> Channels;  // output channel -> (source name, channel in it)
-		// `sourceThresholds`, keyed by source name; `"target"` names the game's own entry.
-		std::map<std::string, double> Thresholds;
-
-		// `crossfadeShape`: how this segment's crossfade with the previous one is curved.
-		// Complementary linear ramps hold level where the two sides are correlated and sag
-		// 3 dB where they are not; square-root ramps do the reverse. A crossfade exists
-		// precisely where two segments carry *different* material, so uncorrelated is the
-		// normal case and equal power is the default; `"linear"` opts out.
-		//
-		// Measured over all 95 crossfaded targets, the same items built both ways: the
-		// envelope hole improves on 43 and worsens on 2, both by 0.1 dB, mean -0.84 dB,
-		// with the weighted score unmoved. On BGM_EX5_Raid_22's join, which puts the
-		// recording's ending against the same recording re-entered 144s earlier, the worst
-		// point against the game's own file goes -5.3 dB to -2.7.
-		bool CrossfadeEqualPower = true;
-		double Length = 0.;
-		double CrossfadeSeconds = 0.;
-		// Where this segment begins in the target, when it does not simply follow the one
-		// before it. That turns a sequence into a layering: several spans sounding at once
-		// rather than one after another, which is what a canon is -- BGM_EX4_Event_15 is its
-		// own recording entering three times over itself. Negative means "follow on".
-		double StartSeconds = -1.;
-		// A fade at this segment's own edges, in its own span -- not the crossfade with a
-		// neighbour, which `CrossfadeSeconds` already covers and which only exists where two
-		// segments meet. Ten of the hand-written filterComplex graphs are one window of one
-		// recording with a fade at one or both ends and nothing else:
-		//
-		//     [0:a]atrim=114.889:217.103,asetpts=PTS-STARTPTS,afade=t=out:st=100.714:d=1
-		//
-		// `sourceFilters` cannot say that. Filters run on the whole source *before* the
-		// offset trims it, so `st=100.714` would have to be rewritten to 217.103 -- against
-		// the source's timeline rather than the window's -- and an entry whose offset differs
-		// per album would need a different number in each. Negative means "not stated", which
-		// leaves whatever the crossfade machinery decides.
-		double FadeInSeconds = -1.;
-		double FadeOutSeconds = -1.;
-	};
 
 	struct apply_job {
 		std::string TargetPath;   // path inside the game
@@ -1427,158 +1323,10 @@ namespace {
 		return out;
 	}
 
-	// The album directory a MusicImportConfig means by a name. The config names an album
-	// ("Stormblood"); the directory carries the patch version too ("4.0 - Stormblood"), so
-	// the name is matched as a suffix.
-	//
-	// With no name, this answers with the preset's *default* album -- the one flagged
-	// `default` in `searchDirectories`, or the first listed. That is the scope of a bare
-	// pattern, and only that: MusicImporter fills a pattern's absent directory in with the
-	// default and then skips any pattern whose directory is not the folder being scanned, so
-	// a bare name never reaches another album however many the preset lists. Searching all
-	// of them instead let `ENDWALKER_001`'s disc index "00000" land on `GL_00000.flac` in
-	// Growing Light, which Endwalker.json also lists; 114 targets resolved to a recording
-	// from the wrong release that way.
-	std::vector<std::filesystem::path> resolve_search_directories(
-		const std::filesystem::path& ostDir,
-		const nlohmann::json& config,
-		const std::string& album = {}) {
-
-		const auto search = config.find("searchDirectories");
-		if (search == config.end() || !search->is_object())
-			return {ostDir};
-
-		std::string wanted = album;
-		if (wanted.empty()) {
-			for (const auto& [name, spec] : search->items()) {
-				if (wanted.empty() || (spec.is_object() && spec.value("default", false)))
-					wanted = name;
-				if (spec.is_object() && spec.value("default", false))
-					break;
-			}
-		} else if (!search->contains(album)) {
-			// Naming a directory the preset never declared would reach a release the user was
-			// never told this preset needs, so it resolves to nothing instead.
-			return {};
-		}
-		if (wanted.empty())
-			return {};
-
-		const auto lower = [](std::string text) {
-			std::ranges::transform(text, text.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
-			return text;
-		};
-		const auto target = lower(wanted);
-		std::vector<std::filesystem::path> dirs;
-		std::error_code ec;
-		for (const auto& entry : std::filesystem::directory_iterator(ostDir, ec)) {
-			if (!entry.is_directory())
-				continue;
-			const auto name = lower(u8(entry.path().filename()));
-			if (name == target || (name.size() > target.size() && name.ends_with(target)))
-				dirs.push_back(entry.path());
-		}
-		return dirs;
-	}
-
-	// A MusicImportConfig source name is a list of alternatives -- a disc index, an OST
-	// stem, the track's title in either language -- and the first one that names exactly one
-	// file wins. Two files matching is an error rather than a coin flip, which is the rule
-	// the importer itself follows.
-	//
-	// An alternative may also be an object naming its own directory, which is how an entry
-	// reaches a track that lives on another album: a credits medley stitched from six
-	// releases names each of them explicitly rather than widening the search for all of them.
-	std::optional<std::filesystem::path> resolve_source_name(
-		const std::filesystem::path& ostDir,
-		const nlohmann::json& config,
-		const std::vector<std::filesystem::path>& dirs,
-		const nlohmann::json& patterns) {
-
-		// (pattern, the directories to look in -- empty meaning the album's own)
-		std::vector<std::pair<std::string, std::vector<std::filesystem::path>>> alternatives;
-		const auto add = [&](const nlohmann::json& one) {
-			if (one.is_string()) {
-				alternatives.emplace_back(one.get<std::string>(), dirs);
-			} else if (one.is_object() && one.contains("pattern")) {
-				auto scoped = dirs;
-				if (const auto directory = one.find("directory"); directory != one.end() && directory->is_string())
-					scoped = resolve_search_directories(ostDir, config, directory->get<std::string>());
-				alternatives.emplace_back(one.at("pattern").get<std::string>(), std::move(scoped));
-			}
-		};
-
-		if (patterns.is_object() && patterns.contains("inputFiles")) {
-			const auto& files = patterns.at("inputFiles");
-			if (files.is_array() && !files.empty()) {
-				// Only the first entry: this path replaces one stream, so a list of files to
-				// join is not something it can honour, and taking the first silently would be
-				// worse than the miss that not resolving produces.
-				if (files.size() > 1)
-					return std::nullopt;
-				for (const auto& one : files.front().is_array() ? files.front() : nlohmann::json::array({files.front()}))
-					add(one);
-			}
-		} else if (patterns.is_array()) {
-			for (const auto& one : patterns)
-				add(one);
-		} else {
-			add(patterns);
-		}
-
-		for (const auto& [pattern, where] : alternatives) {
-			std::regex re;
-			try {
-				re = std::regex(pattern, std::regex::icase);
-			} catch (const std::regex_error&) {
-				continue;
-			}
-			std::vector<std::filesystem::path> hits;
-			for (const auto& dir : where) {
-				std::error_code ec;
-				// Recursive: a release with more tracks than one disc holds keeps the rest in
-				// a subdirectory, and 131 targets resolved to nothing while this only looked
-				// at the album's top level.
-				for (const auto& entry : std::filesystem::recursive_directory_iterator(dir, ec)) {
-					if (!entry.is_regular_file())
-						continue;
-					if (std::regex_search(u8(entry.path().filename()), re))
-						hits.push_back(entry.path());
-				}
-			}
-			if (hits.size() == 1)
-				return hits.front();
-			// The same track in two encodings is one track, and the album's own lossless copy
-			// is the one to take -- an .mp3 beside a .flac is a convenience copy, not a rival.
-			if (hits.size() > 1) {
-				std::vector<std::filesystem::path> lossless;
-				for (const auto& hit : hits) {
-					const auto extension = hit.extension();
-					if (extension == L".flac" || extension == L".wav")
-						lossless.push_back(hit);
-				}
-				if (lossless.size() == 1)
-					return lossless.front();
-				throw std::runtime_error(std::format("\"{}\" names {} files; it has to name one.", pattern, hits.size()));
-			}
-		}
-		return std::nullopt;
-	}
-
-	// The first game path a target names, for a diagnostic that has nothing else to
-	// identify it by.
-	std::string collect_config_target_path(const nlohmann::json& target) {
-		if (const auto path = target.find("path"); path != target.end()) {
-			if (path->is_string())
-				return path->get<std::string>();
-			if (path->is_array() && !path->empty() && path->front().is_string())
-				return path->front().get<std::string>();
-		}
-		return "(unnamed target)";
-	}
-
 	// Turn one MusicImportConfig target into jobs -- one per game path it lists, since a
-	// target may name several .scd files that carry the same music.
+	// target may name several .scd files that carry the same music. The reading itself is
+	// preset_model's, which `verify` shares, so the two cannot disagree about what a preset
+	// builds; what is decided here is only which of apply's two build paths gets it.
 	void collect_config_target(
 		const std::filesystem::path& ostDir,
 		const nlohmann::json& config,
@@ -1587,224 +1335,11 @@ namespace {
 		std::vector<apply_job>& jobs,
 		std::vector<std::pair<std::string, std::string>>& unresolved) {
 
-		if (target.value("enable", true) == false)
+		auto read = read_config_target(ostDir, config, sourceSpec, target, unresolved);
+		if (!read)
 			return;
-		// Whether this file's offsets are complete, which decides what an absent one means.
-		const auto offsetsAreFitted = config.value("offsetsAreFitted", false);
-		// A target that needs no offset and no filter says so by leaving `segments` out
-		// altogether -- it plays its source from the start, whole. 54 targets, most of them
-		// Orchestrion rolls, are written that way, and skipping them for want of the key
-		// lost every one.
-		const auto segmentsJson = target.find("segments");
-		const auto hasSegments = segmentsJson != target.end() && segmentsJson->is_array() && !segmentsJson->empty();
-		if (!hasSegments && target.contains("segments"))
-			return;   // present but empty: the entry says nothing to build
-
-		std::vector<std::string> paths;
-		if (const auto path = target.find("path"); path != target.end()) {
-			if (path->is_string())
-				paths.push_back(path->get<std::string>());
-			else if (path->is_array())
-				for (const auto& one : *path)
-					if (one.is_string())
-						paths.push_back(one.get<std::string>());
-		}
-		if (paths.empty())
-			return;
-
-		// "source" is either one list of alternatives -- the implicit name "source" -- or
-		// an object of named ones, which is what a multi-source segment refers to.
-		std::map<std::string, nlohmann::json> named;
-		if (sourceSpec.is_object())
-			for (const auto& [name, patterns] : sourceSpec.items())
-				named.emplace(name, patterns);
-		else
-			named.emplace("source", sourceSpec);
-
-		const auto dirs = resolve_search_directories(ostDir, config);
-		std::map<std::string, std::filesystem::path> resolved;
-		std::map<std::string, std::shared_ptr<apply_source_graph>> graphs;
-		for (const auto& [name, patterns] : named) {
-			// A source may be built by a filter graph rather than read whole from one file:
-			// several inputs layered rather than sequenced, which is what BGM_EX4_Event_15's
-			// three copies of one recording at 0s, 75.195s and 150.390s are. `filterGraph` is
-			// the JSON form; `filterComplex` is the escaped string the hand-written presets
-			// have always used, and both compile to the same ffmpeg argument.
-			const auto hasGraph = patterns.is_object()
-				&& (patterns.contains("filterGraph") || patterns.contains("filterComplex"));
-			if (hasGraph) {
-				try {
-					auto built = std::make_shared<apply_source_graph>();
-					const auto outName = patterns.value("filterComplexOutName", std::string{});
-					std::vector<size_t> wanted;
-					if (const auto graphJson = patterns.find("filterGraph"); graphJson != patterns.end()) {
-						const auto compiled = compile_filter_graph(*graphJson, outName);
-						built->Description = compiled.Description;
-						built->OutLabel = compiled.OutLabel;
-						wanted = compiled.UsedInputs;
-					} else {
-						built->Description = patterns.at("filterComplex").get<std::string>();
-						if (outName.empty())
-							throw std::runtime_error("a filterComplex needs a filterComplexOutName");
-						built->OutLabel = outName.size() >= 2 && outName.front() == '['
-							? outName.substr(1, outName.size() - 2) : outName;
-						// The string form names its inputs as [N:a] inside the description, so
-						// which slots it reads is not knowable without parsing it. Resolve them
-						// all; a slot it does not read costs one lookup and nothing else.
-						const auto& files = patterns.at("inputFiles");
-						for (size_t i = 0; i < files.size(); ++i)
-							wanted.push_back(i);
-					}
-
-					// ffmpeg numbers its inputs by the order they are passed, so every slot up
-					// to the highest one read has to be present even if nothing reads it.
-					const auto& files = patterns.at("inputFiles");
-					const auto slots = wanted.empty() ? size_t{0} : wanted.back() + 1;
-					if (slots > files.size())
-						throw std::runtime_error(std::format(
-							"the graph reads input {} but inputFiles has {} slot(s)", slots - 1, files.size()));
-					const std::set used(wanted.begin(), wanted.end());
-					for (size_t i = 0; i < slots; ++i) {
-						if (!used.contains(i) || (files[i].is_array() && files[i].empty())) {
-							// An empty slot means the game's own audio in the old importer's
-							// presets. That file does not exist yet -- it is staged per target,
-							// later -- so the slot is carried as an intention and filled in at
-							// render time. A slot nothing reads only has to hold ffmpeg's
-							// numbering, and stays empty in both senses.
-							built->Inputs.push_back({.IsTarget = used.contains(i)});
-							continue;
-						}
-						const auto file = resolve_source_name(ostDir, config, dirs, files[i]);
-						if (!file)
-							throw std::runtime_error(std::format("no file for input {}", i));
-						built->Inputs.push_back({.Path = *file});
-					}
-					graphs.emplace(name, built);
-					resolved.emplace(name, built->Inputs.empty() ? std::filesystem::path{} : built->Inputs.front().Path);
-					continue;
-				} catch (const std::exception& e) {
-					unresolved.emplace_back(paths.front(), std::format(
-						"source \"{}\" is built by a filter graph: {}", name, e.what()));
-					return;
-				}
-			}
-			const auto file = resolve_source_name(ostDir, config, dirs, patterns);
-			if (!file) {
-				unresolved.emplace_back(paths.front(), std::format("no file for \"{}\"", name));
-				return;
-			}
-			resolved.emplace(name, *file);
-		}
-
-		// Every name a segment uses has to be one the item defines. Two entries referred to
-		// their recording by its stem while declaring it as a bare array -- which names it
-		// `source` -- and the offset attached to the stem name was quietly dropped, leaving
-		// BGM_EX5_Boss_Battle03 a second out of step and 0.10 worse than the previous build.
-		// Silence is the wrong answer to that, so it is reported and the entry left alone.
-		if (hasSegments) {
-			for (const auto& segmentJson : *segmentsJson) {
-				std::vector<std::string> used;
-				for (const auto& key : {"sourceOffsets", "sourceFilters"})
-					if (const auto section = segmentJson.find(key); section != segmentJson.end() && section->is_object())
-						for (const auto& [name, _spec] : section->items())
-							used.push_back(name);
-				if (const auto channels = segmentJson.find("channels"); channels != segmentJson.end() && channels->is_array())
-					for (const auto& channel : *channels)
-						used.push_back(channel.value("source", std::string("source")));
-				for (const auto& name : used) {
-					if (name == "target" || resolved.contains(name))
-						continue;
-					unresolved.emplace_back(paths.front(), std::format(
-						"segment names source \"{}\", which the item does not define", name));
-					return;
-				}
-			}
-		}
-
-		// `"target"` names the game's own audio. It is validated above like any other name
-		// but resolves to no file, so it is registered here with an empty path and swapped
-		// for the staged template at build time. Without this the name passed validation and
-		// then threw in the assembler -- "maps a channel from source \"target\", which it
-		// does not define" -- which is a promise the builder could not keep.
-		auto usesTarget = false;
-		if (hasSegments) {
-			for (const auto& segmentJson : *segmentsJson) {
-				for (const auto& key : {"sourceOffsets", "sourceFilters"})
-					if (const auto section = segmentJson.find(key); section != segmentJson.end() && section->is_object())
-						for (const auto& [name, _spec] : section->items())
-							usesTarget = usesTarget || name == "target";
-				if (const auto channels = segmentJson.find("channels"); channels != segmentJson.end() && channels->is_array())
-					for (const auto& channel : *channels)
-						usesTarget = usesTarget || channel.value("source", std::string("source")) == "target";
-			}
-		}
-		if (usesTarget)
-			resolved.emplace("target", std::filesystem::path{});
-
-		std::vector<apply_segment> segments;
-		if (!hasSegments) {
-			// One default span covering the whole of the single source it names. More than
-			// one source with no segments to route them through says nothing about which
-			// channel each feeds, so there is nothing to build.
-			if (resolved.size() != 1)
-				return;
-			apply_segment segment;
-			segment.Sources.emplace(resolved.begin()->first, apply_segment_source{
-				.Path = resolved.begin()->second,
-				.Graph = graphs.contains(resolved.begin()->first) ? graphs.at(resolved.begin()->first) : nullptr});
-			// Two entries, taken in order: the single-source path below reads only the source
-			// and the offset from this, and derives the channel count from the game's own file.
-			segment.Channels.emplace_back(resolved.begin()->first, 0);
-			segment.Channels.emplace_back(resolved.begin()->first, 1);
-			segments.push_back(std::move(segment));
-		}
-		static const nlohmann::json NoSegments = nlohmann::json::array();
-		for (const auto& segmentJson : hasSegments ? *segmentsJson : NoSegments) {
-			apply_segment segment{
-				.Length = segmentJson.value("length", 0.),
-				.CrossfadeSeconds = segmentJson.value("crossfadeSeconds", 0.),
-				.StartSeconds = segmentJson.value("startSeconds", -1.),
-				.FadeInSeconds = segmentJson.value("fadeInSeconds", -1.),
-				.FadeOutSeconds = segmentJson.value("fadeOutSeconds", -1.),
-			};
-			for (const auto& [name, path] : resolved)
-				segment.Sources.emplace(name, apply_segment_source{
-					.Path = path,
-					.Graph = graphs.contains(name) ? graphs.at(name) : nullptr,
-					.IsTarget = name == "target",
-					.Fitted = offsetsAreFitted});
-			if (const auto offsets = segmentJson.find("sourceOffsets"); offsets != segmentJson.end() && offsets->is_object()) {
-				for (const auto& [name, spec] : offsets->items()) {
-					if (const auto source = segment.Sources.find(name); source != segment.Sources.end()) {
-						source->second.Offset = spec.is_object() ? spec.value("offset", 0.) : spec.get<double>();
-						source->second.Stated = true;
-					}
-				}
-			}
-			if (const auto shape = segmentJson.find("crossfadeShape"); shape != segmentJson.end() && shape->is_string())
-				segment.CrossfadeEqualPower = shape->get<std::string>() != "linear";
-			if (const auto thresholds = segmentJson.find("sourceThresholds"); thresholds != segmentJson.end() && thresholds->is_object()) {
-				for (const auto& [name, value] : thresholds->items())
-					if (value.is_number())
-						segment.Thresholds.emplace(name, value.get<double>());
-			}
-			if (const auto filters = segmentJson.find("sourceFilters"); filters != segmentJson.end() && filters->is_object()) {
-				for (const auto& [name, filter] : filters->items()) {
-					if (const auto source = segment.Sources.find(name); source != segment.Sources.end() && filter.is_string())
-						source->second.Filter = xivres::util::unicode::convert<std::wstring>(filter.get<std::string>());
-				}
-			}
-			if (const auto channels = segmentJson.find("channels"); channels != segmentJson.end() && channels->is_array()) {
-				for (const auto& channel : *channels)
-					segment.Channels.emplace_back(channel.value("source", std::string("source")),
-						channel.value("channel", size_t{0}));
-			}
-			if (segment.Channels.empty())
-				return;
-			segments.push_back(std::move(segment));
-		}
-		if (segments.empty())
-			return;
+		const auto& paths = read->Paths;
+		const auto& segments = read->Segments;
 
 		// One span of one recording, its channels taken in order, is exactly what the
 		// single-source path already builds -- and that path carries the treatments a
@@ -1849,7 +1384,7 @@ namespace {
 					.Filter = only.Filter,
 					.FromPreset = true,
 					.OffsetStated = only.FixesAlignment(),
-					.Note = target.value("# comment", std::string{}),
+					.Note = read->Note,
 				});
 				continue;
 			}
@@ -1858,7 +1393,7 @@ namespace {
 				.Score = 1.,
 				.Segments = segments,
 				.FromPreset = true,
-				.Note = target.value("# comment", std::string{}),
+				.Note = read->Note,
 			});
 		}
 	}
@@ -2382,25 +1917,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// more than one, and the two releases of a piece are rarely the same recording:
 			// by filename, A Realm Reborn would claim BGM_Ban_Ifrit from Before Meteor and
 			// come out 0.006 further from the game's own file.
-			std::vector<std::pair<std::string, std::filesystem::path>> ordered;
-			for (const auto& entry : std::filesystem::directory_iterator(presetPath)) {
-				if (!entry.is_regular_file() || entry.path().extension() != L".json")
-					continue;
-				std::string name;
-				try {
-					std::ifstream f(entry.path(), std::ios::binary);
-					nlohmann::json head;
-					f >> head;
-					name = head.value("name", std::string{});
-				} catch (const std::exception&) {
-					// Unreadable here is reported properly when it is loaded below.
-				}
-				// A preset that names no release sorts by its filename, after every one that does.
-				ordered.emplace_back(name.empty() ? "ÿ" + u8(entry.path().filename()) : name, entry.path());
-			}
-			std::ranges::sort(ordered);
-			for (auto& [_name, path] : ordered)
-				presetPaths.push_back(std::move(path));
+			presetPaths = release_ordered_presets({presetPath});
 			if (presetPaths.empty())
 				throw std::runtime_error(std::format("No .json presets in {}", u8(presetPath)));
 		} else {

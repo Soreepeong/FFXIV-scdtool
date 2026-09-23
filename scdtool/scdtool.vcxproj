@@ -225,6 +225,8 @@
     <ClCompile Include="utils\verify_spectrum.cpp" />
     <ClCompile Include="utils\substitute_codec.cpp" />
     <ClCompile Include="utils\mpls.cpp" />
+    <ClCompile Include="utils\preset_model.cpp" />
+    <ClCompile Include="utils\join_detector.cpp" />
     <ClCompile Include="utils\win32_process.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +249,8 @@
     <ClInclude Include="utils\substitute_codec.h" />
     <ClInclude Include="utils\misc.h" />
     <ClInclude Include="utils\mpls.h" />
+    <ClInclude Include="utils\preset_model.h" />
+    <ClInclude Include="utils\join_detector.h" />
     <ClInclude Include="utils\win32_process.h" />
   </ItemGroup>
   <ItemGroup>

@@ -13,6 +13,8 @@
     <ClCompile Include="utils\audio_match.cpp" />
     <ClCompile Include="utils\describe_path.cpp" />
     <ClCompile Include="utils\mpls.cpp" />
+    <ClCompile Include="utils\preset_model.cpp" />
+    <ClCompile Include="utils\join_detector.cpp" />
     <ClCompile Include="utils\filter_graph.cpp" />
     <ClCompile Include="utils\verify_audio.cpp" />
     <ClCompile Include="utils\verify_spectrum.cpp" />
@@ -32,6 +34,8 @@
     <ClInclude Include="utils\describe_path.h" />
     <ClInclude Include="utils\misc.h" />
     <ClInclude Include="utils\mpls.h" />
+    <ClInclude Include="utils\preset_model.h" />
+    <ClInclude Include="utils\join_detector.h" />
     <ClInclude Include="utils\filter_graph.h" />
     <ClInclude Include="utils\verify_audio.h" />
     <ClInclude Include="utils\stats.h" />

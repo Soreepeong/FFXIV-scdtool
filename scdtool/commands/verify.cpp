@@ -6,6 +6,8 @@
 #include "utils/misc.h"
 #include "utils/win32_process.h"
 #include "utils/hca_payload.h"
+#include "utils/join_detector.h"
+#include "utils/preset_model.h"
 #include "utils/substitute_codec.h"
 #include "utils/verify_audio.h"
 
@@ -18,6 +20,8 @@
 #include <atomic>
 #include <mutex>
 #include <ranges>
+#include <chrono>
+#include <thread>
 
 namespace {
 	std::string u8(const std::filesystem::path& p) {
@@ -29,6 +33,7 @@ namespace {
 		size_t EndSample = 0;
 		size_t Rate = 0;
 		size_t TotalSamples = 0;
+		size_t Channels = 0;
 	};
 
 	// The entry's audio written somewhere ffmpeg can open, plus what the header says about
@@ -42,7 +47,8 @@ namespace {
 			throw std::runtime_error(std::format("only {} sound entries", scd.sound_item_count()));
 		const auto item = scd.read_sound_item(entryIndex);
 
-		loop_info info{.Rate = static_cast<size_t>(item.Header->SamplingRate)};
+		loop_info info{.Rate = static_cast<size_t>(item.Header->SamplingRate),
+			.Channels = static_cast<size_t>(item.Header->ChannelCount)};
 		std::vector<uint8_t> bytes;
 		const wchar_t* ext;
 		if (hca_payload::is_hca(item)) {
@@ -458,6 +464,119 @@ namespace {
 		return res;
 	}
 
+	std::string lower_ascii(std::string s) {
+		std::ranges::transform(s, s.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+		return s;
+	}
+
+	// The segments `apply` built each multi-copy target from, resolved against the OST pool
+	// the same way, for the join detector.
+	//
+	// Unlike read_joins this can see resolution, so it follows `apply` the rest of the way: in
+	// release order, the first listing of a path that *resolves* is the one built. Only paths
+	// some listing could make multi-copy are resolved at all -- more than one segment, an
+	// asplit in a filter, or a graph-built source -- since resolving is a directory walk per
+	// pattern and 1900 of them is minutes; but every listing of such a path is resolved in
+	// turn, the single-copy ones included, because an earlier single-copy listing that
+	// resolves is what the build holds and there is then nothing to judge.
+	std::map<std::string, std::vector<apply_segment>> read_detector_targets(const std::string& spec,
+		const std::filesystem::path& ostDir, std::vector<std::pair<std::string, std::string>>& unresolved) {
+
+		std::vector<std::filesystem::path> roots;
+		for (size_t begin = 0, end; begin <= spec.size(); begin = end + 1) {
+			end = spec.find(',', begin);
+			if (end == std::string::npos)
+				end = spec.size();
+			if (const auto part = spec.substr(begin, end - begin); !part.empty())
+				roots.push_back(argactions::path(part));
+		}
+
+		struct listing {
+			const nlohmann::json* Config;
+			const nlohmann::json* Source;
+			const nlohmann::json* Target;
+			std::vector<std::string> Paths;   // lowercased
+		};
+		std::vector<nlohmann::json> presets;
+		for (const auto& file : release_ordered_presets(roots)) {
+			try {
+				std::ifstream f(file, std::ios::binary);
+				presets.push_back(nlohmann::json::parse(f));
+			} catch (const std::exception&) {
+				// read_joins has already said so.
+			}
+		}
+		std::vector<listing> listings;
+		std::set<std::string> candidates;
+		for (const auto& preset : presets) {
+			// `apply` reads only a MusicImportConfig this way; a matchset has no segments.
+			if (!preset.contains("searchDirectories") || !preset.contains("items") || !preset["items"].is_array())
+				continue;
+			for (const auto& item : preset["items"]) {
+				const auto source = item.find("source");
+				const auto target = item.find("target");
+				if (source == item.end() || target == item.end())
+					continue;
+				auto graph = false;
+				if (source->is_object())
+					for (const auto& [_n, spec2] : source->items())
+						graph = graph || (spec2.is_object() && spec2.contains("inputFiles"));
+				// By address into the preset, which outlives this: a listing is resolved later,
+				// and a one-element array built here to iterate a lone target would not.
+				std::vector<const nlohmann::json*> targets;
+				if (target->is_array())
+					for (const auto& one : *target)
+						targets.push_back(&one);
+				else
+					targets.push_back(&*target);
+				for (const auto* pone : targets) {
+					const auto& one = *pone;
+					if (!one.is_object() || one.value("enable", true) == false)
+						continue;
+					listing l{&preset, &*source, &one};
+					if (const auto p = one.find("path"); p != one.end()) {
+						if (p->is_string())
+							l.Paths.push_back(lower_ascii(p->get<std::string>()));
+						else if (p->is_array())
+							for (const auto& x : *p)
+								if (x.is_string())
+									l.Paths.push_back(lower_ascii(x.get<std::string>()));
+					}
+					auto candidate = graph;
+					if (const auto segs = one.find("segments"); segs != one.end() && segs->is_array()) {
+						candidate = candidate || segs->size() > 1;
+						for (const auto& seg : *segs)
+							if (const auto filters = seg.find("sourceFilters"); filters != seg.end() && filters->is_object())
+								for (const auto& [_n, fl] : filters->items())
+									candidate = candidate || (fl.is_string() && fl.get<std::string>().find("asplit") != std::string::npos);
+					}
+					if (candidate)
+						candidates.insert(l.Paths.begin(), l.Paths.end());
+					listings.push_back(std::move(l));
+				}
+			}
+		}
+
+		std::map<std::string, std::vector<apply_segment>> res;
+		std::set<std::string> decided;
+		for (const auto& l : listings) {
+			if (std::ranges::none_of(l.Paths, [&](const auto& p) { return candidates.contains(p) && !decided.contains(p); }))
+				continue;
+			std::optional<config_target> read;
+			try {
+				read = read_config_target(ostDir, *l.Config, *l.Source, *l.Target, unresolved);
+			} catch (const std::exception& e) {
+				unresolved.emplace_back(collect_config_target_path(*l.Target), e.what());
+			}
+			if (!read)
+				continue;
+			for (const auto& p : l.Paths)
+				if (decided.insert(p).second && candidates.contains(p))
+					res.emplace(p, read->Segments);
+		}
+		return res;
+	}
+
 	// Mean level of one stretch of a file, in dB. The step across a join is built from two of
 	// these on each side.
 	std::optional<double> level_db(std::span<const float> x, double fromSeconds, double toSeconds) {
@@ -548,6 +667,67 @@ namespace {
 		return !join_problem(j, seamThreshold).empty();
 	}
 
+	nlohmann::json curve_json(const detector_curve& c) {
+		using kind = detector_curve::kind;
+		if (c.Kind == kind::Unknown)
+			return {{"kind", "unknown"}};
+		nlohmann::json x{{"kind", c.Kind == kind::Steady ? "steady" : c.Kind == kind::In ? "in" : "out"},
+			{"start", c.Start}, {"end", c.End}};
+		if (c.Kind == kind::Steady)
+			x["mid"] = c.Mid;
+		else
+			x.update({{"t10", c.T10}, {"t50", c.T50}, {"t90", c.T90}, {"shape", c.Shape}});
+		return x;
+	}
+
+	nlohmann::json region_json(const detector_region_result& g) {
+		nlohmann::json x{{"from", g.From}, {"to", g.To}, {"joins", g.Joins}};
+		if (!g.Error.empty()) {
+			x["error"] = g.Error;
+			return x;
+		}
+		x["copies"] = g.Copies;
+		x["shape"] = {{"peak", g.PeakShape}, {"at", g.PeakShapeAt}, {"area", g.Area}, {"wrongSeconds", g.WrongSeconds}};
+		x["level"] = {{"peakDb", g.PeakLevelDb}, {"at", g.PeakLevelAt}};
+		x["relLagMs"] = g.RelLagMs;
+		x["total"] = g.Total;
+		x["r2"] = {{"game", g.R2Game}, {"build", g.R2Build}};
+		auto flags = nlohmann::json::array();
+		if (g.ShapeFlag)
+			flags.push_back("shape");
+		if (g.LevelFlag)
+			flags.push_back("level");
+		if (g.LagFlag)
+			flags.push_back("lag");
+		x["flags"] = std::move(flags);
+		if (const auto p = g.problem(); !p.empty())
+			x["problem"] = p;
+		auto per = nlohmann::json::array();
+		for (const auto& c : g.PerCopy) {
+			nlohmann::json y{{"copy", c.Name}, {"game", curve_json(c.Game)}, {"build", curve_json(c.Build)},
+				{"lagGameMs", c.LagGameMs}, {"lagBuildMs", c.LagBuildMs},
+				{"lagWindows", {c.LagWindowsGame, c.LagWindowsBuild}}, {"lagRho", {c.LagRhoGame, c.LagRhoBuild}},
+				{"identFraction", c.IdentFraction}};
+			if (c.Dt50)
+				y["dt50"] = *c.Dt50;
+			if (c.KindMismatch)
+				y["kindMismatch"] = true;
+			per.push_back(std::move(y));
+		}
+		x["perCopy"] = std::move(per);
+		return x;
+	}
+
+	// How far past its thresholds a region sits, for ranking the worst first.
+	double region_severity(const detector_region_result& g) {
+		if (!g.Error.empty())
+			return 0.;
+		// A wrong arrangement or level step before any copy that is merely out of step: the
+		// first is heard as a different piece of music at the join, the second as a smear.
+		return (g.flagged() ? 1000. : 0.) + (std::max)(g.PeakShape / 0.14, std::abs(g.PeakLevelDb) / 3.5)
+			+ (g.LagFlag ? g.RelLagMs / 100. : 0.);
+	}
+
 	struct row {
 		std::string Target;
 		double Weighted = 0., Plain = 0.;
@@ -566,6 +746,17 @@ namespace {
 		level_offset Level;
 		// Every place two segments meet, when --preset says where they are.
 		std::vector<join_comparison> Joins;
+		// The game's own loop and length, which is what the join detector's regions are
+		// clipped to: past the game's loop end nothing is heard, whatever the build holds.
+		loop_info GameLoop;
+		size_t BuiltChannels = 0;
+		// Both entries' payloads, kept past the per-file pass for a target the join detector
+		// will read: extracting them costs a full Vorbis decode each, just for the loop points.
+		std::filesystem::path KeptBuilt, KeptGame;
+		// The join detector's verdict per region, with --ost; or why this target could not
+		// be judged at all.
+		std::vector<detector_region_result> Regions;
+		std::string RegionsNotAnalysable;
 		std::string Error;
 	};
 
@@ -629,6 +820,15 @@ int cmd_verify(const std::vector<std::string>& args) {
 				"            file, so the presets are the only place to learn where one is.\n"
 				"  seam      whether the loop point clicks, judged from the built file alone. Above\n"
 				"            about 1 the seam is a bigger jump than anything happening near it.\n"
+				"  regions   with --preset and --ost, every item that mixes more than one copy of a\n"
+				"            recording -- segments, or an asplit/adelay sum -- is modelled copy by copy:\n"
+				"            per quarter second, how much of each copy the game plays and how much the\n"
+				"            build does, over 20 s either side of each join. `shape` is the part of the\n"
+				"            game the build's copy ratio fails to explain (flagged over 0.14 for a\n"
+				"            second), `level` the build's step against the game there (over 3.5 dB),\n"
+				"            and copies out of step with each other by more than 2 ms are reported\n"
+				"            apart. The only check here that can tell a wrong crossfade from a\n"
+				"            different master, which lower every spectral match alike.\n"
 				"\n"
 				"The csv columns are target,weighted,plain,built_seconds,game_seconds and then the\n"
 				"envelope and silence fields, so an existing build_scores.csv reader keeps working.");
@@ -648,6 +848,7 @@ int cmd_verify(const std::vector<std::string>& args) {
 		parser.add_argument("--head-seconds").default_value(3.0).scan<'g', double>().help("how long the head window is, in seconds (default: 3), measured from the first moment the game's own file is carrying something");
 		parser.add_argument("--max-lag-ms").default_value(25.0).scan<'g', double>().help("how far either way the head and loop-start lag is searched, in milliseconds (default: 25)");
 		parser.add_argument("--preset").default_value(std::string()).help("the presets the build came from -- files or directories, comma-separated -- so every place two segments meet can be judged. A join leaves no mark in the .scd it produces, so without this the joins are not checked");
+		parser.add_argument("--ost").default_value(std::string()).help("the recordings the build was made from, as `apply --ost` took them. With --preset, runs the join detector on every item that mixes more than one copy of a recording; without it the joins are judged by level and spectrum only");
 		parser.add_argument("--join-seconds").default_value(6.0).scan<'g', double>().help("how long the window centred on each join is, in seconds (default: 6; never less than twice the crossfade plus a second either side)");
 		parser.parse_args(args);
 	} catch (const std::exception& e) {
@@ -671,6 +872,18 @@ int cmd_verify(const std::vector<std::string>& args) {
 		const auto maxLagMs = parser.get<double>("--max-lag-ms");
 		const auto joinSeconds = parser.get<double>("--join-seconds");
 		const auto joinsByTarget = read_joins(parser.get<std::string>("--preset"));
+		const auto ostSpec = parser.get<std::string>("--ost");
+		std::map<std::string, std::vector<apply_segment>> detectorTargets;
+		if (!ostSpec.empty()) {
+			if (parser.get<std::string>("--preset").empty())
+				throw std::runtime_error("--ost only names the recordings; --preset says what was built from them.");
+			std::vector<std::pair<std::string, std::string>> unresolved;
+			detectorTargets = read_detector_targets(parser.get<std::string>("--preset"), argactions::path(ostSpec), unresolved);
+			std::cerr << std::format("{} target(s) the join detector may judge{}", detectorTargets.size(),
+				unresolved.empty() ? "." : std::format("; {} listing(s) did not resolve and were passed over, as apply does:", unresolved.size())) << '\n';
+			for (size_t i = 0; i < (std::min<size_t>)(unresolved.size(), 4); ++i)
+				std::cerr << std::format("   {}: {}", unresolved[i].first, unresolved[i].second) << '\n';
+		}
 		if (!parser.get<std::string>("--preset").empty()) {
 			size_t count = 0;
 			for (const auto& [_t, j] : joinsByTarget)
@@ -713,7 +926,8 @@ int cmd_verify(const std::vector<std::string>& args) {
 			try {
 				const auto builtLoop = unwrap_entry(std::make_shared<xivres::file_stream>(builtPath),
 					entryIndex, stem.wstring() + L"_a", builtAudio);
-				unwrap_entry(installation.get_file(target), entryIndex, stem.wstring() + L"_b", gameAudio);
+				r.BuiltChannels = builtLoop.Channels;
+				r.GameLoop = unwrap_entry(installation.get_file(target), entryIndex, stem.wstring() + L"_b", gameAudio);
 
 				const auto a = decode_mono_float(ffmpeg, builtAudio);
 				const auto b = decode_mono_float(ffmpeg, gameAudio);
@@ -869,6 +1083,10 @@ int cmd_verify(const std::vector<std::string>& args) {
 			} catch (const std::exception& e) {
 				r.Error = std::string(e.what()).substr(0, 90);
 			}
+			if (r.Error.empty() && detectorTargets.contains(lower_ascii(target))) {
+				r.KeptBuilt = std::exchange(builtAudio, {});
+				r.KeptGame = std::exchange(gameAudio, {});
+			}
 			for (const auto& p : {builtAudio, gameAudio}) {
 				if (!p.empty()) {
 					std::error_code ec;
@@ -880,6 +1098,217 @@ int cmd_verify(const std::vector<std::string>& args) {
 				std::cerr << std::format("   {}/{}", n, pairs.size()) << '\n';
 			}
 		});
+
+		// The join detector, over every region of every multi-copy target. A pass of its own
+		// rather than part of the one above: a region is the unit of work, not a file -- the
+		// credits rolls hold nine each and would otherwise run on one thread while the rest sit
+		// idle -- and the recordings are shared between targets, so each is rendered once.
+		const auto detectorStarted = std::chrono::steady_clock::now();
+		size_t detectorTargetsRun = 0;
+		if (!detectorTargets.empty()) {
+			// Everything decoded is on disk and mapped, and dropped once the last region that
+			// reads it is done: a run holds a few gigabytes of renders at most at a time,
+			// rather than every recording of the library.
+			struct shared_decode {
+				std::mutex Lock;
+				bool Tried = false;
+				std::string Error;
+				std::atomic_size_t Remaining = 0;
+			};
+			struct target_audio : shared_decode {
+				std::shared_ptr<mapped_audio_file> Game, Build;
+			};
+			struct render_audio : shared_decode {
+				std::filesystem::path File;
+				std::string Render;
+				std::shared_ptr<mapped_audio_file> Audio;
+			};
+			struct region_job {
+				size_t Row = 0, Index = 0;
+			};
+
+			std::mutex probeLock;
+			std::map<std::filesystem::path, std::pair<size_t, size_t>> probed;   // (rate, channels)
+			const auto probe = [&](const std::filesystem::path& file) {
+				{
+					const auto lock = std::scoped_lock(probeLock);
+					if (const auto it = probed.find(file); it != probed.end())
+						return it->second;
+				}
+				std::pair<size_t, size_t> v{44100, 2};
+				try {
+					const auto out = run_process_capture_stdout(ffprobe, {
+						L"-v", L"error", L"-select_streams", L"a:0",
+						L"-show_entries", L"stream=sample_rate,channels", L"-of", L"csv=p=0",
+						file.wstring(),
+					});
+					const std::string text(out.begin(), out.end());
+					const auto comma = text.find(',');
+					v = {std::stoul(text.substr(0, comma)), std::stoul(text.substr(comma + 1))};
+				} catch (const std::exception&) {
+				}
+				const auto lock = std::scoped_lock(probeLock);
+				return probed.emplace(file, v).first->second;
+			};
+
+			std::vector<detector_plan> plans(rows.size());
+			std::vector<std::vector<detector_region_span>> spans(rows.size());
+			std::vector<std::unique_ptr<target_audio>> audio(rows.size());
+			std::map<std::string, std::unique_ptr<render_audio>> renders;
+			const auto renderKey = [](const detector_copy& c) {
+				return u8(c.File) + "|" + c.Render;
+			};
+			std::vector<region_job> jobs;
+			for (size_t i = 0; i < rows.size(); ++i) {
+				auto& r = rows[i];
+				if (r.KeptGame.empty())
+					continue;
+				const auto& segments = detectorTargets.at(lower_ascii(r.Target));
+				plans[i] = plan_copies(segments, r.GameLoop.Channels,
+					[&](const std::filesystem::path& f) { return static_cast<double>(probe(f).first); });
+				const auto& plan = plans[i];
+				if (!plan.MultiCopy)
+					continue;
+				if (!plan.NotAnalysable.empty()) {
+					r.RegionsNotAnalysable = plan.NotAnalysable;
+					continue;
+				}
+				// The game's loop end, else its length: nothing past it is heard.
+				const auto rate = static_cast<double>(r.GameLoop.Rate ? r.GameLoop.Rate : 1);
+				const auto duration = static_cast<double>(r.GameLoop.TotalSamples) / rate;
+				const auto end = (std::min)(r.GameLoop.EndSample ? static_cast<double>(r.GameLoop.EndSample) / rate : duration, duration);
+				spans[i] = detector_regions(plan.Events, end);
+				if (spans[i].empty())
+					continue;
+				++detectorTargetsRun;
+				r.Regions.resize(spans[i].size());
+				audio[i] = std::make_unique<target_audio>();
+				audio[i]->Remaining = spans[i].size();
+				std::set<std::string> used;
+				for (const auto& c : plan.Copies)
+					used.insert(renderKey(c));
+				for (const auto& c : plan.Copies) {
+					auto& entry = renders[renderKey(c)];
+					if (!entry) {
+						entry = std::make_unique<render_audio>();
+						entry->File = c.File;
+						entry->Render = c.Render;
+					}
+				}
+				for (const auto& key : used)
+					renders.at(key)->Remaining += spans[i].size();
+				for (size_t k = 0; k < spans[i].size(); ++k)
+					jobs.push_back({i, k});
+			}
+
+			if (!jobs.empty()) {
+				std::cerr << std::format("Join detector: {} region(s) across {} target(s), {} recording render(s)...",
+					jobs.size(), detectorTargetsRun, renders.size()) << '\n';
+				std::atomic_size_t regionsDone = 0, renderCounter = 0;
+				// Four cores left free: this pass is minutes of solid FFT work, and a machine
+				// with none spare is unusable for its duration.
+				const auto threads = (std::max)(1u, std::thread::hardware_concurrency() > 4
+					? std::thread::hardware_concurrency() - 4 : 1u);
+				parallel_for(jobs.size(), [&](size_t jobIndex) {
+					const auto [i, k] = jobs[jobIndex];
+					auto& r = rows[i];
+					auto& ta = *audio[i];
+					auto& result = r.Regions[k];
+					std::shared_ptr<mapped_audio_file> game, build;
+					{
+						const auto lock = std::scoped_lock(ta.Lock);
+						if (!ta.Tried) {
+							ta.Tried = true;
+							try {
+								ta.Game = decode_for_detector(ffmpeg, r.KeptGame, {}, r.GameLoop.Channels,
+									tempDir / std::format(L"d{}_game.f32", i));
+								ta.Build = decode_for_detector(ffmpeg, r.KeptBuilt, {}, r.BuiltChannels,
+									tempDir / std::format(L"d{}_built.f32", i));
+							} catch (const std::exception& e) {
+								ta.Error = std::string("could not decode: ") + e.what();
+							}
+							std::error_code ec;
+							std::filesystem::remove(r.KeptGame, ec);
+							std::filesystem::remove(r.KeptBuilt, ec);
+						}
+						game = ta.Game;
+						build = ta.Build;
+					}
+
+					std::vector<std::shared_ptr<mapped_audio_file>> held;
+					std::vector<detector_copy_audio> copies;
+					std::string error = ta.Error;
+					std::set<std::string> seen;
+					for (const auto& c : plans[i].Copies) {
+						auto& re = *renders.at(renderKey(c));
+						{
+							const auto lock = std::scoped_lock(re.Lock);
+							if (!re.Tried) {
+								re.Tried = true;
+								try {
+									re.Audio = decode_for_detector(ffmpeg, re.File, re.Render, probe(re.File).second,
+										tempDir / std::format(L"r{}.f32", renderCounter.fetch_add(1)));
+								} catch (const std::exception& e) {
+									re.Error = std::format("could not render {}: {}", u8(re.File.filename()), e.what());
+								}
+							}
+							if (re.Audio)
+								held.push_back(re.Audio);
+							else if (error.empty())
+								error = re.Error;
+						}
+						if (re.Audio)
+							copies.push_back({&c, re.Audio->audio()});
+					}
+
+					if (error.empty() && game && build) {
+						try {
+							result = analyse_join_region(game->audio(), build->audio(), r.GameLoop.Channels,
+								copies, spans[i][k]);
+						} catch (const std::exception& e) {
+							error = e.what();
+						}
+					}
+					if (!error.empty()) {
+						result = {};
+						result.From = spans[i][k].From;
+						result.To = spans[i][k].To;
+						result.Joins = spans[i][k].Joins;
+						result.Error = error.substr(0, 120);
+					}
+
+					// Done with what this region read.
+					held.clear();
+					for (const auto& c : plans[i].Copies) {
+						if (!seen.insert(renderKey(c)).second)
+							continue;
+						auto& re = *renders.at(renderKey(c));
+						if (re.Remaining.fetch_sub(1) == 1) {
+							const auto lock = std::scoped_lock(re.Lock);
+							re.Audio.reset();
+						}
+					}
+					if (ta.Remaining.fetch_sub(1) == 1) {
+						const auto lock = std::scoped_lock(ta.Lock);
+						ta.Game.reset();
+						ta.Build.reset();
+					}
+					if (const auto n = regionsDone.fetch_add(1) + 1; n % 25 == 0) {
+						const auto lock = std::scoped_lock(progressMutex);
+						std::cerr << std::format("   regions {}/{}", n, jobs.size()) << '\n';
+					}
+				}, threads);
+			}
+			// A target planned but left without regions never had its payloads consumed.
+			for (auto& r : rows) {
+				std::error_code ec;
+				if (!r.KeptGame.empty())
+					std::filesystem::remove(r.KeptGame, ec);
+				if (!r.KeptBuilt.empty())
+					std::filesystem::remove(r.KeptBuilt, ec);
+			}
+		}
+		const auto detectorSeconds = std::chrono::duration<double>(std::chrono::steady_clock::now() - detectorStarted).count();
 
 		std::vector<const row*> ok, failed;
 		for (const auto& r : rows)
@@ -957,6 +1386,14 @@ int cmd_verify(const std::vector<std::string>& args) {
 						}
 						one["joins"] = std::move(joins);
 					}
+					if (!r.Regions.empty()) {
+						auto regions = nlohmann::json::array();
+						for (const auto& g : r.Regions)
+							regions.push_back(region_json(g));
+						one["regions"] = std::move(regions);
+					}
+					if (!r.RegionsNotAnalysable.empty())
+						one["regionsNotAnalysable"] = r.RegionsNotAnalysable;
 				out.push_back(std::move(one));
 			}
 			table = out.dump(1);
@@ -968,6 +1405,7 @@ int cmd_verify(const std::vector<std::string>& args) {
 			table += ",head_lag_ms,head_match,loop_lag_ms,loop_match";
 			table += ",lag_min_ms,lag_max_ms,lag_ppm,level_db,level_p90_db";
 			table += ",joins,joins_wrong,join_at,join_match,join_ctrl_match,join_before_db,join_after_db,join_seam,join_problem";
+			table += ",regions,regions_flagged,worst_shape,worst_shape_at,worst_region_level_db,worst_rel_lag_ms,region_problem";
 			table += ",error\n";
 			for (const auto& r : rows) {
 				table += std::format("{},{:.4f},{:.4f},{:.1f},{:.1f},", r.Target, r.Weighted, r.Plain,
@@ -1038,6 +1476,41 @@ int cmd_verify(const std::vector<std::string>& args) {
 					} else {
 						table += ",,,,,,,,,";
 					}
+				}
+				// The join detector: the worst of every region, and what is wrong with the ones
+				// that flag. Every region, with its per-copy curves, is in the JSON.
+				if (!r.Regions.empty()) {
+					size_t flagged = 0;
+					const detector_region_result* worstShape = nullptr;
+					const detector_region_result* worstLevel = nullptr;
+					auto worstLag = 0.;
+					std::string problems;
+					for (const auto& g : r.Regions) {
+						if (g.flagged())
+							++flagged;
+						if (const auto p = g.problem(); !p.empty() && (g.flagged() || g.LagFlag || !g.Error.empty()))
+							problems += (problems.empty() ? "" : " | ") + p;
+						if (!g.Error.empty())
+							continue;
+						if (!worstShape || g.PeakShape > worstShape->PeakShape)
+							worstShape = &g;
+						if (!worstLevel || std::abs(g.PeakLevelDb) > std::abs(worstLevel->PeakLevelDb))
+							worstLevel = &g;
+						worstLag = (std::max)(worstLag, g.RelLagMs);
+					}
+					std::ranges::replace(problems, ',', ' ');
+					table += std::format(",{},{},{},{},{},{},{}", r.Regions.size(), flagged,
+						worstShape ? std::format("{:.3f}", worstShape->PeakShape) : "",
+						worstShape ? std::format("{:.2f}", worstShape->PeakShapeAt) : "",
+						worstLevel ? std::format("{:.2f}", worstLevel->PeakLevelDb) : "",
+						worstShape ? std::format("{:.2f}", worstLag) : "",
+						problems);
+				} else if (!r.RegionsNotAnalysable.empty()) {
+					auto why = "not analysable: " + r.RegionsNotAnalysable;
+					std::ranges::replace(why, ',', ' ');
+					table += ",,,,,,," + why;
+				} else {
+					table += ",,,,,,,";
 				}
 				table += ',';
 				table += r.Error;
@@ -1241,6 +1714,65 @@ int cmd_verify(const std::vector<std::string>& args) {
 						r->Target.size() > 40 ? r->Target.substr(r->Target.size() - 40) : r->Target,
 						j->Join.AtSeconds, j->Join.SameRecording ? "loop-out" : "medley",
 						join_problem(*j, seamThreshold)) << '\n';
+				}
+			}
+		}
+
+		// The join detector's regions: which arrangements differ from the game's, and which
+		// targets it could not model at all, by reason.
+		{
+			struct flagged { const row* Row; const detector_region_result* Region; };
+			std::vector<flagged> bad;
+			size_t regions = 0, errors = 0, lagged = 0;
+			std::set<const row*> badFiles;
+			std::map<std::string, size_t> notAnalysable;
+			for (const auto& r : rows) {
+				if (!r.RegionsNotAnalysable.empty()) {
+					// The reason without the source name, so like counts with like.
+					auto why = r.RegionsNotAnalysable;
+					if (const auto q = why.find("\" "); why.starts_with("source \"") && q != std::string::npos)
+						why = why.substr(q + 2);
+					else if (const auto c = why.find("\": "); why.starts_with("source \"") && c != std::string::npos)
+						why = why.substr(c + 3);
+					++notAnalysable[why];
+				}
+				for (const auto& g : r.Regions) {
+					++regions;
+					if (!g.Error.empty())
+						++errors;
+					if (g.LagFlag)
+						++lagged;
+					if (g.flagged() || g.LagFlag) {
+						bad.push_back({&r, &g});
+						if (g.flagged())
+							badFiles.insert(&r);
+					}
+				}
+			}
+			if (regions || !notAnalysable.empty()) {
+				size_t joinFlagged = 0;
+				for (const auto& b : bad)
+					joinFlagged += b.Region->flagged();
+				std::cerr << std::format("{} join region(s) modelled in {} target(s) in {:.0f}s; {} arrangement(s) differ from the game's in {} file(s), {} region(s) hold copies out of step{}",
+					regions, detectorTargetsRun, detectorSeconds, joinFlagged, badFiles.size(), lagged,
+					errors ? std::format(", {} could not be analysed", errors) : "")
+					<< (bad.empty() ? "" : "; worst:") << '\n';
+				std::ranges::stable_sort(bad, [](const flagged& x, const flagged& y) {
+					return region_severity(*x.Region) > region_severity(*y.Region);
+				});
+				for (size_t i = 0; i < (std::min<size_t>)(bad.size(), 15); ++i) {
+					const auto& [r, g] = bad[i];
+					std::cerr << std::format("   {:<40} {:7.1f}-{:<7.1f} shape {:.2f} level {:+5.1f} dB  {}",
+						r->Target.size() > 40 ? r->Target.substr(r->Target.size() - 40) : r->Target,
+						g->From, g->To, g->PeakShape, g->PeakLevelDb, g->problem()) << '\n';
+				}
+				if (!notAnalysable.empty()) {
+					size_t total = 0;
+					for (const auto& [_w, n] : notAnalysable)
+						total += n;
+					std::cerr << std::format("{} multi-copy target(s) the detector cannot model:", total) << '\n';
+					for (const auto& [why, n] : notAnalysable)
+						std::cerr << std::format("   {:4} {}", n, why) << '\n';
 				}
 			}
 		}
