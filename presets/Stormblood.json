@@ -2110,10 +2110,28 @@
       "crossfadeShape": "linear",
       "sourceFilters": {
        "SB_FFXIV_031": "aresample=141120,asetrate=141121"
-      }
+      },
+      "length": 61.8
+     },
+     {
+      "sourceOffsets": {
+       "target": 701.8
+      },
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "a medley of three pieces: SB_FFXIV_046 to 421.6s, SB_FFXIV_010 to 549.2s, then SB_FFXIV_031 to the loop end. SB_FFXIV_031 is one 151.58s piece played twice, sample-identical (self-correlation 1.000), and the game's loop is that period: the loop start (551.82s) reads the second pass and the end reads the first. The second pass carries the album's fade from about 651s, and the switch back to the first pass sat at 669.3s, inside it (join flagged 'outgoing runs out before the join', envelope hole 41.9 dB). The switch is now at 640s, exactly one recorded period back (so a linear crossfade of the two copies is seamless), well before the fade. Every offset was off by 1-13 ms (SB_FFXIV_010 by 13 ms), so each is now fitted by waveform correlation against the game; SB_FFXIV_046 and SB_FFXIV_031 also run 12.8 and 7.2 ppm fast against the game, corrected by aresample/asetrate pairs (78400->78401, 141120->141121) so the build stays within 0.07 ms of the game end to end. The first join moved to 421.6s, the silence between SB_FFXIV_046's decay and SB_FFXIV_010's attack (it used to fade SB_FFXIV_010 in from 422s, a second after its attack), and the second to 549.2s with a 1s crossfade, matching where the game ramps SB_FFXIV_031 in. Against the game's own file: weighted 0.9877 -> 0.9943, envelope hole 41.9 -> 1.0 dB, joins 0.960/0.978/flagged -> 0.991/0.993/0.995 (controls 0.995/0.996/0.995), tail 0.989 -> 0.990 (control 0.995). The last 1.6s before the loop end in the game is not the recording at any lag (waveform correlation drops from 0.97 to ~0.3 at 701.8s, level 3 dB lower); nothing tried reproduced it, which is what keeps the tail under its control."
+    "# comment": "a medley of three pieces: SB_FFXIV_046 to 421.6s, SB_FFXIV_010 to 549.2s, then SB_FFXIV_031 to the loop end. SB_FFXIV_031 is one 151.58s piece played twice, sample-identical (self-correlation 1.000), and the game's loop is that period: the loop start (551.82s) reads the second pass and the end reads the first. The second pass carries the album's fade from about 651s, and the switch back to the first pass sat at 669.3s, inside it (join flagged 'outgoing runs out before the join', envelope hole 41.9 dB). The switch is now at 640s, exactly one recorded period back (so a linear crossfade of the two copies is seamless), well before the fade. Every offset was off by 1-13 ms (SB_FFXIV_010 by 13 ms), so each is now fitted by waveform correlation against the game; SB_FFXIV_046 and SB_FFXIV_031 also run 12.8 and 7.2 ppm fast against the game, corrected by aresample/asetrate pairs (78400->78401, 141120->141121) so the build stays within 0.07 ms of the game end to end. The first join moved to 421.6s, the silence between SB_FFXIV_046's decay and SB_FFXIV_010's attack (it used to fade SB_FFXIV_010 in from 422s, a second after its attack), and the second to 549.2s with a 1s crossfade, matching where the game ramps SB_FFXIV_031 in. Against the game's own file: weighted 0.9877 -> 0.9943, envelope hole 41.9 -> 1.0 dB, joins 0.960/0.978/flagged -> 0.991/0.993/0.995 (controls 0.995/0.996/0.995), tail 0.989 -> 0.990 (control 0.995). The last 1.6s before the loop end in the game is not the recording at any lag (waveform correlation drops from 0.97 to ~0.3 at 701.8s, level 3 dB lower); nothing tried reproduced it, which is what keeps the tail under its control. The game's last 1.6s (701.8-703.4) is material no album release contains -- no lag of SB_FFXIV_031, 010 or 046 matches it (whole-recording search, single and paired lags, mid/side) -- so it is filled from the game's own audio with a 50 ms linear crossfade: tail 0.990 -> 0.996 against mid-loop 0.995, waveform correlation over those seconds -0.4..0.3 -> 1.00."
    }
   },
   {
