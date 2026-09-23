@@ -2178,11 +2178,11 @@
        }
       ],
       "sourceFilters": {
-       "source": "asplit[a][b];[b]adelay=20015290S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
+       "source": "aeval='val(ch)*pow(10,(if(lt(t,150.15),if(lt(t,140.15),if(lt(t,47.05),if(lt(t,46.8),-4.95,(-4.95+(t-46.8)*19.8)),0),if(lt(t,149.85),if(lt(t,140.45),(0+(t-140.15)*-13),-3.9),(-3.9+(t-149.85)*12.1333))),if(lt(t,177.85),if(lt(t,157.45),if(lt(t,157.15),-0.26,(-0.26+(t-157.15)*-10.8667)),-3.52),if(lt(t,178.15),(-3.52+(t-177.85)*8.9),-0.85)))+0)/20)':c=same,aformat=channel_layouts=stereo,asplit[a][b];[b]adelay=20015290S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
       }
      }
     ],
-    "# comment": "Over the loop's end the game plays the recording's own ending and its opening one loop period (208.493s) later at once, summed rather than cut to (as the game does on BGM_ORCH_295 and BGM_EX5_Raid_24); the old layout cut to the opening at 208.50s. Now one segment, the recording mixed with itself delayed by exactly one period (20015290 samples at its own 96000 Hz), which also closes the loop wrap. BGM_ORCH_169 weighted 0.9677 -> 0.9677, hole 9.4 -> 9.3 dB, tail 0.965 -> 0.966 against mid-loop 0.971; no joins left. The two-segment layout this replaced: the game's file is 42.4s longer than this recording and ends by repeating itself: from 208.5s it replays the file from 0.0s (similarity 0.989, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 1.760s. Built and measured: whole file 0.966, across the seam 0.946, against a ceiling of 0.966 for this pairing."
+    "# comment": "Over the loop's end the game plays the recording's own ending and its opening one loop period (208.493s) later at once, summed rather than cut to (as the game does on BGM_ORCH_295 and BGM_EX5_Raid_24); the old layout cut to the opening at 208.50s. Now one segment, the recording mixed with itself delayed by exactly one period (20015290 samples at its own 96000 Hz), which also closes the loop wrap. BGM_ORCH_169 weighted 0.9677 -> 0.9677, hole 9.4 -> 9.3 dB, tail 0.965 -> 0.966 against mid-loop 0.971; no joins left. The two-segment layout this replaced: the game's file is 42.4s longer than this recording and ends by repeating itself: from 208.5s it replays the file from 0.0s (similarity 0.989, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 1.760s. Built and measured: whole file 0.966, across the seam 0.946, against a ceiling of 0.966 for this pairing. Agent 26 (verify's join detector: 'arrangement differs from the game's at 197.7 s; level off -6.3 dB at 205.7 s; copies 8.3 ms apart'): the arrangement and lag parts are misreads. The game's file is a different mix of this piece (waveform correlation 0.3-0.6 everywhere, the band below 150 Hz polarity-inverted, others 1.3 ms apart), so the detector's two-copy fit explains 1% of the game (r2 0.011) and its copy lags mean nothing. Model-free, the sum is right: the game's re-entry is its own head one loop later (game vs game 0.99), and the recording's ending is already at -57 dB and falling when the opening re-enters at 208.5 s, so a sum and a cut are the same there. The level part is real: per 2 s, in recording time and identically in both passes, the game holds the opening (recording < 46.9 s, i.e. everything before the game's loop start, and its repeat after 208.5 s) 4.95 dB lower against the body than the recording does, and three more sections (recording 140.3-150.0, 157.3-178.0, 178.0 on) 3.9 / 3.5 / 0.85 dB lower. Now an aeval gain in recording time before the asplit with those sections (0.3 s ramps); an aformat=channel_layouts=stereo after it is REQUIRED -- aeval leaves the layout unset and the single-source path's mono fold then keeps only the left channel (weighted fell to 0.9633). Weighted 0.9677 -> 0.9677, hole 9.3 -> 6.9 dB, tail level +4.37 -> -0.46 dB (control +1.58 -> -0.10; matches 0.966 vs 0.971 unchanged), whole-file level +2.12 -> -0.43 dB, build-minus-game per 2 s spread (median abs deviation) 2.25 -> 0.75 dB. The detector still flags the region (level -4.7 dB at 208.7 s): the game's mix of the opening attack is 7-12 dB louder than the recording's for its first 0.5 s, at the head as at the re-entry, and its ending decays 3-5 dB slower over 204.5-206 s -- mix, not stitching."
    }
   },
   {
@@ -2616,34 +2616,12 @@
     "Dragonsong"
    ],
    "target": {
-    "path": [
-     "music/ex1/BGM_EX1_Ban_Nidhogg_01.scd",
-     "music/ex4/BGM_EX4_Ban_Nidhogg_01.scd"
-    ],
+    "path": "music/ex1/BGM_EX1_Ban_Nidhogg_01.scd",
     "segments": [
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.69,
-        "pcmHash": "624d198e"
-       }
-      },
-      "length": 332.42,
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     },
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 2.23,
+        "offset": 1.692127,
         "pcmHash": "624d198e"
        }
       },
@@ -2657,10 +2635,46 @@
         "channel": 1
        }
       ],
-      "crossfadeSeconds": 1.0
+      "sourceFilters": {
+       "source": "asplit[a][b];[b]adelay=31860819S:all=1[bd];[a][bd]amix=inputs=2:normalize=0"
+      }
      }
     ],
-    "# comment": "the game's file is 20.1s longer than this recording and ends by repeating itself: from 332.4s it replays the file from 0.5s (similarity 0.994, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 2.230s. The game built its loop-out by crossfading, so this does too: segment 1 keeps playing 1s past the seam at 332.420s, into the recording's own ending, while segment 2 fades in from 2.230s. Fitted over the target's own onsets (scratch/fit_loopout_crossfade.py): the join goes 0.946 hard-cut to 0.976, the whole file 0.996 to 0.997."
+    "# comment": "the game's file is 20.1s longer than this recording and ends by repeating itself: from 332.4s it replays the file from 0.5s (similarity 0.994, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 2.230s. The game built its loop-out by crossfading, so this does too: segment 1 keeps playing 1s past the seam at 332.420s, into the recording's own ending, while segment 2 fades in from 2.230s. Fitted over the target's own onsets (scratch/fit_loopout_crossfade.py): the join goes 0.946 hard-cut to 0.976, the whole file 0.996 to 0.997. Agent 26 (verify's join detector: 'arrangement differs from the game's at 333.9 s; copies 3.5 ms apart', both paths): the game does not crossfade here, it sums. Least squares per 0.25 s of the game onto the two copies (each at its own lag) keeps the outgoing copy at its full gain (1.05) right through the recording's own decay to 335 s, while the opening copy is at full gain (1.05) from its own onset at ~331.5 s; the build's 1 s crossfade faded the ending out under it, 3.5 dB under the game at 332-333 s (waveform correlation 0.63-0.88). The copies also sat 3.5 ms out of step: offsets were 10 ms-rounded; the game reads the recording at 1.692127 s (lag 2.13 ms, no drift over the file) and its opening copy 331.883535 s earlier (31860819 samples at the recording's 96 kHz, 6 samples more than the loop length -- the game's own wrap skips 0.07 ms; taking the loop length exactly scored the same). Now ONE segment, the recording summed with itself delayed by that period. Weighted 0.9960 -> 0.9970, hole 3.6 dB at 332.5 -> 0.3 dB, tail 0.998 vs control 0.996 -> 0.999 vs 0.997, lag probes -1.40..2.14 ms -> -0.02..0.00 ms, detector region clear (shape 0.272 -> 0.000, 3.54 -> 0.01 ms); build vs game at 330-340 s correlates 0.997-0.999 within 0.5 dB. BGM_EX4_Ban_Nidhogg_01 is split out below: it is this same file with a stepped volume ride (0.9996 correlated with EX1, levels +3.1/+2.6/+0.8/+2.1/+1.1/0/+1.3/+3.0 dB in sections)."
+   }
+  },
+  {
+   "source": [
+    "^00054\\.",
+    "HEAVENSWARD_FFXIV_55",
+    "Dragonsong"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Ban_Nidhogg_01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.692127,
+        "pcmHash": "624d198e"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "asplit[a][b];[b]adelay=31860819S:all=1[bd];[a][bd]amix=inputs=2:normalize=0,aeval='val(ch)*pow(10,(if(lt(n/96000,169.742),if(lt(n/96000,123.292),if(lt(n/96000,84.7921),if(lt(n/96000,56.0921),if(lt(n/96000,55.7421),3.11,(3.11+(n/96000-55.7421)*-1.4)),2.62),if(lt(n/96000,84.9921),(2.62+(n/96000-84.7921)*-9.3),(0.76+(n/96000-84.9921)*0.000261097))),if(lt(n/96000,151.742),if(lt(n/96000,123.492),(0.77+(n/96000-123.292)*6.55),2.08),if(lt(n/96000,151.892),(2.08+(n/96000-151.742)*-6.4),1.12))),if(lt(n/96000,336.192),if(lt(n/96000,306.192),if(lt(n/96000,172.292),(1.12+(n/96000-169.742)*-0.439216),0),if(lt(n/96000,306.442),(0+(n/96000-306.192)*5.12),(1.28+(n/96000-306.442)*-0.000336134))),if(lt(n/96000,362.492),if(lt(n/96000,336.992),(1.27+(n/96000-336.192)*2.2),3.03),if(lt(n/96000,362.542),(3.03+(n/96000-362.492)*-4060.6),-200)))))/20)':c=same,aformat=channel_layouts=stereo"
+      }
+     }
+    ],
+    "# comment": "the game's file is 20.1s longer than this recording and ends by repeating itself: from 332.4s it replays the file from 0.5s (similarity 0.994, seam located by self-similar run). Built as two segments of the same recording -- the match, then the same recording re-entered at 2.230s. The game built its loop-out by crossfading, so this does too: segment 1 keeps playing 1s past the seam at 332.420s, into the recording's own ending, while segment 2 fades in from 2.230s. Fitted over the target's own onsets (scratch/fit_loopout_crossfade.py): the join goes 0.946 hard-cut to 0.976, the whole file 0.996 to 0.997. Agent 26 (verify's join detector: 'arrangement differs from the game's at 333.9 s; copies 3.5 ms apart', both paths): the game does not crossfade here, it sums. Least squares per 0.25 s of the game onto the two copies (each at its own lag) keeps the outgoing copy at its full gain (1.05) right through the recording's own decay to 335 s, while the opening copy is at full gain (1.05) from its own onset at ~331.5 s; the build's 1 s crossfade faded the ending out under it, 3.5 dB under the game at 332-333 s (waveform correlation 0.63-0.88). The copies also sat 3.5 ms out of step: offsets were 10 ms-rounded; the game reads the recording at 1.692127 s (lag 2.13 ms, no drift over the file) and its opening copy 331.883535 s earlier (31860819 samples at the recording's 96 kHz, 6 samples more than the loop length -- the game's own wrap skips 0.07 ms; taking the loop length exactly scored the same). Now ONE segment, the recording summed with itself delayed by that period. Weighted 0.9960 -> 0.9970, hole 3.6 dB at 332.5 -> 0.3 dB, tail 0.998 vs control 0.996 -> 0.999 vs 0.997, lag probes -1.40..2.14 ms -> -0.02..0.00 ms, detector region clear (shape 0.272 -> 0.000, 3.54 -> 0.01 ms); build vs game at 330-340 s correlates 0.997-0.999 within 0.5 dB. Split from BGM_EX1_Ban_Nidhogg_01 (was one item): this file is EX1's waveform (correlation 0.9996) with a stepped volume ride, measured per 0.1 s as EX4-over-EX1 gain in game time: +3.11 dB to 54.05 s, +2.62 from 54.4, +0.76 from 83.3, +2.08 from 121.8, +1.12 from 150.2, falling linearly to 0 over 168.05-170.6, +1.28 from 304.75, +3.03 from 335.3 s (0.15-0.8 s ramps). Applied after the sum as an aeval in the sample counter n (after amix, aeval's t follows frame timestamps that jump once the undelayed branch ends), muted past the loop end, because apply's single-source path limits its gain on peaks past the loop end too (the ride lifted the delayed copy's loudest passage there by 3 dB and the whole file came out 3.3 dB quiet). Level -1.32 -> -0.23 dB (p90 3.34 -> 0.31), hole 3.8 -> 0.3 dB, tail level -3.2 -> -0.2 dB, weighted 0.9961 -> 0.9970."
    }
   },
   {
