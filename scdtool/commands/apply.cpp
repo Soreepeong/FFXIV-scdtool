@@ -2428,12 +2428,17 @@ int cmd_apply(const std::vector<std::string>& args) {
 				// sides have. Requiring a loop left every non-looping target at the master's
 				// own level: BGM_EX2_Field_Safe_01 came out 3.7 dB quiet, which neither the
 				// weighted score nor the envelope hole shows -- only a level comparison does.
-				const auto presetSetsGain = job.Filter.find(L"volume=") != std::wstring::npos;
+				//
+				// A volume= in the preset's filter is where the match starts, not a gain to keep:
+				// the source is measured through the filter, as the segment path does. Generated
+				// presets carry apply's own earlier gain that way, measured before the -ss and
+				// mono-fold fixes, and keeping it left the one-segment Orchestrion rolls ~4 dB
+				// quiet (BGM_ORCH_599: volume=-2.9dB stated, -5.6 dB against the game).
 				const auto looped = newLoopEnd > newLoopStart;
 				const auto spanFrom = looped ? newLoopStart : size_t{0};
 				const auto spanTo = looped ? newLoopEnd : (std::min)(totalSamples,
 					static_cast<size_t>(std::llround(templateSeconds * static_cast<double>(samplingRate))));
-				if (loudnessMatch && !presetSetsGain && spanTo > spanFrom) {
+				if (loudnessMatch && spanTo > spanFrom) {
 					const auto spanSeconds = static_cast<double>(spanTo - spanFrom) / static_cast<double>(samplingRate);
 					const auto templateStartSeconds = looped
 						? static_cast<double>(templateLoopStart) / static_cast<double>(templateRate) : 0.;
