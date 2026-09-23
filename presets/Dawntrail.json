@@ -74,11 +74,11 @@
      {
       "sourceOffsets": {
        "DT_001": {
-        "offset": 1.55,
+        "offset": 1.550977,
         "pcmHash": "2b968e14"
        }
       },
-      "length": 328.17,
+      "length": 329.7,
       "channels": [
        {
         "source": "DT_001",
@@ -93,12 +93,14 @@
      {
       "sourceOffsets": {
        "DT_006": {
-        "offset": 1.69,
+        "offset": 3.219125,
         "pcmHash": "458ffced"
        }
       },
-      "length": 154.77,
-      "crossfadeSeconds": 0.5,
+      "length": 159.5,
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear",
+      "fadeInSeconds": 0.0,
       "channels": [
        {
         "source": "DT_006",
@@ -113,12 +115,14 @@
      {
       "sourceOffsets": {
        "DT_023": {
-        "offset": 0.33,
+        "offset": 6.59254,
         "pcmHash": "b96ae678"
        }
       },
-      "length": 277.51,
-      "crossfadeSeconds": 2.0,
+      "length": 283.7,
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear",
+      "fadeInSeconds": 0.0,
       "channels": [
        {
         "source": "DT_023",
@@ -133,12 +137,17 @@
      {
       "sourceOffsets": {
        "DT_032": {
-        "offset": 1.6,
+        "offset": 14.053335,
         "pcmHash": "9f934297"
        }
       },
-      "length": 149.32,
-      "crossfadeSeconds": 0.5,
+      "length": 141.8,
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear",
+      "fadeInSeconds": 0.0,
+      "sourceFilters": {
+       "DT_032": "afade=t=out:st=141.2733:d=14.5000:curve=hsin"
+      },
       "channels": [
        {
         "source": "DT_032",
@@ -153,12 +162,14 @@
      {
       "sourceOffsets": {
        "DT_036": {
-        "offset": 2.01,
+        "offset": 6.93956,
         "pcmHash": "6e3282d5"
        }
       },
-      "length": 124.27,
-      "crossfadeSeconds": 0.5,
+      "length": 186.0,
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear",
+      "fadeInSeconds": 0.0,
       "channels": [
        {
         "source": "DT_036",
@@ -173,12 +184,17 @@
      {
       "sourceOffsets": {
        "DT_042": {
-        "offset": 160.13,
+        "offset": 6.555972,
         "pcmHash": "21dee3f9"
        }
       },
-      "length": 283.6,
-      "crossfadeSeconds": 16.0,
+      "length": 220.4,
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear",
+      "fadeInSeconds": 0.0,
+      "sourceFilters": {
+       "DT_042": "afade=t=out:st=223.1760:d=3.7500:curve=hsin"
+      },
       "channels": [
        {
         "source": "DT_042",
@@ -193,12 +209,17 @@
      {
       "sourceOffsets": {
        "DT_050": {
-        "offset": 2.18,
+        "offset": 5.642703,
         "pcmHash": "a42bbf1d"
        }
       },
-      "length": 198.74,
-      "crossfadeSeconds": 2.0,
+      "length": 203.8,
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear",
+      "fadeInSeconds": 0.0,
+      "sourceFilters": {
+       "DT_050": "afade=t=out:st=196.2127:d=13.2000:curve=hsin"
+      },
       "channels": [
        {
         "source": "DT_050",
@@ -213,12 +234,17 @@
      {
       "sourceOffsets": {
        "DT_053": {
-        "offset": 0.39,
+        "offset": 8.90506,
         "pcmHash": "c5dc7738"
        }
       },
-      "length": 137.51,
-      "crossfadeSeconds": 2.0,
+      "length": 128.18,
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear",
+      "fadeInSeconds": 0.0,
+      "sourceFilters": {
+       "DT_053": "aeval='-val(ch)*exp(if(lt(t,74.0051),if(lt(t,43.0051),if(lt(t,24.0051),if(lt(t,10.0051),(0.650860+0.00000000*(t-0.0000)),if(lt(t,19.0051),(0.650860+0.00169029*(t-10.0051)),(0.666073+-0.00952525*(t-19.0051)))),if(lt(t,27.0051),(0.618446+-0.03400337*(t-24.0051)),if(lt(t,40.0051),(0.516436+-0.01415575*(t-27.0051)),(0.332411+0.00899489*(t-40.0051))))),if(lt(t,50.0051),if(lt(t,46.0051),(0.359396+0.07087985*(t-43.0051)),if(lt(t,47.0051),(0.572036+0.01077221*(t-46.0051)),(0.582808+-0.04834081*(t-47.0051)))),if(lt(t,66.0051),if(lt(t,58.0051),(0.437785+0.00776337*(t-50.0051)),(0.499892+-0.00768451*(t-58.0051))),if(lt(t,70.0051),(0.438416+-0.03949684*(t-66.0051)),(0.280429+-0.00127169*(t-70.0051)))))),if(lt(t,109.0051),if(lt(t,90.0051),if(lt(t,81.0051),(0.275342+-0.02698288*(t-74.0051)),if(lt(t,85.0051),(0.086462+-0.00703133*(t-81.0051)),(0.058337+-0.03629596*(t-85.0051)))),if(lt(t,96.0051),if(lt(t,93.0051),(-0.123143+0.04564041*(t-90.0051)),(0.013778+0.01618827*(t-93.0051))),if(lt(t,105.0051),(0.062343+-0.00574979*(t-96.0051)),(0.010595+0.01290281*(t-105.0051))))),if(lt(t,118.0051),if(lt(t,113.0051),(0.062206+-0.03203011*(t-109.0051)),if(lt(t,115.0051),(-0.065914+-0.00231617*(t-113.0051)),(-0.070547+0.03113111*(t-115.0051)))),if(lt(t,131.0051),if(lt(t,127.0051),(0.022847+-0.01739630*(t-118.0051)),(-0.133720+0.08765556*(t-127.0051))),if(lt(t,135.0051),(0.216902+0.03662100*(t-131.0051)),(0.363386+0.00000000*(t-135.0051))))))))':c=same,alimiter=limit=0.8:level=0:latency=1"
+      },
       "channels": [
        {
         "source": "DT_053",
@@ -233,11 +259,14 @@
      {
       "sourceOffsets": {
        "DT_054": {
-        "offset": 1.88,
+        "offset": 1.070207,
         "pcmHash": "1221d5cf"
        }
       },
-      "length": 265.76,
+      "length": 270.32,
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear",
+      "fadeInSeconds": 0.0,
       "channels": [
        {
         "source": "DT_054",
@@ -252,11 +281,13 @@
      {
       "sourceOffsets": {
        "DT_037": {
-        "offset": 1.39,
+        "offset": 5.141843,
         "pcmHash": "c35d497f"
        }
       },
-      "crossfadeSeconds": 0.5,
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear",
+      "fadeInSeconds": 0.0,
       "channels": [
        {
         "source": "DT_037",
@@ -267,9 +298,216 @@
         "channel": 1
        }
       ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_006": {
+        "offset": 1.419125,
+        "pcmHash": "458ffced"
+       }
+      },
+      "startSeconds": 327.9,
+      "length": 1.8,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "channels": [
+       {
+        "source": "DT_006",
+        "channel": 0
+       },
+       {
+        "source": "DT_006",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_023": {
+        "offset": 1.49254,
+        "pcmHash": "b96ae678"
+       }
+      },
+      "startSeconds": 484.1,
+      "length": 5.1,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "channels": [
+       {
+        "source": "DT_023",
+        "channel": 0
+       },
+       {
+        "source": "DT_023",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_032": {
+        "offset": 1.353335,
+        "pcmHash": "9f934297"
+       }
+      },
+      "startSeconds": 760.2,
+      "length": 12.7,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "sourceFilters": {
+       "DT_032": "afade=t=out:st=141.2733:d=14.5000:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "DT_032",
+        "channel": 0
+       },
+       {
+        "source": "DT_032",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_036": {
+        "offset": 1.53956,
+        "pcmHash": "6e3282d5"
+       }
+      },
+      "startSeconds": 909.3,
+      "length": 5.4,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "channels": [
+       {
+        "source": "DT_036",
+        "channel": 0
+       },
+       {
+        "source": "DT_036",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_042": {
+        "offset": 1.455972,
+        "pcmHash": "21dee3f9"
+       }
+      },
+      "startSeconds": 1095.6,
+      "length": 5.1,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "sourceFilters": {
+       "DT_042": "afade=t=out:st=223.1760:d=3.7500:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "DT_042",
+        "channel": 0
+       },
+       {
+        "source": "DT_042",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_050": {
+        "offset": 2.042703,
+        "pcmHash": "a42bbf1d"
+       }
+      },
+      "startSeconds": 1317.5,
+      "length": 3.6,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "sourceFilters": {
+       "DT_050": "afade=t=out:st=196.2127:d=13.2000:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "DT_050",
+        "channel": 0
+       },
+       {
+        "source": "DT_050",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_053": {
+        "offset": 1.80506,
+        "pcmHash": "c5dc7738"
+       }
+      },
+      "startSeconds": 1517.8,
+      "length": 7.1,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "sourceFilters": {
+       "DT_053": "aeval='-val(ch)*exp(if(lt(t,74.0051),if(lt(t,43.0051),if(lt(t,24.0051),if(lt(t,10.0051),(0.650860+0.00000000*(t-0.0000)),if(lt(t,19.0051),(0.650860+0.00169029*(t-10.0051)),(0.666073+-0.00952525*(t-19.0051)))),if(lt(t,27.0051),(0.618446+-0.03400337*(t-24.0051)),if(lt(t,40.0051),(0.516436+-0.01415575*(t-27.0051)),(0.332411+0.00899489*(t-40.0051))))),if(lt(t,50.0051),if(lt(t,46.0051),(0.359396+0.07087985*(t-43.0051)),if(lt(t,47.0051),(0.572036+0.01077221*(t-46.0051)),(0.582808+-0.04834081*(t-47.0051)))),if(lt(t,66.0051),if(lt(t,58.0051),(0.437785+0.00776337*(t-50.0051)),(0.499892+-0.00768451*(t-58.0051))),if(lt(t,70.0051),(0.438416+-0.03949684*(t-66.0051)),(0.280429+-0.00127169*(t-70.0051)))))),if(lt(t,109.0051),if(lt(t,90.0051),if(lt(t,81.0051),(0.275342+-0.02698288*(t-74.0051)),if(lt(t,85.0051),(0.086462+-0.00703133*(t-81.0051)),(0.058337+-0.03629596*(t-85.0051)))),if(lt(t,96.0051),if(lt(t,93.0051),(-0.123143+0.04564041*(t-90.0051)),(0.013778+0.01618827*(t-93.0051))),if(lt(t,105.0051),(0.062343+-0.00574979*(t-96.0051)),(0.010595+0.01290281*(t-105.0051))))),if(lt(t,118.0051),if(lt(t,113.0051),(0.062206+-0.03203011*(t-109.0051)),if(lt(t,115.0051),(-0.065914+-0.00231617*(t-113.0051)),(-0.070547+0.03113111*(t-115.0051)))),if(lt(t,131.0051),if(lt(t,127.0051),(0.022847+-0.01739630*(t-118.0051)),(-0.133720+0.08765556*(t-127.0051))),if(lt(t,135.0051),(0.216902+0.03662100*(t-131.0051)),(0.363386+0.00000000*(t-135.0051))))))))':c=same,alimiter=limit=0.8:level=0:latency=1"
+      },
+      "channels": [
+       {
+        "source": "DT_053",
+        "channel": 0
+       },
+       {
+        "source": "DT_053",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "DT_037": {
+        "offset": 1.241843,
+        "pcmHash": "c35d497f"
+       }
+      },
+      "startSeconds": 1919.5,
+      "length": 3.9,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "channels": [
+       {
+        "source": "DT_037",
+        "channel": 0
+       },
+       {
+        "source": "DT_037",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "target": 1653.08
+      },
+      "startSeconds": 1653.08,
+      "length": 0.85,
+      "fadeInSeconds": 0.05,
+      "fadeOutSeconds": 0.03,
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ]
      }
     ],
-    "# comment": "credits roll: a medley of 10 pieces, tiled across the target's timeline (scratch/scan_credits_medley.py, tile_credits.py). DT_001 from 0s, DT_006 from 328s, DT_023 from 483s, DT_032 from 760s, DT_036 from 910s, DT_042 from 1034s, DT_050 from 1318s, DT_053 from 1516s, DT_054 from 1654s, DT_037 from 1920s. Each join is placed where the target stops agreeing with one piece and starts agreeing with the next, then crossfaded (fit_credits_joins.py). Built with ffmpeg and scored against the game's own file: whole file 0.987, worst segment 0.959, worst join 0.843."
+    "# comment": "credits roll: a medley of 10 pieces. Rebuilt from a lag map of the game's file against all ten recordings (scratch/_agent/17_EX5_EndCredit01). The old tiling switched DT_036 -> DT_042 at 1034s into DT_042's middle (offset 160.13, 16s crossfade), but the game plays DT_036 to its own end (~1100.6) and starts DT_042 from its opening (lag -1094.144, onset 1095.7). Every other change of piece: the incoming recording plays at full from its own onset (its lead-in is a layered segment at the end of the list; the main segment starts at full with fadeInSeconds 0 and a 50ms linear crossfade), while the outgoing either plays out its natural decay at full (DT_001 to 329.7, DT_006 to 489.2, DT_023 to 772.9, DT_036 to 1100.7, DT_054 to 1923.4) or is faded by the game with a raised-cosine curve, reproduced as afade curve=hsin in its filter (fitted from per-window least-squares gains: DT_032 900.12-914.62, DT_042 1317.32-1321.07, DT_050 1511.67-1524.87). DT_053 ends at 1653.13, before the recording's next pass attacks (the old cut at 1653.89 let 0.75s of that attack through, the flagged click); the game's own 0.85s reverb tail there (1653.08-1653.93) is in no album release -- DT_053 correlates -0.3..0.15 at either pass and a whole-pool search of Dawntrail and Trail to the Heavens tops out at 0.34 -- so it is filled from the game (\"target\"). The game's DT_053 is a different mix (waveform correlation only ~0.5 at the sample-exact lag, inverted polarity) that rides quiet passages up to +6 dB and holds peaks near 0.8: its filter inverts polarity and applies the measured energy envelope (aeval, recording time, 28 knots) and alimiter=limit=0.8. Offsets are sample-level (old ones were rounded to 10ms); these recordings do not drift against the game (<0.2 ppm). Before: whole file 0.9868, hole 17.9 dB at 1519.1, head 0.965, joins at 1516.38 (incoming too quiet after it) and 1653.89 (clicks at the cut) flagged. After: 0.9931, hole 2.7 dB, head 0.984, every join clean, tail 0.997 vs control 0.996."
    }
   },
   {
