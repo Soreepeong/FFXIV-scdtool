@@ -2542,21 +2542,33 @@
    }
   },
   {
-   "source": [
-    "^00039\\.",
-    "ENDWALKER_040",
-    "Answers",
-    "Answers"
-   ],
+   "source": {
+    "source": {
+     "inputFiles": [
+      [
+       "00039",
+       "ENDWALKER_040",
+       "^((?!Piano).)*Answers((?!Piano).)*$"
+      ],
+      [],
+      [
+       "00038",
+       "ENDWALKER_039",
+       "灰より生まれし者",
+       "From the Ashes"
+      ]
+     ],
+     "filterComplex": "[0:a]atrim=0:219.829,asetpts=PTS-STARTPTS,afade=t=out:st=217.881:d=1.948:curve=squ[tr1];[1:a]atrim=217.382:222.454,asetpts=PTS-STARTPTS,afade=t=in:st=0:d=1.948:curve=squ,afade=t=out:st=2.938:d=2.134:curve=squ,volume=3.2dB,adelay=217881:all=1,aresample=96000[tr2];[2:a]atrim=start=2.438,asetpts=PTS-STARTPTS,afade=t=in:st=0:d=2.134:curve=squ,volume=3.2dB,aresample=76336,asetrate=76337,adelay=220820:all=1[tr3];[tr1][tr2][tr3]amix=inputs=3:duration=longest:normalize=0,atrim=start=0.499208[res]",
+     "filterComplexOutName": "[res]"
+    }
+   },
    "target": {
     "path": "music/ex4/BGM_EX4_Event_14.scd",
     "segments": [
      {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.5,
-        "pcmHash": "dee9f3f6"
-       }
+      "sourceThresholds": {
+       "target": 0,
+       "source": 0
       },
       "channels": [
        {
@@ -2570,7 +2582,7 @@
       ]
      }
     ],
-    "# comment": "same recording as ENDWALKER_040.flac, released on both albums; offset re-derived against the game's own file rather than copied across, because the two releases are not sample aligned (intro similarity 0.926)"
+    "# comment": "Answers leading into From the Ashes, as the game plays it: ENDWALKER_040 to 219.83s fading out over 1.95s, 5s of ENDWALKER_039 from 217.38s bridging the two, then ENDWALKER_039 from 2.44s, which is 3.2 dB under the game and drifts 13.1 ppm against it, so it carries a gain and a drift correction. Ported from presets-manual (676e672), which built this at weighted 0.985 but let From the Ashes fall out of sync; the two single-recording entries presets/ had instead scored 0.32 and could not reach the second track."
    }
   },
   {

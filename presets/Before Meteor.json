@@ -3629,17 +3629,6 @@
     "Answers"
    ],
    "target": {
-    "path": "music/ex4/BGM_EX4_Event_14.scd",
-    "# comment": "spectral similarity to the game's own file: 0.926; also released as ENDWALKER_040; that album's own preset carries its own entry"
-   }
-  },
-  {
-   "source": [
-    "^00103\\.",
-    "Before_Meteor_FFXIV_104",
-    "Answers"
-   ],
-   "target": {
     "path": "music/ex4/BGM_EX4_Event_21.scd",
     "segments": [
      {
