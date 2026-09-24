@@ -1867,7 +1867,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.42,
+        "offset": 1.421198,
         "pcmHash": "6263dbf3",
         "driftPpm": 13.1
        }
@@ -1884,10 +1884,35 @@
       ],
       "sourceFilters": {
        "source": "volume=+2.8dB"
-      }
+      },
+      "length": 180.7
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 10.347208,
+        "pcmHash": "6263dbf3",
+        "driftPpm": 13.1
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceFilters": {
+       "source": "volume=+2.8dB"
+      },
+      "crossfadeSeconds": 0.1,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.998"
+    "# comment": "spectral similarity to the game's own file: 0.998. The album fades out from 180.3 s of the game's timeline, 8 s before the loop end; the game plays on at full level, and what it plays is the album's own earlier copy of the passage (10.35 s on), which leads into the loop start. Two segments of the recording, switching at 180.70 s with a 100 ms linear crossfade."
    }
   },
   {
