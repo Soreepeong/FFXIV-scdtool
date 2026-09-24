@@ -241,7 +241,8 @@ int cmd_toscd(const std::vector<std::string>& args) {
 		}
 
 		const auto result = newScd.export_to_bytes();
-		create_directories(outputPath.parent_path());
+		if (outputPath.has_parent_path())
+			create_directories(outputPath.parent_path());
 		const auto hFile = CreateFileW(outputPath.c_str(), GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, 0, nullptr);
 		if (hFile == INVALID_HANDLE_VALUE)
 			throw std::system_error(std::error_code(static_cast<int>(GetLastError()), std::system_category()));

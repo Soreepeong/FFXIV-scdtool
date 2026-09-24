@@ -1542,7 +1542,8 @@ int cmd_verify(const std::vector<std::string>& args) {
 
 		if (const auto outputPath = parser.present<std::string>("--output")) {
 			const auto out = argactions::path(*outputPath);
-			std::filesystem::create_directories(out.parent_path());
+			if (out.has_parent_path())
+				std::filesystem::create_directories(out.parent_path());
 			std::ofstream f(out);
 			f << table;
 			std::cerr << std::format("Wrote {}.", u8(out)) << '\n';
