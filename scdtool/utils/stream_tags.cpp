@@ -44,6 +44,17 @@ namespace {
 			|| key == "ITUNNORM" || key == "ITUNSMPB";
 	}
 
+	// Pictures, and anything else too big to be text. The Vorbis and FLAC paths put the tags in
+	// the entry's header, which the engine reads whole into a 0x30000-byte streaming slot
+	// without checking it fits; a cover image of a few hundred KB, which an Ogg file can carry
+	// as a base64 comment, would overrun it and crash the game. FLAC and MP3 covers never
+	// arrive here -- ffprobe reports them as a video stream, not a tag -- but a comment can.
+	constexpr size_t MaxValueBytes = 1024;
+
+	bool is_picture_field(const std::string& key) {
+		return key == "METADATA_BLOCK_PICTURE" || key == "COVERART" || key == "COVERARTMIME";
+	}
+
 	std::string trimmed(std::string_view text) {
 		while (!text.empty() && (text.front() == ' ' || text.front() == '\t'))
 			text.remove_prefix(1);
@@ -116,12 +127,14 @@ std::vector<stream_tags::field> stream_tags::read(const std::filesystem::path& f
 			if (!value.is_string())
 				continue;
 			auto k = canonical_key(key);
-			if (k.empty() || is_file_field(k))
+			if (k.empty() || is_file_field(k) || is_picture_field(k))
 				continue;
 			// ffprobe reports a field the file states several times as one string, the values
 			// joined by ';'. Split back, so that each value is compared on its own when two
 			// recordings share some of them.
 			const auto joined = value.get<std::string>();
+			if (joined.size() > MaxValueBytes)
+				continue;
 			for (size_t begin = 0; begin <= joined.size();) {
 				auto end = joined.find(';', begin);
 				if (end == std::string::npos)

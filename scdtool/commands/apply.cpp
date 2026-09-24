@@ -1642,6 +1642,10 @@ namespace {
 	// rest -- bars the recording only has fading out, or does not have at all -- take the
 	// game's own audio, at the build's level. Each change of source is a short linear
 	// crossfade: the two sides are the same music.
+	//
+	// Judged and refilled per channel group: the whole entry where it is mono or stereo, and
+	// each engine-switched stem on its own above that, since stems can run out or fade
+	// separately (BGM_EX5_MKD_01's two both fade over its last 3s).
 	struct tail_fill {
 		size_t From = 0;          // first frame refilled
 		size_t LeadInFrames = 0;  // of those, taken from one loop earlier
@@ -1649,10 +1653,8 @@ namespace {
 		bool Applied = false;
 	};
 
-	tail_fill fill_loop_tail(std::vector<float>& floats, size_t channels, size_t samplingRate,
-		size_t loopStart, size_t loopEnd,
-		const std::filesystem::path& ffmpeg, const std::filesystem::path& templateAudio,
-		const std::filesystem::path& rawPath) {
+	tail_fill fill_loop_tail(std::vector<float>& floats, size_t channels, std::span<const size_t> group,
+		size_t samplingRate, size_t loopStart, size_t loopEnd, const std::vector<float>& game) {
 
 		constexpr double WindowSeconds = 0.5;
 		constexpr double MaxSpanSeconds = 180.;    // the longest shortfall found was 122s
@@ -1664,22 +1666,21 @@ namespace {
 		constexpr double CrossfadeSeconds = 0.1;
 
 		tail_fill res;
-		if (!channels || channels > 2 || !samplingRate || loopEnd <= loopStart || floats.size() / channels < loopEnd)
+		if (!channels || group.empty() || !samplingRate || loopEnd <= loopStart || floats.size() / channels < loopEnd)
 			return res;
 		const auto period = loopEnd - loopStart;
 		const auto window = static_cast<size_t>(WindowSeconds * static_cast<double>(samplingRate));
 		if (period < 4 * window)
 			return res;
 
-		const auto game = decode_source_to_floats(ffmpeg, templateAudio, channels, samplingRate, rawPath);
 		if (game.size() / channels < loopEnd)
 			return res;
 
 		const auto mono = [&](const std::vector<float>& v, size_t frame) {
 			auto sum = 0.f;
-			for (size_t c = 0; c < channels; c++)
+			for (const auto c : group)
 				sum += v[frame * channels + c];
-			return static_cast<double>(sum) / static_cast<double>(channels);
+			return static_cast<double>(sum) / static_cast<double>(group.size());
 		};
 		const auto levelDb = [&](const std::vector<float>& v, size_t at) {
 			double e = 0.;
@@ -1758,7 +1759,7 @@ namespace {
 		// Into the fill, over the end of the last window the build keeps...
 		for (size_t i = from - fade; i < from; i++) {
 			const auto w = static_cast<float>(i - (from - fade) + 1) / static_cast<float>(fade);
-			for (size_t c = 0; c < channels; c++)
+			for (const auto c : group)
 				floats[i * channels + c] = floats[i * channels + c] * (1.f - w) + source(0, i, c) * w;
 		}
 		// ...then window by window, crossing over the start of any window that changes source.
@@ -1768,7 +1769,7 @@ namespace {
 			for (size_t i = at; i < end; i++) {
 				const auto blend = k > 0 && leadIn[k] != leadIn[k - 1] && i < at + fade;
 				const auto w = blend ? static_cast<float>(i - at + 1) / static_cast<float>(fade) : 1.f;
-				for (size_t c = 0; c < channels; c++)
+				for (const auto c : group)
 					floats[i * channels + c] = blend ? source(k - 1, i, c) * (1.f - w) + source(k, i, c) * w : source(k, i, c);
 			}
 			(leadIn[k] ? res.LeadInFrames : res.GameFrames) += end - at;
@@ -2801,7 +2802,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// loop is the game's timing, so pad to it, and then borrow the loop's own lead-in
 			// wherever the game plays that and the build has run out or faded.
 			size_t shortfall = 0;
-			tail_fill tailFill;
+			std::vector<std::pair<std::vector<size_t>, tail_fill>> tailFills;
 			if (loopEnd > loopStart && totalSamples < loopEnd) {
 				shortfall = loopEnd - totalSamples;
 				floats.resize(loopEnd * channels, 0.f);
@@ -2811,11 +2812,25 @@ int cmd_apply(const std::vector<std::string>& args) {
 			}
 			if (newLoopEnd > newLoopStart) {
 				try {
-					tailFill = fill_loop_tail(floats, channels, samplingRate, newLoopStart, newLoopEnd, ffmpegPath, templateAudio,
+					const auto game = decode_source_to_floats(ffmpegPath, templateAudio, channels, samplingRate,
 						keepTemp(tempDir / std::format(L"scdtool_apply_loop_tail_{}.f32", tempFileCounter.fetch_add(1))));
+					std::vector<std::vector<size_t>> groups;
+					// Stems by pair where the pairing is known -- four channels are two stereo
+					// stems in order -- and channel by channel where it is not: a six-channel
+					// entry's stems pair differently from file to file in the decoded order.
+					// Judged channel by channel, BGM_EX5_MKD_01 refilled one side of a stem.
+					if (channels <= 2)
+						groups.push_back(channels == 1 ? std::vector<size_t>{0} : std::vector<size_t>{0, 1});
+					else if (channels == 4)
+						groups = {{0, 1}, {2, 3}};
+					else
+						for (size_t c = 0; c < channels; c++)
+							groups.push_back({c});
+					for (auto& group : groups)
+						if (const auto fill = fill_loop_tail(floats, channels, group, samplingRate, newLoopStart, newLoopEnd, game); fill.Applied)
+							tailFills.emplace_back(std::move(group), fill);
 				} catch (const std::exception&) {
 					// Same principle as the tail check: the build stands without it.
-					tailFill = {};
 				}
 			}
 
@@ -2924,6 +2939,9 @@ int cmd_apply(const std::vector<std::string>& args) {
 				for (const auto& recording : recordings_in_play_order(job))
 					perRecording.push_back(stream_tags::read(ffprobePath, recording));
 				tags = stream_tags::merge(perRecording);
+				// And which game file it replaces, so a stream pulled out of the .scd still says
+				// where it goes.
+				tags.emplace_back("FFXIV_PATH", job.TargetPath);
 			}
 			const auto comments = stream_tags::vorbis_comments(tags);
 
@@ -3092,11 +3110,17 @@ int cmd_apply(const std::vector<std::string>& args) {
 				std::string res;
 				if (shortfall)
 					res += std::format("\n      recording ends {:.2f}s before the loop end; padded", seconds(shortfall));
-				if (tailFill.Applied)
-					res += std::format("\n      last {:.2f}s (from {:.2f}s) refilled where the build ran out or faded: {:.2f}s from one loop earlier, {:.2f}s from the game's own audio",
-						seconds(tailFill.LeadInFrames + tailFill.GameFrames), seconds(tailFill.From),
-						seconds(tailFill.LeadInFrames), seconds(tailFill.GameFrames));
-				else if (shortfall)
+				for (const auto& [group, fill] : tailFills) {
+					std::string which;
+					if (channels > 2)
+						for (const auto c : group)
+							which += std::format("{}channel {}", which.empty() ? "" : "+", c);
+					res += std::format("\n      {}last {:.2f}s (from {:.2f}s) refilled where the build ran out or faded: {:.2f}s from one loop earlier, {:.2f}s from the game's own audio",
+						which.empty() ? "" : which + ": ",
+						seconds(fill.LeadInFrames + fill.GameFrames), seconds(fill.From),
+						seconds(fill.LeadInFrames), seconds(fill.GameFrames));
+				}
+				if (shortfall && tailFills.empty())
 					res += " with silence";
 				if (unloopedPadding)
 					res += std::format("\n      recording ends {:.2f}s before the game's file does; padded with silence", seconds(unloopedPadding));
