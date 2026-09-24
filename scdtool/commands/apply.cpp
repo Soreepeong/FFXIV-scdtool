@@ -1595,6 +1595,155 @@ namespace {
 		return res;
 	}
 
+	// The recording ends, or fades out, before the game's loop end, and the game plays on at
+	// full level. 46 of 1918 builds came out with the loop end pulled in to where the
+	// recording stops (BGM_ORCH_168 by 38s, most by 1-15s), and more fade out inside the
+	// loop (BGM_EX5_MKD_07: 9.6 dB down at the loop end).
+	//
+	// The game is the judge: from the loop end back, every window where the build sits well
+	// below the game -- by more than it does over the loop as a whole -- is refilled. What
+	// the game plays there is usually the passage leading into its loop start, and the
+	// recording has that, one loop earlier, as its own lead-in; a window where the game
+	// repeats what it played one loop earlier takes the build's own audio from there. The
+	// rest -- bars the recording only has fading out, or does not have at all -- take the
+	// game's own audio, at the build's level. Each change of source is a short linear
+	// crossfade: the two sides are the same music.
+	struct tail_fill {
+		size_t From = 0;          // first frame refilled
+		size_t LeadInFrames = 0;  // of those, taken from one loop earlier
+		size_t GameFrames = 0;    // and from the game's own audio
+		bool Applied = false;
+	};
+
+	tail_fill fill_loop_tail(std::vector<float>& floats, size_t channels, size_t samplingRate,
+		size_t loopStart, size_t loopEnd,
+		const std::filesystem::path& ffmpeg, const std::filesystem::path& templateAudio,
+		const std::filesystem::path& rawPath) {
+
+		constexpr double WindowSeconds = 0.5;
+		constexpr double MaxSpanSeconds = 180.;    // the longest shortfall found was 122s
+		constexpr double RepeatFloor = 0.9;        // the game's window against one loop earlier
+		constexpr double GameLevelSlackDb = 1.5;   // the game's own repeat, pass to pass
+		constexpr double FadeDb = 3.;              // below the build's usual level against the game
+		constexpr double FadeOnsetDb = 1.;         // and where such a fade begins
+		constexpr double SilentDb = -60.;
+		constexpr double CrossfadeSeconds = 0.1;
+
+		tail_fill res;
+		if (!channels || channels > 2 || !samplingRate || loopEnd <= loopStart || floats.size() / channels < loopEnd)
+			return res;
+		const auto period = loopEnd - loopStart;
+		const auto window = static_cast<size_t>(WindowSeconds * static_cast<double>(samplingRate));
+		if (period < 4 * window)
+			return res;
+
+		const auto game = decode_source_to_floats(ffmpeg, templateAudio, channels, samplingRate, rawPath);
+		if (game.size() / channels < loopEnd)
+			return res;
+
+		const auto mono = [&](const std::vector<float>& v, size_t frame) {
+			auto sum = 0.f;
+			for (size_t c = 0; c < channels; c++)
+				sum += v[frame * channels + c];
+			return static_cast<double>(sum) / static_cast<double>(channels);
+		};
+		const auto levelDb = [&](const std::vector<float>& v, size_t at) {
+			double e = 0.;
+			for (size_t i = at; i < at + window; i++)
+				e += mono(v, i) * mono(v, i);
+			return 10. * std::log10(e / static_cast<double>(window) + 1e-12);
+		};
+
+		// Where the build usually sits against the game: gain matching gets it close, not exact.
+		std::vector<double> diffs;
+		for (size_t at = loopStart; at + window <= loopEnd; at += window)
+			if (const auto g = levelDb(game, at); g > SilentDb)
+				diffs.push_back(levelDb(floats, at) - g);
+		if (diffs.empty())
+			return res;
+		std::ranges::nth_element(diffs, diffs.begin() + static_cast<ptrdiff_t>(diffs.size() / 2));
+		const auto usualDb = diffs[diffs.size() / 2];
+
+		// The trailing run of windows where the build has run out or faded and the game has not.
+		// A window where the game is silent says nothing either way and is walked over:
+		// BGM_EX5_DD_08's last 0.4s is silent, and stopping there left 5.7s of music unfilled.
+		const auto maxSpan = static_cast<size_t>(MaxSpanSeconds * static_cast<double>(samplingRate)) / window * window;
+		const auto lowest = loopEnd - (std::min)(period / window * window, maxSpan);
+		auto from = loopEnd;
+		for (auto at = loopEnd - window; at >= lowest; at -= window) {
+			const auto g = levelDb(game, at);
+			if (g > SilentDb && levelDb(floats, at) >= g + usualDb - FadeDb)
+				break;
+			if (g > SilentDb || from != loopEnd)
+				from = at;
+			if (at < lowest + window)
+				break;
+		}
+		// Back to where the fade begins, or the fill would join the build partway down it:
+		// BGM_EX5_MKD_07's album is 3 dB down only 3.5s after it starts to fade.
+		if (from != loopEnd) {
+			while (from >= lowest + window) {
+				const auto at = from - window;
+				const auto g = levelDb(game, at);
+				if (g <= SilentDb || levelDb(floats, at) >= g + usualDb - FadeOnsetDb)
+					break;
+				from = at;
+			}
+		}
+		// The crossfade into the fill sits in the window before it, which has to be the build's
+		// own music; a run that reaches as far as it may look is not an ending but a bad match.
+		if (from == loopEnd || from < lowest + window)
+			return res;
+
+		// Per window: one loop earlier where the game repeats itself there, else the game.
+		const auto windows = (loopEnd - from + window - 1) / window;
+		std::vector<bool> leadIn(windows);
+		for (size_t k = 0; k < windows; k++) {
+			const auto at = from + k * window;
+			const auto n = (std::min)(window, loopEnd - at);
+			if (at < period)
+				continue;
+			double xy = 0., xx = 0., yy = 0.;
+			for (size_t i = at; i < at + n; i++) {
+				const auto x = mono(game, i), y = mono(game, i - period);
+				xy += x * y; xx += x * x; yy += y * y;
+			}
+			const auto nowDb = 10. * std::log10(xx / static_cast<double>(n) + 1e-12);
+			const auto beforeDb = 10. * std::log10(yy / static_cast<double>(n) + 1e-12);
+			leadIn[k] = xy / (std::sqrt(xx * yy) + 1e-12) >= RepeatFloor && std::abs(nowDb - beforeDb) <= GameLevelSlackDb;
+		}
+
+		// One loop earlier reads frames before the loop start, which nothing here writes. The
+		// crossfade into the first window reaches a little before it, where one loop earlier
+		// may not exist.
+		const auto gameGain = static_cast<float>(std::pow(10., usualDb / 20.));
+		const auto source = [&](size_t k, size_t frame, size_t c) {
+			return leadIn[k] && frame >= period ? floats[(frame - period) * channels + c] : game[frame * channels + c] * gameGain;
+		};
+		const auto fade = (std::min)(window, static_cast<size_t>(CrossfadeSeconds * static_cast<double>(samplingRate)));
+		// Into the fill, over the end of the last window the build keeps...
+		for (size_t i = from - fade; i < from; i++) {
+			const auto w = static_cast<float>(i - (from - fade) + 1) / static_cast<float>(fade);
+			for (size_t c = 0; c < channels; c++)
+				floats[i * channels + c] = floats[i * channels + c] * (1.f - w) + source(0, i, c) * w;
+		}
+		// ...then window by window, crossing over the start of any window that changes source.
+		for (size_t k = 0; k < windows; k++) {
+			const auto at = from + k * window;
+			const auto end = (std::min)(at + window, loopEnd);
+			for (size_t i = at; i < end; i++) {
+				const auto blend = k > 0 && leadIn[k] != leadIn[k - 1] && i < at + fade;
+				const auto w = blend ? static_cast<float>(i - at + 1) / static_cast<float>(fade) : 1.f;
+				for (size_t c = 0; c < channels; c++)
+					floats[i * channels + c] = blend ? source(k - 1, i, c) * (1.f - w) + source(k, i, c) * w : source(k, i, c);
+			}
+			(leadIn[k] ? res.LeadInFrames : res.GameFrames) += end - at;
+		}
+		res.From = from;
+		res.Applied = true;
+		return res;
+	}
+
 	// The last `seconds` of a file. Input-side -ss, because output-side seeking is what
 	// corrupts a read deep into a file -- the same trap the loudness measurement hit.
 	std::vector<float> decode_tail_to_floats(
@@ -2612,6 +2761,30 @@ int cmd_apply(const std::vector<std::string>& args) {
 
 			}
 
+			// A recording that stops short of the game's loop end used to pull the loop end in
+			// with it, so the loop came around early -- by 9-10 minutes on BGM_EX5_MKD_03 to 06,
+			// whose game files hold one short cue and then silence until a 600s loop end. The
+			// loop is the game's timing, so pad to it, and then borrow the loop's own lead-in
+			// wherever the game plays that and the build has run out or faded.
+			size_t shortfall = 0;
+			tail_fill tailFill;
+			if (loopEnd > loopStart && totalSamples < loopEnd) {
+				shortfall = loopEnd - totalSamples;
+				floats.resize(loopEnd * channels, 0.f);
+				totalSamples = loopEnd;
+				newLoopStart = loopStart;
+				newLoopEnd = loopEnd;
+			}
+			if (newLoopEnd > newLoopStart) {
+				try {
+					tailFill = fill_loop_tail(floats, channels, samplingRate, newLoopStart, newLoopEnd, ffmpegPath, templateAudio,
+						keepTemp(tempDir / std::format(L"scdtool_apply_loop_tail_{}.f32", tempFileCounter.fetch_add(1))));
+				} catch (const std::exception&) {
+					// Same principle as the tail check: the build stands without it.
+					tailFill = {};
+				}
+			}
+
 			// The encoder's channel i is a *Vorbis* channel, and for 6 channels Vorbis's
 			// own order (FL, FC, FR, BL, BR, LFE) is not the order a decoder hands back
 			// (FL, FR, FC, LFE, BL, BR). Everything above works in the decoded order,
@@ -2869,6 +3042,21 @@ int cmd_apply(const std::vector<std::string>& args) {
 				}
 			}
 
+			// Its own line: it is a change to the music, not a detail of the match.
+			const auto tailReport = [&] {
+				const auto seconds = [&](size_t frames) { return static_cast<double>(frames) / static_cast<double>(samplingRate); };
+				std::string res;
+				if (shortfall)
+					res += std::format("\n      recording ends {:.2f}s before the loop end; padded", seconds(shortfall));
+				if (tailFill.Applied)
+					res += std::format("\n      last {:.2f}s (from {:.2f}s) refilled where the build ran out or faded: {:.2f}s from one loop earlier, {:.2f}s from the game's own audio",
+						seconds(tailFill.LeadInFrames + tailFill.GameFrames), seconds(tailFill.From),
+						seconds(tailFill.LeadInFrames), seconds(tailFill.GameFrames));
+				else if (shortfall)
+					res += " with silence";
+				return res;
+			}();
+
 			{
 				const auto lock = std::scoped_lock(logMutex);
 				++writtenCount;
@@ -2890,6 +3078,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 							// way a shortfall past the loop end is not.
 							stem.ShortfallSeconds > 0.5 ? std::format(", SHORT by {:.1f}s", stem.ShortfallSeconds) : "");
 					}
+					std::cerr << tailReport;
 					if (!encodeReport.empty())
 						std::cerr << std::format("\n      {}", encodeReport);
 					std::cerr << '\n';
@@ -2940,6 +3129,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 						? std::format(", loop seam {:.2f} -> {:.2f} over {:.0f}ms", seam.Before, seam.After,
 							1000. * static_cast<double>(seam.Frames) / static_cast<double>(samplingRate))
 						: seam.Before > 0. ? std::format(", loop seam {:.2f}", seam.Before) : "")
+					<< tailReport
 					// What the encode itself cost, for the formats that have something to say
 					// about it -- the libvorbis path's quality number is already in the command
 					// line, but how big a lossless or FLAC entry came out is not.
