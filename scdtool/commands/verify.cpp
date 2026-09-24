@@ -133,6 +133,70 @@ namespace {
 		bool Valid = false;
 	};
 
+	// Whether the build keeps the game's timing: the same loop points, and sound out to where
+	// the game's own file stops being heard -- its loop end, or its end where it does not loop.
+	// Nothing else here could see it. Every audio measurement ran over the span the two files
+	// share, so a build that stopped early was judged only on what it held: BGM_EX5_MKD_03 to
+	// 06 looped at 29-42s against the game's 600s, BGM_EX5_MKD_14 to 17 ended 8-9 minutes
+	// early, BGM_ORCH_168 lost 38s of music, and all of them scored clean.
+	struct structure_check {
+		bool GameLooped = false, BuiltLooped = false;
+		double GameStart = 0., GameEnd = 0.;     // the loop, in seconds; 0 and the length where none
+		double BuiltStart = 0., BuiltEnd = 0.;
+		double StartDiffMs = 0., EndDiffMs = 0.;  // built minus game
+		double ShortSeconds = 0.;                 // how much sooner than the game the build stops
+		double MissingAudibleSeconds = 0.;        // of that, where the game's own file is audible
+		bool Valid = false;
+	};
+
+	constexpr double LoopToleranceMs = 10.;       // a loop point further off than this is a different loop
+	constexpr double ShortToleranceSeconds = 0.5; // shorter than this is rounding and codec padding
+	constexpr double AudibleDb = -60.;            // what counts as the game playing something
+
+	bool loop_differs(const structure_check& s) {
+		return s.Valid && (s.GameLooped != s.BuiltLooped || (s.GameLooped
+			&& (std::abs(s.StartDiffMs) > LoopToleranceMs || std::abs(s.EndDiffMs) > LoopToleranceMs)));
+	}
+
+	bool ends_short(const structure_check& s) {
+		return s.Valid && s.ShortSeconds > ShortToleranceSeconds;
+	}
+
+	structure_check check_structure(const loop_info& built, const loop_info& game,
+		double builtSeconds, double gameSeconds, std::span<const float> gameMono) {
+
+		structure_check s;
+		if (!built.Rate || !game.Rate)
+			return s;
+		const auto seconds = [](size_t samples, size_t rate) { return static_cast<double>(samples) / static_cast<double>(rate); };
+		s.GameLooped = game.EndSample > game.StartSample;
+		s.BuiltLooped = built.EndSample > built.StartSample;
+		s.GameStart = s.GameLooped ? seconds(game.StartSample, game.Rate) : 0.;
+		s.GameEnd = s.GameLooped ? seconds(game.EndSample, game.Rate) : gameSeconds;
+		s.BuiltStart = s.BuiltLooped ? seconds(built.StartSample, built.Rate) : 0.;
+		s.BuiltEnd = s.BuiltLooped ? seconds(built.EndSample, built.Rate) : builtSeconds;
+		// In seconds rather than samples: a 96 kHz build of a 44.1 kHz entry carries the same
+		// loop at different indices.
+		s.StartDiffMs = 1000. * (s.BuiltStart - s.GameStart);
+		s.EndDiffMs = 1000. * (s.BuiltEnd - s.GameEnd);
+		s.ShortSeconds = (std::max)(0., s.GameEnd - s.BuiltEnd);
+
+		// Of what the build lacks, how much the game plays something in. Silence the game holds
+		// to a 600s loop end is lost timing; music is lost music.
+		const auto block = AnalysisRateHz / 10;
+		const auto from = static_cast<size_t>(s.BuiltEnd * static_cast<double>(AnalysisRateHz)) / block * block;
+		const auto to = (std::min)(gameMono.size(), static_cast<size_t>(s.GameEnd * static_cast<double>(AnalysisRateHz)));
+		for (auto i = from; i + block <= to; i += block) {
+			auto e = 0.;
+			for (auto j = i; j < i + block; ++j)
+				e += static_cast<double>(gameMono[j]) * gameMono[j];
+			if (10. * std::log10(e / static_cast<double>(block) + 1e-12) > AudibleDb)
+				s.MissingAudibleSeconds += static_cast<double>(block) / static_cast<double>(AnalysisRateHz);
+		}
+		s.Valid = true;
+		return s;
+	}
+
 	// Both files are decoded at the same rate and laid on the same timeline, so one pair of
 	// indices addresses the same music in each.
 	window_comparison measure_window(std::span<const float> built, std::span<const float> game,
@@ -772,6 +836,8 @@ namespace {
 		// clipped to: past the game's loop end nothing is heard, whatever the build holds.
 		loop_info GameLoop;
 		size_t BuiltChannels = 0;
+		// Loop points and length against the game's, and what the build lacks of it.
+		structure_check Structure;
 		// Both entries' payloads, kept past the per-file pass for a target the join detector
 		// will read: extracting them costs a full Vorbis decode each, just for the loop points.
 		std::filesystem::path KeptBuilt, KeptGame;
@@ -820,7 +886,13 @@ int cmd_verify(const std::vector<std::string>& args) {
 				"            correlations measure noise; read `dev` instead.\n"
 				"  silence   stretches the build is digitally silent and the game is not, reported\n"
 				"            against the loop end because silence past it is never played.\n"
-				"  tail      the last --tail-seconds before the loop end, against a control window\n"
+				"  structure the build's loop points and length against the game's own file: a loop\n"
+				"            more than 10 ms off, or a build that stops before the game's file does --\n"
+				"            its loop end, or its end where it does not loop -- and how much of what it\n"
+				"            lacks the game plays sound in. A build shorter than the game's file is\n"
+				"            measured as silent for the rest of it everywhere below.\n"
+				"  tail      the last --tail-seconds before the game's loop end (or the end of its\n"
+				"            file where it does not loop), against a control window\n"
 				"            of the same length from mid-loop. Everything else here averages over\n"
 				"            the file and cannot see five bad seconds in two hundred and ninety,\n"
 				"            which is exactly where a recording runs out or a loop-out takes over.\n"
@@ -951,10 +1023,17 @@ int cmd_verify(const std::vector<std::string>& args) {
 				r.BuiltChannels = builtLoop.Channels;
 				r.GameLoop = unwrap_entry(installation.get_file(target), entryIndex, stem.wstring() + L"_b", gameAudio);
 
-				const auto a = decode_mono_float(ffmpeg, builtAudio);
+				auto a = decode_mono_float(ffmpeg, builtAudio);
 				const auto b = decode_mono_float(ffmpeg, gameAudio);
 				r.BuiltSeconds = static_cast<double>(a.size()) / AnalysisRateHz;
 				r.GameSeconds = static_cast<double>(b.size()) / AnalysisRateHz;
+				r.Structure = check_structure(builtLoop, r.GameLoop, r.BuiltSeconds, r.GameSeconds, b);
+
+				// A build that stops before the game's own file does is silent for the rest of
+				// it, and is measured that way. Every measurement below used to run over the
+				// span both files share, which left what a short build lacks out of all of them.
+				if (a.size() < b.size())
+					a.resize(b.size(), 0.f);
 
 				if (const auto score = build_score(a, b); score.Valid) {
 					r.Weighted = score.Weighted;
@@ -981,13 +1060,18 @@ int cmd_verify(const std::vector<std::string>& args) {
 				// same loop. Needs no extra decode -- both files are already here at the
 				// analysis rate. Skipped where the loop is too short to hold three windows,
 				// since the control would then overlap the tail and compare it with itself.
+				//
+				// At the game's loop end, or the end of the game's file where it does not loop:
+				// that is where the music has to arrive. Anchored on the build's own loop end, a
+				// loop the build had pulled in was judged where the build ended it, and a file
+				// with no loop was not judged at all.
 				const auto loopStartSeconds = builtLoop.Rate
 					? static_cast<double>(builtLoop.StartSample) / static_cast<double>(builtLoop.Rate)
 					: 0.;
-				if (loopEndSeconds > 0. && builtLoop.Rate && tailSeconds > 0.
-					&& loopEndSeconds - loopStartSeconds >= 3. * tailSeconds) {
-					r.Tail = measure_window(a, b, loopEndSeconds - tailSeconds, loopEndSeconds);
-					const auto mid = (loopStartSeconds + loopEndSeconds) / 2.;
+				if (const auto& s = r.Structure; s.Valid && tailSeconds > 0.
+					&& s.GameEnd - s.GameStart >= 3. * tailSeconds) {
+					r.Tail = measure_window(a, b, s.GameEnd - tailSeconds, s.GameEnd);
+					const auto mid = (s.GameStart + s.GameEnd) / 2.;
 					r.Control = measure_window(a, b, mid - tailSeconds / 2., mid + tailSeconds / 2.);
 				}
 
@@ -1348,6 +1432,12 @@ int cmd_verify(const std::vector<std::string>& args) {
 					one["plain"] = r.Plain;
 					one["builtSeconds"] = r.BuiltSeconds;
 					one["gameSeconds"] = r.GameSeconds;
+					if (const auto& st = r.Structure; st.Valid)
+						one["structure"] = {{"gameLoop", st.GameLooped ? nlohmann::json{st.GameStart, st.GameEnd} : nlohmann::json()},
+							{"builtLoop", st.BuiltLooped ? nlohmann::json{st.BuiltStart, st.BuiltEnd} : nlohmann::json()},
+							{"loopStartDiffMs", st.StartDiffMs}, {"loopEndDiffMs", st.EndDiffMs},
+							{"shortSeconds", st.ShortSeconds}, {"missingAudibleSeconds", st.MissingAudibleSeconds},
+							{"loopDiffers", loop_differs(st)}, {"endsShort", ends_short(st)}};
 					if (r.Envelope.Valid)
 						one["envelope"] = {{"rEye", r.Envelope.REye}, {"rFine", r.Envelope.RFine},
 							{"dev", r.Envelope.Dev}, {"span", r.Envelope.Span},
@@ -1428,6 +1518,7 @@ int cmd_verify(const std::vector<std::string>& args) {
 			table += ",lag_min_ms,lag_max_ms,lag_ppm,level_db,level_p90_db";
 			table += ",joins,joins_wrong,join_at,join_match,join_ctrl_match,join_before_db,join_after_db,join_seam,join_problem";
 			table += ",regions,regions_flagged,worst_shape,worst_shape_at,worst_region_level_db,worst_rel_lag_ms,region_problem";
+			table += ",game_loop,built_loop,loop_start_diff_ms,loop_end_diff_ms,short_seconds,missing_audible_seconds";
 			table += ",error\n";
 			for (const auto& r : rows) {
 				table += std::format("{},{:.4f},{:.4f},{:.1f},{:.1f},", r.Target, r.Weighted, r.Plain,
@@ -1534,6 +1625,17 @@ int cmd_verify(const std::vector<std::string>& args) {
 				} else {
 					table += ",,,,,,,";
 				}
+				// Loops as start-end in seconds, `none` where the file does not loop.
+				if (const auto& st = r.Structure; st.Valid) {
+					const auto loop = [](bool looped, double from, double to) {
+						return looped ? std::format("{:.3f}-{:.3f}", from, to) : std::string("none");
+					};
+					table += std::format(",{},{},{:.1f},{:.1f},{:.2f},{:.1f}",
+						loop(st.GameLooped, st.GameStart, st.GameEnd), loop(st.BuiltLooped, st.BuiltStart, st.BuiltEnd),
+						st.StartDiffMs, st.EndDiffMs, st.ShortSeconds, st.MissingAudibleSeconds);
+				} else {
+					table += ",,,,,,";
+				}
 				table += ',';
 				table += r.Error;
 				table += '\n';
@@ -1604,23 +1706,78 @@ int cmd_verify(const std::vector<std::string>& args) {
 				std::cerr << std::format("   dullest {} at {:.1f} dB", worstHf->Target, worstHf->Spectrum.HfDb) << '\n';
 		}
 
+		// Timing the build does not keep: a loop that is not the game's, or an end that comes
+		// sooner. Before any score, because a build that loops nine minutes early is broken
+		// however well the part it has matches.
+		{
+			const auto name = [](const row* r) {
+				return r->Target.size() > 46 ? r->Target.substr(r->Target.size() - 46) : r->Target;
+			};
+			std::vector<const row*> loops, shorts;
+			for (const auto* r : ok) {
+				if (loop_differs(r->Structure))
+					loops.push_back(r);
+				if (ends_short(r->Structure))
+					shorts.push_back(r);
+			}
+			if (!loops.empty()) {
+				std::ranges::sort(loops, [](const row* x, const row* y) {
+					return (std::max)(std::abs(x->Structure.StartDiffMs), std::abs(x->Structure.EndDiffMs))
+						> (std::max)(std::abs(y->Structure.StartDiffMs), std::abs(y->Structure.EndDiffMs));
+				});
+				std::cerr << std::format("{} file(s) loop somewhere other than the game's own file; worst:", loops.size()) << '\n';
+				for (size_t i = 0; i < (std::min<size_t>)(loops.size(), 8); ++i) {
+					const auto& st = loops[i]->Structure;
+					const auto loop = [](bool looped, double from, double to) {
+						return looped ? std::format("{:.2f}-{:.2f}s", from, to) : std::string("no loop");
+					};
+					std::cerr << std::format("   {:<46} game {}, build {}", name(loops[i]),
+						loop(st.GameLooped, st.GameStart, st.GameEnd), loop(st.BuiltLooped, st.BuiltStart, st.BuiltEnd)) << '\n';
+				}
+			}
+			if (!shorts.empty()) {
+				// Music the build lacks first, then lost timing alone.
+				std::ranges::sort(shorts, [](const row* x, const row* y) {
+					return std::pair(x->Structure.MissingAudibleSeconds, x->Structure.ShortSeconds)
+						> std::pair(y->Structure.MissingAudibleSeconds, y->Structure.ShortSeconds);
+				});
+				const auto audible = std::ranges::count_if(shorts, [](const row* r) { return r->Structure.MissingAudibleSeconds >= 1.; });
+				std::cerr << std::format("{} file(s) stop before the game's own file does, {} of them missing sound the game plays; worst:",
+					shorts.size(), audible) << '\n';
+				for (size_t i = 0; i < (std::min<size_t>)(shorts.size(), 8); ++i) {
+					const auto& st = shorts[i]->Structure;
+					std::cerr << std::format("   {:<46} {:.1f}s short, {:.1f}s of it audible in the game", name(shorts[i]),
+						st.ShortSeconds, st.MissingAudibleSeconds) << '\n';
+				}
+			}
+		}
+
 		// Where the loop ends worse than the middle of the same loop. The comparison is the
 		// point of the control window: a poor tail on its own usually means the recording is
 		// a poor match throughout, which is not something the build did to it.
 		{
 			std::vector<const row*> tailWorse;
+			size_t byMatch = 0, byLevel = 0;
 			for (const auto& r : rows) {
 				if (!r.Tail.Valid || !r.Control.Valid)
 					continue;
-				if (r.Tail.Match < r.Control.Match - 0.05 || r.Tail.Worst < r.Control.Worst - 4.)
+				const auto worseMatch = r.Tail.Match < r.Control.Match - 0.05;
+				const auto worseLevel = r.Tail.Worst < r.Control.Worst - 4.;
+				byMatch += worseMatch;
+				byLevel += worseLevel;
+				if (worseMatch || worseLevel)
 					tailWorse.push_back(&r);
 			}
 			if (!tailWorse.empty()) {
-				std::sort(tailWorse.begin(), tailWorse.end(), [](const row* x, const row* y) {
-					return (x->Tail.Match - x->Control.Match) < (y->Tail.Match - y->Control.Match);
-				});
-				std::cerr << std::format("{} file(s) end their loop worse than they run mid-loop; worst:",
-					tailWorse.size()) << '\n';
+				// By whichever is further out, a match point against a dB: a fade keeps its
+				// match and loses only level, and sorting on match alone kept every fade-out
+				// (BGM_EX5_MKD_07, 9.6 dB down at the loop end) off the list shown.
+				const auto severity = [](const row* r) {
+					return (std::max)(100. * (r->Control.Match - r->Tail.Match), r->Control.Worst - r->Tail.Worst);
+				};
+				std::ranges::sort(tailWorse, [&](const row* x, const row* y) { return severity(x) > severity(y); });
+				std::cerr << std::format("{} file(s) end their loop worse than they run mid-loop ({} by match, {} by level); worst:",
+					tailWorse.size(), byMatch, byLevel) << '\n';
 				for (size_t i = 0; i < (std::min<size_t>)(tailWorse.size(), 8); ++i) {
 					const auto* r = tailWorse[i];
 					std::cerr << std::format("   {:<46} tail {:.3f} at {:+.1f} dB, mid-loop {:.3f} at {:+.1f} dB",
