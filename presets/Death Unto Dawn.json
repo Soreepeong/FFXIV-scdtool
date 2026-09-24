@@ -209,17 +209,281 @@
       ],
       "sourceOffsets": {
        "DUD_003": {
-        "offset": 1.37,
+        "offset": 1.37093,
         "pcmHash": "5af22703"
        },
        "TFEOF_FFXIV_38": {
-        "offset": 14.87,
+        "offset": 1.15565,
         "pcmHash": "c19e36d3"
        }
-      }
+      },
+      "length": 41.144
+     },
+     {
+      "channels": [
+       {
+        "source": "DUD_003",
+        "channel": 0
+       },
+       {
+        "source": "DUD_003",
+        "channel": 1
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "DUD_003": {
+        "offset": 42.51493,
+        "pcmHash": "5af22703"
+       },
+       "TFEOF_FFXIV_38": {
+        "offset": 14.88033,
+        "pcmHash": "c19e36d3"
+       }
+      },
+      "length": 27.42,
+      "crossfadeSeconds": 0.1,
+      "crossfadeShape": "linear"
+     },
+     {
+      "channels": [
+       {
+        "source": "DUD_003",
+        "channel": 0
+       },
+       {
+        "source": "DUD_003",
+        "channel": 1
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "DUD_003": {
+        "offset": 69.93493,
+        "pcmHash": "5af22703"
+       },
+       "TFEOF_FFXIV_38": {
+        "offset": 14.86692,
+        "pcmHash": "c19e36d3"
+       }
+      },
+      "length": 27.433,
+      "crossfadeSeconds": 0.1,
+      "crossfadeShape": "linear"
+     },
+     {
+      "channels": [
+       {
+        "source": "DUD_003",
+        "channel": 0
+       },
+       {
+        "source": "DUD_003",
+        "channel": 1
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "DUD_003": {
+        "offset": 97.36793,
+        "pcmHash": "5af22703"
+       },
+       "TFEOF_FFXIV_38": {
+        "offset": 14.86588,
+        "pcmHash": "c19e36d3"
+       }
+      },
+      "length": 27.434,
+      "crossfadeSeconds": 0.1,
+      "crossfadeShape": "linear"
+     },
+     {
+      "channels": [
+       {
+        "source": "DUD_003",
+        "channel": 0
+       },
+       {
+        "source": "DUD_003",
+        "channel": 1
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "DUD_003": {
+        "offset": 124.80193,
+        "pcmHash": "5af22703"
+       },
+       "TFEOF_FFXIV_38": {
+        "offset": 14.88331,
+        "pcmHash": "c19e36d3"
+       }
+      },
+      "length": 10.269,
+      "crossfadeSeconds": 0.1,
+      "crossfadeShape": "linear"
+     },
+     {
+      "channels": [
+       {
+        "source": "DUD_003",
+        "channel": 0
+       },
+       {
+        "source": "DUD_003",
+        "channel": 1
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "DUD_003": {
+        "offset": 148.82556,
+        "pcmHash": "5af22703"
+       },
+       "TFEOF_FFXIV_38": {
+        "offset": 25.15231,
+        "pcmHash": "c19e36d3"
+       }
+      },
+      "length": 17.148,
+      "crossfadeSeconds": 0.6,
+      "crossfadeShape": "linear"
+     },
+     {
+      "channels": [
+       {
+        "source": "DUD_003",
+        "channel": 0
+       },
+       {
+        "source": "DUD_003",
+        "channel": 1
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "DUD_003": {
+        "offset": 165.97356,
+        "pcmHash": "5af22703"
+       },
+       "TFEOF_FFXIV_38": {
+        "offset": 14.88885,
+        "pcmHash": "c19e36d3"
+       }
+      },
+      "length": 27.411,
+      "crossfadeSeconds": 0.1,
+      "crossfadeShape": "linear"
+     },
+     {
+      "channels": [
+       {
+        "source": "DUD_003",
+        "channel": 0
+       },
+       {
+        "source": "DUD_003",
+        "channel": 1
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "DUD_003": {
+        "offset": 193.38456,
+        "pcmHash": "5af22703"
+       },
+       "TFEOF_FFXIV_38": {
+        "offset": 14.8664,
+        "pcmHash": "c19e36d3"
+       }
+      },
+      "length": 11.041,
+      "crossfadeSeconds": 0.1,
+      "crossfadeShape": "linear"
+     },
+     {
+      "channels": [
+       {
+        "source": "DUD_003",
+        "channel": 0
+       },
+       {
+        "source": "DUD_003",
+        "channel": 1
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "DUD_003": {
+        "offset": 5.54918,
+        "pcmHash": "5af22703"
+       },
+       "TFEOF_FFXIV_38": {
+        "offset": 25.9074,
+        "pcmHash": "c19e36d3"
+       }
+      },
+      "crossfadeSeconds": 0.8,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "multichannel target: 2 engine-switched stems, matched individually (DUD_003 to game channels [0, 1] @0.622; TFEOF_FFXIV_38 to game channels [2, 3] @0.609). The stems tile the channels in order, so a plain sequential mapping is correct -- the same shape as the hand-written BGM_EX1_PvP01 entry. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio. per-stem offsets: DUD_003 at +1.370s, TFEOF_FFXIV_38 at +14.870s."
+    "# comment": "multichannel target: 2 engine-switched stems, sequential channels 0-1 Rise (DUD_003) and 2-3 Stasis Loop (TFEOF_FFXIV_38). The stasis stem is the album's 14.87-42.30s cycle, which the game plays seven times: it follows the recording from +1.156 and jumps back one cycle (27.43s) each time the recording reaches 42.30s, with a ~0.1s blend. Rise follows the recording at +1.371 to 133.70s, skips 13.75s of it there (album +15.126, the game's own 0.6s blend), and from 189.30s plays the loop's lead-in. One segment per switch; a stem that does not switch at a join crosses into itself, which a linear blend leaves unchanged. The preset used to take each recording once through, the stasis stem at +14.87, so that stem ran out at 73s of a 195s loop."
    }
   },
   {
