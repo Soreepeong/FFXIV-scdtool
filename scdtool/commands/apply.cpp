@@ -3003,13 +3003,23 @@ int cmd_apply(const std::vector<std::string>& args) {
 			check_stream_slot(result, entryIndex);
 			const auto outputPath = outputDir / argactions::path(job.TargetPath);
 			std::filesystem::create_directories(outputPath.parent_path());
+			// Written beside the file it replaces as `.new`, checked there, and only then swapped
+			// in, so the build a game may be playing from is never a half-written file. A `.new`
+			// that did not finish writing is removed; one that did is left behind whatever goes
+			// wrong after it -- a failed check, or a file the game holds open -- to look at.
+			auto newPath = outputPath;
+			newPath += L".new";
 			{
-				std::ofstream f(outputPath, std::ios::binary);
+				std::ofstream f(newPath, std::ios::binary);
 				if (!f)
-					throw std::runtime_error(std::format("Could not create {}", u8(outputPath)));
+					throw std::runtime_error(std::format("Could not create {}", u8(newPath)));
 				f.write(reinterpret_cast<const char*>(result.data()), static_cast<std::streamsize>(result.size()));
-				if (!f)
-					throw std::runtime_error(std::format("Could not write {}", u8(outputPath)));
+				f.close();
+				if (!f) {
+					std::error_code ec;
+					std::filesystem::remove(newPath, ec);
+					throw std::runtime_error(std::format("Could not write {}", u8(newPath)));
+				}
 			}
 
 			// The game's own file, byte for byte, beside the replacement -- so any later
@@ -3039,7 +3049,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 				std::shared_ptr<xivres::file_stream> checkStream;
 				for (int attempt = 0; ; ++attempt) {
 					try {
-						checkStream = std::make_shared<xivres::file_stream>(outputPath);
+						checkStream = std::make_shared<xivres::file_stream>(newPath);
 						break;
 					} catch (const std::exception&) {
 						if (attempt >= 5)
@@ -3102,6 +3112,34 @@ int cmd_apply(const std::vector<std::string>& args) {
 						throw std::runtime_error(std::format("verification failed for {}: {} samples read back, expected about {}",
 							u8(outputPath), checkSamples, expectedSamples));
 				}
+			}
+
+			// The swap: ReplaceFileW, with the old file kept as `.old` until the new one is in
+			// place, then removed. A replace the game refuses -- it holds the file open while
+			// playing it -- fails with ERROR_UNABLE_TO_REMOVE_REPLACED and moves nothing, leaving
+			// the old file where it was and the new one as `.new`. Its other two failures say
+			// where each file ended up; the one that leaves the old file as `.old` is undone.
+			{
+				auto oldPath = outputPath;
+				oldPath += L".old";
+				std::error_code ec;
+				std::filesystem::remove(oldPath, ec);
+				const auto message = [](DWORD error) {
+					return std::error_code(static_cast<int>(error), std::system_category()).message();
+				};
+				if (!std::filesystem::exists(outputPath, ec)) {
+					if (!MoveFileExW(newPath.c_str(), outputPath.c_str(), MOVEFILE_WRITE_THROUGH))
+						throw std::runtime_error(std::format("Could not move {} into place ({}); it is left as {}",
+							u8(outputPath), message(GetLastError()), u8(newPath)));
+				} else if (!ReplaceFileW(outputPath.c_str(), newPath.c_str(), oldPath.c_str(),
+						REPLACEFILE_IGNORE_MERGE_ERRORS | REPLACEFILE_IGNORE_ACL_ERRORS, nullptr, nullptr)) {
+					const auto error = GetLastError();
+					if (error == ERROR_UNABLE_TO_MOVE_REPLACEMENT_2)
+						MoveFileExW(oldPath.c_str(), outputPath.c_str(), 0);
+					throw std::runtime_error(std::format("Could not replace {} ({}); the new build is left as {}",
+						u8(outputPath), message(error), u8(newPath)));
+				}
+				std::filesystem::remove(oldPath, ec);
 			}
 
 			// Its own line: it is a change to the music, not a detail of the match.
