@@ -1060,29 +1060,7 @@
      "TFEOF_FFXIV_20",
      "豪雨に打たれて　～禁忌都市マハ～",
      "Torrent"
-    ],
-    "SB_FFXIV_020": {
-     "inputFiles": [
-      [
-       {
-        "directory": "Stormblood",
-        "pattern": "^00019\\."
-       },
-       {
-        "directory": "Stormblood",
-        "pattern": "SB_FFXIV_020"
-       },
-       {
-        "directory": "Stormblood",
-        "pattern": "東方の地"
-       },
-       {
-        "directory": "Stormblood",
-        "pattern": "Far East of Eorzea"
-       }
-      ]
-     ]
-    }
+    ]
    },
    "target": {
     "path": "music/ex1/BGM_EX1_Makosen_Nomal02.scd",
@@ -1094,7 +1072,11 @@
         "channel": 0
        },
        {
-        "source": "TFEOF_FFXIV_20",
+        "source": "TFEOF_FFXIV_19",
+        "channel": 1
+       },
+       {
+        "source": "TFEOF_FFXIV_19",
         "channel": 0
        },
        {
@@ -1102,16 +1084,12 @@
         "channel": 1
        },
        {
-        "source": "SB_FFXIV_020",
-        "channel": 0
+        "source": "target",
+        "channel": 4
        },
        {
-        "source": "TFEOF_FFXIV_20",
-        "channel": 1
-       },
-       {
-        "source": "SB_FFXIV_020",
-        "channel": 1
+        "source": "target",
+        "channel": 5
        }
       ],
       "sourceOffsets": {
@@ -1120,13 +1098,52 @@
         "pcmHash": "9d230008"
        }
       },
-      "sourceFilters": {
-       "TFEOF_FFXIV_20": "adelay=7445:all=1",
-       "SB_FFXIV_020": "adelay=35285:all=1"
-      }
+      "length": 9.2
+     },
+     {
+      "channels": [
+       {
+        "source": "TFEOF_FFXIV_19",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_19",
+        "channel": 1
+       },
+       {
+        "source": "TFEOF_FFXIV_20",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_20",
+        "channel": 1
+       },
+       {
+        "source": "target",
+        "channel": 4
+       },
+       {
+        "source": "target",
+        "channel": 5
+       }
+      ],
+      "sourceOffsets": {
+       "TFEOF_FFXIV_19": {
+        "offset": 10.825,
+        "pcmHash": "9d230008"
+       },
+       "TFEOF_FFXIV_20": {
+        "offset": 1.756
+       },
+       "target": {
+        "offset": 9.2
+       }
+      },
+      "crossfadeSeconds": 0.08,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "multichannel target: 3 engine-switched stems, matched individually (TFEOF_FFXIV_19 to game channels [0, 2] @0.974; TFEOF_FFXIV_20 to game channels [1, 4] @0.939; SB_FFXIV_020 to game channels [3, 5] @0.616). The stems do NOT tile the channels in order, so this needs a sequentialToFfmpegChannelIndexMap that has not been derived; disabled. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio. per-stem offsets: SB_FFXIV_020 at -35.285s, TFEOF_FFXIV_19 at +1.625s, TFEOF_FFXIV_20 at -7.445s. the game's file starts before this recording does, so the source is delayed rather than offset: SB_FFXIV_020 by 35.285s, TFEOF_FFXIV_20 by 7.445s. Channels are listed in Vorbis order with a sequentialToFfmpegChannelIndexMap, because for 6 channels that order is not the decoded one the stem matcher reports (scratch/fix_multichannel_map.py). Enabled 2026-09-21 with the channel map its own comment describes; sequential placement was putting each stem in the wrong pair. Corrected it scores 0.933 at the full 134.1s with its loop intact, against 0.925 for the opposite left/right assignment and 0.911 sequential.",
+    "# comment": "multichannel target: 3 engine-switched stems. The game's decoded channels pair as (0,2), (1,4), (3,5), which in the stream's own (sequential) order is (0,1), (2,3), (5,4). The first is TFEOF_FFXIV_19 (Teardrops in the Rain) at +1.625. The second is sample-identical to the first until 9.20 s and TFEOF_FFXIV_20 (Torrent, recording t = game t - 7.444) after it, so it takes Teardrops to 9.20 s and Torrent from there, with an 80 ms linear crossfade (the other stems cross into themselves, which a linear shape leaves unchanged). The third, the transition stem, is silent to 8 s and then a 4 s loop on no album (SB_FFXIV_020 correlated 0.03 everywhere; best of TFEOF, Stormblood, Shadowbringers and DUD 0.07), so it is the game's own audio. The channel list is sequential, as apply and sequentialToFfmpegChannelIndexMap both read it; it used to be written in decoded order, which since apply's 2026-09-23 fix put each stem in the wrong pair. The lower decoded channel of a stem carries its left.",
     "sequentialToFfmpegChannelIndexMap": [
      0,
      2,

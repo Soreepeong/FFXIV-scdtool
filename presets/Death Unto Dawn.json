@@ -1438,29 +1438,7 @@
      "DUD_034",
      "ボズヤの血風",
      "Blood on the Wind"
-    ],
-    "Before_Meteor_FFXIV_084": {
-     "inputFiles": [
-      [
-       {
-        "directory": "Before Meteor",
-        "pattern": "^00083\\."
-       },
-       {
-        "directory": "Before Meteor",
-        "pattern": "Before_Meteor_FFXIV_084"
-       },
-       {
-        "directory": "Before Meteor",
-        "pattern": "Quick as Silver, Hard as Stone"
-       },
-       {
-        "directory": "Before Meteor",
-        "pattern": "疾きこと銀の如く、硬きこと石の如く"
-       }
-      ]
-     ]
-    }
+    ]
    },
    "target": {
     "path": "music/ex3/BGM_EX3_MYC_01.scd",
@@ -1472,15 +1450,11 @@
         "channel": 0
        },
        {
-        "source": "DUD_034",
-        "channel": 0
-       },
-       {
         "source": "DUD_033",
         "channel": 1
        },
        {
-        "source": "Before_Meteor_FFXIV_084",
+        "source": "DUD_034",
         "channel": 0
        },
        {
@@ -1488,8 +1462,12 @@
         "channel": 1
        },
        {
-        "source": "Before_Meteor_FFXIV_084",
-        "channel": 1
+        "source": "target",
+        "channel": 4
+       },
+       {
+        "source": "target",
+        "channel": 5
        }
       ],
       "sourceOffsets": {
@@ -1500,15 +1478,11 @@
        "DUD_034": {
         "offset": 1.4,
         "pcmHash": "f3a60894"
-       },
-       "Before_Meteor_FFXIV_084": {
-        "offset": 137.445,
-        "pcmHash": "6fed3f7e"
        }
       }
      }
     ],
-    "# comment": "multichannel target: 3 engine-switched stems, matched individually (DUD_033 to game channels [0, 2] @0.891; DUD_034 to game channels [1, 4] @0.780; Before_Meteor_FFXIV_084 to game channels [3, 5] @0.587). The stems do NOT tile the channels in order, so this needs a sequentialToFfmpegChannelIndexMap that has not been derived; disabled. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio. per-stem offsets: Before_Meteor_FFXIV_084 at +137.445s, DUD_033 at +1.115s, DUD_034 at +1.400s. Channels are listed in Vorbis order with a sequentialToFfmpegChannelIndexMap, because for 6 channels that order is not the decoded one the stem matcher reports (scratch/fix_multichannel_map.py). Enabled 2026-09-21 with the channel map its own comment describes: the stems were being written sequentially, so each landed in the wrong pair. Corrected, the entry comes out at the full 147.2s with its loop intact and scores 0.853, against 0.798 sequential. The lower of a stem's two game channels carries its left: the swap measures 0.841, so this is the right way round.",
+    "# comment": "multichannel target: 3 engine-switched stems. The game's decoded channels pair as (0,2), (1,4), (3,5), which in the stream's own (sequential) order is (0,1), (2,3), (5,4): DUD_033 (Wind on the Plains) on the first, DUD_034 (Blood on the Wind) on the second, and the transition stem on the third. The channel list is sequential, as apply and sequentialToFfmpegChannelIndexMap both read it; it used to be written in decoded order, which since apply's 2026-09-23 fix put each stem in the wrong pair. The transition stem is a 6 s loop on no album (Before Meteor 084 correlated 0.03 everywhere; best of Before Meteor, ARR, Stormblood and DUD 0.20), so it is the game's own audio. The lower decoded channel of a stem carries its left.",
     "sequentialToFfmpegChannelIndexMap": [
      0,
      2,
