@@ -37,6 +37,22 @@ namespace {
 	// invites: "size is ours to choose".
 	constexpr size_t SeekAnchorFrames = 1024;
 
+	// ...but never more anchors than this. The whole header region -- the seek table included --
+	// is read into one of the engine's streaming slots, a fixed 0x30000-byte buffer, before any
+	// audio is, and nothing checks that it fits: BGM_EX5_MKD_03 to 06, 600s at 96 kHz, carried
+	// 56251 anchors (225 KB) and overran it, which crashed the game on load. 4096 anchors is
+	// 16 KB, far inside it, and still one per 6s of a 400s track at 96 kHz. Past it the spacing
+	// doubles -- 2048 frames, 4096, ... -- so every anchor still starts a frame whose index is a
+	// multiple of SeekAnchorFrames.
+	constexpr size_t MaxSeekAnchors = 4096;
+
+	size_t seek_anchor_frames(size_t frames) {
+		auto spacing = SeekAnchorFrames;
+		while (frames / spacing + 2 > MaxSeekAnchors)
+			spacing *= 2;
+		return spacing;
+	}
+
 	// An entry is addressed by 32-bit offsets throughout -- the stream size, the seek anchors,
 	// the file size -- so a payload that does not fit in one has to be refused rather than
 	// silently truncated. Raw PCM is the format that can actually reach this: 96 kHz stereo
@@ -76,12 +92,12 @@ namespace {
 		return res;
 	}
 
-	// Anchor k is the byte offset of sample frame k * SeekAnchorFrames, which for a linear
+	// Anchor k is the byte offset of sample frame k * seek_anchor_frames, which for a linear
 	// payload is that multiplication and nothing else. The last anchor is the end of the
 	// stream, so a seek past the audio lands on it rather than off the table.
 	std::vector<uint32_t> linear_seek_table(size_t dataBytes, size_t frameBytes) {
 		std::vector<uint32_t> res;
-		const auto anchorBytes = SeekAnchorFrames * frameBytes;
+		const auto anchorBytes = seek_anchor_frames(frameBytes ? dataBytes / frameBytes : 0) * frameBytes;
 		res.reserve(dataBytes / anchorBytes + 2);
 		for (size_t offset = 0;; offset += anchorBytes) {
 			res.push_back(static_cast<uint32_t>((std::min)(offset, dataBytes)));
@@ -598,14 +614,15 @@ xivres::sound::writer::sound_item substitute_codec::make_flac_entry(
 		std::span(reinterpret_cast<const uint8_t*>(samples.data()), samples.size() * sizeof(int16_t)),
 		comments);
 
-	// Anchor k addresses sample frame k * SeekAnchorFrames as the frame that holds it, which
+	// Anchor k addresses sample frame k * seek_anchor_frames as the frame that holds it, which
 	// is as close as a variable-length payload gets to the linear table PCM writes: a decoder
 	// starting there has to drop at most a blocksize of samples to land on the anchor.
 	std::vector<uint32_t> seekTable;
 	{
 		size_t index = 0;
-		seekTable.reserve(frames / SeekAnchorFrames + 2);
-		for (uint64_t anchor = 0;; anchor += SeekAnchorFrames) {
+		const auto spacing = seek_anchor_frames(frames);
+		seekTable.reserve(frames / spacing + 2);
+		for (uint64_t anchor = 0;; anchor += spacing) {
 			if (anchor >= frames || starts.empty()) {
 				seekTable.push_back(static_cast<uint32_t>(data.size()));
 				break;

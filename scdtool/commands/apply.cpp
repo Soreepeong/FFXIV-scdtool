@@ -1595,6 +1595,40 @@ namespace {
 		return res;
 	}
 
+	// The engine reads a streamed entry's header -- the file from its start to where the entry's
+	// audio begins, seek table and codec header included -- into one streaming slot, a fixed
+	// buffer of 0x30000 bytes, then moves it to the buffer's end and streams audio through what
+	// is left, less (channels * 0x800 + 0x2A) * 3 it holds back. Nothing in the engine checks
+	// that the header fits, and one that does not overruns the slot and crashes the game:
+	// BGM_EX5_MKD_03 to 06 carried a 225 KB seek table (traced in XivAlexander, 2026-09-25).
+	// The largest header among builds that play (BGM_EX5_MKD_01) leaves a window of about 56 KB;
+	// this refuses anything under 32 KB rather than find out where between that and nothing the
+	// engine starts to stall.
+	constexpr size_t StreamSlotBytes = 0x30000;
+	constexpr size_t MinStreamWindowBytes = 0x8000;
+
+	void check_stream_slot(const std::vector<uint8_t>& scd, size_t entryIndex) {
+		const auto read = [&]<typename T>(size_t at) {
+			if (at + sizeof(T) > scd.size())
+				throw std::runtime_error(std::format("stream slot check: offset {} past the end of the file", at));
+			T value;
+			std::memcpy(&value, &scd[at], sizeof(T));
+			return value;
+		};
+		const auto fileHeader = read.operator()<xivres::sound::header>(0);
+		const auto offsets = read.operator()<xivres::sound::offsets>(fileHeader.HeaderSize);
+		const auto entryOffset = size_t{read.operator()<uint32_t>(offsets.SoundEntryOffset + 4 * entryIndex)};
+		const auto entry = read.operator()<xivres::sound::sound_entry_header>(entryOffset);
+		const auto header = entryOffset + sizeof(xivres::sound::sound_entry_header) + size_t{entry.StreamOffset};
+		const auto reserved = (size_t{entry.ChannelCount} * 0x800 + 0x2A) * 3;
+		const auto moved = header < StreamSlotBytes ? (StreamSlotBytes - header) & ~size_t{0xF} : size_t{0};
+		const auto window = moved > reserved ? (moved - reserved) & ~size_t{0x3FF} : size_t{0};
+		if (window < MinStreamWindowBytes)
+			throw std::runtime_error(std::format(
+				"the entry's header runs to byte {} of the engine's {}-byte streaming slot, leaving {} bytes to stream through "
+				"(at least {} wanted); the game would overrun the slot", header, StreamSlotBytes, window, MinStreamWindowBytes));
+	}
+
 	// The recording ends, or fades out, before the game's loop end, and the game plays on at
 	// full level. 46 of 1918 builds came out with the loop end pulled in to where the
 	// recording stops (BGM_ORCH_168 by 38s, most by 1-15s), and more fade out inside the
@@ -2804,9 +2838,18 @@ int cmd_apply(const std::vector<std::string>& args) {
 			// game's own file, some by minutes, because the album track carries the whole
 			// piece where the game ships an excerpt. The game's own length is the bound.
 			double tailDb = 0., tailSeconds = 0.;
+			size_t unloopedPadding = 0;
 			if (!newLoopEnd && templateSeconds > 0.) {
 				const auto templateFrames = static_cast<size_t>(
 					std::llround(templateSeconds * static_cast<double>(samplingRate)));
+				// And the other way: a build that ends before the game's own file does ends the
+				// cue that much sooner. BGM_EX5_MKD_14 to 17 hold 43-94s of music and then
+				// silence to 600s, and came out 8-9 minutes short.
+				if (templateFrames > totalSamples) {
+					unloopedPadding = templateFrames - totalSamples;
+					floats.resize(templateFrames * channels, 0.f);
+					totalSamples = templateFrames;
+				}
 				if (templateFrames && totalSamples > templateFrames) {
 					floats.resize(templateFrames * channels);
 					totalSamples = templateFrames;
@@ -2939,6 +2982,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 			}
 
 			const auto result = newScd.export_to_bytes();
+			check_stream_slot(result, entryIndex);
 			const auto outputPath = outputDir / argactions::path(job.TargetPath);
 			std::filesystem::create_directories(outputPath.parent_path());
 			{
@@ -3054,6 +3098,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 						seconds(tailFill.LeadInFrames), seconds(tailFill.GameFrames));
 				else if (shortfall)
 					res += " with silence";
+				if (unloopedPadding)
+					res += std::format("\n      recording ends {:.2f}s before the game's file does; padded with silence", seconds(unloopedPadding));
 				return res;
 			}();
 
