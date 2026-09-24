@@ -2004,7 +2004,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 0.62,
+        "offset": 0.6225,
         "pcmHash": "c61bbf1d"
        }
       },
@@ -2017,10 +2017,31 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 434.41
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 22.2325,
+        "pcmHash": "c61bbf1d"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.02,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.910"
+    "# comment": "The game plays DUD_044 at +0.6225 to 434.41 s, then ends on the album's 22.23-27.62 s -- the passage leading into its own loop start, one loop (412.80 s) earlier -- so that the loop closes; the album plays on into material that does not lead back. Two segments of the recording, switching where the game does (the two alignments share their fine offset to the sample), with a 20 ms linear crossfade. The loop end then plays the album position the loop start begins at."
    }
   },
   {
@@ -2124,7 +2145,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 3.02,
+        "offset": 3.0223,
         "pcmHash": "c61bbf1d"
        }
       },
@@ -2137,10 +2158,31 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 432.01
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 22.2323,
+        "pcmHash": "c61bbf1d"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.02,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.888"
+    "# comment": "The game plays DUD_044 at +3.0223 to 432.01 s, then ends on the album's 22.23-31.70 s -- the passage leading into its own loop start, one loop (412.80 s) earlier -- so that the loop closes; the album plays on into material that does not lead back. Two segments of the recording, switching where the game does (the two alignments share their fine offset to the sample), with a 20 ms linear crossfade. The loop end then plays the album position the loop start begins at."
    }
   },
   {
