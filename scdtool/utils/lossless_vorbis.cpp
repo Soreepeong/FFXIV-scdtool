@@ -948,9 +948,11 @@ namespace lossless_vorbis {
 				ogg_stream_state os{};
 				ogg_stream_init(&os, 0x10C51E55);
 				std::vector<uint8_t> out;
+				// Between the forced flushes, pages filled to 65307 bytes as xivres's own encoder
+				// has them, rather than libogg's default cut at about 4 KB: one seek anchor each.
 				const auto drain_pages = [&](bool force) {
 					ogg_page og;
-					while (force ? ogg_stream_flush(&os, &og) : ogg_stream_pageout(&os, &og)) {
+					while (force ? ogg_stream_flush(&os, &og) : ogg_stream_pageout_fill(&os, &og, 65307)) {
 						out.insert(out.end(), og.header, og.header + og.header_len);
 						out.insert(out.end(), og.body, og.body + og.body_len);
 					}
@@ -976,7 +978,14 @@ namespace lossless_vorbis {
 				// libvorbis derives the front trim from the first audio page's granulepos and
 				// the end trim from the last, and mis-handles both landing on one page, so at
 				// least two audio pages are always emitted.
-				const auto perPage = (std::max<size_t>)(1, (std::min<size_t>)(16, (blocks + 1) / 2));
+				//
+				// Sixteen blocks a page, or more on a long track: the entry carries a seek anchor
+				// per page, and its whole header has to fit the engine's 0x30000-byte streaming
+				// slot. At sixteen, BGM_EX5_EndCredit01's table came to 389 KB. 2048 pages is
+				// 8 KB of table; a page that outgrows 64 KB is split by libogg, as any page is.
+				constexpr size_t MaxPages = 2048;
+				const auto perPage = (std::max<size_t>)(1, (std::min<size_t>)(
+					(std::max<size_t>)(16, (blocks + MaxPages - 1) / MaxPages), (blocks + 1) / 2));
 				// The block whose own first sample is the last block boundary at or before the
 				// loop. Ending the page before it puts a page start there, which is where the
 				// engine's loop seek lands; without this the nearest boundary fell wherever the
