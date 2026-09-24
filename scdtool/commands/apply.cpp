@@ -8,6 +8,7 @@
 #include "utils/lossless_vorbis.h"
 #include "utils/misc.h"
 #include "utils/preset_model.h"
+#include "utils/stream_tags.h"
 #include "utils/substitute_codec.h"
 #include "utils/verify_audio.h"
 #include "utils/win32_process.h"
@@ -20,6 +21,7 @@
 #include <limits>
 #include <map>
 #include <optional>
+#include <ranges>
 #include <regex>
 #include <set>
 #include <mutex>
@@ -94,6 +96,56 @@ namespace {
 			return {0, 0};
 		const auto info = item.get_ogg_decoded();
 		return {info.LoopStartBlockIndex, info.LoopEndBlockIndex};
+	}
+
+	// The recordings an entry is built from, each once, in the order it plays them: segments
+	// by where they start -- after the one before, or at their `startSeconds` when layered --
+	// and within a segment by its channel list. The game's own audio has no file and no tags
+	// to carry, and a graph-built source is its graph's inputs.
+	std::vector<std::filesystem::path> recordings_in_play_order(const apply_job& job) {
+		std::vector<std::pair<double, std::filesystem::path>> timed;
+		if (!job.Segments.empty()) {
+			double cursor = 0.;
+			for (const auto& segment : job.Segments) {
+				const auto start = segment.StartSeconds >= 0. ? segment.StartSeconds : cursor;
+				std::vector<std::string> names;
+				const auto note = [&names](const std::string& name) {
+					if (std::ranges::find(names, name) == names.end())
+						names.push_back(name);
+				};
+				for (const auto& name : segment.Channels | std::views::keys)
+					note(name);
+				for (const auto& name : segment.Sources | std::views::keys)
+					note(name);
+				for (const auto& name : names) {
+					const auto found = segment.Sources.find(name);
+					if (found == segment.Sources.end() || found->second.IsTarget)
+						continue;
+					if (const auto& graph = found->second.Graph) {
+						for (const auto& input : graph->Inputs)
+							if (!input.IsTarget)
+								timed.emplace_back(start, input.Path);
+					} else {
+						timed.emplace_back(start, found->second.Path);
+					}
+				}
+				if (segment.StartSeconds < 0.)
+					cursor = start + segment.Length;
+			}
+		} else if (!job.Stems.empty()) {
+			for (const auto& stem : job.Stems)
+				if (stem.Matched)
+					timed.emplace_back(0., stem.SourcePath);
+		} else {
+			timed.emplace_back(0., job.SourcePath);
+		}
+		std::ranges::stable_sort(timed, {}, [](const auto& t) { return t.first; });
+
+		std::vector<std::filesystem::path> res;
+		for (const auto& path : timed | std::views::values)
+			if (std::ranges::find(res, path) == res.end())
+				res.push_back(path);
+		return res;
 	}
 
 	// The source's channel layout as ffmpeg names it ("stereo", "mono"), or empty.
@@ -1703,6 +1755,7 @@ namespace {
 		size_t loopStartBlockIndex,
 		size_t loopEndBlockIndex,
 		std::span<const uint32_t> markIndices,
+		const std::vector<std::string>& comments,
 		std::string& reportOut) {
 
 		lossless_vorbis::options opts;
@@ -1716,6 +1769,7 @@ namespace {
 			opts.Comments.push_back(std::format("LoopStart={}", loopStartBlockIndex));
 			opts.Comments.push_back(std::format("LoopEnd={}", loopEndBlockIndex));
 		}
+		opts.Comments.insert(opts.Comments.end(), comments.begin(), comments.end());
 
 		const auto encoded = lossless_vorbis::encode(pcm, channels, samplingRate, opts);
 		if (!encoded.Exact)
@@ -1887,6 +1941,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 		parser.add_argument("--no-onset-match").default_value(false).implicit_value(true).help("disable --onset-match");
 		parser.add_argument("--auto-offset").default_value(true).implicit_value(true).help("re-derive each match's source offset against the game's own file instead of trusting the recorded one, judged on the pre-loop intro; --no-auto-offset uses the recorded offset verbatim");
 		parser.add_argument("--no-auto-offset").default_value(false).implicit_value(true).help("disable --auto-offset");
+		parser.add_argument("--tags").default_value(true).implicit_value(true).help("copy the recordings' own tags (title, artist, album...) into each replacement's stream, every value once in the order the entry plays its recordings; --no-tags disables");
+		parser.add_argument("--no-tags").default_value(false).implicit_value(true).help("disable --tags");
 		parser.add_argument("--emit-original").default_value(false).implicit_value(true).help("also write the game's own file next to each replacement as <name>.orig.scd, for A/B comparison");
 		parser.parse_args(args);
 	} catch (const std::exception& e) {
@@ -1930,6 +1986,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 		const auto verify = parser.get<bool>("--verify");
 		const auto loudnessMatch = parser.get<bool>("--loudness-match") && !parser.get<bool>("--no-loudness-match");
 		const auto onsetMatch = parser.get<bool>("--onset-match") && !parser.get<bool>("--no-onset-match");
+		const auto writeTags = parser.get<bool>("--tags") && !parser.get<bool>("--no-tags");
 		const auto autoOffset = parser.get<bool>("--auto-offset") && !parser.get<bool>("--no-auto-offset");
 		const auto emitOriginal = parser.get<bool>("--emit-original");
 		const auto maxGainDb = parser.get<double>("--max-gain");
@@ -2642,22 +2699,34 @@ int cmd_apply(const std::vector<std::string>& args) {
 				}
 			}
 
+			// The recordings' own tags, each field's values once in the order the entry plays
+			// them, for whatever the payload keeps tags in. Native PCM has no container to
+			// hold any.
+			std::vector<stream_tags::field> tags;
+			if (writeTags) {
+				std::vector<std::vector<stream_tags::field>> perRecording;
+				for (const auto& recording : recordings_in_play_order(job))
+					perRecording.push_back(stream_tags::read(ffprobePath, recording));
+				tags = stream_tags::merge(perRecording);
+			}
+			const auto comments = stream_tags::vorbis_comments(tags);
+
 			std::string encodeReport;
 			xivres::sound::writer::sound_item newEntry;
 			switch (audioFormat.Codec) {
 				case audio_format::codec::LosslessVorbis:
 					newEntry = make_lossless_ogg_entry(quantise_pcm16(floats, channels, newLoopEnd),
-						channels, samplingRate, newLoopStart, newLoopEnd, markIndices, encodeReport);
+						channels, samplingRate, newLoopStart, newLoopEnd, markIndices, comments, encodeReport);
 					break;
 
 				case audio_format::codec::Flac:
 					newEntry = substitute_codec::make_flac_entry(quantise_pcm16(floats, channels, newLoopEnd),
-						channels, samplingRate, newLoopStart, newLoopEnd, audioFormat.FlacLevel, encodeReport);
+						channels, samplingRate, newLoopStart, newLoopEnd, audioFormat.FlacLevel, comments, encodeReport);
 					break;
 
 				case audio_format::codec::Pcm:
 					newEntry = substitute_codec::make_pcm_entry(quantise_pcm16(floats, channels, newLoopEnd),
-						channels, samplingRate, newLoopStart, newLoopEnd);
+						channels, samplingRate, newLoopStart, newLoopEnd, stream_tags::id3_riff_chunk(tags));
 					break;
 
 				case audio_format::codec::NativePcm:
@@ -2666,7 +2735,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 					break;
 
 				default:
-					newEntry = xivres::sound::writer::sound_item::make_from_ogg_encode(
+					newEntry = stream_tags::with_vorbis_comments(xivres::sound::writer::sound_item::make_from_ogg_encode(
 						channels,
 						samplingRate,
 						newLoopStart,
@@ -2674,7 +2743,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 						xivres::memory_stream(xivres::util::span_cast<const uint8_t>(floats)).as_linear_reader<uint8_t>(),
 						{},
 						markIndices,
-						audioFormat.OggQuality);
+						audioFormat.OggQuality), comments);
 					break;
 			}
 			// The two Vorbis paths attach the marks themselves, on their way through the

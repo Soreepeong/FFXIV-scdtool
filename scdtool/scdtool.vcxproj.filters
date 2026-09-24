@@ -19,6 +19,7 @@
     <ClCompile Include="utils\verify_audio.cpp" />
     <ClCompile Include="utils\verify_spectrum.cpp" />
     <ClCompile Include="utils\substitute_codec.cpp" />
+    <ClCompile Include="utils\stream_tags.cpp" />
     <ClCompile Include="utils\win32_process.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -41,6 +42,7 @@
     <ClInclude Include="utils\stats.h" />
     <ClInclude Include="utils\fft.h" />
     <ClInclude Include="utils\substitute_codec.h" />
+    <ClInclude Include="utils\stream_tags.h" />
     <ClInclude Include="utils\win32_process.h" />
   </ItemGroup>
   <ItemGroup>

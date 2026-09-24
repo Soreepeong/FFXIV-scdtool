@@ -42,15 +42,19 @@ namespace substitute_codec {
 	//
 	// `loopEndBlockIndex` is expected to be the end of the audio (the callers truncate there,
 	// as the Vorbis path does), and 0/0 means the entry does not loop.
+	//
+	// `trailingChunks` are whole RIFF chunks written after the data chunk: the tags.
 	xivres::sound::writer::sound_item make_pcm_entry(
 		const std::vector<int16_t>& samples,
 		size_t channels,
 		size_t samplingRate,
 		size_t loopStartBlockIndex,
-		size_t loopEndBlockIndex);
+		size_t loopEndBlockIndex,
+		const std::vector<uint8_t>& trailingChunks = {});
 
 	// `compressionLevel` is libFLAC's own 0 to 8. `reportOut` gets a one-line summary of what
-	// the encode cost, in the shape the lossless Vorbis path reports.
+	// the encode cost, in the shape the lossless Vorbis path reports. `comments` are
+	// "KEY=value" fields added to the VORBIS_COMMENT block after the loop tags.
 	xivres::sound::writer::sound_item make_flac_entry(
 		const std::vector<int16_t>& samples,
 		size_t channels,
@@ -58,6 +62,7 @@ namespace substitute_codec {
 		size_t loopStartBlockIndex,
 		size_t loopEndBlockIndex,
 		size_t compressionLevel,
+		const std::vector<std::string>& comments,
 		std::string& reportOut);
 
 	// What a format-6 entry actually carries, by the magic at the start of its header region.

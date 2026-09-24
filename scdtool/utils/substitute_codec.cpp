@@ -43,7 +43,9 @@ namespace {
 	// runs 384 KB/s, so the ceiling is a little over three hours.
 	constexpr size_t MaxPayloadBytes = 0xF0000000;
 
-	std::vector<uint8_t> wave_header(size_t channels, size_t samplingRate, size_t dataBytes) {
+	// `trailingBytes` is whatever chunks follow the data chunk -- the tags -- which the RIFF
+	// size has to cover and the data chunk's own size must not.
+	std::vector<uint8_t> wave_header(size_t channels, size_t samplingRate, size_t dataBytes, size_t trailingBytes = 0) {
 		const auto blockAlign = static_cast<uint16_t>(channels * sizeof(int16_t));
 		std::vector<uint8_t> res;
 		res.reserve(44);
@@ -57,7 +59,7 @@ namespace {
 		};
 		const auto tag = [&res](const char* s) { res.insert(res.end(), s, s + 4); };
 		tag("RIFF");
-		u32(static_cast<uint32_t>(36 + dataBytes));
+		u32(static_cast<uint32_t>(36 + dataBytes + trailingBytes));
 		tag("WAVE");
 		tag("fmt ");
 		u32(16);
@@ -428,7 +430,8 @@ namespace {
 		size_t channels, size_t samplingRate, uint64_t totalSamples,
 		size_t minBlockSize, size_t maxBlockSize, size_t minFrameSize, size_t maxFrameSize,
 		size_t loopStartBlockIndex, size_t loopEndBlockIndex,
-		std::span<const uint8_t> rawAudio) {
+		std::span<const uint8_t> rawAudio,
+		const std::vector<std::string>& comments) {
 
 		std::array<uint8_t, 34> info{};
 		const auto put16 = [&info](size_t at, size_t v) {
@@ -463,6 +466,7 @@ namespace {
 				tags.push_back(std::format("LoopStart={}", loopStartBlockIndex));
 				tags.push_back(std::format("LoopEnd={}", loopEndBlockIndex));
 			}
+			tags.insert(tags.end(), comments.begin(), comments.end());
 			// Vorbis comments are little-endian even inside FLAC, which is big-endian
 			// everywhere else.
 			const auto u32le = [&comment](uint32_t v) {
@@ -503,7 +507,8 @@ xivres::sound::writer::sound_item substitute_codec::make_pcm_entry(
 	size_t channels,
 	size_t samplingRate,
 	size_t loopStartBlockIndex,
-	size_t loopEndBlockIndex) {
+	size_t loopEndBlockIndex,
+	const std::vector<uint8_t>& trailingChunks) {
 
 	if (!channels)
 		throw std::runtime_error("wav: no channels");
@@ -513,17 +518,22 @@ xivres::sound::writer::sound_item substitute_codec::make_pcm_entry(
 	if (!data.empty())
 		std::memcpy(data.data(), samples.data(), data.size());
 
-	const auto header = wave_header(channels, samplingRate, data.size());
-	const auto seekTable = linear_seek_table(data.size(), frameBytes);
+	const auto dataBytes = data.size();
+	const auto header = wave_header(channels, samplingRate, dataBytes, trailingChunks.size());
+	const auto seekTable = linear_seek_table(dataBytes, frameBytes);
 
 	// The caller has already truncated the audio at the loop end, so looping to the end of
 	// the payload is the whole of the mapping -- which for linear PCM is exact, with no
 	// rounding onto a frame or page boundary of any kind.
 	const auto loopStartOffset = loopEndBlockIndex
-		? (std::min)(loopStartBlockIndex * frameBytes, data.size())
+		? (std::min)(loopStartBlockIndex * frameBytes, dataBytes)
 		: size_t{0};
-	const auto loopEndOffset = loopEndBlockIndex ? data.size() : size_t{0};
+	const auto loopEndOffset = loopEndBlockIndex ? dataBytes : size_t{0};
 
+	// After the audio rather than before it: the hook walks the chunks up to "data" and stops
+	// decoding at that chunk's own length, so a chunk behind it is never played, and the loop
+	// offsets and seek anchors -- byte offsets into the stream -- stay where they were.
+	data.insert(data.end(), trailingChunks.begin(), trailingChunks.end());
 	return assemble(header, std::move(data), seekTable, channels, samplingRate, loopStartOffset, loopEndOffset);
 }
 
@@ -534,6 +544,7 @@ xivres::sound::writer::sound_item substitute_codec::make_flac_entry(
 	size_t loopStartBlockIndex,
 	size_t loopEndBlockIndex,
 	size_t compressionLevel,
+	const std::vector<std::string>& comments,
 	std::string& reportOut) {
 
 	if (!channels)
@@ -584,7 +595,8 @@ xivres::sound::writer::sound_item substitute_codec::make_flac_entry(
 	const auto header = flac_header_region(channels, samplingRate, frames,
 		minBlockSize, maxBlockSize, minFrameSize, maxFrameSize,
 		loopStartBlockIndex, loopEndBlockIndex,
-		std::span(reinterpret_cast<const uint8_t*>(samples.data()), samples.size() * sizeof(int16_t)));
+		std::span(reinterpret_cast<const uint8_t*>(samples.data()), samples.size() * sizeof(int16_t)),
+		comments);
 
 	// Anchor k addresses sample frame k * SeekAnchorFrames as the frame that holds it, which
 	// is as close as a variable-length payload gets to the linear table PCM writes: a decoder
@@ -643,8 +655,13 @@ substitute_codec::payload_info substitute_codec::inspect(const xivres::sound::re
 		res.Channels = header[22] | (static_cast<size_t>(header[23]) << 8);
 		for (size_t i = 0; i < 4; i++)
 			res.SamplingRate |= static_cast<size_t>(header[24 + i]) << (8 * i);
+		// From the data chunk's own size, not the stream's: tags can follow the audio.
+		size_t dataBytes = 0;
+		for (size_t i = 0; i < 4; i++)
+			dataBytes |= static_cast<size_t>(header[40 + i]) << (8 * i);
+		dataBytes = (std::min)(dataBytes, item.Data.size());
 		const auto frameBytes = res.Channels * sizeof(int16_t);
-		res.TotalFrames = frameBytes ? item.Data.size() / frameBytes : 0;
+		res.TotalFrames = frameBytes ? dataBytes / frameBytes : 0;
 		return res;
 	}
 
