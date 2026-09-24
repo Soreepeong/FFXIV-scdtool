@@ -1795,6 +1795,16 @@
     "path": "music/ex1/BGM_EX1_Alex08.scd",
     "segments": [
      {
+      "sourceOffsets": {
+       "TFEOF_FFXIV_39": {
+        "offset": 1.775,
+        "pcmHash": "5ee4a5cc"
+       },
+       "TFEOF_FFXIV_38": {
+        "offset": 1.175
+       }
+      },
+      "length": 60.0,
       "channels": [
        {
         "source": "TFEOF_FFXIV_39",
@@ -1812,19 +1822,41 @@
         "source": "TFEOF_FFXIV_38",
         "channel": 1
        }
-      ],
+      ]
+     },
+     {
       "sourceOffsets": {
        "TFEOF_FFXIV_39": {
-        "offset": 1.775,
+        "offset": 61.775,
         "pcmHash": "5ee4a5cc"
+       },
+       "TFEOF_FFXIV_38": {
+        "offset": 6.317864
        }
       },
-      "sourceFilters": {
-       "TFEOF_FFXIV_38": "adelay=46825:all=1"
-      }
+      "crossfadeSeconds": 0.05,
+      "crossfadeShape": "linear",
+      "channels": [
+       {
+        "source": "TFEOF_FFXIV_39",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_39",
+        "channel": 1
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_38",
+        "channel": 1
+       }
+      ]
      }
     ],
-    "# comment": "multichannel target: 2 engine-switched stems, matched individually (TFEOF_FFXIV_39 to game channels [0, 1] @0.746; TFEOF_FFXIV_38 to game channels [2, 3] @0.622). The stems tile the channels in order, so a plain sequential mapping is correct -- the same shape as the hand-written BGM_EX1_PvP01 entry. scdtool apply cannot build a per-stem item, so this is for the importer. Unmatched stems keep the game's own audio. per-stem offsets: TFEOF_FFXIV_38 at -46.825s, TFEOF_FFXIV_39 at +1.775s. the game's file starts before this recording does, so the source is delayed rather than offset: TFEOF_FFXIV_38 by 46.825s"
+    "# comment": "multichannel target: 2 engine-switched stems, Rise (TFEOF_FFXIV_39) on game channels 0-1 and Stasis Loop (TFEOF_FFXIV_38) on 2-3, both playing from the start. The stasis stem is a two-bar ostinato (3.428571 s at 140 bpm) and the game's 122 s of it is longer than the recording's steady part (1-71 s, then a fade), so it takes two passes 16 bars apart: +1.175 to 60 s, then -53.682 (recording 6.3-68.4 s), with a 50 ms linear crossfade (Rise crossfades into itself there, which a linear shape leaves unchanged). Every offset a whole number of bars from another scores the same on log-mel (0.96-0.98 per 5 s), so bar phase against Rise and staying inside the recording's steady part decide it. The loop (9.0-122.1 s) is 33 two-bar periods. Previously a single copy delayed 46.825 s, which left the stem silent for its first 47 s (user report)."
    }
   },
   {
