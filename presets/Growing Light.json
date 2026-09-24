@@ -5923,6 +5923,57 @@
   },
   {
    "source": [
+    "^00095\\.",
+    "GL_00095",
+    "A Gentleman to Walk with Me",
+    "ときめき紳士エスコート"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_24.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.49645
+       }
+      },
+      "length": 12.0,
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 30.6393
+       }
+      },
+      "crossfadeSeconds": 0.1,
+      "crossfadeShape": "linear",
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "The matcher's best source (0.636, under the bar), and the user's call after listening. The game edits GL_00095: the album plays one passage twice (recording 12.5-26.5 and again 29.6-43.7 s, 17.14485 s = 20 beats later) and the game only once, going straight to the ending, so a single offset runs into the album's repeat for the last 6 s (log-mel 0.01-0.35 there). Two segments: +1.49645 to 12.0 s, then the second pass (+18.6393) to the end, 0.1 s linear crossfade in the stretch where the two passes are alike. The ceiling is the mix, not the edit: BGM_EX4_Event_31 (same recording, same +1.4965) matches the album at waveform 0.98, this file at 0.4-0.6 -- its centre bass (80-160 Hz) and melody range (630-2500 Hz) are a different part (0.16-0.46 against Event_31, while sub-bass, 315-630 Hz, highs and sides match 0.7-0.8), and its ending is played a little slower. Weighted 0.8759 (single offset: 0.636), level -0.03 dB, join clean."
+   }
+  },
+  {
+   "source": [
     "^00096\\.",
     "GL_00096",
     "願いは追い風となりて ～華めく神域 タレイア～",
