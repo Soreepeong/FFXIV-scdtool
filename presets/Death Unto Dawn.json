@@ -4360,35 +4360,6 @@
   },
   {
    "source": [
-    "DUD_046"
-   ],
-   "target": {
-    "path": "music/ex1/BGM_EX1_Dungeon_Kyoko_0.scd",
-    "segments": [
-     {
-      "sourceOffsets": {
-       "source": {
-        "offset": 0.93,
-        "pcmHash": "9f980dc3"
-       }
-      },
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ]
-     }
-    ],
-    "# comment": "found only with the coarse shortlist disabled, then ranked on log-mel rather than envelope correlation: 0.7596 here, 0.1916 clear of the next candidate."
-   }
-  },
-  {
-   "source": [
     "00007",
     "DUD_008",
     "花の館 ～魔法宮殿 グラン・コスモス～",
