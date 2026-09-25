@@ -2920,39 +2920,6 @@
   },
   {
    "source": [
-    "00029",
-    "HEAVENSWARD_FFXIV_30",
-    "聖座 ～強硬突入 イシュガルド教皇庁～",
-    "Hallowed Halls"
-   ],
-   "target": {
-    "path": "music/ex1/BGM_EX1_Dungeon_Kyoko.scd",
-    "segments": [
-     {
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.825,
-        "pcmHash": "3522857a",
-        "exact": true
-       }
-      }
-     }
-    ],
-    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.8924 (was 0.8901)."
-   }
-  },
-  {
-   "source": [
     "00014",
     "HEAVENSWARD_FFXIV_15",
     "天上の世界 ～アバラシア雲海：夜～",
@@ -3108,39 +3075,6 @@
      }
     ],
     "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9964 (was 0.9220)."
-   }
-  },
-  {
-   "source": [
-    "00029",
-    "HEAVENSWARD_FFXIV_30",
-    "聖座 ～強硬突入 イシュガルド教皇庁～",
-    "Hallowed Halls"
-   ],
-   "target": {
-    "path": "music/ffxiv/Orchestrion/BGM_ORCH_139.scd",
-    "segments": [
-     {
-      "channels": [
-       {
-        "source": "source",
-        "channel": 0
-       },
-       {
-        "source": "source",
-        "channel": 1
-       }
-      ],
-      "sourceOffsets": {
-       "source": {
-        "offset": 1.825,
-        "pcmHash": "3522857a",
-        "exact": true
-       }
-      }
-     }
-    ],
-    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.8724 (was 0.8700)."
    }
   },
   {
