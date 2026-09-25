@@ -4836,6 +4836,19 @@
      {
       "channels": [
        {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 12.0
+     },
+     {
+      "channels": [
+       {
         "source": "source",
         "channel": 0
        },
@@ -4846,14 +4859,15 @@
       ],
       "sourceOffsets": {
        "source": {
-        "offset": 1.650646,
-        "pcmHash": "095cb441",
-        "exact": true
+        "offset": 13.650646,
+        "pcmHash": "095cb441"
        }
-      }
+      },
+      "crossfadeSeconds": 0.3,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.8321 (was 0.8322)."
+    "# comment": "Opens with a voice and sound effects over the music, which no album release has: the game's own audio to 12.0s, where the music alone matches the album (r 0.91-0.97, within 2 dB), then SB_FFXIV_002 from there with a 0.3s blend. Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.8321 (was 0.8322)."
    }
   },
   {
@@ -5041,6 +5055,19 @@
      {
       "channels": [
        {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 12.0
+     },
+     {
+      "channels": [
+       {
         "source": "source",
         "channel": 0
        },
@@ -5051,14 +5078,15 @@
       ],
       "sourceOffsets": {
        "source": {
-        "offset": 1.650644,
-        "pcmHash": "095cb441",
-        "exact": true
+        "offset": 13.650644,
+        "pcmHash": "095cb441"
        }
-      }
+      },
+      "crossfadeSeconds": 0.3,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.8231 (was 0.8231)."
+    "# comment": "Opens with a voice and sound effects over the music, which no album release has: the game's own audio to 12.0s, where the music alone matches the album (r 0.91-0.97, within 2 dB), then SB_FFXIV_002 from there with a 0.3s blend. Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.8231 (was 0.8231)."
    }
   },
   {

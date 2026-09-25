@@ -4023,6 +4023,19 @@
      {
       "channels": [
        {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 13.0
+     },
+     {
+      "channels": [
+       {
         "source": "source",
         "channel": 0
        },
@@ -4033,14 +4046,36 @@
       ],
       "sourceOffsets": {
        "source": {
-        "offset": 1.671511,
-        "pcmHash": "aac94141",
-        "exact": true
+        "offset": 77.623,
+        "pcmHash": "aac94141"
        }
-      }
+      },
+      "length": 63.0,
+      "crossfadeSeconds": 0.3,
+      "crossfadeShape": "linear"
+     },
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 14.72133,
+        "pcmHash": "aac94141"
+       }
+      },
+      "crossfadeSeconds": 0.25,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.8819 (was 0.8153)."
+    "# comment": "Opens with a voice and sound effects the album does not have: the game's own audio to 13.0s. Then ENDWALKER_002 as the game edits it -- its second pass through the loop body (+64.623s) to 76.0s, and its first pass (-61.279s) from there to the loop end, one loop period apart and the same music at both joins. Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.8819 (was 0.8153)."
    }
   }
  ],
