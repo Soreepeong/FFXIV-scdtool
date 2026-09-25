@@ -417,6 +417,94 @@ namespace {
 		return res;
 	}
 
+	// One stem of a layered entry, measured against the same channels of the game's file.
+	//
+	// Everything above hears the mono mix of all channels at once, and in a mix a stem that
+	// drops out is masked by the ones still playing: it showed only as a softer r_eye. The
+	// game's multichannel music entries are stereo stems side by side (the engine fades them
+	// in and out independently), so each channel pair is judged on its own; an odd channel
+	// count is taken a channel at a time.
+	struct stem_check {
+		size_t Index = 0;              // stem number: channels Index*Width .. +Width-1
+		size_t Width = 0;
+		envelope_comparison Envelope;
+		double SilenceSeconds = 0.;    // before the loop end, as for the whole file
+		level_offset Level;
+	};
+
+	// What, if anything, is wrong with one stem. Empty when nothing is. The whole file's own
+	// bars: a sustained 20 dB hole is where a dropout becomes audible, a second of silence is
+	// not a gap between notes, and a stem 6 dB down has lost its place in the balance.
+	std::string stem_problem(const stem_check& s) {
+		std::string res;
+		const auto add = [&](const std::string& what) { res += (res.empty() ? "" : "; ") + what; };
+		if (s.SilenceSeconds >= 1.)
+			add(std::format("silent {:.1f}s", s.SilenceSeconds));
+		if (s.Envelope.Valid && s.Envelope.Hole >= 20.)
+			add(std::format("hole {:.1f} dB at {:.1f}s", s.Envelope.Hole, s.Envelope.HoleAt));
+		if (s.Level.Valid && s.Level.MedianDb <= -6.)
+			add(std::format("{:+.1f} dB", s.Level.MedianDb));
+		return res;
+	}
+
+	// The stem to show for a file: one with something wrong before one without, then the one
+	// with the most silence, then the deepest hole.
+	const stem_check* worst_stem(const std::vector<stem_check>& stems) {
+		const stem_check* worst = nullptr;
+		const auto key = [](const stem_check& s) {
+			return std::tuple(!stem_problem(s).empty(), s.SilenceSeconds, s.Envelope.Valid ? s.Envelope.Hole : 0.);
+		};
+		for (const auto& s : stems)
+			if (!worst || key(s) > key(*worst))
+				worst = &s;
+		return worst;
+	}
+
+	// Channels `first` .. `first + width - 1` of a file, averaged to mono at the analysis rate.
+	// `pan` indexes the decoded channels directly, as apply's own per-channel decode does, so
+	// ffmpeg cannot reinterpret stems against a speaker layout they do not follow.
+	std::vector<float> decode_stem_float(const std::filesystem::path& ffmpeg,
+		const std::filesystem::path& file, size_t first, size_t width) {
+		std::wstring pan = L"pan=mono|c0=";
+		for (size_t c = first; c < first + width; ++c)
+			pan += std::format(L"{}{:.6f}*c{}", c == first ? L"" : L"+", 1. / static_cast<double>(width), c);
+		const auto pcmBytes = run_process_capture_stdout(ffmpeg, {
+			L"-v", L"error",
+			L"-i", file.wstring(),
+			L"-map", L"0:a:0",
+			L"-af", pan,
+			L"-ar", std::to_wstring(AnalysisRateHz),
+			L"-f", L"f32le", L"-",
+		});
+		const auto decoded = xivres::util::span_cast<const float>(pcmBytes);
+		return {decoded.begin(), decoded.end()};
+	}
+
+	std::vector<stem_check> check_stems(const std::filesystem::path& ffmpeg,
+		const std::filesystem::path& built, const std::filesystem::path& game,
+		size_t channels, double loopEndSeconds) {
+		const auto width = channels % 2 ? size_t{1} : size_t{2};
+		const auto bucket = static_cast<size_t>(std::llround(
+			EnvelopeBucketSeconds * static_cast<double>(AnalysisRateHz)));
+		std::vector<stem_check> res;
+		for (size_t first = 0; first + width <= channels; first += width) {
+			auto a = decode_stem_float(ffmpeg, built, first, width);
+			const auto b = decode_stem_float(ffmpeg, game, first, width);
+			if (a.size() < b.size())
+				a.resize(b.size(), 0.f);
+			const auto n = (std::min)(a.size(), b.size());
+			const auto ea = peak_envelope_db(std::span(a).subspan(0, n), bucket);
+			const auto eb = peak_envelope_db(std::span(b).subspan(0, n), bucket);
+			stem_check s{.Index = first / width, .Width = width};
+			s.Envelope = compare_envelopes(ea, eb);
+			for (const auto& run : silence_gaps(ea, eb, loopEndSeconds))
+				s.SilenceSeconds += run.ToSeconds - run.FromSeconds;
+			s.Level = measure_level(a, b);
+			res.push_back(std::move(s));
+		}
+		return res;
+	}
+
 	// One place two segments of a preset meet, on the target's own timeline.
 	struct join_point {
 		double AtSeconds = 0.;         // where the incoming segment starts
@@ -830,6 +918,8 @@ namespace {
 		lag_probe Head, AtLoop;
 		lag_span Lags;
 		level_offset Level;
+		// Each stem on its own, where the entry has more than one.
+		std::vector<stem_check> Stems;
 		// Every place two segments meet, when --preset says where they are.
 		std::vector<join_comparison> Joins;
 		// The game's own loop and length, which is what the join detector's regions are
@@ -886,6 +976,10 @@ int cmd_verify(const std::vector<std::string>& args) {
 				"            correlations measure noise; read `dev` instead.\n"
 				"  silence   stretches the build is digitally silent and the game is not, reported\n"
 				"            against the loop end because silence past it is never played.\n"
+				"  stems     for a layered entry (more than two channels), the envelope, silence and\n"
+				"            level of each stereo stem against the same channels of the game's file.\n"
+				"            Everything else hears the mix, where a stem that drops out is masked by\n"
+				"            the ones still playing.\n"
 				"  structure the build's loop points and length against the game's own file: a loop\n"
 				"            more than 10 ms off, or a build that stops before the game's file does --\n"
 				"            its loop end, or its end where it does not loop -- and how much of what it\n"
@@ -1091,6 +1185,11 @@ int cmd_verify(const std::vector<std::string>& args) {
 						end - maxLagMs / 1000., headSeconds, maxLagMs);
 				}
 				r.Level = measure_level(a, b);
+
+				// Only where both files lay out the same channels: a build that changed the
+				// channel count has no stem-for-stem counterpart, and says so in structure.
+				if (const auto channels = r.GameLoop.Channels; channels > 2 && channels == builtLoop.Channels)
+					r.Stems = check_stems(ffmpeg, builtAudio, gameAudio, channels, loopEndSeconds);
 
 				// Every place two segments meet. The window is centred on the crossfade and
 				// always wide enough to hold it with a second to spare either side; the control
@@ -1468,6 +1567,22 @@ int cmd_verify(const std::vector<std::string>& args) {
 						one["head"] = {{"lagMs", r.Head.LagMs}, {"match", r.Head.Match}};
 					if (r.AtLoop.Valid)
 						one["atLoop"] = {{"lagMs", r.AtLoop.LagMs}, {"match", r.AtLoop.Match}};
+					if (!r.Stems.empty()) {
+						auto stems = nlohmann::json::array();
+						for (const auto& s : r.Stems) {
+							nlohmann::json x{{"index", s.Index}, {"channels", s.Width},
+								{"silenceSeconds", s.SilenceSeconds}};
+							if (s.Envelope.Valid)
+								x["envelope"] = {{"rEye", s.Envelope.REye}, {"hole", s.Envelope.Hole},
+									{"holeAt", s.Envelope.HoleAt}};
+							if (s.Level.Valid)
+								x["levelDb"] = s.Level.MedianDb;
+							if (const auto problem = stem_problem(s); !problem.empty())
+								x["problem"] = problem;
+							stems.push_back(std::move(x));
+						}
+						one["stems"] = std::move(stems);
+					}
 					if (r.Lags.Valid)
 						one["lags"] = {{"probes", r.Lags.Probes}, {"minMs", r.Lags.MinMs},
 							{"maxMs", r.Lags.MaxMs}, {"ppm", r.Lags.Ppm}};
@@ -1519,6 +1634,7 @@ int cmd_verify(const std::vector<std::string>& args) {
 			table += ",joins,joins_wrong,join_at,join_match,join_ctrl_match,join_before_db,join_after_db,join_seam,join_problem";
 			table += ",regions,regions_flagged,worst_shape,worst_shape_at,worst_region_level_db,worst_rel_lag_ms,region_problem";
 			table += ",game_loop,built_loop,loop_start_diff_ms,loop_end_diff_ms,short_seconds,missing_audible_seconds";
+			table += ",stems,stems_wrong,stem_worst,stem_r_eye,stem_hole,stem_silence_seconds,stem_level_db,stem_problem";
 			table += ",error\n";
 			for (const auto& r : rows) {
 				table += std::format("{},{:.4f},{:.4f},{:.1f},{:.1f},", r.Target, r.Weighted, r.Plain,
@@ -1636,6 +1752,21 @@ int cmd_verify(const std::vector<std::string>& args) {
 				} else {
 					table += ",,,,,,";
 				}
+				// The worst stem only; every stem is in the JSON.
+				if (const auto* s = worst_stem(r.Stems)) {
+					const auto wrong = std::ranges::count_if(r.Stems,
+						[](const stem_check& x) { return !stem_problem(x).empty(); });
+					auto problem = stem_problem(*s);
+					std::ranges::replace(problem, ',', ' ');
+					table += std::format(",{},{},{},{},{},{:.2f},{},{}", r.Stems.size(), wrong, s->Index,
+						s->Envelope.Valid ? std::format("{:.4f}", s->Envelope.REye) : "",
+						s->Envelope.Valid ? std::format("{:.2f}", s->Envelope.Hole) : "",
+						s->SilenceSeconds,
+						s->Level.Valid ? std::format("{:.2f}", s->Level.MedianDb) : "",
+						problem);
+				} else {
+					table += ",,,,,,,,";
+				}
 				table += ',';
 				table += r.Error;
 				table += '\n';
@@ -1677,6 +1808,34 @@ int cmd_verify(const std::vector<std::string>& args) {
 		if (silentFiles)
 			std::cerr << std::format("{} file(s) hold {:.1f}s of silence the game's own files do not",
 				silentFiles, silentSeconds) << '\n';
+
+		// A stem that drops out under the others: masked in the mix every line above hears.
+		{
+			size_t layered = 0;
+			std::vector<const row*> badStems;
+			for (const auto* r : ok) {
+				if (r->Stems.empty())
+					continue;
+				layered++;
+				if (const auto* s = worst_stem(r->Stems); s && !stem_problem(*s).empty())
+					badStems.push_back(r);
+			}
+			if (layered)
+				std::cerr << std::format("{} layered file(s) checked stem by stem; {} have a stem the game's own file does not match{}",
+					layered, badStems.size(), badStems.empty() ? "" : ":") << '\n';
+			std::ranges::sort(badStems, [](const row* x, const row* y) {
+				const auto* a = worst_stem(x->Stems);
+				const auto* b = worst_stem(y->Stems);
+				return std::tuple(a->SilenceSeconds, a->Envelope.Hole) > std::tuple(b->SilenceSeconds, b->Envelope.Hole);
+			});
+			for (size_t i = 0; i < (std::min<size_t>)(badStems.size(), 8); ++i) {
+				const auto* r = badStems[i];
+				const auto* s = worst_stem(r->Stems);
+				std::cerr << std::format("   {:<46} stem {} of {}: {}",
+					r->Target.size() > 46 ? r->Target.substr(r->Target.size() - 46) : r->Target,
+					s->Index, r->Stems.size(), stem_problem(*s)) << '\n';
+			}
+		}
 
 		std::vector<const row*> clicky;
 		for (const auto* r : ok)
