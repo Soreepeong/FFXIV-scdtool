@@ -1026,8 +1026,13 @@ namespace {
 			// an error. Measured once per source and applied to all of its channels, from
 			// the first output channel that names it, which is what the importer did.
 			std::map<std::string, ptrdiff_t> start;
+			// Signed: a negative offset reads from before the recording begins, which the
+			// render below plays as silence -- the game's file starts before the recording
+			// does. toSamples clamps at zero, which silently put every negative stated offset
+			// at the recording's start: BGM_Con_CrystalTower_01's two stems, stated at
+			// -0.188s and -0.221s, came out 187 and 221 ms early.
 			for (const auto& [name, source] : segment.Sources)
-				start.emplace(name, static_cast<ptrdiff_t>(toSamples(source.Offset)));
+				start.emplace(name, static_cast<ptrdiff_t>(std::llround(source.Offset * static_cast<double>(rate))));
 
 			std::map<size_t, std::vector<float>> targetChannel;  // decoded on demand, cached
 			std::set<std::string> aligned;
@@ -3127,13 +3132,29 @@ int cmd_apply(const std::vector<std::string>& args) {
 				const auto message = [](DWORD error) {
 					return std::error_code(static_cast<int>(error), std::system_category()).message();
 				};
+				// Retried on a sharing violation, as the read-back above is: whatever scans new
+				// files on Windows holds a just-written `.new` open for a moment, and one pass
+				// left 67 FLAC and 245 WAV builds as `.new` over it -- four of them in a fresh
+				// directory nothing else had touched.
+				const auto retrying = [](auto&& attempt) {
+					for (int i = 0; ; ++i) {
+						if (attempt())
+							return DWORD{0};
+						const auto error = GetLastError();
+						if (i >= 6 || (error != ERROR_SHARING_VIOLATION && error != ERROR_ACCESS_DENIED
+							&& error != ERROR_UNABLE_TO_REMOVE_REPLACED))
+							return error;
+						std::this_thread::sleep_for(std::chrono::milliseconds(50 << i));
+					}
+				};
 				if (!std::filesystem::exists(outputPath, ec)) {
-					if (!MoveFileExW(newPath.c_str(), outputPath.c_str(), MOVEFILE_WRITE_THROUGH))
+					if (const auto error = retrying([&] { return MoveFileExW(newPath.c_str(), outputPath.c_str(), MOVEFILE_WRITE_THROUGH) != FALSE; }))
 						throw std::runtime_error(std::format("Could not move {} into place ({}); it is left as {}",
-							u8(outputPath), message(GetLastError()), u8(newPath)));
-				} else if (!ReplaceFileW(outputPath.c_str(), newPath.c_str(), oldPath.c_str(),
-						REPLACEFILE_IGNORE_MERGE_ERRORS | REPLACEFILE_IGNORE_ACL_ERRORS, nullptr, nullptr)) {
-					const auto error = GetLastError();
+							u8(outputPath), message(error), u8(newPath)));
+				} else if (const auto error = retrying([&] {
+						return ReplaceFileW(outputPath.c_str(), newPath.c_str(), oldPath.c_str(),
+							REPLACEFILE_IGNORE_MERGE_ERRORS | REPLACEFILE_IGNORE_ACL_ERRORS, nullptr, nullptr) != FALSE;
+					})) {
 					if (error == ERROR_UNABLE_TO_MOVE_REPLACEMENT_2)
 						MoveFileExW(oldPath.c_str(), outputPath.c_str(), 0);
 					throw std::runtime_error(std::format("Could not replace {} ({}); the new build is left as {}",
