@@ -343,6 +343,9 @@ std::optional<config_target> read_config_target(
 					source->second.Stated = true;
 					source->second.Exact = spec.is_object() && spec.value("exact", false);
 					if (spec.is_object())
+						if (const auto hash = spec.find("pcmHash"); hash != spec.end() && hash->is_string())
+							source->second.PcmHash = hash->get<std::string>();
+					if (spec.is_object())
 						if (const auto drift = spec.find("driftPpm"); drift != spec.end() && drift->is_number())
 							driftPpm.emplace(name, drift->get<double>());
 				}

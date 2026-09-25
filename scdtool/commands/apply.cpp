@@ -84,6 +84,9 @@ namespace {
 		// And measured to the sample, so the sample alignment leaves it alone too. See
 		// apply_segment_source::Exact.
 		bool OffsetExact = false;
+		// The preset's pcmHash for the recording that offset was measured on; `exact` holds
+		// only for that recording. See apply_segment_source::PcmHash.
+		std::string PcmHash;
 		std::string Note;         // the preset's own comment, echoed in the log line
 	};
 
@@ -705,7 +708,11 @@ namespace {
 		// against the bare recording, a drift-corrected one-segment item was "corrected" by
 		// the drift accumulated to the loop start (BGM_ORCH_402: 38 samples, 0.4 ms), and an
 		// item with a long adelay fell under the correlation floor and was never aligned.
-		const std::wstring& sourceFilter = {}) {
+		const std::wstring& sourceFilter = {},
+		// The game's side taken through this, when only some of its channels are the ones the
+		// source plays on -- one stem of an engine-switched entry, rather than the whole mix it
+		// correlates with too poorly to align (BGM_Con_Bahamut's Primal Timbre).
+		const std::wstring& templateFilter = {}) {
 
 		constexpr double HalfWindowSeconds = 2.0;
 		constexpr double MaxShiftSeconds = 0.060;   // far past what the coarse search can be out by
@@ -721,7 +728,7 @@ namespace {
 		const auto want = static_cast<size_t>(2 * HalfWindowSeconds * static_cast<double>(samplingRate));
 		const auto shift = static_cast<size_t>(MaxShiftSeconds * static_cast<double>(samplingRate));
 		const auto target = decode_window_to_mono(ffmpeg, templateAudio, from, 2 * HalfWindowSeconds,
-			samplingRate, tempFile(L"scdtool_apply_align_t", L".f32"));
+			samplingRate, tempFile(L"scdtool_apply_align_t", L".f32"), templateFilter);
 		const auto candidate = decode_window_to_mono(ffmpeg, source, sourceFrom,
 			2 * HalfWindowSeconds + 2 * MaxShiftSeconds, samplingRate,
 			tempFile(L"scdtool_apply_align_s", L".f32"), sourceFilter);
@@ -759,6 +766,57 @@ namespace {
 		out.Seconds = coarseOffset - (static_cast<double>(bestLag) - static_cast<double>(shift)) / static_cast<double>(samplingRate);
 		out.Refined = bestLag != shift;
 		return out;
+	}
+
+	// Whether a recording decodes to the samples a preset measured its offset against: the
+	// CRC-32 (zlib's, reflected 0xEDB88320) of `ffmpeg -map 0:a:0 -f s32le`, at the recording's
+	// own rate and channel count, against the preset's `pcmHash`. Streamed through a temp file
+	// rather than held -- a twenty-minute 96 kHz track is most of a gigabyte of s32 -- and
+	// cached per file for the run, since one recording often serves several targets.
+	bool pcm_hash_matches(const std::filesystem::path& ffmpeg, const std::filesystem::path& file,
+		const std::string& expected, const std::filesystem::path& rawPath) {
+
+		static std::mutex cacheMutex;
+		static std::map<std::filesystem::path, uint32_t> cache;
+		uint32_t crc = 0;
+		{
+			const auto lock = std::scoped_lock(cacheMutex);
+			if (const auto it = cache.find(file); it != cache.end())
+				crc = it->second;
+		}
+		if (!crc) {
+			static const auto table = [] {
+				std::array<uint32_t, 256> t{};
+				for (uint32_t i = 0; i < 256; i++) {
+					auto c = i;
+					for (int k = 0; k < 8; k++)
+						c = c & 1 ? 0xEDB88320u ^ (c >> 1) : c >> 1;
+					t[i] = c;
+				}
+				return t;
+			}();
+			std::error_code ec;
+			std::filesystem::remove(rawPath, ec);
+			run_process_capture_stdout(ffmpeg, {
+				L"-v", L"error", L"-nostdin", L"-i", file.wstring(),
+				L"-map", L"0:a:0", L"-f", L"s32le", L"-y", rawPath.wstring(),
+			});
+			std::ifstream f(rawPath, std::ios::binary);
+			if (!f)
+				return false;
+			std::vector<char> buffer(1 << 20);
+			uint32_t c = 0xFFFFFFFFu;
+			while (f.read(buffer.data(), static_cast<std::streamsize>(buffer.size())) || f.gcount()) {
+				for (std::streamsize i = 0; i < f.gcount(); i++)
+					c = table[(c ^ static_cast<uint8_t>(buffer[static_cast<size_t>(i)])) & 0xFF] ^ (c >> 8);
+			}
+			f.close();
+			std::filesystem::remove(rawPath, ec);
+			crc = c ^ 0xFFFFFFFFu;
+			const auto lock = std::scoped_lock(cacheMutex);
+			cache.emplace(file, crc);
+		}
+		return std::format("{:08x}", crc) == expected;
 	}
 
 	// Vorbis's own six-channel order is FL, FC, FR, BL, BR, LFE; a decoder hands back
@@ -871,6 +929,69 @@ namespace {
 			cursor = segmentStart[i] + toSamples(segments[i].Length);
 		}
 
+		// Offsets here are used as written, so they are only right for the recording they were
+		// measured on. One that decodes to other samples than its pcmHash says -- another rip,
+		// another encode; an MP3 without a LAME header keeps its encoder delay, 23 ms on
+		// BGM_EX4_Event_13's -- is measured once against the game's file, at the first segment
+		// that plays it, and every offset it has moves by what that finds. A decoder delay is
+		// the same all through the file, so one measurement serves them all. Where the game's
+		// file does not correlate well enough to say (a stem against a whole mix, often), the
+		// offsets stay as they are and the log says the recording differs.
+		std::map<std::string, double> encodeShift;
+		for (size_t i = 0; i < segments.size(); i++) {
+			for (const auto& [name, source] : segments[i].Sources) {
+				if (source.IsTarget || source.Graph || !source.Stated || source.PcmHash.empty() || encodeShift.contains(name))
+					continue;
+				if (std::ranges::none_of(segments[i].Channels, [&](const auto& c) { return c.first == name; }))
+					continue;
+				encodeShift.emplace(name, 0.);
+				try {
+					if (pcm_hash_matches(ffmpeg, source.Path, source.PcmHash, tempFile(L"scdtool_apply_pcmhash", L".s32")))
+						continue;
+					const auto from = static_cast<double>(segmentStart[i]) / rate;
+					const auto span = segments[i].Length > 0.
+						? segments[i].Length
+						: static_cast<double>(targetEnd) / rate - from;
+					if (span < 6.) {
+						if (alignments)
+							alignments->emplace_back(name + " (not the recording its pcmHash names; not re-measured)", 0.);
+						continue;
+					}
+					// Target frame t holds the source at t - offset, so a segment starting at
+					// `from` and reading the recording from Offset has offset from - Offset.
+					const auto coarse = from - source.Offset;
+					// Against the game's channels this source plays on, where it does not play on
+					// them all: a stem is aligned against its own stem, not the whole mix.
+					std::set<size_t> seats;
+					for (size_t c = 0; c < segments[i].Channels.size(); c++)
+						if (segments[i].Channels[c].first == name)
+							seats.insert(seat(c));
+					std::wstring pick;
+					if (seats.size() < channels) {
+						pick = L"pan=mono|c0=";
+						for (const auto d : seats)
+							pick += std::format(L"{}{:.6f}*c{}", pick.back() == L'=' ? L"" : L"+", 1. / static_cast<double>(seats.size()), d);
+					}
+					const auto measured = refine_offset_to_samples(ffmpeg, templateAudio, source.Path, samplingRate,
+						from + (std::min)(span / 2., 20.), coarse, tempFile, source.Filter, pick);
+					constexpr double ReencodeFloor = 0.8;
+					if (measured.Correlation >= ReencodeFloor) {
+						encodeShift[name] = coarse - measured.Seconds;
+						if (alignments)
+							alignments->emplace_back(name + " (not the recording its pcmHash names; moved by)", encodeShift[name]);
+					} else if (alignments) {
+						alignments->emplace_back(name + " (not the recording its pcmHash names; could not re-measure)", 0.);
+					}
+				} catch (const std::exception&) {
+					// The offsets stand as written; the build is no worse than it was.
+				}
+			}
+		}
+		const auto offsetOf = [&](const std::string& name, const apply_segment_source& source) {
+			const auto it = encodeShift.find(name);
+			return source.Offset + (it == encodeShift.end() ? 0. : it->second);
+		};
+
 		// One gain per recording (file and filter), measured over the longest span any
 		// segment reads from it, on both sides. Per segment was fragile: a short span is a
 		// noisy reading, and one that does not hold what the game plays there -- a misplaced
@@ -903,7 +1024,7 @@ namespace {
 					const auto file = fileFor(source);
 					if (!recordingLength.contains(file))
 						recordingLength.emplace(file, toSamples(probe_duration(ffprobe, file)));
-					const auto from = toSamples(source.Offset);
+					const auto from = toSamples(offsetOf(name, source));
 					// As far as the segment states, the target runs and the recording lasts.
 					auto span = segments[i].Length > 0. ? toSamples(segments[i].Length) : (std::numeric_limits<size_t>::max)();
 					span = (std::min)(span, targetEnd > segmentStart[i] ? targetEnd - segmentStart[i] : 0);
@@ -1035,7 +1156,7 @@ namespace {
 			// at the recording's start: BGM_Con_CrystalTower_01's two stems, stated at
 			// -0.188s and -0.221s, came out 187 and 221 ms early.
 			for (const auto& [name, source] : segment.Sources)
-				start.emplace(name, static_cast<ptrdiff_t>(std::llround(source.Offset * static_cast<double>(rate))));
+				start.emplace(name, static_cast<ptrdiff_t>(std::llround(offsetOf(name, source) * static_cast<double>(rate))));
 
 			std::map<size_t, std::vector<float>> targetChannel;  // decoded on demand, cached
 			std::set<std::string> aligned;
@@ -1477,6 +1598,7 @@ namespace {
 					.FromPreset = true,
 					.OffsetStated = only.FixesAlignment(),
 					.OffsetExact = only.Stated && only.Exact,
+					.PcmHash = only.PcmHash,
 					.Note = read->Note,
 				});
 				continue;
@@ -2565,6 +2687,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 			auto effectiveOffset = job.Offset;
 			deduced_offset deduced;
 			sample_alignment aligned;
+			bool exactHonoured = job.OffsetExact;
 			double offsetBeforeAlignment = job.Offset;
 			size_t paddingAdded = 0;
 			size_t trimmedAway = 0;
@@ -2641,8 +2764,18 @@ int cmd_apply(const std::vector<std::string>& args) {
 				// which is not good enough for a loop point.
 				offsetBeforeAlignment = effectiveOffset;
 				// Unless the preset measured it to the sample already, which a single window at
-				// a lower correlation can only make worse.
-				if (!job.OffsetExact) {
+				// a lower correlation can only make worse -- on this recording. Another encode of
+				// it is aligned like any other: an exact offset is not exact against an MP3 that
+				// kept its encoder delay (BGM_EX4_Event_13: 23 ms late).
+				if (exactHonoured) {
+					try {
+						exactHonoured = job.PcmHash.empty() || pcm_hash_matches(ffmpegPath, job.SourcePath, job.PcmHash,
+							keepTemp(tempDir / std::format(L"scdtool_apply_pcmhash_{}.s32", tempFileCounter.fetch_add(1))));
+					} catch (const std::exception&) {
+						exactHonoured = false;
+					}
+				}
+				if (!exactHonoured) {
 					const auto tempFile = [&](const wchar_t* prefix, const wchar_t* extension) {
 						auto path = tempDir / std::format(L"{}_{}{}", prefix, tempFileCounter.fetch_add(1), extension);
 						return keepTemp(std::move(path));
@@ -3236,7 +3369,10 @@ int cmd_apply(const std::vector<std::string>& args) {
 						? std::format(" [deduced, was {:+.3f}s, intro {:.3f} over {} candidates]",
 							job.Offset, deduced.Score, deduced.Candidates)
 						: "",
-					job.OffsetExact ? " [exact, as stated]"
+					exactHonoured ? " [exact, as stated]"
+					: job.OffsetExact && aligned.Correlation > -2.
+						? std::format(" [exact for another encode (pcmHash); sample-aligned {:+.0f}, r {:.3f}]",
+							(aligned.Seconds - offsetBeforeAlignment) * static_cast<double>(samplingRate), aligned.Correlation)
 					: aligned.Correlation > -2.
 						? std::format(" [sample-aligned {:+.0f}, r {:.3f}]",
 							(aligned.Seconds - offsetBeforeAlignment) * static_cast<double>(samplingRate), aligned.Correlation)

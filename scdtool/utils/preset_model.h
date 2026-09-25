@@ -70,6 +70,13 @@ struct apply_segment_source {
 	// rounded record and refined, which is what most of presets/ needs.
 	bool Exact = false;
 
+	// `pcmHash` beside the offset: the CRC-32 of the recording's canonical decode (s32le at its
+	// own rate and channel count) the offset was measured against, as 8 hex digits. Another
+	// encode of the same recording decodes to other samples -- an MP3 without a LAME header
+	// keeps its encoder delay, 23 ms on BGM_EX4_Event_13's -- so a stated offset is only as
+	// good as this match. Empty where the preset does not say.
+	std::string PcmHash;
+
 	// Set from the preset file's `offsetsAreFitted`: every offset in that file is
 	// already decided, the ones it leaves out included. See FixesAlignment.
 	bool Fitted = false;
