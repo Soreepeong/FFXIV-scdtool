@@ -6132,6 +6132,35 @@
      {
       "channels": [
        {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       },
+       {
+        "source": "target",
+        "channel": 2
+       },
+       {
+        "source": "target",
+        "channel": 3
+       },
+       {
+        "source": "target",
+        "channel": 4
+       },
+       {
+        "source": "target",
+        "channel": 5
+       }
+      ],
+      "length": 0.38
+     },
+     {
+      "channels": [
+       {
         "source": "Hubris",
         "channel": 0
        },
@@ -6158,17 +6187,22 @@
       ],
       "sourceOffsets": {
        "Ever Upwards": {
-        "offset": -0.220616,
+        "offset": 0.159384,
         "pcmHash": "992b3ab7"
        },
        "Hubris": {
-        "offset": -0.187109,
+        "offset": 0.192891,
         "pcmHash": "9d5932a4"
+       },
+       "target": {
+        "offset": 0.38
        }
-      }
+      },
+      "crossfadeSeconds": 0.03,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9925 (was 0.9406)."
+    "# comment": "The game file opens with a 0.35 s drum-roll pickup (150-600 Hz, rising from -57 to -30 dB) that neither album recording has -- both begin at the downbeat, about 0.2 s after the game's file -- so the game's own audio plays to 0.38 s and the stems take over there with a 30 ms linear blend. Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9925 (was 0.9406)."
    }
   },
   {
