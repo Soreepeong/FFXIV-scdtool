@@ -3926,6 +3926,117 @@
     ],
     "# comment": "spectral similarity to the game's own file: 0.882"
    }
+  },
+  {
+   "source": [
+    "00027",
+    "ENDWALKER_028",
+    "イマジネーション \\(Duality\\) 〜蒼天聖戦 魔科学研究所〜",
+    "Imagination \\(Duality\\)"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_13.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.809863,
+        "pcmHash": "794a21f9",
+        "exact": true
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9986 (was 0.8878)."
+   }
+  },
+  {
+   "source": {
+    "source": {
+     "inputFiles": [
+      [],
+      [
+       "00000",
+       "ENDWALKER_001",
+       "Endwalker - Footfalls"
+      ],
+      [
+       "00050",
+       "ENDWALKER_051",
+       "想いが動かす力",
+       "With Hearts Aligned"
+      ]
+     ],
+     "filterComplex": "[2:a]atrim=0:10.211,asetpts=PTS-STARTPTS,adelay=243307:all=1[tr1];[2:a]atrim=10.211:15.617,asetpts=PTS-STARTPTS,volume='1-t/5.406':eval=frame,adelay=253518:all=1[tr2];[1:a]atrim=253.518:260.025,asetpts=PTS-STARTPTS,volume='0.562+0.068*t/6.507':eval=frame,adelay=253518:all=1[tr3];[1:a]atrim=260.024:336.808,asetpts=PTS-STARTPTS,volume=0.63,adelay=260024:all=1[tr4];[0:a]atrim=91.702:100.023,asetpts=PTS-STARTPTS,volume='1-pow(t/8.321,0.5)':eval=frame,adelay=336808:all=1,aresample=96000[tr5];[1:a]atrim=0:9.130,asetpts=PTS-STARTPTS,volume='0.63*pow(t/9.13,0.5)':eval=frame,adelay=336000:all=1[tr6];[1:a]atrim=9.130:354.260,asetpts=PTS-STARTPTS,volume=0.63,adelay=345130:all=1[tr7];[tr1][tr2][tr3][tr4][tr5][tr6][tr7]amix=inputs=7:duration=longest:normalize=0,atrim=start=245.107[res]",
+     "filterComplexOutName": "[res]"
+    }
+   },
+   "target": {
+    "path": "music/ex4/BGM_EX4_Event_18.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": -0.000403
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9658 (was 0.9602)."
+   }
+  },
+  {
+   "source": [
+    "00001",
+    "ENDWALKER_002",
+    "暁月のプレリュード",
+    "Prelude - Tales"
+   ],
+   "target": {
+    "path": "music/ex4/BGM_EX4_System_Title.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.671511,
+        "pcmHash": "aac94141",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.8819 (was 0.8153)."
+   }
   }
  ],
  "pcmHashAlgorithm": "crc32/s32le@native",

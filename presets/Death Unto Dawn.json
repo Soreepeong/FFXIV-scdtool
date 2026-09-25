@@ -4373,6 +4373,205 @@
     ],
     "# comment": "found only with the coarse shortlist disabled, then ranked on log-mel rather than envelope correlation: 0.7596 here, 0.1916 clear of the next candidate."
    }
+  },
+  {
+   "source": [
+    "00007",
+    "DUD_008",
+    "花の館 ～魔法宮殿 グラン・コスモス～",
+    "The Grand Cosmos"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Dan_D09.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.5943,
+        "pcmHash": "3d8222ad",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9286 (was 0.9139)."
+   }
+  },
+  {
+   "source": [
+    "00079",
+    "DUD_079",
+    "遺サレタ場所／斜光 \\(From NieR:Automata\\)",
+    "City Ruins - Rays of Light \\(From NieR:Automata\\)"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_Ytc_12.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.571998,
+        "pcmHash": "92ec8f24",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.8861 (was 0.8875)."
+   }
+  },
+  {
+   "source": {
+    "A Fine Air Forbiddeth": [
+     "00004",
+     "DUD_005",
+     "戦士の守勢 ～PvPフロントライン～",
+     "A Fine Air Forbiddeth"
+    ],
+    "A Fierce Air Forceth": [
+     "00005",
+     "DUD_006",
+     "戦士の攻勢 ～PvPフロントライン～",
+     "A Fierce Air Forceth"
+    ]
+   },
+   "target": {
+    "path": "music/ffxiv/BGM_PvP_Battle_02.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "A Fine Air Forbiddeth",
+        "channel": 0
+       },
+       {
+        "source": "A Fine Air Forbiddeth",
+        "channel": 1
+       },
+       {
+        "source": "A Fierce Air Forceth",
+        "channel": 0
+       },
+       {
+        "source": "A Fierce Air Forceth",
+        "channel": 1
+       },
+       {
+        "source": "target",
+        "channel": 4
+       },
+       {
+        "source": "target",
+        "channel": 5
+       }
+      ],
+      "sourceOffsets": {
+       "A Fierce Air Forceth": {
+        "offset": 1.725869,
+        "pcmHash": "26fd6e4d"
+       },
+       "A Fine Air Forbiddeth": {
+        "offset": 1.7274,
+        "pcmHash": "426883dc"
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9520 (was 0.9489)."
+   }
+  },
+  {
+   "source": [
+    "00007",
+    "DUD_008",
+    "花の館 ～魔法宮殿 グラン・コスモス～",
+    "The Grand Cosmos"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_354.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.593809,
+        "pcmHash": "3d8222ad",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9089 (was 0.8953)."
+   }
+  },
+  {
+   "source": {
+    "A Fine Air Forbiddeth": [
+     "00004",
+     "DUD_005",
+     "戦士の守勢 ～PvPフロントライン～",
+     "A Fine Air Forbiddeth"
+    ],
+    "A Fierce Air Forceth": [
+     "00005",
+     "DUD_006",
+     "戦士の攻勢 ～PvPフロントライン～",
+     "A Fierce Air Forceth"
+    ]
+   },
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_357.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "A Fine Air Forbiddeth",
+        "channel": 0
+       },
+       {
+        "source": "A Fine Air Forbiddeth",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "A Fine Air Forbiddeth": {
+        "offset": 1.727,
+        "pcmHash": "426883dc"
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9440 (was 0.9440)."
+   }
   }
  ],
  "pcmHashAlgorithm": "crc32/s32le@native",

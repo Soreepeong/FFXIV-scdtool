@@ -3819,6 +3819,330 @@
     ],
     "# comment": "the inn's sleep jingle: the first 8.75s of \"In the Arms of Althyk\". The game's entry is CRI HCA (format 26), which nothing here encodes, so the replacement is written in whatever --audio-format names and the entry's format changes. No sheet references this path -- the bgm sheet holds only music/ -- so `match --discover` will not recreate this entry and a regeneration of presets/ drops it. Length is stated because the entry does not loop and the album track runs 11.01s: with nothing to truncate at, the render would take the whole recording."
    }
+  },
+  {
+   "source": [
+    "00048",
+    "Before_Meteor_FFXIV_049",
+    "疑惑の廻廊",
+    "Neverborn"
+   ],
+   "target": {
+    "path": "music/ex2/BGM_EX2_Event_37.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": -2.4e-05,
+        "pcmHash": "39661fe1",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.8398 (was 0.8398)."
+   }
+  },
+  {
+   "source": [
+    "00023",
+    "Before_Meteor_FFXIV_024",
+    "幽境",
+    "Phantoms on the Lake"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Boss_05.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.38434,
+        "pcmHash": "b71fb093",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9915 (was 0.9894)."
+   }
+  },
+  {
+   "source": [
+    "00059",
+    "Before_Meteor_FFXIV_060",
+    "憤怒",
+    "Fury"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Dungeon_Lim_05.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.352,
+        "pcmHash": "51d3d766",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9959 (was 0.9960)."
+   }
+  },
+  {
+   "source": [
+    "00026",
+    "Before_Meteor_FFXIV_027",
+    "地平線の彼方",
+    "Horizons Calling"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Dungeon_Lim_06.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.381579,
+        "pcmHash": "a9acce4d",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9914 (was 0.9914)."
+   }
+  },
+  {
+   "source": {
+    "The Dark's Embrace": [
+     "00067",
+     "Before_Meteor_FFXIV_068",
+     "闇の抱擁",
+     "The Dark's Embrace"
+    ],
+    "The Dark's Kiss": [
+     "00068",
+     "Before_Meteor_FFXIV_069",
+     "闇の口付",
+     "The Dark's Kiss"
+    ]
+   },
+   "target": {
+    "path": "music/ffxiv/BGM_Rade_01.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "The Dark's Embrace",
+        "channel": 0
+       },
+       {
+        "source": "The Dark's Embrace",
+        "channel": 1
+       },
+       {
+        "source": "The Dark's Kiss",
+        "channel": 0
+       },
+       {
+        "source": "The Dark's Kiss",
+        "channel": 1
+       },
+       {
+        "source": "target",
+        "channel": 4
+       },
+       {
+        "source": "target",
+        "channel": 5
+       }
+      ],
+      "sourceOffsets": {
+       "The Dark's Embrace": {
+        "offset": 0.404454,
+        "pcmHash": "f046c629"
+       },
+       "The Dark's Kiss": {
+        "offset": -1.638467,
+        "pcmHash": "2233d3a5"
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9949 (was 0.9396)."
+   }
+  },
+  {
+   "source": [
+    "00026",
+    "Before_Meteor_FFXIV_027",
+    "地平線の彼方",
+    "Horizons Calling"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_Ride_Kgreen.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.381579,
+        "pcmHash": "a9acce4d",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9914 (was 0.9914)."
+   }
+  },
+  {
+   "source": [
+    "00055",
+    "Before_Meteor_FFXIV_056",
+    "エッグハントの英雄",
+    "The Hero of Hatchingtide"
+   ],
+   "target": {
+    "path": "music/ffxiv/BGM_System_WinShot_04.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.397771,
+        "pcmHash": "2c0907d5",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9963 (was 0.9954)."
+   }
+  },
+  {
+   "source": [
+    "00026",
+    "Before_Meteor_FFXIV_027",
+    "地平線の彼方",
+    "Horizons Calling"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_067.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": -0.086497,
+        "pcmHash": "a9acce4d",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9709 (was 0.9709)."
+   }
+  },
+  {
+   "source": [
+    "00059",
+    "Before_Meteor_FFXIV_060",
+    "憤怒",
+    "Fury"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_338.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 0.35233,
+        "pcmHash": "51d3d766",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9828 (was 0.9828)."
+   }
   }
  ],
  "pcmHashAlgorithm": "crc32/s32le@native",

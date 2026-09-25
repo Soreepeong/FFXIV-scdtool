@@ -2301,6 +2301,113 @@
     ],
     "# comment": "spectral similarity to the game's own file: 0.969"
    }
+  },
+  {
+   "source": [
+    "00033",
+    "TFEOF_FFXIV_34",
+    "ビブリオフォビア　～稀書回収 グブラ幻想図書館～",
+    "Bibliophobia"
+   ],
+   "target": {
+    "path": "music/ex1/BGM_EX1_Dungeon_DravaniaL_04.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.943486,
+        "pcmHash": "b6f1e365",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9334 (was 0.9334)."
+   }
+  },
+  {
+   "source": [
+    "00007",
+    "TFEOF_FFXIV_08",
+    "餓えた狼　～ザ・フィースト～",
+    "Starved"
+   ],
+   "target": {
+    "path": "music/ex1/BGM_EX1_pvp01.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       },
+       {
+        "source": "target",
+        "channel": 2
+       },
+       {
+        "source": "target",
+        "channel": 3
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.532078,
+        "pcmHash": "1318411e",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9904."
+   }
+  },
+  {
+   "source": [
+    "00033",
+    "TFEOF_FFXIV_34",
+    "ビブリオフォビア　～稀書回収 グブラ幻想図書館～",
+    "Bibliophobia"
+   ],
+   "target": {
+    "path": "music/ffxiv/Orchestrion/BGM_ORCH_165.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.943276,
+        "pcmHash": "b6f1e365",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9242 (was 0.9242)."
+   }
   }
  ],
  "pcmHashAlgorithm": "crc32/s32le@native",

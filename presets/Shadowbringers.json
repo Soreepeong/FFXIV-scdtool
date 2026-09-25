@@ -4000,6 +4000,104 @@
     ],
     "# comment": "found only with the coarse shortlist disabled, then ranked on log-mel rather than envelope correlation: 0.7923 here, 0.2050 clear of the next candidate."
    }
+  },
+  {
+   "source": {
+    "Final Struggle": [
+     "00026",
+     "SHADOWBRINGERS_27",
+     "ラスト戦闘終了",
+     "Final Struggle"
+    ],
+    "Hall of Worship": [
+     "00027",
+     "SHADOWBRINGERS_28",
+     "礼拝堂",
+     "Hall of Worship"
+    ]
+   },
+   "target": {
+    "path": "music/ex2/BGM_EX2_Rti_34.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "Final Struggle": {
+        "offset": 2.8055,
+        "pcmHash": "d46d3c54"
+       }
+      },
+      "sourceFilters": {
+       "Final Struggle": "volume=-2dB"
+      },
+      "channels": [
+       {
+        "source": "Final Struggle",
+        "channel": 0
+       },
+       {
+        "source": "Final Struggle",
+        "channel": 1
+       }
+      ],
+      "length": 14.71
+     },
+     {
+      "sourceOffsets": {
+       "Hall of Worship": {
+        "offset": 2.87017,
+        "pcmHash": "ba29eeac"
+       }
+      },
+      "sourceFilters": {
+       "Hall of Worship": "volume=-2dB"
+      },
+      "channels": [
+       {
+        "source": "Hall of Worship",
+        "channel": 0
+       },
+       {
+        "source": "Hall of Worship",
+        "channel": 1
+       }
+      ]
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9934 (was 0.9453)."
+   }
+  },
+  {
+   "source": [
+    "00037",
+    "SHADOWBRINGERS_38",
+    "四重の見聞を経て",
+    "Four-fold Knowing"
+   ],
+   "target": {
+    "path": "music/ex3/BGM_EX3_System_Title.scd",
+    "segments": [
+     {
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.553078,
+        "pcmHash": "4496c678",
+        "exact": true
+       }
+      }
+     }
+    ],
+    "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9573 (was 0.9521)."
+   }
   }
  ],
  "pcmHashAlgorithm": "crc32/s32le@native",
