@@ -1568,7 +1568,8 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 68.217026
+        "offset": 68.217026,
+        "pcmHash": "c899b5e6"
        }
       },
       "channels": [
@@ -2541,7 +2542,8 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 3.27907292
+        "offset": 3.27907292,
+        "pcmHash": "d86c7248"
        }
       },
       "channels": [
@@ -2699,7 +2701,8 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.72394364
+        "offset": 1.72394364,
+        "pcmHash": "26732188"
        }
       },
       "channels": [
@@ -3463,7 +3466,8 @@
      {
       "sourceOffsets": {
        "SHADOWBRINGERS_76": {
-        "offset": 2.81949
+        "offset": 2.81949,
+        "pcmHash": "92270fe3"
        }
       },
       "channels": [
@@ -3481,7 +3485,8 @@
      {
       "sourceOffsets": {
        "SHADOWBRINGERS_62": {
-        "offset": 1.476011
+        "offset": 1.476011,
+        "pcmHash": "8809308b"
        }
       },
       "sourceFilters": {
@@ -3503,7 +3508,8 @@
       "startSeconds": 258.5,
       "sourceOffsets": {
        "SHADOWBRINGERS_76": {
-        "offset": 261.31949
+        "offset": 261.31949,
+        "pcmHash": "92270fe3"
        }
       },
       "channels": [
@@ -3984,7 +3990,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 3.93
+       "source": {
+        "offset": 3.93,
+        "pcmHash": "92270fe3"
+       }
       },
       "channels": [
        {

@@ -1133,7 +1133,8 @@
         "pcmHash": "9d230008"
        },
        "TFEOF_FFXIV_20": {
-        "offset": 1.756
+        "offset": 1.756,
+        "pcmHash": "62bb25b0"
        },
        "target": {
         "offset": 9.2
@@ -1770,7 +1771,8 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.175464
+        "offset": 1.175464,
+        "pcmHash": "c19e36d3"
        }
       },
       "channels": [
@@ -1818,7 +1820,8 @@
         "pcmHash": "5ee4a5cc"
        },
        "TFEOF_FFXIV_38": {
-        "offset": 1.175
+        "offset": 1.175,
+        "pcmHash": "c19e36d3"
        }
       },
       "length": 60.0,
@@ -1848,7 +1851,8 @@
         "pcmHash": "5ee4a5cc"
        },
        "TFEOF_FFXIV_38": {
-        "offset": 6.317864
+        "offset": 6.317864,
+        "pcmHash": "c19e36d3"
        }
       },
       "crossfadeSeconds": 0.05,

@@ -464,7 +464,10 @@
      },
      {
       "sourceOffsets": {
-       "source": 2.06
+       "source": {
+        "offset": 2.06,
+        "pcmHash": "24ded18d"
+       }
       },
       "channels": [
        {
@@ -1878,7 +1881,10 @@
      },
      {
       "sourceOffsets": {
-       "source": 2.025
+       "source": {
+        "offset": 2.025,
+        "pcmHash": "2efe8e1d"
+       }
       },
       "channels": [
        {
@@ -2141,7 +2147,8 @@
      {
       "sourceOffsets": {
        "SB_FFXIV_046": {
-        "offset": 2.37197
+        "offset": 2.37197,
+        "pcmHash": "72bf459d"
        }
       },
       "channels": [
@@ -2162,7 +2169,8 @@
      {
       "sourceOffsets": {
        "SB_FFXIV_010": {
-        "offset": 1.93297
+        "offset": 1.93297,
+        "pcmHash": "24ded18d"
        }
       },
       "channels": [
@@ -2181,7 +2189,8 @@
      {
       "sourceOffsets": {
        "SB_FFXIV_031": {
-        "offset": 2.01721
+        "offset": 2.01721,
+        "pcmHash": "6556b5ea"
        }
       },
       "channels": [
@@ -2222,7 +2231,8 @@
       "startSeconds": 549.2,
       "sourceOffsets": {
        "SB_FFXIV_010": {
-        "offset": 129.53297
+        "offset": 129.53297,
+        "pcmHash": "24ded18d"
        }
       },
       "length": 2.3,
@@ -4634,7 +4644,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 2.36
+       "source": {
+        "offset": 2.36,
+        "pcmHash": "72bf459d"
+       }
       },
       "channels": [
        {

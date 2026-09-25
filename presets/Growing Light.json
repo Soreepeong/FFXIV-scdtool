@@ -2247,7 +2247,8 @@
       {
        "sourceOffsets": {
         "source": {
-         "offset": 6.0
+         "offset": 6.0,
+         "pcmHash": "3d5621fd"
         }
        },
        "channels": [
@@ -2290,7 +2291,8 @@
       {
        "sourceOffsets": {
         "source": {
-         "offset": 6.0
+         "offset": 6.0,
+         "pcmHash": "3d5621fd"
         }
        },
        "channels": [
@@ -4004,7 +4006,10 @@
      },
      {
       "sourceOffsets": {
-       "source": 1.495
+       "source": {
+        "offset": 1.495,
+        "pcmHash": "49189ee0"
+       }
       },
       "startSeconds": 7.1,
       "crossfadeSeconds": 0.25,
@@ -5934,7 +5939,8 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.49645
+        "offset": 1.49645,
+        "pcmHash": "daf50202"
        }
       },
       "length": 12.0,
@@ -5952,7 +5958,8 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 30.6393
+        "offset": 30.6393,
+        "pcmHash": "daf50202"
        }
       },
       "crossfadeSeconds": 0.1,
@@ -6188,7 +6195,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 1.865
+       "source": {
+        "offset": 1.865,
+        "pcmHash": "712dd03a"
+       }
       },
       "channels": [
        {
@@ -6214,7 +6224,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 1.37
+       "source": {
+        "offset": 1.37,
+        "pcmHash": "b173632f"
+       }
       },
       "channels": [
        {

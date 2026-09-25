@@ -810,7 +810,8 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 20.9
+        "offset": 20.9,
+        "pcmHash": "b9551e56"
        }
       },
       "channels": [
@@ -1550,7 +1551,8 @@
      {
       "sourceOffsets": {
        "Tremble": {
-        "offset": 65.04526
+        "offset": 65.04526,
+        "pcmHash": "78a76343"
        }
       },
       "channels": [
@@ -3669,7 +3671,10 @@
      },
      {
       "sourceOffsets": {
-       "source": 1.610919
+       "source": {
+        "offset": 1.610919,
+        "pcmHash": "569b79a0"
+       }
       },
       "channels": [
        {

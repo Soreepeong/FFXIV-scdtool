@@ -1877,7 +1877,10 @@
      },
      {
       "sourceOffsets": {
-       "source": 1.445
+       "source": {
+        "offset": 1.445,
+        "pcmHash": "54ad2c4f"
+       }
       },
       "channels": [
        {
@@ -4445,7 +4448,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 1.545
+       "source": {
+        "offset": 1.545,
+        "pcmHash": "2b0e6411"
+       }
       },
       "channels": [
        {

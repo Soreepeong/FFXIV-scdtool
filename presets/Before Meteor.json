@@ -1251,7 +1251,10 @@
      },
      {
       "sourceOffsets": {
-       "source": 14.939272
+       "source": {
+        "offset": 14.939272,
+        "pcmHash": "3d5db835"
+       }
       },
       "channels": [
        {
@@ -1523,7 +1526,10 @@
      },
      {
       "sourceOffsets": {
-       "source": 10.894301
+       "source": {
+        "offset": 10.894301,
+        "pcmHash": "100f83b0"
+       }
       },
       "channels": [
        {
@@ -3742,7 +3748,10 @@
      },
      {
       "sourceOffsets": {
-       "source": 1.04535
+       "source": {
+        "offset": 1.04535,
+        "pcmHash": "5312680b"
+       }
       },
       "channels": [
        {
@@ -3772,7 +3781,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "source": 0.39
+       "source": {
+        "offset": 0.39,
+        "pcmHash": "f65fbe46"
+       }
       },
       "channels": [
        {
@@ -3802,7 +3814,10 @@
     "segments": [
      {
       "sourceOffsets": {
-       "Before_Meteor_FFXIV_094": 0.365
+       "Before_Meteor_FFXIV_094": {
+        "offset": 0.365,
+        "pcmHash": "a877adc6"
+       }
       },
       "channels": [
        {
