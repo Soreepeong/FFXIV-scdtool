@@ -4,6 +4,7 @@
 #include "utils/argactions.h"
 #include "utils/audio_match.h"
 #include "utils/filter_graph.h"
+#include "utils/fft.h"
 #include "utils/hca_payload.h"
 #include "utils/lossless_vorbis.h"
 #include "utils/misc.h"
@@ -17,6 +18,7 @@
 #include <atomic>
 #include <charconv>
 #include <chrono>
+#include <deque>
 #include <functional>
 #include <limits>
 #include <map>
@@ -579,12 +581,19 @@ namespace {
 		constexpr double CorrectionThreshold = 0.5;  // ~6 dB quieter or more counts as "an onset treatment is here"
 		constexpr double MinSourceRms = 1e-5;         // floor to avoid a huge ratio off a near-zero denominator
 		std::vector ratios(totalBlocks, 1.);
+		// Whether the source was audible enough in a block to say the game is at full level there.
+		// Not merely above MinSourceRms: against the game's held silence, a recording's own
+		// faint noise or reverb reads as needing no correction, and five such blocks ended
+		// BGM_EX2_Event_10's 2.4s of held silence after 40 ms.
+		constexpr double MinJudgedRms = 1e-3;   // -60 dBFS
+		std::vector<bool> judged(totalBlocks, false);
 		size_t lastCorrected = 0;
 		bool anyCorrection = false;
 		for (size_t b = 0; b < totalBlocks; ++b) {
 			const auto srcRms = blockRms(floats, b);
 			const auto tplRms = blockRms(templateFloats, b);
 			if (srcRms > MinSourceRms) {
+				judged[b] = srcRms > MinJudgedRms;
 				const auto raw = tplRms / srcRms;
 				if (raw < CorrectionThreshold) {
 					ratios[b] = std::clamp(raw, 0., 1.);
@@ -596,10 +605,47 @@ namespace {
 		if (!anyCorrection)
 			return;
 
-		// Only the leading run through the last block that actually needed correction --
-		// not the whole decoded onset window -- so the correction is as short as the real
-		// treatment, not an arbitrary fixed length.
-		const auto windowBlocks = lastCorrected + 1;
+		// The treatment is over at the first run of blocks the source has sound in that need no
+		// correction -- 100 ms of them, so one block of noise at the very start does not end a
+		// fade before it begins. Past that point nothing is corrected: taken block by block
+		// through the whole window, a game file whose opening is a different mix -- quieter
+		// between the notes -- had its dips copied into the music as dropouts,
+		// BGM_EX1_Field_Abaracia03 cut 9 dB at 1.3s and again at 1.9s, heard as a fade out and
+		// back in a second into the piece. A block the source is silent in has nothing to
+		// compare and neither extends nor ends the run.
+		constexpr size_t FullLevelRun = 5;
+		size_t windowBlocks = lastCorrected + 1;
+		for (size_t b = 0, run = 0, runStart = 0; b <= lastCorrected; ++b) {
+			if (!judged[b])
+				continue;
+			if (ratios[b] < 1.) {
+				run = 0;
+				continue;
+			}
+			if (!run++)
+				runStart = b;
+			if (run >= FullLevelRun) {
+				windowBlocks = runStart;
+				break;
+			}
+		}
+		// And within it, a fade-in or a held silence only rises: each block takes at least the
+		// gain of the one before.
+		double running = 0.;
+		bool started = false;
+		for (size_t b = 0; b < windowBlocks; ++b) {
+			if (judged[b]) {
+				running = started ? (std::max)(running, ratios[b]) : ratios[b];
+				started = true;
+			}
+			// Before the source is audible at all, each block keeps its own reading: a held
+			// silence over the recording's faint start is still silence.
+			if (started)
+				ratios[b] = running;
+		}
+		if (!windowBlocks || std::all_of(ratios.begin(), ratios.begin() + static_cast<ptrdiff_t>(windowBlocks),
+				[](double r) { return r >= 1.; }))
+			return;
 
 		// Linearly interpolate between block-center ratios so the correction ramps rather
 		// than steps, which would otherwise click at every 20ms block boundary.
@@ -768,6 +814,148 @@ namespace {
 		return out;
 	}
 
+	// Where a recording sits against the game's file when its offset was measured on another
+	// decode of it -- a `pcmHash` that does not match. An MP3 of the same master is off by its
+	// encoder delay and by whatever its ripper trimmed, a second or two at most; that is past
+	// what the sample alignment's 60 ms window can reach, so this searches `rangeSeconds` either
+	// side first, by FFT correlation of a four-second window at 8 kHz, and hands the sample
+	// alignment the lag it finds. Same convention and return as refine_offset_to_samples.
+	sample_alignment search_offset_wide(
+		const std::filesystem::path& ffmpeg,
+		const std::filesystem::path& templateAudio,
+		const std::filesystem::path& source,
+		size_t samplingRate,
+		double aroundSeconds,
+		double coarseOffset,
+		double rangeSeconds,
+		const std::function<std::filesystem::path(const wchar_t*, const wchar_t*)>& tempFile,
+		const std::wstring& sourceFilter = {},
+		const std::wstring& templateFilter = {}) {
+
+		constexpr size_t SearchRate = 8000;
+		constexpr double HalfWindowSeconds = 2.0;
+		constexpr double MinCorrelation = 0.5;
+
+		sample_alignment out{.Seconds = coarseOffset};
+		const auto from = aroundSeconds - HalfWindowSeconds;
+		const auto sourceFrom = (std::max)(0., from - coarseOffset - rangeSeconds);
+		if (from < 0)
+			return out;
+		const auto target = decode_window_to_mono(ffmpeg, templateAudio, from, 2 * HalfWindowSeconds,
+			SearchRate, tempFile(L"scdtool_apply_wide_t", L".f32"), templateFilter);
+		const auto candidate = decode_window_to_mono(ffmpeg, source, sourceFrom,
+			2 * HalfWindowSeconds + 2 * rangeSeconds, SearchRate, tempFile(L"scdtool_apply_wide_s", L".f32"), sourceFilter);
+		const auto w = target.size();
+		if (!w || candidate.size() <= w)
+			return out;
+
+		size_t n = 1;
+		while (n < candidate.size() + w)
+			n <<= 1;
+		std::vector<fft_cplx> a(n), b(n);
+		for (size_t i = 0; i < candidate.size(); i++)
+			a[i] = candidate[i];
+		for (size_t i = 0; i < w; i++)
+			b[i] = target[i];
+		fft(a, false);
+		fft(b, false);
+		for (size_t i = 0; i < n; i++)
+			a[i] *= std::conj(b[i]);
+		fft(a, true);
+
+		double targetEnergy = 0.;
+		for (const auto v : target)
+			targetEnergy += static_cast<double>(v) * v;
+		std::vector<double> prefix(candidate.size() + 1, 0.);
+		for (size_t i = 0; i < candidate.size(); i++)
+			prefix[i + 1] = prefix[i] + static_cast<double>(candidate[i]) * candidate[i];
+		double best = -2.;
+		size_t bestLag = 0;
+		for (size_t lag = 0; lag + w <= candidate.size(); lag++) {
+			const auto energy = prefix[lag + w] - prefix[lag];
+			if (energy <= 0. || targetEnergy <= 0.)
+				continue;
+			const auto r = a[lag].real() / std::sqrt(energy * targetEnergy);   // fft() normalises the inverse
+			if (r > best) {
+				best = r;
+				bestLag = lag;
+			}
+		}
+		out.Correlation = best;
+		if (best < MinCorrelation)
+			return out;
+		// The window of the game at `from` sits at `sourceFrom + lag` in the recording, and
+		// target frame t holds the source at t - offset.
+		const auto wide = from - (sourceFrom + static_cast<double>(bestLag) / SearchRate);
+		out = refine_offset_to_samples(ffmpeg, templateAudio, source, samplingRate, aroundSeconds, wide,
+			tempFile, sourceFilter, templateFilter);
+		if (!out.Refined && out.Correlation < MinCorrelation)
+			out = {.Seconds = wide, .Correlation = best, .Refined = true};
+		else
+			out.Refined = true;
+		return out;
+	}
+
+	// A channel-linked lookahead peak limiter, for a replacement the level match pushes past
+	// full scale. Backing the whole file off instead keeps the album's dynamics and loses the
+	// level: 864 of 1918 builds were held under the game's level that way, 139 by 2 dB or more
+	// -- BGM_Con_Teikoku_Gaius, BGM_EX1_Dungeon_DravaniaL_04 and BGM_EX2_Field_Safe_03 all
+	// 3-4.4 dB quiet by short-term loudness, which is heard. The game's own masters are
+	// limited; these recordings are not.
+	//
+	// The gain each frame needs to stay under `ceiling`, taken as the minimum over the next
+	// `lookahead` frames and averaged over the last `lookahead` -- which never exceeds the need
+	// at any frame, since every window it averages covers that frame -- so the gain is down
+	// before a peak arrives and ramps rather than steps; it recovers over `release`. Offline, so
+	// the lookahead costs no delay. Returns the deepest reduction, in dB (0 where none).
+	double limit_peaks(std::vector<float>& floats, size_t channels, size_t samplingRate, size_t heardFrames,
+		float ceiling = 0.98f, double lookaheadSeconds = 0.005, double releaseSeconds = 0.080) {
+
+		const auto frames = (std::min)(floats.size() / (channels ? channels : 1), heardFrames);
+		if (!channels || !frames)
+			return 0.;
+		std::vector<float> need(frames, 1.f);
+		bool any = false;
+		for (size_t n = 0; n < frames; n++) {
+			float peak = 0.f;
+			for (size_t c = 0; c < channels; c++)
+				peak = (std::max)(peak, std::abs(floats[n * channels + c]));
+			if (peak > ceiling) {
+				need[n] = ceiling / peak;
+				any = true;
+			}
+		}
+		if (!any)
+			return 0.;
+		const auto look = (std::max<size_t>)(1, static_cast<size_t>(lookaheadSeconds * static_cast<double>(samplingRate)));
+		// Sliding minimum over [n, n + look) by a monotonic deque.
+		std::vector<float> ahead(frames);
+		std::deque<size_t> q;
+		for (size_t i = frames; i-- > 0;) {
+			while (!q.empty() && need[q.back()] >= need[i])
+				q.pop_back();
+			q.push_back(i);
+			while (q.front() >= i + look)
+				q.pop_front();
+			ahead[i] = need[q.front()];
+		}
+		// Averaged over [n - look + 1, n], then released exponentially.
+		const auto recover = static_cast<float>(1. - std::exp(-1. / (releaseSeconds * static_cast<double>(samplingRate))));
+		double sum = 0.;
+		float gain = 1.f, deepest = 1.f;
+		for (size_t n = 0; n < frames; n++) {
+			sum += ahead[n];
+			if (n >= look)
+				sum -= ahead[n - look];
+			const auto attack = static_cast<float>(sum / static_cast<double>((std::min)(n + 1, look)));
+			gain = (std::min)(attack, gain + (1.f - gain) * recover);
+			deepest = (std::min)(deepest, gain);
+			for (size_t c = 0; c < channels; c++)
+				floats[n * channels + c] *= gain;
+		}
+		return 20. * std::log10(static_cast<double>(deepest));
+	}
+
 	// Whether a recording decodes to the samples a preset measured its offset against: the
 	// CRC-32 (zlib's, reflected 0xEDB88320) of `ffmpeg -map 0:a:0 -f s32le`, at the recording's
 	// own rate and channel count, against the preset's `pcmHash`. Streamed through a temp file
@@ -883,6 +1071,11 @@ namespace {
 		size_t targetEnd,
 		bool loudnessMatch,
 		double maxGainDb,
+		// Limit the peaks a level match pushes past full scale, rather than hold each recording
+		// and then the whole file under it. See limit_peaks.
+		bool peakLimit,
+		// How far a recording that is not the decode its pcmHash names is searched for.
+		double reencodeRange,
 		const std::function<std::filesystem::path(const wchar_t*, const wchar_t*)>& tempFile,
 		// Where the onset alignment put each source it moved, for the caller to report.
 		std::vector<std::pair<std::string, double>>* alignments = nullptr,
@@ -972,8 +1165,8 @@ namespace {
 						for (const auto d : seats)
 							pick += std::format(L"{}{:.6f}*c{}", pick.back() == L'=' ? L"" : L"+", 1. / static_cast<double>(seats.size()), d);
 					}
-					const auto measured = refine_offset_to_samples(ffmpeg, templateAudio, source.Path, samplingRate,
-						from + (std::min)(span / 2., 20.), coarse, tempFile, source.Filter, pick);
+					const auto measured = search_offset_wide(ffmpeg, templateAudio, source.Path, samplingRate,
+						from + (std::min)(span / 2., 20.), coarse, reencodeRange, tempFile, source.Filter, pick);
 					constexpr double ReencodeFloor = 0.8;
 					if (measured.Correlation >= ReencodeFloor) {
 						encodeShift[name] = coarse - measured.Seconds;
@@ -1276,7 +1469,7 @@ namespace {
 			// stereo recording peaks lower than either channel (BGM_ORCH_899: 2.16 against
 			// 2.64, a 1.7 dB tighter hold than needed).
 			for (auto& [name, g] : gain) {
-				if (g <= 1.)
+				if (g <= 1. || peakLimit)
 					continue;
 				const auto from = start.at(name);
 				float peak = 0.f;
@@ -1340,10 +1533,15 @@ namespace {
 		const auto heardEnd = (std::min)(out.size(), targetEnd < out.size() / channels ? targetEnd * channels : out.size());
 		if (const auto peak = heardEnd == 0 ? 0.f : std::abs(*std::ranges::max_element(out.begin(), out.begin() + static_cast<ptrdiff_t>(heardEnd),
 			[](float a, float b) { return std::abs(a) < std::abs(b); })); peak > 1.f) {
-			for (auto& v : out)
-				v /= peak;
-			if (gains)
-				gains->emplace_back("peak", -20. * std::log10(static_cast<double>(peak)));
+			if (peakLimit) {
+				if (const auto limited = limit_peaks(out, channels, samplingRate, heardEnd / channels); gains && limited < 0.)
+					gains->emplace_back("peaks limited", limited);
+			} else {
+				for (auto& v : out)
+					v /= peak;
+				if (gains)
+					gains->emplace_back("peak", -20. * std::log10(static_cast<double>(peak)));
+			}
 		}
 		return out;
 	}
@@ -1766,7 +1964,8 @@ namespace {
 	// loop (BGM_EX5_MKD_07: 9.6 dB down at the loop end).
 	//
 	// The game is the judge: from the loop end back, every window where the build sits well
-	// below the game -- by more than it does over the loop as a whole -- is refilled. What
+	// below the game -- by more than it does over the loop as a whole -- or no longer follows
+	// its waveform is refilled. What
 	// the game plays there is usually the passage leading into its loop start, and the
 	// recording has that, one loop earlier, as its own lead-in; a window where the game
 	// repeats what it played one loop earlier takes the build's own audio from there. The
@@ -1830,6 +2029,32 @@ namespace {
 		std::ranges::nth_element(diffs, diffs.begin() + static_cast<ptrdiff_t>(diffs.size() / 2));
 		const auto usualDb = diffs[diffs.size() / 2];
 
+		// And how well its waveform usually follows the game's, window by window at no lag --
+		// the two are aligned to the sample. A recording that carries on into music the game
+		// does not play keeps its level and loses this: BGM_EX2_Event_37's album goes on into
+		// another passage at 61.5s where the game returns to the loop's lead-in, 2-12 dB down
+		// by level alone, too little in places to trip the level test at all. Judged against
+		// the file's own usual correlation, so a different mix, which follows loosely all
+		// through, is not read as a divergence; below 0.5 usual it is not judged at all.
+		const auto rhoAt = [&](size_t at) {
+			double xy = 0., xx = 0., yy = 0.;
+			for (size_t i = at; i < at + window; i++) {
+				const auto x = mono(floats, i), y = mono(game, i);
+				xy += x * y; xx += x * x; yy += y * y;
+			}
+			return xy / (std::sqrt(xx * yy) + 1e-12);
+		};
+		std::vector<double> rhos;
+		for (size_t at = loopStart; at + window <= loopEnd; at += window)
+			if (levelDb(game, at) > SilentDb)
+				rhos.push_back(rhoAt(at));
+		std::ranges::nth_element(rhos, rhos.begin() + static_cast<ptrdiff_t>(rhos.size() / 2));
+		const auto usualRho = rhos[rhos.size() / 2];
+		constexpr double UsualRhoFloor = 0.5, DivergedFraction = 0.5;
+		const auto diverged = [&](size_t at) {
+			return usualRho >= UsualRhoFloor && rhoAt(at) < usualRho * DivergedFraction;
+		};
+
 		// The trailing run of windows where the build has run out or faded and the game has not.
 		// A window where the game is silent says nothing either way and is walked over:
 		// BGM_EX5_DD_08's last 0.4s is silent, and stopping there left 5.7s of music unfilled.
@@ -1838,7 +2063,7 @@ namespace {
 		auto from = loopEnd;
 		for (auto at = loopEnd - window; at >= lowest; at -= window) {
 			const auto g = levelDb(game, at);
-			if (g > SilentDb && levelDb(floats, at) >= g + usualDb - FadeDb)
+			if (g > SilentDb && levelDb(floats, at) >= g + usualDb - FadeDb && !diverged(at))
 				break;
 			if (g > SilentDb || from != loopEnd)
 				from = at;
@@ -2250,6 +2475,9 @@ int cmd_apply(const std::vector<std::string>& args) {
 		parser.add_argument("--loudness-match").default_value(true).implicit_value(true).help("gain-match each replacement to the loudness of the loop region of the file it replaces; --no-loudness-match disables");
 		parser.add_argument("--no-loudness-match").default_value(false).implicit_value(true).help("disable --loudness-match");
 		parser.add_argument("--max-gain").default_value(12.0).scan<'g', double>().help("clamp on loudness matching gain, in dB");
+		parser.add_argument("--reencode-range").default_value(2.0).scan<'g', double>().help("how far, in seconds either way, a recording that is not the decode its preset's pcmHash names (an MP3 of the FLAC it was measured on, say) is searched for around its stated offset; encoder delay and ripping make it up to a second or two");
+		parser.add_argument("--peak-limit").default_value(true).implicit_value(true).help("where the level match pushes peaks past full scale, limit them (5 ms lookahead, 80 ms release) so the build reaches the game's level; --no-peak-limit backs the whole file off instead, keeping the recording's dynamics and losing the level");
+		parser.add_argument("--no-peak-limit").default_value(false).implicit_value(true).help("disable --peak-limit");
 		parser.add_argument("--loop-crossfade").default_value(0.030).scan<'g', double>().help("blend this many seconds of the loop's tail with the same music one loop-period earlier, so the loop point joins cleanly; 0 disables");
 		parser.add_argument("--loop-seam-threshold").default_value(1.0).scan<'g', double>().help("only blend when the loop seam measures above this -- the jump at the loop point against the motion either side of it, where about 1 is where it starts to click");
 		parser.add_argument("--onset-match").default_value(true).implicit_value(true).help("reproduce a fade-in or held silence the game's own file has at its start but the OST source does not; --no-onset-match disables");
@@ -2305,6 +2533,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 		const auto autoOffset = parser.get<bool>("--auto-offset") && !parser.get<bool>("--no-auto-offset");
 		const auto emitOriginal = parser.get<bool>("--emit-original");
 		const auto maxGainDb = parser.get<double>("--max-gain");
+		const auto peakLimit = parser.get<bool>("--peak-limit") && !parser.get<bool>("--no-peak-limit");
+		const auto reencodeRange = parser.get<double>("--reencode-range");
 		const auto loopCrossfadeSeconds = parser.get<double>("--loop-crossfade");
 		const auto loopSeamThreshold = parser.get<double>("--loop-seam-threshold");
 
@@ -2688,12 +2918,14 @@ int cmd_apply(const std::vector<std::string>& args) {
 			deduced_offset deduced;
 			sample_alignment aligned;
 			bool exactHonoured = job.OffsetExact;
+			bool hashDiffers = false;   // the recording is not the decode its pcmHash names
 			double offsetBeforeAlignment = job.Offset;
 			size_t paddingAdded = 0;
 			size_t trimmedAway = 0;
 			double gainDb = 0.;
 			double requestedGainDb = 0.;
 			bool gainLimited = false;
+			double limitedDb = 0.;   // the deepest the peak limiter went, where it ran
 			double onsetDb = 0.;
 			double onsetSeconds = 0.;
 			std::vector<std::pair<std::string, double>> segmentAlignments;
@@ -2714,7 +2946,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 				floats = build_segment_audio(ffmpegPath, ffprobePath, templateAudio, job.Segments, channels,
 					samplingRate, loopEnd > loopStart ? loopEnd
 						: static_cast<size_t>(std::llround(templateSeconds * static_cast<double>(samplingRate))),
-					loudnessMatch, maxGainDb, tempFile, &segmentAlignments, &segmentGains);
+					loudnessMatch, maxGainDb, peakLimit, reencodeRange, tempFile, &segmentAlignments, &segmentGains);
 
 				totalSamples = floats.size() / channels;
 				newLoopStart = loopStart;
@@ -2767,14 +2999,20 @@ int cmd_apply(const std::vector<std::string>& args) {
 				// a lower correlation can only make worse -- on this recording. Another encode of
 				// it is aligned like any other: an exact offset is not exact against an MP3 that
 				// kept its encoder delay (BGM_EX4_Event_13: 23 ms late).
-				if (exactHonoured) {
+				//
+				// And a stated offset measured on another decode of the recording is not even
+				// close enough for the 60 ms window: an MP3 of the same master sits off by its
+				// encoder delay and whatever its ripper trimmed, so that one is searched
+				// --reencode-range seconds either side first. See search_offset_wide.
+				if (job.OffsetStated && !job.PcmHash.empty()) {
 					try {
-						exactHonoured = job.PcmHash.empty() || pcm_hash_matches(ffmpegPath, job.SourcePath, job.PcmHash,
+						hashDiffers = !pcm_hash_matches(ffmpegPath, job.SourcePath, job.PcmHash,
 							keepTemp(tempDir / std::format(L"scdtool_apply_pcmhash_{}.s32", tempFileCounter.fetch_add(1))));
 					} catch (const std::exception&) {
-						exactHonoured = false;
+						hashDiffers = true;
 					}
 				}
+				exactHonoured = job.OffsetExact && !hashDiffers;
 				if (!exactHonoured) {
 					const auto tempFile = [&](const wchar_t* prefix, const wchar_t* extension) {
 						auto path = tempDir / std::format(L"{}_{}{}", prefix, tempFileCounter.fetch_add(1), extension);
@@ -2785,8 +3023,11 @@ int cmd_apply(const std::vector<std::string>& args) {
 					const auto around = (std::max)(2.5,
 						static_cast<double>(templateLoopStart) / static_cast<double>(templateRate));
 					try {
-						aligned = refine_offset_to_samples(ffmpegPath, templateAudio, job.SourcePath,
-							samplingRate, around, effectiveOffset, tempFile, job.Filter);
+						aligned = hashDiffers
+							? search_offset_wide(ffmpegPath, templateAudio, job.SourcePath, samplingRate, around,
+								effectiveOffset, reencodeRange, tempFile, job.Filter)
+							: refine_offset_to_samples(ffmpegPath, templateAudio, job.SourcePath,
+								samplingRate, around, effectiveOffset, tempFile, job.Filter);
 						// Unbounded, as it is for a matchset. A preset's offset is a millisecond-rounded
 						// record of a fit, not a ceiling on how far the truth can be from it, and holding
 						// the search to 5ms of it left 134 targets unaligned, two of them measurably worse
@@ -2894,8 +3135,9 @@ int cmd_apply(const std::vector<std::string>& args) {
 						for (auto& v : floats)
 							v = static_cast<float>(v * gain);
 
-						// Applying the gain must not clip; if it would, back off uniformly rather
-						// than letting the encoder fold peaks over. Judged only over what is heard
+						// Applying the gain must not clip; if it would, limit the peaks (or, with
+						// --no-peak-limit, back off uniformly) rather than letting the encoder fold
+						// them over. See limit_peaks. Judged only over what is heard
 						// -- to the loop end, or the game's length -- as the segment path does: a
 						// summed copy running past the loop end held BGM_EX4_Ban_Nidhogg_01 at
 						// -2.9 dB where +0.4 was wanted.
@@ -2903,12 +3145,16 @@ int cmd_apply(const std::vector<std::string>& args) {
 						if (const auto peak = heard == 0 ? 0.f : *std::ranges::max_element(floats.begin(), floats.begin() + static_cast<ptrdiff_t>(heard),
 								[](float a, float b) { return std::abs(a) < std::abs(b); });
 							std::abs(peak) > 1.f) {
-							const auto scale = 1.f / std::abs(peak);
-							for (auto& v : floats)
-								v = v * scale;
-							gainDb += 20. * std::log10(static_cast<double>(scale));
-							gainLimited = true;
-							requestedGainDb = requestedDb;
+							if (peakLimit) {
+								limitedDb = limit_peaks(floats, channels, samplingRate, heard / channels);
+							} else {
+								const auto scale = 1.f / std::abs(peak);
+								for (auto& v : floats)
+									v = v * scale;
+								gainDb += 20. * std::log10(static_cast<double>(scale));
+								gainLimited = true;
+								requestedGainDb = requestedDb;
+							}
 						}
 					} catch (const std::exception&) {
 						// A missing or unreadable measurement must not lose the whole file; the
@@ -3370,8 +3616,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 							job.Offset, deduced.Score, deduced.Candidates)
 						: "",
 					exactHonoured ? " [exact, as stated]"
-					: job.OffsetExact && aligned.Correlation > -2.
-						? std::format(" [exact for another encode (pcmHash); sample-aligned {:+.0f}, r {:.3f}]",
+					: hashDiffers && aligned.Correlation > -2.
+						? std::format(" [another decode than its pcmHash; searched +-{:g}s, moved {:+.0f}, r {:.3f}]", reencodeRange,
 							(aligned.Seconds - offsetBeforeAlignment) * static_cast<double>(samplingRate), aligned.Correlation)
 					: aligned.Correlation > -2.
 						? std::format(" [sample-aligned {:+.0f}, r {:.3f}]",
@@ -3379,7 +3625,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 						: " [not sample-aligned]",
 					trimmedAway, paddingAdded,
 					newLoopStart, newLoopEnd, gainDb,
-					gainLimited ? std::format(", peak-limited from {:+.1f} dB", requestedGainDb) : "",
+					gainLimited ? std::format(", peak-limited from {:+.1f} dB", requestedGainDb)
+						: limitedDb < 0. ? std::format(", peaks limited by up to {:.1f} dB", -limitedDb) : "",
 					onsetSeconds > 0. ? std::format(", onset corrected {:.1f} dB over {:.2f}s", onsetDb, onsetSeconds) : "",
 					tailSeconds > 0. ? std::format(", tail faded {:.1f} dB over {:.2f}s", tailDb, tailSeconds) : "",
 					[&] {
