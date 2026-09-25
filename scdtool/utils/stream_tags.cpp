@@ -153,6 +153,73 @@ std::vector<stream_tags::field> stream_tags::read(const std::filesystem::path& f
 	return merge(parts);
 }
 
+namespace {
+	// Whether UTF-8 text holds any CJK character: kana, CJK ideographs, and the CJK and
+	// full-width punctuation the albums' Japanese titles use (U+FF5E wave dash, U+FF1A colon).
+	bool has_cjk(std::string_view text) {
+		for (size_t i = 0; i < text.size();) {
+			const auto c = static_cast<uint8_t>(text[i]);
+			const size_t len = c < 0x80 ? 1 : c < 0xE0 ? 2 : c < 0xF0 ? 3 : 4;
+			uint32_t cp = len == 1 ? c : c & (0xFF >> (len + 1));
+			for (size_t k = 1; k < len && i + k < text.size(); k++)
+				cp = (cp << 6) | (static_cast<uint8_t>(text[i + k]) & 0x3F);
+			if ((cp >= 0x3000 && cp <= 0x30FF) || (cp >= 0x3400 && cp <= 0x4DBF) || (cp >= 0x4E00 && cp <= 0x9FFF)
+				|| (cp >= 0xF900 && cp <= 0xFAFF) || (cp >= 0xFF00 && cp <= 0xFFEF))
+				return true;
+			i += len;
+		}
+		return false;
+	}
+
+	// A title's English name. The albums tag "Japanese / English" -- "<Japanese> / Stone and Steel" --
+	// or the English twice where the Japanese title is English too ("Dragonsong / Dragonsong").
+	// The parts with no CJK in them, once each; the whole title where every part has some.
+	std::string english_title(const std::string& title) {
+		constexpr std::string_view Separator = " / ";
+		std::vector<std::string> kept;
+		for (size_t from = 0;;) {
+			const auto at = title.find(Separator, from);
+			auto part = title.substr(from, at == std::string::npos ? std::string::npos : at - from);
+			if (!part.empty() && !has_cjk(part) && std::ranges::find(kept, part) == kept.end())
+				kept.push_back(std::move(part));
+			if (at == std::string::npos)
+				break;
+			from = at + Separator.size();
+		}
+		if (kept.empty())
+			return title;
+		std::string res;
+		for (const auto& part : kept)
+			res += (res.empty() ? "" : std::string(Separator)) + part;
+		return res;
+	}
+
+	// One TITLE for the whole entry: each recording's English title once, in play order,
+	// joined by "; ". vgmstream -- what foobar2000 plays these through -- keeps only the last
+	// TITLE comment it reads, in a 256-byte buffer, so several TITLEs showed only the last
+	// recording's and a long one would be cut mid-character. Past 255 bytes the list ends at
+	// a title boundary with an ellipsis.
+	std::string joined_title(const std::vector<std::string>& titles) {
+		constexpr size_t MaxBytes = 255;
+		constexpr std::string_view Separator = "; ", Ellipsis = "\xE2\x80\xA6";   // U+2026, in UTF-8
+		std::vector<std::string> english;
+		for (const auto& t : titles)
+			if (auto e = english_title(t); std::ranges::find(english, e) == english.end())
+				english.push_back(std::move(e));
+		std::string res;
+		for (size_t i = 0; i < english.size(); i++) {
+			const auto next = (res.empty() ? "" : std::string(Separator)) + english[i];
+			const auto reserve = i + 1 < english.size() ? Ellipsis.size() : 0;
+			if (res.size() + next.size() + reserve > MaxBytes) {
+				res += Ellipsis;
+				break;
+			}
+			res += next;
+		}
+		return res;
+	}
+}
+
 std::vector<stream_tags::field> stream_tags::merge(const std::vector<std::vector<field>>& perRecording) {
 	std::vector<std::string> keyOrder;
 	std::map<std::string, std::vector<std::string>> values;
@@ -166,9 +233,14 @@ std::vector<stream_tags::field> stream_tags::merge(const std::vector<std::vector
 		}
 	}
 	std::vector<field> res;
-	for (const auto& key : keyOrder)
+	for (const auto& key : keyOrder) {
+		if (key == "TITLE") {
+			res.emplace_back(key, joined_title(values[key]));
+			continue;
+		}
 		for (const auto& value : values[key])
 			res.emplace_back(key, value);
+	}
 	return res;
 }
 
