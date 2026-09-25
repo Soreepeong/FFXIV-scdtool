@@ -63,6 +63,13 @@ struct apply_segment_source {
 	// carries that much slack; a stated one was fitted and only lost precision to JSON.
 	bool Stated = false;
 
+	// `"exact": true` beside the offset: it was measured to the sample against this very
+	// recording, so apply's own sample alignment -- one four-second window at the loop start,
+	// which a remixed game file can pull milliseconds off (BGM_EX3_System_Title, 9 ms at
+	// r 0.74) -- must not move it. Without it a stated offset is treated as a millisecond-
+	// rounded record and refined, which is what most of presets/ needs.
+	bool Exact = false;
+
 	// Set from the preset file's `offsetsAreFitted`: every offset in that file is
 	// already decided, the ones it leaves out included. See FixesAlignment.
 	bool Fitted = false;

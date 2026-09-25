@@ -341,6 +341,7 @@ std::optional<config_target> read_config_target(
 				if (const auto source = segment.Sources.find(name); source != segment.Sources.end()) {
 					source->second.Offset = spec.is_object() ? spec.value("offset", 0.) : spec.get<double>();
 					source->second.Stated = true;
+					source->second.Exact = spec.is_object() && spec.value("exact", false);
 					if (spec.is_object())
 						if (const auto drift = spec.find("driftPpm"); drift != spec.end() && drift->is_number())
 							driftPpm.emplace(name, drift->get<double>());

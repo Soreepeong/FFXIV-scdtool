@@ -81,6 +81,9 @@ namespace {
 		// decision to start at zero. Re-deriving where nothing was fixed is the only way
 		// those entries get an offset at all. See apply_segment_source::FixesAlignment.
 		bool OffsetStated = false;
+		// And measured to the sample, so the sample alignment leaves it alone too. See
+		// apply_segment_source::Exact.
+		bool OffsetExact = false;
 		std::string Note;         // the preset's own comment, echoed in the log line
 	};
 
@@ -1473,6 +1476,7 @@ namespace {
 					.Filter = only.Filter,
 					.FromPreset = true,
 					.OffsetStated = only.FixesAlignment(),
+					.OffsetExact = only.Stated && only.Exact,
 					.Note = read->Note,
 				});
 				continue;
@@ -2636,7 +2640,9 @@ int cmd_apply(const std::vector<std::string>& args) {
 					// ...then to the sample. The coarse offset is good to a few milliseconds,
 				// which is not good enough for a loop point.
 				offsetBeforeAlignment = effectiveOffset;
-				{
+				// Unless the preset measured it to the sample already, which a single window at
+				// a lower correlation can only make worse.
+				if (!job.OffsetExact) {
 					const auto tempFile = [&](const wchar_t* prefix, const wchar_t* extension) {
 						auto path = tempDir / std::format(L"{}_{}{}", prefix, tempFileCounter.fetch_add(1), extension);
 						return keepTemp(std::move(path));
@@ -3230,7 +3236,8 @@ int cmd_apply(const std::vector<std::string>& args) {
 						? std::format(" [deduced, was {:+.3f}s, intro {:.3f} over {} candidates]",
 							job.Offset, deduced.Score, deduced.Candidates)
 						: "",
-					aligned.Correlation > -2.
+					job.OffsetExact ? " [exact, as stated]"
+					: aligned.Correlation > -2.
 						? std::format(" [sample-aligned {:+.0f}, r {:.3f}]",
 							(aligned.Seconds - offsetBeforeAlignment) * static_cast<double>(samplingRate), aligned.Correlation)
 						: " [not sample-aligned]",
