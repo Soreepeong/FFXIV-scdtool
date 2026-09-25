@@ -194,14 +194,16 @@ namespace {
 		return res;
 	}
 
-	// One TITLE for the whole entry: each recording's English title once, in play order,
-	// joined by "; ". vgmstream -- what foobar2000 plays these through -- keeps only the last
+	// One TITLE for the whole entry. A single recording keeps its title whole; several give
+	// each one's English title once, in play order, joined by "; ". vgmstream -- what foobar2000 plays these through -- keeps only the last
 	// TITLE comment it reads, in a 256-byte buffer, so several TITLEs showed only the last
 	// recording's and a long one would be cut mid-character. Past 255 bytes the list ends at
 	// a title boundary with an ellipsis.
 	std::string joined_title(const std::vector<std::string>& titles) {
 		constexpr size_t MaxBytes = 255;
 		constexpr std::string_view Separator = "; ", Ellipsis = "\xE2\x80\xA6";   // U+2026, in UTF-8
+		if (titles.size() == 1)
+			return titles.front();
 		std::vector<std::string> english;
 		for (const auto& t : titles)
 			if (auto e = english_title(t); std::ranges::find(english, e) == english.end())
