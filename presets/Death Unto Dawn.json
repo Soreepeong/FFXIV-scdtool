@@ -4556,6 +4556,162 @@
     ],
     "# comment": "Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.9440 (was 0.9440)."
    }
+  },
+  {
+   "source": [
+    "^00070\\.",
+    "DUD_070",
+    "The Color of Depression (From NieR:Automata)",
+    "沈痛ノ色 (From NieR:Automata)"
+   ],
+   "target": {
+    "path": [
+     "music/ex3/BGM_EX3_Ytc_26.scd",
+     "music/ffxiv/Orchestrion/BGM_ORCH_488.scd"
+    ],
+    "segments": [
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 1.67515,
+        "pcmHash": "87348e0d",
+        "driftPpm": 12.2
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "length": 38.1
+     },
+     {
+      "sourceOffsets": {
+       "target": {
+        "offset": 38.1
+       }
+      },
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 16.6,
+      "crossfadeSeconds": 0.03
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 24.37515,
+        "pcmHash": "87348e0d",
+        "driftPpm": 12.2
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "length": 15.4,
+      "crossfadeSeconds": 0.03
+     },
+     {
+      "sourceOffsets": {
+       "target": {
+        "offset": 70.1
+       }
+      },
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 16.6,
+      "crossfadeSeconds": 0.03
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 24.37515,
+        "pcmHash": "87348e0d",
+        "driftPpm": 12.2
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "length": 15.4,
+      "crossfadeSeconds": 0.03
+     },
+     {
+      "sourceOffsets": {
+       "target": {
+        "offset": 102.1
+       }
+      },
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 16.6,
+      "crossfadeSeconds": 0.03
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 24.37515,
+        "pcmHash": "87348e0d",
+        "driftPpm": 12.2
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.03
+     }
+    ],
+    "# comment": "The album is the game's first pass (game t = album t + 1.675 s) and fades out from album 40.5 s (game 38.9 s); the game's body repeats every 32 s (loop 58.98-122.98 = two passes). Each pass's 38.1-54.7 s -- the phrase at 38.9-51.0 s that the album only has fading (-4 dB by 41 s, -14 dB by 48 s) and the ring it leaves over the next downbeat, +3-4 dB at 500-1000 Hz against the album until 54.5 s -- plays the game's own audio; every other stretch is the album, the later passes re-reading it from 24.375 s. driftPpm 12.2: the album's lag grows 0.45 ms over 36 s (without it the waveform r fell to 0.4-0.7 and the loop seam measured 4.23). Joins sit in quiet dips (38.10-38.25, 54.70-54.90) and the crossfades are short because album and game are the same mix here, r 0.99: an equal-power crossfade of the two peaks +3 dB, held to 20-30 ms."
+   }
   }
  ],
  "pcmHashAlgorithm": "crc32/s32le@native",
