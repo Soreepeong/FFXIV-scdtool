@@ -4447,9 +4447,22 @@
     "path": "music/ex5/BGM_EX5_System_Title.scd",
     "segments": [
      {
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 7.0
+     },
+     {
       "sourceOffsets": {
        "source": {
-        "offset": 1.545,
+        "offset": 8.545,
         "pcmHash": "2b0e6411"
        }
       },
@@ -4462,10 +4475,12 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "crossfadeSeconds": 0.3,
+      "crossfadeShape": "linear"
      }
     ],
-    "# comment": "the matcher never proposed this one: the coarse shortlist of 60 drops DT_002 before it is scored, and with the shortlist off it wins on envelope correlation by only 0.0155, under the 0.05 margin. Against the log-mel metric it is not close -- 0.853 here against 0.559 for the best rival -- so the pairing is not in doubt."
+    "# comment": "the matcher never proposed this one: the coarse shortlist of 60 drops DT_002 before it is scored, and with the shortlist off it wins on envelope correlation by only 0.0155, under the 0.05 margin. Against the log-mel metric it is not close -- 0.853 here against 0.559 for the best rival -- so the pairing is not in doubt. The game's first 7 s carry sound effects over the opening (bursts at 1.75-5.75 s, +10 to +30 dB above 16 kHz) that no album has, so the game's own audio plays them and the album takes over at 7.0 s, where the music alone matches it within a dB per octave: 0.842 -> 0.917. The loop body is a different mix (waveform r 0.38-0.84 at the right offset, other voicings at 16-18 s and 24-26 s), which caps it there."
    }
   }
  ],
