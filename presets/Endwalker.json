@@ -8,7 +8,27 @@
     "amazon.co.jp": "https://www.amazon.co.jp/dp/B09PW4VVHN/"
    }
   },
-  "Growing Light": {}
+  "Growing Light": {},
+  "A Realm Reborn": {
+   "purchaseLinks": {
+    "amazon.co.jp": "https://www.amazon.co.jp/dp/B00I3LHM2M/"
+   }
+  },
+  "The Far Edge Of Fate": {
+   "purchaseLinks": {
+    "amazon.co.jp": "https://www.amazon.co.jp/dp/B06XRQCZX9/"
+   }
+  },
+  "Stormblood": {
+   "purchaseLinks": {
+    "amazon.co.jp": "https://www.amazon.co.jp/dp/B07CZZJ24B/"
+   }
+  },
+  "Shadowbringers": {
+   "purchaseLinks": {
+    "amazon.co.jp": "https://www.amazon.co.jp/dp/B07Y62NCNX/"
+   }
+  }
  },
  "items": [
   {
@@ -4076,6 +4096,832 @@
      }
     ],
     "# comment": "Opens with a voice and sound effects the album does not have: the game's own audio to 13.0s. Then ENDWALKER_002 as the game edits it -- its second pass through the loop body (+64.623s) to 76.0s, and its first pass (-61.279s) from there to the loop end, one loop period apart and the same music at both joins. Ported from presets-manual (676e672), which alone built this target. Offsets fitted to the sample against the game's own file per source (waveform correlation, or onset envelopes where the game's mix differs), corrected by the lag measured in the build itself; `exact` where apply's own one-window alignment scored worse. sourceThresholds and sequentialToFfmpegChannelIndexMap dropped: the offsets are exact, and the channel list already reads correctly as sequential. Built: 0.8819 (was 0.8153)."
+   }
+  },
+  {
+   "source": {
+    "ARR_FFXIV_004": {
+     "inputFiles": [
+      [
+       {
+        "directory": "A Realm Reborn",
+        "pattern": "^00003\\."
+       },
+       {
+        "directory": "A Realm Reborn",
+        "pattern": "ARR_FFXIV_004"
+       },
+       {
+        "directory": "A Realm Reborn",
+        "pattern": "A New Hope"
+       },
+       {
+        "directory": "A Realm Reborn",
+        "pattern": "希望の都"
+       }
+      ]
+     ]
+    },
+    "ARR_FFXIV_020": {
+     "inputFiles": [
+      [
+       {
+        "directory": "A Realm Reborn",
+        "pattern": "^00019\\."
+       },
+       {
+        "directory": "A Realm Reborn",
+        "pattern": "ARR_FFXIV_020"
+       },
+       {
+        "directory": "A Realm Reborn",
+        "pattern": "Saltswept"
+       },
+       {
+        "directory": "A Realm Reborn",
+        "pattern": "潮風香る街"
+       }
+      ]
+     ]
+    },
+    "ARR_FFXIV_027": {
+     "inputFiles": [
+      [
+       {
+        "directory": "A Realm Reborn",
+        "pattern": "^00026\\."
+       },
+       {
+        "directory": "A Realm Reborn",
+        "pattern": "ARR_FFXIV_027"
+       },
+       {
+        "directory": "A Realm Reborn",
+        "pattern": "Serenity"
+       },
+       {
+        "directory": "A Realm Reborn",
+        "pattern": "静穏の森"
+       }
+      ]
+     ]
+    },
+    "GL_00032": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Growing Light",
+        "pattern": "^00032\\."
+       },
+       {
+        "directory": "Growing Light",
+        "pattern": "GL_00032"
+       },
+       {
+        "directory": "Growing Light",
+        "pattern": "Heavensward"
+       }
+      ]
+     ]
+    },
+    "TFEOF_FFXIV_04": {
+     "inputFiles": [
+      [
+       {
+        "directory": "The Far Edge Of Fate",
+        "pattern": "^00003\\."
+       },
+       {
+        "directory": "The Far Edge Of Fate",
+        "pattern": "TFEOF_FFXIV_04"
+       },
+       {
+        "directory": "The Far Edge Of Fate",
+        "pattern": "Revenge Twofold"
+       },
+       {
+        "directory": "The Far Edge Of Fate",
+        "pattern": "逆襲の咆哮"
+       }
+      ]
+     ]
+    },
+    "SB_FFXIV_041": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Stormblood",
+        "pattern": "^00040\\."
+       },
+       {
+        "directory": "Stormblood",
+        "pattern": "SB_FFXIV_041"
+       },
+       {
+        "directory": "Stormblood",
+        "pattern": "Old Wounds"
+       },
+       {
+        "directory": "Stormblood",
+        "pattern": "古傷 ～ギラバニア湖畔地帯：夜～"
+       }
+      ]
+     ]
+    },
+    "SB_FFXIV_105": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Stormblood",
+        "pattern": "^00105\\."
+       },
+       {
+        "directory": "Stormblood",
+        "pattern": "SB_FFXIV_105"
+       },
+       {
+        "directory": "Stormblood",
+        "pattern": "Wayward Daughter"
+       },
+       {
+        "directory": "Stormblood",
+        "pattern": "月下彼岸花 ～蛮神ツクヨミ討滅戦～"
+       }
+      ]
+     ]
+    },
+    "SHADOWBRINGERS_52": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Shadowbringers",
+        "pattern": "^00051\\."
+       },
+       {
+        "directory": "Shadowbringers",
+        "pattern": "SHADOWBRINGERS_52"
+       },
+       {
+        "directory": "Shadowbringers",
+        "pattern": "Knowledge Never Sleeps"
+       },
+       {
+        "directory": "Shadowbringers",
+        "pattern": "知恵は眠らず ～クリスタリウム：夜～"
+       }
+      ]
+     ]
+    },
+    "SHADOWBRINGERS_49": {
+     "inputFiles": [
+      [
+       {
+        "directory": "Shadowbringers",
+        "pattern": "^00048\\."
+       },
+       {
+        "directory": "Shadowbringers",
+        "pattern": "SHADOWBRINGERS_49"
+       },
+       {
+        "directory": "Shadowbringers",
+        "pattern": "Insatiable"
+       },
+       {
+        "directory": "Shadowbringers",
+        "pattern": "貪欲"
+       }
+      ]
+     ]
+    },
+    "ENDWALKER_048": [
+     "^00047\\.",
+     "ENDWALKER_048",
+     "Dynamis",
+     "デュナミスの欠片"
+    ],
+    "ENDWALKER_034": [
+     "^00033\\.",
+     "ENDWALKER_034",
+     "Sky Unsundered",
+     "古の空 ～エルピス：昼～"
+    ],
+    "ENDWALKER_027": [
+     "^00026\\.",
+     "ENDWALKER_027",
+     "Endcaller",
+     "ENDCALLER ～ゾディアーク討滅戦～"
+    ],
+    "ENDWALKER_035": [
+     "^00034\\.",
+     "ENDWALKER_035",
+     "Flow Together"
+    ]
+   },
+   "target": {
+    "path": "music/ex4/BGM_EX4_EndCredit01.scd",
+    "segments": [
+     {
+      "sourceOffsets": {
+       "ARR_FFXIV_004": {
+        "offset": 0.0,
+        "pcmHash": "43d84269"
+       }
+      },
+      "length": 197.850992,
+      "sourceFilters": {
+       "ARR_FFXIV_004": "afade=t=out:st=187.100000:d=20.400:curve=ipar"
+      },
+      "channels": [
+       {
+        "source": "ARR_FFXIV_004",
+        "channel": 0
+       },
+       {
+        "source": "ARR_FFXIV_004",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ARR_FFXIV_020": {
+        "offset": 0.0,
+        "pcmHash": "5fc31d55"
+       }
+      },
+      "length": 74.21678,
+      "crossfadeSeconds": 0.0,
+      "fadeInSeconds": 0.0,
+      "sourceFilters": {
+       "ARR_FFXIV_020": "afade=t=out:st=70.649008:d=12.200:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "ARR_FFXIV_020",
+        "channel": 0
+       },
+       {
+        "source": "ARR_FFXIV_020",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ARR_FFXIV_027": {
+        "offset": 0.0,
+        "pcmHash": "56abae92"
+       }
+      },
+      "length": 41.932228,
+      "crossfadeSeconds": 0.0,
+      "fadeInSeconds": 0.0,
+      "channels": [
+       {
+        "source": "ARR_FFXIV_027",
+        "channel": 0
+       },
+       {
+        "source": "ARR_FFXIV_027",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ARR_FFXIV_027": {
+        "offset": 288.482692,
+        "pcmHash": "56abae92"
+       }
+      },
+      "length": 59.046185,
+      "crossfadeSeconds": 2.0,
+      "channels": [
+       {
+        "source": "ARR_FFXIV_027",
+        "channel": 0
+       },
+       {
+        "source": "ARR_FFXIV_027",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "GL_00032": {
+        "offset": 0.0,
+        "pcmHash": "5ae1f468"
+       }
+      },
+      "length": 98.853815,
+      "crossfadeSeconds": 0.0,
+      "fadeInSeconds": 0.0,
+      "sourceFilters": {
+       "GL_00032": "afade=t=out:st=98.453815:d=1.500:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "GL_00032",
+        "channel": 0
+       },
+       {
+        "source": "GL_00032",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "target": 471.9
+      },
+      "length": 1.35,
+      "crossfadeSeconds": 0.1,
+      "crossfadeShape": "linear",
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "TFEOF_FFXIV_04": {
+        "offset": 1.353407,
+        "pcmHash": "ea5b3ab3"
+       }
+      },
+      "length": 295.82877,
+      "crossfadeSeconds": 0.05,
+      "channels": [
+       {
+        "source": "TFEOF_FFXIV_04",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_04",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "SB_FFXIV_041": {
+        "offset": 0.0,
+        "pcmHash": "d77fbf71"
+       }
+      },
+      "length": 248.82123,
+      "crossfadeSeconds": 0.0,
+      "fadeInSeconds": 0.0,
+      "sourceFilters": {
+       "SB_FFXIV_041": "afade=t=out:st=248.321230:d=0.900:curve=cbr"
+      },
+      "channels": [
+       {
+        "source": "SB_FFXIV_041",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_041",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "SB_FFXIV_105": {
+        "offset": 1.80526,
+        "pcmHash": "2d2c33c1"
+       }
+      },
+      "length": 152.689996,
+      "crossfadeSeconds": 0.05,
+      "sourceFilters": {
+       "SB_FFXIV_105": "afade=t=out:st=151.405260:d=11.600:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "SB_FFXIV_105",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_105",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "SHADOWBRINGERS_52": {
+        "offset": 0.0,
+        "pcmHash": "47fc6913"
+       }
+      },
+      "length": 270.310004,
+      "crossfadeSeconds": 0.0,
+      "fadeInSeconds": 0.0,
+      "sourceFilters": {
+       "SHADOWBRINGERS_52": "afade=t=out:st=246.410004:d=40.500:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "SHADOWBRINGERS_52",
+        "channel": 0
+       },
+       {
+        "source": "SHADOWBRINGERS_52",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "SHADOWBRINGERS_49": {
+        "offset": 3.163729,
+        "pcmHash": "fe974afe"
+       }
+      },
+      "length": 152.044753,
+      "crossfadeSeconds": 0.0,
+      "fadeInSeconds": 0.0,
+      "sourceFilters": {
+       "SHADOWBRINGERS_49": "afade=t=out:st=150.063729:d=11.600:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "SHADOWBRINGERS_49",
+        "channel": 0
+       },
+       {
+        "source": "SHADOWBRINGERS_49",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ENDWALKER_048": {
+        "offset": 0.0,
+        "pcmHash": "5bebd8e3"
+       }
+      },
+      "length": 119.714781,
+      "crossfadeSeconds": 0.0,
+      "fadeInSeconds": 0.0,
+      "sourceFilters": {
+       "ENDWALKER_048": "afade=t=out:st=111.155247:d=15.100:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "ENDWALKER_048",
+        "channel": 0
+       },
+       {
+        "source": "ENDWALKER_048",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ENDWALKER_034": {
+        "offset": 0.0,
+        "pcmHash": "747d5cbc"
+       }
+      },
+      "length": 143.989247,
+      "crossfadeSeconds": 0.0,
+      "fadeInSeconds": 0.0,
+      "sourceFilters": {
+       "ENDWALKER_034": "afade=t=out:st=139.640466:d=13.300:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "ENDWALKER_034",
+        "channel": 0
+       },
+       {
+        "source": "ENDWALKER_034",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ENDWALKER_027": {
+        "offset": 0.0,
+        "pcmHash": "a49dc6c5"
+       }
+      },
+      "length": 164.080719,
+      "crossfadeSeconds": 0.0,
+      "fadeInSeconds": 0.0,
+      "sourceFilters": {
+       "ENDWALKER_027": "afade=t=out:st=161.051219:d=8.500:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "ENDWALKER_027",
+        "channel": 0
+       },
+       {
+        "source": "ENDWALKER_027",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ENDWALKER_035": {
+        "offset": 0.0,
+        "pcmHash": "5371323a"
+       }
+      },
+      "length": 253.2705,
+      "crossfadeSeconds": 0.0,
+      "fadeInSeconds": 0.0,
+      "channels": [
+       {
+        "source": "ENDWALKER_035",
+        "channel": 0
+       },
+       {
+        "source": "ENDWALKER_035",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ENDWALKER_035": {
+        "offset": 2.9025,
+        "pcmHash": "5371323a"
+       }
+      },
+      "crossfadeSeconds": 0.2,
+      "channels": [
+       {
+        "source": "ENDWALKER_035",
+        "channel": 0
+       },
+       {
+        "source": "ENDWALKER_035",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ARR_FFXIV_004": {
+        "offset": 197.850992,
+        "pcmHash": "43d84269"
+       }
+      },
+      "startSeconds": 197.850992,
+      "length": 9.699,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "sourceFilters": {
+       "ARR_FFXIV_004": "afade=t=out:st=187.100000:d=20.400:curve=ipar"
+      },
+      "channels": [
+       {
+        "source": "ARR_FFXIV_004",
+        "channel": 0
+       },
+       {
+        "source": "ARR_FFXIV_004",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ARR_FFXIV_020": {
+        "offset": 74.21678,
+        "pcmHash": "5fc31d55"
+       }
+      },
+      "startSeconds": 272.067772,
+      "length": 8.682,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "sourceFilters": {
+       "ARR_FFXIV_020": "afade=t=out:st=70.649008:d=12.200:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "ARR_FFXIV_020",
+        "channel": 0
+       },
+       {
+        "source": "ARR_FFXIV_020",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ARR_FFXIV_027": {
+        "offset": 347.528877,
+        "pcmHash": "56abae92"
+       }
+      },
+      "startSeconds": 373.046185,
+      "length": 5.35,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "channels": [
+       {
+        "source": "ARR_FFXIV_027",
+        "channel": 0
+       },
+       {
+        "source": "ARR_FFXIV_027",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "TFEOF_FFXIV_04": {
+        "offset": 297.182177,
+        "pcmHash": "ea5b3ab3"
+       }
+      },
+      "startSeconds": 769.07877,
+      "length": 12.45,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "channels": [
+       {
+        "source": "TFEOF_FFXIV_04",
+        "channel": 0
+       },
+       {
+        "source": "TFEOF_FFXIV_04",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "SB_FFXIV_105": {
+        "offset": 154.495256,
+        "pcmHash": "2d2c33c1"
+       }
+      },
+      "startSeconds": 1170.589996,
+      "length": 8.56,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "sourceFilters": {
+       "SB_FFXIV_105": "afade=t=out:st=151.405260:d=11.600:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "SB_FFXIV_105",
+        "channel": 0
+       },
+       {
+        "source": "SB_FFXIV_105",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "SHADOWBRINGERS_52": {
+        "offset": 270.310004,
+        "pcmHash": "47fc6913"
+       }
+      },
+      "startSeconds": 1440.9,
+      "length": 16.65,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "sourceFilters": {
+       "SHADOWBRINGERS_52": "afade=t=out:st=246.410004:d=40.500:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "SHADOWBRINGERS_52",
+        "channel": 0
+       },
+       {
+        "source": "SHADOWBRINGERS_52",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "SHADOWBRINGERS_49": {
+        "offset": 155.208482,
+        "pcmHash": "fe974afe"
+       }
+      },
+      "startSeconds": 1592.944753,
+      "length": 6.505,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "sourceFilters": {
+       "SHADOWBRINGERS_49": "afade=t=out:st=150.063729:d=11.600:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "SHADOWBRINGERS_49",
+        "channel": 0
+       },
+       {
+        "source": "SHADOWBRINGERS_49",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ENDWALKER_048": {
+        "offset": 119.714781,
+        "pcmHash": "5bebd8e3"
+       }
+      },
+      "startSeconds": 1712.659534,
+      "length": 6.59,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "sourceFilters": {
+       "ENDWALKER_048": "afade=t=out:st=111.155247:d=15.100:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "ENDWALKER_048",
+        "channel": 0
+       },
+       {
+        "source": "ENDWALKER_048",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ENDWALKER_034": {
+        "offset": 143.989247,
+        "pcmHash": "747d5cbc"
+       }
+      },
+      "startSeconds": 1856.648781,
+      "length": 9.001,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "sourceFilters": {
+       "ENDWALKER_034": "afade=t=out:st=139.640466:d=13.300:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "ENDWALKER_034",
+        "channel": 0
+       },
+       {
+        "source": "ENDWALKER_034",
+        "channel": 1
+       }
+      ]
+     },
+     {
+      "sourceOffsets": {
+       "ENDWALKER_027": {
+        "offset": 164.080719,
+        "pcmHash": "a49dc6c5"
+       }
+      },
+      "startSeconds": 2020.7295,
+      "length": 5.521,
+      "fadeInSeconds": 0.0,
+      "fadeOutSeconds": 0.0,
+      "sourceFilters": {
+       "ENDWALKER_027": "afade=t=out:st=161.051219:d=8.500:curve=hsin"
+      },
+      "channels": [
+       {
+        "source": "ENDWALKER_027",
+        "channel": 0
+       },
+       {
+        "source": "ENDWALKER_027",
+        "channel": 1
+       }
+      ]
+     }
+    ]
    }
   }
  ],
