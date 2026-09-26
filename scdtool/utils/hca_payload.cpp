@@ -85,5 +85,20 @@ hca_payload::info hca_payload::inspect(const xivres::sound::reader::sound_item& 
 	}
 	if (const auto comp = find("comp"); comp != SIZE_MAX && comp + 6 <= header.size())
 		res.BlockSize = be16(comp + 4);
+	// Start and end block, then the samples of the start block before the loop begins and of
+	// the end block after it ends. Found in BGM_Town_Gri_Day and _Night, the first music the
+	// game ships as HCA: the entry's own loop fields repeat the two block indices.
+	if (const auto loop = find("loop"); loop != SIZE_MAX && loop + 16 <= header.size()) {
+		const auto be32 = [&header](size_t i) {
+			return static_cast<uint64_t>(header[i]) << 24 | static_cast<uint64_t>(header[i + 1]) << 16
+				| static_cast<uint64_t>(header[i + 2]) << 8 | header[i + 3];
+		};
+		const auto startBlock = be32(loop + 4), endBlock = be32(loop + 8);
+		const auto startDelay = be16(loop + 12), endPadding = be16(loop + 14);
+		if (endBlock >= startBlock && endPadding <= 1024) {
+			res.LoopStart = startBlock * 1024 + startDelay;
+			res.LoopEnd = endBlock * 1024 + 1024 - endPadding;
+		}
+	}
 	return res;
 }

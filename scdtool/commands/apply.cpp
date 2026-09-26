@@ -100,6 +100,11 @@ namespace {
 	// that does not loop has both at 0, and 0 must stay 0 so the replacement does not
 	// acquire a loop the original never had.
 	std::pair<size_t, size_t> template_loop_points(const xivres::sound::reader::sound_item& item) {
+		// In the timeline the rest of apply aligns against: ffmpeg's decode of the staged .hca.
+		if (hca_payload::is_hca(item)) {
+			const auto hca = hca_payload::inspect(item);
+			return {static_cast<size_t>(hca.LoopStart), static_cast<size_t>(hca.LoopEnd)};
+		}
 		if (item.Header->Format != xivres::sound::sound_entry_format::Ogg)
 			return {0, 0};
 		const auto info = item.get_ogg_decoded();

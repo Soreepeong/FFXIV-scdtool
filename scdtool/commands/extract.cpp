@@ -132,9 +132,12 @@ int cmd_extract(const std::vector<std::string>& args) {
 				if (hca.SamplingRate)
 					res["durationSeconds"] = static_cast<double>(hca.TotalFrames)
 						/ static_cast<double>(hca.SamplingRate);
-				// The loop fields of an HCA entry are byte offsets like any other, but HCA
-				// carries its own loop section and nothing here has needed one yet, so the
-				// samples are left unstated rather than guessed.
+				// The entry's loop fields hold block indices here; HCA's own loop section has
+				// the samples, counted as ffmpeg decodes the file (with the encoder delay).
+				if (hca.LoopEnd) {
+					res["loopStartSample"] = hca.LoopStart;
+					res["loopEndSample"] = hca.LoopEnd;
+				}
 			} else if (item.Header->Format == xivres::sound::sound_entry_format::Ogg) {
 				const auto info = item.get_ogg_decoded();
 				const auto channels = info.Channels ? info.Channels : 1;

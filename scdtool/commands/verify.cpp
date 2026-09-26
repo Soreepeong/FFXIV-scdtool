@@ -54,7 +54,10 @@ namespace {
 		if (hca_payload::is_hca(item)) {
 			bytes = hca_payload::payload_file(item);
 			ext = L".hca";
-			info.TotalSamples = static_cast<size_t>(hca_payload::inspect(item).TotalFrames);
+			const auto hca = hca_payload::inspect(item);
+			info.TotalSamples = static_cast<size_t>(hca.TotalFrames);
+			info.StartSample = static_cast<size_t>(hca.LoopStart);
+			info.EndSample = static_cast<size_t>(hca.LoopEnd);
 		} else if (const auto payload = substitute_codec::payload_of(item);
 			payload != substitute_codec::payload::Vorbis) {
 			bytes = substitute_codec::payload_file(item);

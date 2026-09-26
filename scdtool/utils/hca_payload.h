@@ -5,9 +5,10 @@
 
 #include <xivres/sound.h>
 
-// Sound entries whose payload is CRI HCA -- format 26, which the music folder never uses but
-// `sound/` does. `sound/zingle/Zingle_Sleep.scd` is one, and nothing in the game's bgm sheet
-// references it, so it only turns up when someone names the path directly.
+// Sound entries whose payload is CRI HCA -- format 26, which `sound/` uses and the music folder
+// had not until BGM_Town_Gri_Day and _Night, the only two in it so far, and both looped.
+// `sound/zingle/Zingle_Sleep.scd` is another, and nothing in the game's bgm sheet references
+// it, so it only turns up when someone names the path directly.
 //
 // The entry is shaped like the Ogg one: a 0x18-byte prefix in ExtraData that is
 // `sound_entry_ogg_header` under another name (Version 2, HeaderSize 0x18, and the block size
@@ -40,6 +41,13 @@ namespace hca_payload {
 		uint64_t TotalFrames = 0;   // sample frames, after the encoder delay and padding
 		size_t BlockSize = 0;
 		size_t BlockCount = 0;
+
+		// The "loop" section, in sample frames as ffmpeg decodes the file -- which, unlike
+		// TotalFrames, keeps the encoder delay: ffmpeg outputs every block whole, so its
+		// sample 0 is the first block's first. End is exclusive. Both zero when the file does
+		// not loop. The entry header's loop fields hold the same block indices, unscaled.
+		uint64_t LoopStart = 0;
+		uint64_t LoopEnd = 0;
 	};
 
 	info inspect(const xivres::sound::reader::sound_item& item);
