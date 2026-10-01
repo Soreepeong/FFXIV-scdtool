@@ -3311,10 +3311,12 @@ int cmd_apply(const std::vector<std::string>& args) {
 			const auto seam = close_loop_seam(floats, channels, samplingRate,
 				newLoopStart, newLoopEnd, loopSeamThreshold, loopCrossfadeSeconds);
 
-			// Only for a Vorbis payload. WAV and FLAC both order their channels the way the
-			// decoder hands them back -- FL, FR, FC, LFE, BL, BR -- which is the order
-			// everything above already works in, so permuting for them would be the bug this
-			// permutation exists to fix.
+			// Only for a Vorbis payload. WAV and FLAC store their channels in their own
+			// standard order -- FL, FR, FC, LFE, BL, BR, the order ffmpeg hands back and
+			// everything above works in -- and the hook decoding them for the game reorders
+			// them into Vorbis's, as the engine pairs its stems by that order
+			// (XivAlexander's VorbisOrderSourceChannels). Stored in Vorbis order here instead,
+			// they would be reordered twice.
 			if (channels == 6 && encodesVorbis) {
 				std::vector<float> reordered(floats.size());
 				for (size_t i = 0; i < totalSamples; ++i)
