@@ -584,6 +584,11 @@ namespace {
 		};
 
 		constexpr double CorrectionThreshold = 0.5;  // ~6 dB quieter or more counts as "an onset treatment is here"
+		// What the game has to be within for a block to count as full level and help end the
+		// treatment. Not CorrectionThreshold: a fade-in still has its last 6 dB to climb when it
+		// crosses that, and ending there stepped BGM_Field_Lim_05 up 5.5 dB at 0.38s, 160 ms
+		// before its fade-in reached full level.
+		constexpr double FullLevelRatio = 0.89;      // -1 dB
 		constexpr double MinSourceRms = 1e-5;         // floor to avoid a huge ratio off a near-zero denominator
 		std::vector ratios(totalBlocks, 1.);
 		// Whether the source was audible enough in a block to say the game is at full level there.
@@ -600,8 +605,11 @@ namespace {
 			if (srcRms > MinSourceRms) {
 				judged[b] = srcRms > MinJudgedRms;
 				const auto raw = tplRms / srcRms;
-				if (raw < CorrectionThreshold) {
+				// Every block keeps its own reading below full level, so a fade is followed all
+				// the way up; only a block 6 dB down or more says there is a treatment at all.
+				if (raw < FullLevelRatio)
 					ratios[b] = std::clamp(raw, 0., 1.);
+				if (raw < CorrectionThreshold) {
 					lastCorrected = b;
 					anyCorrection = true;
 				}
@@ -618,9 +626,16 @@ namespace {
 		// BGM_EX1_Field_Abaracia03 cut 9 dB at 1.3s and again at 1.9s, heard as a fade out and
 		// back in a second into the piece. A block the source is silent in has nothing to
 		// compare and neither extends nor ends the run.
+		// The run is looked for past the last block 6 dB down too, as that is where a fade-in
+		// climbs its last few dB -- but no further past it than the treatment ran up to it
+		// (a fade linear in amplitude spends as long on its last 6 dB as on all the rest), and
+		// at least half a second: a game a dB or two quieter throughout would otherwise carry
+		// the correction deep into the piece.
 		constexpr size_t FullLevelRun = 5;
+		const auto searchBlocks = (std::min)(totalBlocks,
+			lastCorrected + 1 + (std::max)(lastCorrected + 1, static_cast<size_t>(0.5 / BlockSeconds)));
 		size_t windowBlocks = lastCorrected + 1;
-		for (size_t b = 0, run = 0, runStart = 0; b <= lastCorrected; ++b) {
+		for (size_t b = 0, run = 0, runStart = 0; b < searchBlocks; ++b) {
 			if (!judged[b])
 				continue;
 			if (ratios[b] < 1.) {
@@ -653,17 +668,23 @@ namespace {
 			return;
 
 		// Linearly interpolate between block-center ratios so the correction ramps rather
-		// than steps, which would otherwise click at every 20ms block boundary.
+		// than steps, which would otherwise click at every 20ms block boundary. Centres, not
+		// starts: ramping from one block's start to the next one's ran every onset half a
+		// block early, and once a window reached over a sharp attack that opened it 10-20 ms
+		// before the hit -- BGM_ORCH_262 at -25 dB where the game is still at -61.
 		double minRatio = 1.;
 		for (size_t b = 0; b < windowBlocks; ++b) {
 			const auto blockStart = b * blockFrames;
 			const auto blockEnd = (std::min)(blockStart + blockFrames, floats.size());
+			const auto ratioPrev = b ? ratios[b - 1] : ratios[b];
 			const auto ratioHere = ratios[b];
 			const auto ratioNext = b + 1 < windowBlocks ? ratios[b + 1] : ratios[b];
 			minRatio = (std::min)(minRatio, ratioHere);
 			for (size_t i = blockStart; i < blockEnd; i += channels) {
 				const auto t = static_cast<double>(i - blockStart) / static_cast<double>(blockEnd - blockStart);
-				const auto g = ratioHere + (ratioNext - ratioHere) * t;
+				const auto g = t < .5
+					? ratioPrev + (ratioHere - ratioPrev) * (t + .5)
+					: ratioHere + (ratioNext - ratioHere) * (t - .5);
 				for (size_t ch = 0; ch < channels && i + ch < floats.size(); ++ch)
 					floats[i + ch] = static_cast<float>(floats[i + ch] * g);
 			}
