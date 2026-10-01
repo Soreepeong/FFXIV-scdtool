@@ -957,7 +957,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 2.795,
+        "offset": 1.51698,
         "pcmHash": "18ff689c"
        }
       },
@@ -970,10 +970,50 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 5.65
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 7.26778,
+        "pcmHash": "18ff689c"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "length": 0.77,
+      "crossfadeSeconds": 0.03
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 9.21274,
+        "pcmHash": "18ff689c"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.03
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.968"
+    "# comment": "spectral similarity to the game's own file: 0.968. The game's intro is its own edit of the album's: its first 5.65 s are the album from 1.517 s, the next 0.77 s from 0.1 s further on, and from 6.42 s it runs 2.793 s ahead, where one offset of 2.795 had put the whole file -- the opening 1.28 s were missing. Joined in the quiet before each new phrase. Built: 0.9744 (was 0.9709), head match 0.86 (was 0.12)."
    }
   },
   {
