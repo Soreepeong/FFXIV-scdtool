@@ -1507,7 +1507,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.47,
+        "offset": 1.47243,
         "pcmHash": "6db2ae6b"
        }
       },
@@ -1520,10 +1520,49 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 125.25
+     },
+     {
+      "sourceOffsets": {
+       "target": {
+        "offset": 125.25
+       }
+      },
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 5.6,
+      "crossfadeSeconds": 0.03
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 3.36721,
+        "pcmHash": "6db2ae6b"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.03
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.914"
+    "# comment": "spectral similarity to the game's own file: 0.914. The game closes its loop with its own edit: a swell from 125.25 s on no recording (the game's own audio, to 130.85 s, through the bass hit that ends it), then the album's opening -- the music before its loop start, 128.955 s earlier -- to the loop end; one offset played the album's next pass there. The album repeats its loop body every 71.641 s from 0:35.36; the game's file is a separate render from 105.5 s (album 1:47.00, the second pass), 15 samples later and with a layer on top, left to the album. Built: 0.9716 (was 0.9605), tail match 0.979 (was 0.846)."
    }
   },
   {
