@@ -2004,7 +2004,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.545,
+        "offset": 1.54526,
         "pcmHash": "bd5ac999"
        }
       },
@@ -2017,10 +2017,49 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 300.75
+     },
+     {
+      "sourceOffsets": {
+       "target": {
+        "offset": 300.75
+       }
+      },
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 3.0,
+      "crossfadeSeconds": 0.03
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 305.29526,
+        "pcmHash": "bd5ac999"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.03
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.914"
+    "# comment": "spectral similarity to the game's own file: 0.914. The game has a 3 s fill before its loop end (300.75-303.75 s) that no recording has -- the game's own audio there -- and follows the album either side of it. Built: 0.9168 (was 0.9142), tail match 0.912 (was 0.844)."
    }
   },
   {

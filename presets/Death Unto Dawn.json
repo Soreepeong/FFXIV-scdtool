@@ -1175,7 +1175,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.32,
+        "offset": 1.31932,
         "pcmHash": "94aeb9af"
        }
       },
@@ -1188,10 +1188,30 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 309.75
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 25.34014,
+        "pcmHash": "94aeb9af"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.03
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.978"
+    "# comment": "spectral similarity to the game's own file: 0.978. The game closes its loop with its own edit: from 309.75 s it plays the music before its loop start (the album 285.729 s earlier), where the album carries on into something else; one offset played the album there. Built: 0.9755 (was 0.9706), tail match 0.968 (was 0.726)."
    }
   },
   {
