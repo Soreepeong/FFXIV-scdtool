@@ -3638,7 +3638,7 @@
      {
       "sourceOffsets": {
        "source": {
-        "offset": 1.995,
+        "offset": 1.99154,
         "pcmHash": "569b79a0"
        }
       },
@@ -3651,10 +3651,49 @@
         "source": "source",
         "channel": 1
        }
-      ]
+      ],
+      "length": 240.06
+     },
+     {
+      "sourceOffsets": {
+       "target": {
+        "offset": 240.06
+       }
+      },
+      "channels": [
+       {
+        "source": "target",
+        "channel": 0
+       },
+       {
+        "source": "target",
+        "channel": 1
+       }
+      ],
+      "length": 1.84,
+      "crossfadeSeconds": 0.03
+     },
+     {
+      "sourceOffsets": {
+       "source": {
+        "offset": 2.06608,
+        "pcmHash": "569b79a0"
+       }
+      },
+      "channels": [
+       {
+        "source": "source",
+        "channel": 0
+       },
+       {
+        "source": "source",
+        "channel": 1
+       }
+      ],
+      "crossfadeSeconds": 0.03
      }
     ],
-    "# comment": "spectral similarity to the game's own file: 0.988"
+    "# comment": "spectral similarity to the game's own file: 0.988. The game ends its loop with its own edit: the album runs 1.991 s ahead until 240.06 s, then four cymbal hits over the held chord that no recording has (the game's own audio, to 241.90 s), then the album's opening -- the music before the loop start -- to the loop end, so the loop closes on itself. One offset played the album's ending there instead. Built: 0.9773 (was 0.9654), tail match 0.986 (was 0.73)."
    }
   },
   {
