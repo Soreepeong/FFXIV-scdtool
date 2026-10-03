@@ -630,11 +630,15 @@ namespace {
 		// climbs its last few dB -- but no further past it than the treatment ran up to it
 		// (a fade linear in amplitude spends as long on its last 6 dB as on all the rest), and
 		// at least half a second: a game a dB or two quieter throughout would otherwise carry
-		// the correction deep into the piece.
+		// the correction deep into the piece. With no such run in reach the treatment is
+		// followed to the end of the search instead of stopping at the last block 6 dB down:
+		// BGM_EX1_Event_Nidhogg_01 fades in over 3.5 s, reaches full level right at that limit,
+		// and stepped up 5.5 dB at 1.76 s; at the limit it is half a dB short. A rise is all a
+		// game a dB or two quieter throughout can get out of it, as the gain below only rises.
 		constexpr size_t FullLevelRun = 5;
 		const auto searchBlocks = (std::min)(totalBlocks,
 			lastCorrected + 1 + (std::max)(lastCorrected + 1, static_cast<size_t>(0.5 / BlockSeconds)));
-		size_t windowBlocks = lastCorrected + 1;
+		size_t windowBlocks = searchBlocks;
 		for (size_t b = 0, run = 0, runStart = 0; b < searchBlocks; ++b) {
 			if (!judged[b])
 				continue;
@@ -1623,7 +1627,7 @@ namespace {
 			for (size_t i = 0; i < templateChannels[ch].size(); ++i)
 				out[i * channels + ch] = templateChannels[ch][i];
 
-		constexpr double OnsetWindowSeconds = 3.0;
+		constexpr double OnsetWindowSeconds = 6.0;  // as the single-source path's; see there
 		const auto onsetWindow = (std::min)(templateSamples, static_cast<size_t>(OnsetWindowSeconds * static_cast<double>(samplingRate)));
 
 		for (auto& stem : stems) {
@@ -3195,7 +3199,11 @@ int cmd_apply(const std::vector<std::string>& args) {
 				const auto presetSetsOnset = job.Filter.find(L"adelay=") != std::wstring::npos
 					|| job.Filter.find(L"afade=t=in") != std::wstring::npos;
 				if (onsetMatch && !presetSetsOnset) {
-					constexpr double OnsetWindowSeconds = 3.0;  // longest observed real case was ~1.3s; ample margin
+					// The longest fade-ins run past 3 s (BGM_EX1_Event_Nidhogg_01 and _02, ~3.5 s), and a
+					// window that ends mid-fade can follow it no further than that: both stepped up
+					// over a dB at 3.0 s. Only what the correction finds is applied, so a longer window
+					// costs one longer decode and nothing else.
+					constexpr double OnsetWindowSeconds = 6.0;
 					const auto onsetRawPath = tempDir / std::format(L"scdtool_apply_onset_{}.f32", tempFileCounter.fetch_add(1));
 					keepTemp(onsetRawPath);
 					try {
@@ -3290,7 +3298,7 @@ int cmd_apply(const std::vector<std::string>& args) {
 						const auto tailRawPath = tempDir / std::format(L"scdtool_apply_tail_{}.f32",
 							tempFileCounter.fetch_add(1));
 						keepTemp(tailRawPath);
-						constexpr double TailWindowSeconds = 3.0;
+						constexpr double TailWindowSeconds = 6.0;  // as the onset window, for long fade-outs
 						const auto templateTail = decode_tail_to_floats(ffmpegPath, templateAudio,
 							channels, samplingRate, TailWindowSeconds, templateSeconds, tailRawPath);
 						if (!templateTail.empty())
